@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <script>
+        (function () {
+            var baseHref = "{{ site.baseurl }}/";
+            if (window.location.protocol === "file:") {
+                var path = window.location.pathname.replace(/\\/g, "/");
+                var marker = "/_site/";
+                var idx = path.lastIndexOf(marker);
+                var relDir = "";
+
+                if (idx >= 0) {
+                    var after = path.slice(idx + marker.length);
+                    relDir = after.replace(/[^/]*$/, "");
+                }
+
+                var depth = relDir.split("/").filter(Boolean).length;
+                baseHref = "../".repeat(depth);
+            }
+
+            document.write('<base href="' + baseHref + '">');
+        })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+
+<body>
+    <div class="site-shell">
+        <header class="doc-header">
+            <div class="doc-header-inner">
+                <a href="index.html" class="brand">
+                    <img src="assets/images/logo.svg" alt="zero2Agent logo" class="brand-logo">
+                    <span class="brand-text">zero2Agent</span>
+                </a>
+                <nav class="doc-nav">
+                    <a href="learn-agent-basic/index.html">Agent Basic</a>
+                    <a href="learn-langgraph/index.html">LangGraph</a>
+                    <a href="learn-claude-code/index.html">Claude Code</a>
+                    <a href="learn-frameworks/index.html">Frameworks</a>
+                    <a href="final-project/index.html">Final Project</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="doc-main">
+            <aside class="doc-sidebar">
+                <p class="sidebar-label">Learning Map</p>
+                <a href="learn-agent-basic/index.html">01. learn-agent-basic</a>
+                <a href="learn-langgraph/index.html">02. learn-langgraph</a>
+                <a href="learn-claude-code/index.html">03. learn-claude-code</a>
+                <a href="learn-frameworks/index.html">04. learn-frameworks</a>
+                <a href="final-project/index.html">05. final-project</a>
+                <div class="sidebar-note">
+                    <p>这个站点采用 Markdown 驱动内容，首页负责展示，章节页负责沉淀知识。</p>
+                </div>
+            </aside>
+
+            <article class="doc-article">
+                {% if page.eyebrow %}
+                <p class="doc-eyebrow">{{ page.eyebrow }}</p>
+                {% endif %}
+                {{ content }}
+            </article>
+        </main>
+
+        <footer class="doc-footer">
+            <p>zero2Agent · Agent learning knowledge base and static docs site.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>

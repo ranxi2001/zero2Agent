@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for dir:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/ranxi/Desktop/Project/zero2Agent/UsersranxiDesktopProjectzero2Agent/**)",
+      "Bash(grep -E \"\\\\.md$|^-\")",
+      "Bash(done)",
+      "Bash(start:*)"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+title: zero2Agent
+description: 面向程序员的 Agent 教程类知识库与前端展示项目
+markdown: kramdown
+highlighter: rouge
+baseurl: /zero2Agent
+
+include:
+  - learn-agent-basic
+  - learn-langgraph
+  - learn-claude-code
+  - learn-frameworks
+  - final-project
+  - docs
+
+exclude:
+  - README.md
+  - requirements.txt
+  - .gitignore
+  - __pycache__

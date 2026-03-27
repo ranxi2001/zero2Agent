@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="面向程序员的 Agent 教程类知识库与静态展示站点">
+    <meta name="keywords" content="Agent, LLM, LangGraph, Claude Code, AI Agent, 教程">
+    <title>zero2Agent | 从会用 AI 到会开发 Agent</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="page-shell">
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a href="#" class="brand">
+                    <img src="assets/images/logo.svg" alt="zero2Agent logo" class="brand-logo">
+                    <span class="brand-text">zero2Agent</span>
+                </a>
+                <button class="nav-toggle" type="button" aria-label="切换导航">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links">
+                    <a href="#audience">适合谁看</a>
+                    <a href="#roadmap">学习路线</a>
+                    <a href="#modules">章节规划</a>
+                    <a href="learn-agent-basic/index.html" data-file-href="_site/learn-agent-basic/index.html">开始阅读</a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-inner">
+                <section class="hero-copy">
+                    <div class="eyebrow">Static Knowledge Base for Agent Builders</div>
+                    <h1>从<span>会用 AI</span>到<span>会开发 Agent</span></h1>
+                    <p>
+                        这是一个面向程序员的 Agent 学习知识库和前端展示项目。它不只讲工具体验，也不只堆框架名词，而是按工程路线把
+                        Agent 基础、LangGraph、Code Agent、框架选型和最终实战串成一条完整链路。
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="learn-agent-basic/index.html" data-file-href="_site/learn-agent-basic/index.html">进入 learn-agent-basic</a>
+                        <a class="button button-secondary" href="final-project/index.html" data-file-href="_site/final-project/index.html">查看最终实战方向</a>
+                    </div>
+                    <ul class="hero-meta">
+                        <li>
+                            <strong>Markdown</strong>
+                            <span>内容驱动，便于持续写教程</span>
+                        </li>
+                        <li>
+                            <strong>Static</strong>
+                            <span>沿用旧项目静态站方案</span>
+                        </li>
+                        <li>
+                            <strong>Roadmap</strong>
+                            <span>从概念到真实业务项目</span>
+                        </li>
+                    </ul>
+                </section>
+
+            </div>
+        </header>
+
+        <section class="section" id="audience">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <h2>这个项目适合谁</h2>
+                    <p>首页不讲实现细节，先回答三个更重要的问题：你是不是目标读者、你能从这里获得什么、以及应该从哪里开始读。</p>
+                </div>
+                <div class="section-card">
+                    <div class="intro-grid">
+                        <article class="intro-card">
+                            <h3>你已经会用 AI，但不会开发 Agent</h3>
+                            <p>如果你会写代码、懂一点深度学习、平时会用 ChatGPT / Claude / Cursor，但还没建立 Agent 工程认知，这个站就是写给你的。</p>
+                        </article>
+                        <article class="intro-card">
+                            <h3>你会得到一条连贯的学习路线</h3>
+                            <p>这里不是零散资料收集，而是按 Agent Basic、LangGraph、Code Agent、框架对比和最终实战逐步推进的知识库。</p>
+                        </article>
+                        <article class="intro-card">
+                            <h3>最好的入口是从基础开始</h3>
+                            <p>先读 `learn-agent-basic` 建立概念框架，再进入 LangGraph 和 Code Agent，最后回到加密货币市场风控 Agent 的项目实战。</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="roadmap">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <h2>学习路线</h2>
+                    <p>不是碎片化材料堆砌，而是从 Agent 基础认知开始，逐步进入框架、Code Agent 和真实业务场景。</p>
+                </div>
+                <div class="roadmap-grid">
+                    <a class="roadmap-card" href="learn-agent-basic/index.html" data-file-href="_site/learn-agent-basic/index.html">
+                        <div class="roadmap-index">01</div>
+                        <h3>learn-agent-basic</h3>
+                        <p>先讲清楚 Agent 是什么、为什么不是普通工作流，以及工具、记忆、规划、RAG 分别解决什么问题。</p>
+                    </a>
+                    <a class="roadmap-card" href="learn-langgraph/index.html" data-file-href="_site/learn-langgraph/index.html">
+                        <div class="roadmap-index">02</div>
+                        <h3>learn-langgraph</h3>
+                        <p>从状态图和可恢复执行切入，把真正可维护的 Agent 系统搭起来，而不是停留在线性链式调用。</p>
+                    </a>
+                    <a class="roadmap-card" href="learn-claude-code/index.html" data-file-href="_site/learn-claude-code/index.html">
+                        <div class="roadmap-index">03</div>
+                        <h3>learn-claude-code</h3>
+                        <p>聚焦 Code Agent 设计，拆解上下文管理、工具系统、命令执行、补丁写入和任务闭环。</p>
+                    </a>
+                    <a class="roadmap-card" href="learn-frameworks/index.html" data-file-href="_site/learn-frameworks/index.html">
+                        <div class="roadmap-index">04</div>
+                        <h3>learn-frameworks</h3>
+                        <p>横向理解不同框架和生态，不追求全部都学，而是建立选型视角和取舍能力。</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="modules">
+            <div class="section-inner">
+                <div class="section-heading">
+                    <h2>章节规划</h2>
+                    <p>这批内容会先搭骨架，再逐步沉淀成教程、最小示例和最终项目文档。</p>
+                </div>
+                <div class="module-grid">
+                    <article class="module-card">
+                        <span class="module-kicker">Basic</span>
+                        <h3>Agent 基础知识</h3>
+                        <p>概念边界、系统组成、工程问题、评估思路。</p>
+                    </article>
+                    <article class="module-card">
+                        <span class="module-kicker">Framework</span>
+                        <h3>LangGraph 与状态流</h3>
+                        <p>Node / Edge / State 的设计方式和长任务执行。</p>
+                    </article>
+                    <article class="module-card">
+                        <span class="module-kicker">Code Agent</span>
+                        <h3>Claude Code 类工具拆解</h3>
+                        <p>为什么代码 Agent 和聊天 Agent 的系统设计差异很大。</p>
+                    </article>
+                    <article class="module-card">
+                        <span class="module-kicker">Compare</span>
+                        <h3>框架与生态对比</h3>
+                        <p>LangGraph、Agents SDK、MCP 以及其他工具链。</p>
+                    </article>
+                    <article class="module-card">
+                        <span class="module-kicker">Project</span>
+                        <h3>加密货币市场风控 Agent</h3>
+                        <p>围绕真实业务目标设计 Agent，而不是做一个泛泛的聊天助手。</p>
+                    </article>
+                    <article class="module-card">
+                        <span class="module-kicker">Docs Site</span>
+                        <h3>Markdown 友好展示</h3>
+                        <p>代码块、表格、引用、任务列表、长文排版都已经纳入样式基础设施。</p>
+                    </article>
+                </div>
+                <p class="section-footer">下一步直接往这些章节目录里补 Markdown 内容即可，前端不用重搭。</p>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div>zero2Agent · static docs architecture</div>
+                <div>Built for learning Agent development from zero to project.</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
