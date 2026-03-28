@@ -208,14 +208,13 @@ img {
 /* ===== Hero ===== */
 .hero {
     padding: 68px 0 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-inner {
     max-width: 1600px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 48px;
-    align-items: center;
 }
 
 .hero-copy {
@@ -223,7 +222,19 @@ img {
     background: none;
     border: none;
     border-radius: 0;
-    text-align: center;
+}
+
+.hero-decoration {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-5deg);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.hero-decoration .hero-card {
+    width: 380px;
 }
 
 .eyebrow {
@@ -875,13 +886,8 @@ img {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .hero-inner {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-card {
-        max-width: 420px;
-        margin: 0 auto;
+    .hero-decoration {
+        display: none;
     }
 }
 
@@ -920,10 +926,6 @@ img {
 
     .hero h1 {
         font-size: 2.4rem;
-    }
-
-    .hero-card {
-        display: none;
     }
 
     .hero-meta {
