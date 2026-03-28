@@ -31,23 +31,23 @@ eyebrow: Agent Basic / 05
 
 你可以把工具调用理解成：
 
-```mermaid
+<div class="mermaid">
 flowchart LR
     A([模型]) -->|决定做什么| B([程序])
     B -->|真的去做| C([结果])
     C -.->|返回| A
-```
+</div>
 
 更完整一点就是：
 
-```mermaid
+<div class="mermaid">
 flowchart TD
     A([用户目标]) --> B[模型判断是否需要工具]
     B --> C[模型选择工具并生成参数]
     C --> D[程序执行工具]
     D --> E[返回结果给模型]
     E --> F[模型基于结果继续决策或输出答案]
-```
+</div>
 
 这里最关键的是分工。
 

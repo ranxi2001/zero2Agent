@@ -30,10 +30,10 @@ eyebrow: Agent Basic / 02
 
 特点是一次输入，一次输出。
 
-```mermaid
+<div class="mermaid">
 flowchart LR
     A([输入]) --> B([模型]) --> C([输出])
-```
+</div>
 
 例如：
 
@@ -48,14 +48,14 @@ flowchart LR
 
 特点是执行路径主要由开发者预先定义。
 
-```mermaid
+<div class="mermaid">
 flowchart LR
     A([输入]) --> B[步骤 A] --> C[步骤 B] --> D{条件分支}
     D -->|分支1| E[步骤 C]
     D -->|分支2| F[步骤 D]
     E --> G([输出])
     F --> G
-```
+</div>
 
 例如：
 
@@ -69,7 +69,7 @@ Workflow 很有价值，而且在很多业务里已经足够了。
 
 特点是系统会根据中间状态自己决定下一步做什么。
 
-```mermaid
+<div class="mermaid">
 flowchart LR
     A([目标]) --> B[判断当前状态]
     B --> C[决定动作]
@@ -78,7 +78,7 @@ flowchart LR
     E --> F{继续?}
     F -->|是| B
     F -->|否| G([结束])
-```
+</div>
 
 也就是说，执行路径不是完全写死的，而是部分由系统在运行中决定。
 

@@ -23,8 +23,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/docs.css?v=6">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/docs.css?v=7">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <!-- Mermaid: load + configure in <head> so it's ready before body scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'loose',
+            theme: 'dark',
+            themeVariables: {
+                background: '#0a0a10',
+                primaryColor: '#1a2535',
+                primaryTextColor: '#d1d5db',
+                primaryBorderColor: '#334155',
+                lineColor: '#10b981',
+                secondaryColor: '#161e2e',
+                tertiaryColor: '#161e2e',
+                edgeLabelBackground: '#0d0d12',
+                clusterBkg: '#13131f',
+                fontFamily: '"Noto Sans SC", "Inter", sans-serif',
+                fontSize: '14px',
+            },
+            flowchart: { curve: 'basis', htmlLabels: false, padding: 16 },
+            sequence: {
+                actorFontFamily: '"Noto Sans SC", sans-serif',
+                messageFontFamily: '"Noto Sans SC", sans-serif',
+            },
+        });
+    </script>
 </head>
 
 <body>
@@ -105,8 +132,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
-    <script src="{{ site.baseurl }}/assets/js/app.js?v=6"></script>
+    <!-- Render mermaid divs now that the DOM is fully parsed -->
+    <script>
+        (function () {
+            var els = document.querySelectorAll('.mermaid');
+            if (els.length > 0) mermaid.init(undefined, els);
+        })();
+    </script>
+    <script src="{{ site.baseurl }}/assets/js/app.js?v=7"></script>
 </body>
 
 </html>

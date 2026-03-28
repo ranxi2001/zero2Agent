@@ -6,55 +6,6 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
     });
 });
 
-/* ===== Mermaid diagrams (v9 UMD) ===== */
-(function () {
-    if (typeof mermaid === "undefined") return;
-
-    // Rouge wraps ```mermaid as: .language-mermaid.highlighter-rouge > .highlight > pre > code
-    var blocks = document.querySelectorAll(".language-mermaid code");
-    if (blocks.length === 0) return;
-
-    var converted = [];
-    blocks.forEach(function (code) {
-        var container = code.closest(".language-mermaid");
-        if (!container) return;
-        var div = document.createElement("div");
-        div.className = "mermaid";
-        div.textContent = code.textContent; // textContent strips any hljs spans
-        container.parentNode.replaceChild(div, container);
-        converted.push(div);
-    });
-
-    if (converted.length === 0) return;
-
-    // Mermaid 9 API: initialize then init(config, elements)
-    mermaid.initialize({
-        startOnLoad: false,
-        securityLevel: "loose",
-        theme: "dark",
-        themeVariables: {
-            background: "#0a0a10",
-            primaryColor: "#1a2535",
-            primaryTextColor: "#d1d5db",
-            primaryBorderColor: "#334155",
-            lineColor: "#10b981",
-            secondaryColor: "#161e2e",
-            tertiaryColor: "#161e2e",
-            edgeLabelBackground: "#0d0d12",
-            clusterBkg: "#13131f",
-            fontFamily: '"Noto Sans SC", "Inter", sans-serif',
-            fontSize: "14px",
-        },
-        flowchart: { curve: "basis", htmlLabels: false, padding: 16 },
-        sequence: {
-            actorFontFamily: '"Noto Sans SC", sans-serif',
-            messageFontFamily: '"Noto Sans SC", sans-serif',
-        },
-    });
-
-    // mermaid.init(config, elements) — pass null config to use initialized settings
-    mermaid.init(undefined, converted);
-})();
 
 /* ===== TOC generation ===== */
 (function () {
