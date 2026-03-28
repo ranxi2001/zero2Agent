@@ -2,8 +2,7 @@ title: zero2Agent
 description: 面向程序员的 Agent 教程类知识库与前端展示项目
 markdown: kramdown
 highlighter: rouge
-baseurl: ""
-url: "https://onefly.top"
+baseurl: /zero2Agent
 
 include:
   - learn-agent-basic
