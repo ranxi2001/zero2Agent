@@ -17,23 +17,20 @@ eyebrow: Claude Code / s06
 
 ## 三层压缩
 
-```
-每轮 LLM 调用前
-       ↓
-[第一层] micro_compact（静默，每轮）
-  把 3 轮前的 tool_result 替换为 "[Previous: used bash]"
-       ↓
-[检查] token 数 > 50,000?
-   ↙               ↘
-  否               是
-  ↓               ↓
-继续      [第二层] auto_compact（自动触发）
-            完整对话存磁盘 → LLM 生成摘要
-            messages 替换为 [摘要]
-                   ↓
-          [第三层] compact 工具（模型主动调用）
-            同 auto_compact，按需触发
-```
+<div class="mermaid">
+flowchart TD
+    A([每轮 LLM 调用前]) --> B
+
+    B["第一层：micro_compact\n旧 tool_result 替换为占位符\nPrevious: used bash"]
+    B --> C{token 数 > 50000?}
+
+    C -->|否| D([继续调用 LLM])
+    C -->|是| E
+
+    E["第二层：auto_compact\n完整对话存磁盘\nLLM 生成摘要\nmessages 替换为摘要"]
+    E --> F["第三层：compact 工具\n模型主动调用\n同 auto_compact"]
+    F --> D
+</div>
 
 完整历史通过 transcript 保存在磁盘。信息没有真正丢失，只是移出了活跃上下文。
 

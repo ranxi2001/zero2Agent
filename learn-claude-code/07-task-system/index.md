@@ -23,13 +23,18 @@ s03 的 TodoManager 是内存里的平铺列表——进程一重启就没了，
 2. **什么任务在等待？**（有未完成的前置任务）
 3. **什么任务已经完成？**
 
-```
-task_1 (completed)
-    ↓
-task_2 (ready)  ←→  task_3 (ready)
-         ↘      ↙
-          task_4 (blocked: 等待 2 和 3)
-```
+<div class="mermaid">
+flowchart TD
+    T1["task_1 ✓ completed"]
+    T2["task_2 ○ ready"]
+    T3["task_3 ○ ready"]
+    T4["task_4 ⏸ blocked"]
+
+    T1 --> T2
+    T1 --> T3
+    T2 --> T4
+    T3 --> T4
+</div>
 
 ---
 
