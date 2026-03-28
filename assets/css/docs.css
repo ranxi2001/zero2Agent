@@ -104,16 +104,17 @@ code, pre { font-family: var(--font-mono); }
 .doc-nav a.is-active { color: var(--text); }
 
 .nav-friend-link {
-    color: var(--brand) !important;
-    border: 1px solid var(--brand-border);
+    color: #818cf8 !important;
+    border: 1px solid rgba(129, 140, 248, 0.3);
     margin-left: 6px;
     font-size: 0.76rem !important;
     padding: 4px 9px !important;
 }
 
 .nav-friend-link:hover {
-    background: var(--brand-dim) !important;
-    border-color: var(--brand) !important;
+    color: #14b8a6 !important;
+    background: rgba(129, 140, 248, 0.08) !important;
+    border-color: #14b8a6 !important;
 }
 
 /* ===== 3-Column Main Layout ===== */
