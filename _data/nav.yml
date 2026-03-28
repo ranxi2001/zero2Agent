@@ -85,7 +85,15 @@ modules:
         slug: "12-worktree-isolation"
   - title: "Frameworks"
     slug: "learn-frameworks"
-    articles: []
+    articles:
+      - title: "OpenAI Agents SDK：Agent、Tool、Handoff"
+        slug: "01-openai-agents-sdk"
+      - title: "Google Gemini SDK：Function Calling 全解"
+        slug: "02-google-gemini-sdk"
+      - title: "Claude Anthropic SDK：Messages API 与 Tool Use"
+        slug: "03-claude-anthropic-sdk"
+      - title: "三大 SDK 横向对比：怎么选"
+        slug: "04-sdk-comparison"
   - title: "Final Project"
     slug: "final-project"
     articles: []

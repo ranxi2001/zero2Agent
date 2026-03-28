@@ -1,34 +1,37 @@
 ---
 layout: default
 title: learn-frameworks
-description: Agent 框架与生态横向对比
-eyebrow: Module 04
+description: OpenAI Agents SDK、Google Gemini SDK、Claude Anthropic SDK——三大原厂 SDK 的核心用法与选型指南
+eyebrow: Module 05
 ---
 
 # learn-frameworks
 
-这一部分做横向视角，不追求罗列，而是建立选型标准。
+这个模块不是 API 文档的复读，而是帮你建立**选型判断力**。
 
-不是所有项目都要上多 Agent，不是所有 Agent 都需要 LangGraph，也不是所有场景都适合复杂框架。理解框架的取舍比背 API 更重要。
+三大模型厂商（OpenAI、Google、Anthropic）各自提供了官方 SDK。它们的 API 设计哲学不同，适合的场景也不同。这个模块逐一讲清楚各 SDK 的核心模式，最后做横向对比。
 
-## 会比较什么
+## 这个模块覆盖什么
 
-- 抽象层级
-- 状态管理方式
-- 工具接入能力
-- 调试与可观测性
-- 适合做 Demo 还是适合做系统
+| # | 文章 | 核心内容 |
+|---|------|---------|
+| 01 | OpenAI Agents SDK | Agent 对象、Runner 执行、工具注册、Handoff 多 Agent |
+| 02 | Google Gemini SDK | Function Calling、多模态、流式生成、安全设置 |
+| 03 | Claude Anthropic SDK | Messages API、Tool Use、流式、视觉能力 |
+| 04 | 三大 SDK 横向对比 | API 设计差异、Tool Calling 实现、选型建议 |
 
-## 可纳入的对象
+## 为什么要关注原厂 SDK
 
-- LangChain / LangGraph
-- OpenAI Agents SDK
-- MCP 生态
-- CrewAI / AutoGen / Agno
+用 LangChain 这类封装框架，出问题时要翻三层抽象。原厂 SDK 的优势：
 
-## 后续可补充的文章
+- **稳定**：跟着模型版本同步更新，不会因为 LangChain 版本不兼容踩坑
+- **完整**：能用到最新功能（比如 OpenAI 的 Realtime API、Google 的 grounding）
+- **轻量**：不引入额外依赖，适合生产环境
+- **可读**：代码意图直接，出问题好排查
 
-- [ ] Agent 框架怎么选
-- [ ] LangGraph vs Agents SDK
-- [ ] MCP 在 Agent 系统中的位置
-- [ ] 多 Agent 框架的真实价值
+学会原厂 SDK，再用封装框架时也能理解底层在做什么。
+
+## 前置知识
+
+- 了解什么是 Tool Calling（参考 [Agent Basic - Tool Calling 入门](../learn-agent-basic/05-tool-calling-basics/index.html)）
+- 会写基本 Python，了解 async/await 更佳
