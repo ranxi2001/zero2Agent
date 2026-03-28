@@ -513,6 +513,46 @@ img {
     gap: 16px;
 }
 
+.roadmap-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.roadmap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.roadmap-badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    padding: 3px 8px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.02em;
+}
+
+.badge-done {
+    color: var(--brand);
+    background: var(--brand-dim);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-todo {
+    color: var(--text-tertiary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.roadmap-card-muted {
+    opacity: 0.6;
+}
+
+.roadmap-card-muted:hover {
+    opacity: 1;
+}
+
 .roadmap-card {
     padding: 28px;
     background: var(--surface);
@@ -570,6 +610,24 @@ img {
 .roadmap-card:nth-child(4):hover {
     border-color: rgba(245, 158, 11, 0.25);
     box-shadow: 0 0 40px rgba(245, 158, 11, 0.08);
+}
+
+.roadmap-card:nth-child(5)::before {
+    background: linear-gradient(90deg, #f472b6, transparent);
+}
+
+.roadmap-card:nth-child(5):hover {
+    border-color: rgba(244, 114, 182, 0.25);
+    box-shadow: 0 0 40px rgba(244, 114, 182, 0.08);
+}
+
+.roadmap-card:nth-child(6)::before {
+    background: linear-gradient(90deg, #38bdf8, transparent);
+}
+
+.roadmap-card:nth-child(6):hover {
+    border-color: rgba(56, 189, 248, 0.25);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.08);
 }
 
 .roadmap-index {
@@ -674,20 +732,100 @@ img {
     font-size: 0.92rem;
 }
 
+/* ===== Stats ===== */
+.section-stats {
+    padding: 32px 0;
+}
+
+.stats-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 28px 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 40px;
+    text-align: center;
+}
+
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--text), var(--brand));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+}
+
+.stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    flex-shrink: 0;
+}
+
 /* ===== Footer ===== */
 .site-footer {
     margin-top: auto;
-    padding: 40px 0 48px;
+    padding: 32px 0 40px;
 }
 
 .footer-inner {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding-top: 24px;
+    padding-top: 20px;
     border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.footer-desc {
     color: var(--text-tertiary);
-    font-size: 0.88rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.footer-link:hover {
+    color: var(--brand);
+    border-color: rgba(16, 185, 129, 0.4);
+    background: var(--brand-dim);
 }
 
 /* ===== Responsive ===== */
@@ -697,8 +835,18 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .roadmap-grid {
-        grid-template-columns: 1fr;
+    .roadmap-grid,
+    .roadmap-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        gap: 0;
+        padding: 20px 16px;
+    }
+
+    .stat-item {
+        padding: 0 20px;
     }
 
     .section-heading {
@@ -757,8 +905,19 @@ img {
     }
 
     .intro-grid,
-    .module-grid {
+    .module-grid,
+    .roadmap-grid-3 {
         grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .stat-divider {
+        display: none;
     }
 
     .section {
