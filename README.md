@@ -1,230 +1,153 @@
+<div align="center">
+
 # zero2Agent
 
-从 0 到 1 学会开发 AI Agent。
+**面向程序员的 Agent 工程教程 · 从概念到生产**
 
-这不是一个只教你“怎么用现成 Agent 产品”的仓库，而是一个面向程序员的教程类知识库 + 前端展示项目。它的目标很直接：
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/ranxi2001/zero2Agent?style=social)](https://github.com/ranxi2001/zero2Agent)
+[![Site](https://img.shields.io/badge/Site-onefly.top%2FzeroAgent-brightgreen)](https://onefly.top/zero2Agent)
 
-**帮助已经了解深度学习、会写代码、会用 AI 工具，但还不了解大模型应用开发和 Agent 工程机制的开发者，真正上手做出自己的 Agent。**
+[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/)
 
-最终，这个仓库不会停留在 Demo、Prompt、套壳工作流，而是会落到一个完整的实战项目：
+</div>
 
-**以我的毕设方向为例，完成一个面向加密货币市场的风控 Agent。**
+---
 
-## 为什么要做这个项目
+## 这是什么
 
-现在很多人已经会：
+**zero2Agent** 是一个面向程序员的 Agent 工程教程仓库，目标是帮助已经会写代码、会用 AI 工具，但还没系统做过 Agent 工程的开发者，真正从零搭出自己的 Agent 系统。
 
-- 用 ChatGPT、Claude、Cursor、Copilot
-- 搭一些工作流式的自动化
-- 调 API 做简单问答或摘要
+内容不停留在 Demo、Prompt、套壳工作流，而是从核心机制出发，覆盖 Agent 的工程设计原理、框架拆解、代码实现，最终落到一个完整的实战项目。
 
-但一旦开始自己做 Agent，问题就出来了：
+**在线阅读（GitHub Pages）**：[https://onefly.top/zero2Agent](https://onefly.top/zero2Agent)
 
-- 不清楚大模型应用开发和传统深度学习项目的差异
-- 不理解 Agent 到底比普通 Workflow 多了什么
-- 不知道 Tool Calling、Memory、Planning、RAG、MCP、Code Agent 这些概念怎么串起来
-- 看了很多教程，能跑 Demo，但没法迁移到自己的项目
-- 会“用” Agent，不会“开发” Agent
+---
 
-这个仓库就是为了解决这些问题。
+## 模块概览
+
+| 模块 | 状态 | 内容 |
+|------|------|------|
+| [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) | ✅ 进行中 | Agent 核心概念、Tool Calling、Memory、Planning、RAG、多 Agent 模式 |
+| [OpenClaw Agent](https://onefly.top/zero2Agent/learn-openclaw/) | ✅ 完成 | 60 行核心框架，从 Node 推导到 Agent，pi-mono 架构解析，部署实战 |
+| [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) | ✅ 完成 | 12 节课手写 Coding Agent：Loop → Tools → Subagent → Teams → Worktree 隔离 |
+| LangGraph | 🔲 待开始 | Graph 状态机、条件分支、持久化、Human-in-the-loop |
+| Frameworks | 🔲 待开始 | LangChain、OpenAI Agents SDK、MCP、CrewAI 横向对比 |
+| Final Project | 🔲 待开始 | 加密货币市场风控 Agent 完整实战 |
+
+---
+
+## 模块详情
+
+### Agent Basic
+
+建立正确的 Agent 工程认知，覆盖：
+
+- 什么是 Agent，与 Workflow 的本质区别
+- Tool Calling 的完整机制
+- Memory 设计模式（短期 / 长期 / 外部存储）
+- Planning、Reflection、RAG 的作用边界
+- 单 Agent vs 多 Agent 的常见架构模式
+- 为什么 Demo 能跑、落地就不稳定
+
+### OpenClaw Agent
+
+从 60 行核心代码出发，一步步推导出完整的 Agent 框架：
+
+```python
+workflow = node + node        # 有向路径，无循环
+chatbot  = workflow + loop    # 外层循环，多轮对话
+agent    = chatbot + tools    # 图内回路，模型驱动工具
+```
+
+覆盖 RAG、Tool/MCP/Skill 三种工具形式、Memory 压缩、多 Agent 并行团队、pi-mono 架构解析，以及完整的部署和面试准备。
+
+参考仓库：[lasywolf/Learn-OpenClaw](https://github.com/lasywolf/Learn-OpenClaw) · [pi-mcp/pi-mono](https://github.com/pi-mcp/pi-mono)
+
+### Claude Code
+
+12 节课，从 30 行 Agent 循环逐步构建完整 Coding Agent 系统：
+
+| 章节 | 机制 |
+|------|------|
+| s01–s06 | Agent Loop · Tool Dispatch · TodoWrite · Subagent · Skill Loading · Context Compact |
+| s07–s12 | Task DAG · Background Tasks · Agent Teams · Protocols · Autonomous Agents · Worktree Isolation |
+
+参考仓库：[shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code)
+
+---
 
 ## 适合谁
 
-这个项目主要面向下面这类开发者：
-
-- 学过机器学习或深度学习，但没系统做过 LLM 应用开发
-- 会 Python 或前端开发，希望补齐 Agent 工程能力
-- 用过 AI 编程工具，但不清楚它们背后的实现模式
-- 想从教程、案例、源码三个层面系统学习 Agent
-- 想把 Agent 用到真实业务，而不是只停留在聊天机器人阶段
+- 学过深度学习，但没做过 LLM 应用开发
+- 会 Python，想补齐 Agent 工程能力
+- 用过 Claude Code / Cursor 等工具，想理解背后的实现
+- 准备 Agent 方向技术面试或实习
+- 想把 Agent 真正部署上线，而不只是跑 Demo
 
 ## 不适合谁
 
-如果你当前更需要的是下面这些内容，这个仓库不是第一优先：
-
-- 大模型预训练、对齐、蒸馏、推理优化等底层算法研究
+- 大模型预训练、对齐、推理优化等底层算法研究
 - 纯学术导向的 Agent 论文综述
-- 只想快速复制一个“几分钟搭建 Agent”的短教程
+- 只想快速复制"几分钟搭建 Agent"的短教程
 
-这个仓库更偏工程实践、系统理解和项目落地。
+---
 
-## 你会学到什么
+## 仓库结构
 
-我希望这个仓库最后能回答清楚下面这些问题：
-
-- 什么是 Agent，它和普通 LLM App、Workflow 的边界在哪里
-- 一个可用的 Agent 系统由哪些核心模块构成
-- 为什么很多 Agent Demo 能跑，但一进生产就不稳定
-- LangGraph 这类框架到底解决了什么问题
-- Code Agent 是怎么工作的，为什么 Claude Code / Cursor / Codex 这类工具体验差异这么大
-- 做一个真实业务 Agent 时，如何定义输入、状态、工具、记忆、评估和风控边界
-
-## 学习路线
-
-整个仓库会按“从基础概念到真实项目”的顺序组织。
-
-### 1. learn-agent-basic
-
-这一部分解决的是“先把 Agent 讲明白”。
-
-计划覆盖：
-
-- LLM 应用开发基础
-- Prompt、工具调用、结构化输出
-- Workflow 与 Agent 的区别
-- Agent 的最小系统组成
-- Memory、Planning、Reflection、RAG 的作用和边界
-- 单 Agent 与多 Agent 的常见模式
-- 评估、观测、成本、延迟、稳定性这些工程问题
-
-这一部分的目标不是让你先学一堆框架，而是先建立正确的工程认知。
-
-### 2. learn-langgraph
-
-这一部分解决的是“如何用一个现代 Agent 框架，把系统真正搭起来”。
-
-计划覆盖：
-
-- Graph 思维与状态驱动开发
-- Node / Edge / State 的设计方式
-- 条件分支、循环、错误恢复
-- Memory 与持久化
-- Human-in-the-loop
-- 多 Agent 协作
-- 长任务、可恢复执行与调试
-
-如果你想认真做 Agent，而不是只做链式调用，LangGraph 会是一个重要部分。
-
-### 3. learn-claude-code
-
-这一部分解决的是“Code Agent 到底是怎么工作的”。
-
-计划覆盖：
-
-- Claude Code 这类工具的核心交互模式
-- 为什么代码 Agent 需要更强的上下文管理
-- 工具系统、文件系统、命令执行、补丁写入
-- Repo 理解、任务拆解、执行反馈闭环
-- Prompt 设计之外，更关键的系统约束设计
-- 如何从“会用代码 Agent”进阶到“自己做代码 Agent”
-
-这部分会重点分析代码场景下的 Agent 设计，而不只是把它当成聊天机器人加个终端。
-
-### 4. learn-frameworks
-
-这一部分会横向看不同 Agent 框架与工具链。
-
-计划可能包含：
-
-- LangChain / LangGraph
-- OpenAI Agents SDK
-- MCP 生态
-- CrewAI / AutoGen / Agno / 其他值得关注的方案
-- 不同框架的适用场景、优缺点和取舍
-
-这一部分不会追求“全都学”，而是帮助你建立框架选型能力。
-
-### 5. final-project
-
-最终实战会回到一个真实问题：
-
-**加密货币市场风控 Agent 开发**
-
-计划围绕下面这些能力展开：
-
-- 市场信息采集与事件理解
-- 风险信号提取
-- 多源数据整合
-- 风险分析工作流
-- 告警与解释生成
-- 人工审核与风控边界控制
-- Agent 评估与迭代
-
-我希望最后输出的不是一个“能聊天的金融助手”，而是一个真正有业务目标、有约束、有评估标准的 Agent 系统。
-
-## 仓库规划
-
-当前仓库还在开坑阶段，后续会逐步整理成下面这样的结构：
-
-```text
+```
 zero2Agent/
-├─ README.md
-├─ docs/
-│  ├─ learn-agent-basic/
-│  ├─ learn-langgraph/
-│  ├─ learn-claude-code/
-│  ├─ learn-frameworks/
-│  └─ final-project/
-├─ examples/
-│  ├─ basic/
-│  ├─ langgraph/
-│  ├─ code-agent/
-│  └─ final-project/
-├─ frontend/
-│  └─ ...
-└─ assets/
-   └─ ...
+├── _layouts/           # Jekyll 页面模板
+├── _data/
+│   └── nav.yml         # 导航配置
+├── assets/
+│   ├── css/docs.css    # 三栏布局样式
+│   └── js/app.js       # 侧边栏 + TOC + Mermaid
+├── learn-agent-basic/  # Agent 基础概念（8 篇）
+├── learn-openclaw/     # OpenClaw 框架教程（9 篇）
+├── learn-claude-code/  # Claude Code 课程（12 篇）
+├── learn-langgraph/    # LangGraph（待开始）
+├── learn-frameworks/   # 框架横向对比（待开始）
+└── final-project/      # 加密货币风控 Agent 实战（待开始）
 ```
 
-其中：
+---
 
-- `docs/` 放教程、原理拆解、学习笔记
-- `examples/` 放最小可运行示例和实验代码
-- `frontend/` 放知识库展示站点
-- `final-project/` 相关内容会逐步沉淀为完整实战案例
+## 本地运行
 
-## 写作原则
+```bash
+git clone https://github.com/ranxi2001/zero2Agent
+cd zero2Agent
 
-这个仓库会尽量坚持几件事：
+# 安装 Jekyll（需要 Ruby）
+gem install bundler jekyll
+bundle install
 
-- 不堆砌黑话，先把概念讲清楚
-- 不迷信框架，优先解释设计思想
-- 不只给 Demo，要讲为什么这样设计
-- 不只讲“能跑”，还要讲“为什么会坏”
-- 不只讲 Agent 能做什么，也讲它不能做什么
+# 本地预览
+bundle exec jekyll serve
+# 访问 http://localhost:4000/zero2Agent
+```
 
-## 项目目标
+---
 
-如果这个仓库写完整，我希望它至少做到下面三件事：
+## 引用与致谢
 
-1. 让一个只会“使用 AI 工具”的程序员，具备独立开发 Agent 的基本能力。
-2. 让学习路径从碎片化教程，变成一条连贯的工程路线。
-3. 让最终实战不止于展示效果，而是尽量贴近真实业务问题。
+本仓库的内容参考并引用了以下开源项目：
 
-## 更新计划
+- **[shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code)** — Claude Code 模块的课程结构和核心内容来源，12 节渐进式 Agent 构建课程
+- **[lasywolf/Learn-OpenClaw](https://github.com/lasywolf/Learn-OpenClaw)** — OpenClaw 模块的核心思路和代码框架来源
+- **[pi-mcp/pi-mono](https://github.com/pi-mcp/pi-mono)** — 生产级 Coding Agent 的参考实现
 
-第一阶段先完成：
+---
 
-- [ ] README 和仓库整体结构初始化
-- [ ] `learn-agent-basic` 第一批文章
-- [ ] `learn-langgraph` 最小示例
-- [ ] `learn-claude-code` 学习路线与资料整理
-- [ ] 前端展示页面原型
+## Contributing
 
-后续再逐步推进：
+欢迎 PR 和 Issue。内容补充、错误修正、新模块建议均可。
 
-- [ ] 多框架对比
-- [ ] Code Agent 专题
-- [ ] 加密货币市场风控 Agent 实战
-- [ ] 评估、观测、部署与迭代
+提 Issue 前请先检查是否已有相关讨论。PR 建议一个 PR 只做一件事。
 
-## 参考方向
+---
 
-这个 README 的开坑方式参考了 `learn-claude-code` 项目的中文文档思路，但这个仓库会更偏：
+## License
 
-- Agent 基础知识系统化
-- 多框架实践
-- Code Agent 理解
-- 面向真实业务的最终项目落地
-
-## 开始施工
-
-如果你也在经历同样的问题：
-
-会用 AI，但不会做 Agent；
-看过很多教程，但还是搭不出自己的系统；
-知道一些术语，但没建立完整工程认知；
-
-那这个仓库就是写给你的。
-
-欢迎一起把这个坑填起来。
+[MIT](LICENSE)
