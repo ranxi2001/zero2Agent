@@ -1,9 +1,18 @@
-<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="160" height="160" rx="38" fill="#141420"/>
-  <path d="M34 48C34 40.268 40.268 34 48 34H112C119.732 34 126 40.268 126 48V112C126 119.732 119.732 126 112 126H48C40.268 126 34 119.732 34 112V48Z" fill="#10b981"/>
-  <path d="M53 60H104.5L90 76.5H68L53 60Z" fill="#fff"/>
-  <path d="M61 88H87.5L103 104H75.5L61 88Z" fill="#fff"/>
-  <circle cx="111" cy="51" r="14" fill="#f59e0b"/>
-  <path d="M111 44V58" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-  <path d="M118 51L104 51" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <!-- 左大括号 -->
+  <path d="M14 8C14 8 10 8 10 12V20C10 20 10 24 6 24C10 24 10 28 10 28V36C10 40 14 40 14 40"
+        stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 右大括号 -->
+  <path d="M34 8C34 8 38 8 38 12V20C38 20 38 24 42 24C38 24 38 28 38 28V36C38 40 34 40 34 40"
+        stroke="url(#logoGradient)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 中间 0 -->
+  <ellipse cx="24" cy="24" rx="6" ry="8" stroke="url(#logoGradient)" stroke-width="3" fill="none"/>
+  <!-- 斜线表示从0开始 -->
+  <line x1="20" y1="30" x2="28" y2="18" stroke="url(#logoGradient)" stroke-width="2" stroke-linecap="round"/>
 </svg>
