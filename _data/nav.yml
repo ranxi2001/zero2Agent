@@ -1,0 +1,32 @@
+modules:
+  - title: "Agent Basic"
+    slug: "learn-agent-basic"
+    articles:
+      - title: "什么是 Agent"
+        slug: "01-what-is-an-agent"
+      - title: "Workflow 和 Agent 的区别"
+        slug: "02-workflow-vs-agent"
+      - title: "核心组成"
+        slug: "03-core-components"
+      - title: "为什么 Demo 一落地就不稳定"
+        slug: "04-why-agent-demos-break"
+      - title: "Tool Calling 入门"
+        slug: "05-tool-calling-basics"
+      - title: "Memory 设计模式"
+        slug: "06-memory-patterns"
+      - title: "Planning / Reflection / RAG"
+        slug: "07-planning-reflection-rag"
+      - title: "单 Agent vs 多 Agent"
+        slug: "08-single-vs-multi-agent"
+  - title: "LangGraph"
+    slug: "learn-langgraph"
+    articles: []
+  - title: "Claude Code"
+    slug: "learn-claude-code"
+    articles: []
+  - title: "Frameworks"
+    slug: "learn-frameworks"
+    articles: []
+  - title: "Final Project"
+    slug: "final-project"
+    articles: []
