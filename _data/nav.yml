@@ -18,6 +18,11 @@ modules:
         slug: "07-planning-reflection-rag"
       - title: "单 Agent vs 多 Agent"
         slug: "08-single-vs-multi-agent"
+  - title: "OpenClaw Agent"
+    slug: "learn-openclaw"
+    articles:
+      - title: "为什么要自己写 Agent"
+        slug: "01-core-idea"
   - title: "LangGraph"
     slug: "learn-langgraph"
     articles: []

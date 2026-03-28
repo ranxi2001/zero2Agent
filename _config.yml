@@ -6,6 +6,7 @@ baseurl: /zero2Agent
 
 include:
   - learn-agent-basic
+  - learn-openclaw
   - learn-langgraph
   - learn-claude-code
   - learn-frameworks
