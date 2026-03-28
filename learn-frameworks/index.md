@@ -1,11 +1,11 @@
 ---
 layout: default
-title: learn-frameworks
+title: SDK 框架
 description: OpenAI Agents SDK、Google Gemini SDK、Claude Anthropic SDK——三大原厂 SDK 的核心用法与选型指南
 eyebrow: Module 05
 ---
 
-# learn-frameworks
+# SDK 框架
 
 这个模块不是 API 文档的复读，而是帮你建立**选型判断力**。
 

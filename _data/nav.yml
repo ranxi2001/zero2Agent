@@ -83,7 +83,7 @@ modules:
         slug: "11-autonomous-agents"
       - title: "Worktree 隔离：多 Agent 并行不踩踏"
         slug: "12-worktree-isolation"
-  - title: "Frameworks"
+  - title: "SDK 框架"
     slug: "learn-frameworks"
     articles:
       - title: "OpenAI Agents SDK：Agent、Tool、Handoff"
