@@ -65,6 +65,17 @@
                         </li>
                     </ul>
                 </section>
+                <aside class="hero-card">
+                    <div class="terminal">
+                        <div class="terminal-top">
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-dot"></span>
+                            <span class="terminal-title">agent.py</span>
+                        </div>
+                        <div class="terminal-body"><div><span style="color:#c084fc">class</span> <span style="color:#60a5fa">Agent</span>:</div><div>    <span style="color:#c084fc">def</span> <span style="color:#60a5fa">run</span>(<span style="color:#f59e0b">self</span>, goal: <span style="color:#60a5fa">str</span>):</div><div>        <span style="color:#4a4a5a"># Agent Loop 核心</span></div><div>        <span style="color:#c084fc">while not</span> self.done:</div><div>            action = self.<span style="color:#34d399">think</span>(goal)</div><div>            result = self.<span style="color:#34d399">use_tool</span>(action)</div><div>            self.memory.<span style="color:#34d399">add</span>(result)</div><div>        <span style="color:#c084fc">return</span> self.<span style="color:#34d399">output</span>()</div></div>
+                    </div>
+                </aside>
             </div>
         </header>
 

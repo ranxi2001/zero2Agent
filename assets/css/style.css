@@ -208,11 +208,14 @@ img {
 /* ===== Hero ===== */
 .hero {
     padding: 68px 0 64px;
-    text-align: center;
 }
 
 .hero-inner {
     max-width: 1600px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
 }
 
 .hero-copy {
@@ -220,6 +223,7 @@ img {
     background: none;
     border: none;
     border-radius: 0;
+    text-align: center;
 }
 
 .eyebrow {
@@ -870,6 +874,15 @@ img {
     .hero-meta {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+        max-width: 420px;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 640px) {
@@ -907,6 +920,10 @@ img {
 
     .hero h1 {
         font-size: 2.4rem;
+    }
+
+    .hero-card {
+        display: none;
     }
 
     .hero-meta {
