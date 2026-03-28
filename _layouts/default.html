@@ -52,28 +52,34 @@
                 <p class="sidebar-label">Learning Map</p>
                 {% for module in site.data.nav.modules %}
                 {% assign is_open = page.url | contains: module.slug %}
-                <details class="nav-module" {% if is_open %}open{% endif %}>
-                    <summary class="nav-module-title">
+                <div class="nav-module{% if is_open %} is-open{% endif %}">
+                    <div class="nav-module-row">
+                        {% if module.articles.size > 0 %}
+                        <button class="nav-toggle-btn" type="button" aria-label="展开">
+                            <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                <path d="M2 1.5l3 2.5-3 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        {% else %}
+                        <span class="nav-toggle-gap"></span>
+                        {% endif %}
                         <a href="{{ site.baseurl }}/{{ module.slug }}/index.html"
-                           class="nav-module-link {% if is_open %}is-active{% endif %}">
+                           class="nav-module-link{% if is_open %} is-active{% endif %}">
                             {{ module.title }}
                         </a>
-                        {% if module.articles.size > 0 %}
-                        <span class="nav-arrow">›</span>
-                        {% endif %}
-                    </summary>
+                    </div>
                     {% if module.articles.size > 0 %}
                     <div class="nav-articles">
                         {% for article in module.articles %}
                         {% assign article_path = module.slug | append: '/' | append: article.slug %}
                         <a href="{{ site.baseurl }}/{{ article_path }}/index.html"
-                           class="nav-article {% if page.url contains article.slug %}is-current{% endif %}">
+                           class="nav-article{% if page.url contains article.slug %} is-current{% endif %}">
                             {{ article.title }}
                         </a>
                         {% endfor %}
                     </div>
                     {% endif %}
-                </details>
+                </div>
                 {% endfor %}
             </aside>
 
