@@ -172,6 +172,15 @@ img {
     background: rgba(16, 185, 129, 0.22);
 }
 
+.nav-links .friend-link-lc {
+    color: #818cf8;
+}
+
+.nav-links .friend-link-lc:hover {
+    color: #14b8a6;
+    background: rgba(129, 140, 248, 0.08);
+}
+
 .nav-toggle {
     display: none;
     border: 0;
