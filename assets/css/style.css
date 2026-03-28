@@ -215,6 +215,8 @@ img {
 
 .hero-inner {
     max-width: 1600px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-copy {
