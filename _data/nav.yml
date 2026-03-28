@@ -41,7 +41,21 @@ modules:
         slug: "09-interview"
   - title: "LangGraph"
     slug: "learn-langgraph"
-    articles: []
+    articles:
+      - title: "LangGraph 是什么，为什么不用链式调用"
+        slug: "01-what-is-langgraph"
+      - title: "State、Node、Graph 三件套"
+        slug: "02-state-node-graph"
+      - title: "顺序图：第一个可运行的 Workflow"
+        slug: "03-sequential-graph"
+      - title: "条件分支：add_conditional_edges"
+        slug: "04-conditional-edges"
+      - title: "并行执行：Fan-out / Fan-in"
+        slug: "05-parallel-workflows"
+      - title: "Prompt Chaining：分步生成"
+        slug: "06-prompt-chaining"
+      - title: "接入 LLM：OpenAI 与 HuggingFace"
+        slug: "07-llm-integration"
   - title: "Claude Code"
     slug: "learn-claude-code"
     articles:
