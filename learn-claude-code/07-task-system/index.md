@@ -193,15 +193,16 @@ def run_task_tool(action: str, **kwargs) -> str:
 
 <div class="mermaid">
 flowchart TD
-    A[create task_1: 分析代码] --> B[create task_2: 重构\nblockedBy: task_1]
-    B --> C[create task_3: 写测试\nblockedBy: task_1]
-    C --> D[create task_4: 集成测试\nblockedBy: task_2, task_3]
+    A[task_1: 分析代码] --> B[task_2: 重构]
+    A --> C[task_3: 写测试]
+    B --> D[task_4: 集成测试]
+    C --> D
 
-    D --> E[list_ready → task_1]
+    D --> E[list_ready: task_1 可用]
     E --> F[执行 task_1]
-    F --> G[complete task_1\n→ 解锁 task_2, task_3]
-    G --> H[并行处理 task_2, task_3]
-    H --> I[complete task_2 + task_3\n→ 解锁 task_4]
+    F --> G[complete task_1\n解锁 task_2 和 task_3]
+    G --> H[并行处理 task_2 和 task_3]
+    H --> I[complete task_2 + task_3\n解锁 task_4]
 </div>
 
 ---

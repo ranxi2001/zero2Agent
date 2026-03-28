@@ -42,9 +42,9 @@ IDLE 阶段：
 
 <div class="mermaid">
 stateDiagram-v2
-    [*] --> WORK: spawn + 初始任务
-    WORK --> IDLE: 完成当前任务\n调用 idle()
-    IDLE --> WORK: 收到消息\n或认领任务
+    [*] --> WORK: spawn
+    WORK --> IDLE: 完成任务
+    IDLE --> WORK: 收到消息或认领任务
     IDLE --> [*]: 60s 无活动
 </div>
 

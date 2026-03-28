@@ -30,7 +30,7 @@ flowchart LR
     A([用户 prompt]) --> B[LLM]
     B -->|tool_use| C[执行工具]
     C -->|tool_result| B
-    B -->|stop_reason ≠ tool_use| D([结束])
+    B -->|stop| D([结束])
 </div>
 
 一个退出条件控制整个流程：循环持续运行，直到模型不再调用工具。

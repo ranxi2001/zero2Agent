@@ -145,13 +145,13 @@ class ProtocolManager:
 
 <div class="mermaid">
 sequenceDiagram
-    Leader->>Coder: request_shutdown(reason="任务完成")
-    Note over Coder: 检查当前状态<br/>是否安全关机？
-    Coder->>Leader: approve(req_id) 或 reject(req_id)
+    Leader->>Coder: request_shutdown
+    Note over Coder: 检查当前状态
+    Coder->>Leader: approve 或 reject
     alt approved
         Leader->>Coder: 执行关机
     else rejected
-        Leader->>Leader: 等待，稍后重试
+        Leader->>Leader: 等待稍后重试
     end
 </div>
 
@@ -161,13 +161,13 @@ sequenceDiagram
 
 <div class="mermaid">
 sequenceDiagram
-    Coder->>Leader: request_plan_approval("删除 src/legacy/ 目录")
-    Note over Leader: 审查计划<br/>是否安全？
-    Leader->>Coder: approve 或 reject(reason)
+    Coder->>Leader: request_plan_approval
+    Note over Leader: 审查计划是否安全
+    Leader->>Coder: approve 或 reject
     alt approved
-        Coder->>Coder: 执行删除操作
+        Coder->>Coder: 执行操作
     else rejected
-        Coder->>Leader: 说明原因，请求指导
+        Coder->>Leader: 说明原因请求指导
     end
 </div>
 
