@@ -74,57 +74,57 @@
                     <h2>学习路线</h2>
                     <p>六个模块按工程认知深度递进，从概念理解到框架手写到多 Agent 系统，最终落到真实业务项目。</p>
                 </div>
-                <div class="roadmap-grid roadmap-grid-3">
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
 
                     <a class="roadmap-card" href="learn-agent-basic/index.html">
-                        <div class="roadmap-header">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                             <div class="roadmap-index">01</div>
-                            <span class="roadmap-badge badge-done">8 篇 · 完成</span>
+                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">8 篇 · 完成</span>
                         </div>
                         <h3>learn-agent-basic</h3>
                         <p>Agent 是什么、工具调用机制、Memory 设计模式、Planning / RAG 的边界、单 Agent vs 多 Agent 常见模式。建立正确工程认知，不迷信框架。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-openclaw/index.html">
-                        <div class="roadmap-header">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                             <div class="roadmap-index">02</div>
-                            <span class="roadmap-badge badge-done">9 篇 · 完成</span>
+                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">9 篇 · 完成</span>
                         </div>
                         <h3>learn-openclaw</h3>
                         <p>60 行核心框架，从 Node → Workflow → Chatbot → Agent 完整推导。RAG、Tool/MCP/Skill、pi-mono 架构解析，以及部署和面试准备。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-claude-code/index.html">
-                        <div class="roadmap-header">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                             <div class="roadmap-index">03</div>
-                            <span class="roadmap-badge badge-done">12 篇 · 完成</span>
+                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">12 篇 · 完成</span>
                         </div>
                         <h3>learn-claude-code</h3>
                         <p>12 节课手写 Coding Agent。从 30 行 Loop 起步，逐步叠加 Tool Dispatch、Subagent、Context Compact、Task DAG、多 Agent Teams、Worktree 隔离。</p>
                     </a>
 
-                    <a class="roadmap-card roadmap-card-muted" href="learn-langgraph/index.html">
-                        <div class="roadmap-header">
+                    <a class="roadmap-card" style="opacity:0.6;" href="learn-langgraph/index.html">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                             <div class="roadmap-index">04</div>
-                            <span class="roadmap-badge badge-todo">待开始</span>
+                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#565669;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">待开始</span>
                         </div>
                         <h3>learn-langgraph</h3>
                         <p>Graph 状态机、条件分支、持久化执行、Human-in-the-loop、多 Agent 协作。从状态图角度理解可维护 Agent 系统的搭建方式。</p>
                     </a>
 
-                    <a class="roadmap-card roadmap-card-muted" href="learn-frameworks/index.html">
-                        <div class="roadmap-header">
+                    <a class="roadmap-card" style="opacity:0.6;" href="learn-frameworks/index.html">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                             <div class="roadmap-index">05</div>
-                            <span class="roadmap-badge badge-todo">待开始</span>
+                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#565669;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">待开始</span>
                         </div>
                         <h3>learn-frameworks</h3>
                         <p>LangChain、OpenAI Agents SDK、MCP 生态、CrewAI、AutoGen 横向对比。不追求全都学，建立框架选型视角和取舍能力。</p>
                     </a>
 
-                    <a class="roadmap-card roadmap-card-muted" href="final-project/index.html">
-                        <div class="roadmap-header">
+                    <a class="roadmap-card" style="opacity:0.6;" href="final-project/index.html">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
                             <div class="roadmap-index">06</div>
-                            <span class="roadmap-badge badge-todo">待开始</span>
+                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#565669;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">待开始</span>
                         </div>
                         <h3>final-project</h3>
                         <p>加密货币市场风控 Agent 完整实战。真实业务目标、有约束、有评估标准——不是泛泛的聊天助手，而是能上线的工程系统。</p>
@@ -159,27 +159,27 @@
         </section>
 
         <!-- Stats bar -->
-        <section class="section section-stats">
+        <section class="section" style="padding: 24px 0 40px;">
             <div class="section-inner">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-num">29</span>
-                        <span class="stat-label">已发布文章</span>
+                <div style="display:flex;align-items:center;justify-content:center;gap:0;padding:28px 40px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;flex-wrap:wrap;">
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
+                        <span style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">29</span>
+                        <span style="font-size:0.82rem;color:#565669;">已发布文章</span>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-num">3</span>
-                        <span class="stat-label">完整模块</span>
+                    <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
+                        <span style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">3</span>
+                        <span style="font-size:0.82rem;color:#565669;">完整模块</span>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-num">60</span>
-                        <span class="stat-label">行核心框架代码</span>
+                    <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
+                        <span style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">60</span>
+                        <span style="font-size:0.82rem;color:#565669;">行核心框架代码</span>
                     </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat-item">
-                        <span class="stat-num">s01→s12</span>
-                        <span class="stat-label">Claude Code 渐进课程</span>
+                    <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">s01→s12</span>
+                        <span style="font-size:0.82rem;color:#565669;">Claude Code 渐进课程</span>
                     </div>
                 </div>
             </div>
