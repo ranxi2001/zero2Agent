@@ -2,3 +2,4 @@ _site/
 .jekyll-cache/
 .sass-cache/
 .jekyll-metadata
+.claude/skills-workspace
