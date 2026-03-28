@@ -6,6 +6,47 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
     });
 });
 
+/* ===== Mermaid diagrams ===== */
+(function () {
+    if (typeof mermaid === "undefined") return;
+
+    // Rouge wraps ```mermaid as .language-mermaid.highlighter-rouge > .highlight > pre > code
+    var blocks = document.querySelectorAll(".language-mermaid code");
+    if (blocks.length === 0) return;
+
+    blocks.forEach(function (code) {
+        var container = code.closest(".language-mermaid");
+        if (!container) return;
+        var div = document.createElement("div");
+        div.className = "mermaid";
+        // Use textContent to avoid any HTML escaping issues
+        div.textContent = code.textContent;
+        container.parentNode.replaceChild(div, container);
+    });
+
+    mermaid.initialize({
+        startOnLoad: false,
+        theme: "dark",
+        themeVariables: {
+            background: "#0a0a10",
+            primaryColor: "#1a2535",
+            primaryTextColor: "#d1d5db",
+            primaryBorderColor: "#334155",
+            lineColor: "#10b981",
+            secondaryColor: "#161e2e",
+            tertiaryColor: "#161e2e",
+            edgeLabelBackground: "#0d0d12",
+            clusterBkg: "#13131f",
+            fontFamily: '"Noto Sans SC", "Inter", sans-serif',
+            fontSize: "14px",
+        },
+        flowchart: { curve: "basis", htmlLabels: false, padding: 16 },
+        sequence: { actorFontFamily: '"Noto Sans SC", sans-serif', messageFontFamily: '"Noto Sans SC", sans-serif' },
+    });
+
+    mermaid.run({ querySelector: ".mermaid" });
+})();
+
 /* ===== TOC generation ===== */
 (function () {
     var tocList = document.getElementById("toc-list");
