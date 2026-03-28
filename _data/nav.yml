@@ -88,7 +88,7 @@ modules:
     articles:
       - title: "OpenAI Agents SDK：Agent、Tool、Handoff"
         slug: "01-openai-agents-sdk"
-      - title: "Google Gemini SDK：Function Calling 全解"
+      - title: "Google genai SDK：Gemini + Vertex AI 多模型"
         slug: "02-google-gemini-sdk"
       - title: "Claude Anthropic SDK：Messages API 与 Tool Use"
         slug: "03-claude-anthropic-sdk"
