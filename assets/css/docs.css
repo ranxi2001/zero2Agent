@@ -103,6 +103,19 @@ code, pre { font-family: var(--font-mono); }
 .doc-nav a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
 .doc-nav a.is-active { color: var(--text); }
 
+.nav-friend-link {
+    color: var(--brand) !important;
+    border: 1px solid var(--brand-border);
+    margin-left: 6px;
+    font-size: 0.76rem !important;
+    padding: 4px 9px !important;
+}
+
+.nav-friend-link:hover {
+    background: var(--brand-dim) !important;
+    border-color: var(--brand) !important;
+}
+
 /* ===== 3-Column Main Layout ===== */
 .doc-main {
     display: grid;
