@@ -427,12 +427,50 @@ code, pre { font-family: var(--font-mono); }
 /* ===== Footer ===== */
 .doc-footer {
     margin-top: auto;
-    padding: 0 0 32px;
+    padding: 20px 0 28px;
+    border-top: 1px solid var(--border);
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
 }
 
-.doc-footer p { margin: 0; }
+.doc-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.footer-desc {
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.footer-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(16, 185, 129, 0.06);
+}
 
 /* ===== Responsive ===== */
 /* Hide TOC only on narrow screens; keep it at any width where sidebar is visible */
