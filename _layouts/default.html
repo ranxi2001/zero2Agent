@@ -80,8 +80,7 @@
             <aside class="doc-sidebar">
                 <p class="sidebar-label">Learning Map</p>
                 {% for module in site.data.nav.modules %}
-                {% assign is_open = page.url | contains: module.slug %}
-                <div class="nav-module{% if is_open %} is-open{% endif %}">
+                <div class="nav-module{% if page.url contains module.slug %} is-open{% endif %}">
                     <div class="nav-module-row">
                         {% if module.articles.size > 0 %}
                         <button class="nav-toggle-btn" type="button" aria-label="展开">
@@ -93,7 +92,7 @@
                         <span class="nav-toggle-gap"></span>
                         {% endif %}
                         <a href="{{ site.baseurl }}/{{ module.slug }}/index.html"
-                           class="nav-module-link{% if is_open %} is-active{% endif %}">
+                           class="nav-module-link{% if page.url contains module.slug %} is-active{% endif %}">
                             {{ module.title }}
                         </a>
                     </div>
