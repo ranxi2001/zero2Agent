@@ -38,19 +38,184 @@ flowchart LR
 
 ---
 
-## 实现
+## 源码实证：Claude Code 真实的 AgentTool
+
+以下内容均来自 Claude Code 泄露源码，不是猜测。
+
+### AgentTool 完整参数 schema
+
+`AgentTool.tsx` 定义了两层 schema。**基础参数**（`baseInputSchema`）：
+
+```typescript
+// src/tools/AgentTool/AgentTool.tsx
+const baseInputSchema = lazySchema(() => z.object({
+  description: z.string()
+    .describe('A short (3-5 word) description of the task'),
+  prompt: z.string()
+    .describe('The task for the agent to perform'),
+  subagent_type: z.string().optional()
+    .describe('The type of specialized agent to use for this task'),
+  model: z.enum(['sonnet', 'opus', 'haiku']).optional()
+    .describe("Optional model override for this agent."),
+  run_in_background: z.boolean().optional()
+    .describe('Set to true to run this agent in the background.')
+}));
+```
+
+**完整参数**（`fullInputSchema`）在基础上扩展了多 Agent 协作与隔离：
+
+```typescript
+// 多 Agent 参数
+name:      z.string().optional()   // 让 Agent 可通过 SendMessage({to: name}) 被寻址
+team_name: z.string().optional()   // 团队名称
+mode:      permissionModeSchema()  // 权限模式，如 "plan" 需要审批
+
+// 隔离模式
+isolation: z.enum(['worktree', 'remote']).optional()
+  // "worktree" — 创建临时 git worktree，Agent 在代码副本上工作
+  // "remote"  — 在远程 CCR 环境中启动（始终后台运行）
+
+// 工作目录覆盖
+cwd: z.string().optional()
+  // 绝对路径，覆盖 Agent 的工作目录，与 worktree 互斥
+```
+
+这意味着 Claude Code 的 Agent 不是简单的"子任务执行器"，而是支持 **模型选择 / 后台执行 / 团队协作 / 代码隔离** 的完整多 Agent 系统。
+
+### runAgent.ts 执行流程
+
+`runAgent.ts` 是子 Agent 的核心运行逻辑。简化后的流程：
+
+```
+runAgent({agentDefinition, promptMessages, toolUseContext, ...})
+  │
+  ├── 1. 解析模型：getAgentModel(定义model, 主循环model, 调用指定model)
+  ├── 2. 生成 agentId：createAgentId()（UUID）
+  ├── 3. 构建初始消息：contextMessages + promptMessages
+  ├── 4. 构建 system prompt：agent 定义 → 增强环境信息
+  ├── 5. 解析工具集：resolveAgentTools() 或直接继承父工具
+  ├── 6. 初始化 agent 专属 MCP servers（叠加到父 MCP 之上）
+  ├── 7. 执行 SubagentStart hooks
+  ├── 8. 预加载 frontmatter 中指定的 skills
+  ├── 9. 创建隔离的 ToolUseContext（createSubagentContext）
+  │
+  ├── 10. 进入 query() 主循环 ─────────────────────┐
+  │       for await (message of query({...}))       │
+  │         ├── stream_event → 转发 metrics 给父    │
+  │         ├── attachment   → 直接 yield           │
+  │         └── recordable   → 记录 + yield         │
+  │                                                  │
+  └── 11. finally 清理 ────────────────────────────┘
+          ├── 清理 agent MCP servers
+          ├── 清理 session hooks
+          ├── 释放 fileStateCache 内存
+          ├── 释放 Perfetto trace 注册
+          └── kill agent 产生的后台 bash 任务
+```
+
+关键设计：**sync Agent 共享父的 abortController（Ctrl+C 同时停掉），async Agent 用独立的 AbortController。**
+
+### QueryChainTracking：嵌套 Agent 是支持的
+
+```typescript
+// src/Tool.ts
+export type QueryChainTracking = {
+  chainId: string   // UUID，同一条调用链共享
+  depth: number     // 0 = 顶层 Agent，每嵌套一层 +1
+}
+```
+
+在 `query.ts` 中，每次进入 query 循环时：
+
+```typescript
+// src/query.ts — 初始化或递增
+const queryTracking = toolUseContext.queryTracking
+  ? {
+      chainId: toolUseContext.queryTracking.chainId,
+      depth: toolUseContext.queryTracking.depth + 1,  // 嵌套时 +1
+    }
+  : {
+      chainId: deps.uuid(),   // 顶层生成新 UUID
+      depth: 0,               // 顶层从 0 开始
+    }
+```
+
+这意味着 **Claude Code 支持 Agent 嵌套调用**：Agent A 调用 Agent B，Agent B 再调用 Agent C，depth 从 0 → 1 → 2 递增。`chainId` 保持不变，用于遥测和调试时追踪整条调用链。
+
+### 120 秒自动转后台
+
+```typescript
+// src/tools/AgentTool/AgentTool.tsx
+function getAutoBackgroundMs(): number {
+  if (isEnvTruthy(process.env.CLAUDE_AUTO_BACKGROUND_TASKS)
+    || getFeatureValue_CACHED_MAY_BE_STALE(
+         'tengu_auto_background_agents', false)) {
+    return 120_000;  // 120 秒
+  }
+  return 0;
+}
+```
+
+如果一个同步 Agent 执行超过 120 秒，会自动转为后台任务。这解决了"子任务意外耗时很长，阻塞父 Agent 交互"的问题。
+
+### LocalAgentTask / RemoteAgentTask
+
+后台 Agent 有完整的进度跟踪机制：
+
+```typescript
+// src/tasks/LocalAgentTask/LocalAgentTask.tsx
+export type AgentProgress = {
+  toolUseCount: number;      // 已执行的工具调用次数
+  tokenCount: number;        // 消耗的 token 总数
+  lastActivity?: ToolActivity;
+  recentActivities?: ToolActivity[];  // 最近 5 条活动
+  summary?: string;          // 周期性摘要
+};
+```
+
+`LocalAgentTask` 负责本地后台 Agent，`RemoteAgentTask` 负责远程 CCR 环境中的 Agent。两者都通过 `registerAsyncAgent` / `registerRemoteAgentTask` 注册到 AppState，父 Agent 可以随时查看进度。
+
+---
+
+## 简化 Python 实现
+
+理解了真实架构后，我们用 Python 实现核心机制。
+
+### Subagent 运行器
 
 ```python
-def run_subagent(prompt: str) -> str:
-    """启动子 Agent，返回最终摘要文本"""
+import uuid
+
+# 模拟 QueryChainTracking
+def make_tracking(parent_tracking=None):
+    """生成调用链追踪信息"""
+    if parent_tracking:
+        return {
+            "chain_id": parent_tracking["chain_id"],
+            "depth": parent_tracking["depth"] + 1
+        }
+    return {"chain_id": str(uuid.uuid4()), "depth": 0}
+
+def run_subagent(prompt: str, parent_tracking=None,
+                 model=None) -> str:
+    """启动子 Agent，返回最终摘要文本
+
+    与 Claude Code 的关键对应：
+    - parent_tracking → QueryChainTracking（支持嵌套）
+    - model → AgentTool 的 model 参数
+    - CHILD_TOOLS 包含 task → 允许递归（靠 depth 追踪）
+    """
+    tracking = make_tracking(parent_tracking)
+    use_model = model or MODEL
+
     sub_messages = [{"role": "user", "content": prompt}]
 
-    for _ in range(30):  # 安全限制：最多 30 轮
+    for _ in range(30):  # 安全限制
         response = client.messages.create(
-            model=MODEL,
+            model=use_model,
             system=SUBAGENT_SYSTEM,
             messages=sub_messages,
-            tools=CHILD_TOOLS,   # 子 Agent 没有 task 工具（禁止递归）
+            tools=PARENT_TOOLS,  # 子 Agent 也有 task 工具，允许嵌套
             max_tokens=8000,
         )
         sub_messages.append({"role": "assistant", "content": response.content})
@@ -61,8 +226,17 @@ def run_subagent(prompt: str) -> str:
         results = []
         for block in response.content:
             if block.type == "tool_use":
-                handler = TOOL_HANDLERS.get(block.name)
-                output = handler(**block.input) if handler else f"Unknown tool: {block.name}"
+                if block.name == "task":
+                    # 递归调用子 Agent，传递 tracking
+                    output = run_subagent(
+                        block.input["prompt"],
+                        parent_tracking=tracking,
+                        model=block.input.get("model"),
+                    )
+                else:
+                    handler = TOOL_HANDLERS.get(block.name)
+                    output = (handler(**block.input) if handler
+                              else f"Unknown tool: {block.name}")
                 results.append({
                     "type": "tool_result",
                     "tool_use_id": block.id,
@@ -70,7 +244,6 @@ def run_subagent(prompt: str) -> str:
                 })
         sub_messages.append({"role": "user", "content": results})
 
-    # 只返回最后一条 assistant 消息的文本
     return "".join(
         b.text for b in response.content if hasattr(b, "text")
     ) or "(no summary)"
@@ -81,27 +254,41 @@ def run_subagent(prompt: str) -> str:
 ## task 工具定义
 
 ```python
-PARENT_TOOLS = CHILD_TOOLS + [
+PARENT_TOOLS = BASE_TOOLS + [
     {
         "name": "task",
-        "description": "启动子 Agent 处理子任务，返回摘要。适合需要大量工具调用但父 Agent 只关心结论的场景。",
+        "description": (
+            "启动子 Agent 处理子任务，返回摘要。"
+            "子 Agent 有独立的上下文和完整的工具能力（包括再次调用 task）。"
+        ),
         "input_schema": {
             "type": "object",
             "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "3-5 个词的任务简述"
+                },
                 "prompt": {
                     "type": "string",
-                    "description": "子任务的完整描述，需要自包含（子 Agent 没有父 Agent 的上下文）"
+                    "description": "子任务的完整描述，需自包含"
+                },
+                "model": {
+                    "type": "string",
+                    "enum": ["sonnet", "opus", "haiku"],
+                    "description": "可选的模型覆盖"
                 }
             },
-            "required": ["prompt"]
+            "required": ["description", "prompt"]
         }
     }
 ]
 
-TOOL_HANDLERS["task"] = lambda **kw: run_subagent(kw["prompt"])
+TOOL_HANDLERS["task"] = lambda **kw: run_subagent(
+    kw["prompt"], model=kw.get("model")
+)
 ```
 
-**关键限制：子 Agent 没有 `task` 工具。** 防止子 Agent 再生成孙子 Agent，避免递归爆炸。
+**注意：子 Agent 拥有 `task` 工具。** 与我们最初以为的"禁止递归"不同，Claude Code 通过 `QueryChainTracking.depth` 追踪嵌套深度而非禁止嵌套。实际的安全边界是 `maxTurns` 限制和 token 预算，而不是剥夺工具。
 
 ---
 
@@ -125,9 +312,10 @@ TOOL_HANDLERS["task"] = lambda **kw: run_subagent(kw["prompt"])
 
 | 组件 | s03 | s04 |
 |------|-----|-----|
-| 工具数量 | 5 | 5（子端）+ task（父端） |
+| 工具数量 | 5 | 5 + task（所有层级共享） |
 | 上下文 | 单一共享 | 父/子隔离 |
 | 子 Agent | 无 | `run_subagent()` |
+| 嵌套调用 | — | 支持，depth 追踪 |
 | 返回值 | — | 仅摘要文本 |
 
 ---
@@ -139,6 +327,7 @@ TOOL_HANDLERS["task"] = lambda **kw: run_subagent(kw["prompt"])
 - 需要读大量文件但只关心结论（"这个模块有什么问题？"）
 - 需要独立验证（一个子 Agent 写代码，另一个子 Agent 审查）
 - 独立的子任务，结果互不依赖
+- 需要不同模型（用 haiku 做简单搜索，用 opus 做复杂推理）
 
 不适合用子 Agent 的场景：
 

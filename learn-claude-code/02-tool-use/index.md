@@ -57,6 +57,149 @@ output = handler(**block.input) if handler else f"Unknown tool: {block.name}"
 
 循环体本身和 s01 完全一样，只是工具执行那行变成了字典查找。
 
+这个 Python 字典正是 Claude Code 真实架构的简化映射——在 Claude Code 源码中，同样的思路被推到了工业级规模。
+
+---
+
+## 源码实证：Claude Code 的工具注册表
+
+以下内容来自 Claude Code 泄露源码的真实分析。
+
+### 工具注册：`src/tools.ts`
+
+Claude Code 在 `getAllBaseTools()` 函数中返回一个 `Tools` 数组——这就是它的 "dispatch map"。核心工具直接注册，实验性工具通过 feature flag 条件注册：
+
+```typescript
+// src/tools.ts — 工具注册表（简化）
+export function getAllBaseTools(): Tools {
+  return [
+    AgentTool,
+    TaskOutputTool,
+    BashTool,
+    // 内嵌搜索工具时跳过 Glob/Grep
+    ...(hasEmbeddedSearchTools() ? [] : [GlobTool, GrepTool]),
+    FileReadTool,
+    FileEditTool,
+    FileWriteTool,
+    NotebookEditTool,
+    WebFetchTool,
+    TodoWriteTool,
+    WebSearchTool,
+    SkillTool,
+    AskUserQuestionTool,
+    EnterPlanModeTool,
+    ExitPlanModeV2Tool,
+    // feature flag 条件注册
+    ...(SleepTool ? [SleepTool] : []),
+    ...cronTools,  // CronCreate, CronDelete, CronList
+    ...(isWorktreeModeEnabled()
+      ? [EnterWorktreeTool, ExitWorktreeTool] : []),
+    ...(isTodoV2Enabled()
+      ? [TaskCreateTool, TaskGetTool, TaskUpdateTool, TaskListTool] : []),
+    ...(isToolSearchEnabledOptimistic() ? [ToolSearchTool] : []),
+    // ... 共计 ~40 个工具
+  ]
+}
+```
+
+关键设计：**数组展开 + 条件三元运算符**。`feature('PROACTIVE')` 返回 `true` 时 `SleepTool` 才会进入数组；`process.env.USER_TYPE === 'ant'` 控制 Anthropic 内部工具。这让同一个二进制产物能服务不同用户群。
+
+### 完整工具清单
+
+`src/tools/` 目录下共 40+ 个工具目录：
+
+| 类别 | 工具 | 作用 |
+|------|------|------|
+| **文件操作** | `FileReadTool`, `FileWriteTool`, `FileEditTool`, `NotebookEditTool` | 读、写、精确编辑、Jupyter 编辑 |
+| **搜索** | `GlobTool`, `GrepTool`, `ToolSearchTool`, `LSPTool` | 文件名匹配、内容搜索、工具搜索、语言服务 |
+| **执行** | `BashTool`, `PowerShellTool`, `REPLTool` | Shell 执行、PowerShell、REPL |
+| **Agent/协作** | `AgentTool`, `SkillTool`, `SendMessageTool`, `TeamCreateTool`, `TeamDeleteTool` | 子 Agent、技能调用、消息传递、团队管理 |
+| **任务管理** | `TodoWriteTool`, `TaskCreateTool`, `TaskGetTool`, `TaskUpdateTool`, `TaskListTool`, `TaskOutputTool`, `TaskStopTool` | 待办事项、任务 CRUD、输出采集 |
+| **Web** | `WebFetchTool`, `WebSearchTool`, `WebBrowserTool` | URL 抓取、搜索引擎、浏览器 |
+| **计划/模式** | `EnterPlanModeTool`, `ExitPlanModeV2Tool`, `EnterWorktreeTool`, `ExitWorktreeTool` | 计划模式、Git worktree 隔离 |
+| **调度/监控** | `CronCreateTool`, `CronDeleteTool`, `CronListTool`, `SleepTool`, `MonitorTool`, `RemoteTriggerTool` | 定时任务、休眠、监控 |
+| **交互** | `AskUserQuestionTool`, `BriefTool`, `ConfigTool`, `PushNotificationTool` | 向用户提问、简报、配置、推送通知 |
+| **MCP** | `ListMcpResourcesTool`, `ReadMcpResourceTool` | MCP 协议资源访问 |
+
+### Tool 类型定义：`src/Tool.ts`
+
+每个工具都实现 `Tool<Input, Output, Progress>` 类型：
+
+```typescript
+// src/Tool.ts — 核心类型（简化）
+export type Tool<Input, Output, P> = {
+  readonly name: string
+  readonly inputSchema: Input           // Zod schema
+  call(
+    args: z.infer<Input>,
+    context: ToolUseContext,
+    canUseTool: CanUseToolFn,
+    parentMessage: AssistantMessage,
+    onProgress?: ToolCallProgress<P>,
+  ): Promise<ToolResult<Output>>
+  description(input, options): Promise<string>
+  isEnabled(): boolean                  // 是否在当前环境可用
+  isReadOnly(input): boolean            // 只读操作？
+  isDestructive?(input): boolean        // 不可逆操作？
+  isConcurrencySafe(input): boolean     // 可并发执行？
+  maxResultSizeChars: number            // 结果超限时持久化到磁盘
+  readonly shouldDefer?: boolean        // 延迟加载（需 ToolSearch 发现）
+}
+```
+
+### 工具返回值：`ToolResult<T>`
+
+```typescript
+export type ToolResult<T> = {
+  data: T                    // 工具输出内容
+  newMessages?: Message[]    // 可选：注入额外消息到上下文
+  contextModifier?: (ctx: ToolUseContext) => ToolUseContext  // 可选：修改后续上下文
+}
+```
+
+`data` 是返回给 LLM 的主体内容。`newMessages` 让工具可以向消息历史注入系统提示。`contextModifier` 让工具（如 `EnterPlanModeTool`）可以改变后续循环的行为。
+
+### ToolUseContext：工具运行时上下文
+
+```typescript
+export type ToolUseContext = {
+  messages: Message[]               // 完整对话历史
+  abortController: AbortController  // 中断控制
+  getAppState(): AppState           // 读全局状态
+  setAppState(f): void              // 写全局状态
+  queryTracking?: QueryChainTracking  // 查询链追踪
+  options: {
+    tools: Tools                    // 可用工具列表
+    mcpClients: MCPServerConnection[]
+    mainLoopModel: string
+    // ...
+  }
+}
+
+export type QueryChainTracking = {
+  chainId: string   // 同一轮对话的链 ID
+  depth: number     // 嵌套深度（Agent 中的 Agent）
+}
+```
+
+### 权限模型：`ToolPermissionContext`
+
+每次工具调用前都经过权限检查：
+
+```typescript
+export type ToolPermissionContext = DeepImmutable<{
+  mode: PermissionMode                    // 'default' | 'plan' | 'bypass'
+  alwaysAllowRules: ToolPermissionRulesBySource   // 始终允许
+  alwaysDenyRules: ToolPermissionRulesBySource     // 始终拒绝
+  alwaysAskRules: ToolPermissionRulesBySource      // 始终询问
+  additionalWorkingDirectories: Map<string, AdditionalWorkingDirectory>
+  isBypassPermissionsModeAvailable: boolean
+  shouldAvoidPermissionPrompts?: boolean  // 后台 Agent 自动拒绝
+}>
+```
+
+权限检查的结果是三选一：**allow**（直接执行）、**deny**（拒绝并返回错误）、**ask**（弹出对话框请求用户授权）。工具还通过 `isReadOnly()` 和 `isDestructive()` 标记自身的危险等级，`filterToolsByDenyRules()` 在工具列表发送给模型之前就过滤掉被禁止的工具。
+
 ---
 
 ## 路径沙箱
@@ -75,6 +218,8 @@ def safe_path(p: str) -> Path:
 ```
 
 所有文件操作都通过 `safe_path()` 验证，模型无法读写工作区外的文件。
+
+在 Claude Code 的真实实现中，`ToolPermissionContext` 中的 `additionalWorkingDirectories` 字段允许配置额外的合法工作目录，实现更灵活的沙箱策略。
 
 ---
 
@@ -169,6 +314,8 @@ TOOLS = [
 ]
 ```
 
+在 Claude Code 中，schema 使用 Zod 定义（`inputSchema` 字段），运行时自动转换为 JSON Schema 发送给 API。每个工具还有动态 `description()` 方法，可以根据当前权限上下文生成不同的描述文本。
+
 ---
 
 ## 相对 s01 的变化
@@ -203,6 +350,23 @@ run_edit("file.py", old_text="def foo():", new_text="def bar():")
 ```
 
 `edit_file` 还有一个额外好处：如果 `old_text` 不存在，会返回明确的错误信息，而不是静默成功（sed 的常见陷阱）。
+
+---
+
+## 从 4 个工具到 40 个：架构启示
+
+我们的 s02 只有 4 个工具，但架构设计和 Claude Code 的 40+ 工具注册表是同构的：
+
+| 维度 | s02 (Python) | Claude Code (TypeScript) |
+|------|-------------|--------------------------|
+| 注册表 | `TOOL_HANDLERS` 字典 | `getAllBaseTools()` 数组 |
+| Schema | JSON dict | Zod → JSON Schema |
+| 返回值 | `str` | `ToolResult { data, newMessages?, contextModifier? }` |
+| 权限 | `safe_path()` | `ToolPermissionContext` (allow/deny/ask) |
+| 条件注册 | 无 | `feature()` flag + 环境变量 |
+| 工具发现 | 全量发送 | `ToolSearchTool` + `shouldDefer` 延迟加载 |
+
+核心原则不变：**加一个工具，只加一个 handler，循环永远不变。**
 
 ---
 
