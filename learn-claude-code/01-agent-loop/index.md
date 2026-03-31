@@ -321,6 +321,26 @@ while (true):
 
 ---
 
+## 设计哲学：从 REPL 到 Agent
+
+Claude Code 设计指南将 Agent Loop 放在一条清晰的进化线上：
+
+```
+Lisp REPL (1960) → Shell (1971) → Jupyter (2014) → ChatGPT (2022) → Claude Code (2024)
+```
+
+所有这些系统共享同一个骨架：**Read → Eval → Print → Loop**。区别在于 Eval 的能力边界——Shell eval 系统命令，Jupyter eval 代码块，而 Claude Code eval 的是 LLM 推理 + 工具调用。
+
+这意味着 `while True` 循环不是一个实现细节，而是 **Agent 系统的本质结构**。设计指南总结的 "Agent 公式" 也证实了这一点：
+
+> **Tool Calls + Context Management + Task Planning + Error Handling + Permission Control + State Persistence = Agent System**
+
+我们的 30 行循环覆盖了前两项（Tool Calls + Context Management），后续章节逐步补全其余部分。
+
+从 chatbot 到 agent 的关键跃迁只有一个：**stop_reason 从 "end_turn" 变成了 "tool_use"**。chatbot 在模型说完话时停下，agent 在模型没有更多工具要调用时才停下。这个看似微小的判断条件，决定了系统是被动应答还是主动执行。
+
+---
+
 ## 试一试
 
 ```bash

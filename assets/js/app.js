@@ -2,7 +2,14 @@
 document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
         var module = btn.closest(".nav-module");
-        if (module) module.classList.toggle("is-open");
+        if (!module) return;
+        var willOpen = !module.classList.contains("is-open");
+        if (willOpen) {
+            document.querySelectorAll(".nav-module.is-open").forEach(function (m) {
+                if (m !== module) m.classList.remove("is-open");
+            });
+        }
+        module.classList.toggle("is-open");
     });
 });
 

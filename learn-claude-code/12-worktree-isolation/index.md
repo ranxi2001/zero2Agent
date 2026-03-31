@@ -507,6 +507,30 @@ def recover_from_crash() -> list[str]:
 
 Claude Code 的做法更精细：通过 `saveWorktreeState()` 将 worktree session 持久化到 project config，重启时 `restoreWorktreeSession()` 恢复。Agent worktree 则有专门的 `cleanupStaleAgentWorktrees()` 定期扫描 `.claude/worktrees/` 目录清理过期的。
 
+## 设计哲学：安全是默认，便利是可选
+
+Worktree 隔离是设计指南**第二原则——安全是默认（Secure by Default）**的最佳案例。
+
+Claude Code 的 5 层权限模型：
+
+```
+Layer 1: 操作系统沙箱（macOS Seatbelt / Linux Landlock）
+Layer 2: 网络访问控制（允许列表 vs 拒绝列表）
+Layer 3: 文件系统边界（项目目录 + 明确添加的路径）
+Layer 4: 工具级别权限（每个工具独立的 allow/deny/ask）
+Layer 5: Bash 命令分类（读命令自动放行，写命令需要确认）
+```
+
+Worktree 处于 Layer 3——文件系统隔离。它的设计遵循 **fail-closed** 原则：
+
+- Agent worktree 创建失败？不执行任何操作，返回错误
+- worktree 退出时发现未提交更改？保留 worktree，不删除（宁可泄漏资源也不丢失工作）
+- 3 处缓存需要清除（system prompt cache、permission classifier approvals cache、session messages cache）？全部清除，即使某些可能不需要
+
+这和"便利优先"的设计完全相反。便利优先会选择：失败时自动回退到主分支、退出时自动丢弃未提交更改、只清除确认需要清除的缓存。但这些"便利"在出错时会导致数据丢失或安全漏洞。
+
+设计指南总结了整个 Claude Code 的安全哲学：**能力和控制之间的平衡**。Worktree 给了 Agent 并行修改代码的能力，但通过 fail-closed 设计和 5 层权限确保这种能力始终在人类的控制之下。
+
 ---
 
 ## 这套系统的全貌

@@ -480,6 +480,25 @@ PTL 重试时需要从头部丢弃消息。按 API-round 分组（`groupMessages
 
 三层各有侧重。Microcompact 是零成本的持续清理；Full Compact 是 Sonnet 驱动的大规模摘要；Auto Compact 是智能调度器，先尝试轻量路径再回退到重量级方案。Session Memory 独立运行，为压缩提供辅助上下文。
 
+## 设计哲学：Context Engineering 的核心命题
+
+设计指南将 Claude Code 的上下文管理提升到一个独立的工程学科——**Context Engineering**，区别于大众熟知的 Prompt Engineering：
+
+| 维度 | Prompt Engineering | Context Engineering |
+|------|-------------------|---------------------|
+| 关注点 | 单次输入的措辞 | 整个会话的信息流 |
+| 时间尺度 | 一次请求 | 跨数百轮对话 |
+| 核心挑战 | 如何表达清楚 | 如何在有限窗口中保留关键信息 |
+| 对应机制 | system prompt 设计 | Compact + Memory + CLAUDE.md |
+
+Auto-Compact 揭示了一个深刻的设计原则：**智能系统需要有选择地遗忘**。人类的记忆也是这样工作的——我们不记得每一个细节，但我们记得重要的事情。三层压缩架构正是对"遗忘的艺术"的工程实现：
+
+- **Microcompact**（持续遗忘）：每轮自动清理工具输出的细节，只保留操作摘要
+- **Full Compact**（主动遗忘）：用 LLM 判断什么值得记住，什么可以丢弃
+- **Auto Compact**（防御性遗忘）：熔断器确保系统在极端情况下也不会崩溃
+
+设计指南特别强调了**为失败设计**原则在压缩系统中的体现：Reactive Compact 是 Auto Compact 的"保险丝"——即使自动压缩没有及时触发，API 返回 `prompt_too_long` 时也能自动恢复。这种多层防御的设计，让系统在面对不可预测的对话长度时始终保持稳定。
+
 ---
 
 ## Post-Compact 清理

@@ -370,4 +370,23 @@ run_edit("file.py", old_text="def foo():", new_text="def bar():")
 
 ---
 
+## 设计哲学：Unix 哲学与工具设计
+
+Claude Code 的工具系统深刻体现了 Unix 哲学：**每个工具做好一件事，复杂功能通过组合完成**。
+
+- `FileReadTool` 只读文件
+- `GrepTool` 只搜索内容
+- `FileEditTool` 只做字符串替换
+- `BashTool` 只执行命令
+
+复杂任务（如"重构认证模块"）不是由一个大而全的 `RefactorTool` 完成的，而是由 LLM 的推理能力编排多个原子工具完成。这和 Unix 管道的思想一致——`cat file | grep pattern | sort | uniq` 每一环只做一件事。
+
+设计指南还指出一个容易忽视的细节：**工具描述是"承重的艺术品"（load-bearing art form）**。Claude Code 的每个工具描述都经过精心设计，因为模型完全依赖描述来决定何时使用哪个工具。一个模糊的描述会导致工具被误用或忽略。这就是为什么源码中 `BashTool` 的描述长达数十行——它不只是文档，而是模型决策的核心输入。
+
+另一个 Unix 启发的设计：**工具是无状态的**。每次调用独立执行，通过 `ToolUseContext` 显式接收所有依赖，而不是通过全局变量。这让工具可以被安全地并行执行、被不同 Agent 复用。
+
+这个原则的实际意义：**加一个工具只需要加一个 handler 和一份 schema，Agent 循环永远不变。** 这就是我们在 s02 中实践的设计。
+
+---
+
 下一篇：[TodoWrite：让 Agent 不再迷路](../03-todo-write/index.html)

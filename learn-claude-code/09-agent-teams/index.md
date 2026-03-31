@@ -555,6 +555,22 @@ stateDiagram-v2
 
 **确定性 ID**——`formatAgentId(name, teamName)` 生成的 ID 是可推算的。任何 teammate 都能计算出 team-lead 的 ID 而不需要查询，减少了一次文件读取。
 
+## 8 | 设计哲学：可观察性驱动的多 Agent 架构
+
+设计指南指出，多 Agent 系统最大的挑战不是通信，而是**可观察性**——当多个 Agent 并行工作时，如何知道谁在做什么？
+
+Claude Code 的解决方案层层叠加：
+
+**颜色系统**：每个 Agent 分配唯一颜色（蓝、绿、黄、红、青、品红、白），UI 中不同 Agent 的输出一目了然。这个小细节对调试至关重要。
+
+**确定性 ID**：`formatAgentId(name, teamName)` 生成可推算的 ID，不需要查询就能计算任意 teammate 的地址。减少了一次文件读取，也让日志更易追踪。
+
+**资源限制**：`maxTurns`、`maxBudgetUsd`、50 条消息 UI cap——这些不只是安全措施，也是可观察性工具。当一个 Agent 达到限制时，系统知道出了问题。
+
+**两级 AbortController**：区分"取消当前操作"和"彻底关闭"。这让人类操作员有精细的控制粒度，而不是只能全杀或全不杀。
+
+设计指南总结的原则是：**在能力和控制之间取得平衡**。多 Agent 系统很强大，但如果人类无法理解和干预，强大就变成了危险。
+
 ---
 
 下一篇：[Team Protocols：结构化通信协议](../10-team-protocols/index.html)
