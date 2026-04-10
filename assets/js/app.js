@@ -120,3 +120,82 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 })();
+
+
+/* ===== Theme toggle ===== */
+(function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    function currentTheme() {
+        return document.documentElement.getAttribute('data-theme') || 'dark';
+    }
+
+    btn.addEventListener('click', function () {
+        var next = currentTheme() === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('z2a-theme', next);
+        swapHljsTheme(next);
+        rerenderMermaid(next);
+    });
+
+    function swapHljsTheme(theme) {
+        var link = document.getElementById('hljs-theme');
+        if (!link) return;
+        link.href = theme === 'light'
+            ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css'
+            : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+    }
+
+    var darkVars = {
+        background: '#0a0a10', primaryColor: '#1a2535',
+        primaryTextColor: '#d1d5db', primaryBorderColor: '#334155',
+        lineColor: '#10b981', secondaryColor: '#161e2e',
+        tertiaryColor: '#161e2e', edgeLabelBackground: '#0d0d12',
+        clusterBkg: '#13131f'
+    };
+    var lightVars = {
+        background: '#ffffff', primaryColor: '#dbeafe',
+        primaryTextColor: '#1a1a2e', primaryBorderColor: '#93c5fd',
+        lineColor: '#059669', secondaryColor: '#f0fdf4',
+        tertiaryColor: '#ecfdf5', edgeLabelBackground: '#ffffff',
+        clusterBkg: '#f8fafc'
+    };
+
+    function rerenderMermaid(theme) {
+        if (typeof mermaid === 'undefined') return;
+        var els = document.querySelectorAll('.mermaid');
+        if (!els.length) return;
+
+        mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: 'loose',
+            theme: theme === 'light' ? 'default' : 'dark',
+            themeVariables: theme === 'light' ? lightVars : darkVars,
+            flowchart: { curve: 'basis', htmlLabels: false, padding: 16 }
+        });
+
+        els.forEach(function (el) {
+            var src = el.dataset.mermaidSrc;
+            if (!src) return;
+            el.removeAttribute('data-processed');
+            el.innerHTML = src;
+            mermaid.init(undefined, el);
+        });
+    }
+
+    /* On initial load, swap hljs if light */
+    if (currentTheme() === 'light') {
+        swapHljsTheme('light');
+    }
+
+    /* Listen for OS theme change when no stored preference */
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
+        if (!localStorage.getItem('z2a-theme')) {
+            var theme = e.matches ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+            swapHljsTheme(theme);
+            rerenderMermaid(theme);
+        }
+    });
+})();

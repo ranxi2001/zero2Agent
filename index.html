@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function(){var s=localStorage.getItem('z2a-theme');var t=s||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();
+    </script>
     <meta name="description" content="面向程序员的 Agent 工程教程——从 Agent 基础概念到手写框架到生产部署，完整学习路线。">
     <meta name="keywords" content="Agent, LLM, Claude Code, OpenClaw, LangGraph, AI Agent, 教程">
     <title>Zero2Agent | 从会用 AI 到会开发 Agent</title>
@@ -11,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?v=2">
+    <link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 
 <body>
@@ -31,6 +34,10 @@
                     <a href="learn-claude-code/index.html">Claude Code</a>
                     <a href="https://onefly.top/zero2Leetcode/" target="_blank" rel="noopener" class="friend-link-lc">zero2Leetcode</a>
                     <a href="https://github.com/ranxi2001/zero2Agent" target="_blank" rel="noopener">GitHub</a>
+                    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换主题" title="切换主题">
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                    </button>
                     <a href="learn-agent-basic/01-what-is-an-agent/index.html">开始阅读 →</a>
                 </div>
             </div>
@@ -88,75 +95,75 @@
                     <h2>学习路线</h2>
                     <p>八个模块按工程认知深度递进，从概念理解到框架手写到多 Agent 系统，最终落到真实业务项目。</p>
                 </div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+                <div class="roadmap-grid">
 
                     <a class="roadmap-card" href="learn-agent-basic/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">01</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">8 篇 · 完成</span>
+                            <span class="module-badge module-badge--done">8 篇 · 完成</span>
                         </div>
                         <h3>learn-agent-basic</h3>
                         <p>Agent 是什么、工具调用机制、Memory 设计模式、Planning / RAG 的边界、单 Agent vs 多 Agent 常见模式。建立正确工程认知，不迷信框架。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-openclaw/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">02</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">9 篇 · 完成</span>
+                            <span class="module-badge module-badge--done">9 篇 · 完成</span>
                         </div>
                         <h3>learn-openclaw</h3>
                         <p>60 行核心框架，从 Node → Workflow → Chatbot → Agent 完整推导。RAG、Tool/MCP/Skill、pi-mono 架构解析，以及部署和面试准备。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-claude-code/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">03</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">12 篇 · 完成</span>
+                            <span class="module-badge module-badge--done">12 篇 · 完成</span>
                         </div>
                         <h3>learn-claude-code</h3>
                         <p>12 节课手写 Coding Agent。从 30 行 Loop 起步，逐步叠加 Tool Dispatch、Subagent、Context Compact、Task DAG、多 Agent Teams、Worktree 隔离。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-langgraph/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">04</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">7 篇 · 完成</span>
+                            <span class="module-badge module-badge--done">7 篇 · 完成</span>
                         </div>
                         <h3>learn-langgraph</h3>
                         <p>Graph 状态机、条件分支、并行 Fan-out/Fan-in、Prompt Chaining、接入 OpenAI 与 HuggingFace。从状态图角度理解可维护 Agent 系统的搭建方式。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-sdk-frameworks/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">05</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">4 篇 · 完成</span>
+                            <span class="module-badge module-badge--done">4 篇 · 完成</span>
                         </div>
                         <h3>learn-sdk-frameworks</h3>
                         <p>OpenAI Agents SDK、Google Gemini SDK、Claude Anthropic SDK 核心用法精讲，三大原厂 SDK 横向对比与选型建议。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-agent-survey/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">06</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#10b981;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.2);">13 篇 · 完成</span>
+                            <span class="module-badge module-badge--done">13 篇 · 完成</span>
                         </div>
                         <h3>learn-agent-survey</h3>
                         <p>13 个框架横向调研：AgentScope、Mastra、Semantic Kernel、Eino、DeerFlow、LangChain、Google ADK、AutoGen、Vercel AI SDK 等。</p>
                     </a>
 
                     <a class="roadmap-card" href="learn-agent-training/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">08</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#f59e0b;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.2);">1 篇 · 撰写中</span>
+                            <span class="module-badge module-badge--wip">1 篇 · 撰写中</span>
                         </div>
                         <h3>learn-agent-training</h3>
                         <p>Agent 场景下的 SFT、RLHF 等训练技术实战。轨迹数据构造、Loss Mask 策略、SFT 与 RL 配合、训练数据配比经验——从训练层面理解如何让模型学会做 Agent。</p>
                     </a>
 
                     <a class="roadmap-card" style="opacity:0.6;" href="final-project/index.html">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+                        <div class="roadmap-card-head">
                             <div class="roadmap-index">09</div>
-                            <span style="font-size:0.72rem;font-weight:600;font-family:'JetBrains Mono',monospace;padding:3px 8px;border-radius:999px;color:#565669;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">待开始</span>
+                            <span class="module-badge module-badge--pending">待开始</span>
                         </div>
                         <h3>final-project</h3>
                         <p>加密货币市场风控 Agent 完整实战。真实业务目标、有约束、有评估标准——不是泛泛的聊天助手，而是能上线的工程系统。</p>
@@ -191,34 +198,34 @@
         </section>
 
         <!-- Stats bar -->
-        <section class="section" style="padding: 24px 0 40px;">
+        <section class="section stats-section">
             <div class="section-inner">
-                <div style="display:flex;align-items:center;justify-content:center;gap:0;padding:28px 40px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;flex-wrap:wrap;">
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
-                        <span style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">53</span>
-                        <span style="font-size:0.82rem;color:#565669;">已发布文章</span>
+                <div class="stats-bar">
+                    <div class="stats-item">
+                        <span class="stats-value">53</span>
+                        <span class="stats-label">已发布文章</span>
                     </div>
-                    <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
-                        <span style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">7</span>
-                        <span style="font-size:0.82rem;color:#565669;">完整模块</span>
+                    <div class="stats-divider"></div>
+                    <div class="stats-item">
+                        <span class="stats-value">7</span>
+                        <span class="stats-label">完整模块</span>
                     </div>
-                    <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
-                        <span style="font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-0.04em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">60</span>
-                        <span style="font-size:0.82rem;color:#565669;">行核心框架代码</span>
+                    <div class="stats-divider"></div>
+                    <div class="stats-item">
+                        <span class="stats-value">60</span>
+                        <span class="stats-label">行核心框架代码</span>
                     </div>
-                    <div style="width:1px;height:40px;background:rgba(255,255,255,0.08);flex-shrink:0;"></div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 40px;text-align:center;">
-                        <span style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(135deg,#ececf1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">s01→s12</span>
-                        <span style="font-size:0.82rem;color:#565669;">Claude Code 渐进课程</span>
+                    <div class="stats-divider"></div>
+                    <div class="stats-item">
+                        <span class="stats-value stats-value--mono">s01→s12</span>
+                        <span class="stats-label">Claude Code 渐进课程</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <footer class="site-footer">
-            <div class="footer-inner" style="flex-direction:column;align-items:center;text-align:center;gap:14px;">
+            <div class="footer-inner footer-inner--center">
                 <span class="footer-desc">Zero2Agent · static docs architecture · Built for learning Agent development from zero to project.</span>
                 <div class="footer-right">
                     <a href="https://onefly.top" target="_blank" rel="noopener" class="footer-link">

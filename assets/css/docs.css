@@ -659,3 +659,129 @@ code, pre { font-family: var(--font-mono); }
 .footer-counter .cv { color: var(--brand); font-weight: 600; }
 .hljs-type, .hljs-class .hljs-title { color: #a78bfa; }
 .hljs-deletion { color: #f87171; }
+
+/* ===== Theme Toggle Button ===== */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    flex-shrink: 0;
+}
+.theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--brand-border);
+    background: var(--brand-dim);
+}
+html[data-theme="dark"] .icon-moon { display: none; }
+html[data-theme="light"] .icon-sun { display: none; }
+
+/* ===== Light Mode ===== */
+html[data-theme="light"] {
+    --bg: #f8f9fa;
+    --sidebar-bg: #ffffff;
+    --article-bg: #ffffff;
+    --border: rgba(0, 0, 0, 0.08);
+    --text: #1a1a2e;
+    --text-secondary: #4a4a68;
+    --text-muted: #8e8ea0;
+    --brand: #059669;
+    --brand-dim: rgba(5, 150, 105, 0.08);
+    --brand-border: rgba(5, 150, 105, 0.2);
+    --accent: #d97706;
+}
+
+/* Header */
+html[data-theme="light"] .doc-header {
+    background: rgba(248, 249, 250, 0.92);
+}
+
+/* Sidebar scrollbar */
+html[data-theme="light"] .doc-sidebar {
+    scrollbar-color: rgba(0,0,0,0.08) transparent;
+}
+html[data-theme="light"] .doc-sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); }
+
+/* Nav hover states */
+html[data-theme="light"] .doc-nav a:hover { background: rgba(0,0,0,0.05); }
+html[data-theme="light"] .nav-toggle-btn:hover { background: rgba(0,0,0,0.05); }
+html[data-theme="light"] .nav-module-link:hover { background: rgba(0,0,0,0.04); }
+html[data-theme="light"] .nav-article:hover { background: rgba(0,0,0,0.04); }
+html[data-theme="light"] .nav-articles { border-left-color: rgba(0,0,0,0.12); }
+html[data-theme="light"] .toc-item:hover { background: rgba(0,0,0,0.04); }
+
+/* TOC scrollbar */
+html[data-theme="light"] .doc-toc {
+    scrollbar-color: rgba(0,0,0,0.08) transparent;
+}
+html[data-theme="light"] .doc-toc::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); }
+
+/* Inline code */
+html[data-theme="light"] .doc-article code {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* Code blocks */
+html[data-theme="light"] .doc-article pre {
+    background: #f0f2f5;
+}
+html[data-theme="light"] .doc-article pre code,
+html[data-theme="light"] .doc-article pre code.hljs {
+    color: #24292e;
+}
+
+/* Table */
+html[data-theme="light"] .doc-article th { background: rgba(0,0,0,0.04); }
+html[data-theme="light"] .doc-article td { border-bottom-color: rgba(0,0,0,0.05); }
+
+/* Pager */
+html[data-theme="light"] .pager-btn { background: rgba(0,0,0,0.02); }
+
+/* Global scrollbar */
+html[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); }
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.18); }
+
+/* Mermaid */
+html[data-theme="light"] .mermaid {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* Back to top */
+html[data-theme="light"] .back-to-top {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+html[data-theme="light"] .back-to-top:hover {
+    background: rgba(5, 150, 105, 0.1);
+}
+
+/* Syntax Highlighting — Light */
+html[data-theme="light"] .hljs { color: #24292e !important; }
+html[data-theme="light"] .hljs-keyword,
+html[data-theme="light"] .hljs-selector-tag { color: #d73a49; }
+html[data-theme="light"] .hljs-string,
+html[data-theme="light"] .hljs-addition { color: #22863a; }
+html[data-theme="light"] .hljs-number,
+html[data-theme="light"] .hljs-literal { color: #005cc5; }
+html[data-theme="light"] .hljs-comment,
+html[data-theme="light"] .hljs-quote { color: #6a737d; }
+html[data-theme="light"] .hljs-title,
+html[data-theme="light"] .hljs-section { color: #6f42c1; }
+html[data-theme="light"] .hljs-name,
+html[data-theme="light"] .hljs-tag { color: #22863a; }
+html[data-theme="light"] .hljs-attr,
+html[data-theme="light"] .hljs-attribute { color: #005cc5; }
+html[data-theme="light"] .hljs-built_in { color: #e36209; }
+html[data-theme="light"] .hljs-type,
+html[data-theme="light"] .hljs-class .hljs-title { color: #6f42c1; }
+html[data-theme="light"] .hljs-deletion { color: #b31d28; }
+
+/* a:hover in light mode */
+html[data-theme="light"] a:hover { color: #059669; }
