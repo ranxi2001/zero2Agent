@@ -123,6 +123,11 @@ modules:
         slug: "12-vercel-ai-sdk"
       - title: "AutoGen：微软的多 Agent 对话框架"
         slug: "13-autogen"
+  - title: "Agent 训练实战"
+    slug: "learn-agent-training"
+    articles:
+      - title: "Agent SFT 关键细节：从轨迹数据到 Loss Mask"
+        slug: "01-agent-sft"
   - title: "Final Project"
     slug: "final-project"
     articles: []

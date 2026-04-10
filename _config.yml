@@ -10,6 +10,7 @@ include:
   - learn-langgraph
   - learn-claude-code
   - learn-frameworks
+  - learn-agent-training
   - final-project
   - docs
 
