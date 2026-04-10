@@ -22,11 +22,17 @@ Agent 不只是 prompt + tool calling——当你需要让模型真正学会"做
 ## 建议阅读顺序
 
 1. [Agent SFT 关键细节：从轨迹数据到 Loss Mask](01-agent-sft/index.html)
+2. [Agent RL 实战：用强化学习提升推理与决策质量](02-agent-rl/index.html)
+3. [GRPO vs PPO：Agent 强化学习算法深度对比与选型](03-grpo-vs-ppo/index.html)
+4. [训练数据配比实战：Agent 不只吃轨迹数据](04-data-mix/index.html)
+5. [Agent 评测：怎么衡量你训练出来的 Agent 到底行不行](05-agent-eval/index.html)
+6. [从 SFT 到部署：Agent 模型上线全流程](06-train-to-deploy/index.html)
 
-## 后续可补充的文章
+## 文章完成状态
 
-- [ ] Agent SFT 关键细节：从轨迹数据到 Loss Mask
-- [ ] Agent RL：基于环境 Reward 提升决策质量
-- [ ] 训练数据配比实战经验
-- [ ] Agent 评测：怎么衡量训练效果
-- [ ] 从 SFT 到部署：Agent 模型上线全流程
+- [x] Agent SFT 关键细节：从轨迹数据到 Loss Mask
+- [x] Agent RL：基于环境 Reward 提升决策质量
+- [x] GRPO vs PPO：Agent 强化学习算法深度对比与选型
+- [x] 训练数据配比实战经验
+- [x] Agent 评测：怎么衡量训练效果
+- [x] 从 SFT 到部署：Agent 模型上线全流程
