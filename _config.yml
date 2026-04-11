@@ -1,16 +1,22 @@
 title: zero2Agent
 description: 面向程序员的 Agent 教程类知识库与前端展示项目
+url: https://onefly.top
 markdown: kramdown
 highlighter: rouge
 baseurl: /zero2Agent
+
+plugins:
+  - jekyll-sitemap
 
 include:
   - learn-agent-basic
   - learn-openclaw
   - learn-langgraph
   - learn-claude-code
-  - learn-frameworks
+  - learn-sdk-frameworks
+  - learn-agent-survey
   - learn-agent-training
+  - learn-agent-interview
   - final-project
   - docs
 
