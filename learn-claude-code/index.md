@@ -6,7 +6,7 @@ description: 从 30 行代码出发，手写一个能真正干活的 Coding Agen
 
 # Claude Code
 
-> *"One loop & Bash is all you need"*
+> *“One loop & Bash is all you need”*
 
 这个模块做一件事：**从零手写一个 Agent，一层一层叠加机制，最终变成一个能处理真实任务的 Coding Agent。**
 
@@ -46,7 +46,7 @@ description: 从 30 行代码出发，手写一个能真正干活的 Coding Agen
 
 **Agent 的复杂度应该随需求增长，而不是从一开始就引入。**
 
-s01 是 30 行。每一节只加必要的机制，解决前一节暴露出来的具体问题。读完之后你会发现，所有的"框架"都是这些机制的不同组合。
+s01 是 30 行。每一节只加必要的机制，解决前一节暴露出来的具体问题。读完之后你会发现，所有的“框架”都是这些机制的不同组合。
 
 参考仓库：[shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code)
 

@@ -243,7 +243,7 @@ END
 
 ## 初始 State 怎么设置
 
-注意调用 `invoke` 时我们传入了完整的初始 state，包括 `bmi: 0.0`、`category: ""`、`report: ""` 这些"空值"。
+注意调用 `invoke` 时我们传入了完整的初始 state，包括 `bmi: 0.0`、`category: ""`、`report: ""` 这些“空值”。
 
 这是因为 `TypedDict` 要求字段完整。实际项目里通常有两种处理方式：
 

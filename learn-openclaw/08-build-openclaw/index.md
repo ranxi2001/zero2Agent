@@ -61,7 +61,7 @@ load_dotenv()
 
 ## 第三步：修改系统 Prompt
 
-`SYSTEM_PROMPT.md` 是你 Agent 的"人格"。把它改成你想要的行为：
+`SYSTEM_PROMPT.md` 是你 Agent 的“人格”。把它改成你想要的行为：
 
 ```markdown
 你是 [你的名字]Claw，一个专注于 Python 和 TypeScript 的 Coding Agent。

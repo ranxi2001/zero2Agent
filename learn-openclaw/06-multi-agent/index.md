@@ -15,7 +15,7 @@ eyebrow: OpenClaw / 06
 
 ## 主从调度的问题
 
-"Orchestrator + Worker" 的经典架构：
+“Orchestrator + Worker” 的经典架构：
 
 <div class="mermaid">
 flowchart TD

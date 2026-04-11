@@ -245,7 +245,7 @@ async def stream_example():
 **优点：**
 - 代码执行是原生能力，代码 Agent 场景强
 - Human-in-the-loop 支持完善
-- 多 Agent 对话模式自然，适合需要"讨论"的任务
+- 多 Agent 对话模式自然，适合需要“讨论”的任务
 - 微软官方维护，Semantic Kernel 可集成
 
 **缺点：**
@@ -257,6 +257,6 @@ async def stream_example():
 ## 适合什么场景
 
 - 代码生成和自动执行（Coder + Executor 模式）
-- 需要多专家"讨论"得出结论的分析任务
+- 需要多专家“讨论”得出结论的分析任务
 - 有 Human-in-the-loop 审批需求的工作流
 - 教育和研究：探索多 Agent 协作行为

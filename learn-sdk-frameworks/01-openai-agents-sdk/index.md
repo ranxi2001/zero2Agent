@@ -7,7 +7,7 @@ eyebrow: learn-frameworks · 01
 
 # OpenAI Agents SDK：Agent、Tool、Handoff
 
-OpenAI 在 2025 年初开源了 [Agents SDK](https://github.com/openai/openai-agents-python)，这是他们对"怎么构建 Agent"给出的官方答案。它比直接调 Chat Completions API 多了一层抽象，但比 LangChain 轻得多。
+OpenAI 在 2025 年初开源了 [Agents SDK](https://github.com/openai/openai-agents-python)，这是他们对“怎么构建 Agent”给出的官方答案。它比直接调 Chat Completions API 多了一层抽象，但比 LangChain 轻得多。
 
 ## 安装
 

@@ -404,7 +404,7 @@ for (const recipientName of recipients) {
 }
 ```
 
-广播开销与团队大小成正比（O(n)），所以 prompt 里明确标注"expensive, use only when everyone genuinely needs it"。
+广播开销与团队大小成正比（O(n)），所以 prompt 里明确标注“expensive, use only when everyone genuinely needs it”。
 
 **结构化消息类型**
 
@@ -549,7 +549,7 @@ stateDiagram-v2
 
 **消息队列 vs 直接调用**——teammate 正在执行时收到的消息不会打断它，而是进入 `pendingUserMessages[]`。这避免了并发竞争，同时保证消息不丢失。
 
-**两级 AbortController**——`abortController` 杀死整个 teammate，`currentWorkAbortController` 只中断当前 turn。这让"取消当前操作"和"彻底关闭"成为两个独立操作。
+**两级 AbortController**——`abortController` 杀死整个 teammate，`currentWorkAbortController` 只中断当前 turn。这让“取消当前操作”和“彻底关闭”成为两个独立操作。
 
 **leader 不是 teammate**——leader 故意不设置 `CLAUDE_CODE_AGENT_ID`，这样 `isTeammate()` 返回 false。leader 不参与收件箱轮询，它通过 `onIdleCallbacks` 被动接收通知。
 
@@ -567,7 +567,7 @@ Claude Code 的解决方案层层叠加：
 
 **资源限制**：`maxTurns`、`maxBudgetUsd`、50 条消息 UI cap——这些不只是安全措施，也是可观察性工具。当一个 Agent 达到限制时，系统知道出了问题。
 
-**两级 AbortController**：区分"取消当前操作"和"彻底关闭"。这让人类操作员有精细的控制粒度，而不是只能全杀或全不杀。
+**两级 AbortController**：区分“取消当前操作”和“彻底关闭”。这让人类操作员有精细的控制粒度，而不是只能全杀或全不杀。
 
 设计指南总结的原则是：**在能力和控制之间取得平衡**。多 Agent 系统很强大，但如果人类无法理解和干预，强大就变成了危险。
 

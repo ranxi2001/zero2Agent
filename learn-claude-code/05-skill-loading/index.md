@@ -7,9 +7,9 @@ eyebrow: Claude Code / s05
 
 # Skill Loading：按需加载领域知识
 
-> *"load knowledge temporarily when needed"*
+> *“load knowledge temporarily when needed”*
 
-把所有领域知识塞进 system prompt 会浪费 20,000+ token。这一节实现按需加载：系统提示只告诉模型"有哪些技能"，详细文档在模型主动请求时才加载。
+把所有领域知识塞进 system prompt 会浪费 20,000+ token。这一节实现按需加载：系统提示只告诉模型“有哪些技能”，详细文档在模型主动请求时才加载。
 
 ---
 
@@ -706,7 +706,7 @@ Skills 处于中间层，这个定位决定了它的设计选择：
 - 比 Plugins 更安全（只注入 Markdown 文本，不执行代码）
 - 通过 frontmatter 元数据实现条件激活，兼顾灵活性和 token 效率
 
-这三层遵循一个共同原则：**显式优于隐式**。技能通过 `paths` 字段显式声明适用范围，MCP 工具通过 schema 显式声明参数，Plugins 通过 API 显式注册能力。没有"自动发现"的魔法，一切可追溯。
+这三层遵循一个共同原则：**显式优于隐式**。技能通过 `paths` 字段显式声明适用范围，MCP 工具通过 schema 显式声明参数，Plugins 通过 API 显式注册能力。没有“自动发现”的魔法，一切可追溯。
 
 ---
 

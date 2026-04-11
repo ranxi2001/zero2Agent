@@ -7,7 +7,7 @@ eyebrow: Claude Code / s02
 
 # Tool Use：扩展模型能触达的边界
 
-> *"加一个工具，只加一个 handler"*
+> *“加一个工具，只加一个 handler”*
 
 s01 只有一个 `bash` 工具。这一节加 3 个专用工具，同时引入一个关键设计：**dispatch map**。
 
@@ -67,7 +67,7 @@ output = handler(**block.input) if handler else f"Unknown tool: {block.name}"
 
 ### 工具注册：`src/tools.ts`
 
-Claude Code 在 `getAllBaseTools()` 函数中返回一个 `Tools` 数组——这就是它的 "dispatch map"。核心工具直接注册，实验性工具通过 feature flag 条件注册：
+Claude Code 在 `getAllBaseTools()` 函数中返回一个 `Tools` 数组——这就是它的 “dispatch map”。核心工具直接注册，实验性工具通过 feature flag 条件注册：
 
 ```typescript
 // src/tools.ts — 工具注册表（简化）
@@ -379,9 +379,9 @@ Claude Code 的工具系统深刻体现了 Unix 哲学：**每个工具做好一
 - `FileEditTool` 只做字符串替换
 - `BashTool` 只执行命令
 
-复杂任务（如"重构认证模块"）不是由一个大而全的 `RefactorTool` 完成的，而是由 LLM 的推理能力编排多个原子工具完成。这和 Unix 管道的思想一致——`cat file | grep pattern | sort | uniq` 每一环只做一件事。
+复杂任务（如“重构认证模块”）不是由一个大而全的 `RefactorTool` 完成的，而是由 LLM 的推理能力编排多个原子工具完成。这和 Unix 管道的思想一致——`cat file | grep pattern | sort | uniq` 每一环只做一件事。
 
-设计指南还指出一个容易忽视的细节：**工具描述是"承重的艺术品"（load-bearing art form）**。Claude Code 的每个工具描述都经过精心设计，因为模型完全依赖描述来决定何时使用哪个工具。一个模糊的描述会导致工具被误用或忽略。这就是为什么源码中 `BashTool` 的描述长达数十行——它不只是文档，而是模型决策的核心输入。
+设计指南还指出一个容易忽视的细节：**工具描述是“承重的艺术品”（load-bearing art form）**。Claude Code 的每个工具描述都经过精心设计，因为模型完全依赖描述来决定何时使用哪个工具。一个模糊的描述会导致工具被误用或忽略。这就是为什么源码中 `BashTool` 的描述长达数十行——它不只是文档，而是模型决策的核心输入。
 
 另一个 Unix 启发的设计：**工具是无状态的**。每次调用独立执行，通过 `ToolUseContext` 显式接收所有依赖，而不是通过全局变量。这让工具可以被安全地并行执行、被不同 Agent 复用。
 

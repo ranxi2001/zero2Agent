@@ -26,7 +26,7 @@ System Prompt（轻量，描述 Skill 元数据）
 Skill 内容进入上下文
 ```
 
-类比：Skill 就是 Agent 的"技能书"，用到哪本翻哪本，不是把整个图书馆背下来。
+类比：Skill 就是 Agent 的“技能书”，用到哪本翻哪本，不是把整个图书馆背下来。
 
 ## Skill 文件结构
 

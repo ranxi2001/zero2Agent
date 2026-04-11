@@ -282,7 +282,7 @@ message = client.messages.create(
 
 ## Extended Thinking（扩展思考）
 
-Claude 3.7+ 支持在回答前"思考"，适合复杂推理任务：
+Claude 3.7+ 支持在回答前“思考”，适合复杂推理任务：
 
 ```python
 response = client.messages.create(

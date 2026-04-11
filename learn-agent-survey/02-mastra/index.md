@@ -7,7 +7,7 @@ eyebrow: 框架调研 · 02
 
 # Mastra：TypeScript 原生 Agent 框架
 
-Mastra 是 2024 年底出现的 TypeScript 原生 Agent 框架，定位是"给 TypeScript 开发者的 LangChain"。如果你的技术栈是 Next.js / Node.js，Mastra 是目前最自然的选择之一。
+Mastra 是 2024 年底出现的 TypeScript 原生 Agent 框架，定位是“给 TypeScript 开发者的 LangChain”。如果你的技术栈是 Next.js / Node.js，Mastra 是目前最自然的选择之一。
 
 GitHub：[mastra-ai/mastra](https://github.com/mastra-ai/mastra)
 

@@ -22,7 +22,7 @@ AgentUniverse 提出了 **PEER** 多 Agent 协作模式：
 | **E**xpressing | 表达 Agent | 整合结果，生成最终输出 |
 | **R**eviewing | 审查 Agent | 检查结果质量，决定是否需要重试 |
 
-这是对"多 Agent 如何分工"的一种具体化方案。
+这是对“多 Agent 如何分工”的一种具体化方案。
 
 ## 安装
 

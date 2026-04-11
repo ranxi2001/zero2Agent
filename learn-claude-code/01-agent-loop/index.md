@@ -7,7 +7,7 @@ eyebrow: Claude Code / s01
 
 # Agent Loop：一个循环就是一个 Agent
 
-> *"One loop & Bash is all you need"*
+> *“One loop & Bash is all you need”*
 
 这一节只做一件事：搭出 Agent 的最小可运行版本。
 
@@ -39,7 +39,7 @@ flowchart LR
 
 ## 从零实现
 
-> **注意**：下面这 30 行 Python 是教学用的最小实现。真实的 Claude Code 远比这复杂——它用 1700+ 行 TypeScript 实现了状态机、自动压缩、token 恢复等机制。我们在后面的"源码实证"小节会深入对比。
+> **注意**：下面这 30 行 Python 是教学用的最小实现。真实的 Claude Code 远比这复杂——它用 1700+ 行 TypeScript 实现了状态机、自动压缩、token 恢复等机制。我们在后面的“源码实证”小节会深入对比。
 
 ```python
 import anthropic
@@ -331,13 +331,13 @@ Lisp REPL (1960) → Shell (1971) → Jupyter (2014) → ChatGPT (2022) → Clau
 
 所有这些系统共享同一个骨架：**Read → Eval → Print → Loop**。区别在于 Eval 的能力边界——Shell eval 系统命令，Jupyter eval 代码块，而 Claude Code eval 的是 LLM 推理 + 工具调用。
 
-这意味着 `while True` 循环不是一个实现细节，而是 **Agent 系统的本质结构**。设计指南总结的 "Agent 公式" 也证实了这一点：
+这意味着 `while True` 循环不是一个实现细节，而是 **Agent 系统的本质结构**。设计指南总结的 “Agent 公式” 也证实了这一点：
 
 > **Tool Calls + Context Management + Task Planning + Error Handling + Permission Control + State Persistence = Agent System**
 
 我们的 30 行循环覆盖了前两项（Tool Calls + Context Management），后续章节逐步补全其余部分。
 
-从 chatbot 到 agent 的关键跃迁只有一个：**stop_reason 从 "end_turn" 变成了 "tool_use"**。chatbot 在模型说完话时停下，agent 在模型没有更多工具要调用时才停下。这个看似微小的判断条件，决定了系统是被动应答还是主动执行。
+从 chatbot 到 agent 的关键跃迁只有一个：**stop_reason 从 “end_turn” 变成了 “tool_use”**。chatbot 在模型说完话时停下，agent 在模型没有更多工具要调用时才停下。这个看似微小的判断条件，决定了系统是被动应答还是主动执行。
 
 ---
 

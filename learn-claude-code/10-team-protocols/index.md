@@ -19,7 +19,7 @@ s09 的 Agent 团队可以互发消息，但消息是非结构化的——任意
 
 **场景 1：关机**
 
-Leader 发 "请关机" → Coder 可能正在执行重要任务，直接关掉会丢失工作。需要一个询问-确认流程。
+Leader 发 “请关机” → Coder 可能正在执行重要任务，直接关掉会丢失工作。需要一个询问-确认流程。
 
 **场景 2：危险操作**
 
@@ -225,7 +225,7 @@ async function handlePlanApproval(recipientName, requestId, context) {
 }
 ```
 
-注意 `permissionMode: modeToInherit`——审批不只是 "同意"，还传递了执行权限级别。
+注意 `permissionMode: modeToInherit`——审批不只是 “同意”，还传递了执行权限级别。
 
 <div class="mermaid">
 sequenceDiagram
@@ -509,7 +509,7 @@ TOOL_HANDLERS.update({
 - 权限通过 `permissionMode: modeToInherit` 显式继承——子 Agent 不会自动获得父 Agent 的权限
 - 关机需要**协议审批**——不是直接杀进程，而是走 request → response → abort 流程
 
-这些设计看起来增加了复杂性，但实际上减少了生产环境中的混乱。隐式的"便利"在单 Agent 时没问题，在多 Agent 协作时就是灾难源。
+这些设计看起来增加了复杂性，但实际上减少了生产环境中的混乱。隐式的“便利”在单 Agent 时没问题，在多 Agent 协作时就是灾难源。
 
 ---
 

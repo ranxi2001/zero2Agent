@@ -101,11 +101,11 @@ Worker 完成后，结果作为 **user-role 消息** 回来，包裹在 `<task-n
 </task-notification>
 ```
 
-**最重要的一条规则 --- "先理解再委派"**：
+**最重要的一条规则 --- “先理解再委派”**：
 
-> When workers report research findings, **you must understand them before directing follow-up work**. Never write "based on your findings" or "based on the research." You never hand off understanding to another worker.
+> When workers report research findings, **you must understand them before directing follow-up work**. Never write “based on your findings” or “based on the research.” You never hand off understanding to another worker.
 
-这是区分好 Coordinator 和差 Coordinator 的分水岭。差的 Coordinator 是传话筒（"根据你的发现去修"）；好的 Coordinator 先消化结果，再给出精确指令（"修 src/auth/validate.ts:42 的空指针，Session.expired 为 true 时 user 字段是 undefined"）。
+这是区分好 Coordinator 和差 Coordinator 的分水岭。差的 Coordinator 是传话筒（“根据你的发现去修”）；好的 Coordinator 先消化结果，再给出精确指令（“修 src/auth/validate.ts:42 的空指针，Session.expired 为 true 时 user 字段是 undefined”）。
 
 ### 1.4 Worker 的工具上下文注入
 
@@ -146,7 +146,7 @@ export function getCoordinatorUserContext(
 
 > 源文件：`src/tasks/DreamTask/DreamTask.ts`
 
-Dream Task 是 Claude Code 的 **后台记忆整理** 机制 --- 像人睡觉时整理白天记忆一样（所以叫 "Dream"）。
+Dream Task 是 Claude Code 的 **后台记忆整理** 机制 --- 像人睡觉时整理白天记忆一样（所以叫 “Dream”）。
 
 ### 2.1 状态模型
 
@@ -196,7 +196,7 @@ export function addDreamTurn(
 }
 ```
 
-滑动窗口只保留最近 30 轮。`filesTouched` 用 Set 去重。注释特别强调这只是 **"至少碰了这些文件"**，因为 Bash 命令里的写操作无法被 pattern-match 捕获。
+滑动窗口只保留最近 30 轮。`filesTouched` 用 Set 去重。注释特别强调这只是 **“至少碰了这些文件”**，因为 Bash 命令里的写操作无法被 pattern-match 捕获。
 
 ### 2.3 Kill 与锁回滚
 
@@ -250,10 +250,10 @@ export const MEMORY_TYPES = ['user', 'feedback', 'project', 'reference'] as cons
 
 | 类型 | 内容 | 示例 |
 |------|------|------|
-| `user` | 用户角色、目标、偏好 | "用户是数据科学家，关注可观测性" |
-| `feedback` | 用户对工作方式的指导 | "不要 mock 数据库，上次 mock 通过但线上挂了" |
-| `project` | 项目进展、决策、截止日期 | "周四后冻结非关键合并，移动端在切分支" |
-| `reference` | 外部系统指针 | "pipeline bug 追踪在 Linear 项目 INGEST 里" |
+| `user` | 用户角色、目标、偏好 | “用户是数据科学家，关注可观测性” |
+| `feedback` | 用户对工作方式的指导 | “不要 mock 数据库，上次 mock 通过但线上挂了” |
+| `project` | 项目进展、决策、截止日期 | “周四后冻结非关键合并，移动端在切分支” |
+| `reference` | 外部系统指针 | “pipeline bug 追踪在 Linear 项目 INGEST 里” |
 
 注意 **什么不存**：代码模式、架构、文件结构、git 历史 --- 这些可以从当前代码直接推导出来。记忆只存 **不可推导** 的信息。
 
@@ -428,7 +428,7 @@ stateDiagram-v2
 
 ### 4.2 核心工具：idle 和 claim_task
 
-**idle 工具**：Agent 完成任务后主动调用，告诉框架"我空了，可以接新任务"。
+**idle 工具**：Agent 完成任务后主动调用，告诉框架“我空了，可以接新任务”。
 
 ```python
 def run_idle(agent_name: str) -> str:
@@ -618,7 +618,7 @@ Claude Code 的核心设计哲学：**Coordinator 不是传话筒，是理解者
 
 设计指南用一个精妙的比喻描述 Coordinator 模式：
 
-> 协调器是多 Agent 系统的"指挥家"——它不演奏，但决定谁演奏什么。
+> 协调器是多 Agent 系统的“指挥家”——它不演奏，但决定谁演奏什么。
 
 这个比喻揭示了 Coordinator 的三个核心职责：
 
@@ -626,7 +626,7 @@ Claude Code 的核心设计哲学：**Coordinator 不是传话筒，是理解者
 2. **选择合适的演奏者**：Explore Agent 做只读分析，Plan Agent 做方案设计，general-purpose Agent 做实际修改——不同任务分配给不同专业能力的 Agent
 3. **整合最终结果**：收集各 Agent 的输出，综合成用户需要的完整答案
 
-设计指南将这种模式提升为一个通用工程原则：**复杂系统的管理本身也需要专门的角色**。不是每个团队成员都应该做调度，也不是调度者应该亲自执行。这和软件架构中的"关注点分离"一脉相承。
+设计指南将这种模式提升为一个通用工程原则：**复杂系统的管理本身也需要专门的角色**。不是每个团队成员都应该做调度，也不是调度者应该亲自执行。这和软件架构中的“关注点分离”一脉相承。
 
 从源码中还能看到一个重要的设计决策：Coordinator 通过 **feature flag 双重门控** 启用，而且有 **session mode 恢复** 机制。这意味着：
 - 新功能默认关闭，验证充分后再开放（安全是默认）

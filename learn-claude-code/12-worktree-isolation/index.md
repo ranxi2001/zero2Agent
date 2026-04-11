@@ -256,7 +256,7 @@ export function buildWorktreeNotice(parentCwd: string, worktreeCwd: string): str
 
 ### 自动清理逻辑
 
-Agent 完成后，worktree 的清理遵循"有变更则保留"原则：
+Agent 完成后，worktree 的清理遵循“有变更则保留”原则：
 
 ```typescript
 const cleanupWorktreeIfNeeded = async () => {
@@ -527,7 +527,7 @@ Worktree 处于 Layer 3——文件系统隔离。它的设计遵循 **fail-clos
 - worktree 退出时发现未提交更改？保留 worktree，不删除（宁可泄漏资源也不丢失工作）
 - 3 处缓存需要清除（system prompt cache、permission classifier approvals cache、session messages cache）？全部清除，即使某些可能不需要
 
-这和"便利优先"的设计完全相反。便利优先会选择：失败时自动回退到主分支、退出时自动丢弃未提交更改、只清除确认需要清除的缓存。但这些"便利"在出错时会导致数据丢失或安全漏洞。
+这和“便利优先”的设计完全相反。便利优先会选择：失败时自动回退到主分支、退出时自动丢弃未提交更改、只清除确认需要清除的缓存。但这些“便利”在出错时会导致数据丢失或安全漏洞。
 
 设计指南总结了整个 Claude Code 的安全哲学：**能力和控制之间的平衡**。Worktree 给了 Agent 并行修改代码的能力，但通过 fail-closed 设计和 5 层权限确保这种能力始终在人类的控制之下。
 

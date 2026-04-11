@@ -7,7 +7,7 @@ eyebrow: Claude Code / s06
 
 # Context Compact：三层压缩换无限会话
 
-> *"上下文总会满，要有办法腾地方"*
+> *“上下文总会满，要有办法腾地方”*
 
 读一个 1000 行的文件就吃掉约 4000 token；读 30 个文件、跑 20 条命令，轻松突破 100k token。不压缩，Agent 根本没法在大项目里干活。
 
@@ -117,7 +117,7 @@ def _find_tool_name(messages: list, tool_use_id: str) -> str:
     return "tool"
 ```
 
-效果：大量工具输出被压缩为一行，模型仍然知道"做过这件事"，但不再占用大量上下文。
+效果：大量工具输出被压缩为一行，模型仍然知道“做过这件事”，但不再占用大量上下文。
 
 ---
 
@@ -125,7 +125,7 @@ def _find_tool_name(messages: list, tool_use_id: str) -> str:
 
 > 源码位置：`src/services/compact/compact.ts` + `src/services/compact/prompt.ts`
 
-Full Compact 是真正的"重炮"——fork 一个 Sonnet 子进程，用专门的 summary prompt 把整段对话浓缩成结构化摘要。
+Full Compact 是真正的“重炮”——fork 一个 Sonnet 子进程，用专门的 summary prompt 把整段对话浓缩成结构化摘要。
 
 ### 核心流程
 
@@ -188,7 +188,7 @@ export function truncateHeadForPTLRetry(
 
 **Step 4：后置附件注入**
 
-压缩完成后，自动附加关键上下文，确保模型不会"失忆"：
+压缩完成后，自动附加关键上下文，确保模型不会“失忆”：
 
 ```typescript
 // 源码：compact.ts:122-131
@@ -386,7 +386,7 @@ export const DEFAULT_SESSION_MEMORY_CONFIG: SessionMemoryConfig = {
 # Worklog
 ```
 
-每个 section 上限约 2000 token，全文上限 12000 token。超限时模型被提示"MUST condense"。
+每个 section 上限约 2000 token，全文上限 12000 token。超限时模型被提示“MUST condense”。
 
 ### 与压缩的关系
 
@@ -461,11 +461,11 @@ PTL 重试时需要从头部丢弃消息。按 API-round 分组（`groupMessages
 
 ### 为什么 Auto Compact 要加熔断器？
 
-源码注释直接给了答案：*"1,279 sessions had 50+ consecutive failures (up to 3,272), wasting ~250K API calls/day globally."* 3 次连续失败后停止重试。
+源码注释直接给了答案：*“1,279 sessions had 50+ consecutive failures (up to 3,272), wasting ~250K API calls/day globally.”* 3 次连续失败后停止重试。
 
 ### 压缩后为什么要注入附件？
 
-摘要再好也会丢失细节。注入最近读取的 5 个文件（每个 5K token 上限）、当前 plan、已激活 skill、工具/agent 列表变化量，确保模型在压缩后仍能"接上"工作。
+摘要再好也会丢失细节。注入最近读取的 5 个文件（每个 5K token 上限）、当前 plan、已激活 skill、工具/agent 列表变化量，确保模型在压缩后仍能“接上”工作。
 
 ---
 
@@ -491,13 +491,13 @@ PTL 重试时需要从头部丢弃消息。按 API-round 分组（`groupMessages
 | 核心挑战 | 如何表达清楚 | 如何在有限窗口中保留关键信息 |
 | 对应机制 | system prompt 设计 | Compact + Memory + CLAUDE.md |
 
-Auto-Compact 揭示了一个深刻的设计原则：**智能系统需要有选择地遗忘**。人类的记忆也是这样工作的——我们不记得每一个细节，但我们记得重要的事情。三层压缩架构正是对"遗忘的艺术"的工程实现：
+Auto-Compact 揭示了一个深刻的设计原则：**智能系统需要有选择地遗忘**。人类的记忆也是这样工作的——我们不记得每一个细节，但我们记得重要的事情。三层压缩架构正是对“遗忘的艺术”的工程实现：
 
 - **Microcompact**（持续遗忘）：每轮自动清理工具输出的细节，只保留操作摘要
 - **Full Compact**（主动遗忘）：用 LLM 判断什么值得记住，什么可以丢弃
 - **Auto Compact**（防御性遗忘）：熔断器确保系统在极端情况下也不会崩溃
 
-设计指南特别强调了**为失败设计**原则在压缩系统中的体现：Reactive Compact 是 Auto Compact 的"保险丝"——即使自动压缩没有及时触发，API 返回 `prompt_too_long` 时也能自动恢复。这种多层防御的设计，让系统在面对不可预测的对话长度时始终保持稳定。
+设计指南特别强调了**为失败设计**原则在压缩系统中的体现：Reactive Compact 是 Auto Compact 的“保险丝”——即使自动压缩没有及时触发，API 返回 `prompt_too_long` 时也能自动恢复。这种多层防御的设计，让系统在面对不可预测的对话长度时始终保持稳定。
 
 ---
 

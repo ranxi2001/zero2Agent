@@ -6,7 +6,7 @@ description: 从零构建属于自己的轻量级 Coding Agent
 
 # OpenClaw Agent
 
-> "Agent 其实很简单。"
+> “Agent 其实很简单。”
 
 这个模块要解决一个具体的问题：**怎么从零搭出一个真正跑在生产上的 Coding Agent。**
 

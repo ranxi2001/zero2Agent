@@ -139,7 +139,7 @@ const PROMPT_PATTERNS = [
 ]
 ```
 
-watchdog 通过 `fs.stat()` 监控输出文件大小变化。文件大小不增长 + 尾部匹配 prompt 模式 = 发出通知，告诉模型 "这个命令可能卡在交互提示上，kill 掉重试吧"。
+watchdog 通过 `fs.stat()` 监控输出文件大小变化。文件大小不增长 + 尾部匹配 prompt 模式 = 发出通知，告诉模型 “这个命令可能卡在交互提示上，kill 掉重试吧”。
 
 ### 通知格式
 
@@ -266,7 +266,7 @@ export const DreamTask: Task = {
 
 ## 源码实证：LocalMainSessionTask 主会话后台化
 
-当用户按两次 Ctrl+B，当前对话本身会被放入后台。这是最"重量级"的后台任务——整个 query 循环在后台继续：
+当用户按两次 Ctrl+B，当前对话本身会被放入后台。这是最“重量级”的后台任务——整个 query 循环在后台继续：
 
 ```typescript
 // src/tasks/LocalMainSessionTask.ts
@@ -548,7 +548,7 @@ def agent_loop(messages: list):
 
 设计指南的第一原则是**透明性优于便利性**。后台任务系统完美体现了这一点：
 
-- **Stall Watchdog**：45 秒检测交互式命令卡住，不是静默杀死，而是告知模型"这个命令可能需要交互输入"
+- **Stall Watchdog**：45 秒检测交互式命令卡住，不是静默杀死，而是告知模型“这个命令可能需要交互输入”
 - **Task Notification**：XML 结构化通知注入对话，让模型（和用户）都能看到任务状态变化
 - **输出流**：磁盘持久化 + 增量读取，任务的每一行输出都可追溯
 

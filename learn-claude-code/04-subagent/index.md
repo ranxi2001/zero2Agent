@@ -7,7 +7,7 @@ eyebrow: Claude Code / s04
 
 # Subagent：上下文隔离的正确姿势
 
-> *"大任务拆小，每个小任务干净的上下文"*
+> *“大任务拆小，每个小任务干净的上下文”*
 
 这一节加一个 `task` 工具。调用它会启动一个子 Agent，子 Agent 有完整的工具能力，但它的上下文完全隔离——父 Agent 只看到最终摘要。
 
@@ -17,7 +17,7 @@ eyebrow: Claude Code / s04
 
 Agent 工作越久，messages 数组越胖。读文件、跑命令的每条输出都永久留在上下文里。
 
-"这个项目用什么测试框架？"可能要读 5 个文件，但父 Agent 只需要一个词："pytest"。
+“这个项目用什么测试框架？”可能要读 5 个文件，但父 Agent 只需要一个词：“pytest”。
 
 如果直接在父 Agent 里做，这 5 次 read_file 的完整输出都会留在 messages 里，占用宝贵的上下文空间，干扰模型对后续任务的判断。
 
@@ -80,7 +80,7 @@ cwd: z.string().optional()
   // 绝对路径，覆盖 Agent 的工作目录，与 worktree 互斥
 ```
 
-这意味着 Claude Code 的 Agent 不是简单的"子任务执行器"，而是支持 **模型选择 / 后台执行 / 团队协作 / 代码隔离** 的完整多 Agent 系统。
+这意味着 Claude Code 的 Agent 不是简单的“子任务执行器”，而是支持 **模型选择 / 后台执行 / 团队协作 / 代码隔离** 的完整多 Agent 系统。
 
 ### runAgent.ts 执行流程
 
@@ -156,7 +156,7 @@ function getAutoBackgroundMs(): number {
 }
 ```
 
-如果一个同步 Agent 执行超过 120 秒，会自动转为后台任务。这解决了"子任务意外耗时很长，阻塞父 Agent 交互"的问题。
+如果一个同步 Agent 执行超过 120 秒，会自动转为后台任务。这解决了“子任务意外耗时很长，阻塞父 Agent 交互”的问题。
 
 ### LocalAgentTask / RemoteAgentTask
 
@@ -288,7 +288,7 @@ TOOL_HANDLERS["task"] = lambda **kw: run_subagent(
 )
 ```
 
-**注意：子 Agent 拥有 `task` 工具。** 与我们最初以为的"禁止递归"不同，Claude Code 通过 `QueryChainTracking.depth` 追踪嵌套深度而非禁止嵌套。实际的安全边界是 `maxTurns` 限制和 token 预算，而不是剥夺工具。
+**注意：子 Agent 拥有 `task` 工具。** 与我们最初以为的“禁止递归”不同，Claude Code 通过 `QueryChainTracking.depth` 追踪嵌套深度而非禁止嵌套。实际的安全边界是 `maxTurns` 限制和 token 预算，而不是剥夺工具。
 
 ---
 
@@ -324,7 +324,7 @@ TOOL_HANDLERS["task"] = lambda **kw: run_subagent(
 
 适合用子 Agent 的场景：
 
-- 需要读大量文件但只关心结论（"这个模块有什么问题？"）
+- 需要读大量文件但只关心结论（“这个模块有什么问题？”）
 - 需要独立验证（一个子 Agent 写代码，另一个子 Agent 审查）
 - 独立的子任务，结果互不依赖
 - 需要不同模型（用 haiku 做简单搜索，用 opus 做复杂推理）

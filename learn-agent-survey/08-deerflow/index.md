@@ -7,7 +7,7 @@ eyebrow: 框架调研 · 08
 
 # DeerFlow：字节跳动的 Deep Research 框架
 
-DeerFlow 是字节跳动 2025 年初开源的 Deep Research 框架，用于自动化地进行深度信息调研并生成结构化报告。它底层基于 LangGraph，是"用框架搭框架"的典型案例。
+DeerFlow 是字节跳动 2025 年初开源的 Deep Research 框架，用于自动化地进行深度信息调研并生成结构化报告。它底层基于 LangGraph，是“用框架搭框架”的典型案例。
 
 GitHub：[bytedance/deer-flow](https://github.com/bytedance/deer-flow)
 

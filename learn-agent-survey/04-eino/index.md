@@ -7,7 +7,7 @@ eyebrow: 框架调研 · 04
 
 # Eino：字节跳动的 Go 语言 Agent 框架
 
-Eino 是字节跳动 2024 年开源的 Go 语言 AI 应用框架，用于构建基于 LLM 的应用和 Agent。名字来源于希腊语"εἶναι"（存在），定位是**生产级 Go AI 框架**。
+Eino 是字节跳动 2024 年开源的 Go 语言 AI 应用框架，用于构建基于 LLM 的应用和 Agent。名字来源于希腊语“εἶναι”（存在），定位是**生产级 Go AI 框架**。
 
 GitHub：[cloudwego/eino](https://github.com/cloudwego/eino)
 

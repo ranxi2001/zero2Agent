@@ -130,7 +130,7 @@ print(result)  # 晴天 25°C
 
 ## 语义函数（Prompt Function）
 
-SK 支持用 Prompt 模板定义"语义函数"：
+SK 支持用 Prompt 模板定义“语义函数”：
 
 ```python
 from semantic_kernel.functions import KernelFunctionFromPrompt
