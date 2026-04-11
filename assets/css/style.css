@@ -1221,10 +1221,19 @@ html[data-theme="light"] .hero-meta li:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
-/* Terminal stays dark */
+/* Terminal — light mode */
 html[data-theme="light"] .terminal {
+    background: #f0f2f5;
+    color: #24292e;
     border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-md);
 }
+html[data-theme="light"] .terminal-top {
+    background: rgba(0, 0, 0, 0.03);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+html[data-theme="light"] .terminal-body div { opacity: 0.65; }
+html[data-theme="light"] .terminal-body div:has(.prompt) { opacity: 1; }
 html[data-theme="light"] .hero-card {
     border-color: rgba(0, 0, 0, 0.1);
 }
