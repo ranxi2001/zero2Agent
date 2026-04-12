@@ -83,6 +83,6 @@ eyebrow: Agent 面试通关 / 07
 
 ---
 
-维度篇到这里就结束了。接下来是面经实录——完整还原一场真实面试：
+下一篇建议继续看：
 
-- [面经实录：阿里 AI Agent 开发一面](../08-alibaba-agent-dev/index.html)
+- [Prompt 工程与框架原理：模板构建、Skills 机制](../08-prompt-engineering/index.html)
