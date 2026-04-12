@@ -163,6 +163,8 @@ modules:
         slug: "10-training-and-data"
       - title: "AI 代码分析与测试"
         slug: "11-ai-code-testing"
+      - title: "蚂蚁 Agent 一面"
+        slug: "12-ant-agent-intern"
   - title: "Final Project"
     slug: "final-project"
     articles: []
