@@ -40,7 +40,3 @@ eyebrow: Module 09
 9. [RAG 与检索系统：从 chunk 设计到多路召回](09-rag-retrieval/index.html)
 10. [训练、数据与模型优化：从数据清洗到 LoRA](10-training-and-data/index.html)
 11. [AI 代码分析与测试：覆盖率、插桩、代码过滤](11-ai-code-testing/index.html)
-
-## 面经实录
-
-12. [蚂蚁 Agent 应用暑期实习一面](12-ant-agent-intern/index.html)
