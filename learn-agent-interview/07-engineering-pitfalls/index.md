@@ -83,12 +83,6 @@ eyebrow: Agent 面试通关 / 07
 
 ---
 
-恭喜你看完了本模块的全部 7 篇文章。回顾一下五大考察维度 + 两个进阶方向：
+维度篇到这里就结束了。接下来是面经实录——完整还原一场真实面试：
 
-1. [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
-2. [工具管理：参数校验、工具路由与百级工具库](../02-tool-management/index.html)
-3. [容错与鲁棒性：超时、报错、误操作的工程化处理](../03-fault-tolerance/index.html)
-4. [记忆与上下文：长对话不丢信息的实战方案](../04-memory-context/index.html)
-5. [评估与全局观：怎么量化 Agent 好坏、落地最大挑战](../05-eval-and-vision/index.html)
-6. [多智能体协作：角色分工、通信机制与冲突仲裁](../06-multi-agent-collab/index.html)
-7. [工程化踩坑：死循环、状态丢失与成本控制](../07-engineering-pitfalls/index.html)
+- [面经实录：阿里 AI Agent 开发一面](../08-alibaba-agent-dev/index.html)

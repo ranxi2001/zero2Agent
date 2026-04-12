@@ -1,6 +1,6 @@
 ---
 name: new-article
-description: 在 zero2Agent 项目中创建新的学习文章。当用户说"写一篇新文章"、"创建文章"、"新建文章"、"在某模块下添加一篇关于X的文章"、"帮我起草一篇讲XX的内容"时触发。适用于在 learn-agent-basic、learn-langgraph、learn-claude-code、learn-frameworks、final-project 任意模块下新建内容。即使用户没有明确说"文章"，只要涉及给 zero2Agent 项目增加教学内容，也应当触发此技能。
+description: 在 zero2Agent 项目中创建新的学习文章。当用户说"写一篇新文章"、"创建文章"、"新建文章"、"在某模块下添加一篇关于X的文章"、"帮我起草一篇讲XX的内容"、"整理面经"时触发。适用于所有模块下新建内容，包括面试维度拆解文章和面经实录。即使用户没有明确说"文章"，只要涉及给 zero2Agent 项目增加教学内容，也应当触发此技能。
 ---
 
 # new-article：创建新文章
@@ -23,9 +23,13 @@ description: 在 zero2Agent 项目中创建新的学习文章。当用户说"写
 | 模块 | 目录 | 已有文章数 |
 |------|------|-----------|
 | Agent Basic | `learn-agent-basic/` | 08 篇 (01–08) |
-| LangGraph | `learn-langgraph/` | 0 篇 (占位符) |
-| Claude Code | `learn-claude-code/` | 0 篇 (占位符) |
-| Frameworks | `learn-frameworks/` | 0 篇 (占位符) |
+| Agent Survey | `learn-agent-survey/` | 13 篇 (01–13) |
+| Agent Training | `learn-agent-training/` | 06 篇 (01–06) |
+| Agent Interview | `learn-agent-interview/` | 08 篇 (01–08)，含面经实录 |
+| LangGraph | `learn-langgraph/` | 07 篇 (01–07) |
+| Claude Code | `learn-claude-code/` | 12 篇 (01–12) |
+| SDK Frameworks | `learn-sdk-frameworks/` | 04 篇 (01–04) |
+| OpenClaw | `learn-openclaw/` | 09 篇 (01–09) |
 | Final Project | `final-project/` | 0 篇 (占位符) |
 
 **Frontmatter 格式**
@@ -85,6 +89,41 @@ eyebrow: {Module} / {NN}
 
 - [{下一篇标题}]({相对路径}/index.html)
 ```
+
+## 面试模块特殊格式（learn-agent-interview）
+
+该模块有两类文章，格式不同：
+
+### 维度拆解文章（01–07）
+按考察维度分类，每道题用"新手答 vs 高手答"对比格式：
+```markdown
+## Q：{面试题}
+
+> 来源：{公司/岗位}
+
+**新手答**："{浅层回答}"
+
+**高手答**：
+
+{深度回答，分层递进，带具体方案}
+
+**差距在哪**：{分析新手和高手答案的差距，点出面试官真正在考什么}
+```
+
+### 面经实录文章（08+）
+完整还原一场真实面试，保留题目顺序。每道题格式：
+```markdown
+## Q{N}：{面试题}
+
+**新手答**："{浅层回答}"
+
+**高手答**：
+
+{深度回答}
+
+**考察点**：{一句话说明面试官在考什么}
+```
+文末附面试整体分析（考察逻辑、技术栈覆盖范围）。
 
 ## 执行步骤
 

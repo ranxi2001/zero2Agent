@@ -11,11 +11,15 @@ description: 在 zero2Agent 项目中创建新的学习模块。当用户说"新
 
 ```
 zero2Agent/
-├── learn-agent-basic/     # Module 01 — 已完成 8 篇文章
-├── learn-langgraph/       # Module 02 — 占位符
-├── learn-claude-code/     # Module 03 — 占位符
-├── learn-frameworks/      # Module 04 — 占位符
-└── final-project/         # Module 05 — 占位符
+├── learn-agent-basic/       # Module 01 — 08 篇文章
+├── learn-agent-survey/      # Module 02 — 13 篇文章
+├── learn-agent-training/    # Module 03 — 06 篇文章
+├── learn-langgraph/         # Module 04 — 07 篇文章
+├── learn-claude-code/       # Module 05 — 12 篇文章
+├── learn-sdk-frameworks/    # Module 06 — 04 篇文章
+├── learn-openclaw/          # Module 07 — 09 篇文章
+├── learn-agent-interview/   # Module 09 — 08 篇（维度拆解 + 面经实录）
+└── final-project/           # Module 10 — 占位符
 ```
 
 每个模块是根目录下的一个子目录，包含 `index.md` 作为模块入口。
@@ -71,7 +75,7 @@ eyebrow: Module {NN}
 ## 执行步骤
 
 1. **收集信息**：如果用户没有提供，先确认：
-   - 模块编号（`NN`，当前最大为 05）
+   - 模块编号（`NN`，当前最大为 10）
    - 模块目录名（如 `learn-mcp`）
    - 模块显示名（如 `MCP`）
    - 模块描述（一句话）
