@@ -37,3 +37,4 @@ eyebrow: Module 09
 
 8. [阿里 AI Agent 开发一面：10 道真题全解析](08-alibaba-agent-dev/index.html)
 9. [抖音基础架构 AI Agent 一面：12 题深挖项目细节](09-douyin-infra/index.html)
+10. [字节后端开发 Agent 一面：7 题概念深挖](10-bytedance-backend-agent/index.html)
