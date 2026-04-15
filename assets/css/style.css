@@ -1305,7 +1305,10 @@ html[data-theme="light"] .terminal-top {
 html[data-theme="light"] .terminal-body div { opacity: 0.65; }
 html[data-theme="light"] .terminal-body div:has(.prompt) { opacity: 1; }
 html[data-theme="light"] .hero-card {
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: transparent;
+}
+html[data-theme="light"] .hero-card::after {
+    display: none;
 }
 
 /* Scrollbar */
