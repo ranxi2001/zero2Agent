@@ -20,36 +20,53 @@ def fix_file(file_path, dry_run=False):
     before = analyze_markdown_quotes(content)
     file_name = os.path.basename(file_path)
 
-    if before['straight_double_text'] == 0:
+    fixable_double = before['straight_double_text']
+    fixable_single = before['straight_single_text']
+
+    if fixable_double == 0 and fixable_single == 0:
         print(f'SKIP {file_name} - No fixable straight quotes')
         return True
 
     fixed = fix_markdown_quotes(content)
     after = analyze_markdown_quotes(fixed)
-    preserved = after['straight_double_total'] - after['straight_double_text']
+    preserved_double = after['straight_double_total'] - after['straight_double_text']
 
     if dry_run:
         print(f'PREVIEW {file_name}')
-        print(
-            f'   {before["straight_double_text"]} straight quotes in prose -> '
-            f'left({after["left_double"]}) right({after["right_double"]})'
-        )
     else:
         with open(file_path, 'w', encoding='utf-8') as handle:
             handle.write(fixed)
         print(f'FIXED {file_name}')
+
+    # Double quote report
+    if fixable_double:
+        action = '->' if dry_run else 'converted ->'
         print(
-            f'   {before["straight_double_text"]} straight quotes converted -> '
+            f'   Double: {fixable_double} straight {action} '
             f'left({after["left_double"]}) right({after["right_double"]})'
         )
 
-    paired = '\033[32mYes\033[0m' if after['pairing_issues'] == 0 else f'\033[31mNo ({after["pairing_issues"]} issues)\033[0m'
-    print(f'   Paired: {paired}')
+    paired_double = '\033[32mYes\033[0m' if after['pairing_issues'] == 0 else f'\033[31mNo ({after["pairing_issues"]} issues)\033[0m'
+    print(f'   Double paired: {paired_double}')
 
-    if preserved:
-        print(f'   {preserved} straight quotes preserved in protected zones')
+    if preserved_double:
+        print(f'   {preserved_double} straight double quotes preserved in protected zones')
     if after['straight_double_text']:
-        print(f'   \033[31mWarning: {after["straight_double_text"]} fixable straight quotes remain\033[0m')
+        print(f'   \033[31mWarning: {after["straight_double_text"]} fixable straight double quotes remain\033[0m')
+
+    # Single quote report
+    if fixable_single:
+        action = '->' if dry_run else 'converted ->'
+        print(
+            f'   Single: {fixable_single} straight (CJK) {action} '
+            f'left({after["left_single"]}) right({after["right_single"]})'
+        )
+
+    paired_single = '\033[32mYes\033[0m' if after['single_pairing_issues'] == 0 else f'\033[31mNo ({after["single_pairing_issues"]} issues)\033[0m'
+    print(f'   Single paired: {paired_single}')
+
+    if after['straight_single_text']:
+        print(f'   \033[31mWarning: {after["straight_single_text"]} fixable straight single quotes remain\033[0m')
 
     return True
 
@@ -62,7 +79,7 @@ def main():
     file_args = [arg for arg in args if arg != '--dry-run']
 
     if not file_args:
-        print('Chinese Quote Fixer v4')
+        print('Chinese Quote Fixer v5 (double + single quotes)')
         print()
         print('Usage: python fix_quotes.py [--dry-run] <file1.md> [file2.md] ...')
         print()

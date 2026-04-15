@@ -19,32 +19,60 @@ def check_file(file_path):
 
     stats = analyze_markdown_quotes(content)
     file_name = os.path.basename(file_path)
-    needs_fix = stats['straight_double_text'] > 0
-    paired = stats['pairing_issues'] == 0
+    needs_fix_double = stats['straight_double_text'] > 0
+    needs_fix_single = stats['straight_single_text'] > 0
+    needs_fix = needs_fix_double or needs_fix_single
+    paired_double = stats['pairing_issues'] == 0
+    paired_single = stats['single_pairing_issues'] == 0
+    paired = paired_double and paired_single
 
     print(f'\n{file_name}')
     print(f'   Path: {file_path}')
+
+    # Double quotes
     print(
-        f'   Curly quotes in prose: left({stats["left_double"]}) right({stats["right_double"]}) '
-        f'{"paired" if paired else "MISMATCH"}'
+        f'   Double quotes in prose: left({stats["left_double"]}) right({stats["right_double"]}) '
+        f'{"paired" if paired_double else "MISMATCH"}'
     )
     print(
-        f'   Straight quotes: {stats["straight_double_total"]} total, '
+        f'   Straight double: {stats["straight_double_total"]} total, '
         f'{stats["straight_double_text"]} in prose (fixable)'
     )
 
-    if needs_fix:
-        print(f'   \033[33mNeeds fix: {stats["straight_double_text"]} straight quotes in prose\033[0m')
+    if needs_fix_double:
+        print(f'   \033[33mNeeds fix: {stats["straight_double_text"]} straight double quotes in prose\033[0m')
         for line_number, line in stats['straight_lines']:
             print(f'      L{line_number}: {preview_line(line)}')
 
     if stats['pairing_issues']:
-        print(f'   \033[31mPairing issues: {stats["pairing_issues"]}\033[0m')
+        print(f'   \033[31mDouble pairing issues: {stats["pairing_issues"]}\033[0m')
         for line_number, line in stats['pairing_lines']:
             print(f'      L{line_number}: {preview_line(line)}')
     elif stats['left_double'] or stats['right_double']:
-        print('   \033[32mOK: Curly quotes are properly paired in prose\033[0m')
-    elif not needs_fix:
+        print('   \033[32mOK: Double quotes properly paired\033[0m')
+
+    # Single quotes
+    print(
+        f'   Single quotes in prose: left({stats["left_single"]}) right({stats["right_single"]}) '
+        f'{"paired" if paired_single else "MISMATCH"}'
+    )
+    print(
+        f'   Straight single (CJK context): {stats["straight_single_text"]} in prose (fixable)'
+    )
+
+    if needs_fix_single:
+        print(f'   \033[33mNeeds fix: {stats["straight_single_text"]} straight single quotes in CJK context\033[0m')
+        for line_number, line in stats['straight_single_lines']:
+            print(f'      L{line_number}: {preview_line(line)}')
+
+    if stats['single_pairing_issues']:
+        print(f'   \033[31mSingle pairing issues: {stats["single_pairing_issues"]}\033[0m')
+        for line_number, line in stats['single_pairing_lines']:
+            print(f'      L{line_number}: {preview_line(line)}')
+    elif stats['left_single'] or stats['right_single']:
+        print('   \033[32mOK: Single quotes properly paired\033[0m')
+
+    if not needs_fix and not (stats['left_double'] or stats['right_double'] or stats['left_single'] or stats['right_single']):
         print('   No quotes found in prose')
 
     return {'needs_fix': needs_fix, 'paired': paired}

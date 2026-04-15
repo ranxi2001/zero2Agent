@@ -41,8 +41,8 @@ PROTECTED_PATTERNS = (
     HTML_TAG,
 )
 
-OPENING_CONTEXT = set('([<{（［【《「『〈〔〖“‘:：')
-CLOSING_CONTEXT = set(')]}>）］】》」』〉〕〗，。！？；：,.!?;、')
+OPENING_CONTEXT = set('([<{（［【《「『〈〔〖\u201c\u2018:：')
+CLOSING_CONTEXT = set(')]}>）］】》」』〉〕〗\u201d\u2019，。！？；：,.!?;、')
 IGNORABLE_CONTEXT = set(' \t*_~')
 
 
@@ -105,6 +105,20 @@ def _is_escaped_quote(segment, index):
     return index > 0 and segment[index - 1] == '\\'
 
 
+_CJK_PUNCT = set('，。！？；：、（）【】《》「」『』〈〉〔〕〖〗\u201c\u201d\u2018\u2019')
+
+
+def _has_cjk_context(segment, index):
+    """Check if a straight single quote at index has CJK context nearby."""
+    prev = _prev_significant_char(segment, index)
+    nxt = _next_significant_char(segment, index)
+    if prev and (_is_cjk(prev) or prev in _CJK_PUNCT):
+        return True
+    if nxt and (_is_cjk(nxt) or nxt in _CJK_PUNCT):
+        return True
+    return False
+
+
 def _classify_straight_quote(segment, index, expect_open):
     prev_char = _prev_significant_char(segment, index)
     next_char = _next_significant_char(segment, index)
@@ -123,9 +137,11 @@ def _classify_straight_quote(segment, index, expect_open):
         return 'open'
     if next_closeish and not prev_openish:
         return 'close'
+    prev_closeish = prev_char in CLOSING_CONTEXT
+
     if prev_wordish and not next_wordish:
         return 'close'
-    if next_wordish and not prev_wordish:
+    if next_wordish and not prev_wordish and not prev_closeish:
         return 'open'
 
     return 'open' if expect_open else 'close'
@@ -138,47 +154,91 @@ def analyze_segment_quotes(segment, convert=False):
         'left': 0,
         'right': 0,
         'pairing_issues': 0,
+        'straight_single': 0,
+        'left_single': 0,
+        'right_single': 0,
+        'single_pairing_issues': 0,
     }
-    expect_open = True
+    expect_open_double = True
+    expect_open_single = True
 
     for index, char in enumerate(chars):
-        if char == '“':
+        # --- Curly double quotes ---
+        if char == '\u201c':
             stats['left'] += 1
-            if not expect_open:
+            if not expect_open_double:
                 stats['pairing_issues'] += 1
-            expect_open = False
+            expect_open_double = False
             continue
 
-        if char == '”':
+        if char == '\u201d':
             stats['right'] += 1
-            if expect_open:
+            if expect_open_double:
                 stats['pairing_issues'] += 1
-            expect_open = True
+            expect_open_double = True
             continue
 
+        # --- Curly single quotes ---
+        if char == '\u2018':
+            stats['left_single'] += 1
+            if not expect_open_single:
+                stats['single_pairing_issues'] += 1
+            expect_open_single = False
+            continue
+
+        if char == '\u2019':
+            stats['right_single'] += 1
+            if expect_open_single:
+                stats['single_pairing_issues'] += 1
+            expect_open_single = True
+            continue
+
+        # --- Straight single quote with CJK context ---
+        if char == "'" and not _is_escaped_quote(segment, index) and _has_cjk_context(segment, index):
+            stats['straight_single'] += 1
+            quote_type = _classify_straight_quote(segment, index, expect_open_single)
+            if quote_type == 'open':
+                stats['left_single'] += 1
+                if not expect_open_single:
+                    stats['single_pairing_issues'] += 1
+                if convert:
+                    chars[index] = '\u2018'
+                expect_open_single = False
+            else:
+                stats['right_single'] += 1
+                if expect_open_single:
+                    stats['single_pairing_issues'] += 1
+                if convert:
+                    chars[index] = '\u2019'
+                expect_open_single = True
+            continue
+
+        # --- Straight double quote ---
         if char != '"' or _is_escaped_quote(segment, index):
             continue
 
         stats['straight'] += 1
-        quote_type = _classify_straight_quote(segment, index, expect_open)
+        quote_type = _classify_straight_quote(segment, index, expect_open_double)
 
         if quote_type == 'open':
             stats['left'] += 1
-            if not expect_open:
+            if not expect_open_double:
                 stats['pairing_issues'] += 1
             if convert:
-                chars[index] = '“'
-            expect_open = False
+                chars[index] = '\u201c'
+            expect_open_double = False
         else:
             stats['right'] += 1
-            if expect_open:
+            if expect_open_double:
                 stats['pairing_issues'] += 1
             if convert:
-                chars[index] = '”'
-            expect_open = True
+                chars[index] = '\u201d'
+            expect_open_double = True
 
-    if not expect_open:
+    if not expect_open_double:
         stats['pairing_issues'] += 1
+    if not expect_open_single:
+        stats['single_pairing_issues'] += 1
 
     return ''.join(chars), stats
 
@@ -189,6 +249,10 @@ def analyze_line(line, line_mask):
         'left': 0,
         'right': 0,
         'pairing_issues': 0,
+        'straight_single': 0,
+        'left_single': 0,
+        'right_single': 0,
+        'single_pairing_issues': 0,
     }
     cursor = 0
 
@@ -222,6 +286,14 @@ def analyze_markdown_quotes(content):
         'pairing_issues': 0,
         'straight_lines': [],
         'pairing_lines': [],
+        # Single quote stats
+        'left_single': 0,
+        'right_single': 0,
+        'straight_single_text': 0,
+        'straight_single_total': content.count("'"),
+        'single_pairing_issues': 0,
+        'straight_single_lines': [],
+        'single_pairing_lines': [],
     }
 
     offset = 0
@@ -230,6 +302,7 @@ def analyze_markdown_quotes(content):
         line_mask = mask[offset:offset + len(line)]
         line_stats = analyze_line(line, line_mask)
 
+        # Double quote aggregation
         stats['left_double'] += line_stats['left']
         stats['right_double'] += line_stats['right']
         stats['straight_double_text'] += line_stats['straight']
@@ -239,6 +312,17 @@ def analyze_markdown_quotes(content):
             stats['straight_lines'].append((line_number, line))
         if line_stats['pairing_issues']:
             stats['pairing_lines'].append((line_number, line))
+
+        # Single quote aggregation
+        stats['left_single'] += line_stats['left_single']
+        stats['right_single'] += line_stats['right_single']
+        stats['straight_single_text'] += line_stats['straight_single']
+        stats['single_pairing_issues'] += line_stats['single_pairing_issues']
+
+        if line_stats['straight_single']:
+            stats['straight_single_lines'].append((line_number, line))
+        if line_stats['single_pairing_issues']:
+            stats['single_pairing_lines'].append((line_number, line))
 
         offset += len(line_with_end)
 
