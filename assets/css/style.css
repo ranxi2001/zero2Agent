@@ -429,23 +429,10 @@ img {
 /* hero right card */
 .hero-card {
     position: relative;
-    padding: 28px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    backdrop-filter: blur(12px);
-    overflow: hidden;
 }
 
 .hero-card::after {
-    content: "";
-    position: absolute;
-    inset: auto -60px -80px auto;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(167, 139, 250, 0.08), transparent 60%);
-    pointer-events: none;
+    display: none;
 }
 
 /* ===== Terminal ===== */
@@ -1304,12 +1291,6 @@ html[data-theme="light"] .terminal-top {
 }
 html[data-theme="light"] .terminal-body div { opacity: 0.65; }
 html[data-theme="light"] .terminal-body div:has(.prompt) { opacity: 1; }
-html[data-theme="light"] .hero-card {
-    border-color: transparent;
-}
-html[data-theme="light"] .hero-card::after {
-    display: none;
-}
 
 /* Scrollbar */
 html[data-theme="light"] ::-webkit-scrollbar-track { background: var(--bg); }
