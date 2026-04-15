@@ -172,13 +172,77 @@ img {
     background: rgba(16, 185, 129, 0.22);
 }
 
-.nav-links .friend-link-lc {
-    color: #818cf8;
+/* ===== Nav Dropdown (Zero 系列) ===== */
+.nav-links .nav-dropdown {
+    position: relative;
+    margin-left: 0;
 }
 
-.nav-links .friend-link-lc:hover {
-    color: #14b8a6;
+.nav-links .nav-dropdown-trigger {
+    all: unset;
+    cursor: pointer;
+    color: #818cf8;
+    font-size: 0.9rem;
+    font-family: inherit;
+    padding: 8px 14px;
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: var(--radius-sm);
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.nav-links .nav-dropdown-trigger:hover {
+    color: var(--text);
     background: rgba(129, 140, 248, 0.08);
+    border-color: rgba(129, 140, 248, 0.5);
+}
+
+.nav-links .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.18s, visibility 0.18s, transform 0.18s;
+    z-index: 200;
+}
+
+.nav-links .nav-dropdown:hover .nav-dropdown-menu,
+.nav-links .nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-links .nav-dropdown-menu a {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--text) !important;
+    font-size: 0.82rem;
+    font-weight: 500;
+    background: transparent;
+    transition: background 0.12s;
+}
+
+.nav-links .nav-dropdown-menu a:hover {
+    background: rgba(99, 102, 241, 0.1) !important;
+    color: #818cf8 !important;
+}
+
+.nav-links .nav-dropdown-menu a span {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: auto;
 }
 
 .nav-toggle {
@@ -1200,6 +1264,12 @@ html[data-theme="light"] {
 /* Nav background */
 html[data-theme="light"] .site-nav {
     background: rgba(245, 245, 247, 0.85);
+}
+
+/* Dropdown */
+html[data-theme="light"] .nav-dropdown-menu {
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 /* Mesh gradient — softer on light */
