@@ -599,6 +599,23 @@ code, pre { font-family: var(--font-mono); }
 .hljs-attr, .hljs-attribute { color: #fbbf24; }
 .hljs-built_in { color: #38bdf8; }
 
+/* ===== Article Feedback ===== */
+.article-feedback { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 36px; color: var(--text-muted); font-size: 0.78rem; }
+.feedback-label { color: var(--text-muted); font-size: 0.78rem; margin-right: 2px; }
+.feedback-btns { display: inline-flex; gap: 4px; }
+.reaction-btn { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; background: none; border: 1px solid transparent; border-radius: 5px; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer; transition: color 0.15s, border-color 0.15s, background 0.15s; }
+.reaction-btn svg { width: 14px; height: 14px; }
+.reaction-btn:hover { color: var(--text-secondary); border-color: var(--border); background: rgba(255, 255, 255, 0.04); }
+.reaction-btn.is-liked { color: var(--brand); border-color: var(--brand-border); background: var(--brand-dim); }
+.reaction-btn.is-disliked { color: var(--accent); border-color: rgba(244, 63, 94, 0.25); background: rgba(244, 63, 94, 0.08); }
+.reaction-count { font-weight: 600; }
+.feedback-sep { color: var(--border); margin: 0 2px; user-select: none; }
+.feedback-comment { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border: 1px solid transparent; border-radius: 5px; color: var(--text-muted) !important; font-size: 0.78rem; text-decoration: none !important; transition: color 0.15s, border-color 0.15s, background 0.15s; white-space: nowrap; }
+.feedback-comment svg { width: 13px; height: 13px; }
+.feedback-comment:hover { color: var(--text-secondary) !important; border-color: var(--border); background: rgba(255, 255, 255, 0.04); }
+html[data-theme="light"] .reaction-btn:hover, html[data-theme="light"] .feedback-comment:hover { background: rgba(0, 0, 0, 0.04); }
+html[data-theme="light"] .reaction-btn.is-disliked { background: rgba(225, 29, 72, 0.06); }
+
 /* ===== Prev / Next Pager ===== */
 .doc-pager {
     display: flex;

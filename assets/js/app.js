@@ -199,3 +199,64 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
         }
     });
 })();
+
+
+/* ===== Article Feedback (like / dislike / comment link) ===== */
+(function () {
+    var feedback = document.getElementById('article-feedback');
+    if (!feedback) return;
+    var API = (window.Z2A_REACTIONS_API || '').replace(/\/+$/, '');
+    var pageId = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '').replace(/^\//, '') || 'home';
+    var VOTE_KEY = 'z2a-vote-' + pageId;
+    var likeBtn = document.getElementById('btn-like');
+    var dislikeBtn = document.getElementById('btn-dislike');
+    var likeCount = document.getElementById('like-count');
+    var dislikeCount = document.getElementById('dislike-count');
+    var commentLink = document.getElementById('feedback-comment');
+    var counts = { likes: 0, dislikes: 0 };
+    function render() { likeCount.textContent = counts.likes; dislikeCount.textContent = counts.dislikes; }
+    var userVote = localStorage.getItem(VOTE_KEY);
+    if (userVote === 'like') likeBtn.classList.add('is-liked');
+    if (userVote === 'dislike') dislikeBtn.classList.add('is-disliked');
+    if (API) {
+        fetch(API + '/reactions?page=' + encodeURIComponent(pageId))
+            .then(function (r) { return r.json(); })
+            .then(function (d) { counts = d; render(); })
+            .catch(function () { render(); });
+    } else { render(); }
+    function postReaction(type, action) {
+        if (!API) return;
+        fetch(API + '/reactions?page=' + encodeURIComponent(pageId), {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: type, action: action })
+        }).catch(function () {});
+    }
+    function vote(type) {
+        var prev = localStorage.getItem(VOTE_KEY);
+        if (prev === type) {
+            localStorage.removeItem(VOTE_KEY);
+            likeBtn.classList.remove('is-liked'); dislikeBtn.classList.remove('is-disliked');
+            if (type === 'like') counts.likes = Math.max(0, counts.likes - 1);
+            else counts.dislikes = Math.max(0, counts.dislikes - 1);
+            render(); postReaction(type, 'remove'); return;
+        }
+        if (prev) {
+            if (prev === 'like') counts.likes = Math.max(0, counts.likes - 1);
+            else counts.dislikes = Math.max(0, counts.dislikes - 1);
+            postReaction(prev, 'remove');
+        }
+        localStorage.setItem(VOTE_KEY, type);
+        likeBtn.classList.remove('is-liked'); dislikeBtn.classList.remove('is-disliked');
+        if (type === 'like') { likeBtn.classList.add('is-liked'); counts.likes++; }
+        else { dislikeBtn.classList.add('is-disliked'); counts.dislikes++; }
+        render(); postReaction(type, 'add');
+    }
+    likeBtn.addEventListener('click', function () { vote('like'); });
+    dislikeBtn.addEventListener('click', function () { vote('dislike'); });
+    var h1 = document.querySelector('.doc-article h1');
+    var title = h1 ? h1.textContent.trim() : document.title;
+    commentLink.href = 'https://github.com/ranxi2001/zero2Agent/issues/new'
+        + '?title=' + encodeURIComponent('[留言] ' + title)
+        + '&body=' + encodeURIComponent('> 来自：[' + title + '](' + window.location.href + ')\n\n---\n\n')
+        + '&labels=comment';
+})();

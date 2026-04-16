@@ -4,6 +4,7 @@ url: https://onefly.top
 markdown: kramdown
 highlighter: rouge
 baseurl: /zero2Agent
+reactions_api: "https://zero2pm-reactions.ranxi169.workers.dev"
 
 plugins:
   - jekyll-sitemap
