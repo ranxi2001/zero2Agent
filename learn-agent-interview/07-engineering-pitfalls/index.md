@@ -384,6 +384,205 @@ flowchart LR
 
 ---
 
+## Q：LangGraph 定义的搜索节点做不到并发执行吗？怎么做？
+
+> 来源：AI 工程师面试
+
+**新手答**：“LangGraph 是顺序执行的，做不了并发。”
+
+**高手答**：
+
+LangGraph 完全支持并发执行，有三种方式，适用场景不同：
+
+**方式一：Fan-out / Fan-in（静态并行）**
+
+在 graph 定义时，让多个节点从同一个上游节点出发，形成并行分支，最后汇聚到一个下游节点：
+
+```python
+graph.add_edge("plan_node", "search_node_1")
+graph.add_edge("plan_node", "search_node_2")
+graph.add_edge("plan_node", "search_node_3")
+graph.add_edge("search_node_1", "merge_node")
+graph.add_edge("search_node_2", "merge_node")
+graph.add_edge("search_node_3", "merge_node")
+```
+
+三个 search 节点会**并发执行**，全部完成后进入 merge_node。适合**编译时就知道要并行几路**的场景。
+
+**方式二：Send API（动态并行）**
+
+并行数量在运行时才确定时，用 `Send` API 动态创建并行分支：
+
+```python
+from langgraph.types import Send
+
+def plan_node(state):
+    queries = state["search_queries"]  # 运行时才知道有几个查询
+    return [Send("search_node", {"query": q}) for q in queries]
+
+graph.add_conditional_edges("plan_node", plan_node)
+```
+
+每个 `Send` 创建一个独立的并发执行分支，适合**搜索数量取决于规划结果**的场景。
+
+**方式三：节点内部 asyncio 并发**
+
+如果只是一个节点内部需要并发调用多个 API：
+
+```python
+import asyncio
+
+async def search_node(state):
+    queries = state["search_queries"]
+    results = await asyncio.gather(*[
+        search_api(q) for q in queries
+    ])
+    return {"search_results": results}
+```
+
+**状态合并是关键问题**：
+
+并发节点同时写同一个 state 字段会冲突。LangGraph 用 **Reducer 函数**解决：
+
+```python
+from typing import Annotated
+import operator
+
+class State(TypedDict):
+    # operator.add 表示多个并发节点的结果做列表拼接
+    search_results: Annotated[list, operator.add]
+```
+
+每个并发分支返回的 `search_results` 会被自动拼接成一个大列表，而不是互相覆盖。
+
+**差距在哪**：新手以为 LangGraph 不支持并发——说明没深入用过。高手给出了三种并发方式（静态 Fan-out、动态 Send、节点内 asyncio），且指出了并发状态合并（Reducer）这个关键问题。面试官考的是你对 LangGraph 并发执行机制的实际掌握程度。
+
+---
+
+## Q：PostgreSQL 的索引结构是什么？索引如何优化查询速度？在 Checkpoint 场景下如何用索引加速？
+
+> 来源：AI 工程师面试
+
+**新手答**：“就是 B+ 树，查询快。”
+
+**高手答**：
+
+PostgreSQL 支持**多种索引类型**，不同索引适用不同查询模式：
+
+| 索引类型 | 底层结构 | 适用查询 | 典型场景 |
+|---------|---------|---------|---------|
+| **B-Tree**（默认） | 平衡多叉树 | 等值查询、范围查询、排序 | 绝大多数场景的首选 |
+| **Hash** | 哈希表 | 纯等值查询 | 精确匹配，如 session_id = 'xxx' |
+| **GIN** | 倒排索引 | 包含查询、全文搜索 | JSONB 字段查询、数组包含 |
+| **GiST** | 通用搜索树 | 范围重叠、最近邻 | 地理空间、区间查询 |
+| **BRIN** | 块范围索引 | 大表上的范围查询 | 时间序列、日志表（数据物理有序时） |
+
+**B-Tree 索引如何加速查询**：
+
+B-Tree 是一棵平衡多叉排序树，每个节点存多个键值和指向子节点的指针。查询时从根节点开始，每一层通过比较快速定位到目标区间，时间复杂度 **O(log N)**：
+
+```text
+无索引：全表扫描 100 万行 → 逐行比较 → O(N)
+有 B-Tree 索引：树高约 3-4 层 → 3-4 次磁盘 IO → O(log N)
+```
+
+关键优化手段：
+
+1. **覆盖索引（Covering Index）**：把查询需要的列都放进索引，查询直接从索引返回，不需要回表
+2. **复合索引**：`CREATE INDEX ON checkpoints (thread_id, checkpoint_id DESC)` 一个索引同时支持按 thread_id 过滤 + 按 checkpoint_id 排序
+3. **部分索引（Partial Index）**：`CREATE INDEX ON checkpoints (thread_id) WHERE is_active = true` 只索引活跃数据，索引体积更小
+4. **Index-Only Scan**：当查询的所有列都在索引中时，PostgreSQL 直接扫描索引，完全跳过堆表
+
+**Checkpoint 场景下的索引设计**：
+
+Checkpoint 表的核心查询模式是：**给定 session_id（thread_id），找到最新的 Checkpoint**。
+
+```sql
+-- 最常见的查询：加载最新 checkpoint
+SELECT * FROM checkpoints
+WHERE thread_id = 'abc-123'
+ORDER BY checkpoint_id DESC
+LIMIT 1;
+```
+
+最优索引：
+
+```sql
+-- 复合索引：thread_id 精确匹配 + checkpoint_id 倒序排列
+CREATE INDEX idx_checkpoints_thread_latest
+ON checkpoints (thread_id, checkpoint_id DESC);
+```
+
+这个索引让查询**一次 B-Tree 查找就能定位到目标行**——先按 thread_id 定位到该会话的所有 checkpoint，B-Tree 内部已按 checkpoint_id 倒序排列，直接取第一条就是最新的。
+
+如果 Checkpoint 表还有 JSONB 类型的 `metadata` 字段需要查询（如按节点名过滤）：
+
+```sql
+-- GIN 索引支持 JSONB 内部字段查询
+CREATE INDEX idx_checkpoints_metadata ON checkpoints USING GIN (metadata);
+
+-- 查询：找所有在 search_node 节点暂停的 checkpoint
+SELECT * FROM checkpoints WHERE metadata @> '{"node": "search_node"}';
+```
+
+**差距在哪**：新手只知道 B+ 树一个名字。高手区分了五种索引类型及适用场景，详细说明了 B-Tree 的查询加速原理，且结合 Checkpoint 实际场景给出了复合索引 + GIN 索引的具体设计。面试官考的是你能不能把数据库基础知识应用到 Agent 系统的实际存储设计中。
+
+---
+
+## Q：用 Claude Code 做一个比较长的任务，如果遇到单次 session 跑不完、中间断网怎么办？
+
+> 来源：AI 工程师面试
+
+**新手答**：“重新开一个 session 从头做。”
+
+**高手答**：
+
+长任务中断是 AI Coding 工具的常见问题。解决方案分**预防**和**恢复**两个层面：
+
+**预防——降低中断的影响**：
+
+1. **任务拆分**：长任务不要一口气交给 Agent。先用 Plan Mode（`/plan`）生成整体方案，再按模块逐步执行。每完成一个模块就 commit 一次，确保进度不丢
+2. **CLAUDE.md 持久化上下文**：把项目的关键信息、架构约定、已完成的进度写在 `CLAUDE.md` 文件中。新 session 启动时会自动读取，相当于给 Agent 一个“接班备忘录”
+3. **TodoList 跟踪进度**：用 Claude Code 的任务管理功能（或直接在 CLAUDE.md 中维护 checklist），标记每个子任务的完成状态。中断后可以精确知道“做到哪了”
+
+```text
+## 当前任务进度
+- [x] 数据库 schema 设计
+- [x] API 路由层实现
+- [ ] 业务逻辑层实现  ← 断点
+- [ ] 单元测试
+- [ ] 集成测试
+```
+
+4. **高频 git commit**：每完成一个有意义的改动就 commit，不要攒到最后。即使 session 崩了，代码改动不会丢
+
+**恢复——中断后快速接续**：
+
+5. **`--continue` 继续上次对话**：Claude Code 支持 `claude --continue` 直接恢复上一次 session 的对话上下文，从断点继续
+6. **`/resume` 恢复任务**：在新 session 中使用 `/resume` 命令，可以加载之前的对话历史和任务状态
+7. **Git diff 定位进度**：新 session 中让 Claude Code 执行 `git diff` 和 `git log`，快速了解已完成的改动，从断点处继续
+
+**最佳实践流程**：
+
+```mermaid
+flowchart TB
+    A["长任务开始"] --> B["Plan Mode\n生成整体方案"]
+    B --> C["写入 CLAUDE.md\n+ TodoList"]
+    C --> D["按模块逐步执行"]
+    D --> E["每个模块完成后\ngit commit"]
+    E --> F{"中断？"}
+    F -->|"否"| D
+    F -->|"是"| G["claude --continue\n或 /resume"]
+    G --> H["读取 CLAUDE.md\n+ git log"]
+    H --> D
+```
+
+核心认知：**长任务的可靠性不靠 session 稳定性保证，而靠“频繁保存 + 上下文持久化 + 快速恢复”的工程习惯**。这和写代码要频繁 commit 是同一个道理——不要把所有筹码押在“一次跑通”上。
+
+**差距在哪**：新手遇到中断只会重来。高手从预防（任务拆分 + CLAUDE.md + TodoList + 高频 commit）和恢复（--continue + /resume + git diff）两个层面给出了完整方案。面试官考的是你用 AI Coding 工具做大型任务时的工程化习惯。
+
+---
+
 ## 这类题的答题模式
 
 踩坑题的核心是**真实 + 系统性**：

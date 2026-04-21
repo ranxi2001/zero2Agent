@@ -3,5 +3,6 @@ _site/
 .sass-cache/
 .jekyll-metadata
 .claude/skills-workspace
+.claude/skills/local-dev
 __pycache__/
 *.pyc
