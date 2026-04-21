@@ -15,7 +15,8 @@
       "Bash(git pull:*)",
       "Bash(ls:*)",
       "Bash(git checkout:*)",
-      "Bash(git remote *)"
+      "Bash(git remote *)",
+      "Bash(bash *)"
     ]
   }
 }
