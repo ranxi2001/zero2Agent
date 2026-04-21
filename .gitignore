@@ -6,3 +6,4 @@ _site/
 .claude/skills/local-dev
 __pycache__/
 *.pyc
+.DS_Store
