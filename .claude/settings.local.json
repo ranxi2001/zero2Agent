@@ -16,7 +16,10 @@
       "Bash(ls:*)",
       "Bash(git checkout:*)",
       "Bash(git remote *)",
-      "Bash(bash *)"
+      "Bash(bash *)",
+      "Bash(xxd)",
+      "Bash(bundle exec *)",
+      "Bash(git stash *)"
     ]
   }
 }
