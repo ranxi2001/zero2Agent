@@ -627,17 +627,26 @@ result = agent.invoke({
 
 **Agent 的实际执行链路（任务 2 为例）**：
 
-```mermaid
-flowchart TB
-    A[“思考：要找行数最短的 py 文件\n先列出所有 py 文件”] --> B[“行动：list_py_files(/workspace)”]
-    B --> C[“观察：返回 5 个文件路径”]
-    C --> D[“思考：逐个统计行数”]
-    D --> E[“行动：count_lines 逐个调用”]
-    E --> F[“观察：a.py=10, b.py=3, c.py=25...”]
-    F --> G[“思考：b.py 行数最短，删除它”]
-    G --> H[“行动：delete_file(b.py)”]
-    H --> I[“观察：已删除”]
-    I --> J[“思考：任务完成，输出结果”]
+```text
+思考：要找行数最短的 py 文件，先列出所有 py 文件
+  ↓
+行动：list_py_files('/workspace')
+  ↓
+观察：返回 5 个文件路径
+  ↓
+思考：逐个统计行数
+  ↓
+行动：count_lines 逐个调用
+  ↓
+观察：a.py=10, b.py=3, c.py=25...
+  ↓
+思考：b.py 行数最短，删除它
+  ↓
+行动：delete_file('b.py')
+  ↓
+观察：已删除
+  ↓
+思考：任务完成，输出结果
 ```
 
 **面试官可能追问的细节**：
