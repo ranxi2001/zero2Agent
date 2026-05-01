@@ -235,10 +235,26 @@
     <button class="back-to-top" id="back-to-top" aria-label="回到顶部" title="回到顶部">🚀</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
-    <!-- Render mermaid divs now that the DOM is fully parsed -->
+    <script>
+        // Prevent hljs from processing mermaid code blocks
+        document.querySelectorAll('.language-mermaid code, code.language-mermaid').forEach(function(el) {
+            el.classList.add('nohighlight');
+        });
+        hljs.highlightAll();
+    </script>
+    <!-- Transform kramdown mermaid code blocks and render -->
     <script>
         (function () {
+            // kramdown renders ```mermaid as <div class="language-mermaid highlighter-rouge">
+            // Transform these into <div class="mermaid"> that mermaid.js expects
+            document.querySelectorAll('.language-mermaid').forEach(function(wrapper) {
+                var code = wrapper.querySelector('code') || wrapper;
+                var div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = code.textContent;
+                wrapper.parentNode.replaceChild(div, wrapper);
+            });
+
             var els = document.querySelectorAll('.mermaid');
             els.forEach(function(el){ el.dataset.mermaidSrc = el.textContent; });
             if (els.length > 0) mermaid.init(undefined, els);
