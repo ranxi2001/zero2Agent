@@ -4,9 +4,9 @@ _site/
 .jekyll-metadata
 .claude/skills-workspace
 .claude/skills/local-dev
+.claude/settings.local.json
 .codex-tmp/
 .packs/
 __pycache__/
 *.pyc
 .DS_Store
-.packs/
