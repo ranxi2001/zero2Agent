@@ -1,13 +1,13 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-05-02（淘天AI应用开发一面 batch — 索引补全）
+> 最后更新：2026-05-03（美团Keeta Agent开发一面 batch）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 27 |
+| 01-architecture-design | 28 |
 | 02-tool-management | 18 |
 | 03-fault-tolerance | 15 |
 | 04-memory-context | 36 |
@@ -15,13 +15,13 @@
 | 06-multi-agent-collab | 15 |
 | 07-engineering-pitfalls | 30 |
 | 08-prompt-engineering | 8 |
-| 09-rag-retrieval | 38 |
+| 09-rag-retrieval | 39 |
 | 10-training-and-data | 28 |
 | 11-ai-code-testing | 5 |
 | 13-project-deep-dive | 15 |
-| **总计** | **255** |
+| **总计** | **257** |
 
-## 01-architecture-design（27题）
+## 01-architecture-design（28题）
 
 1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】
 2. Tree of Thoughts (ToT) 在线上系统里能用吗？成本不高？ — 腾讯终面
@@ -50,6 +50,7 @@
 25. LangChain 和 LangGraph 有什么区别？分别适合什么场景？ — 淘宝闪购一面
 26. Agent 的 Self-Reflection 机制是什么？它怎么识别输出中的逻辑错误？ — 蚂蚁AI应用开发二面
 27. 如何保障自然语言任务描述能精准转化为稳定、可靠的执行路径？ — 蚂蚁AI应用开发二面
+28. 多角色智能客服场景（B/C/D 端），用 RAG 还是 Skill？怎么设计？ — 美团Keeta一面
 
 ## 02-tool-management（18题）
 
@@ -124,7 +125,7 @@
 30. 设计会话记忆系统时需要考虑哪些维度？ — 高德实习一面
 31. 用户对话中频繁切换话题，会话记忆该怎么设计？ — 高德实习一面
 32. Claude Code 的记忆架构是什么？上下文真的等于记忆吗？ — 字节实习一面
-33. 有没有了解过最前沿的记忆设计？ — 字节实习一面 【淘宝闪购一面追问：OpenClaw vs Hermes 分层压缩记忆对比】
+33. 有没有了解过最前沿的记忆设计？ — 字节实习一面 【淘宝闪购一面追问：OpenClaw vs Hermes 分层压缩记忆对比】【美团Keeta一面追问：Mem0 原理与自实现记忆的区别】
 34. Lost in the Middle 问题是什么？有哪些解决方案？ — 淘宝闪购一面
 35. 什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？ — 蚂蚁AI应用开发二面
 36. 长周期对话（间隔数周后继续）如何管理历史？冷启动怎么做？ — 淘宝闪购一面
@@ -215,7 +216,7 @@
 7. LobeChat 的插件和 Claude Code 的 Skills 有什么本质区别？ — 字节实习二面
 8. 通常 Prompt 包含哪些结构？ — 淘宝闪购一面
 
-## 09-rag-retrieval（38题）
+## 09-rag-retrieval（39题）
 
 1. RAG 的检索如何实现？ — 阿里一面
 2. 多维度的查询改写是什么？ — 抖音一面 【淘天一面追问：改写为何提升精准度的底层原理】
@@ -255,6 +256,7 @@
 36. 图检索、向量检索、混合检索有什么区别？怎么选？ — 腾讯AI应用开发二面
 37. 多模态 Embedding 检索中，文本与图片权重怎么平衡？图纸参数召回不准的根因？ — 淘天AI应用开发一面
 38. 向量数据库的标量条件过滤怎么做？Pre-filter vs Post-filter 的区别？ — 淘天AI应用开发一面
+39. Agentic RAG 是什么？和传统 RAG 的核心区别？ — 美团Keeta一面
 
 ## 10-training-and-data（28题）
 
@@ -262,7 +264,7 @@
 2. Agent 工具调用怎么训练？训练集包含什么？ — 腾讯二面
 3. 构造数据集遇到过什么难点？ — 腾讯AI应用开发
 4. 微调方法有哪些？LoRA 和全参数微调？ — 高频题 【阿里国际二面追问：微调经验与全流程认知】【淘天AI应用开发一面追问：LoRA A/B矩阵初始化+秩选择+权重Merge】
-5. DPO、PPO、GRPO 的区别和优缺点？ — 高频题 【阿里国际一面追问：PPO vs GRPO 深度对比】【淘天AI应用开发一面追问：DPO不需要在线采样的原因+数据格式】
+5. DPO、PPO、GRPO 的区别和优缺点？ — 高频题 【阿里国际一面追问：PPO vs GRPO 深度对比】【淘天AI应用开发一面追问：DPO不需要在线采样的原因+数据格式】【美团Keeta一面追问：chosen/rejected数据生成实操与常见坑】
 6. 给定时间序列，如何用 ML 筛选特征再基于规则建模？ — 字节一面
 7. kernel 级别的优化，CUTE DSL 或手写 CUDA？ — 字节一面
 8. 位置编码的作用？ — 高频题
