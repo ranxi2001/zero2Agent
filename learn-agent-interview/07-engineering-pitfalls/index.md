@@ -1517,6 +1517,106 @@ flowchart TD
 
 ---
 
+## Q：高并发场景下同时调 10 个 Embedding 接口，asyncio.gather 相比多线程有什么资源优势？
+
+> 来源：阿里淘天 AI应用开发一面
+
+**新手答**：“asyncio 更快。”
+
+**高手答**：
+
+“更快”不准确——asyncio 和多线程在 IO 密集场景下的**完成时间几乎一样**，真正的差距在于**资源消耗**。
+
+**核心区别**：
+
+| 维度 | 多线程（threading） | 协程（asyncio） |
+|------|-------------------|----------------|
+| 调度层级 | OS 内核态调度 | 用户态调度（Python 解释器内部） |
+| 内存开销 | 每线程 ~8MB 栈内存（默认） | 每协程 ~KB 级（几百字节到几 KB） |
+| 上下文切换 | 内核态切换，涉及寄存器保存/恢复、TLB 刷新 | 用户态切换，只需保存/恢复 Python 帧对象 |
+| 创建销毁成本 | 高（系统调用） | 极低（普通 Python 对象） |
+| GIL 影响 | 受 GIL 限制，同一时刻只有一个线程执行 Python 代码 | 单线程内运行，天然不受 GIL 影响 |
+
+**10 个并发 Embedding 调用的场景分析**：
+
+瓶颈在**网络 IO**（等 API 返回），不在 CPU 计算。IO 密集型任务是协程的最佳场景——协程在 `await` 时让出执行权，单线程就能管理上千并发连接。
+
+**资源对比**：
+
+```text
+多线程方案（10 个线程）：
+  内存：10 × 8MB = 80MB 额外栈内存
+  线程池管理开销：线程创建/销毁/调度
+  OS 资源：10 个内核线程对象
+
+asyncio 方案（10 个协程）：
+  内存：10 × ~几KB = ~几十 KB
+  无线程池，单线程 event loop 调度
+  OS 资源：1 个线程
+
+差距：内存开销差 1000 倍+
+```
+
+**asyncio 方案实现**：
+
+```python
+import asyncio
+import aiohttp
+
+async def embed_one(session, text):
+    async with session.post(EMBED_URL, json={"input": text}) as resp:
+        return await resp.json()
+
+async def embed_batch(texts):
+    async with aiohttp.ClientSession() as session:
+        tasks = [embed_one(session, t) for t in texts]
+        results = await asyncio.gather(*tasks)
+    return results
+
+# 10 个并发请求，单线程完成
+results = asyncio.run(embed_batch(texts[:10]))
+```
+
+**asyncio 的局限——什么时候不适用**：
+
+如果 Embedding 是**本地 CPU 计算**（比如用 sentence-transformers 在本地跑模型），asyncio **无法并行**——因为 Python 的 GIL 限制，单线程内 CPU 密集计算无法真正并行执行。这时需要 `ProcessPoolExecutor`：
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+import asyncio
+
+async def embed_batch_cpu(texts):
+    loop = asyncio.get_event_loop()
+    with ProcessPoolExecutor(max_workers=4) as pool:
+        # CPU 密集任务交给进程池
+        results = await loop.run_in_executor(pool, local_embed, texts)
+    return results
+```
+
+**实际工程中的混合方案**：
+
+```text
+asyncio + aiohttp      → 网络并发（调远程 Embedding API）
+ProcessPoolExecutor     → CPU 密集（本地模型推理）
+两者结合               → 最优资源利用
+
+典型场景：
+  10 个文本需要 Embedding
+  ├─ 远程 API（OpenAI / BGE API）→ asyncio.gather + aiohttp
+  └─ 本地模型（sentence-transformers）→ ProcessPoolExecutor + batch inference
+```
+
+| 场景 | 推荐方案 | 原因 |
+|------|---------|------|
+| 远程 API 调用（IO 密集） | asyncio + aiohttp | 内存占用极低，单线程管理上千连接 |
+| 本地模型推理（CPU 密集） | ProcessPoolExecutor | 绕过 GIL，真正多核并行 |
+| 本地 GPU 推理 | batch inference（一次送入） | GPU 本身并行计算，不需要多线程/多进程 |
+| 混合场景 | asyncio 编排 + executor 处理 CPU 部分 | 各取所长 |
+
+**差距在哪**：新手只说“更快”。高手区分了 IO 密集 vs CPU 密集场景，给出了具体的内存开销对比，且知道什么时候协程不适用。面试官考的是你对 Python 并发模型的工程理解。
+
+---
+
 ## 这类题的答题模式
 
 踩坑题的核心是**真实 + 系统性**：
