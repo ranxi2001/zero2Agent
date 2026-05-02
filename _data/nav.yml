@@ -163,6 +163,10 @@ modules:
         slug: "10-training-and-data"
       - title: "AI 代码分析与测试"
         slug: "11-ai-code-testing"
+      - title: "简历项目拷打"
+        slug: "13-project-deep-dive"
+      - title: "各公司面试偏好"
+        slug: "14-company-preferences"
   - title: "Final Project"
     slug: "final-project"
     articles: []

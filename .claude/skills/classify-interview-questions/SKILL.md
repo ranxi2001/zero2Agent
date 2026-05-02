@@ -22,6 +22,7 @@ description: 将面试题按考察维度分类，拆分后加入 learn-agent-int
 | 09 | RAG 与检索 | `09-rag-retrieval/` | chunk 设计、查询改写、召回精排、Embedding/ReRank 微调 |
 | 10 | 训练与模型 | `10-training-and-data/` | 数据清洗、LoRA、PPO/DPO/GRPO、位置编码、归一化、量化部署、多模态 |
 | 11 | AI 代码测试 | `11-ai-code-testing/` | 覆盖率插桩、前置分析、代码过滤 |
+| 13 | 简历项目拷打 | `13-project-deep-dive/` | 项目部署、框架选型、意图识别、工具设计、知识库构建、性能优化 |
 
 ## 执行步骤
 
