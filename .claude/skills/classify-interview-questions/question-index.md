@@ -1,7 +1,7 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-05-03（美团Keeta Agent开发一面 batch）
+> 最后更新：2026-05-03（京东+字节+蚂蚁 batch）
 
 ## 统计
 
@@ -9,7 +9,7 @@
 |------|------|
 | 01-architecture-design | 28 |
 | 02-tool-management | 18 |
-| 03-fault-tolerance | 15 |
+| 03-fault-tolerance | 16 |
 | 04-memory-context | 36 |
 | 05-eval-and-vision | 20 |
 | 06-multi-agent-collab | 15 |
@@ -19,11 +19,11 @@
 | 10-training-and-data | 28 |
 | 11-ai-code-testing | 5 |
 | 13-project-deep-dive | 15 |
-| **总计** | **257** |
+| **总计** | **258** |
 
 ## 01-architecture-design（28题）
 
-1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】
+1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】
 2. Tree of Thoughts (ToT) 在线上系统里能用吗？成本不高？ — 腾讯终面
 3. Agent 的架构设计？从系统角度来拆分 — 阿里一面
 4. Agent 在学术上由哪些部分组成？ — 字节一面
@@ -64,7 +64,7 @@
 8. 大厂开源 CLI 工具和 MCP 有什么区别？ — 蚂蚁一面
 9. 大模型的 Function Call 是什么？Tool Use 一般怎么用？ — 30题
 10. MCP 和 Skills 的本质区别是什么？ — 蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】
-11. Function Calling 的本质价值是什么？ — 30题
+11. Function Calling 的本质价值是什么？ — 30题 【蚂蚁Agent开发一面追问：有了FC是否可以没有MCP】
 12. 你会如何设计工具 schema？ — 30题
 13. 同一个能力是做成大而全工具还是多个小工具？ — 30题
 14. 手撕一个 ReAct 架构的 Agent — 蚂蚁二面
@@ -73,7 +73,7 @@
 17. LLM 是怎么从用户意图匹配到具体工具参数的？ — 高德实习一面
 18. Agent 做多轮工具调用和单轮调用相比，会面临哪些额外挑战？ — 阿里国际一面
 
-## 03-fault-tolerance（15题）
+## 03-fault-tolerance（16题）
 
 1. 调支付接口超时了，Agent 怎么处理？ — 腾讯终面
 2. Agent 错误删除了数据，系统设计上怎么防范？ — 腾讯终面
@@ -90,6 +90,7 @@
 13. 支付等高敏感操作场景下，Human-in-the-Loop 流程怎么设计？ — 蚂蚁AI应用开发二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】
 14. Agent 的 Self-Reflection 机制怎么识别输出中的逻辑错误？（容错角度） — 蚂蚁AI应用开发二面 【字节AI一面追问：Reflection 连续失败 3 次后的降级策略】
 15. 高风险在线环境中，Agent 的异常管控方案怎么设计？ — 淘宝闪购一面
+16. 金融系统不能让 Agent 真实操作，怎么设计？（影子模式 + 渐进放权） — 京东一面
 
 ## 04-memory-context（36题）
 
@@ -208,11 +209,11 @@
 ## 08-prompt-engineering（8题）
 
 1. 提示词模板是怎么构建的？ — 抖音一面
-2. Skills 的原理有没有了解过？ — 蚂蚁一面 【高德实习一面追问：Skill 的本质理解】
+2. Skills 的原理有没有了解过？ — 蚂蚁一面 【高德实习一面追问：Skill 的本质理解】【蚂蚁Agent开发一面追问：创建 Skill 的方式（除自然语言描述外）】
 3. Claude Code 的架构有什么比较创新的设计？ — 蚂蚁一面 【高德实习一面追问：从源码角度看设计哲学】
 4. 一个好的 Prompt 和一个差的 Prompt 的区别？ — 蚂蚁一面
 5. 为什么已经有了 MCP，Anthropic 还要做 Skill？Skill 里面有没有工具？ — 字节实习一面
-6. 如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？ — 字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】
+6. 如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？ — 字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】
 7. LobeChat 的插件和 Claude Code 的 Skills 有什么本质区别？ — 字节实习二面
 8. 通常 Prompt 包含哪些结构？ — 淘宝闪购一面
 
