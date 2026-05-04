@@ -23,7 +23,7 @@ eyebrow: Module 09
 
 无论你是**校招**、**社招**还是**实习**，准备 Agent 相关岗位面试，这里的题目都能帮你建立系统性的知识框架。
 
-## 十三大考察维度 + 公司偏好速查
+## 十四大考察维度 + 公司偏好速查
 
 按能力维度分类，方便你系统性地补齐某个方向的短板：
 
@@ -40,6 +40,7 @@ eyebrow: Module 09
 | **RAG 与检索系统** | chunk 设计、查询改写、并行意图识别、多路召回精排 | 携程、阿里、百度 |
 | **训练、数据与模型优化** | 数据清洗、工具调用训练、LoRA vs 全参微调、DPO/PPO/GRPO | 字节、蚂蚁 |
 | **AI 代码分析与测试** | 覆盖率插桩原理、前置分析与有效性判断、代码过滤策略 | 蚂蚁 AI Coding |
+| **业务 AI 工程分析** | 业务需求拆解、AI 方案选型、效果评估、业务与技术结合 | 蚂蚁、阿里、字节 |
 | **简历项目拷打** | 项目部署、框架选型、意图识别、工具设计、知识库构建、性能优化 | 淘宝闪购、阿里、字节 |
 | **各公司面试偏好** | 按公司统计高频考点、面试风格分析、针对性备战策略 | 全部公司 |
 
@@ -63,8 +64,9 @@ eyebrow: Module 09
 9. [RAG 与检索系统：从 chunk 设计到多路召回](09-rag-retrieval/index.html)
 10. [训练、数据与模型优化：从数据清洗到 LoRA](10-training-and-data/index.html)
 11. [AI 代码分析与测试：覆盖率、插桩、代码过滤](11-ai-code-testing/index.html)
-12. [简历项目拷打：面试官追着你的 Agent 项目问到底](13-project-deep-dive/index.html)
-13. [各公司面试偏好：按公司备战的高频题速查](14-company-preferences/index.html)
+12. [业务 AI 工程分析：业务场景与 AI 系统的结合](12-business-ai-engineering/index.html)
+13. [简历项目拷打：面试官追着你的 Agent 项目问到底](13-project-deep-dive/index.html)
+14. [各公司面试偏好：按公司备战的高频题速查](14-company-preferences/index.html)
 
 ## 常见问题
 

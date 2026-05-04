@@ -1,11 +1,11 @@
 ---
 layout: default
-title: 蚂蚁 Agent 应用暑期实习一面
-description: 蚂蚁 Agent 岗一面完整还原，21 题覆盖多 Agent 架构、并发、RAG、工具、MCP、AI Coding
+title: 业务 AI 工程分析：业务场景与 AI 系统的结合面试题
+description: 业务理解与 AI 工程化结合的面试题拆解，覆盖业务需求拆解、AI 方案选型、效果评估与落地策略
 eyebrow: Agent 面试通关 / 12
 ---
 
-# 蚂蚁 Agent 应用暑期实习一面
+# 业务 AI 工程分析
 
 这场面试的特点是**从项目架构出发，逐层深挖工程细节**。面试官先问整体架构，再追问多 Agent 通信、并发、异步，最后考系统设计——是一场典型的“从宏观到微观”的追问链。
 
