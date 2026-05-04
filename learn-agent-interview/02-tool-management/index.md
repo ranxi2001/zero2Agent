@@ -417,7 +417,70 @@ sequenceDiagram
 - **返回值要结构化**：工具返回不要是一大段文本，而是 JSON——模型解析结构化数据比理解自然语言更稳定
 - **错误处理要前置**：工具调用可能失败，返回值里必须带状态码和错误信息，让模型能根据错误类型决定下一步
 
-**差距在哪**：新手把 Function Call 等同于“调函数”。高手理解它是模型从“文本生成器”升级为“行动执行器”的关键机制，且清楚 Schema 设计、返回值规范和错误处理这些工程细节决定了 Tool Use 的稳定性。面试官考的是你对 Agent 核心能力的理解深度。
+**差距在哪**：新手把 Function Call 等同于”调函数”。高手理解它是模型从”文本生成器”升级为”行动执行器”的关键机制，且清楚 Schema 设计、返回值规范和错误处理这些工程细节决定了 Tool Use 的稳定性。面试官考的是你对 Agent 核心能力的理解深度。
+
+**追问：如果不做训练（不 SFT），怎么让 Agent 知道怎么调用工具？调用格式是什么？**
+
+> 来源：小红书 AI应用开发
+
+这道题的关键在于理解：**应用开发者不需要自己训练模型的 tool use 能力，但模型的 tool use 能力不是凭空出现的**。
+
+**两种实现路径**：
+
+| 路径 | 原理 | 适用场景 |
+|------|------|---------|
+| **API 原生 Function Calling** | 模型厂商（OpenAI/Anthropic）在训练阶段已做了 tool use 的 SFT + RLHF，开发者只需传 tool schema | 使用商业 API 的主流方案 |
+| **Prompt-based（ReAct）** | 通过提示词教模型按固定格式输出工具调用，再由代码解析执行 | 没有原生 FC 能力的开源模型 |
+
+**API 原生 FC 的工作方式**——开发者只做三件事：
+
+1. **定义 Tool Schema**：用 JSON Schema 描述工具的名称、功能、参数类型和约束
+2. **传给 API**：在请求的 `tools` 参数中传入 schema 列表
+3. **解析响应**：模型返回结构化的 `tool_calls`（工具名 + 参数 JSON），编排层执行后回传结果
+
+```text
+开发者定义：
+  tools: [{
+    name: “search_order”,
+    description: “根据订单号查询订单状态”,
+    parameters: {
+      order_id: { type: “string”, description: “订单编号” }
+    }
+  }]
+
+模型输出：
+  tool_calls: [{
+    name: “search_order”,
+    arguments: { “order_id”: “2024050312345” }
+  }]
+```
+
+模型”知道”怎么调用，是因为**厂商在训练阶段已经用大量 tool use 数据做了对齐**——开发者不需要训练，但不代表没有训练。
+
+**Prompt-based 方案**——当模型没有原生 FC 时：
+
+在 System Prompt 中定义 ReAct 格式，让模型按固定模式输出，再用正则/JSON 解析提取调用意图：
+
+```text
+System Prompt:
+  你可以使用以下工具：
+  - search_order(order_id: str): 查询订单状态
+  
+  使用工具时，严格按以下格式输出：
+  Thought: 我需要查询订单
+  Action: search_order
+  Action Input: {“order_id”: “2024050312345”}
+  
+  等待工具返回后继续推理。
+```
+
+**两种方案的工程差异**：
+
+- **可靠性**：原生 FC 远高于 Prompt-based——前者有专门的训练和 Schema 约束，后者依赖模型遵循格式的能力
+- **并行调用**：原生 FC 支持一次返回多个 tool_calls；Prompt-based 通常只能单步
+- **错误率**：Prompt-based 容易输出格式不规范（多一个逗号、少一个引号），需要额外的输出修复逻辑
+
+核心认知：**”不做训练”不等于”没有训练”——应用开发者不需要训练，是因为模型厂商已经做了。真正需要开发者做的是写好 Tool Schema，这是 tool use 准确率最大的杠杆。**
 
 ---
 
