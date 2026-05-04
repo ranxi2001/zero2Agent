@@ -104,7 +104,7 @@ eyebrow: Agent 面试通关 / 06
 
 ### Q：怎么判断一个 Agent 该做成单 Agent，还是多 Agent？
 
-> 来源：腾讯大模型应用开发二面
+> 来源：腾讯大模型应用开发二面 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】
 
 **新手答**：“复杂任务用多 Agent，简单任务用单 Agent。”
 
