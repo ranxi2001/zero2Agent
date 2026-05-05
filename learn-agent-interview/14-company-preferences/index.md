@@ -24,7 +24,7 @@ eyebrow: Agent 面试通关 / 14
 | **阿里-淘天** | 26 | 记忆(6) > RAG(4) > 架构(3) | 系统设计 + 理论深度，追问细节 |
 | **快手** | 18 | 训练(6) > RAG(5) | 算法基础扎实，工程+模型并重 |
 | **淘宝闪购** | 17 | 项目拷打(12) > 架构(2) | 几乎全程项目深挖，无八股 |
-| **阿里国际** | 13 | 训练(7) > 评估(2) | RL/微调深度，模型层能力 |
+| **阿里国际** | 14+ | 训练(10+) > 工具(2) > RAG(2) | RL/微调深度 + GRPO 必考，近期也考 Agent 工程 |
 | **高德** | 12 | RAG(4) > 记忆(3) | 实习题为主，MCP 协议+会话记忆 |
 | **携程** | 5 | RAG(5) | RAG 基础，适合入门准备 |
 | **bilibili** | 4 | 分散 | Agent 框架实战，项目驱动 |
@@ -160,22 +160,40 @@ eyebrow: Agent 面试通关 / 14
 
 ---
 
-## 阿里国际（13 题）
+## 阿里国际（14+ 考点）
 
-**面试风格**：阿里国际面试**最侧重模型训练与优化**——微调方法、RL 训练、推理加速是核心。评估体系也是重点。整体偏算法研发，对模型层理解要求高。
+**面试风格**：阿里国际面试**最侧重模型训练与优化**——微调方法、RL 训练（GRPO 深度追问）、推理加速是核心。但近期面试也开始考察 Agent 工程能力（多轮工具调用、多智能体、上下文管理）。整体偏算法研发，对模型层理解要求高，追问极深。
 
 **高频考察维度**：
 
 | 维度 | 题量 | 代表性问题 |
 |------|------|-----------|
-| [训练与模型](../10-training-and-data/index.html) | 7 | LoRA vs 全参微调、PPO vs GRPO、推理加速、SFT+蒸馏+GRPO 选型 |
-| [评估与全局观](../05-eval-and-vision/index.html) | 2 | 评测体系构建、调优 case + 评测集构建 |
-| [RAG 与检索](../09-rag-retrieval/index.html) | 2 | 向量数据库选型、Embedding 升级一致性 |
+| [训练与模型](../10-training-and-data/index.html) | 10+ | LoRA vs 全参微调、PPO vs GRPO 深度对比、GRPO Loss/Advantages/信用分配、重要性采样失效场景、KL散度区别、SFT+蒸馏+GRPO 选型、推理加速部署、GRPO训练监控指标 |
+| [RAG 与检索](../09-rag-retrieval/index.html) | 2 | 向量数据库选型（不同规模方案）、Embedding 升级后索引一致性 |
+| [工具管理](../02-tool-management/index.html) | 2 | Agent 多轮工具调用挑战、Skill 描述过长导致上下文爆炸 |
+| [评估与全局观](../05-eval-and-vision/index.html) | 1 | 调优 case + 评测集构建（规模/分布/baseline 三件套） |
+| [多智能体协作](../06-multi-agent-collab/index.html) | 1 | Claude Code 是 multi 还是 single agent |
+| [工程化踩坑](../07-engineering-pitfalls/index.html) | 1 | 数据量/QPS 增大后架构改进、硬件选型 |
+
+**GRPO 是阿里国际的必考核心**（多次出现、追问极深）：
+
+```text
+必须准备的 GRPO 知识点：
+├── Loss 函数：clipped surrogate objective + KL penalty
+├── Advantages 计算：组内归一化（无 Critic），为什么不直接用 reward
+├── 信用分配：序列级奖励如何分配到 token 级
+├── 重要性采样：为什么需要、策略差异大时 IS 失效怎么办
+├── KL 散度：GRPO vs PPO 的 KL 计算有什么区别（per-token vs 序列级）
+├── 训练监控：reward mean/std、KL divergence、policy entropy、gradient norm
+└── 技术选型：什么时候用 SFT、什么时候蒸馏、什么时候上 GRPO
+```
 
 **备考重点**：
-- 训练三件套必背：LoRA 原理与适用场景、PPO vs DPO vs GRPO 对比、SFT 什么时候不够
-- 推理加速技术要熟——算子融合、KV Cache、量化部署
-- 如果面的是应用开发方向，RAG 和评估也要准备
+- **GRPO 深度是第一优先级**——不是"知道 GRPO 是什么"就够，要能讲清 Loss 推导、Advantages 归一化原理、信用分配机制、重要性采样局限性
+- 训练三件套必背：LoRA 原理与适用场景（A/B 矩阵初始化+秩选择）、PPO vs DPO vs GRPO 对比、SFT 什么时候不够
+- 推理加速技术要熟——算子融合、KV Cache、量化部署、IO 优化
+- **Agent 工程也开始考了**：多轮工具调用挑战（状态管理、错误传播、上下文膨胀）、Claude Code 架构理解
+- 如果面的是应用开发方向，RAG（向量数据库选型）和评估（评测集构建）也要准备
 
 ---
 
