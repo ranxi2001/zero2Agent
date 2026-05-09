@@ -1,330 +1,291 @@
 ---
 layout: default
-title: Node → Workflow → Agent 推导
-description: 从 60 行核心代码出发，手写出一个完整的 Agent 框架
+title: Agent Loop：EventStream 驱动的核心循环
+description: pi-mono 的 agentLoop 实现——从入口到工具执行的完整数据流
 eyebrow: OpenClaw / 02
 ---
 
-# Node → Workflow → Agent 推导
+# Agent Loop：EventStream 驱动的核心循环
 
-这一节做一件事：从最简单的 Node 开始，一步步推导出 Workflow、Chatbot、Agent，每一步都有完整可运行的代码。
+pi-mono 的核心在 `packages/agent/src/agent-loop.ts`。这个文件实现了整个 Agent 的执行引擎。
 
-读完之后你会发现，所谓“框架”就是这些代码加在一起。
-
----
-
-## 核心结构：60 行代码
-
-先看完整的 `core/node.py`，整个框架就在这里：
-
-```python
-# core/node.py
-import time
-from typing import Any, Dict, Optional, Tuple
-
-shared = {}  # 全局状态，所有 Node 之间共享
-
-class Node:
-    def __init__(self, max_retries: int = 1, wait: float = 0):
-        self.successors: Dict[str, "Node"] = {}
-        self._action: str = "default"
-        self.max_retries = max_retries
-        self.wait = wait
-
-    def exec(self, payload: Any) -> Tuple[str, Any]:
-        """子类实现：返回 (action, next_payload)"""
-        raise NotImplementedError
-
-    def _exec(self, payload: Any) -> Tuple[str, Any]:
-        """内部调用：处理重试逻辑"""
-        for attempt in range(self.max_retries):
-            try:
-                return self.exec(payload)
-            except Exception as e:
-                if attempt == self.max_retries - 1:
-                    raise
-                time.sleep(self.wait)
-
-    def __rshift__(self, other: "Node") -> "Node":
-        """node >> other  —— 连接到下一个节点"""
-        self.successors[self._action] = other
-        self._action = "default"
-        return other
-
-    def __sub__(self, action: str) -> "Node":
-        """node - "action"  —— 给连接边打标签"""
-        self._action = action
-        return self
-
-
-class Flow:
-    def __init__(self, start: Optional[Node] = None):
-        self.start = start
-
-    def run(self, payload: Any = None) -> Any:
-        """沿有向图走到没有后继节点为止"""
-        node = self.start
-        while node:
-            action, payload = node._exec(payload)
-            node = node.successors.get(action)
-        return payload
-```
-
-两个核心设计：
-
-1. **`exec()` 返回 `(action, next_payload)`** ——  action 决定路由，next_payload 是下一个 Node 的输入
-2. **运算符重载** —— `node - "action" >> next_node` 让图的构建语法极度简洁
+读懂它，就理解了所有生产级 Coding Agent 的运行原理。
 
 ---
 
-## 第一步：Workflow
+## 两个入口
 
-Workflow 是一条有向路径，每个 Node 做一件具体的事。
+```typescript
+// packages/agent/src/agent-loop.ts
 
-目标：`接收输入 → 联网搜索 → 大模型总结`
+// 全新对话
+export function agentLoop(config: AgentConfig): EventStream { ... }
 
-```python
-# examples/workflow/main.py
-from core.node import Node, Flow, shared
-from core.llm import call_llm_simple
-from tools.builtins.search import search_web
-
-class InputNode(Node):
-    def exec(self, query):
-        shared["query"] = query
-        return "search", query
-
-class SearchNode(Node):
-    def exec(self, query):
-        results = search_web(query)
-        shared["search_results"] = results
-        return "summarize", results
-
-class SummarizeNode(Node):
-    def exec(self, results):
-        prompt = f"请总结以下搜索结果：\n{results}\n\n原始问题：{shared['query']}"
-        answer = call_llm_simple(prompt)
-        return "default", answer
-
-# 构图
-input_node  = InputNode()
-search_node = SearchNode()
-summary_node = SummarizeNode()
-
-input_node  - "search"    >> search_node
-search_node - "summarize" >> summary_node
-
-# 执行
-flow = Flow(input_node)
-result = flow.run("Python asyncio 最佳实践")
-print(result)
+// 恢复已有对话（从上次中断处继续）
+export function agentLoopContinue(config: AgentConfig, transcript: Event[]): EventStream { ... }
 ```
 
-<div class="mermaid">
-flowchart LR
-    A([用户输入]) --> B[InputNode]
-    B -->|search| C[SearchNode]
-    C -->|summarize| D[SummarizeNode]
-    D --> E([输出总结])
-</div>
-
-没有循环，执行路径写死，这就是 Workflow。
+`agentLoop()` 启动新对话，`agentLoopContinue()` 从历史 transcript 恢复。两者返回同一种类型：**EventStream**——一个异步事件生成器。
 
 ---
 
-## 第二步：Chatbot
+## EventStream 架构
 
-把 Workflow 套进 `while True` 循环，加上多轮对话历史，就变成了 Chatbot。
+pi-mono 不像传统框架那样返回最终结果，而是**流式发射生命周期事件**：
 
-```python
-# examples/chatbot/main.py
-from core.node import Node, Flow, shared
-from core.llm import call_llm
-
-shared["messages"] = []
-
-class ChatNode(Node):
-    def exec(self, _):
-        response = call_llm(shared["messages"])
-        shared["messages"].append(response)
-        return "output", response["content"]
-
-class OutputNode(Node):
-    def exec(self, text):
-        print(f"\nAssistant: {text}\n")
-        return "default", None
-
-# 构图
-chat_node   = ChatNode()
-output_node = OutputNode()
-chat_node - "output" >> output_node
-
-# 循环
-while True:
-    user_input = input("You: ").strip()
-    if not user_input:
-        continue
-    shared["messages"].append({"role": "user", "content": user_input})
-    Flow(chat_node).run()
+```typescript
+type Event =
+  | { type: 'agent_start' }
+  | { type: 'turn_start' }
+  | { type: 'message_start', role: 'assistant' }
+  | { type: 'message_update', delta: string }
+  | { type: 'message_end', content: Message }
+  | { type: 'tool_execution_start', toolCall: ToolCall }
+  | { type: 'tool_execution_update', delta: string }
+  | { type: 'tool_execution_end', result: ToolResult }
+  | { type: 'turn_end' }
+  | { type: 'agent_end' }
 ```
+
+调用方（CLI、Web UI、测试）通过消费这个 EventStream 来驱动 UI 渲染、日志记录、进度展示。
+
+**为什么这么设计？**
+
+1. **UI 解耦**：TUI、Web UI、测试 harness 都消费同一个 EventStream，Agent 逻辑不需要知道渲染细节
+2. **可观测性**：每个事件都是结构化数据，天然支持日志、trace、metrics
+3. **可恢复**：事件序列就是 transcript，崩溃后从 transcript 恢复
+
+---
+
+## 核心循环的数据流
 
 <div class="mermaid">
 flowchart TD
-    A([用户输入]) --> B[ChatNode]
-    B -->|output| C[OutputNode]
-    C --> A
+    A[agentLoop 启动] --> B[outer loop: 等待用户消息]
+    B --> C[inner loop: 调用 LLM]
+    C --> D{有 tool_calls?}
+    D -->|是| E[并行执行工具]
+    E --> F[emit tool_execution_end]
+    F --> G[工具结果追加到 messages]
+    G --> C
+    D -->|否| H[emit message_end]
+    H --> I{需要 follow-up?}
+    I -->|是| B
+    I -->|否| J[emit agent_end]
 </div>
 
+关键设计：
+
+- **外层循环**处理多轮对话（follow-up messages）
+- **内层循环**处理单轮中的多次工具调用
+- 工具执行默认**并行**（`Promise.all`），可配置为顺序执行
+
 ---
 
-## 第三步：Agent
+## 工具执行：并行是默认
 
-Agent 和 Chatbot 的区别只有一个：当模型想调工具时，把流程路由到 ToolCallNode，执行完再路由回 ChatNode。
+```typescript
+// 简化自 agent-loop.ts
+const toolResults = await Promise.all(
+  response.toolCalls.map(async (toolCall) => {
+    yield { type: 'tool_execution_start', toolCall }
 
-这在图结构里就是**一个回路**。
+    const result = await executeTool(toolCall, config)
+
+    yield { type: 'tool_execution_end', result }
+    return result
+  })
+)
+```
+
+当模型一次返回多个 tool_calls（比如同时读 3 个文件），pi-mono 会**并行执行所有工具**。这是 Coding Agent 速度快的关键原因之一。
+
+对比 LangChain 的默认串行执行：
+
+| 模式 | 3 个工具各 2 秒 | 总耗时 |
+|------|----------------|--------|
+| 串行 | 2 + 2 + 2 | 6 秒 |
+| 并行 | max(2, 2, 2) | 2 秒 |
+
+---
+
+## Hooks：拦截与变换
+
+pi-mono 提供了四个 Hook 点，让你在不修改核心循环的情况下注入逻辑：
+
+```typescript
+interface AgentHooks {
+  beforeToolCall?: (toolCall: ToolCall) => ToolCall | null  // 拦截/修改工具调用
+  afterToolCall?: (result: ToolResult) => ToolResult        // 修改工具结果
+  transformContext?: (messages: Message[]) => Message[]      // 发送给 LLM 前变换上下文
+  convertToLlm?: (message: Message) => LlmMessage          // 自定义消息格式转换
+}
+```
+
+实际用途：
+
+- `beforeToolCall`：安全过滤（阻止危险命令）、权限控制
+- `afterToolCall`：结果截断（大文件只保留前 N 行）
+- `transformContext`：上下文压缩、注入系统指令
+- `convertToLlm`：适配不同 LLM Provider 的消息格式
+
+---
+
+## OpenClaw 的 5 阶段执行模型
+
+pi-mono 的 Agent Loop 是基础，OpenClaw 在此之上增加了更完整的执行阶段：
+
+```
+Stage 1: RPC Validation
+    → 验证请求格式、权限检查、速率限制
+Stage 2: Skill Loading
+    → 根据用户输入动态加载匹配的 Skill（SKILL.md）
+Stage 3: Pi-Agent Runtime
+    → 核心 Agent Loop（即 pi-mono 的 agentLoop）
+Stage 4: Event Bridging
+    → 把 EventStream 事件桥接到具体渠道（Slack/飞书/Web）
+Stage 5: Persistence
+    → JSONL transcript 持久化 + MEMORY.md 更新
+```
+
+### Hook 介入点
+
+OpenClaw 定义了 4 个 Hook 介入点，覆盖执行全流程：
+
+```typescript
+interface OpenClawHooks {
+  before_model_resolve: (req: ModelRequest) => ModelRequest
+  // 可以动态切换模型（如简单问题用便宜模型）
+
+  before_prompt_build: (context: ContextState) => ContextState
+  // 在 assemble() 之前修改上下文状态
+
+  before_tool_call: (call: ToolCall) => ToolCall | null
+  // 拦截、修改或阻止工具调用（安全策略的主要入口）
+
+  before_agent_reply: (reply: AgentReply) => AgentReply
+  // 在回复发送给用户之前做后处理（脱敏、格式化）
+}
+```
+
+### 并发控制：per-session 串行化
+
+```typescript
+// OpenClaw 用文件级写锁保证同一 session 不会并发执行
+const lock = await acquireFileLock(`/tmp/openclaw-session-${sessionId}.lock`)
+try {
+  // 同一 session 的请求排队执行，不会并发
+  await runAgentLoop(session)
+} finally {
+  await lock.release()
+}
+```
+
+为什么？如果同一用户同时发两条消息，两个 Agent Loop 并发执行会导致：
+- 消息顺序混乱（哪条先哪条后？）
+- 上下文竞态（两个循环同时追加消息）
+- 工具冲突（两个循环同时写同一个文件）
+
+### 多层超时
+
+```typescript
+timeouts:
+  waitForInput: 30_000      // 30 秒等待用户输入
+  maxRuntime: 172_800_000   // 48 小时最大运行时间
+  idleWatchdog: 300_000     // 5 分钟无活动自动暂停
+  toolExecution: 120_000    // 单个工具最多 2 分钟
+```
+
+---
+
+## Claude Code vs OpenClaw 的 Agent Loop 对比
+
+根据 [claude-code-vs-openclaw](https://github.com/rrmars/claude-code-vs-openclaw) 的 11 维度对比（OpenClaw 赢 8 项）：
+
+| 维度 | Claude Code | OpenClaw | 胜者 |
+|------|-----------|----------|------|
+| Context Compaction | LLM 摘要（无验证） | 标识符保留 + 质量检查点 + 重试 | OpenClaw |
+| Context Pruning | 基于 token 计数 | 基于 `promptAuthority` 标志 + 语义重要性 | OpenClaw |
+| Memory System | CLAUDE.md（单文件） | MEMORY.md + Daily Notes + DREAMS.md（三层） | OpenClaw |
+| Agent Isolation | SubAgent（同进程） | 独立 workspace + 文件锁 | OpenClaw |
+| Tool Safety | 命令黑名单 | 分层工具调度 + 沙箱 + Ed25519 签名 | OpenClaw |
+| Cache Optimization | Prompt Caching（Anthropic 专有） | N/A | Claude Code |
+| Frustration Detection | 检测用户沮丧并调整行为 | ❌ | Claude Code |
+
+**核心差异**：Claude Code 是 Anthropic 的垂直集成产品（模型 + 工具 + 缓存一体化），OpenClaw 是 provider-agnostic 的开放架构。Claude Code 的 Prompt Caching 是独家优势，但 OpenClaw 在可插拔性和安全性上更强。
+
+---
+
+## 与传统框架的对比
+
+### LangChain 的链式模型
 
 ```python
-# examples/chatbot_with_tools/main.py
-from core.node import Node, Flow, shared
-from core.llm import call_llm
-from tools.executor import ToolExecutor
-from tools.builtins import ALL_TOOLS
-
-shared["messages"] = []
-executor = ToolExecutor(ALL_TOOLS)
-
-class ChatNode(Node):
-    def exec(self, _):
-        response = call_llm(
-            shared["messages"],
-            tools=[t.to_llm_format() for t in ALL_TOOLS]
-        )
-        shared["messages"].append(response)
-
-        # 有 tool_calls → 去执行工具
-        if response.get("tool_calls"):
-            return "tool_call", response["tool_calls"]
-        # 没有 → 直接输出
-        return "output", response["content"]
-
-class ToolCallNode(Node):
-    def exec(self, tool_calls):
-        results = executor.execute(tool_calls)
-        # 把工具结果追加到对话历史
-        for result in results:
-            shared["messages"].append(result.to_message())
-        # 路由回 ChatNode
-        return "chat", None
-
-class OutputNode(Node):
-    def exec(self, text):
-        print(f"\nAssistant: {text}\n")
-        return "default", None
-
-# 构图（注意回路）
-chat_node      = ChatNode()
-tool_call_node = ToolCallNode()
-output_node    = OutputNode()
-
-chat_node      - "tool_call" >> tool_call_node
-tool_call_node - "chat"      >> chat_node      # 回路
-chat_node      - "output"    >> output_node
-
-# 循环
-while True:
-    user_input = input("You: ").strip()
-    if not user_input:
-        continue
-    shared["messages"].append({"role": "user", "content": user_input})
-    Flow(chat_node).run()
+# LangChain: 每个步骤是一个 "chain"，线性组合
+chain = prompt | llm | output_parser
+result = chain.invoke({"question": "..."})
 ```
 
-<div class="mermaid">
-flowchart TD
-    A([用户输入]) --> B[ChatNode]
-    B -->|tool_call| C[ToolCallNode]
-    C -->|chat| B
-    B -->|output| D[OutputNode]
-    D --> A
-</div>
+问题：当你需要工具调用循环时，链式模型就不够用了，需要引入 `AgentExecutor`，其内部实现和 pi-mono 的 Agent Loop 殊途同归。
 
-这个回路就是 Agent 的核心结构。ToolCallNode 不决定任务，ChatNode（模型）决定。ToolCallNode 只负责执行，把结果交还给模型继续判断。
+### pi-mono 的循环模型
+
+```typescript
+// pi-mono: 一个循环就是整个 Agent
+while (hasToolCalls) {
+  results = await executeTools(toolCalls)
+  messages.push(...results)
+  response = await llm.chat(messages)
+}
+```
+
+没有链、没有 DAG、没有中间抽象层。一个 while 循环解决所有问题。
 
 ---
 
-## 三行公式的完整含义
+## 面试高频题：Agent Loop 的设计决策
 
-```
-workflow = node + node           # 有向路径，无循环
-chatbot  = workflow + loop       # 加外层循环，多轮对话
-agent    = chatbot + tools       # 图内部有回路，模型驱动工具
-```
+**Q：为什么用 EventStream 而不是直接返回结果？**
 
-这三行不是比喻，是图结构的精确描述。
+> 生产级 Agent 的单次任务可能执行几分钟甚至更长。如果等整个执行完才返回，用户体验极差（无响应）。EventStream 让 UI 可以实时渲染中间状态——正在思考、正在读文件、正在执行命令——每一步都有视觉反馈。
 
-理解了这个，你就理解了市面上所有 Agent 框架的本质——它们都是在这个结构上加了各种封装。
+**Q：为什么默认并行执行工具？**
+
+> Coding Agent 的典型操作（读文件、grep 搜索）是 IO 密集型，互相独立，没有数据依赖。并行执行可以将延迟从 O(n) 降到 O(1)。只有当工具间有显式依赖（写文件 → 读同一文件）时才需要串行。
+
+**Q：Agent 和 Chatbot 的本质区别是什么？**
+
+> 一行代码的区别：`if (response.toolCalls?.length) continue`。Chatbot 收到 LLM 回复就结束；Agent 检测到 tool_calls 后继续循环——执行工具、把结果追加到上下文、再次调用 LLM。这个循环持续到模型不再请求工具为止。
 
 ---
 
-## LLM 调用层
+## 动手：跟踪一次完整执行
 
-`core/llm.py` 只暴露两个函数：
-
-```python
-def call_llm_simple(prompt: str) -> str:
-    """单轮，string in，string out"""
-    ...
-
-def call_llm(
-    messages: list,
-    tools: list = None,
-    system_prompt: str = None
-) -> dict:
-    """多轮，返回 assistant message dict（含 tool_calls 字段）"""
-    ...
-```
-
-使用 OpenAI 兼容协议，通过环境变量配置接入点：
+克隆 pi-mono 后，在 `agent-loop.ts` 的关键位置加 `console.log`：
 
 ```bash
-export OPENAI_API_KEY="your-key"
-export OPENAI_BASE_URL="https://api.moonshot.cn/v1"  # Kimi
-# 或
-export OPENAI_BASE_URL="https://open.bigmodel.cn/api/paas/v4"  # 智谱
+git clone https://github.com/badlogic/pi-mono
+cd pi-mono
 ```
+
+观察一次 "读取 README.md 并总结" 任务的事件序列：
+
+```
+agent_start
+turn_start
+message_start (role: assistant)
+message_update (delta: "让我读取...")
+tool_execution_start (name: "read", args: {path: "README.md"})
+tool_execution_end (result: "# pi-mono\n...")
+message_start (role: assistant)
+message_update (delta: "这个项目是...")
+message_end
+turn_end
+agent_end
+```
+
+把这个事件流画成时序图，你就理解了整个执行模型。
 
 ---
 
-## 动手跑起来
-
-```bash
-# 1. 安装 uv（比 conda 快 10 倍，无商业授权风险）
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# 2. 克隆仓库
-git clone https://github.com/lasywolf/Learn-OpenClaw
-cd Learn-OpenClaw
-
-# 3. 配置镜像源（国内）
-cat >> ~/.config/uv/uv.toml << 'EOF'
-[[index]]
-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
-default = true
-EOF
-
-# 4. 初始化项目
-uv sync
-
-# 5. 配置 API key
-export OPENAI_API_KEY="sk-xxx"
-export OPENAI_BASE_URL="https://api.moonshot.cn/v1"
-
-# 6. 依次运行三个示例
-uv run examples/workflow/main.py
-uv run examples/chatbot/main.py
-uv run examples/chatbot_with_tools/main.py
-```
-
-三个示例跑通之后，你已经完整理解了 Agent 的核心结构。
-
-下一篇：[RAG 的本质是 VectorDB](../03-rag/index.html)
+下一篇：[RAG：检索增强的工程实现](../03-rag/index.html)

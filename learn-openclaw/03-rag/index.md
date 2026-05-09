@@ -1,250 +1,209 @@
 ---
 layout: default
-title: RAG 的本质是 VectorDB
-description: 把 RAG 拆到最小单位——一个向量数据库和一次近邻检索
+title: RAG：检索增强的工程实现
+description: 从向量检索到混合召回，Coding Agent 场景下 RAG 的正确实现
 eyebrow: OpenClaw / 03
 ---
 
-# RAG 的本质是 VectorDB
+# RAG：检索增强的工程实现
 
-RAG（Retrieval-Augmented Generation）听起来很复杂。但把它拆到最小单位，就是两件事：
+RAG（Retrieval-Augmented Generation）在 Agent 系统中有两种用法：
 
-1. 把文档存进向量数据库
-2. 用户问问题时，检索最相关的几段，拼进 prompt
+1. **知识库问答**：用户提问 → 检索相关文档 → 注入上下文 → 生成回答
+2. **代码库导航**：Agent 需要理解大型代码库时，按需检索相关代码片段
 
-这一节从这里出发，把 RAG 的实现路径走一遍。
-
----
-
-## 为什么需要 RAG
-
-LLM 的上下文窗口有限。即使是 128K token 的模型，遇到大型代码库或者企业知识库，直接把所有内容塞进去也不现实。
-
-RAG 的思路是：**只给模型看它需要看的那部分**。
-
-```
-用户提问
-   ↓
-向量检索：在知识库里找最相关的 K 段
-   ↓
-把这 K 段拼进 prompt
-   ↓
-模型生成回答
-```
+这一节覆盖从基础实现到生产级优化的完整路径。
 
 ---
 
-## 向量数据库是什么
+## 核心管线
 
-向量数据库存的不是文本，而是文本对应的**嵌入向量（embedding）**——一个高维浮点数组，捕捉了文本的语义。
-
-```python
-# 同一个意思，向量应该相近
-"Python 如何处理异常" → [0.12, -0.34, 0.91, ...]
-"Python exception handling" → [0.11, -0.35, 0.89, ...]
+```
+文档 → 分块 → 编码（Embedding）→ 写入向量库
+                                         ↓
+用户查询 → 编码 → 向量检索 Top-K → Rerank → 注入 Prompt → LLM 生成
 ```
 
-检索时，把用户的问题也转成向量，找余弦距离最近的 K 个文档片段。
+每个环节的选择直接影响最终效果。
 
 ---
 
-## 实现：三个步骤
+## 分块策略
 
-### 步骤 1：分块（Chunking）
+### 按语义边界分块（推荐）
 
-把文档切成适合模型阅读的片段。
-
-```python
-# tools/rag/chunker.py
-def chunk_text(text: str, chunk_size: int = 512, overlap: int = 64) -> list[str]:
-    """按字符数分块，支持重叠防止语义断裂"""
-    chunks = []
-    start = 0
-    while start < len(text):
-        end = start + chunk_size
-        chunks.append(text[start:end])
-        start += chunk_size - overlap
-    return chunks
+```typescript
+// 代码文件：按函数/类边界切分
+function chunkByAST(code: string, language: string): Chunk[] {
+  const tree = parser.parse(code, language)
+  return tree.rootNode.children
+    .filter(node => ['function', 'class', 'method'].includes(node.type))
+    .map(node => ({
+      content: node.text,
+      metadata: { type: node.type, name: node.name, startLine: node.startPosition.row }
+    }))
+}
 ```
 
-重叠（overlap）是关键：边界处的语义不应该被硬切断。
+### 按固定窗口分块（简单场景）
 
-### 步骤 2：嵌入 + 存入向量库
-
-```python
-# tools/rag/store.py
-import chromadb
-from openai import OpenAI
-
-client = OpenAI()
-chroma = chromadb.PersistentClient(path="./rag_db")
-collection = chroma.get_or_create_collection("docs")
-
-def embed(text: str) -> list[float]:
-    resp = client.embeddings.create(
-        input=text,
-        model="text-embedding-3-small"
-    )
-    return resp.data[0].embedding
-
-def add_document(doc_id: str, text: str, metadata: dict = None):
-    chunks = chunk_text(text)
-    for i, chunk in enumerate(chunks):
-        collection.add(
-            ids=[f"{doc_id}_{i}"],
-            embeddings=[embed(chunk)],
-            documents=[chunk],
-            metadatas=[metadata or {}]
-        )
+```typescript
+function chunkByWindow(text: string, size = 512, overlap = 64): string[] {
+  const chunks: string[] = []
+  for (let i = 0; i < text.length; i += size - overlap) {
+    chunks.push(text.slice(i, i + size))
+  }
+  return chunks
+}
 ```
 
-### 步骤 3：检索
-
-```python
-def retrieve(query: str, k: int = 5) -> list[str]:
-    results = collection.query(
-        query_embeddings=[embed(query)],
-        n_results=k
-    )
-    return results["documents"][0]
-```
+**面试考点**：为什么需要 overlap？因为语义可能跨越切分边界，overlap 保证边界处的信息不丢失。
 
 ---
 
-## 接进 Agent
+## Embedding 选型
 
-把检索嵌进 Node 里：
-
-```python
-# examples/rag_agent/main.py
-from core.node import Node, Flow, shared
-from core.llm import call_llm
-from tools.rag.store import retrieve
-
-shared["messages"] = []
-
-class RAGChatNode(Node):
-    def exec(self, _):
-        user_query = shared["messages"][-1]["content"]
-
-        # 检索相关片段
-        relevant_chunks = retrieve(user_query, k=5)
-        context = "\n\n---\n\n".join(relevant_chunks)
-
-        # 把检索结果注入 system prompt
-        system_prompt = f"""你是一个知识库助手。回答时优先参考以下上下文：
-
-{context}
-
-如果上下文不足以回答，请如实说明。"""
-
-        response = call_llm(shared["messages"], system_prompt=system_prompt)
-        shared["messages"].append(response)
-        return "output", response["content"]
-
-class OutputNode(Node):
-    def exec(self, text):
-        print(f"\nAssistant: {text}\n")
-        return "default", None
-
-rag_node = RAGChatNode()
-out_node = OutputNode()
-rag_node - "output" >> out_node
-
-while True:
-    user_input = input("You: ").strip()
-    if not user_input:
-        continue
-    shared["messages"].append({"role": "user", "content": user_input})
-    Flow(rag_node).run()
-```
-
-<div class="mermaid">
-flowchart TD
-    A([用户输入]) --> B[RAGChatNode]
-    B --> C[向量检索 top-K]
-    C --> D[拼入 system_prompt]
-    D --> E[调用 LLM]
-    E --> F[OutputNode]
-    F --> A
-</div>
-
----
-
-## 为什么选 Chroma，不选 Milvus 或 pgvector
-
-| 工具 | 适用场景 |
-|------|---------|
-| **Chroma** | 本地开发、小型项目、嵌入式部署 |
-| **pgvector** | 已有 PostgreSQL、数据量中等 |
-| **Milvus** | 大规模生产（亿级向量） |
-| **Pinecone** | 托管服务，不想自运维 |
-
-大多数 Coding Agent 的知识库不需要亿级向量。Chroma 零配置、纯 Python、本地持久化，是原型和中小型生产最合适的选择。
-
----
-
-## Embedding 模型选择
-
-```bash
-# 配置 embedding 模型（OpenAI 协议兼容）
-export OPENAI_API_KEY="your-key"
-export OPENAI_BASE_URL="https://api.moonshot.cn/v1"
-```
-
-国内常用选项：
-
-| 模型 | 维度 | 备注 |
+| 模型 | 维度 | 特点 |
 |------|------|------|
-| `text-embedding-3-small` | 1536 | OpenAI，需代理 |
-| 智谱 `embedding-3` | 2048 | 国内直连 |
-| Moonshot（暂不支持 embedding）| — | 用 LLM 模型 |
+| `text-embedding-3-small` (OpenAI) | 1536 | 通用能力强，需代理 |
+| `BGE-M3` (BAAI) | 1024 | 中文优秀，开源可部署 |
+| `GTE-Qwen2` (阿里) | 768 | 代码理解能力强 |
+| `Cohere embed-v3` | 1024 | 支持搜索/分类/聚类多任务 |
 
-如果用 Kimi 或智谱做 LLM，embedding 通常要单独调另一个接口。在 `tools/rag/store.py` 里单独配一个 embedding 用的 client 即可。
-
----
-
-## 一个常见误区
-
-**RAG 不是搜索引擎**。
-
-全文搜索（BM25、Elasticsearch）匹配的是关键词。向量检索匹配的是**语义**。
-
-两者互补，很多生产系统用混合检索（hybrid search）：先用关键词召回候选集，再用向量排序。Chroma 目前不原生支持 BM25，但你可以自己先用 `grep` 过滤，再用向量 rerank。
+Coding Agent 场景推荐 **GTE-Qwen2** 或 **BGE-M3**——代码和中文都表现好，且可本地部署避免网络延迟。
 
 ---
 
-## 完整目录结构
+## 向量数据库选择
 
-```
-rag_db/           ← Chroma 持久化目录
-tools/
-  rag/
-    chunker.py    ← 文本分块
-    store.py      ← embed + 向量库操作
-examples/
-  rag_agent/
-    main.py       ← 接入 Flow 的完整示例
-    ingest.py     ← 把文档批量写入向量库
-```
-
-`ingest.py` 示例：
-
-```python
-# examples/rag_agent/ingest.py
-import os
-from tools.rag.store import add_document
-
-# 把 docs/ 目录下所有 .md 文件写入向量库
-for fname in os.listdir("docs"):
-    if fname.endswith(".md"):
-        path = os.path.join("docs", fname)
-        with open(path) as f:
-            text = f.read()
-        add_document(doc_id=fname, text=text, metadata={"source": fname})
-        print(f"Indexed: {fname}")
-```
+| 工具 | 适用场景 | 特点 |
+|------|---------|------|
+| **ChromaDB** | 本地开发、原型验证 | Python 嵌入式，零配置 |
+| **pgvector** | 已有 PostgreSQL | 无需新增服务，事务一致性 |
+| **Milvus** | 大规模生产（亿级） | 分布式，高吞吐 |
+| **Qdrant** | 中等规模生产 | Rust 实现，单机性能好 |
 
 ---
 
-下一篇：[Tool / MCP / Skill 全解析](../04-tools/index.html)
+## 混合检索：稠密 + 稀疏
+
+单纯的向量检索有盲区——对精确关键词匹配（函数名、变量名）效果差。生产系统通常用混合检索：
+
+```typescript
+// 伪代码：混合检索 + RRF 融合
+async function hybridSearch(query: string, k: number): Promise<Chunk[]> {
+  // 稠密检索：语义相似
+  const denseResults = await vectorDB.search(embed(query), k * 2)
+
+  // 稀疏检索：关键词匹配（BM25）
+  const sparseResults = await bm25Index.search(query, k * 2)
+
+  // Reciprocal Rank Fusion 融合排序
+  return reciprocalRankFusion(denseResults, sparseResults, k)
+}
+
+function reciprocalRankFusion(lists: Result[][], k: number): Result[] {
+  const scores = new Map<string, number>()
+  const RRF_K = 60 // 常数，控制排名衰减速度
+
+  for (const list of lists) {
+    list.forEach((item, rank) => {
+      const score = 1 / (RRF_K + rank + 1)
+      scores.set(item.id, (scores.get(item.id) || 0) + score)
+    })
+  }
+
+  return [...scores.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, k)
+    .map(([id]) => getChunkById(id))
+}
+```
+
+**GBrain**（OpenClaw 的生产记忆系统）就是用 Postgres + pgvector + BM25 + RRF 实现的混合检索，P@5 达到 49.1%，R@5 达到 97.9%。
+
+---
+
+## Reranker：精排提升精度
+
+粗召回 Top-K 后，用 Cross-Encoder 做精排：
+
+```typescript
+async function rerankResults(query: string, chunks: Chunk[], topN: number): Promise<Chunk[]> {
+  const scored = await Promise.all(
+    chunks.map(async chunk => ({
+      chunk,
+      score: await crossEncoder.score(query, chunk.content)
+    }))
+  )
+  return scored.sort((a, b) => b.score - a.score).slice(0, topN)
+}
+```
+
+常用 Reranker：`bge-reranker-v2-m3`、`cohere-rerank-v3`。
+
+精排可以将 Top-5 精度提升 10-20%，但增加约 200ms 延迟。
+
+---
+
+## 在 Agent 中的集成方式
+
+Coding Agent 中 RAG 通常不是独立的"检索步骤"，而是作为**工具**被模型按需调用：
+
+```typescript
+const searchCodeTool = {
+  name: 'search_codebase',
+  description: '在代码库中搜索与查询语义相关的代码片段',
+  parameters: {
+    query: { type: 'string', description: '搜索查询' },
+    k: { type: 'number', description: '返回结果数量', default: 5 }
+  },
+  execute: async ({ query, k }) => {
+    const results = await hybridSearch(query, k)
+    return results.map(r => `${r.metadata.path}:${r.metadata.startLine}\n${r.content}`).join('\n---\n')
+  }
+}
+```
+
+模型自己决定什么时候需要搜索代码库，而不是每次都强制检索。
+
+---
+
+## OpenClaw 的 RAG 特点
+
+OpenClaw 没有在核心架构中内置 RAG——它把 RAG 当作**可选插件**。原因：
+
+1. Coding Agent 的主要操作是读写文件（`read` 工具带 offset/limit），大多数情况下精确路径 + grep 就够了
+2. 只有在处理大规模知识库（文档库、工单库）时才需要向量检索
+3. RAG 质量高度依赖分块策略和 embedding 选型，不适合做通用默认方案
+
+但 GBrain（OpenClaw 的外部记忆宿主）提供了完整的 RAG 能力：
+- Postgres + pgvector 混合检索
+- "Compiled Truth + Timeline" 模式——每个知识页有当前理解 + 追加式证据链
+- 自动知识图谱：提取实体引用和类型化链接
+- "Dream Cycle" 夜间合成：定期整理、聚合、丰富知识
+
+---
+
+## 面试高频题
+
+**Q：RAG 和 Fine-tuning 什么时候选哪个？**
+
+| 维度 | RAG | Fine-tuning |
+|------|-----|-------------|
+| 知识更新 | 实时（改文档即生效） | 需要重新训练 |
+| 幻觉控制 | 有来源可追溯 | 无法保证 |
+| 成本 | 推理时增加检索开销 | 训练成本高，推理不增加 |
+| 适用场景 | 知识库问答、文档检索 | 风格/格式/推理模式固化 |
+
+**Q：向量检索的 Top-K 设多少合适？**
+
+> 取决于 Reranker 和上下文窗口。经验值：粗召回 K=20，精排后取 Top-5 注入 Prompt。K 太大会引入噪声，太小可能漏掉相关内容。
+
+**Q：Embedding 模型和生成模型用同一个可以吗？**
+
+> 不推荐。Embedding 模型是专门训练的双塔/对比学习模型，生成模型的隐状态不适合做相似度检索。用专用 Embedding 模型效果显著更好。
+
+---
+
+下一篇：[工具系统：MCP 协议与并行执行](../04-tools/index.html)
