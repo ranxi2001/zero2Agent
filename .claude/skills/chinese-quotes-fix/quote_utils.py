@@ -147,24 +147,34 @@ def _classify_straight_quote(segment, index, expect_open):
     return 'open' if expect_open else 'close'
 
 
-def analyze_segment_quotes(segment, convert=False):
+def analyze_segment_quotes(segment, convert=False, fix_pairing=False,
+                           expect_open_double=True, expect_open_single=True,
+                           check_unclosed=True):
     chars = list(segment)
     stats = {
         'straight': 0,
         'left': 0,
         'right': 0,
         'pairing_issues': 0,
+        'pairing_fixed': 0,
         'straight_single': 0,
         'left_single': 0,
         'right_single': 0,
         'single_pairing_issues': 0,
+        'single_pairing_fixed': 0,
     }
-    expect_open_double = True
-    expect_open_single = True
 
     for index, char in enumerate(chars):
         # --- Curly double quotes ---
         if char == '\u201c':
+            if not expect_open_double and fix_pairing:
+                role = _classify_straight_quote(segment, index, expect_open_double)
+                if role == 'close':
+                    chars[index] = '\u201d'
+                    stats['right'] += 1
+                    stats['pairing_fixed'] += 1
+                    expect_open_double = True
+                    continue
             stats['left'] += 1
             if not expect_open_double:
                 stats['pairing_issues'] += 1
@@ -172,6 +182,14 @@ def analyze_segment_quotes(segment, convert=False):
             continue
 
         if char == '\u201d':
+            if expect_open_double and fix_pairing:
+                role = _classify_straight_quote(segment, index, expect_open_double)
+                if role == 'open':
+                    chars[index] = '\u201c'
+                    stats['left'] += 1
+                    stats['pairing_fixed'] += 1
+                    expect_open_double = False
+                    continue
             stats['right'] += 1
             if expect_open_double:
                 stats['pairing_issues'] += 1
@@ -180,6 +198,14 @@ def analyze_segment_quotes(segment, convert=False):
 
         # --- Curly single quotes ---
         if char == '\u2018':
+            if not expect_open_single and fix_pairing:
+                role = _classify_straight_quote(segment, index, expect_open_single)
+                if role == 'close':
+                    chars[index] = '\u2019'
+                    stats['right_single'] += 1
+                    stats['single_pairing_fixed'] += 1
+                    expect_open_single = True
+                    continue
             stats['left_single'] += 1
             if not expect_open_single:
                 stats['single_pairing_issues'] += 1
@@ -187,6 +213,14 @@ def analyze_segment_quotes(segment, convert=False):
             continue
 
         if char == '\u2019':
+            if expect_open_single and fix_pairing:
+                role = _classify_straight_quote(segment, index, expect_open_single)
+                if role == 'open':
+                    chars[index] = '\u2018'
+                    stats['left_single'] += 1
+                    stats['single_pairing_fixed'] += 1
+                    expect_open_single = False
+                    continue
             stats['right_single'] += 1
             if expect_open_single:
                 stats['single_pairing_issues'] += 1
@@ -235,11 +269,14 @@ def analyze_segment_quotes(segment, convert=False):
                 chars[index] = '\u201d'
             expect_open_double = True
 
-    if not expect_open_double:
-        stats['pairing_issues'] += 1
-    if not expect_open_single:
-        stats['single_pairing_issues'] += 1
+    if check_unclosed:
+        if not expect_open_double:
+            stats['pairing_issues'] += 1
+        if not expect_open_single:
+            stats['single_pairing_issues'] += 1
 
+    stats['_expect_open_double'] = expect_open_double
+    stats['_expect_open_single'] = expect_open_single
     return ''.join(chars), stats
 
 
@@ -249,12 +286,16 @@ def analyze_line(line, line_mask):
         'left': 0,
         'right': 0,
         'pairing_issues': 0,
+        'pairing_fixed': 0,
         'straight_single': 0,
         'left_single': 0,
         'right_single': 0,
         'single_pairing_issues': 0,
+        'single_pairing_fixed': 0,
     }
     cursor = 0
+    expect_open_double = True
+    expect_open_single = True
 
     while cursor < len(line):
         while cursor < len(line) and line_mask[cursor]:
@@ -267,9 +308,21 @@ def analyze_line(line, line_mask):
         if segment_start == cursor:
             continue
 
-        _, segment_stats = analyze_segment_quotes(line[segment_start:cursor])
+        _, segment_stats = analyze_segment_quotes(
+            line[segment_start:cursor],
+            expect_open_double=expect_open_double,
+            expect_open_single=expect_open_single,
+            check_unclosed=False,
+        )
+        expect_open_double = segment_stats.pop('_expect_open_double')
+        expect_open_single = segment_stats.pop('_expect_open_single')
         for key, value in segment_stats.items():
             stats[key] += value
+
+    if not expect_open_double:
+        stats['pairing_issues'] += 1
+    if not expect_open_single:
+        stats['single_pairing_issues'] += 1
 
     return stats
 
@@ -341,6 +394,8 @@ def fix_markdown_quotes(content):
             line_end = len(body)
 
         cursor = line_start
+        expect_open_double = True
+        expect_open_single = True
         while cursor < line_end:
             while cursor < line_end and mask[cursor]:
                 cursor += 1
@@ -352,7 +407,14 @@ def fix_markdown_quotes(content):
             if segment_start == cursor:
                 continue
 
-            fixed_segment, _ = analyze_segment_quotes(body[segment_start:cursor], convert=True)
+            fixed_segment, seg_stats = analyze_segment_quotes(
+                body[segment_start:cursor], convert=True,
+                expect_open_double=expect_open_double,
+                expect_open_single=expect_open_single,
+                check_unclosed=False,
+            )
+            expect_open_double = seg_stats['_expect_open_double']
+            expect_open_single = seg_stats['_expect_open_single']
             chars[segment_start:cursor] = list(fixed_segment)
 
         if line_end == len(body):
@@ -360,6 +422,51 @@ def fix_markdown_quotes(content):
         line_start = line_end + 1
 
     return front_matter + ''.join(chars)
+
+
+def fix_pairing_markdown_quotes(content):
+    front_matter, body, _ = split_front_matter(content)
+    mask = build_protection_mask(body)
+    chars = list(body)
+    line_start = 0
+    total_fixed = 0
+
+    while line_start <= len(body):
+        line_end = body.find('\n', line_start)
+        if line_end == -1:
+            line_end = len(body)
+
+        cursor = line_start
+        expect_open_double = True
+        expect_open_single = True
+        while cursor < line_end:
+            while cursor < line_end and mask[cursor]:
+                cursor += 1
+
+            segment_start = cursor
+            while cursor < line_end and not mask[cursor]:
+                cursor += 1
+
+            if segment_start == cursor:
+                continue
+
+            fixed_segment, seg_stats = analyze_segment_quotes(
+                body[segment_start:cursor], convert=True, fix_pairing=True,
+                expect_open_double=expect_open_double,
+                expect_open_single=expect_open_single,
+                check_unclosed=False,
+            )
+            expect_open_double = seg_stats['_expect_open_double']
+            expect_open_single = seg_stats['_expect_open_single']
+            total_fixed += seg_stats.get('pairing_fixed', 0)
+            total_fixed += seg_stats.get('single_pairing_fixed', 0)
+            chars[segment_start:cursor] = list(fixed_segment)
+
+        if line_end == len(body):
+            break
+        line_start = line_end + 1
+
+    return front_matter + ''.join(chars), total_fixed
 
 
 def preview_line(line, limit=100):

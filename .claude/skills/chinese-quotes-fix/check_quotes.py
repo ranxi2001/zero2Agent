@@ -114,6 +114,8 @@ def main():
 
     if needs_fix:
         print(f'\nTo fix: python .claude/skills/chinese-quotes-fix/fix_quotes.py {" ".join(args)}')
+    if unpaired:
+        print(f'\nTo fix pairing: python .claude/skills/chinese-quotes-fix/fix_quotes.py --fix-pairing {" ".join(args)}')
 
 
 if __name__ == '__main__':

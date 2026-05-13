@@ -6,10 +6,10 @@ import glob as glob_module
 import os
 import sys
 
-from quote_utils import analyze_markdown_quotes, configure_console_output, fix_markdown_quotes
+from quote_utils import analyze_markdown_quotes, configure_console_output, fix_markdown_quotes, fix_pairing_markdown_quotes
 
 
-def fix_file(file_path, dry_run=False):
+def fix_file(file_path, dry_run=False, fix_pairing=False):
     if not os.path.exists(file_path):
         print(f'\033[31mFile not found: {file_path}\033[0m')
         return False
@@ -22,12 +22,18 @@ def fix_file(file_path, dry_run=False):
 
     fixable_double = before['straight_double_text']
     fixable_single = before['straight_single_text']
+    has_pairing_issues = before['pairing_issues'] > 0 or before['single_pairing_issues'] > 0
 
-    if fixable_double == 0 and fixable_single == 0:
-        print(f'SKIP {file_name} - No fixable straight quotes')
+    if fixable_double == 0 and fixable_single == 0 and not (fix_pairing and has_pairing_issues):
+        print(f'SKIP {file_name} - No fixable quotes')
         return True
 
     fixed = fix_markdown_quotes(content)
+
+    pairing_fixed_count = 0
+    if fix_pairing:
+        fixed, pairing_fixed_count = fix_pairing_markdown_quotes(fixed)
+
     after = analyze_markdown_quotes(fixed)
     preserved_double = after['straight_double_total'] - after['straight_double_text']
 
@@ -45,6 +51,10 @@ def fix_file(file_path, dry_run=False):
             f'   Double: {fixable_double} straight {action} '
             f'left({after["left_double"]}) right({after["right_double"]})'
         )
+
+    if fix_pairing and pairing_fixed_count:
+        action = 'would fix' if dry_run else 'fixed'
+        print(f'   Pairing: {action} {pairing_fixed_count} misplaced curly quotes')
 
     paired_double = '\033[32mYes\033[0m' if after['pairing_issues'] == 0 else f'\033[31mNo ({after["pairing_issues"]} issues)\033[0m'
     print(f'   Double paired: {paired_double}')
@@ -76,12 +86,17 @@ def main():
 
     args = sys.argv[1:]
     dry_run = '--dry-run' in args
-    file_args = [arg for arg in args if arg != '--dry-run']
+    fix_pairing = '--fix-pairing' in args
+    file_args = [arg for arg in args if not arg.startswith('--')]
 
     if not file_args:
-        print('Chinese Quote Fixer v5 (double + single quotes)')
+        print('Chinese Quote Fixer v6 (double + single + pairing fix)')
         print()
-        print('Usage: python fix_quotes.py [--dry-run] <file1.md> [file2.md] ...')
+        print('Usage: python fix_quotes.py [--dry-run] [--fix-pairing] <file1.md> [file2.md] ...')
+        print()
+        print('Options:')
+        print('  --dry-run       Preview changes without writing')
+        print('  --fix-pairing   Fix misplaced curly quotes (e.g. "text" -> "text")')
         print()
         print('Protected zones:')
         print('  - YAML front matter')
@@ -106,7 +121,7 @@ def main():
     action = 'Previewing' if dry_run else 'Fixing'
     print(f'\n{action} {len(files)} file(s)...\n')
 
-    ok = sum(1 for file_path in files if fix_file(file_path, dry_run=dry_run))
+    ok = sum(1 for file_path in files if fix_file(file_path, dry_run=dry_run, fix_pairing=fix_pairing))
     print(f'\nDone! Processed {ok}/{len(files)} files')
     if dry_run:
         print('\nRemove --dry-run to apply fixes')

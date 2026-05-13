@@ -67,6 +67,17 @@ python .claude/skills/chinese-quotes-fix/fix_quotes.py --dry-run "path/to/file.m
 python .claude/skills/chinese-quotes-fix/fix_quotes.py "path/to/file.md"
 ```
 
+### 4. 修复配对问题（弯引号方向错误）
+
+当 check 报告 `pairing issues`（如 `"text"` 应为 `"text"`）时，使用 `--fix-pairing`：
+
+```bash
+python .claude/skills/chinese-quotes-fix/fix_quotes.py --fix-pairing --dry-run "path/to/file.md"
+python .claude/skills/chinese-quotes-fix/fix_quotes.py --fix-pairing "path/to/file.md"
+```
+
+此模式会分析上下文判断每个弯引号的正确方向，将误用为开引号的 `"` 修正为 `"`，反之亦然。
+
 ## 配对策略
 
 ### 双引号
