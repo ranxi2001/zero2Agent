@@ -10,3 +10,5 @@ _site/
 __pycache__/
 *.pyc
 .DS_Store
+.claude/skills/scrape-nowcoder/nowcoder-output
+nowcoder-output/
