@@ -8,7 +8,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/ranxi2001/zero2Agent?style=social)](https://github.com/ranxi2001/zero2Agent)
 [![Site](https://img.shields.io/badge/Site-onefly.top%2FzeroAgent-brightgreen)](https://onefly.top/zero2Agent)
 
-[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/)
+[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/)
 
 </div>
 
@@ -16,9 +16,9 @@
 
 ## 这是什么
 
-**zero2Agent** 是一个面向程序员的 Agent 工程教程仓库，目标是帮助已经会写代码、会用 AI 工具，但还没系统做过 Agent 工程的开发者，真正从零搭出自己的 Agent 系统。
+**zero2Agent** 是一个面向程序员的 Agent 工程教程仓库，目标是帮助已经会写代码、会用 AI 工具，但还没系统做过 Agent 工程的开发者，真正从零搭出自己的 Agent 系统。同时也适合应届生或转行开发者，作为 AI Agent 方向面试备战的系统性参考。
 
-内容不停留在 Demo、Prompt、套壳工作流，而是从核心机制出发，覆盖 Agent 的工程设计原理、框架拆解、代码实现，最终落到一个完整的实战项目。
+内容不停留在 Demo、Prompt、套壳工作流，而是从核心机制出发，覆盖 Agent 的工程设计原理、框架拆解、代码实现，最终落到完整的实战项目与大厂面试题深度拆解。
 
 **在线阅读（GitHub Pages）**：[https://onefly.top/zero2Agent](https://onefly.top/zero2Agent)
 
@@ -37,9 +37,10 @@
 | [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) | 7 篇 | ✅ 完成 | StateGraph 三件套、条件分支、并行 Fan-out/Fan-in、Prompt Chaining、LLM 集成 |
 | [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) | 4 篇 | ✅ 完成 | OpenAI Agents SDK · Google genai SDK · Claude Anthropic SDK · 三大 SDK 横向对比 |
 | [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) | 13 篇 | ✅ 完成 | AgentScope · Mastra · Semantic Kernel · Eino · DeerFlow · LangChain · Google ADK · AutoGen · Vercel AI SDK 等 |
+| [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 14 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，14 大考察维度，新手答 vs 高手答对比 |
 | Final Project | — | 🔲 待开始 | 加密货币市场风控 Agent 完整实战 |
 
-> **当前进度：53 篇文章，6 个完整模块**
+> **当前进度：67 篇文章，7 个完整模块**
 
 ---
 
@@ -123,6 +124,25 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 | Vercel AI SDK | Vercel | useChat/streamText，Next.js 全栈 |
 | AutoGen | 微软 | 多 Agent 对话，代码执行，HITL |
 
+### 面试通关
+
+大厂 AI Agent 岗位高频面试题深度拆解，覆盖蚂蚁、阿里、字节、腾讯、携程等真实面试场景。每道题对比"新手答"和"高手答"，14 大考察维度：
+
+| 维度 | 核心考点 |
+|------|---------|
+| 架构选型 | ReAct vs Plan-and-Execute、ToT 线上化、四种设计范式 |
+| 工具管理 | 参数校验、百级工具路由、多工具调度 |
+| 容错与鲁棒性 | 超时处理、误操作防范、幻觉治理 |
+| 记忆与上下文 | 长对话不丢信息、上下文污染防治 |
+| 多智能体协作 | 角色分工、通信机制、冲突仲裁 |
+| Prompt 工程 | 模板分层构建、Skills 可复用能力单元 |
+| RAG 与检索 | chunk 设计、查询改写、多路召回精排 |
+| 训练与数据 | 数据清洗、LoRA vs 全参微调、DPO/PPO/GRPO |
+| AI 代码测试 | 覆盖率插桩、代码过滤策略 |
+| 业务 AI 工程 | 业务需求拆解、AI 方案选型 |
+| 简历项目拷打 | 面试官追着你的 Agent 项目问到底 |
+| 各公司偏好 | 按公司统计高频考点与面试风格 |
+
 ---
 
 ## 适合谁
@@ -157,6 +177,7 @@ zero2Agent/
 ├── learn-langgraph/        # LangGraph（7 篇）
 ├── learn-sdk-frameworks/   # 三大原厂 SDK（4 篇）
 ├── learn-agent-survey/     # 框架调研（13 篇）
+├── learn-agent-interview/  # 大厂面试题拆解（14 篇）
 └── final-project/          # 加密货币风控 Agent 实战（待开始）
 ```
 
