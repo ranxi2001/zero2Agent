@@ -1,44 +1,36 @@
 #!/usr/bin/env node
 
 /**
- * 牛客网面经抓取脚本 — 原生 CDP WebSocket，复用已有 Chrome profile
+ * 牛客网面经抓取脚本 — 原生 CDP WebSocket
  *
  * 用法：
  *   node scrape.mjs [选项]
  *
  * 工作方式：
- *   1. 关闭当前 Chrome（需用户确认）
- *   2. 用你原有的 Chrome profile 重新启动 + 启用调试端口
- *   3. 抓取完成后关闭 Chrome（你可以正常重新打开）
+ *   使用独立的 Chrome 实例（~/.chrome-nowcoder），不影响日常 Chrome。
+ *   首次使用需 --login 登录牛客，之后 cookie 永久保存在独立 profile 中。
+ *   脚本自动检测：已有调试实例就直接连接，没有就启动新的。
  *
  * 选项：
- *   --login           打开浏览器让你登录牛客，cookie 保存在 debug profile 中
+ *   --login           打开浏览器让你登录牛客，cookie 保存在独立 profile 中
  *   --pages <n>       抓取列表页数 (默认 1)
  *   --keyword <kw>    按关键词筛选标题 (如 "AI"、"大模型")
- *   --out <dir>       输出目录 (默认 ./nowcoder-output)
+ *   --search <query>  搜索模式，按关键词在搜索页抓取
+ *   --out <dir>       输出目录 (默认 .claude/skills/scrape-nowcoder/nowcoder-output)
  *   --port <port>     Chrome 调试端口 (默认 9222)
- *   --no-headless     显示浏览器窗口（默认 headless，加此参数可看到抓取过程）
  *   --delay <ms>      请求间隔毫秒数 (默认 2000，避免反爬)
- *   --visible         同 --no-headless
  */
 
-import { spawn, execSync } from "node:child_process";
-import { mkdir, writeFile, symlink, cp, rm, access } from "node:fs/promises";
+import { spawn } from "node:child_process";
+import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { createInterface } from "node:readline";
 import { existsSync } from "node:fs";
 
-const USER_CHROME_DIR = join(
-  homedir(),
-  "Library",
-  "Application Support",
-  "Google",
-  "Chrome"
-);
-const DEBUG_PROFILE_DIR = join(homedir(), ".chrome-debug-nowcoder");
 const CHROME_PATH =
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME_USER_DIR = join(homedir(), ".chrome-nowcoder");
 
 // ─── 参数解析 ───────────────────────────────────────────────────────────────────
 
@@ -49,16 +41,14 @@ function parseArgs() {
     pages: 1,
     keyword: "",
     search: "",
-    out: join(process.cwd(), "nowcoder-output"),
+    out: join(import.meta.dirname, "nowcoder-output"),
     port: 9222,
-    headless: true,
     delay: 2000,
   };
   for (let i = 0; i < args.length; i++) {
     switch (args[i]) {
       case "--login":
         opts.login = true;
-        opts.headless = false;
         break;
       case "--pages":
         opts.pages = parseInt(args[++i], 10);
@@ -74,10 +64,6 @@ function parseArgs() {
         break;
       case "--port":
         opts.port = parseInt(args[++i], 10);
-        break;
-      case "--no-headless":
-      case "--visible":
-        opts.headless = false;
         break;
       case "--delay":
         opts.delay = parseInt(args[++i], 10);
@@ -154,87 +140,38 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function waitForChrome(port, maxRetries = 40) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const res = await fetch(`http://127.0.0.1:${port}/json/version`);
-      if (res.ok) return await res.json();
-    } catch {}
-    await sleep(500);
-  }
-  throw new Error(
-    `Chrome did not start on port ${port} after ${maxRetries * 500}ms`
-  );
-}
-
-function isChromeRunning() {
+async function isCdpReachable(port) {
   try {
-    const result = execSync("pgrep -x 'Google Chrome'", {
-      encoding: "utf-8",
-    });
-    return result.trim().length > 0;
-  } catch {
-    return false;
-  }
+    const res = await fetch(`http://127.0.0.1:${port}/json/version`);
+    return res.ok;
+  } catch { return false; }
 }
 
-function quitChrome() {
-  try {
-    execSync(
-      `osascript -e 'tell application "Google Chrome" to quit'`,
-      { stdio: "ignore", timeout: 5000 }
-    );
-  } catch {
-    execSync("pkill -x 'Google Chrome' 2>/dev/null || true", {
-      stdio: "ignore",
-    });
-  }
-}
-
-async function prepareDebugProfile() {
-  // Chrome 拒绝在默认 profile 路径上开启远程调试
-  // 方案：创建独立目录 + symlink Default profile，保留登录态
-  const lockFiles = ["SingletonLock", "SingletonSocket", "SingletonCookie"];
-  for (const f of lockFiles) {
-    const p = join(DEBUG_PROFILE_DIR, f);
-    if (existsSync(p)) await rm(p, { force: true });
-  }
-
-  if (!existsSync(DEBUG_PROFILE_DIR)) {
-    await mkdir(DEBUG_PROFILE_DIR, { recursive: true });
-  }
-
-  const defaultLink = join(DEBUG_PROFILE_DIR, "Default");
-  if (!existsSync(defaultLink)) {
-    await symlink(join(USER_CHROME_DIR, "Default"), defaultLink);
-  }
-
-  const localState = join(DEBUG_PROFILE_DIR, "Local State");
-  if (!existsSync(localState)) {
-    const src = join(USER_CHROME_DIR, "Local State");
-    if (existsSync(src)) {
-      await cp(src, localState);
-    }
-  }
-}
-
-function launchChrome(port, headless) {
-  const args = [
+async function launchChrome(port) {
+  if (!existsSync(CHROME_PATH)) throw new Error(`Chrome not found at ${CHROME_PATH}`);
+  if (!existsSync(CHROME_USER_DIR)) await mkdir(CHROME_USER_DIR, { recursive: true });
+  const child = spawn(CHROME_PATH, [
     `--remote-debugging-port=${port}`,
-    "--no-first-run",
-    "--no-default-browser-check",
-    "--disable-background-networking",
-    `--user-data-dir=${DEBUG_PROFILE_DIR}`,
-    "--profile-directory=Default",
-  ];
-  if (headless) args.push("--headless=new");
-
-  const child = spawn(CHROME_PATH, args, {
-    stdio: "ignore",
-    detached: true,
-  });
+    `--user-data-dir=${CHROME_USER_DIR}`,
+  ], { detached: true, stdio: 'ignore' });
   child.unref();
-  return child;
+  for (let i = 0; i < 30; i++) {
+    await sleep(500);
+    if (await isCdpReachable(port)) return;
+  }
+  throw new Error(`Chrome 启动失败：端口 ${port} 在 15 秒内未就绪`);
+}
+
+async function ensureCdp(port) {
+  if (await isCdpReachable(port)) return;
+  await launchChrome(port);
+}
+
+async function findPage(port, urlPattern) {
+  await ensureCdp(port);
+  const resp = await fetch(`http://127.0.0.1:${port}/json`);
+  const pages = await resp.json();
+  return pages.find(p => p.type === 'page' && p.url.includes(urlPattern));
 }
 
 function askUser(question) {
@@ -290,95 +227,21 @@ async function scrollToBottom(cdp, maxScrolls = 10) {
 // ─── 登录模式 ────────────────────────────────────────────────────────────────────
 
 async function loginMode(opts) {
-  console.log("[login] 登录模式 — 打开浏览器，自动检测登录状态");
-  console.log(`[login] Profile 保存位置: ${DEBUG_PROFILE_DIR}`);
+  console.log("[login] 请确保 Chrome 已以调试端口启动并已登录牛客。");
+  console.log("[login] 如未启动，脚本会自动启动独立 Chrome（~/.chrome-nowcoder）。");
   console.log();
 
-  if (isChromeRunning()) {
-    console.log("[login] 需要先关闭当前 Chrome...");
-    const answer = await askUser("[login] 确认关闭 Chrome？(y/n) ");
-    if (answer.toLowerCase() !== "y") {
-      console.log("[login] 已取消。");
-      process.exit(0);
-    }
-    quitChrome();
-    await sleep(2000);
-  }
-
-  await prepareDebugProfile();
-  const chrome = launchChrome(opts.port, false);
-
-  try {
-    const versionInfo = await waitForChrome(opts.port);
-    console.log(`[login] Chrome 已启动: ${versionInfo.Browser}`);
-
-    const targets = await (await fetch(`http://127.0.0.1:${opts.port}/json`)).json();
-    let pageTarget = targets.find((t) => t.type === "page");
-    if (!pageTarget) {
-      pageTarget = await (
-        await fetch(`http://127.0.0.1:${opts.port}/json/new?about:blank`, { method: "PUT" })
-      ).json();
-    }
-
-    const cdp = new CDPSession(pageTarget.webSocketDebuggerUrl);
-    await cdp.connect();
-    await cdp.send("Page.enable");
-    await cdp.send("Runtime.enable");
-
-    // 导航到登录页
-    await navigate(cdp, "https://www.nowcoder.com/login");
-    console.log("[login] ════════════════════════════════════════════════");
-    console.log("[login]  浏览器已打开牛客登录页，请扫码/账密登录");
-    console.log("[login]  正在自动检测登录状态...");
-    console.log("[login] ════════════════════════════════════════════════");
-
-    // 轮询检测登录成功（最长等 120 秒）
-    const maxWait = 120000;
-    const pollInterval = 2000;
-    const start = Date.now();
-    let loggedIn = false;
-
-    while (Date.now() - start < maxWait) {
-      await sleep(pollInterval);
-      try {
-        const result = await evaluate(
-          cdp,
-          `(() => {
-            // 登录成功后通常会跳转离开 /login 页面
-            if (!location.href.includes('/login')) return true;
-            // 或者页面上出现了用户头像
-            if (document.querySelector('[class*="avatar"]')) return true;
-            // 或者 cookie 中出现登录标识
-            if (document.cookie.includes('t=') || document.cookie.includes('token')) return true;
-            return false;
-          })()`
-        );
-        if (result) {
-          loggedIn = true;
-          break;
-        }
-      } catch {
-        // CDP 可能因页面跳转暂时断开，忽略
-      }
-      const elapsed = Math.round((Date.now() - start) / 1000);
-      process.stdout.write(`\r[login] 等待登录中... ${elapsed}s`);
-    }
-    console.log();
-
-    if (loggedIn) {
-      // 等一下让 cookie 完全写入
-      await sleep(2000);
-      console.log("[login] ✅ 检测到登录成功！Cookie 已保存。");
-      console.log("[login] 后续运行 scrape.mjs 将自动使用此登录态。");
-    } else {
-      console.log("[login] ⚠️  等待超时，未检测到登录。");
-      console.log("[login] 请重试: node scrape.mjs --login");
-    }
-
-    cdp.close();
-  } finally {
-    chrome.kill();
-    console.log("[login] Chrome 已关闭。");
+  await ensureCdp(opts.port);
+  const page = await findPage(opts.port, "nowcoder");
+  if (page) {
+    console.log("[login] ✅ 已找到牛客页面，登录态有效。可直接抓取。");
+  } else {
+    // 打开牛客首页让用户登录
+    const newTab = await (await fetch(`http://127.0.0.1:${opts.port}/json/new?https://www.nowcoder.com/login`, { method: "PUT" })).json();
+    console.log("[login] 已打开牛客登录页，请在浏览器中登录。");
+    console.log("[login] 登录完成后按 Enter 继续...");
+    await askUser("");
+    console.log("[login] ✅ 完成。");
   }
 }
 
@@ -387,29 +250,11 @@ async function loginMode(opts) {
 async function scrapeListPage(cdp, pageNum) {
   const url = "https://www.nowcoder.com/?type=818_1";
   await navigate(cdp, url);
+  await sleep(3000);
+
+  // 滚动加载更多内容
+  await scrollToBottom(cdp, 8);
   await sleep(2000);
-
-  // SPA 可能默认显示"推荐"，需要点击"面经"tab
-  await evaluate(
-    cdp,
-    `(() => {
-      const tabs = document.querySelectorAll('a, span, div, li');
-      for (const tab of tabs) {
-        if (tab.textContent.trim() === '面经' && tab.offsetHeight > 0) {
-          tab.click();
-          return true;
-        }
-      }
-      return false;
-    })()`
-  );
-  await sleep(4000);
-
-  // 多次滚动加载，等待懒加载内容
-  for (let round = 0; round < 3; round++) {
-    await scrollToBottom(cdp, 5);
-    await sleep(2000);
-  }
 
   const articles = await evaluate(
     cdp,
@@ -417,41 +262,38 @@ async function scrapeListPage(cdp, pageNum) {
       const items = [];
       const seen = new Set();
 
-      const links = document.querySelectorAll('a[href*="/discuss/"]');
-      links.forEach(a => {
-        const href = a.href.split('?')[0];
-        if (seen.has(href)) return;
+      // 标题元素：Tailwind 的 tw-font-bold 或 tw-overflow-hidden 标题 div
+      // 它们的父级 a 标签包含文章链接
+      const titleEls = document.querySelectorAll('.tw-font-bold, [class*="tw-overflow-hidden"][class*="hover:tw-text"]');
 
-        let title = a.textContent.trim();
-        if (!title || title.length < 4) return;
-        // 过滤非文章链接
-        if (['查看更多', '查看全部', '登录', '注册', '真题和解析', '查看详情'].some(x => title.includes(x))) return;
+      titleEls.forEach(el => {
+        const title = el.textContent.trim();
+        if (!title || title.length < 4 || title.length > 150) return;
 
-        // 清理标题：去除热度数字后缀（如 "标题 ... 标题 1.1W"）
-        const dupeMatch = title.match(/^(\\d+\\s+)?(.+?)\\s+\\.{3}\\s+.+$/);
-        if (dupeMatch) {
-          title = dupeMatch[2].trim();
+        // 找到包含链接的父级 a
+        const linkEl = el.closest('a') || el.parentElement?.closest('a');
+        let href = '';
+        if (linkEl) {
+          href = linkEl.href.split('?')[0];
+        } else {
+          // 尝试从同级找 feed-text 链接
+          const card = el.closest('[class*="feed"]') || el.parentElement?.parentElement?.parentElement;
+          const feedLink = card?.querySelector('a[href*="/feed/main/detail/"], a[href*="/discuss/"]');
+          if (feedLink) href = feedLink.href.split('?')[0];
         }
-        // 去除尾部数字(阅读量)
-        title = title.replace(/\\s+[\\d.]+[WwKk万]?\\s*$/, '').trim();
-
-        if (title.length > 150 || title.length < 4) return;
-
-        // 面经贴过滤：标题必须含面试相关关键词
-        const interviewKeywords = ['面', '面经', '面试', '一面', '二面', '三面', 'HR面', '笔试', 'OC', 'offer'];
-        const isInterview = interviewKeywords.some(kw => title.includes(kw));
-        if (!isInterview) return;
-
+        if (!href || seen.has(href)) return;
+        if (!href.includes('/feed/') && !href.includes('/discuss/')) return;
         seen.add(href);
 
-        const card = a.closest('[class*="feed"], [class*="discuss"], [class*="post"], [class*="card"], [class*="item"]') || a.parentElement?.parentElement;
+        // 找作者和预览
+        const card = el.closest('[class*="feed"]') || el.parentElement?.parentElement?.parentElement?.parentElement;
         let author = '';
         let preview = '';
         if (card) {
-          const authorEl = card.querySelector('[class*="name"], [class*="author"], [class*="nick"]');
-          if (authorEl && authorEl !== a) author = authorEl.textContent.trim();
-          const previewEl = card.querySelector('[class*="content"], [class*="desc"], [class*="text"], [class*="summary"]');
-          if (previewEl && previewEl !== a) preview = previewEl.textContent.trim().slice(0, 300);
+          const authorEl = card.querySelector('[class*="name"], [class*="nick"]');
+          if (authorEl) author = authorEl.textContent.trim();
+          const previewEl = card.querySelector('.feed-text, [class*="text-gray"]');
+          if (previewEl && previewEl !== el) preview = previewEl.textContent.trim().slice(0, 300);
         }
 
         items.push({ title, url: href, author, preview });
@@ -642,43 +484,18 @@ async function main() {
   console.log(`[scrape] 输出目录: ${opts.out}`);
   console.log();
 
-  // 检查并关闭现有 Chrome（因为同一 profile 不能多开）
-  if (isChromeRunning()) {
-    console.log("[scrape] 检测到 Chrome 正在运行");
-    const answer = await askUser("[scrape] 需要关闭 Chrome 以复用你的登录状态，确认？(y/n) ");
-    if (answer.toLowerCase() !== "y") {
-      console.log("[scrape] 已取消。");
-      process.exit(0);
-    }
-    console.log("[scrape] 正在关闭 Chrome...");
-    quitChrome();
-    await sleep(2000);
-  }
-
-  // 准备调试用 profile（symlink 用户真实 profile，绕过 Chrome 安全限制）
-  console.log("[scrape] 准备调试 profile...");
-  await prepareDebugProfile();
-
-  // 启动 Chrome
-  console.log(`[scrape] 启动 Chrome (headless=${opts.headless})...`);
-  const chrome = launchChrome(opts.port, opts.headless);
+  // 连接 Chrome 调试端口（已运行就直连，否则启动独立实例）
+  await ensureCdp(opts.port);
   let cdp = null;
 
   try {
-    const versionInfo = await waitForChrome(opts.port);
-    console.log(`[scrape] Chrome 已就绪: ${versionInfo.Browser}`);
-
-    // 获取或创建 page target
-    let pageTarget;
+    // 获取 page target（优先用已有的 nowcoder tab，否则新建）
     const targetsRes = await fetch(`http://127.0.0.1:${opts.port}/json`);
     const targets = await targetsRes.json();
-    pageTarget = targets.find((t) => t.type === "page");
-
+    let pageTarget = targets.find((t) => t.type === "page" && t.url.includes("nowcoder"));
+    if (!pageTarget) pageTarget = targets.find((t) => t.type === "page");
     if (!pageTarget) {
-      // Chrome 148+ 要求 PUT 方法创建新 tab
-      const newTabRes = await fetch(`http://127.0.0.1:${opts.port}/json/new?about:blank`, {
-        method: "PUT",
-      });
+      const newTabRes = await fetch(`http://127.0.0.1:${opts.port}/json/new?about:blank`, { method: "PUT" });
       pageTarget = await newTabRes.json();
     }
 
@@ -790,8 +607,6 @@ async function main() {
     console.log(`[scrape] ════════════════════════════════════════\n`);
   } finally {
     if (cdp) cdp.close();
-    chrome.kill();
-    console.log("[scrape] Chrome 已关闭，你可以正常重新打开浏览器。");
   }
 }
 
