@@ -56,9 +56,24 @@ node .claude/skills/scrape-nowcoder/scrape.mjs
 # 抓 3 页，只要 AI 相关
 node .claude/skills/scrape-nowcoder/scrape.mjs --pages 3 --keyword "AI"
 
+# 搜索模式：搜"字节跳动 后端 面经"，抓 5 页
+node .claude/skills/scrape-nowcoder/scrape.mjs --search "字节跳动 后端 面经" --pages 5
+
+# 搜索模式：搜 Redis 八股
+node .claude/skills/scrape-nowcoder/scrape.mjs --search "Redis 面经 八股" --pages 3
+
 # 指定端口
 node .claude/skills/scrape-nowcoder/scrape.mjs --port 9333
 ```
+
+### 两种模式对比
+
+| | 列表模式（默认） | 搜索模式（`--search`） |
+|---|---|---|
+| 数据源 | 牛客面经 tab 时间流 | 牛客搜索页 `/search/all` |
+| 筛选方式 | `--keyword` 按标题过滤 | 搜索词直接匹配全站面经 |
+| 翻页方式 | URL 导航 | 客户端点击分页按钮 |
+| 适用场景 | 浏览最新热门面经 | 精准搜索特定公司/方向/主题 |
 
 ## 输出结构
 

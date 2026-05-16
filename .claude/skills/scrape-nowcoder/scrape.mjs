@@ -309,48 +309,62 @@ async function scrapeListPage(cdp, pageNum) {
 // ─── 搜索页抓取 ──────────────────────────────────────────────────────────────────
 
 async function scrapeSearchPage(cdp, query, pageNum) {
-  const url = `https://www.nowcoder.com/search?type=discuss&query=${encodeURIComponent(query)}&page=${pageNum}&order=time`;
-  await navigate(cdp, url);
-  await sleep(3000);
-
-  // 滚动加载
-  await scrollToBottom(cdp, 3);
-  await sleep(2000);
+  if (pageNum === 1) {
+    // 第一页：直接导航到搜索 URL
+    const url = `https://www.nowcoder.com/search/all?query=${encodeURIComponent(query)}&type=all&searchType=${encodeURIComponent("顶部导航栏")}`;
+    await navigate(cdp, url);
+    await sleep(3000);
+  } else {
+    // 后续页：点击分页按钮
+    await evaluate(
+      cdp,
+      `(() => {
+        var pager = document.querySelector("ul.pager");
+        if (!pager) return false;
+        var items = pager.querySelectorAll("li");
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].textContent.trim() === "${pageNum}") {
+            items[i].click();
+            return true;
+          }
+        }
+        return false;
+      })()`
+    );
+    await sleep(3000);
+  }
 
   const articles = await evaluate(
     cdp,
     `(() => {
-      const items = [];
-      const seen = new Set();
+      var items = [];
+      var seen = {};
+      var links = document.querySelectorAll("a");
 
-      const links = document.querySelectorAll('a[href*="/discuss/"]');
-      links.forEach(a => {
-        const href = a.href.split('?')[0];
-        if (seen.has(href)) return;
+      for (var i = 0; i < links.length; i++) {
+        var a = links[i];
+        var href = (a.href || "").split("?")[0];
+        if (!href.includes("/feed/main/detail/") && !href.includes("/discuss/")) continue;
+        if (seen[href]) continue;
 
-        let title = a.textContent.trim();
-        if (!title || title.length < 4) return;
-        if (['查看更多', '查看全部', '登录', '注册'].some(x => title.includes(x))) return;
+        var title = (a.textContent || "").trim();
+        if (!title || title.length < 4) continue;
+        if (title.includes("查看更多") || title.includes("查看全部")) continue;
 
-        title = title.replace(/\\s+[\\d.]+[WwKk万]?\\s*$/, '').trim();
-        if (title.length > 150 || title.length < 4) return;
+        title = title.replace(/\\s+[\\d.]+[WwKk万]?\\s*$/, "").trim();
+        if (title.length > 150 || title.length < 4) continue;
 
         // 搜索结果中进一步过滤：必须包含面试相关词
-        const interviewKeywords = ['面经', '面试', '一面', '二面', '三面', 'HR面', '实习'];
-        const isInterview = interviewKeywords.some(kw => title.includes(kw));
-        if (!isInterview) return;
-
-        seen.add(href);
-
-        const card = a.closest('[class*="search"], [class*="result"], [class*="item"], [class*="card"]') || a.parentElement?.parentElement;
-        let author = '';
-        if (card) {
-          const authorEl = card.querySelector('[class*="name"], [class*="author"], [class*="nick"]');
-          if (authorEl && authorEl !== a) author = authorEl.textContent.trim();
+        var interviewKeywords = ["面经", "面试", "一面", "二面", "三面", "HR面", "实习", "秋招", "春招", "暑期", "校招", "笔试"];
+        var isInterview = false;
+        for (var k = 0; k < interviewKeywords.length; k++) {
+          if (title.includes(interviewKeywords[k])) { isInterview = true; break; }
         }
+        if (!isInterview) continue;
 
-        items.push({ title, url: href, author, preview: '' });
-      });
+        seen[href] = true;
+        items.push({ title: title, url: href, author: "", preview: "" });
+      }
 
       return items;
     })()`
