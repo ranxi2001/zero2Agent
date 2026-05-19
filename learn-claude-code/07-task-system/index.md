@@ -523,9 +523,9 @@ flowchart TD
 
     D --> E[list_ready: task_1 可用]
     E --> F[执行 task_1]
-    F --> G[complete task_1\n解锁 task_2 和 task_3]
+    F --> G[complete task_1<br>解锁 task_2 和 task_3]
     G --> H[并行处理 task_2 和 task_3]
-    H --> I[complete task_2 + task_3\n解锁 task_4]
+    H --> I[complete task_2 + task_3<br>解锁 task_4]
 </div>
 
 ---

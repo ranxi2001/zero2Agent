@@ -217,7 +217,7 @@ flowchart TD
     COLLAPSE -->|仍然太长| REACTIVE[reactive compact:<br>激进压缩]
     REACTIVE -->|reactive_compact_retry| API
 
-    CHECK -->|max_output_tokens| ESCALATE[max_output_tokens_escalate:<br>8k → 64k]
+    CHECK -->|max_output_tokens| ESCALATE[max_output_tokens_escalate:<br>8k to 64k]
     ESCALATE --> API
 
     ESCALATE -->|仍然超限| RECOVERY[max_output_tokens_recovery:<br>多轮恢复]

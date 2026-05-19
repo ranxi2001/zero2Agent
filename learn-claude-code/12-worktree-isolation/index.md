@@ -469,7 +469,7 @@ flowchart TD
     C --> D[worktree_write: task_001, src/auth.py]
     D --> E[worktree_bash: task_001, pytest tests/]
     E --> F{测试通过?}
-    F -->|是| G[worktree_finish: task_001\n"实现 JWT 验证"]
+    F -->|是| G[worktree_finish: task_001<br>实现 JWT 验证]
     F -->|否| D
     G --> H[idle: 等待新任务]
 </div>
