@@ -64,29 +64,37 @@
     <!-- Mermaid: load + configure in <head> so it's ready before body scripts -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js"></script>
     <script>
-        mermaid.initialize({
-            startOnLoad: false,
-            securityLevel: 'loose',
-            theme: 'dark',
-            themeVariables: {
-                background: '#0a0a10',
-                primaryColor: '#1a2535',
-                primaryTextColor: '#d1d5db',
-                primaryBorderColor: '#334155',
-                lineColor: '#10b981',
-                secondaryColor: '#161e2e',
-                tertiaryColor: '#161e2e',
-                edgeLabelBackground: '#0d0d12',
-                clusterBkg: '#13131f',
-                fontFamily: '"Noto Sans SC", "Inter", sans-serif',
-                fontSize: '14px',
-            },
-            flowchart: { curve: 'basis', htmlLabels: false, padding: 16 },
-            sequence: {
-                actorFontFamily: '"Noto Sans SC", sans-serif',
-                messageFontFamily: '"Noto Sans SC", sans-serif',
-            },
-        });
+        (function(){
+            var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            var darkVars = {
+                background: '#0a0a10', primaryColor: '#1a2535',
+                primaryTextColor: '#d1d5db', primaryBorderColor: '#334155',
+                lineColor: '#10b981', secondaryColor: '#161e2e',
+                tertiaryColor: '#161e2e', edgeLabelBackground: '#0d0d12',
+                clusterBkg: '#13131f'
+            };
+            var lightVars = {
+                background: '#ffffff', primaryColor: '#dbeafe',
+                primaryTextColor: '#1a1a2e', primaryBorderColor: '#93c5fd',
+                lineColor: '#059669', secondaryColor: '#f0fdf4',
+                tertiaryColor: '#ecfdf5', edgeLabelBackground: '#ffffff',
+                clusterBkg: '#f8fafc'
+            };
+            mermaid.initialize({
+                startOnLoad: false,
+                securityLevel: 'loose',
+                theme: isLight ? 'default' : 'dark',
+                themeVariables: Object.assign(isLight ? lightVars : darkVars, {
+                    fontFamily: '"Noto Sans SC", "Inter", sans-serif',
+                    fontSize: '14px'
+                }),
+                flowchart: { curve: 'basis', htmlLabels: false, padding: 16 },
+                sequence: {
+                    actorFontFamily: '"Noto Sans SC", sans-serif',
+                    messageFontFamily: '"Noto Sans SC", sans-serif',
+                },
+            });
+        })();
     </script>
 </head>
 
