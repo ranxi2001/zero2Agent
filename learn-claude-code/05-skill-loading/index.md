@@ -608,7 +608,7 @@ TOOL_HANDLERS["Skill"] = lambda **kw: handle_skill(kw["skill"], kw.get("args", "
 
 ```mermaid
 flowchart TD
-    A([用户：帮我做代码审查]) --> B[LLM 看到技能列表]
+    A(["用户：帮我做代码审查"]) --> B[LLM 看到技能列表]
     B --> C{"Skill 工具调用<br/>skill: code-review"}
     C --> D{context = fork?}
     D -->|inline| E[技能内容注入为 user message]
