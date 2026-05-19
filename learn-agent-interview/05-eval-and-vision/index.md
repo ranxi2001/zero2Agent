@@ -618,7 +618,7 @@ flowchart TB
     H --> H2[“声明提取+验证\n事实幻觉检测”]
     H --> H3[“结果对比\n输出幻觉检测”]
     
-    P1 --> S[“联合评分报告\nPlanning 得分 × Hallucination Rate”]
+    P1 --> S[“联合评分报告<br>Planning 得分 x Hallucination Rate”]
     P2 --> S
     P3 --> S
     H1 --> S
