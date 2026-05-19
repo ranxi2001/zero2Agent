@@ -465,9 +465,9 @@ TOOL_HANDLERS.update({
 ```mermaid
 flowchart TD
     A[claim_task: task_001] --> B[worktree_create: task_001]
-    B --> C[worktree_read: task_001, src/auth.py]
-    C --> D[worktree_write: task_001, src/auth.py]
-    D --> E[worktree_bash: task_001, pytest tests/]
+    B --> C["worktree_read: task_001, src/auth.py"]
+    C --> D["worktree_write: task_001, src/auth.py"]
+    D --> E["worktree_bash: task_001, pytest tests/"]
     E --> F{测试通过?}
     F -->|是| G[worktree_finish: task_001<br>实现 JWT 验证]
     F -->|否| D

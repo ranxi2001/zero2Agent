@@ -18,10 +18,11 @@ RAG（Retrieval-Augmented Generation）在 Agent 系统中有两种用法：
 
 ## 核心管线
 
-```
-文档 → 分块 → 编码（Embedding）→ 写入向量库
-                                         ↓
-用户查询 → 编码 → 向量检索 Top-K → Rerank → 注入 Prompt → LLM 生成
+```mermaid
+flowchart LR
+    A[文档] --> B[分块] --> C[编码 Embedding] --> D[写入向量库]
+    E[用户查询] --> F[编码] --> G[向量检索 Top-K] --> H[Rerank] --> I[注入 Prompt] --> J[LLM 生成]
+    D -.-> G
 ```
 
 每个环节的选择直接影响最终效果。

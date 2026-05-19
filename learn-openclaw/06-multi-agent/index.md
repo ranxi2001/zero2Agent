@@ -20,26 +20,24 @@ OpenClaw 的多 Agent 架构有两个维度：
 
 单 Agent 处理复杂任务时，上下文会被中间过程污染：
 
-```
-任务：审查 3 个模块的安全问题
-
-单 Agent 做法：
-  读 auth.py（500 行进入上下文）
-  → 分析 auth.py（LLM 输出 200 token）
-  → 读 api.py（800 行进入上下文）
-  → 分析 api.py（上下文已经很满了）
-  → 读 db.py（上下文溢出，早期分析被压缩/截断）
-  → 最终报告质量很差（前面的分析已经丢了）
+```mermaid
+flowchart TD
+    A["任务: 审查 3 个模块的安全问题"] --> B["读 auth.py<br>500 行进入上下文"]
+    B --> C["读 api.py<br>800 行进入上下文"]
+    C --> D["读 db.py<br>上下文溢出，早期分析被压缩"]
+    D --> E["最终报告质量很差"]
 ```
 
 SubAgent 做法：每个模块由独立的子 Agent 处理，各自维护独立上下文：
 
-```
-主 Agent：拆任务 + 收结果
-  ├── SubAgent 1：审查 auth.py（独立上下文）→ 返回报告
-  ├── SubAgent 2：审查 api.py（独立上下文）→ 返回报告
-  └── SubAgent 3：审查 db.py（独立上下文）→ 返回报告
-主 Agent：合并 3 份报告
+```mermaid
+flowchart TD
+    M["主 Agent: 拆任务 + 收结果"] --> S1["SubAgent 1<br>审查 auth.py"]
+    M --> S2["SubAgent 2<br>审查 api.py"]
+    M --> S3["SubAgent 3<br>审查 db.py"]
+    S1 -->|报告| R["主 Agent: 合并 3 份报告"]
+    S2 -->|报告| R
+    S3 -->|报告| R
 ```
 
 ### OpenClaw 的 SubAgent 实现

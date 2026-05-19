@@ -86,31 +86,35 @@ cwd: z.string().optional()
 
 `runAgent.ts` 是子 Agent 的核心运行逻辑。简化后的流程：
 
-```
-runAgent({agentDefinition, promptMessages, toolUseContext, ...})
-  │
-  ├── 1. 解析模型：getAgentModel(定义model, 主循环model, 调用指定model)
-  ├── 2. 生成 agentId：createAgentId()（UUID）
-  ├── 3. 构建初始消息：contextMessages + promptMessages
-  ├── 4. 构建 system prompt：agent 定义 → 增强环境信息
-  ├── 5. 解析工具集：resolveAgentTools() 或直接继承父工具
-  ├── 6. 初始化 agent 专属 MCP servers（叠加到父 MCP 之上）
-  ├── 7. 执行 SubagentStart hooks
-  ├── 8. 预加载 frontmatter 中指定的 skills
-  ├── 9. 创建隔离的 ToolUseContext（createSubagentContext）
-  │
-  ├── 10. 进入 query() 主循环 ─────────────────────┐
-  │       for await (message of query({...}))       │
-  │         ├── stream_event → 转发 metrics 给父    │
-  │         ├── attachment   → 直接 yield           │
-  │         └── recordable   → 记录 + yield         │
-  │                                                  │
-  └── 11. finally 清理 ────────────────────────────┘
-          ├── 清理 agent MCP servers
-          ├── 清理 session hooks
-          ├── 释放 fileStateCache 内存
-          ├── 释放 Perfetto trace 注册
-          └── kill agent 产生的后台 bash 任务
+```mermaid
+flowchart TD
+    A["runAgent(agentDefinition, promptMessages, ...)"] --> B["1. getAgentModel()<br>解析模型"]
+    B --> C["2. createAgentId()<br>生成 UUID"]
+    C --> D["3. 构建初始消息<br>contextMessages + promptMessages"]
+    D --> E["4. 构建 system prompt<br>agent 定义 + 环境信息"]
+    E --> F["5. resolveAgentTools()<br>解析工具集或继承父工具"]
+    F --> G["6. 初始化 agent 专属 MCP servers"]
+    G --> H["7. 执行 SubagentStart hooks"]
+    H --> I["8. 预加载 frontmatter skills"]
+    I --> J["9. createSubagentContext<br>创建隔离的 ToolUseContext"]
+    J --> K["10. query() 主循环"]
+
+    subgraph LOOP["for await (message of query)"]
+        K --> L{message 类型}
+        L -->|stream_event| M[转发 metrics 给父]
+        L -->|attachment| N[直接 yield]
+        L -->|recordable| O[记录 + yield]
+    end
+
+    K --> P["11. finally 清理"]
+
+    subgraph CLEAN["清理阶段"]
+        P --> Q[清理 agent MCP servers]
+        Q --> R[清理 session hooks]
+        R --> S[释放 fileStateCache 内存]
+        S --> T[释放 Perfetto trace 注册]
+        T --> U[kill 后台 bash 任务]
+    end
 ```
 
 关键设计：**sync Agent 共享父的 abortController（Ctrl+C 同时停掉），async Agent 用独立的 AbortController。**

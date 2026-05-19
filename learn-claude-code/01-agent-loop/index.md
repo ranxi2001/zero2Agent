@@ -262,14 +262,15 @@ prompt_too_long
 
 当模型输出被 `max_tokens` 截断时：
 
-```
-max_output_tokens
-    ↓
-[1] 把 max_tokens 从 8,000 升级到 64,000（ESCALATED_MAX_TOKENS）
-    ↓ 还是被截断？
-[2] 注入恢复消息，让模型用新一轮继续输出（最多 3 次）
-    ↓ 超过重试限制？
-[3] 返回 { reason: 'completed' } 终止
+```mermaid
+flowchart TD
+    A["max_output_tokens 截断"] --> B["把 max_tokens 从 8k 升级到 64k<br>ESCALATED_MAX_TOKENS"]
+    B --> C{还是被截断?}
+    C -->|是| D["注入恢复消息<br>让模型用新一轮继续输出"]
+    D --> E{超过 3 次重试?}
+    E -->|否| C
+    E -->|是| F["返回 completed 终止"]
+    C -->|否| G["正常完成"]
 ```
 
 ---
@@ -325,8 +326,9 @@ while (true):
 
 Claude Code 设计指南将 Agent Loop 放在一条清晰的进化线上：
 
-```
-Lisp REPL (1960) → Shell (1971) → Jupyter (2014) → ChatGPT (2022) → Claude Code (2024)
+```mermaid
+flowchart LR
+    A["Lisp REPL<br>1960"] --> B["Shell<br>1971"] --> C["Jupyter<br>2014"] --> D["ChatGPT<br>2022"] --> E["Claude Code<br>2024"]
 ```
 
 所有这些系统共享同一个骨架：**Read → Eval → Print → Loop**。区别在于 Eval 的能力边界——Shell eval 系统命令，Jupyter eval 代码块，而 Claude Code eval 的是 LLM 推理 + 工具调用。

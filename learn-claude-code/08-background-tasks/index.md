@@ -194,12 +194,11 @@ export function killShellTasksForAgent(agentId, getAppState, setAppState): void 
 
 Claude Code 支持一个命令从前台无缝切换到后台。流程分三步：
 
-```
-registerForeground()     命令开始时注册前台任务（isBackgrounded=false）
-     ↓ 用户按 Ctrl+B 或自动超时
-backgroundExistingForegroundTask()   翻转 isBackgrounded=true，安装结果处理器
-     ↓ 命令完成
-enqueueShellNotification()   发送完成通知
+```mermaid
+flowchart TD
+    A["registerForeground()<br>注册前台任务 isBackgrounded=false"]
+    A -->|"用户按 Ctrl+B 或自动超时"| B["backgroundExistingForegroundTask()<br>翻转 isBackgrounded=true，安装结果处理器"]
+    B -->|"命令完成"| C["enqueueShellNotification()<br>发送完成通知"]
 ```
 
 `backgroundAll()` 在用户按 Ctrl+B 时，同时处理所有前台的 bash 任务和 agent 任务：
@@ -505,26 +504,15 @@ def agent_loop(messages: list):
 
 ## 典型使用场景
 
-```
-用户：安装依赖并运行测试
-
-模型：
-  background_run("pip install -r requirements.txt")
-  → 返回 job_abc123，继续工作
-
-  # 趁等待时做其他事
-  read_file("tests/test_main.py")
-  todo(update, "2", "in_progress")
-
-  # 通知注入：job_abc123 completed，安装成功
-
-  background_run("pytest tests/ -v")
-  → 返回 job_def456
-
-  # 继续其他工作...
-
-  # 通知注入：job_def456 completed，10 passed 2 failed
-  # 模型根据结果决定下一步
+```mermaid
+flowchart TD
+    A["用户: 安装依赖并运行测试"] --> B["background_run(pip install)<br>返回 job_abc123"]
+    B --> C["趁等待时做其他事<br>read_file / todo update"]
+    C --> D["通知注入: job_abc123 completed<br>安装成功"]
+    D --> E["background_run(pytest tests/ -v)<br>返回 job_def456"]
+    E --> F["继续其他工作..."]
+    F --> G["通知注入: job_def456 completed<br>10 passed 2 failed"]
+    G --> H["模型根据结果决定下一步"]
 ```
 
 ---

@@ -9,10 +9,12 @@ eyebrow: OpenClaw / 05
 
 Agent 的"记忆"不是一个简单的消息列表。OpenClaw 的记忆系统分三层：
 
-```
-持久化记忆（MEMORY.md）  ← 跨 Session 存活，人类可编辑
-Context Engine           ← 每轮动态组装上下文，token 预算内最大化信息量
-Session 管理             ← 会话生命周期、transcript 持久化
+```mermaid
+flowchart TD
+    A["持久化记忆 MEMORY.md<br>跨 Session 存活，人类可编辑"]
+    B["Context Engine<br>每轮动态组装上下文，token 预算内最大化信息量"]
+    C["Session 管理<br>会话生命周期、transcript 持久化"]
+    A --> B --> C
 ```
 
 这三层各自解决不同的问题，组合起来才是一个完整的生产级记忆系统。
