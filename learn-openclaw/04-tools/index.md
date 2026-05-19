@@ -111,12 +111,12 @@ async function executeToolCalls(toolCalls: ToolCall[]): Promise<ToolResult[]> {
 
 MCP 是 Anthropic 2024 年提出的跨进程工具通信标准。核心思想：**工具不必在 Agent 进程内，可以是独立服务。**
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A[Agent 进程] -->|JSON-RPC over stdio| B[MCP Server A\nGitHub 操作]
     A -->|JSON-RPC over HTTP| C[MCP Server B\n数据库查询]
     A -->|JSON-RPC over stdio| D[MCP Server C\n文件系统]
-</div>
+```
 
 ### MCP 的通信协议
 

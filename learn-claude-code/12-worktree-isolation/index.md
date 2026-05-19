@@ -462,7 +462,7 @@ TOOL_HANDLERS.update({
 
 ## 完整任务执行流程
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     A[claim_task: task_001] --> B[worktree_create: task_001]
     B --> C[worktree_read: task_001, src/auth.py]
@@ -472,7 +472,7 @@ flowchart TD
     F -->|是| G[worktree_finish: task_001<br>实现 JWT 验证]
     F -->|否| D
     G --> H[idle: 等待新任务]
-</div>
+```
 
 ---
 

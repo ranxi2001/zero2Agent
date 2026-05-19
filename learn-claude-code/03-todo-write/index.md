@@ -473,7 +473,7 @@ if (updates.status === 'completed') {
   ...
 ```
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     A([任务开始]) --> B[todo: 分解任务]
     B --> C[todo: 标记 in_progress]
@@ -482,7 +482,7 @@ flowchart TD
     E --> F{还有任务?}
     F -->|是| C
     F -->|否| G([任务完成])
-</div>
+```
 
 ---
 

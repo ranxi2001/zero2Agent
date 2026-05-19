@@ -59,7 +59,7 @@ type Event =
 
 ## 核心循环的数据流
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     A[agentLoop 启动] --> B[outer loop: 等待用户消息]
     B --> C[inner loop: 调用 LLM]
@@ -72,7 +72,7 @@ flowchart TD
     H --> I{需要 follow-up?}
     I -->|是| B
     I -->|否| J[emit agent_end]
-</div>
+```
 
 关键设计：
 

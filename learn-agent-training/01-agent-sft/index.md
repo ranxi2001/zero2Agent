@@ -21,7 +21,7 @@ eyebrow: Agent 训练实战 / 01
 
 Agent SFT 训练的是“执行一整条轨迹”——模型要完成多个回合的推理和工具调用，最终给出结果。一条训练样本的执行流程：
 
-<div class="mermaid">
+```mermaid
 graph TD
     A["🔧 System Prompt<br/>你是一个天气助手，可以调用 get_weather 工具"] --> B["👤 User<br/>帮我查一下北京明天的天气<br/>如果下雨就提醒我带伞"]
     B --> C["💭 Think<br/>需要先调天气 API<br/>查询北京明天的天气..."]
@@ -37,7 +37,7 @@ graph TD
     style E fill:#1a2535,stroke:#334155,color:#94a3b8
     style F fill:#1e293b,stroke:#f59e0b,color:#fbbf24
     style G fill:#022c22,stroke:#10b981,color:#34d399
-</div>
+```
 
 > 绿色部分（Tool Call、Response）是 Loss Mask 中**需要计算 loss** 的核心目标，黄色部分（Think）视质量决定是否计算，灰色部分（System Prompt、User、Tool Return）**不计算 loss**。
 

@@ -42,7 +42,7 @@ SFT 的 loss 是 token 级别的交叉熵——模型学的是“这个位置应
 
 把 Agent 交互过程映射到 RL 框架，其实非常自然：
 
-<div class="mermaid">
+```mermaid
 graph LR
     A["Agent<br/>(Policy Model)"] -->|"动作：生成 tool_call<br/>或文本回复"| B["Environment<br/>(工具/API/沙箱)"]
     B -->|"观测：tool 返回结果<br/>+ 对话历史"| A
@@ -52,7 +52,7 @@ graph LR
     style A fill:#022c22,stroke:#10b981,color:#34d399
     style B fill:#1a2535,stroke:#334155,color:#94a3b8
     style C fill:#1e293b,stroke:#f59e0b,color:#fbbf24
-</div>
+```
 
 具体来说：
 

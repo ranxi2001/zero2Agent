@@ -15,7 +15,7 @@ eyebrow: Agent 训练实战 / 06
 
 ## 全流程概览
 
-<div class="mermaid">
+```mermaid
 graph TD
     A["训练完成<br/>得到 Checkpoint"] --> B["模型选择<br/>选哪个 Checkpoint"]
     B --> C["模型压缩<br/>量化 / 蒸馏"]
@@ -35,7 +35,7 @@ graph TD
     style G fill:#022c22,stroke:#10b981,color:#34d399
     style H fill:#022c22,stroke:#10b981,color:#34d399
     style I fill:#022c22,stroke:#10b981,color:#34d399
-</div>
+```
 
 下面逐个环节展开。
 

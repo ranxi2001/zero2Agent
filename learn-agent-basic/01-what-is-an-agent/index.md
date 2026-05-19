@@ -42,7 +42,7 @@ eyebrow: Agent Basic / 01
 
 先看最小版本，不考虑复杂框架：
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     A([接收目标]) --> B[读取上下文]
     B --> C{决定下一步}
@@ -51,7 +51,7 @@ flowchart TD
     D --> E[获取返回结果]
     E --> F[更新状态]
     F --> C
-</div>
+```
 
 举个简单例子：
 
@@ -72,20 +72,20 @@ flowchart TD
 
 普通 LLM App 常常更像这样：
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A([用户输入]) --> B[模型生成] --> C([输出结果])
-</div>
+```
 
 它可以很好用，但通常是一次性响应。
 
 而 Agent 更像这样：
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A([目标]) --> B[多步决策] --> C[工具调用] --> D[状态更新] --> E[继续执行] --> F([最终完成])
     E --> B
-</div>
+```
 
 前者强调一次生成，后者强调持续执行。
 

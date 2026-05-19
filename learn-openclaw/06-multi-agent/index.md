@@ -140,7 +140,7 @@ src/channels/
 
 ### 统一网关架构
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A[Telegram] --> G[Gateway]
     B[Slack] --> G
@@ -150,7 +150,7 @@ flowchart LR
     G --> H[Session Router]
     H --> I[Agent Instance\n+ Context Engine]
     I --> J[Tools / MCP]
-</div>
+```
 
 ```typescript
 // src/gateway/router.ts

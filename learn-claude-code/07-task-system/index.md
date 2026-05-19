@@ -63,7 +63,7 @@ export type TaskStatus =
   | 'killed'     // 被用户或系统终止
 ```
 
-<div class="mermaid">
+```mermaid
 stateDiagram-v2
     [*] --> pending
     pending --> running
@@ -73,7 +73,7 @@ stateDiagram-v2
     completed --> [*]
     failed --> [*]
     killed --> [*]
-</div>
+```
 
 终态守卫——防止对已死任务做状态转换：
 
@@ -277,7 +277,7 @@ export function getTaskByType(type: TaskType): Task | undefined {
 
 ### 架构全景图
 
-<div class="mermaid">
+```mermaid
 flowchart TB
     subgraph "V2 Tool 接口 (s03)"
         TC[TaskCreate] --> |"用户调用"| FW
@@ -317,7 +317,7 @@ flowchart TB
     IP --> RT
     LW --> RT
     DR --> RT
-</div>
+```
 
 ---
 
@@ -349,7 +349,7 @@ flowchart TB
 2. **什么任务在等待？**（有未完成的前置任务）
 3. **什么任务已经完成？**
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     T1["task_1 ✓ completed"]
     T2["task_2 ○ ready"]
@@ -360,7 +360,7 @@ flowchart TD
     T1 --> T3
     T2 --> T4
     T3 --> T4
-</div>
+```
 
 ### 磁盘结构
 
@@ -514,7 +514,7 @@ def run_task_tool(action: str, **kwargs) -> str:
 
 ### DAG 执行流程
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     A[task_1: 分析代码] --> B[task_2: 重构]
     A --> C[task_3: 写测试]
@@ -526,7 +526,7 @@ flowchart TD
     F --> G[complete task_1<br>解锁 task_2 和 task_3]
     G --> H[并行处理 task_2 和 task_3]
     H --> I[complete task_2 + task_3<br>解锁 task_4]
-</div>
+```
 
 ---
 

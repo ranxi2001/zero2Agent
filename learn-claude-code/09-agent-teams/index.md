@@ -482,7 +482,7 @@ TOOL_HANDLERS["read_inbox"]  = lambda **kw: team.read_inbox(kw["agent_name"])
 
 源码中的状态机比我们想象的简单——只有两个核心布尔值 `isIdle` 和 `shutdownRequested`：
 
-<div class="mermaid">
+```mermaid
 stateDiagram-v2
     [*] --> WORKING: spawn（isIdle=false）
     WORKING --> IDLE: turn 结束（isIdle=true, 触发 onIdleCallbacks）
@@ -491,7 +491,7 @@ stateDiagram-v2
     IDLE --> SHUTDOWN_PENDING: shutdown_request（shutdownRequested=true）
     SHUTDOWN_PENDING --> [*]: shutdown_response approve=true（abortController.abort()）
     SHUTDOWN_PENDING --> WORKING: shutdown_response approve=false
-</div>
+```
 
 ---
 

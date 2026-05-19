@@ -183,7 +183,7 @@ async function handleShutdownRejection(requestId, reason) {
 }
 ```
 
-<div class="mermaid">
+```mermaid
 sequenceDiagram
     Leader->>Coder: shutdown_request (reason, request_id)
     Note over Coder: 检查当前状态
@@ -194,7 +194,7 @@ sequenceDiagram
         Coder->>Leader: shutdown_response (approve: false, reason: "...")
         Note over Coder: 继续工作
     end
-</div>
+```
 
 ---
 
@@ -227,7 +227,7 @@ async function handlePlanApproval(recipientName, requestId, context) {
 
 注意 `permissionMode: modeToInherit`——审批不只是 “同意”，还传递了执行权限级别。
 
-<div class="mermaid">
+```mermaid
 sequenceDiagram
     Coder->>Leader: plan_approval_request (plan, request_id)
     Note over Leader: 审查计划 + isTeamLead 检查
@@ -238,7 +238,7 @@ sequenceDiagram
         Leader->>Coder: plan_approval_response (approve: false, feedback: "...")
         Note over Coder: 根据 feedback 修改计划
     end
-</div>
+```
 
 ---
 

@@ -327,7 +327,7 @@ TOOLS = [
 | 路径安全 | 无 | `safe_path()` 沙箱 |
 | Agent loop | — | **不变** |
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A[LLM tool_use] --> B{TOOL_HANDLERS}
     B -->|bash| C[run_bash]
@@ -335,7 +335,7 @@ flowchart LR
     B -->|write_file| E[run_write]
     B -->|edit_file| F[run_edit]
     C & D & E & F --> G[tool_result]
-</div>
+```
 
 ---
 

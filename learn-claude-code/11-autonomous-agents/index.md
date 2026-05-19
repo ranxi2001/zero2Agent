@@ -418,13 +418,13 @@ IDLE 阶段：
     3. 60 秒无活动 → SHUTDOWN
 ```
 
-<div class="mermaid">
+```mermaid
 stateDiagram-v2
     [*] --> WORK: spawn
     WORK --> IDLE: 完成任务
     IDLE --> WORK: 收到消息或认领任务
     IDLE --> [*]: 60s 无活动
-</div>
+```
 
 ### 4.2 核心工具：idle 和 claim_task
 

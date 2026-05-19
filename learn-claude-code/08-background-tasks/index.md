@@ -343,7 +343,7 @@ token 计数有个细节：API 的 `input_tokens` 是每轮累计的（包含所
 
 理解了 Claude Code 的架构，我们来看核心设计模式：
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A[Agent 循环<br>主线程] -->|background_run| B[BackgroundManager<br>启动守护线程]
     B --> C[子进程<br>npm install]
@@ -351,7 +351,7 @@ flowchart LR
     A --> D[继续干别的工作]
     C -->|完成| E[结果入队列]
     E -->|下轮 LLM 调用前<br>draining| A
-</div>
+```
 
 关键设计：主线程始终单线程，只有子进程 I/O 是并行的。
 

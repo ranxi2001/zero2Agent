@@ -179,7 +179,7 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
             var src = el.dataset.mermaidSrc;
             if (!src) return;
             el.removeAttribute('data-processed');
-            el.innerHTML = src;
+            el.textContent = src;
             mermaid.init(undefined, el);
         });
     }

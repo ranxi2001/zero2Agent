@@ -25,13 +25,13 @@ eyebrow: Claude Code / s01
 
 ## 解决方案
 
-<div class="mermaid">
+```mermaid
 flowchart LR
     A([用户 prompt]) --> B[LLM]
     B -->|tool_use| C[执行工具]
     C -->|tool_result| B
     B -->|stop| D([结束])
-</div>
+```
 
 一个退出条件控制整个流程：循环持续运行，直到模型不再调用工具。
 
@@ -206,7 +206,7 @@ type State = {
 
 ### 六种状态转移
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     START([进入 while true]) --> API[调用 API]
     API --> CHECK{检查结果}
@@ -230,7 +230,7 @@ flowchart TD
     TOOLS -->|next_turn| API
 
     CHECK -->|end_turn / 无工具| DONE([completed])
-</div>
+```
 
 具体来说：
 

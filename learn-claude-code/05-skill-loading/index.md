@@ -606,7 +606,7 @@ TOOL_HANDLERS["Skill"] = lambda **kw: handle_skill(kw["skill"], kw.get("args", "
 
 ## 执行流程
 
-<div class="mermaid">
+```mermaid
 flowchart TD
     A([用户：帮我做代码审查]) --> B[LLM 看到技能列表]
     B --> C{"Skill 工具调用<br/>skill: code-review"}
@@ -619,7 +619,7 @@ flowchart TD
     I --> J[独立 token 预算执行]
     J --> K[返回结果文本]
     K --> H
-</div>
+```
 
 ---
 
