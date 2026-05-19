@@ -1,7 +1,7 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-05-17（遥望科技Agent开发+科大讯飞AI+阿里国际AI算法+字节大模型测开+爱奇艺大模型算法）
+> 最后更新：2026-05-19（牛客搜索 harness 相关面试题，新建 15-agent-concepts 维度）
 
 ## 统计
 
@@ -20,7 +20,8 @@
 | 11-ai-code-testing | 5 |
 | 12-business-ai-engineering | 6 |
 | 13-project-deep-dive | 18 |
-| **总计** | **303** |
+| 15-agent-concepts | 10 |
+| **总计** | **313** |
 
 ## 01-architecture-design（29题）
 
@@ -365,9 +366,23 @@
 17. 项目为什么选择 E2B 沙箱？选型理由和优势是什么？ — CVTE AI应用工程师一面
 18. 开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？ — CVTE AI应用工程师一面
 
+## 15-agent-concepts（6题）
+
+1. Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ — 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐同题】
+2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面
+3. 讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering — 阿里淘天AI应用开发暑期二面
+4. 你的项目中体现了哪些 Harness Engineering 的思想？ — 阿里国际一面
+5. Vibe Coding 和 Harness，你更偏向哪种路线？为什么？ — 字节TikTok实习后端AI开发一面
+6. 你会关注 Harness、Context Engineering 这类行业热点吗？优势劣势？ — 腾讯CDG产品经理一面 【字节大模型算法暑期二面追问：harness/Hermes新Agent设计】
+7. MCP 是什么？它解决了 Function Calling 的什么根本问题？ — 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】
+8. MCP 和 A2A 分别解决什么层面的问题？为什么需要两个协议？ — Agent 30题 【蚂蚁一面/币安AI大模型实习一面追问】
+9. Skills 是什么？为什么有了 MCP 和 Function Calling 还需要 Skills？ — 字节实习一面 【蚂蚁一面/小红书/CVTE/科大讯飞同题】
+10. Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？ — 蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】
+
 ---
 
 ## 薄弱维度（题数 < 10）
 
 - **11-ai-code-testing**：仅 5 题，垂直领域
 - **12-business-ai-engineering**：6 题，新建模块待扩充
+- **15-agent-concepts**：10 题，新建维度——概念考察类

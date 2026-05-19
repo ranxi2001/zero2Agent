@@ -169,6 +169,8 @@ modules:
         slug: "13-project-deep-dive"
       - title: "各公司面试偏好"
         slug: "14-company-preferences"
+      - title: "概念考察"
+        slug: "15-agent-concepts"
   - title: "Final Project"
     slug: "final-project"
     articles: []
