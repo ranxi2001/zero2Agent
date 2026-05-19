@@ -162,6 +162,14 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
         clusterBkg: '#f8fafc'
     };
 
+    function srcToInnerHTML(src) {
+        return src
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/&lt;br\s*\/?&gt;/gi, '<br/>');
+    }
+
     function rerenderMermaid(theme) {
         if (typeof mermaid === 'undefined') return;
         var els = document.querySelectorAll('.mermaid');
@@ -179,7 +187,7 @@ document.querySelectorAll(".nav-toggle-btn").forEach(function (btn) {
             var src = el.dataset.mermaidSrc;
             if (!src) return;
             el.removeAttribute('data-processed');
-            el.textContent = src;
+            el.innerHTML = srcToInnerHTML(src);
             mermaid.init(undefined, el);
         });
     }

@@ -253,18 +253,25 @@
     <!-- Transform kramdown mermaid code blocks and render -->
     <script>
         (function () {
-            // kramdown renders ```mermaid as <div class="language-mermaid highlighter-rouge">
-            // Transform these into <div class="mermaid"> that mermaid.js expects
+            function srcToInnerHTML(src) {
+                return src
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/&lt;br\s*\/?&gt;/gi, '<br/>');
+            }
+
             document.querySelectorAll('.language-mermaid').forEach(function(wrapper) {
                 var code = wrapper.querySelector('code') || wrapper;
+                var src = code.textContent;
                 var div = document.createElement('div');
                 div.className = 'mermaid';
-                div.textContent = code.textContent;
+                div.dataset.mermaidSrc = src;
+                div.innerHTML = srcToInnerHTML(src);
                 wrapper.parentNode.replaceChild(div, wrapper);
             });
 
             var els = document.querySelectorAll('.mermaid');
-            els.forEach(function(el){ el.dataset.mermaidSrc = el.textContent; });
             if (els.length > 0) mermaid.init(undefined, els);
         })();
     </script>
