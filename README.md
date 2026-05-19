@@ -37,10 +37,10 @@
 | [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) | 7 篇 | ✅ 完成 | StateGraph 三件套、条件分支、并行 Fan-out/Fan-in、Prompt Chaining、LLM 集成 |
 | [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) | 4 篇 | ✅ 完成 | OpenAI Agents SDK · Google genai SDK · Claude Anthropic SDK · 三大 SDK 横向对比 |
 | [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) | 13 篇 | ✅ 完成 | AgentScope · Mastra · Semantic Kernel · Eino · DeerFlow · LangChain · Google ADK · AutoGen · Vercel AI SDK 等 |
-| [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 14 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，14 大考察维度，新手答 vs 高手答对比 |
+| [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
 | Final Project | — | 🔲 待开始 | 加密货币市场风控 Agent 完整实战 |
 
-> **当前进度：67 篇文章，7 个完整模块**
+> **当前进度：68 篇文章，7 个完整模块**
 
 ---
 
@@ -126,7 +126,7 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 
 ### 面试通关
 
-大厂 AI Agent 岗位高频面试题深度拆解，覆盖蚂蚁、阿里、字节、腾讯、携程等真实面试场景。每道题对比"新手答"和"高手答"，14 大考察维度：
+大厂 AI Agent 岗位高频面试题深度拆解，覆盖蚂蚁、阿里、字节、腾讯、携程等真实面试场景。每道题对比"新手答"和"高手答"，15 大考察维度：
 
 | 维度 | 核心考点 |
 |------|---------|
@@ -142,6 +142,7 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 | 业务 AI 工程 | 业务需求拆解、AI 方案选型 |
 | 简历项目拷打 | 面试官追着你的 Agent 项目问到底 |
 | 各公司偏好 | 按公司统计高频考点与面试风格 |
+| Agent 概念考察 | Harness Engineering、Context Engineering、MCP/Skills 前沿范式 |
 
 ---
 
@@ -177,7 +178,7 @@ zero2Agent/
 ├── learn-langgraph/        # LangGraph（7 篇）
 ├── learn-sdk-frameworks/   # 三大原厂 SDK（4 篇）
 ├── learn-agent-survey/     # 框架调研（13 篇）
-├── learn-agent-interview/  # 大厂面试题拆解（14 篇）
+├── learn-agent-interview/  # 大厂面试题拆解（15 篇）
 └── final-project/          # 加密货币风控 Agent 实战（待开始）
 ```
 
