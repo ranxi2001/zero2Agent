@@ -1,29 +1,29 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-05-19（牛客搜索 harness 相关面试题，新建 15-agent-concepts 维度）
+> 最后更新：2026-05-21（分发7题：04记忆上下文1题、06多智能体1题、05评测与全局观2题、10训练数据1题、07工程踩坑1题、08提示词工程1题）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 30 |
+| 01-architecture-design | 31 |
 | 02-tool-management | 19 |
-| 03-fault-tolerance | 17 |
-| 04-memory-context | 41 |
-| 05-eval-and-vision | 22 |
-| 06-multi-agent-collab | 18 |
-| 07-engineering-pitfalls | 34 |
-| 08-prompt-engineering | 12 |
-| 09-rag-retrieval | 45 |
-| 10-training-and-data | 36 |
-| 11-ai-code-testing | 5 |
+| 03-fault-tolerance | 18 |
+| 04-memory-context | 43 |
+| 05-eval-and-vision | 24 |
+| 06-multi-agent-collab | 19 |
+| 07-engineering-pitfalls | 39 |
+| 08-prompt-engineering | 13 |
+| 09-rag-retrieval | 46 |
+| 10-training-and-data | 38 |
+| 11-ai-code-testing | 7 |
 | 12-business-ai-engineering | 6 |
 | 13-project-deep-dive | 18 |
 | 15-agent-concepts | 10 |
-| **总计** | **313** |
+| **总计** | **331** |
 
-## 01-architecture-design（29题）
+## 01-architecture-design（31题）
 
 1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】
 2. Tree of Thoughts (ToT) 在线上系统里能用吗？成本不高？ — 腾讯终面
@@ -55,6 +55,7 @@
 28. 多角色智能客服场景（B/C/D 端），用 RAG 还是 Skill？怎么设计？ — 美团Keeta一面
 29. 场景题：设计一个日志分析 Agent，怎么设计架构和工具？ — 腾讯AI应用开发实习一面
 30. Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？ — 快手AI应用开发一面
+31. DAG 与含循环图在 Agent 编排中的区别和适用场景 — 猎豹移动Agent全栈开发
 
 ## 02-tool-management（19题）
 
@@ -78,7 +79,7 @@
 18. Agent 做多轮工具调用和单轮调用相比，会面临哪些额外挑战？ — 阿里国际一面
 19. 为什么将 Agent 工具注册到微服务注册中心（Nacos）而不是用 MCP？工具的自动注入怎么实现？ — 遥望科技Agent开发一面
 
-## 03-fault-tolerance（17题）
+## 03-fault-tolerance（18题）
 
 1. 调支付接口超时了，Agent 怎么处理？ — 腾讯终面
 2. Agent 错误删除了数据，系统设计上怎么防范？ — 腾讯终面
@@ -97,8 +98,9 @@
 15. 高风险在线环境中，Agent 的异常管控方案怎么设计？ — 淘宝闪购一面
 16. 金融系统不能让 Agent 真实操作，怎么设计？（影子模式 + 渐进放权） — 京东一面
 17. Agent 系统的安全护栏怎么设计？敏感词拦截的工程方案有哪些？ — 快手AI应用开发算法一面
+18. Agent 系统中网络抖动 vs 真实故障，如何区分判断？ — 滴滴AI agent开发日常实习
 
-## 04-memory-context（41题）
+## 04-memory-context（43题）
 
 1. 长上下文里，怎么让 Agent 不忘记关键信息？ — 腾讯终面 【淘天一面追问：模型层面遗忘缓解机制】
 2. 用户说"按老样子帮我订一下"，模糊需求怎么处理？ — 腾讯终面
@@ -141,8 +143,10 @@
 39. 基于滑动窗口摘要时，合并还是分别保留？各自适合什么场景？ — 快手AI应用开发一面
 40. 如果让你设计一个三层记忆机制，整体架构和压缩方法怎么设计？ — 快手AI应用开发一面
 41. 你的向量记忆库是如何更新用户画像的？ — 快手AI应用开发算法一面
+42. 压缩过程中会丢失工具调用历史，导致模型重复调用工具，怎么解决？ — 美团Agent开发（智能客服方向）二面
+43. 记忆冲突怎么解决？比如用户前后说了不同的过敏信息 — 美团Agent开发（智能客服方向）二面
 
-## 05-eval-and-vision（21题）
+## 05-eval-and-vision（24题）
 
 1. 如何量化评估一个上线的 Agent 好坏？除了准确率 — 腾讯终面
 2. 当前阻碍 Agent 大规模落地的最大挑战？ — 腾讯终面
@@ -166,8 +170,10 @@
 20. 怎么理解 Vibe Coding？你有哪些实践经验？ — 蚂蚁AI应用开发二面 【科大讯飞一面追问：各Vibe Coding工具特点与CC/Codex使用感受对比】
 21. 通过什么方式去验证 Skill 的提升效果，指标是什么？ — 美团食杂后端一面
 22. 用户在线反馈怎么收集？不同模型和 Prompt 的 AB 测试怎么设计？ — 快手AI应用开发一面
+23. AI 写代码越来越强，算法工程师的角色会怎么变？ — 字节TikTok AI应用开发一面
+24. 哪些类型的 Agent 产品在未来 2 年内最可能被淘汰？ — 字节TikTok AI应用开发一面
 
-## 06-multi-agent-collab（16题）
+## 06-multi-agent-collab（19题）
 
 1. 多智能体怎么协作？ — 腾讯终面
 2. 多 Agent 系统里，怎么防止踢皮球或死循环？ — 腾讯终面
@@ -187,8 +193,9 @@
 16. 三层 Agent（Root/Main+Fallback/Sub-Agent）协同策略 + 跨层上下文传递 — 淘天Agent开发
 17. 为什么大家都在用 Multi-Agent？从一开始到现在原因是否有变化？ — 币安AI大模型实习一面
 18. Multi-Agent 如何通信？不同项目分别用了哪些通信方法？（含 MCP vs A2A 协议层次对比） — 币安AI大模型实习一面
+19. 如果让两个不同的 Agent 产品进行对话（比如 Claude Code 和 Cursor），在协议层面应该怎么做？ — 字节TikTok AI应用开发一面
 
-## 07-engineering-pitfalls（33题）
+## 07-engineering-pitfalls（39题）
 
 
 1. 开发 Agent 时踩过什么坑？ — 高频题
@@ -225,8 +232,13 @@
 32. 用 AI Coding 工具写代码达不到预期怎么办？ — CVTE AI应用工程师一面
 33. LangGraph 的 State Snapshot（状态快照）机制是怎么实现的？ — 快手AI应用开发算法一面
 34. 产品的用户量、每日 token 消耗和底层模型选型怎么估算？ — 快手AI应用开发一面
+35. Agent 如何做版本管理与灰度？ — Agent面经八股系列
+36. Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ — 美团Agent开发（智能客服方向）二面
+37. 怎么设计一个大模型网关系统？ — 猎豹移动Agent全栈开发
+38. SSE 流式输出中断后如何保证之前的输出不丢失？ — 某教育agent开发
+39. Claude Code 用久了感觉响应越来越慢，这是什么原因？怎么解决？ — 字节TikTok AI应用开发一面
 
-## 08-prompt-engineering（11题）
+## 08-prompt-engineering（13题）
 
 1. 提示词模板是怎么构建的？ — 抖音一面
 2. Skills 的原理有没有了解过？ — 蚂蚁一面 【高德实习一面追问：Skill 的本质理解】【蚂蚁Agent开发一面追问：创建 Skill 的方式（除自然语言描述外）】【小红书AI应用开发同题：Skills了解+如何管理】【CVTE AI应用工程师一面追问：怎么理解 Skill？能解决什么问题？怎么写 MCP？】【科大讯飞一面追问：写Skills和写提示词的区别与共同点】
@@ -240,8 +252,9 @@
 10. Harness Engineering 是什么？它如何演进的？ — CVTE AI应用工程师一面
 11. Skill 的渐进式披露怎么实现？Skill 之间的沙箱隔离和通信机制是什么？ — 快手AI应用开发一面
 12. 什么是一个好的提示词？如何做好提示词的评估？ — 科大讯飞AI一面
+13. 用户的某个需求，你会沉淀为 Skill 还是长期记忆？判断标准是什么？ — 字节TikTok AI应用开发一面
 
-## 09-rag-retrieval（45题）
+## 09-rag-retrieval（46题）
 
 1. RAG 的检索如何实现？ — 阿里一面
 2. 多维度的查询改写是什么？ — 抖音一面 【淘天一面追问：改写为何提升精准度的底层原理】
@@ -288,8 +301,9 @@
 43. 向量数据库索引中 IVF_FLAT 和 HNSW 的区别？各自适合什么场景？ — 快手AI应用开发算法一面
 44. RAG 检索到的 Chunk 不足以回答问题，后续怎么处理？ — 字节大模型测开一面
 45. 向量数据库里两个同义词是什么关系？完全同义的词会在同一个点上吗？ — 字节大模型测开一面
+46. RAG 过程中如何处理文件里的图片？ — 字节暑期agent实习二面
 
-## 10-training-and-data（36题）
+## 10-training-and-data（38题）
 
 1. 预训练数据清洗方法？ — 字节一面
 2. Agent 工具调用怎么训练？训练集包含什么？ — 腾讯二面
@@ -327,14 +341,18 @@
 34. 什么是灾难性遗忘？微调时如何缓解？ — 字节大模型测开一面
 35. BF16 与 FP32 精度差异及训练推理选型？ — 爱奇艺大模型算法岗二面
 36. 模型推理慢，排查思路是什么？ — 阿里国际AI算法一面
+37. 超长上下文是怎么实现的？（如 Kimi 这类模型） — 百度大模型实习
+38. Agent 在细分场景（比如法律、医疗）落地时，微调策略和通用场景有什么不同？ — 字节TikTok AI应用开发一面
 
-## 11-ai-code-testing（5题）
+## 11-ai-code-testing（7题）
 
 1. 分支覆盖率是怎么统计的？代码插桩怎么实现？ — 蚂蚁一面
 2. 代码解析有没有前置分析？有效性判断？ — 蚂蚁一面
 3. 哪些代码会让模型生成准确度降低？如何过滤？ — 蚂蚁一面
 4. 如何测试 AI 生成代码的正确性？ — 蚂蚁一面 【字节实习二面追问：AI 写的代码如何验证】【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】
 5. AI 生成的代码线下测试没问题，上线后出了问题怎么办？ — 字节实习二面
+6. 工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？ — 蚂蚁Agent一二面（Code Agent方向）
+7. AI 生成代码在哪些场景更具落地价值？应用边界在哪？ — 蚂蚁Agent一二面（Code Agent方向）
 
 ## 12-business-ai-engineering（4题）
 
@@ -383,6 +401,6 @@
 
 ## 薄弱维度（题数 < 10）
 
-- **11-ai-code-testing**：仅 5 题，垂直领域
+- **11-ai-code-testing**：7 题，垂直领域
 - **12-business-ai-engineering**：6 题，新建模块待扩充
 - **15-agent-concepts**：10 题，新建维度——概念考察类

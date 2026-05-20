@@ -793,7 +793,37 @@ flowchart TB
 
 **A2A 核心设计**：Agent Card（`/.well-known/agent.json` 声明能力）→ Task 生命周期（submitted → working → completed）→ 支持多轮交互和长时间运行任务。
 
-**差距在哪**：新手只说“消息传递”——这等于没说。高手分析了六种通信模式各自的适用场景，且用具体项目对比说明了设计背后的取舍。面试官考的是你对 Agent 生态的广度认知——不只是“用过一个框架”，而是理解不同框架的通信哲学差异。
+**差距在哪**：新手只说”消息传递”——这等于没说。高手分析了六种通信模式各自的适用场景，且用具体项目对比说明了设计背后的取舍。面试官考的是你对 Agent 生态的广度认知——不只是”用过一个框架”，而是理解不同框架的通信哲学差异。
+
+---
+
+## Q：如果让两个不同的 Agent 产品进行对话（比如 Claude Code 和 Cursor），在协议层面应该怎么做？
+
+> 来源：字节TikTok AI应用开发一面
+
+**新手答**：”用 API 互相调用呗，一个 Agent 调另一个的接口。”
+
+**高手答**：
+这道题考的是跨产品 Agent 互操作（Interoperability）——两个完全独立的 Agent 产品如何协作，而不是在同一框架内的子 Agent 通信。
+
+**协议层选型**：
+
+1. **A2A（Agent-to-Agent Protocol）**：Google 主导的开放协议，专为跨产品 Agent 互操作设计
+   - Agent Card：每个 Agent 在 `/.well-known/agent.json` 发布自己的能力声明（输入格式、输出类型、认证方式）
+   - Task 生命周期：submitted → working → input-required → completed，支持异步长任务
+   - SSE 流式推送 + 多轮交互，天然支持对话式协作
+
+2. **MCP（Model Context Protocol）**：适合工具/资源暴露，但设计上是 Host→Client→Server 单向调用，不是双向 Agent 对话
+
+3. **纯 REST API 对接**：最简单，但耦合度高，需要双方约定接口规范，无法利用标准化协议带来的互操作生态
+
+**实现关键点**：
+- **身份认证**：A2A 通过 Agent Card 内的 `securitySchemes` 声明 OAuth2/API Key，跨产品必须解决鉴权
+- **能力协商**：A2A 的 Agent Card `skills` 字段描述能力，调用方根据 Card 决定怎么调用，而不是硬编码
+- **状态传递**：Task 的 `contextId` 支持多轮对话上下文，每个消息带 `role: agent`，区分于用户消息
+- **降级策略**：对方不支持 A2A 时，退化为标准 HTTP + JSON 协议，保留基础互操作能力
+
+**差距在哪**：面试官考的是你对”同框架内的子 Agent 通信”和”跨产品 Agent 互操作”这两个不同层次问题的区分。A2A 的价值在于标准化——就像 HTTP 统一了 Web，A2A 试图统一 Agent 生态的互调方式。
 
 ---
 
