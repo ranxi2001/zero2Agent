@@ -1,27 +1,27 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-05-21（分发7题：04记忆上下文1题、06多智能体1题、05评测与全局观2题、10训练数据1题、07工程踩坑1题、08提示词工程1题）
+> 最后更新：2026-05-21（分发7题：02工具管理2题、03容错鲁棒1题、04记忆上下文1题、06多智能体1题、07工程踩坑1题、15概念考察1题）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
 | 01-architecture-design | 31 |
-| 02-tool-management | 19 |
-| 03-fault-tolerance | 18 |
-| 04-memory-context | 43 |
+| 02-tool-management | 21 |
+| 03-fault-tolerance | 19 |
+| 04-memory-context | 44 |
 | 05-eval-and-vision | 24 |
-| 06-multi-agent-collab | 19 |
-| 07-engineering-pitfalls | 39 |
+| 06-multi-agent-collab | 20 |
+| 07-engineering-pitfalls | 40 |
 | 08-prompt-engineering | 13 |
 | 09-rag-retrieval | 46 |
 | 10-training-and-data | 38 |
 | 11-ai-code-testing | 7 |
 | 12-business-ai-engineering | 6 |
 | 13-project-deep-dive | 18 |
-| 15-agent-concepts | 10 |
-| **总计** | **331** |
+| 15-agent-concepts | 11 |
+| **总计** | **338** |
 
 ## 01-architecture-design（31题）
 
