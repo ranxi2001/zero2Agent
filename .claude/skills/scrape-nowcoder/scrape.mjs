@@ -481,6 +481,18 @@ function sanitizeFilename(name) {
     .slice(0, 50);
 }
 
+function extractDate(timeStr) {
+  if (!timeStr) return "unknown";
+  const m = timeStr.match(/(\d{4})[年\-\/.](\d{1,2})[月\-\/.](\d{1,2})/);
+  if (m) return `${m[1]}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")}`;
+  const m2 = timeStr.match(/(\d{1,2})[月\-\/.](\d{1,2})/);
+  if (m2) {
+    const year = new Date().getFullYear();
+    return `${year}-${m2[1].padStart(2, "0")}-${m2[2].padStart(2, "0")}`;
+  }
+  return "unknown";
+}
+
 // ─── 主流程 ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -587,7 +599,8 @@ async function main() {
         const detail = await scrapeArticleDetail(cdp, article.url);
         results.push(detail);
 
-        const filename = `${String(i + 1).padStart(2, "0")}-${sanitizeFilename(detail.title)}.md`;
+        const datePrefix = extractDate(detail.time);
+        const filename = `${datePrefix}-${sanitizeFilename(detail.title)}.md`;
         await writeFile(join(opts.out, filename), toMarkdown(detail), "utf-8");
         console.log(`[scrape]   ✅ ${detail.content.length} 字`);
       } catch (err) {
@@ -617,7 +630,7 @@ async function main() {
     console.log(`[scrape] 📂 ${opts.out}`);
     console.log(`[scrape]    index.md       — 目录`);
     console.log(`[scrape]    all-in-one.md  — 合并版`);
-    console.log(`[scrape]    01-xx.md ...   — 单篇`);
+    console.log(`[scrape]    YYYY-MM-DD-xx.md — 单篇（按发布日期命名）`);
     console.log(`[scrape] ════════════════════════════════════════\n`);
   } finally {
     if (cdp) cdp.close();

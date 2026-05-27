@@ -79,10 +79,10 @@ node .claude/skills/scrape-nowcoder/scrape.mjs --port 9333
 
 ```
 .claude/skills/scrape-nowcoder/nowcoder-output/
-├── index.md          # 目录索引
-├── all-in-one.md     # 全部文章合并
-├── 01-标题.md        # 单篇文章
-├── 02-标题.md
+├── index.md                # 目录索引
+├── all-in-one.md           # 全部文章合并
+├── 2026-05-20-标题.md      # 单篇文章（按发布日期命名）
+├── 2026-05-18-标题.md
 └── ...
 ```
 

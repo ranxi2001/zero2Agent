@@ -512,6 +512,36 @@ flowchart TB
 
 ---
 
+## Q：Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？
+
+> 来源：哆咔互娱 Agent开发实习一面
+
+**新手答**：“Claude Code 最强，其他的也差不多，都是用大模型写代码的工具。”
+
+**高手答**：
+
+这几个工具虽然都属于 Coding Agent，但设计哲学和定位差异很大：
+
+| 工具 | 核心定位 | 架构特点 | 适用场景 |
+|------|---------|---------|---------|
+| **Claude Code** | 闭源商业级 CLI Agent | 单 Agent + Harness 工程（Skills/Hooks/CLAUDE.md）；内置权限沙箱和上下文管理 | 企业级代码生成、长任务编排、安全要求高的场景 |
+| **Hermes** | 开源 Agent Runtime | 分层压缩记忆 + 多模型切换；强调可观测性和 session 持久化 | 需要自托管、定制记忆策略的团队 |
+| **OpenCode** | 轻量开源终端 Agent | Go 实现，启动快，插件少，专注 code completion + 简单 ReAct | 个人开发者、资源受限环境、不需要复杂编排 |
+| **OpenClaw** | 开源 Agent 框架/Runtime | 模块化设计，工具生态开放，支持 MCP 协议原生接入 | 研究性项目、需要深度定制 Agent 行为的场景 |
+
+从工程角度看几个关键差异维度：
+
+1. **上下文管理**：Claude Code 用 Harness + 渐进式披露 + compaction；Hermes 用分层压缩 + 外挂记忆；OpenCode 相对简单靠窗口截断
+2. **工具协议**：Claude Code 原生支持 MCP + Skills 分层；OpenClaw 以 MCP 为核心协议；Hermes 和 OpenCode 各有自己的工具注册方式
+3. **可控性**：Claude Code 的 Hooks 机制允许在工具调用前后插入自定义逻辑，企业级场景必需；开源方案需自行实现类似能力
+4. **成本与隐私**：闭源方案调用付费 API，数据过云端；开源方案可本地部署 + 接本地模型，但能力上限受限于底层模型
+
+选型建议：如果是企业内部需要可控、可审计、安全性要求高 → Claude Code；如果需要深度定制 Runtime 行为 → Hermes/OpenClaw；如果只想快速上手轻量使用 → OpenCode。
+
+**差距在哪**：面试官考的不是你“用过几个工具”，而是你能否从架构层面理解不同 Agent 工具的设计取舍——上下文管理策略、工具协议选型、可控性与开放性的平衡。能说出具体差异而非只报名字，说明你对 Agent 工程有深度认知。
+
+---
+
 ## 这类题的答题模式
 
 概念考察题的核心是**独立思考 + 结构化表达**：
