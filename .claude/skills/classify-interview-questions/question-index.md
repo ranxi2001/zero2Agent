@@ -1,27 +1,27 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-05-27（分发1题：04记忆上下文1题；补充3条已有题目来源标注）
+> 最后更新：2026-06-05（牛客面经第四批——20 道新题分发到 7 个维度文章，347→367）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 32 |
-| 02-tool-management | 22 |
-| 03-fault-tolerance | 19 |
-| 04-memory-context | 45 |
+| 01-architecture-design | 33 |
+| 02-tool-management | 24 |
+| 03-fault-tolerance | 23 |
+| 04-memory-context | 46 |
 | 05-eval-and-vision | 24 |
 | 06-multi-agent-collab | 20 |
-| 07-engineering-pitfalls | 41 |
+| 07-engineering-pitfalls | 44 |
 | 08-prompt-engineering | 14 |
-| 09-rag-retrieval | 48 |
-| 10-training-and-data | 38 |
+| 09-rag-retrieval | 50 |
+| 10-training-and-data | 45 |
 | 11-ai-code-testing | 7 |
 | 12-business-ai-engineering | 7 |
 | 13-project-deep-dive | 18 |
 | 15-agent-concepts | 12 |
-| **总计** | **347** |
+| **总计** | **367** |
 
 ## 01-architecture-design（31题）
 
@@ -57,6 +57,7 @@
 30. Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？ — 快手AI应用开发一面
 31. DAG 与含循环图在 Agent 编排中的区别和适用场景 — 猎豹移动Agent全栈开发
 32. 基于强化学习的 Agent 与传统基于 Prompt 的 Agent 有何区别？各自的适用场景？ — Agent开发八股合集（南京大学）
+33. Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？ — 字节跳动Agent开发实习生一面
 
 ## 02-tool-management（22题）
 
@@ -80,6 +81,8 @@
 18. Agent 做多轮工具调用和单轮调用相比，会面临哪些额外挑战？ — 阿里国际一面
 19. 为什么将 Agent 工具注册到微服务注册中心（Nacos）而不是用 MCP？工具的自动注入怎么实现？ — 遥望科技Agent开发一面
 20. 开源模型的 Function Calling 能力较弱，如何通过微调或 Prompt Engineering 提升？ — Agent开发八股合集（南京大学）
+21. 边界不好定义的场景，Skill形式不能很好区分场景披露工具，怎么办？ — 阿里暑期Agent算法二面
+22. 多Skill串行/嵌套时依赖冲突、参数不兼容的容错设计？ — 百度AI Agent前端研发实习生一面
 
 ## 03-fault-tolerance（18题）
 
@@ -101,6 +104,10 @@
 16. 金融系统不能让 Agent 真实操作，怎么设计？（影子模式 + 渐进放权） — 京东一面
 17. Agent 系统的安全护栏怎么设计？敏感词拦截的工程方案有哪些？ — 快手AI应用开发算法一面
 18. Agent 系统中网络抖动 vs 真实故障，如何区分判断？ — 滴滴AI agent开发日常实习
+19. 如果上下文爆炸或工具循环调用，怎么解决？ — 慧疗互联网医院Agent开发一面 【字节Agent开发实习生一面同题：三级压缩】
+20. Agent 系统的 fallback 是怎么做的？ — 字节Agent开发一面
+21. 整体的失败重试机制（node、RAG链、tools）分别怎么做？ — 字节Agent开发一面
+22. 状态机卡死悬停/死循环的排查与熔断机制？ — 百度AI Agent前端研发实习生一面
 
 ## 04-memory-context（43题）
 
@@ -148,6 +155,7 @@
 42. 压缩过程中会丢失工具调用历史，导致模型重复调用工具，怎么解决？ — 美团Agent开发（智能客服方向）二面
 43. 记忆冲突怎么解决？比如用户前后说了不同的过敏信息 — 美团Agent开发（智能客服方向）二面
 44. Agent 记忆系统里的「做梦机制」（Dreaming）是什么？和 Reflection 有什么区别？ — 阿里云暑期实习Agent面经
+45. 如何判断是 Prompt 内容影响决策，还是 Prompt 太长导致注意力涣散？ — 淘天AI Agent暑期实习一面
 
 ## 05-eval-and-vision（24题）
 
@@ -241,6 +249,9 @@
 38. SSE 流式输出中断后如何保证之前的输出不丢失？ — 某教育agent开发
 39. Claude Code 用久了感觉响应越来越慢，这是什么原因？怎么解决？ — 字节TikTok AI应用开发一面
 40. 如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？ — Agent开发八股合集（南京大学）
+41. 流式返回时，如何插入非文本事件（工具调用标记、思考过程、错误提示），且不影响前端渲染？ — 牛客Agent面经汇总
+42. SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ — 成都agent面试（社招）
+43. AgentState 的作用是什么？为什么不使用全局变量？ — 字节Agent开发一面
 
 ## 08-prompt-engineering（14题）
 
@@ -309,6 +320,8 @@
 46. RAG 过程中如何处理文件里的图片？ — 字节暑期agent实习二面
 47. 如何避免模型回复过度依赖检索到的外部知识，导致回答生硬、缺乏共情能力和自然度？ — 阿里淘天AI Agent应用开发二面
 48. 随着大模型上下文窗口持续扩容（100K→1M+），传统 RAG 技术是否会被完全替代？ — 阿里淘天AI Agent应用开发二面
+49. 从 ES 切换到向量检索，哪些能力会下降，哪些会提升？ — 字节跳动Agent开发实习生一面
+50. 父文档是怎么得到的？语义切分具体是怎么做的？聚类后怎么区分不同文档？ — 同程Agent开发实习一面
 
 ## 10-training-and-data（38题）
 
@@ -350,6 +363,13 @@
 36. 模型推理慢，排查思路是什么？ — 阿里国际AI算法一面
 37. 超长上下文是怎么实现的？（如 Kimi 这类模型） — 百度大模型实习
 38. Agent 在细分场景（比如法律、医疗）落地时，微调策略和通用场景有什么不同？ — 字节TikTok AI应用开发一面
+39. 为什么要通过微调模型来做代码生成？为什么不用纯 Prompt 或 Spec Coding？ — 小米AI Agent一面 【字节Agent开发实习生一面追问：spec coding/SDD为什么达不到Agent效果】
+40. 外部模型参数更大，14B 在 Agent 层面会不会不够？ — 小米AI Agent一面
+41. Rerank 模型蒸馏的数据是什么样的？训练数据大概有多少条？ — 同程Agent开发实习一面
+42. BERT 和 GPT 架构的区别是什么？ — 同程Agent开发实习一面
+43. 为什么现在的大模型都是 Decoder-only 架构？ — 淘天AI Agent暑期实习一面
+44. 训练 AI Coding Agent，端到端还是分阶段训练？ — 淘天AI Agent暑期实习一面
+45. 客服 Agent 奖励函数的 Reward Hacking/稀疏/区分度问题，如何设计新 reward？ — 阿里暑期Agent算法二面
 
 ## 11-ai-code-testing（7题）
 
