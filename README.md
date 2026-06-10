@@ -115,7 +115,7 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 | Semantic Kernel | 微软 | Plugin 体系，Azure 企业级集成 |
 | Eino | 字节跳动 | Go 语言，流式原生，高并发 |
 | GitAgent | — | 代码仓库 Agent 模式，PR 自动审查 |
-| 手搓 Agent | — | 200 行从零实现，看透框架本质 |
+| Harness 工程 | — | 200 行从零实现，看透框架本质 |
 | AgentUniverse | 华为 | PEER 协作模式，企业可观测性 |
 | DeerFlow | 字节跳动 | Deep Research，基于 LangGraph |
 | LangChain | 开源 | LCEL、RAG，以及何时不该用它 |

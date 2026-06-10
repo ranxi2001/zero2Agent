@@ -20,7 +20,7 @@ eyebrow: Module 06
 | 03 | Semantic Kernel | 微软 | C# / Python | 企业级 AI SDK |
 | 04 | Eino | 字节跳动 | Go | 高性能 AI 应用 |
 | 05 | GitAgent | 开源 | Python | 代码仓库 Agent |
-| 06 | 手搓 Agent | — | Python | 从原理实现 |
+| 06 | Harness 工程 | — | Python | 从原理实现 |
 | 07 | AgentUniverse | 华为 | Python | 企业多 Agent |
 | 08 | DeerFlow | 字节跳动 | Python | Deep Research |
 | 09 | LangChain | 开源社区 | Python / JS | 最大生态 |

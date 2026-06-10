@@ -1,13 +1,13 @@
 ---
 layout: default
-title: "手搓 Agent：从原理到实现"
+title: "Harness 工程：从原理到实现"
 description: 不用任何框架，从 LLM API 出发，用 200 行 Python 实现一个完整的 Tool-Use Agent
 eyebrow: 框架调研 · 06
 ---
 
-# 手搓 Agent：从原理到实现
+# Harness 工程：从原理到实现
 
-框架是别人手搓的 Agent。理解了底层原理，框架才是透明的。
+框架是别人写的 Harness。理解了底层原理，框架才是透明的。
 
 这一篇不依赖任何 Agent 框架，只用 LLM 的原始 API，从零实现一个支持 Tool Calling、多工具并发、循环执行的 Agent。
 
@@ -291,7 +291,7 @@ def run_tools_concurrently(tool_calls):
 
 LangChain、OpenAI Agents SDK、AgentScope 做的都是这些——只是加了更多配置、更多工具、更多 Agent 间通信机制。
 
-## 什么时候手搓而不是用框架
+## 什么时候自己写 Harness 而不是用框架
 
 - **学习目的**：理解底层机制，看透框架
 - **极简场景**：工具少，流程固定，不需要框架的复杂性
