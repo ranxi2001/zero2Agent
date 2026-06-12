@@ -1249,6 +1249,47 @@ flowchart TD
 
 ---
 
+### Q：你们有没有用 MCP？为什么要把 OAuth2.1 接到 MCP 里？
+
+> 来源：视频面经汇总
+
+**新手答**：“用了 MCP，OAuth 是做认证的。”
+
+**高手答**：
+
+MCP（Model Context Protocol）本身只解决“模型如何发现和调用工具”的问题，但在企业级 Agent 系统中，**工具背后的服务往往有权限管控**——调用 Slack 发消息需要 OAuth token，查 Google Drive 需要用户授权，操作 GitHub 需要 Personal Access Token。
+
+**为什么 OAuth2.1 要接到 MCP 里：**
+
+1. **代替静态 token**：早期 MCP Server 配置里直接写死 API Key，安全风险极高。OAuth2.1 提供动态令牌 + 自动续期，token 泄漏后可以吊销
+2. **用户级权限隔离**：Agent 代替用户操作时，必须用该用户的 OAuth token 而非全局 service account。否则“帮用户 A 查邮件”可能读到用户 B 的数据
+3. **最小权限原则**：OAuth2.1 的 scope 机制天然适合限制工具权限——MCP Server 声明需要哪些 scope，用户授权时看到明确的权限列表
+4. **标准化**：不同 SaaS 服务（Google、Microsoft、Slack）都走 OAuth 协议，MCP Server 不需要为每个服务写不同的认证逻辑
+
+**典型架构：**
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Agent
+    participant MCP Server
+    participant OAuth Provider
+    participant API Service
+
+    User->>Agent: "帮我查上周的邮件"
+    Agent->>MCP Server: 调用 gmail.search 工具
+    MCP Server->>MCP Server: 检查本地是否有有效 token
+    MCP Server->>OAuth Provider: token 过期，用 refresh_token 续期
+    OAuth Provider-->>MCP Server: 新 access_token
+    MCP Server->>API Service: 带 token 调用 Gmail API
+    API Service-->>MCP Server: 邮件列表
+    MCP Server-->>Agent: 格式化结果
+```
+
+**差距在哪**：新手只知道 OAuth 是“登录用的”。高手理解 MCP + OAuth2.1 组合解决的是 Agent 场景下“代用户操作第三方服务”的授权链路问题——这是 Agent 从 Demo 走向生产的关键安全基础设施。
+
+---
+
 
 ## 这类题的答题模式
 
