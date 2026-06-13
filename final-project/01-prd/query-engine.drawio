@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Main container -->
+        <mxCell id="qe_box" value="Query Engine" style="swimlane;startSize=35;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=16;horizontal=1;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="920" height="220" as="geometry" />
+        </mxCell>
+
+        <!-- 4 pillars -->
+        <mxCell id="router" value="Router&#xa;模型选择 | 按任务路由" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;verticalAlign=middle;" vertex="1" parent="qe_box">
+          <mxGeometry x="20" y="50" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cache" value="Cache&#xa;语义缓存 | 减少重复调用" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;verticalAlign=middle;" vertex="1" parent="qe_box">
+          <mxGeometry x="245" y="50" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="retry" value="Retry&#xa;指数退避 | 3 次重试" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;verticalAlign=middle;" vertex="1" parent="qe_box">
+          <mxGeometry x="470" y="50" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ratelimit" value="Rate Limiter&#xa;令牌桶限流 | 并发控制" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;verticalAlign=middle;" vertex="1" parent="qe_box">
+          <mxGeometry x="695" y="50" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Flow arrows inside -->
+        <mxCell id="f1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="qe_box" source="router" target="cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="qe_box" source="cache" target="retry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="qe_box" source="retry" target="ratelimit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Routing strategy below -->
+        <mxCell id="route_grp" value="" style="group;pointerEvents=0;" vertex="1" parent="qe_box">
+          <mxGeometry x="20" y="150" width="880" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" value="内容诊断 → Claude / DeepSeek" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="route_grp">
+          <mxGeometry x="0" y="0" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="语音分析 → 专用模型" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="route_grp">
+          <mxGeometry x="225" y="0" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="知识检索 → Embedding 模型" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="route_grp">
+          <mxGeometry x="450" y="0" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="报告生成 → 长上下文模型" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;" vertex="1" parent="route_grp">
+          <mxGeometry x="675" y="0" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Input arrow -->
+        <mxCell id="input_label" value="请求输入" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="275" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="output_label" value="模型响应" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="890" y="275" width="70" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Input/Output arrows -->
+        <mxCell id="in_arrow" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="qe_box">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="10" y="140" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="out_arrow" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="qe_box">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="990" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

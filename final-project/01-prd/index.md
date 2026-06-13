@@ -45,45 +45,7 @@ Agent 扮演面试官提问 → 用户实时回答 → 即时反馈
 
 每一层对应具体的工程模块：
 
-```mermaid
-graph TB
-    subgraph "用户交互层"
-        CMD[Command Layer]
-        UI[CLI / Web UI]
-    end
-
-    subgraph "Agent Runtime"
-        CTX[Context Manager]
-        MEM[Memory Store]
-        PERM[Permission Gate]
-        SESS[Session Manager]
-        HOOK[Hook Pipeline]
-    end
-
-    subgraph "执行层"
-        SKILL[Skills Registry]
-        TOOL[Tools Layer]
-        SUB[Sub-agent Pool]
-    end
-
-    subgraph "基础设施"
-        QE[Query Engine]
-        KB[Knowledge Base]
-        STT[STT Engine]
-    end
-
-    UI --> CMD --> CTX
-    CTX --> MEM
-    CTX --> PERM
-    CTX --> SESS
-    CTX --> HOOK
-    HOOK --> SKILL
-    SKILL --> TOOL
-    SKILL --> SUB
-    TOOL --> QE
-    TOOL --> KB
-    TOOL --> STT
-```
+![10 层 Harness 系统架构](architecture-10layers.drawio.png)
 
 ## 第 1 层：Tools —— 原子能力清单
 
@@ -138,22 +100,7 @@ skill: compare-with-expert
 
 不是简单 `await model.invoke()`，而是完整的调用管线：
 
-```text
-┌─────────────────────────────────────────────────┐
-│                 Query Engine                      │
-├──────────┬──────────┬──────────┬────────────────┤
-│  Router  │  Cache   │  Retry   │  Rate Limiter  │
-├──────────┼──────────┼──────────┼────────────────┤
-│ 模型选择 │ 语义缓存 │ 指数退避 │   令牌桶限流   │
-│ 按任务路由│ 减少重复 │ 3次重试  │  并发控制      │
-└──────────┴──────────┴──────────┴────────────────┘
-
-路由策略:
-- 内容诊断 → 主力模型（Claude / DeepSeek）
-- 语音特征分析 → 专用模型
-- 知识库检索 → Embedding 模型
-- 报告生成 → 主力模型，长上下文窗口
-```
+![Query Engine 调用管线](query-engine.drawio.png)
 
 关键设计：
 
@@ -219,19 +166,7 @@ Memory 写入规则（克制原则）：
 
 面试内容是高度隐私数据，权限设计必须严格：
 
-```text
-权限矩阵:
-
-| 操作 | 风险级别 | 策略 |
-|------|---------|------|
-| 读取用户上传文件 | 低 | 自动允许 |
-| 调用 STT 转写 | 中 | 首次确认，后续记住 |
-| 写入诊断报告 | 低 | 自动允许 |
-| 调用外部模型 API | 中 | 自动允许（已授权） |
-| 保存用户面试内容到记忆 | 高 | 每次确认 |
-| 分享/导出诊断报告 | 高 | 每次确认 |
-| 删除历史数据 | 高 | 二次确认 |
-```
+![权限矩阵](permission-matrix.drawio.png)
 
 隐私保护：
 
@@ -299,33 +234,7 @@ post-tool hooks:
 
 单题诊断可以串行，但多题诊断适合并行分发：
 
-```mermaid
-graph TB
-    MAIN[主 Agent / Orchestrator]
-
-    subgraph "并行诊断"
-        A1[内容诊断 Agent]
-        A2[表达诊断 Agent]
-        A3[知识对标 Agent]
-    end
-
-    subgraph "专项 Agent"
-        A4[语音分析 Agent]
-        A5[报告生成 Agent]
-    end
-
-    MAIN --> A1
-    MAIN --> A2
-    MAIN --> A3
-    MAIN --> A4
-    MAIN --> A5
-
-    A1 -->|内容评分 + 问题定位| MAIN
-    A2 -->|表达评分 + 语气分析| MAIN
-    A3 -->|差距分析 + 升级建议| MAIN
-    A4 -->|语速/停顿/顿挫数据| MAIN
-    A5 -->|结构化诊断报告| MAIN
-```
+![Sub-agent 并行诊断架构](subagent-parallel.drawio.png)
 
 Sub-agent 职责划分：
 

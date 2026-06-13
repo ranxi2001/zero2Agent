@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Layer 1: User Interaction -->
+        <mxCell id="layer1" value="用户交互层" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;horizontal=1;swimlaneHead=1;swimlaneBody=1;collapsible=0;rounded=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="30" width="600" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ui" value="CLI / Web UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="layer1">
+          <mxGeometry x="30" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="cmd" value="Command Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="layer1">
+          <mxGeometry x="220" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="hook" value="Hook Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="layer1">
+          <mxGeometry x="410" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 2: Agent Runtime -->
+        <mxCell id="layer2" value="Agent Runtime" style="swimlane;startSize=30;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=14;horizontal=1;collapsible=0;rounded=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="180" width="600" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ctx" value="Context Manager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=12;" vertex="1" parent="layer2">
+          <mxGeometry x="30" y="45" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="mem" value="Memory Store" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=12;" vertex="1" parent="layer2">
+          <mxGeometry x="175" y="45" width="120" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="perm" value="Permission Gate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=12;" vertex="1" parent="layer2">
+          <mxGeometry x="310" y="45" width="130" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sess" value="Session Manager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=12;" vertex="1" parent="layer2">
+          <mxGeometry x="455" y="45" width="130" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 3: Execution -->
+        <mxCell id="layer3" value="执行层" style="swimlane;startSize=30;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=14;horizontal=1;collapsible=0;rounded=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="330" width="600" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="skill" value="Skills Registry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="layer3">
+          <mxGeometry x="30" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="tool" value="Tools Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="layer3">
+          <mxGeometry x="220" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="sub" value="Sub-agent Pool" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=12;" vertex="1" parent="layer3">
+          <mxGeometry x="410" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 4: Infrastructure -->
+        <mxCell id="layer4" value="基础设施" style="swimlane;startSize=30;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=14;horizontal=1;collapsible=0;rounded=1;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="480" width="600" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="qe" value="Query Engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="layer4">
+          <mxGeometry x="30" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="kb" value="Knowledge Base" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=12;size=10;" vertex="1" parent="layer4">
+          <mxGeometry x="235" y="35" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="stt" value="STT Engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="layer4">
+          <mxGeometry x="410" y="45" width="160" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Edges: Layer 1 to Layer 2 -->
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cmd" target="layer2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1b" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="layer1" source="ui" target="cmd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1c" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="layer1" source="cmd" target="hook">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Edges: Layer 2 to Layer 3 -->
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer2" target="layer3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Edges: Layer 3 to Layer 4 -->
+        <mxCell id="e3a" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="layer3" target="layer4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Left side labels -->
+        <mxCell id="lbl1" value="第 1 层" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="220" y="65" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl2" value="第 2-7 层" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="200" y="215" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl3" value="第 8-9 层" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="200" y="365" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl4" value="第 10 层" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="210" y="515" width="70" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
