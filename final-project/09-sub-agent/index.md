@@ -7,11 +7,11 @@ eyebrow: Final Project / 09
 
 # Sub-agent 编排
 
-前面 8 篇把单 Agent 做稳了。现在是时候让它"长出团队"。
+前面 8 篇把单 Agent 做稳了。现在是时候让它“长出团队”。
 
 面试诊断有一个天然的并行结构：一道题的**内容诊断**、**表达诊断**、**语音分析**三个维度之间没有依赖关系。如果串行执行，20 道题 × 3 个维度 = 60 次模型调用，每次 3-5 秒，总计 3-5 分钟。如果三个维度并行，理论上只需要 1-2 分钟。
 
-但 Sub-agent 不是"多开几个并发请求"这么简单。它需要解决：
+但 Sub-agent 不是“多开几个并发请求”这么简单。它需要解决：
 
 - 每个子 Agent 应该看到什么上下文？（太多会干扰，太少会缺信息）
 - 子 Agent 之间怎么隔离？（一个失败不能影响其他）
@@ -34,7 +34,7 @@ src/agent/
 
 Sub-agent 有多种编排模式（消息传递、共享黑板、层级委托）。我们选最简单清晰的一种：**Agent-as-Tool**。
 
-子 Agent 被包装成一个 Tool，主 Agent 像调用普通 Tool 一样调用它。区别是：这个 "Tool" 内部有自己的 Agent Loop（独立的 system prompt、tools 子集、Context）。
+子 Agent 被包装成一个 Tool，主 Agent 像调用普通 Tool 一样调用它。区别是：这个 “Tool” 内部有自己的 Agent Loop（独立的 system prompt、tools 子集、Context）。
 
 ```mermaid
 flowchart TB

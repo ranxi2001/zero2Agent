@@ -150,7 +150,7 @@ CREATE INDEX idx_knowledge_dimension ON knowledge(dimension);
 
 解析逻辑的核心挑战是处理格式变体。虽然大部分题目遵循标准格式，但实际文件里存在：
 - `## Q` 和 `### Q` 两种标题级别
-- 有些题有"差距在哪"，有些用"考察点"
+- 有些题有“差距在哪”，有些用“考察点”
 - 高手答可能包含代码块、列表、多层级标题
 
 ```typescript

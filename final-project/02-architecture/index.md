@@ -7,7 +7,7 @@ eyebrow: Final Project / 02
 
 # 系统架构设计
 
-上一篇 PRD 定义了"做什么"，这篇定义"怎么做"——模块怎么划分、数据怎么流动、接口怎么定义。
+上一篇 PRD 定义了“做什么”，这篇定义“怎么做”——模块怎么划分、数据怎么流动、接口怎么定义。
 
 核心设计决策：**不用框架，手写 Harness。** Agent loop、tool dispatch、stream 解析、context 管理全部自己实现。代码即教程，每一层都是可独立讲解的工程模块。
 
@@ -188,7 +188,7 @@ type StreamChunk =
 |----------|-----|------|------|
 | ClaudeProvider | @anthropic-ai/sdk | claude-sonnet-4-20250514 | 主力诊断、报告生成 |
 | OpenAIProvider | openai SDK | gpt-4o | 备用诊断、多模型交叉验证 |
-| DeepSeekProvider | openai SDK (兼容) | deepseek-chat | 轻量任务、知识库摘要 |
+| DeepSeekProvider | openai SDK（兼容） | deepseek-chat | 轻量任务、知识库摘要 |
 
 ## Tool 系统：注册 + Schema + 分发
 

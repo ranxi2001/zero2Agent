@@ -7,7 +7,7 @@ eyebrow: Final Project / 07
 
 # Permission & Session 实现
 
-Agent 越能干，越需要约束。Permission 决定"能不能做"，Session 决定"做到哪了"。
+Agent 越能干，越需要约束。Permission 决定“能不能做”，Session 决定“做到哪了”。
 
 面试诊断 Agent 处理的是高隐私数据（面试内容、个人表现评估），能调用多种外部 API（STT、LLM），还能写入文件。如果没有权限系统，一个 prompt injection 就可能导致面试内容泄露。如果没有 Session，一次长诊断中断后只能从头来过。
 
@@ -481,7 +481,7 @@ flowchart LR
 
 一场面试诊断涉及 20 道题，每题 3-5 次工具调用，总计 60-100 次模型交互。这个过程可能需要 10-30 分钟。中间任何一个环节中断（网络断开、用户关闭终端、模型限流）都不应该导致从头来过。
 
-Session 保存的是"Agent 做到哪一步了"的完整快照。
+Session 保存的是“Agent 做到哪一步了”的完整快照。
 
 ### 模块结构
 
@@ -988,7 +988,7 @@ flowchart TB
 
 ## 小结
 
-- **Permission**：默认拒绝 + 风险分级（low/medium/high/critical），中风险支持"记住"
+- **Permission**：默认拒绝 + 风险分级（low/medium/high/critical），中风险支持“记住”
 - human-in-the-loop 通过 CLI readline 实现，超时默认拒绝
 - 所有权限决策记录审计日志，支持事后追溯
 - **Session**：完整状态机（created → processing → paused/completed/failed）

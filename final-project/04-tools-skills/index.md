@@ -165,7 +165,7 @@ export function createToolRegistry(): ToolRegistry {
 
 ### split_qa_pairs：从面试稿中拆分 Q&A 对
 
-这个 Tool 的核心挑战是：面试稿格式不统一。有的用"面试官：/候选人："标记，有的是纯对话流，有的甚至没有明确分隔。
+这个 Tool 的核心挑战是：面试稿格式不统一。有的用“面试官：/候选人：”标记，有的是纯对话流，有的甚至没有明确分隔。
 
 ```typescript
 // tools/split-qa.ts
@@ -692,7 +692,7 @@ export const generateReportTool: Tool<ReportInput, DiagnosisReport> = {
 
 ## Skills 层：任务级编排
 
-Skill 不是一个新的抽象层级——它就是"一段被命名和注册的 Tool 调用序列"。重点是可复用和可发现。
+Skill 不是一个新的抽象层级——它就是“一段被命名和注册的 Tool 调用序列”。重点是可复用和可发现。
 
 ### Skill 接口
 
