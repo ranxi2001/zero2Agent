@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1000" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Start: User Input -->
+        <mxCell id="start" value="用户输入文字稿" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 1: CommandParser -->
+        <mxCell id="s1" value="CommandParser: 不是命令，进入 Agent Loop" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="90" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 2: Context Manager -->
+        <mxCell id="s2" value="Context Manager: 拼装 system prompt + 用户输入" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Step 3: Query Engine -->
+        <mxCell id="s3" value="Query Engine &#x2192; LLM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="230" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Tool Call Group 1: split_qa_pairs -->
+        <mxCell id="tc1" value="tool_use: split_qa_pairs" style="swimlane;startSize=24;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="250" y="300" width="400" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="tc1a" value="Pre-hook: permission &#x2713;, budget &#x2713;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="tc1">
+          <mxGeometry x="20" y="35" width="200" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="tc1b" value="Execute: 拆出 15 道 Q&amp;A" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="tc1">
+          <mxGeometry x="20" y="75" width="200" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="tc1c" value="Post-hook: audit log,&#xa;progress update" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="tc1">
+          <mxGeometry x="240" y="35" width="140" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="tc1d" value="Result 回传 Context" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="tc1">
+          <mxGeometry x="240" y="75" width="140" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- Tool Call Group 2: query_knowledge_base -->
+        <mxCell id="tc2" value="tool_use: query_knowledge_base (Q1)" style="swimlane;startSize=24;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="250" y="450" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tc2a" value="Execute: FTS5 + embedding &#x2192; top-3 参考答案" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="tc2">
+          <mxGeometry x="75" y="35" width="250" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- Tool Call Group 3: analyze_content -->
+        <mxCell id="tc3" value="tool_use: analyze_content (Q1)" style="swimlane;startSize=24;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="250" y="560" width="400" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tc3a" value="Execute: 对比用户答案 vs 参考 &#x2192; 诊断结果" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="tc3">
+          <mxGeometry x="20" y="35" width="250" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="tc3b" value="Post-hook: result-compress&#xa;（截断到 500 tokens）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="tc3">
+          <mxGeometry x="20" y="75" width="180" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Repeat indicator -->
+        <mxCell id="repeat" value="... 重复 Q2 &#x2013; Q15 ..." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=2;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="380" y="690" width="140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Context compress -->
+        <mxCell id="s5" value="Context Manager: 历史诊断结果已压缩为摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="740" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Tool Call Group 4: generate_report -->
+        <mxCell id="tc4" value="tool_use: generate_report" style="swimlane;startSize=24;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="250" y="810" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tc4a" value="Execute: 汇总所有诊断 &#x2192; 结构化报告" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="tc4">
+          <mxGeometry x="75" y="35" width="250" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- LLM final output -->
+        <mxCell id="s7" value="LLM 返回 text: 最终报告输出给用户" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="920" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Session save -->
+        <mxCell id="s8" value="Session Manager: 保存完整状态 + checkpoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="990" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="start" target="s1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s1" target="s2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s2" target="s3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s3" target="tc1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tc1" target="tc2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tc2" target="tc3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tc3" target="s5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s5" target="tc4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tc4" target="s7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="s7" target="s8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -825,4 +825,4 @@ sequenceDiagram
 
 下一篇建议继续看：
 
-- [10-stt-speech：STT 集成与语音分析](../10-stt-speech/index.html)（待产出）
+- [10-stt-speech：STT 集成与语音分析](../10-stt-speech/index.html)

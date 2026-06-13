@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="800" dy="520" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="520" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Page frame -->
+        <mxCell id="frame" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CCCCCC;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="720" height="470" as="geometry" />
+        </mxCell>
+
+        <!-- Header with progress -->
+        <mxCell id="hdr" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="720" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="诊断进行中" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="70" y="30" width="90" height="24" as="geometry" />
+        </mxCell>
+        <!-- Progress bar -->
+        <mxCell id="pbar_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0e0e0;strokeColor=none;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="480" y="35" width="200" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="pbar_fill" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6c8ebf;strokeColor=none;arcSize=50;" vertex="1" parent="1">
+          <mxGeometry x="480" y="35" width="75" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="pbar_text" value="3/8 &#x9898; 37%" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="690" y="30" width="70" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Question list -->
+        <mxCell id="q1" value="&#x2713; Q1: ReAct vs Plan-and-Execute" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="230" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="q1s" value="62 分" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#d79b00;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="80" width="50" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="q2" value="&#x2713; Q2: Tool Calling 失败兜底" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="200" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="q2s" value="78 分" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#82b366;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="110" width="50" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="q3" value="&#x25cf; Q3: Agent 记忆系统设计" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#6c8ebf;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="180" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="q3s" value="诊断中..." style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#6c8ebf;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="630" y="140" width="70" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="q4" value="&#x25cb; Q4: 多 Agent 协调" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="80" y="170" width="140" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="q4s" value="待处理" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="650" y="170" width="50" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="q5" value="&#x25cb; Q5: ..." style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="80" y="200" width="60" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Divider -->
+        <mxCell id="div" value="" style="line;strokeWidth=1;html=1;strokeColor=#e0e0e0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="640" height="10" as="geometry" />
+        </mxCell>
+
+        <!-- Live output section -->
+        <mxCell id="live_title" value="Q3 实时输出" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="340" y="255" width="90" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Live output card -->
+        <mxCell id="live_card" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#e0e0e0;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="100" y="290" width="600" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="live1" value="&#x1f4ce; 知识库匹配: memory-context:5 (相似度 0.92)" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="120" y="310" width="310" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="live2" value="&#x280b; 正在对比参考答案..." style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#6c8ebf;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="350" width="160" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

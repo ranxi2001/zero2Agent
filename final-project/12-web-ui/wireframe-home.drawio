@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="800" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="680" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Page frame -->
+        <mxCell id="frame" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CCCCCC;strokeWidth=2;arcSize=3;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="720" height="640" as="geometry" />
+        </mxCell>
+
+        <!-- Header -->
+        <mxCell id="hdr" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#CCCCCC;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="720" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="logo" value="面试诊断 Agent" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="70" y="30" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nav1" value="[历史]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="640" y="33" width="50" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="nav2" value="[设置]" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="700" y="33" width="50" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Hero text -->
+        <mxCell id="hero" value="上传面试稿或录音，获得 AI 结构化诊断" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="230" y="90" width="270" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- 4 feature cards -->
+        <!-- Card 1: Text diagnosis -->
+        <mxCell id="c1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="130" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c1t" value="&#x1f4dd; 文字稿诊断" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="155" y="140" width="120" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c1d" value="粘贴或上传面试稿&#xa;诊断内容 + 表达" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="155" y="172" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Card 2: Audio diagnosis -->
+        <mxCell id="c2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="420" y="130" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c2t" value="&#x1f3a4; 录音诊断" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="510" y="140" width="100" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c2d" value="上传或现场录音&#xa;诊断内容+表达+语音" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="495" y="172" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Card 3: Mock interview -->
+        <mxCell id="c3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="80" y="260" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c3t" value="&#x1f3af; 模拟面试" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="165" y="270" width="100" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c3d" value="Agent 提问+即时反馈" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="150" y="302" width="130" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Card 4: History -->
+        <mxCell id="c4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="420" y="260" width="300" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="c4t" value="&#x1f4ca; 诊断历史" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="510" y="270" width="100" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="c4d" value="查看趋势和进步" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="510" y="302" width="110" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Recent section divider -->
+        <mxCell id="divider" value="&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; &#x6700;&#x8fd1;&#x8bca;&#x65ad; &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="300" y="400" width="200" height="24" as="geometry" />
+        </mxCell>
+
+        <!-- Recent items -->
+        <mxCell id="r1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#e0e0e0;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="120" y="440" width="560" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r1t" value="&#x25cb; 2026-06-12  8 题  67 分  &#x201c;字节 Agent 岗&#x201d;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="140" y="448" width="300" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#e0e0e0;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="120" y="490" width="560" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2t" value="&#x25cb; 2026-06-10  12 题  61 分  &#x201c;蚂蚁 AI 应用&#x201d;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="140" y="498" width="300" height="24" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

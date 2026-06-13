@@ -998,4 +998,4 @@ flowchart TB
 
 下一篇建议继续看：
 
-- [08-hook-command：扩展点与命令层](../08-hook-command/index.html)（待产出）
+- [08-hook-command：扩展点与命令层](../08-hook-command/index.html)

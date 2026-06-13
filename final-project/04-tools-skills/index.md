@@ -1047,4 +1047,4 @@ async function agentLoop(input: string, session: Session): Promise<void> {
 
 下一篇建议继续看：
 
-- [05-knowledge-base：知识库构建](../05-knowledge-base/index.html)（待产出）
+- [05-knowledge-base：知识库构建](../05-knowledge-base/index.html)

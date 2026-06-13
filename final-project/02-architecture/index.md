@@ -476,42 +476,7 @@ sequenceDiagram
 
 ## 数据流：一次完整诊断的生命周期
 
-```text
-用户输入文字稿
-  │
-  ├─ CommandParser: 不是命令，进入 Agent Loop
-  │
-  ├─ Context Manager: 拼装 system prompt + 用户输入
-  │
-  ├─ Query Engine → LLM: "请分析这段面试稿"
-  │
-  ├─ LLM 返回 tool_use: split_qa_pairs
-  │   ├─ Pre-hook: permission ✓, budget ✓
-  │   ├─ Execute: 拆出 15 道 Q&A
-  │   ├─ Post-hook: audit log, progress update
-  │   └─ Result 回传 Context
-  │
-  ├─ LLM 返回 tool_use: query_knowledge_base (Q1)
-  │   ├─ Execute: FTS5 + embedding → top-3 参考答案
-  │   └─ Result 回传
-  │
-  ├─ LLM 返回 tool_use: analyze_content (Q1)
-  │   ├─ Execute: 对比用户答案 vs 参考 → 诊断结果
-  │   ├─ Post-hook: result-compress (截断到 500 tokens)
-  │   └─ Result 回传
-  │
-  ├─ ... 重复 Q2–Q15 ...
-  │
-  ├─ Context Manager: 历史诊断结果已压缩为摘要
-  │
-  ├─ LLM 返回 tool_use: generate_report
-  │   ├─ Execute: 汇总所有诊断 → 结构化报告
-  │   └─ Result 回传
-  │
-  ├─ LLM 返回 text: 最终报告输出给用户
-  │
-  └─ Session Manager: 保存完整状态 + checkpoint
-```
+![数据流生命周期](data-flow-lifecycle.drawio.png)
 
 ## 依赖清单（package.json 核心）
 
@@ -582,4 +547,4 @@ graph BT
 
 下一篇建议继续看：
 
-- [03-query-engine：模型调用层实现](../03-query-engine/index.html)（待产出）
+- [03-query-engine：模型调用层实现](../03-query-engine/index.html)
