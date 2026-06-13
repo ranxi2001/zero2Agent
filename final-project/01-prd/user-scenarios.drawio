@@ -16,16 +16,16 @@
           <mxGeometry x="40" y="50" width="1020" height="100" as="geometry" />
         </mxCell>
         <mxCell id="s1a" value="用户粘贴&#xa;面试对话文字稿" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="s1_grp">
-          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="130" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s1b" value="Agent 识别&#xa;每道题的回答" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="s1_grp">
-          <mxGeometry x="220" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="330" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s1c" value="逐题诊断" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="s1_grp">
-          <mxGeometry x="420" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="530" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s1d" value="输出改进建议" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="s1_grp">
-          <mxGeometry x="620" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="730" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s1e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="s1_grp" source="s1a" target="s1b">
           <mxGeometry relative="1" as="geometry" />
@@ -42,16 +42,16 @@
           <mxGeometry x="40" y="170" width="1020" height="100" as="geometry" />
         </mxCell>
         <mxCell id="s2a" value="用户上传&#xa;面试录音" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="s2_grp">
-          <mxGeometry x="20" y="40" width="120" height="50" as="geometry" />
+          <mxGeometry x="160" y="40" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s2b" value="STT 转写" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="s2_grp">
-          <mxGeometry x="180" y="40" width="120" height="50" as="geometry" />
+          <mxGeometry x="340" y="40" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s2c" value="识别说话人" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="s2_grp">
-          <mxGeometry x="340" y="40" width="120" height="50" as="geometry" />
+          <mxGeometry x="520" y="40" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s2d" value="逐题诊断内容&#xa;+ 语音特征分析" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="s2_grp">
-          <mxGeometry x="500" y="40" width="150" height="50" as="geometry" />
+          <mxGeometry x="700" y="40" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s2e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="s2_grp" source="s2a" target="s2b">
           <mxGeometry relative="1" as="geometry" />
@@ -68,16 +68,16 @@
           <mxGeometry x="40" y="290" width="1020" height="100" as="geometry" />
         </mxCell>
         <mxCell id="s3a" value="用户回答" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
-          <mxGeometry x="20" y="40" width="120" height="50" as="geometry" />
+          <mxGeometry x="150" y="40" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s3b" value="与知识库&#xa;&quot;高手答&quot;对比" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
-          <mxGeometry x="200" y="40" width="150" height="50" as="geometry" />
+          <mxGeometry x="340" y="40" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s3c" value="指出差距" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
-          <mxGeometry x="410" y="40" width="120" height="50" as="geometry" />
+          <mxGeometry x="550" y="40" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s3d" value="给出升级路径" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
-          <mxGeometry x="590" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="740" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s3e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="s3_grp" source="s3a" target="s3b">
           <mxGeometry relative="1" as="geometry" />
@@ -94,13 +94,13 @@
           <mxGeometry x="40" y="410" width="1020" height="100" as="geometry" />
         </mxCell>
         <mxCell id="s4a" value="Agent 扮演&#xa;面试官提问" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="s4_grp">
-          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="230" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s4b" value="用户实时回答" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="s4_grp">
-          <mxGeometry x="220" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="430" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s4c" value="即时反馈" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="s4_grp">
-          <mxGeometry x="420" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="630" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s4e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="s4_grp" source="s4a" target="s4b">
           <mxGeometry relative="1" as="geometry" />
