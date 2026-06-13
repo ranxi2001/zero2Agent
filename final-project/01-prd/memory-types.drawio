@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="900" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Memory 三层模型" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Time axis label on the left -->
+        <mxCell id="time_label" value="持久性" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#666666;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="0" y="280" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow_time" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="530" as="sourcePoint" />
+            <mxPoint x="30" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Layer 1: user-profile (long-term) -->
+        <mxCell id="m1" value="user-profile（长期）" style="swimlane;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=13;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="800" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="m1a" value="用户目标岗位" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
+          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m1b" value="技术栈背景" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
+          <mxGeometry x="180" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m1c" value="历次诊断中暴露&#xa;的共性弱点" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
+          <mxGeometry x="340" y="40" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m1d" value="改进趋势" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
+          <mxGeometry x="510" y="40" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 2: diagnosis-history (mid-term) -->
+        <mxCell id="m2" value="diagnosis-history（中期）" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="200" width="800" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="m2a" value="每次诊断的&#xa;结构化摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="m2">
+          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m2b" value="高频失分维度统计" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="m2">
+          <mxGeometry x="200" y="40" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m2c" value="进步/退步对比" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="m2">
+          <mxGeometry x="400" y="40" width="140" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 3: session-context (short-term) -->
+        <mxCell id="m3" value="session-context（短期）" style="swimlane;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=13;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="350" width="800" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="m3a" value="当前诊断会话&#xa;的工作状态" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="m3">
+          <mxGeometry x="20" y="40" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="m3b" value="已处理/待处理&#xa;的 Q&amp;A 队列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="m3">
+          <mxGeometry x="210" y="40" width="150" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Duration labels on the right -->
+        <mxCell id="dur1" value="跨会话保留" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#6c8ebf;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="750" y="85" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dur2" value="天/周级保留" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#82b366;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="750" y="240" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dur3" value="会话内有效" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=10;fontColor=#d6b656;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="750" y="390" width="80" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

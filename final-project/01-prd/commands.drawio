@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="900" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="用户命令" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="380" y="10" width="80" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Group: Input -->
+        <mxCell id="grp_input" value="输入" style="swimlane;startSize=25;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="250" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="/upload &lt;file&gt;&#xa;上传面试稿或录音" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_input">
+          <mxGeometry x="15" y="35" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="/mock [dimension]&#xa;开始模拟面试" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_input">
+          <mxGeometry x="15" y="90" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="c10" value="/reset&#xa;清空当前会话" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_input">
+          <mxGeometry x="15" y="125" width="220" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Group: Diagnosis -->
+        <mxCell id="grp_diag" value="诊断" style="swimlane;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="330" y="50" width="250" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="/diagnose&#xa;开始诊断当前上传内容" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_diag">
+          <mxGeometry x="15" y="35" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="/skip &lt;n&gt;&#xa;跳过第 n 题" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_diag">
+          <mxGeometry x="15" y="90" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="/compare &lt;n&gt;&#xa;对比第 n 题与高手答" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_diag">
+          <mxGeometry x="15" y="125" width="220" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Group: Output -->
+        <mxCell id="grp_out" value="输出" style="swimlane;startSize=25;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="620" y="50" width="250" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="/status&#xa;查看诊断进度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_out">
+          <mxGeometry x="15" y="35" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="/detail &lt;n&gt;&#xa;查看第 n 题详细诊断" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_out">
+          <mxGeometry x="15" y="90" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" value="/report&#xa;生成完整报告" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="grp_out">
+          <mxGeometry x="15" y="125" width="220" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Bottom row -->
+        <mxCell id="c9" value="/history — 查看历史诊断列表" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="250" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" value="/export [format] — 导出报告（md/pdf）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="330" y="260" width="280" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

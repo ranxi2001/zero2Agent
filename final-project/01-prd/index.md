@@ -25,19 +25,7 @@ eyebrow: Final Project / 01
 
 ## 用户场景
 
-```text
-场景 1：文字稿诊断
-用户粘贴一段面试对话文字稿 → Agent 识别每道题的回答 → 逐题诊断 → 输出改进建议
-
-场景 2：录音诊断
-用户上传面试录音 → STT 转写 → 识别说话人 → 逐题诊断内容 + 语音特征分析
-
-场景 3：知识库对标
-Agent 将用户回答与知识库中的"高手答"对比 → 指出差距 → 给出升级路径
-
-场景 4：模拟面试
-Agent 扮演面试官提问 → 用户实时回答 → 即时反馈
-```
+![用户场景](user-scenarios.drawio.png)
 
 ## 系统架构：基于 Harness 工程的 10 层设计
 
@@ -74,27 +62,7 @@ Skills 是 Tools 的有意义组合，代表一个完整的诊断流程。
 
 **核心 Skills：**
 
-```text
-skill: diagnose-transcript
-  描述: 从文字稿完成全流程诊断
-  流程: split_qa_pairs → query_knowledge_base(each) → analyze_content(each) → generate_report
-  触发: 用户上传文字稿或粘贴面试内容
-
-skill: diagnose-audio
-  描述: 从录音完成全流程诊断
-  流程: transcribe_audio → detect_speakers → split_qa_pairs → [analyze_content + analyze_speech](each) → generate_report
-  触发: 用户上传音频文件
-
-skill: mock-interview
-  描述: 模拟面试 + 即时反馈
-  流程: 从知识库抽题 → 逐题提问 → 收集回答 → diagnose-transcript
-  触发: 用户说"模拟面试"、"练一下"
-
-skill: compare-with-expert
-  描述: 单题深度对比
-  流程: query_knowledge_base → 结构化对比用户答案 vs 高手答 → 输出差距分析
-  触发: 用户问"这道题我答得怎么样"
-```
+![Skills 管线流程](skills-flow.drawio.png)
 
 ## 第 3 层：Query Engine —— 模型调用的工程化
 
@@ -113,48 +81,11 @@ skill: compare-with-expert
 
 面试诊断的上下文特别容易爆：一场面试可能有 20+ 道题，每题的回答、参考答案、诊断结果都在膨胀。
 
-```text
-Context 管理策略:
-
-1. 分层注入
-   - system prompt: 诊断标准 + 评分维度（固定）
-   - current_task: 当前正在诊断的 Q&A 对（动态）
-   - reference: 该题对应的知识库参考（按需加载）
-   - history: 已完成诊断的摘要（压缩后保留）
-
-2. 自动压缩
-   - 每完成一题诊断，将详细过程压缩为摘要
-   - 知识库检索结果只保留 top-3 相关段落
-   - 工具输出超过 2000 token 自动截断 + 摘要
-
-3. Token 预算分配
-   - system prompt: ≤ 2000 tokens
-   - 当前任务上下文: ≤ 4000 tokens
-   - 参考资料: ≤ 3000 tokens
-   - 历史摘要: ≤ 2000 tokens
-   - 模型输出空间: ≥ 4000 tokens
-```
+![Context 管理策略](context-strategy.drawio.png)
 
 ## 第 5 层：Memory —— 用户画像与诊断历史
 
-```text
-Memory 类型:
-
-1. user-profile（长期）
-   - 用户目标岗位
-   - 技术栈背景
-   - 历次诊断中暴露的共性弱点
-   - 改进趋势
-
-2. diagnosis-history（中期）
-   - 每次诊断的结构化摘要
-   - 高频失分维度统计
-   - 进步/退步对比
-
-3. session-context（短期）
-   - 当前诊断会话的工作状态
-   - 已处理/待处理的 Q&A 队列
-```
+![Memory 三层模型](memory-types.drawio.png)
 
 Memory 写入规则（克制原则）：
 
@@ -178,57 +109,15 @@ Memory 写入规则（克制原则）：
 
 一场面试诊断可能需要 10–30 分钟。Session 必须支持中断恢复。
 
-```text
-Session 状态机:
-
-created → processing → [paused | completed | failed]
-                ↑            |
-                └────────────┘ (resume)
-
-Session 保存内容:
-- 原始输入（文字稿/录音路径）
-- 拆分后的 Q&A 列表
-- 每题的诊断进度（待处理/已诊断/已跳过）
-- 累计诊断结果
-- 模型配置快照
-- rewind 检查点（每完成 5 题存一个）
-```
+![Session 状态机](session-state.drawio.png)
 
 ## 第 8 层：Command —— 确定性操作入口
 
-```text
-用户命令:
-
-/upload <file>       — 上传面试稿或录音
-/diagnose            — 开始诊断当前上传内容
-/status              — 查看诊断进度
-/skip <n>            — 跳过第 n 题
-/detail <n>          — 查看第 n 题详细诊断
-/compare <n>         — 对比第 n 题与高手答
-/report              — 生成完整报告
-/history             — 查看历史诊断列表
-/mock [dimension]    — 开始模拟面试
-/reset               — 清空当前会话
-/export [format]     — 导出报告（md/pdf）
-```
+![用户命令](commands.drawio.png)
 
 ## 第 9 层：Hook —— 治理逻辑的扩展点
 
-```text
-Hook 链:
-
-pre-tool hooks:
-  - permission-check: 检查工具调用权限
-  - input-sanitize: 过滤敏感信息（姓名/公司名可选脱敏）
-  - budget-check: 检查 token 预算是否足够
-
-post-tool hooks:
-  - audit-log: 记录工具调用日志
-  - result-compress: 压缩工具输出，控制上下文膨胀
-  - memory-trigger: 判断是否需要更新用户画像
-  - metric-emit: 记录延迟、token 消耗、错误率
-  - progress-update: 更新 session 进度状态
-```
+![Hook 管线](hook-pipeline.drawio.png)
 
 ## 第 10 层：Sub-agent —— 诊断任务的并行分发
 
@@ -250,44 +139,11 @@ Sub-agent 职责划分：
 
 知识库来源就是 zero2Agent 项目本身的面试内容：
 
-```text
-数据源:
-- learn-agent-interview/ 下的 7 个维度文章（384 道题）
-- 每题包含：题目、新手答、高手答、差距分析、考察维度
-
-索引维度:
-- 按考察维度: Agent 基础 / 工具使用 / 记忆 / 规划 / 多 Agent / 工程化 / 模型能力
-- 按技术栈: LangChain / LangGraph / Claude / OpenAI / RAG / ...
-- 按难度: 基础 / 进阶 / 深水区
-
-检索策略:
-- 先按维度过滤
-- 再用 embedding 语义匹配
-- 返回 top-3 相关参考答案
-```
+![知识库设计](knowledge-base.drawio.png)
 
 ## 诊断维度与评分体系
 
-```text
-一、内容维度（60%）
-  1. 完整性: 是否覆盖了关键点
-  2. 深度: 是否有递进分析，不只是表面描述
-  3. 准确性: 技术细节是否正确
-  4. 实践性: 是否有实际经验支撑，而非纯理论
-
-二、表达维度（25%）
-  1. 逻辑结构: 是否分层递进，有框架感
-  2. 简洁度: 是否有废话、重复、绕圈子
-  3. 关键词命中: 是否用了面试官期待的术语
-  4. 收尾力: 结论是否清晰有力
-
-三、语音维度（15%，仅录音模式）
-  1. 流畅度: 语句是否连贯
-  2. 语速: 是否过快或过慢
-  3. 停顿: 是否有过长的思考停顿
-  4. 语气: 是否自信、沉稳
-  5. 顿挫感: 是否频繁出现"嗯""那个""就是"
-```
+![诊断维度与评分体系](diagnosis-dimensions.drawio.png)
 
 ## 技术选型
 
@@ -313,36 +169,7 @@ Sub-agent 职责划分：
 
 ## 开发路线图
 
-```text
-Phase 1: 最小可用（MVP）
-  ├── Query Engine: 模型调用 + stream + retry + error
-  ├── Tools: read_file + split_qa_pairs + query_knowledge_base + analyze_content
-  ├── Knowledge Base: 导入 learn-agent-interview 384 道题
-  ├── 文字稿诊断流程: 上传 → 拆题 → 逐题诊断 → 报告
-  └── 交付物: CLI 可用，能诊断文字稿
-
-Phase 2: 语音能力
-  ├── STT 集成: Whisper / FunASR
-  ├── 说话人分离
-  ├── 语音特征分析 Tool
-  ├── 录音诊断 Skill
-  └── 交付物: 支持录音上传诊断
-
-Phase 3: 工程化加固
-  ├── Permission 层完整实现
-  ├── Session 持久化 + 恢复
-  ├── Context 自动压缩
-  ├── Hook 管线
-  ├── Memory 用户画像
-  └── 交付物: 可长期使用，不丢状态
-
-Phase 4: 多 Agent + 高级功能
-  ├── Sub-agent 并行诊断
-  ├── 模拟面试模式
-  ├── 诊断报告导出
-  ├── 进步趋势追踪
-  └── 交付物: 完整产品体验
-```
+![开发路线图](dev-roadmap.drawio.png)
 
 ## 与 zero2Agent 课程的关系
 

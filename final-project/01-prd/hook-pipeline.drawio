@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1100" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Hook 管线" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="490" y="10" width="80" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Pre-tool hooks -->
+        <mxCell id="pre_grp" value="pre-tool hooks" style="swimlane;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="460" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" value="permission-check&#xa;检查工具调用权限" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="pre_grp">
+          <mxGeometry x="10" y="38" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" value="input-sanitize&#xa;过滤敏感信息" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="pre_grp">
+          <mxGeometry x="160" y="38" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" value="budget-check&#xa;检查 token 预算" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="pre_grp">
+          <mxGeometry x="310" y="38" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="he1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="pre_grp" source="h1" target="h2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#6c8ebf;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="pre_grp" source="h2" target="h3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Tool execution (center) -->
+        <mxCell id="tool_exec" value="Tool 执行" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="80" width="120" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: pre to tool -->
+        <mxCell id="ae1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pre_grp" target="tool_exec">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Post-tool hooks -->
+        <mxCell id="post_grp" value="post-tool hooks" style="swimlane;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="1020" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" value="audit-log&#xa;记录调用日志" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
+          <mxGeometry x="10" y="38" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h5" value="result-compress&#xa;压缩工具输出" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
+          <mxGeometry x="155" y="38" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h6" value="memory-trigger&#xa;判断是否更新画像" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
+          <mxGeometry x="310" y="38" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h7" value="metric-emit&#xa;记录延迟/token/错误率" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
+          <mxGeometry x="475" y="38" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h8" value="progress-update&#xa;更新 session 进度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
+          <mxGeometry x="650" y="38" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="he3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="post_grp" source="h4" target="h5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="post_grp" source="h5" target="h6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="post_grp" source="h6" target="h7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="he6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="post_grp" source="h7" target="h8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: tool to post -->
+        <mxCell id="ae2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="tool_exec" target="post_grp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

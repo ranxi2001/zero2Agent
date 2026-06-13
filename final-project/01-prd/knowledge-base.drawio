@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1000" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="650" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="知识库设计" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="420" y="10" width="100" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Data source -->
+        <mxCell id="src_grp" value="数据源" style="swimlane;startSize=25;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="400" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="src1" value="learn-agent-interview/&#xa;7 个维度文章（384 道题）" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;size=10;" vertex="1" parent="src_grp">
+          <mxGeometry x="20" y="40" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="src2" value="每题包含：&#xa;题目 | 新手答 | 高手答&#xa;差距分析 | 考察维度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="src_grp">
+          <mxGeometry x="230" y="45" width="150" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Index dimensions -->
+        <mxCell id="idx_grp" value="索引维度" style="swimlane;startSize=25;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;collapsible=0;rounded=1;arcSize=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="400" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="idx1" value="按考察维度&#xa;Agent 基础 / 工具使用&#xa;记忆 / 规划 / 多 Agent&#xa;工程化 / 模型能力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="idx_grp">
+          <mxGeometry x="10" y="35" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="idx2" value="按技术栈&#xa;LangChain&#xa;LangGraph&#xa;Claude / OpenAI&#xa;RAG / ..." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="idx_grp">
+          <mxGeometry x="145" y="35" width="110" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="idx3" value="按难度&#xa;基础&#xa;进阶&#xa;深水区" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="idx_grp">
+          <mxGeometry x="270" y="35" width="110" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Retrieval strategy (right side) -->
+        <mxCell id="ret_title" value="检索策略" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="680" y="50" width="80" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r1" value="用户提问" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="90" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" value="按维度过滤" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="170" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" value="Embedding 语义匹配" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="640" y="250" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r4" value="返回 top-3 相关参考答案" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="330" width="160" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="re1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r1" target="r2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r2" target="r3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="re3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r3" target="r4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Connect source to index -->
+        <mxCell id="ce1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="src_grp" target="idx_grp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

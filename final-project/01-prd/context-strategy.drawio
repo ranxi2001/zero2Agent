@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Page-1">
+    <mxGraphModel dx="1000" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="750" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Left: Layered Injection -->
+        <mxCell id="left_title" value="分层注入" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="170" y="10" width="80" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l1" value="System Prompt&#xa;诊断标准 + 评分维度（固定）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="50" width="340" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="Current Task&#xa;当前正在诊断的 Q&amp;A 对（动态）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="340" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="Reference&#xa;该题对应的知识库参考（按需加载）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="190" width="340" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="History&#xa;已完成诊断的摘要（压缩后保留）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="340" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows between layers -->
+        <mxCell id="la1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="l1" target="l2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="l2" target="l3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="la3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="l3" target="l4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Right: Token Budget -->
+        <mxCell id="right_title" value="Token 预算分配" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="600" y="10" width="120" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="budget_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="50" width="440" height="310" as="geometry" />
+        </mxCell>
+
+        <!-- Budget bars (stacked horizontal bars) -->
+        <mxCell id="b1" value="system prompt: &lt;= 2000 tokens" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="70" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="当前任务上下文: &lt;= 4000 tokens" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="400" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="参考资料: &lt;= 3000 tokens" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="170" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="历史摘要: &lt;= 2000 tokens" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="220" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="模型输出空间: &gt;= 4000 tokens" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="270" width="400" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Bottom: Compression strategies -->
+        <mxCell id="comp_title" value="自动压缩策略" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="400" y="390" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="每完成一题诊断&#xa;将详细过程压缩为摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="430" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="知识库检索结果&#xa;只保留 top-3 相关段落" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="290" y="430" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="工具输出超 2000 token&#xa;自动截断 + 摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="430" width="200" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
