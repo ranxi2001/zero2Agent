@@ -1,15 +1,15 @@
 ---
 layout: default
 title: final-project
-description: 面试诊断 Agent 实战——从 PRD 到工程系统
+description: OfferPilot —— 面试诊断 Agent 实战
 eyebrow: Module 05
 ---
 
-# Final Project：面试诊断 Agent
+# Final Project：OfferPilot
 
 最终实战围绕一个高集成度的真实问题展开：
 
-**面试诊断 Agent —— 上传面试录音或文字稿，自动诊断回答质量，输出结构化改进建议。**
+**[OfferPilot](https://github.com/ranxi2001/OfferPilot) —— 上传面试录音或文字稿，自动诊断回答质量，输出结构化改进建议。**
 
 ## 为什么选这个方向
 
@@ -27,6 +27,12 @@ eyebrow: Module 05
 - **Sub-agent**：内容/表达/语音多维度并行诊断
 
 同时，知识库直接复用本项目 learn-agent-interview 模块的 384 道面试题——吃自己的狗粮。
+
+## 项目仓库
+
+**GitHub**: [https://github.com/ranxi2001/OfferPilot](https://github.com/ranxi2001/OfferPilot)
+
+纯手写 Harness 10 层架构，不依赖 LangChain / LangGraph，直接调用 Anthropic SDK + OpenAI SDK。
 
 ## 文档目录
 
