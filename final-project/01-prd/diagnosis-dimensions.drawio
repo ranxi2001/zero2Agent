@@ -61,7 +61,7 @@
         <mxCell id="d3d" value="语气&#xa;是否自信沉稳" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
           <mxGeometry x="530" y="38" width="120" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="d3e" value="顿挫感&#xa;是否频繁&quot;嗯&quot;&quot;那个&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
+        <mxCell id="d3e" value="顿挫感&#xa;是否频繁"嗯""那个"" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
           <mxGeometry x="670" y="38" width="140" height="50" as="geometry" />
         </mxCell>
 

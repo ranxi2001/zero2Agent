@@ -70,7 +70,7 @@
         <mxCell id="s3a" value="用户回答" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
           <mxGeometry x="150" y="40" width="130" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="s3b" value="与知识库&#xa;&quot;高手答&quot;对比" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
+        <mxCell id="s3b" value="与知识库&#xa;"高手答"对比" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
           <mxGeometry x="340" y="40" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="s3c" value="指出差距" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="s3_grp">
