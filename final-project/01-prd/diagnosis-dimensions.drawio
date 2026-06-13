@@ -16,16 +16,16 @@
           <mxGeometry x="40" y="50" width="920" height="100" as="geometry" />
         </mxCell>
         <mxCell id="d1a" value="完整性&#xa;是否覆盖关键点" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="d1">
-          <mxGeometry x="15" y="38" width="130" height="50" as="geometry" />
+          <mxGeometry x="155" y="38" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d1b" value="深度&#xa;是否有递进分析" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="d1">
-          <mxGeometry x="165" y="38" width="130" height="50" as="geometry" />
+          <mxGeometry x="315" y="38" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d1c" value="准确性&#xa;技术细节是否正确" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="d1">
-          <mxGeometry x="315" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="475" y="38" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d1d" value="实践性&#xa;是否有实际经验支撑" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="d1">
-          <mxGeometry x="475" y="38" width="150" height="50" as="geometry" />
+          <mxGeometry x="645" y="38" width="150" height="50" as="geometry" />
         </mxCell>
 
         <!-- Dimension 2: Expression (25%) -->
@@ -33,16 +33,16 @@
           <mxGeometry x="40" y="180" width="920" height="100" as="geometry" />
         </mxCell>
         <mxCell id="d2a" value="逻辑结构&#xa;是否分层递进" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="d2">
-          <mxGeometry x="15" y="38" width="130" height="50" as="geometry" />
+          <mxGeometry x="155" y="38" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d2b" value="简洁度&#xa;是否有废话/绕圈子" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="d2">
-          <mxGeometry x="165" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="315" y="38" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d2c" value="关键词命中&#xa;是否用了期待术语" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="d2">
-          <mxGeometry x="325" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="485" y="38" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d2d" value="收尾力&#xa;结论是否清晰有力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="d2">
-          <mxGeometry x="485" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="655" y="38" width="140" height="50" as="geometry" />
         </mxCell>
 
         <!-- Dimension 3: Speech (15%) -->
@@ -50,19 +50,19 @@
           <mxGeometry x="40" y="310" width="920" height="100" as="geometry" />
         </mxCell>
         <mxCell id="d3a" value="流畅度&#xa;语句是否连贯" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
-          <mxGeometry x="15" y="38" width="120" height="50" as="geometry" />
+          <mxGeometry x="110" y="38" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d3b" value="语速&#xa;是否过快/过慢" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
-          <mxGeometry x="155" y="38" width="120" height="50" as="geometry" />
+          <mxGeometry x="250" y="38" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d3c" value="停顿&#xa;是否有过长停顿" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
-          <mxGeometry x="295" y="38" width="120" height="50" as="geometry" />
+          <mxGeometry x="390" y="38" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d3d" value="语气&#xa;是否自信沉稳" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
-          <mxGeometry x="435" y="38" width="120" height="50" as="geometry" />
+          <mxGeometry x="530" y="38" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="d3e" value="顿挫感&#xa;是否频繁&quot;嗯&quot;&quot;那个&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="d3">
-          <mxGeometry x="575" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="670" y="38" width="140" height="50" as="geometry" />
         </mxCell>
 
         <!-- Weight bar at bottom -->

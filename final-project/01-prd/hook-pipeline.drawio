@@ -46,19 +46,19 @@
           <mxGeometry x="40" y="200" width="1020" height="100" as="geometry" />
         </mxCell>
         <mxCell id="h4" value="audit-log&#xa;记录调用日志" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
-          <mxGeometry x="10" y="38" width="120" height="50" as="geometry" />
+          <mxGeometry x="120" y="38" width="120" height="50" as="geometry" />
         </mxCell>
         <mxCell id="h5" value="result-compress&#xa;压缩工具输出" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
-          <mxGeometry x="155" y="38" width="130" height="50" as="geometry" />
+          <mxGeometry x="265" y="38" width="130" height="50" as="geometry" />
         </mxCell>
         <mxCell id="h6" value="memory-trigger&#xa;判断是否更新画像" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
-          <mxGeometry x="310" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="420" y="38" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="h7" value="metric-emit&#xa;记录延迟/token/错误率" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
-          <mxGeometry x="475" y="38" width="150" height="50" as="geometry" />
+          <mxGeometry x="585" y="38" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="h8" value="progress-update&#xa;更新 session 进度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=10;" vertex="1" parent="post_grp">
-          <mxGeometry x="650" y="38" width="140" height="50" as="geometry" />
+          <mxGeometry x="760" y="38" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="he3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#82b366;strokeWidth=1.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="post_grp" source="h4" target="h5">
           <mxGeometry relative="1" as="geometry" />

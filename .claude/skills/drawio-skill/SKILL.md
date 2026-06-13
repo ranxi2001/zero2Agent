@@ -82,6 +82,7 @@ After exporting the draft PNG, use the agent's vision capability (e.g., Claude's
 | Off-canvas shapes | Shapes at negative coordinates or far from the main group | Move to positive coordinates near the cluster |
 | Edge-shape overlap | An edge/arrow visually crosses through an unrelated shape | Add waypoints (`<Array as="points">`) to route around the shape, or increase spacing between shapes |
 | Stacked edges | Multiple edges overlap each other on the same path | Distribute entry/exit points across the shape perimeter (use different exitX/entryX values) |
+| Off-center content | Children hugging the left side of a container with empty right space | Recalculate child x offsets: `startX = (containerWidth - totalContentWidth) / 2` |
 
 - Max **2 self-check rounds** — if issues remain after 2 fixes, show the user anyway
 - Re-export after each fix and re-read the new PNG
@@ -280,6 +281,7 @@ When multiple edges connect to the same shape, assign different entry/exit point
 **Grid alignment:** snap all `x`, `y`, `width`, `height` values to **multiples of 10** — this ensures shapes align cleanly on draw.io's default grid and makes manual editing easier.
 
 **General rules:**
+- **Center children inside containers by default:** when placing nodes inside a swimlane or group, calculate `startX = (containerWidth - totalContentWidth) / 2` so content is visually centered, not left-aligned. This applies to all container types (swimlane, group, custom container).
 - Plan a grid before assigning x/y coordinates — sketch node positions on paper/mentally first
 - Group related nodes in the same horizontal or vertical band
 - Use `swimlane` cells for logical grouping with visible borders

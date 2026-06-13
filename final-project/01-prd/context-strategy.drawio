@@ -66,13 +66,13 @@
           <mxGeometry x="400" y="390" width="110" height="30" as="geometry" />
         </mxCell>
         <mxCell id="c1" value="每完成一题诊断&#xa;将详细过程压缩为摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="40" y="430" width="200" height="50" as="geometry" />
+          <mxGeometry x="150" y="430" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="c2" value="知识库检索结果&#xa;只保留 top-3 相关段落" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="290" y="430" width="200" height="50" as="geometry" />
+          <mxGeometry x="400" y="430" width="200" height="50" as="geometry" />
         </mxCell>
         <mxCell id="c3" value="工具输出超 2000 token&#xa;自动截断 + 摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="540" y="430" width="200" height="50" as="geometry" />
+          <mxGeometry x="650" y="430" width="200" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

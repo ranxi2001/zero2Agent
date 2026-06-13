@@ -27,16 +27,16 @@
           <mxGeometry x="60" y="50" width="800" height="110" as="geometry" />
         </mxCell>
         <mxCell id="m1a" value="用户目标岗位" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
-          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="95" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="m1b" value="技术栈背景" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
-          <mxGeometry x="180" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="255" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="m1c" value="历次诊断中暴露&#xa;的共性弱点" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
-          <mxGeometry x="340" y="40" width="150" height="50" as="geometry" />
+          <mxGeometry x="415" y="40" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="m1d" value="改进趋势" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6c8ebf;fontSize=11;" vertex="1" parent="m1">
-          <mxGeometry x="510" y="40" width="120" height="50" as="geometry" />
+          <mxGeometry x="585" y="40" width="120" height="50" as="geometry" />
         </mxCell>
 
         <!-- Layer 2: diagnosis-history (mid-term) -->
@@ -44,13 +44,13 @@
           <mxGeometry x="60" y="200" width="800" height="110" as="geometry" />
         </mxCell>
         <mxCell id="m2a" value="每次诊断的&#xa;结构化摘要" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="m2">
-          <mxGeometry x="20" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="140" y="40" width="140" height="50" as="geometry" />
         </mxCell>
         <mxCell id="m2b" value="高频失分维度统计" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="m2">
-          <mxGeometry x="200" y="40" width="160" height="50" as="geometry" />
+          <mxGeometry x="320" y="40" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="m2c" value="进步/退步对比" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82b366;fontSize=11;" vertex="1" parent="m2">
-          <mxGeometry x="400" y="40" width="140" height="50" as="geometry" />
+          <mxGeometry x="520" y="40" width="140" height="50" as="geometry" />
         </mxCell>
 
         <!-- Layer 3: session-context (short-term) -->
@@ -58,10 +58,10 @@
           <mxGeometry x="60" y="350" width="800" height="110" as="geometry" />
         </mxCell>
         <mxCell id="m3a" value="当前诊断会话&#xa;的工作状态" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="m3">
-          <mxGeometry x="20" y="40" width="150" height="50" as="geometry" />
+          <mxGeometry x="230" y="40" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="m3b" value="已处理/待处理&#xa;的 Q&amp;A 队列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="m3">
-          <mxGeometry x="210" y="40" width="150" height="50" as="geometry" />
+          <mxGeometry x="420" y="40" width="150" height="50" as="geometry" />
         </mxCell>
 
         <!-- Duration labels on the right -->
