@@ -8,7 +8,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/ranxi2001/zero2Agent?style=social)](https://github.com/ranxi2001/zero2Agent)
 [![Site](https://img.shields.io/badge/Site-onefly.top%2FzeroAgent-brightgreen)](https://onefly.top/zero2Agent)
 
-[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/)
+[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) · [Final Project](https://onefly.top/zero2Agent/final-project/)
 
 </div>
 
@@ -38,9 +38,9 @@
 | [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) | 4 篇 | ✅ 完成 | OpenAI Agents SDK · Google genai SDK · Claude Anthropic SDK · 三大 SDK 横向对比 |
 | [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) | 13 篇 | ✅ 完成 | AgentScope · Mastra · Semantic Kernel · Eino · DeerFlow · LangChain · Google ADK · AutoGen · Vercel AI SDK 等 |
 | [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
-| Final Project | — | 🔲 待开始 | 加密货币市场风控 Agent 完整实战 |
+| [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
 
-> **当前进度：68 篇文章，7 个完整模块**
+> **当前进度：80 篇文章，8 个完整模块**
 
 ---
 
@@ -144,6 +144,27 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 | 各公司偏好 | 按公司统计高频考点与面试风格 |
 | Agent 概念考察 | Harness Engineering、Context Engineering、MCP/Skills 前沿范式 |
 
+### Final Project：OfferPilot
+
+上传面试录音或文字稿，自动诊断回答质量，输出结构化改进建议。纯手写 Harness 10 层架构，不依赖 LangChain / LangGraph。
+
+| 编号 | 文档 | 内容 |
+|------|------|------|
+| 01 | PRD | 产品定位、用户场景、10 层架构映射、技术选型 |
+| 02 | 系统架构 | 模块划分、数据流、接口定义 |
+| 03 | Query Engine | 三 Provider + stream + retry + cache + 路由 |
+| 04 | Tools & Skills | 原子工具 + 任务级 Skill 编排 |
+| 05 | 知识库 | 385 题导入 + FTS5/embedding 双通道检索 |
+| 06 | Context & Memory | 5 层上下文管理 + 跨会话记忆 |
+| 07 | Permission & Session | 权限分级 + 检查点恢复 + 审计日志 |
+| 08 | Hook & Command | 可插拔治理管线 + 14 个确定性命令 |
+| 09 | Sub-agent | Agent-as-Tool + 并发池 + 上下文隔离 |
+| 10 | STT 语音 | Whisper/FunASR + 说话人分离 + 语音诊断 |
+| 11 | 部署演示 | CLI 入口 + Demo + 三种部署方案 |
+| 12 | Web UI | Next.js + SSE 流式 + 三大核心交互流程 |
+
+参考仓库：[ranxi2001/OfferPilot](https://github.com/ranxi2001/OfferPilot)
+
 ---
 
 ## 适合谁
@@ -179,7 +200,7 @@ zero2Agent/
 ├── learn-sdk-frameworks/   # 三大原厂 SDK（4 篇）
 ├── learn-agent-survey/     # 框架调研（13 篇）
 ├── learn-agent-interview/  # 大厂面试题拆解（15 篇）
-└── final-project/          # 加密货币风控 Agent 实战（待开始）
+└── final-project/          # OfferPilot 面试诊断 Agent 实战（12 篇）
 ```
 
 ---
@@ -209,6 +230,7 @@ bundle exec jekyll serve
 - **[lasywolf/Learn-OpenClaw](https://github.com/lasywolf/Learn-OpenClaw)** — OpenClaw 模块的核心思路和代码框架来源
 - **[pi-mcp/pi-mono](https://github.com/pi-mcp/pi-mono)** — 生产级 Coding Agent 的参考实现
 - **[SandeepMuhal88/LangGraph_BASIC_TO_Advance](https://github.com/SandeepMuhal88/LangGraph_BASIC_TO_Advance)** — LangGraph 模块的实战案例参考
+- **[ranxi2001/OfferPilot](https://github.com/ranxi2001/OfferPilot)** — Final Project 配套代码仓库，手写 Harness 10 层面试诊断 Agent
 
 ---
 
