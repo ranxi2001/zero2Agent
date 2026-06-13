@@ -420,6 +420,7 @@ export function StreamText({ url, onComplete }: StreamTextProps) {
 
 #### ProgressTracker：实时诊断进度
 
+{% raw %}
 ```typescript
 // components/diagnose/ProgressTracker.tsx
 
@@ -514,6 +515,7 @@ export function ProgressTracker({ sessionId }: { sessionId: string }) {
   );
 }
 ```
+{% endraw %}
 
 #### AudioRecorder：浏览器录音
 
