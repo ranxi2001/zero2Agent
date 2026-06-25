@@ -242,6 +242,12 @@ bundle exec jekyll serve
 
 ---
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ranxi2001/zero2Agent&type=Date)](https://star-history.com/#ranxi2001/zero2Agent&Date)
+
+---
+
 ## License
 
 [MIT](LICENSE)
