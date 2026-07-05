@@ -1,27 +1,27 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-07-05（牛客 6-7 月 Agent 面经批量分发——18 道新题分发到 8 个维度，384→402）
+> 最后更新：2026-07-06（牛客第二轮搜索抓取——8 道新题分发到 6 个维度，403→411）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 36 |
-| 02-tool-management | 25 |
-| 03-fault-tolerance | 24 |
+| 01-architecture-design | 38 |
+| 02-tool-management | 26 |
+| 03-fault-tolerance | 25 |
 | 04-memory-context | 48 |
 | 05-eval-and-vision | 30 |
-| 06-multi-agent-collab | 23 |
+| 06-multi-agent-collab | 24 |
 | 07-engineering-pitfalls | 50 |
 | 08-prompt-engineering | 19 |
-| 09-rag-retrieval | 56 |
-| 10-training-and-data | 45 |
+| 09-rag-retrieval | 57 |
+| 10-training-and-data | 47 |
 | 11-ai-code-testing | 7 |
 | 12-business-ai-engineering | 7 |
 | 13-project-deep-dive | 20 |
 | 15-agent-concepts | 13 |
-| **总计** | **403** |
+| **总计** | **411** |
 
 ## 01-architecture-design（36题）
 
@@ -61,6 +61,8 @@
 34. AI 系统该做单域工具还是跨团队通用平台？怎么选？ — 数据智能查询平台面试（新增）
 35. Coding Agent 的完整链路是怎么运转的？从用户输入到代码产出的全流程 — 字节跳动Agent二面（Coding Agent）（新增）
 36. 用拓扑排序（规则式）管理任务依赖 vs 让大模型推理决策执行顺序，各有什么问题？ — 广州某小厂Agent后端开发二面（新增）
+37. Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ — 腾讯AI应用开发实习生一面（新增）
+38. Agent 如何判断已经收集了足够的信息，最终给出输出结论？ — 字节跳动多模态算法一面（新增）
 
 ## 02-tool-management（25题）
 
@@ -87,6 +89,7 @@
 21. 边界不好定义的场景，Skill形式不能很好区分场景披露工具，怎么办？ — 阿里暑期Agent算法二面
 22. 多Skill串行/嵌套时依赖冲突、参数不兼容的容错设计？ — 百度AI Agent前端研发实习生一面
 23. MCP + OAuth2.1：为什么要把 OAuth2.1 接到 MCP 里？ — 视频面经汇总（新增）
+24. 工具返回了非常大的数据超出大模型上下文窗口，怎么办？ — 唯品会一面（新增）
 
 ## 03-fault-tolerance（24题）
 
@@ -113,6 +116,7 @@
 21. 整体的失败重试机制（node、RAG链、tools）分别怎么做？ — 字节Agent开发一面
 22. 状态机卡死悬停/死循环的排查与熔断机制？ — 百度AI Agent前端研发实习生一面
 23. 工具调用返回结果为空或调用失败，Agent 应该怎么处理？是直接重试还是换策略？ — 最有料AI实习生面经（新增）
+24. 在跨境汇款等金融业务场景下，Agent 超时/失败如何应对并保证资金安全？ — 腾讯AI应用开发（新增）
 
 ## 04-memory-context（48题）
 
@@ -221,6 +225,7 @@
 20. 子 Agent 之间的上下文怎么传递？传什么、不传什么？ — 阿里Agent面经（新增）
 21. 多 Agent 协作常见模式有哪些？各自适合什么任务类型？ — 阿里Agent面经（新增）
 22. 主 Agent 与子 Agent 的通信和进度同步怎么做？是推还是拉？ — 广州某小厂Agent后端开发二面（新增）
+23. 多个 Agent 并发操作数据库或文件，这种并发怎么处理？ — 蚂蚁Agent开发一面（新增）
 
 ## 07-engineering-pitfalls（50题）
 
@@ -353,6 +358,7 @@
 52. 手动干预切片是怎么做的？为什么需要这一步？ — 视频面经汇总（新增）
 53. RAG 文档切分中遇到代码块、表格、标题等特殊内容怎么处理？ — 最有料AI实习生面经（新增）
 54. 处理一万个长文档构建 RAG 知识库，工程上怎么做？ — 阿里Agent面经·场景题（新增）
+55. RAG 知识库更新怎么不停服？热更新方案怎么设计？ — 腾讯AI应用开发（新增）
 
 ## 10-training-and-data（38题）
 
@@ -401,6 +407,8 @@
 43. 为什么现在的大模型都是 Decoder-only 架构？ — 淘天AI Agent暑期实习一面
 44. 训练 AI Coding Agent，端到端还是分阶段训练？ — 淘天AI Agent暑期实习一面
 45. 客服 Agent 奖励函数的 Reward Hacking/稀疏/区分度问题，如何设计新 reward？ — 阿里暑期Agent算法二面
+46. 多轮对话 Agent 没有现成对话数据，如何从 UI 操作流合成 SFT 训练语料？ — 海底捞大模型面经（新增）
+47. 多轮 Agent 的 RL reward 怎么设计？Turn 级信用分配怎么做？ — 海底捞大模型面经（新增）
 
 ## 11-ai-code-testing（7题）
 

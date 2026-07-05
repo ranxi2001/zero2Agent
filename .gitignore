@@ -3,12 +3,12 @@ _site/
 .sass-cache/
 .jekyll-metadata
 .claude/skills-workspace
-.claude/skills/local-dev
+.claude/skills/local-dev/
 .claude/settings.local.json
 .codex-tmp/
 .packs/
 __pycache__/
 *.pyc
 .DS_Store
-.claude/skills/scrape-nowcoder/nowcoder-output
+.claude/skills/scrape-nowcoder/nowcoder-output*/
 nowcoder-output/
