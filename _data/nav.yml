@@ -138,6 +138,13 @@ modules:
         slug: "05-agent-eval"
       - title: "从 SFT 到部署：Agent 模型上线全流程"
         slug: "06-train-to-deploy"
+  - title: "Agent 应用实战"
+    slug: "learn-agent-practice"
+    articles:
+      - title: "AI Coding 面试：解题流程与交付策略"
+        slug: "01-ai-coding-interview"
+      - title: "日常开发中的 Agent 工作流"
+        slug: "02-daily-dev-workflow"
   - title: "Agent 面试通关"
     slug: "learn-agent-interview"
     articles:

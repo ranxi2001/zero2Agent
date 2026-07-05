@@ -44,6 +44,7 @@ eyebrow: Module 01
 7. [Planning、Reflection、RAG 分别解决什么问题](./07-planning-reflection-rag/index.html)
 8. [单 Agent 和多 Agent 的边界](./08-single-vs-multi-agent/index.html)
 9. [Agent Infra：从 Harness 到生产环境](./09-agent-infra/index.html)
+10. [Loop Engineering：让 Agent 自主迭代直到正确](./10-loop-engineering/index.html)
 
 ## 这一部分的主线
 
@@ -76,6 +77,7 @@ eyebrow: Module 01
 | [Planning、Reflection、RAG 分别解决什么问题](./07-planning-reflection-rag/index.html) | 防止把三个高频概念混成一团 |
 | [单 Agent 和多 Agent 的边界](./08-single-vs-multi-agent/index.html) | 判断什么时候真的需要多 Agent，而不是跟风拆角色 |
 | [Agent Infra：从 Harness 到生产环境](./09-agent-infra/index.html) | 从 Harness 到上线，需要哪些基础设施支撑 |
+| [Loop Engineering：让 Agent 自主迭代直到正确](./10-loop-engineering/index.html) | Agent 循环的退出条件、纠错策略和防护设计 |
 
 ## 读完之后再学什么
 

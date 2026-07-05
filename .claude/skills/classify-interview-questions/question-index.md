@@ -1,29 +1,29 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-06-12（数据智能查询平台面经——7 道新题分发到 5 个维度，381→388；移除 3 道 Java 八股→385）
+> 最后更新：2026-07-05（牛客 6-7 月 Agent 面经批量分发——18 道新题分发到 8 个维度，384→402）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 34 |
+| 01-architecture-design | 36 |
 | 02-tool-management | 25 |
-| 03-fault-tolerance | 23 |
-| 04-memory-context | 46 |
-| 05-eval-and-vision | 28 |
-| 06-multi-agent-collab | 20 |
-| 07-engineering-pitfalls | 47 |
-| 08-prompt-engineering | 16 |
-| 09-rag-retrieval | 54 |
+| 03-fault-tolerance | 24 |
+| 04-memory-context | 48 |
+| 05-eval-and-vision | 30 |
+| 06-multi-agent-collab | 23 |
+| 07-engineering-pitfalls | 50 |
+| 08-prompt-engineering | 19 |
+| 09-rag-retrieval | 56 |
 | 10-training-and-data | 45 |
 | 11-ai-code-testing | 7 |
 | 12-business-ai-engineering | 7 |
 | 13-project-deep-dive | 20 |
-| 15-agent-concepts | 12 |
-| **总计** | **384** |
+| 15-agent-concepts | 13 |
+| **总计** | **403** |
 
-## 01-architecture-design（31题）
+## 01-architecture-design（36题）
 
 1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】
 2. Tree of Thoughts (ToT) 在线上系统里能用吗？成本不高？ — 腾讯终面
@@ -59,6 +59,8 @@
 32. 基于强化学习的 Agent 与传统基于 Prompt 的 Agent 有何区别？各自的适用场景？ — Agent开发八股合集（南京大学）
 33. Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？ — 字节跳动Agent开发实习生一面
 34. AI 系统该做单域工具还是跨团队通用平台？怎么选？ — 数据智能查询平台面试（新增）
+35. Coding Agent 的完整链路是怎么运转的？从用户输入到代码产出的全流程 — 字节跳动Agent二面（Coding Agent）（新增）
+36. 用拓扑排序（规则式）管理任务依赖 vs 让大模型推理决策执行顺序，各有什么问题？ — 广州某小厂Agent后端开发二面（新增）
 
 ## 02-tool-management（25题）
 
@@ -86,7 +88,7 @@
 22. 多Skill串行/嵌套时依赖冲突、参数不兼容的容错设计？ — 百度AI Agent前端研发实习生一面
 23. MCP + OAuth2.1：为什么要把 OAuth2.1 接到 MCP 里？ — 视频面经汇总（新增）
 
-## 03-fault-tolerance（18题）
+## 03-fault-tolerance（24题）
 
 1. 调支付接口超时了，Agent 怎么处理？ — 腾讯终面
 2. Agent 错误删除了数据，系统设计上怎么防范？ — 腾讯终面
@@ -110,8 +112,9 @@
 20. Agent 系统的 fallback 是怎么做的？ — 字节Agent开发一面
 21. 整体的失败重试机制（node、RAG链、tools）分别怎么做？ — 字节Agent开发一面
 22. 状态机卡死悬停/死循环的排查与熔断机制？ — 百度AI Agent前端研发实习生一面
+23. 工具调用返回结果为空或调用失败，Agent 应该怎么处理？是直接重试还是换策略？ — 最有料AI实习生面经（新增）
 
-## 04-memory-context（43题）
+## 04-memory-context（48题）
 
 1. 长上下文里，怎么让 Agent 不忘记关键信息？ — 腾讯终面 【淘天一面追问：模型层面遗忘缓解机制】
 2. 用户说"按老样子帮我订一下"，模糊需求怎么处理？ — 腾讯终面
@@ -158,8 +161,10 @@
 43. 记忆冲突怎么解决？比如用户前后说了不同的过敏信息 — 美团Agent开发（智能客服方向）二面
 44. Agent 记忆系统里的「做梦机制」（Dreaming）是什么？和 Reflection 有什么区别？ — 阿里云暑期实习Agent面经
 45. 如何判断是 Prompt 内容影响决策，还是 Prompt 太长导致注意力涣散？ — 淘天AI Agent暑期实习一面
+46. 为什么要区分静态长期记忆和动态长期记忆？各自存什么？ — 字节跳动Agent二面（Coding Agent）（新增）
+47. 每轮对话都触发长期记忆存储，用户记忆快速积累、存得过多怎么办？ — 字节跳动Agent二面（Coding Agent）（新增）
 
-## 05-eval-and-vision（26题）
+## 05-eval-and-vision（30题）
 
 1. 如何量化评估一个上线的 Agent 好坏？除了准确率 — 腾讯终面
 2. 当前阻碍 Agent 大规模落地的最大挑战？ — 腾讯终面
@@ -189,8 +194,10 @@
 26. 面试反问环节：怎么提出有深度的问题？ — 视频面经汇总（新增）
 27. Text2SQL 系统的准确性评测与用户反馈回流机制 — 数据智能查询平台面试（新增）
 28. RAG 召回链路监控与召回漂移检测 — 数据智能查询平台面试（新增）
+29. 线上 log 是海量的，怎么转化成有限的线下评测集？随机抽样为什么不行？ — 字节跳动AI Agent评测二面（新增）
+30. 能不能不走"线上转线下评测集"，直接对线上 case 做无 GT 的打分和效果观测？ — 字节跳动AI Agent评测二面（新增）
 
-## 06-multi-agent-collab（19题）
+## 06-multi-agent-collab（23题）
 
 1. 多智能体怎么协作？ — 腾讯终面
 2. 多 Agent 系统里，怎么防止踢皮球或死循环？ — 腾讯终面
@@ -211,8 +218,11 @@
 17. 为什么大家都在用 Multi-Agent？从一开始到现在原因是否有变化？ — 币安AI大模型实习一面
 18. Multi-Agent 如何通信？不同项目分别用了哪些通信方法？（含 MCP vs A2A 协议层次对比） — 币安AI大模型实习一面
 19. 如果让两个不同的 Agent 产品进行对话（比如 Claude Code 和 Cursor），在协议层面应该怎么做？ — 字节TikTok AI应用开发一面
+20. 子 Agent 之间的上下文怎么传递？传什么、不传什么？ — 阿里Agent面经（新增）
+21. 多 Agent 协作常见模式有哪些？各自适合什么任务类型？ — 阿里Agent面经（新增）
+22. 主 Agent 与子 Agent 的通信和进度同步怎么做？是推还是拉？ — 广州某小厂Agent后端开发二面（新增）
 
-## 07-engineering-pitfalls（48题）
+## 07-engineering-pitfalls（50题）
 
 
 1. 开发 Agent 时踩过什么坑？ — 高频题
@@ -261,8 +271,11 @@
 44. 系统里多租户隔离是怎么实现的？ — 视频面经汇总（新增）
 45. 了解 Kubernetes 吗？在 Agent 项目里有没有实际用到？ — 视频面经汇总（新增）
 46. 进程、线程、协程有什么区别？什么场景下协程更有优势？ — 视频面经汇总（新增）
+47. 子 Agent 和工具调用的 Token 用量统计缺失，怎么做容错补偿？ — 深信服AI全栈开发二面（新增）
+48. 多个子 Agent 延迟退出，同时更新同一对话的 Token 统计数据，线程竞争怎么解决？ — 深信服AI全栈开发二面（新增）
+49. Agent 框架如何实现流式并行？了解 Claude Code 的流式并行是怎么做的吗？ — 广州某小厂Agent后端开发二面（新增）
 
-## 08-prompt-engineering（16题）
+## 08-prompt-engineering（19题）
 
 1. 提示词模板是怎么构建的？ — 抖音一面
 2. Skills 的原理有没有了解过？ — 蚂蚁一面 【高德实习一面追问：Skill 的本质理解】【蚂蚁Agent开发一面追问：创建 Skill 的方式（除自然语言描述外）】【小红书AI应用开发同题：Skills了解+如何管理】【CVTE AI应用工程师一面追问：怎么理解 Skill？能解决什么问题？怎么写 MCP？】【科大讯飞一面追问：写Skills和写提示词的区别与共同点】
@@ -280,8 +293,11 @@
 14. DSPy 是什么？它在 Agent 提示词优化和流程构建上有什么优势？ — Agent开发八股合集（南京大学）
 15. Prompt 层面让模型回答更快、更稳定的方法？ — 视频面经汇总（新增）
 16. 一个 Skill 写得好不好，应该看哪些评价标准？ — 视频面经汇总（新增）
+17. Skill 分层体系怎么设计？为什么这么分层？ — 字节跳动Agent二面（Coding Agent）（新增）
+18. 动态 Prompt 和静态 Prompt 有什么区别？各自在什么场景下用？ — 字节跳动Agent二面（Coding Agent）（新增）
+19. 如果让你设计一个代码审查的 Skill，你会如何设计？ — 最有料AI实习生面经（新增）
 
-## 09-rag-retrieval（52题）
+## 09-rag-retrieval（56题）
 
 1. RAG 的检索如何实现？ — 阿里一面
 2. 多维度的查询改写是什么？ — 抖音一面 【淘天一面追问：改写为何提升精准度的底层原理】
@@ -335,6 +351,8 @@
 50. 父文档是怎么得到的？语义切分具体是怎么做的？聚类后怎么区分不同文档？ — 同程Agent开发实习一面
 51. RAG 项目里 MySQL 和 Elasticsearch 的数据一致性怎么保证？ — 视频面经汇总（新增）
 52. 手动干预切片是怎么做的？为什么需要这一步？ — 视频面经汇总（新增）
+53. RAG 文档切分中遇到代码块、表格、标题等特殊内容怎么处理？ — 最有料AI实习生面经（新增）
+54. 处理一万个长文档构建 RAG 知识库，工程上怎么做？ — 阿里Agent面经·场景题（新增）
 
 ## 10-training-and-data（38题）
 
@@ -426,10 +444,10 @@
 18. 开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？ — CVTE AI应用工程师一面
 19. 自我介绍 + 简单讲一下自己做过的 Agent 项目 — 视频面经汇总（新增）
 
-## 15-agent-concepts（12题）
+## 15-agent-concepts（13题）
 
 1. Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ — 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】
-2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面 【阿里云暑期实习同题】
+2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面 【阿里云暑期实习同题】【成都某中厂追问变体：加入 Loop Engineering 作为第四层】
 3. 讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering — 阿里淘天AI应用开发暑期二面
 4. 你的项目中体现了哪些 Harness Engineering 的思想？ — 阿里国际一面
 5. Vibe Coding 和 Harness，你更偏向哪种路线？为什么？ — 字节TikTok实习后端AI开发一面
@@ -440,6 +458,7 @@
 10. Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？ — 蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】
 11. Agent 和 Siri 这种传统助手的核心差别在哪？ — 高频题
 12. Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？ — 哆咔互娱Agent开发实习一面
+13. Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？ — 成都某中厂Agent产品开发实习面经（新增）
 
 ---
 
