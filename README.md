@@ -244,7 +244,10 @@ bundle exec jekyll serve
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=ranxi2001/zero2Agent&type=Date)](https://star-history.com/#ranxi2001/zero2Agent&Date)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ranxi2001/zero2Agent/output/star-history-dark.svg">
+  <img alt="Star History" src="https://raw.githubusercontent.com/ranxi2001/zero2Agent/output/star-history-light.svg">
+</picture>
 
 ---
 
