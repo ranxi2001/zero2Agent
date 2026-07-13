@@ -1,13 +1,13 @@
 ---
 layout: default
 title: Agent Loop：EventStream 驱动的核心循环
-description: pi-mono 的 agentLoop 实现——从入口到工具执行的完整数据流
+description: Pi 的 Agent Loop 实现——从入口到工具执行的完整数据流
 eyebrow: OpenClaw / 02
 ---
 
 # Agent Loop：EventStream 驱动的核心循环
 
-pi-mono 的核心在 `packages/agent/src/agent-loop.ts`。这个文件实现了整个 Agent 的执行引擎。
+Pi 的核心循环位于 `packages/agent/src/agent-loop.ts`。这个文件实现了 Agent 的通用执行引擎。
 
 读懂它，就理解了所有生产级 Coding Agent 的运行原理。
 
@@ -31,7 +31,7 @@ export function agentLoopContinue(config: AgentConfig, transcript: Event[]): Eve
 
 ## EventStream 架构
 
-pi-mono 不像传统框架那样返回最终结果，而是**流式发射生命周期事件**：
+Pi 不像传统框架那样只返回最终结果，而是**流式发射生命周期事件**：
 
 ```typescript
 type Event =
@@ -98,7 +98,7 @@ const toolResults = await Promise.all(
 )
 ```
 
-当模型一次返回多个 tool_calls（比如同时读 3 个文件），pi-mono 会**并行执行所有工具**。这是 Coding Agent 速度快的关键原因之一。
+当模型一次返回多个 tool_calls（比如同时读 3 个文件），Pi 可以**并行执行工具**。这是 Coding Agent 降低 I/O 等待时间的重要手段。
 
 对比 LangChain 的默认串行执行：
 
@@ -111,7 +111,7 @@ const toolResults = await Promise.all(
 
 ## Hooks：拦截与变换
 
-pi-mono 提供了四个 Hook 点，让你在不修改核心循环的情况下注入逻辑：
+Pi 的运行时提供 Hook 点，让你在不修改核心循环的情况下注入逻辑：
 
 ```typescript
 interface AgentHooks {
@@ -133,19 +133,19 @@ interface AgentHooks {
 
 ## OpenClaw 的 5 阶段执行模型
 
-pi-mono 的 Agent Loop 是基础，OpenClaw 在此之上增加了更完整的执行阶段：
+OpenClaw 的早期实现借鉴并改编了 Pi 的 Agent Loop。当前 OpenClaw 已维护自己的 embedded runtime，并把核心循环放进更完整的 Gateway 执行流程：
 
 ```
 Stage 1: RPC Validation
     → 验证请求格式、权限检查、速率限制
 Stage 2: Skill Loading
     → 根据用户输入动态加载匹配的 Skill（SKILL.md）
-Stage 3: Pi-Agent Runtime
-    → 核心 Agent Loop（即 pi-mono 的 agentLoop）
+Stage 3: OpenClaw Embedded Runtime
+    → OpenClaw 自有 Agent Loop（保留 Pi 的架构渊源）
 Stage 4: Event Bridging
     → 把 EventStream 事件桥接到具体渠道（Slack/飞书/Web）
 Stage 5: Persistence
-    → JSONL transcript 持久化 + MEMORY.md 更新
+    → Session Store 持久化 + Workspace / MEMORY.md 上下文
 ```
 
 ### Hook 介入点
@@ -226,12 +226,12 @@ chain = prompt | llm | output_parser
 result = chain.invoke({"question": "..."})
 ```
 
-问题：当你需要工具调用循环时，链式模型就不够用了，需要引入 `AgentExecutor`，其内部实现和 pi-mono 的 Agent Loop 殊途同归。
+问题：当你需要工具调用循环时，链式模型就不够用了，需要引入 `AgentExecutor`，其内部实现和 Pi 的 Agent Loop 殊途同归。
 
-### pi-mono 的循环模型
+### Pi 的循环模型
 
 ```typescript
-// pi-mono: 一个循环就是整个 Agent
+// Pi: 一个循环就是整个 Agent
 while (hasToolCalls) {
   results = await executeTools(toolCalls)
   messages.push(...results)
@@ -261,11 +261,11 @@ while (hasToolCalls) {
 
 ## 动手：跟踪一次完整执行
 
-克隆 pi-mono 后，在 `agent-loop.ts` 的关键位置加 `console.log`：
+克隆当前 Pi 仓库后，在 `agent-loop.ts` 的关键位置加 `console.log`：
 
 ```bash
-git clone https://github.com/badlogic/pi-mono
-cd pi-mono
+git clone https://github.com/earendil-works/pi
+cd pi
 ```
 
 观察一次 "读取 README.md 并总结" 任务的事件序列：
@@ -276,7 +276,7 @@ turn_start
 message_start (role: assistant)
 message_update (delta: "让我读取...")
 tool_execution_start (name: "read", args: {path: "README.md"})
-tool_execution_end (result: "# pi-mono\n...")
+tool_execution_end (result: "# Pi Agent Harness\n...")
 message_start (role: assistant)
 message_update (delta: "这个项目是...")
 message_end

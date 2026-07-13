@@ -1,33 +1,35 @@
 ---
 layout: default
 title: 构建你的 OpenClaw
-description: Fork pi-mono，接入你的 LLM，定制 Skill，部署到消息平台
+description: 借鉴 Pi 的分层，接入 LLM、定制 Skill，并部署到消息平台
 eyebrow: OpenClaw / 08
 ---
 
 # 构建你的 OpenClaw
 
-这一节是动手实践。目标：把 pi-mono 改造成属于你自己的 Agent，部署后通过 Slack 或飞书对话。
+这一节是架构实践。目标是借鉴 Pi 的分层构建属于你自己的 Agent，并在完成后通过 Slack 或飞书对话。
 
 完成之后你会有一个叫 `[YourName]Claw` 的个人 Coding Agent。
 
+> **范围说明**：OpenClaw 当前维护自己的 Agent Runtime，并不是在最新 Pi 仓库上简单加几层代码。下面先跑通 Pi，再用简化代码演示如何组合 Runtime、记忆和消息渠道；标注为“架构示意”的片段需要按当前包 API 适配，不能当作 OpenClaw 主仓库的补丁直接应用。
+
 ---
 
-## 第一步：Fork 并运行 pi-mono
+## 第一步：Fork 并运行 Pi
 
 ```bash
 # Fork（在 GitHub 上操作）然后克隆
-git clone https://github.com/[你的用户名]/pi-mono
-cd pi-mono
+git clone https://github.com/[你的用户名]/pi
+cd pi
 
-# 安装依赖（pnpm monorepo）
-pnpm install
+# 安装依赖（npm workspaces）
+npm install --ignore-scripts
 
 # 构建所有包
-pnpm build
+npm run build
 
-# 运行 coding-agent
-pnpm -F coding-agent start
+# macOS / Linux / Git Bash：从源码运行 coding-agent
+./pi-test.sh
 ```
 
 先跑通原版，确认环境没问题。你应该能在终端与 Agent 对话。
@@ -36,7 +38,7 @@ pnpm -F coding-agent start
 
 ## 第二步：配置 LLM Provider
 
-pi-mono 支持多家 LLM。编辑配置文件或设置环境变量：
+Pi 支持多家 LLM。API Key 使用对应 Provider 的环境变量；模型选择方式以当前 Pi CLI 配置为准：
 
 ```bash
 # 方案 A：使用 Anthropic（推荐，和 Claude Code 同源）
@@ -87,7 +89,7 @@ LLM_MODEL=claude-sonnet-4-6
 - 不删除 node_modules 以外的目录
 
 ## 知识
-- 熟悉 pnpm workspace monorepo 结构
+- 熟悉 npm workspace monorepo 结构
 - 了解 ESLint + Prettier 规范
 - 知道项目使用 vitest 做测试
 ```
@@ -101,7 +103,7 @@ LLM_MODEL=claude-sonnet-4-6
 根据你的场景增删工具：
 
 ```typescript
-// packages/agent/src/tools/index.ts
+// packages/coding-agent/src/core/tools/index.ts（架构示意）
 import { readTool } from './read'
 import { writeTool } from './write'
 import { editTool } from './edit'
@@ -123,7 +125,7 @@ export const defaultTools = [
 ### 自定义工具示例
 
 ```typescript
-// packages/agent/src/tools/deploy.ts
+// packages/coding-agent/src/core/tools/deploy.ts（自定义文件示意）
 import { ToolDefinition } from '../types'
 
 export const deployTool: ToolDefinition = {
@@ -151,7 +153,7 @@ export const deployTool: ToolDefinition = {
 
 ## 第五步：添加 MEMORY.md 支持
 
-pi-mono 原版没有跨 Session 记忆。按 OpenClaw 模式添加：
+Pi CLI 默认以 Coding Session 为中心。要构建长期驻留的个人助理，可以按 OpenClaw 模式增加跨 Session 记忆：
 
 ```typescript
 // packages/agent/src/memory.ts
@@ -192,7 +194,7 @@ const systemPrompt = [
 ```typescript
 // packages/coding-agent/src/server.ts
 import express from 'express'
-import { agentLoop } from '@pi-mono/agent'
+import { agentLoop } from '@earendil-works/pi-agent-core'
 
 const app = express()
 app.use(express.json())
@@ -219,9 +221,9 @@ app.listen(5000)
 ```
 
 ```bash
-# PM2 后台运行
+# PM2 后台运行（服务入口需按上面的架构示意自行实现）
 npm install -g pm2
-pm2 start "pnpm -F coding-agent serve" --name myclaw
+pm2 start "node packages/coding-agent/dist/server.js" --name myclaw
 pm2 save && pm2 startup
 ```
 
@@ -320,7 +322,7 @@ async function runEval(): Promise<void> {
 ## 完整检查清单
 
 ```
-□ Fork pi-mono，pnpm install && pnpm build 成功
+□ Fork Pi，npm install --ignore-scripts && npm run build 成功
 □ 配置 LLM Provider（.env 文件）
 □ 跑通原版 coding-agent（能对话、能调用工具）
 □ 定制 AGENTS.md（系统指令）

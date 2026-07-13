@@ -66,7 +66,7 @@ const subagentResult = await spawnSubagent({
 
 ### 关键设计决策
 
-| 决策 | pi-mono / OpenClaw 的选择 | 原因 |
+| 决策 | Pi / OpenClaw 的选择 | 原因 |
 |------|--------------------------|------|
 | 子 Agent 进程模型 | 同进程异步（非 fork） | 避免进程间通信开销 |
 | 上下文共享 | 不共享（完全隔离） | 防止上下文污染 |
@@ -298,4 +298,4 @@ const review = await spawnSubagent({
 
 ---
 
-下一篇：[读懂 pi-mono 源码](../07-pi-mono/index.html)
+下一篇：[读懂 Pi（原 pi-mono）源码](../07-pi-mono/index.html)

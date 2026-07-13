@@ -1,13 +1,13 @@
 ---
 layout: default
 title: 面试与实习准备
-description: 基于 pi-mono/OpenClaw 源码级理解的面试策略
+description: 基于 Pi / OpenClaw 源码级理解的面试策略
 eyebrow: OpenClaw / 09
 ---
 
 # 面试与实习准备
 
-你读过了 pi-mono 源码，理解了 Agent Loop、Context Engine、MCP 协议、SubAgent 隔离。
+你读过了 Pi（原 pi-mono）源码，理解了 Agent Loop、Context Engine、MCP 协议、SubAgent 隔离。
 
 这一节说怎么把这些变成面试竞争力——让面试官看出你不是调包侠。
 
@@ -71,8 +71,8 @@ eyebrow: OpenClaw / 09
 
 ```
 Situation: 我需要一个能辅助日常编程的 Agent，主流框架太重且不可控
-Task:      基于 pi-mono 架构改造一个个人 Coding Agent
-Action:    Fork pi-mono，接入 DeepSeek/Claude，添加 MEMORY.md 持久化和
+Task:      借鉴 Pi 的分层构建一个个人 Coding Agent
+Action:    Fork Pi，接入 DeepSeek/Claude，添加 MEMORY.md 持久化和
            Slack 接入，构建 15-case Eval 测试集
 Result:    日常使用中任务完成率 82%，上下文压缩策略使单次会话可处理
            的工具调用轮次从 ~20 提升到 ~50
@@ -113,8 +113,8 @@ const results = {
 ## 简历描述模板
 
 ```
-[YourName]Claw — 基于 pi-mono 架构的个人 Coding Agent
-- 基于 pi-mono（TypeScript）架构实现 EventStream 驱动的 Agent Loop
+[YourName]Claw — 借鉴 Pi 分层构建的个人 Coding Agent
+- 基于 Pi（TypeScript）的运行时分层实现 EventStream 驱动的 Agent Loop
 - 接入 Anthropic / DeepSeek 双 Provider，支持配置切换
 - 实现 MEMORY.md 跨 Session 持久化 + Context Engine 动态上下文组装
 - 工具并行执行（Promise.all），支持 Read/Write/Edit/Bash/Grep 5 类核心工具
@@ -153,7 +153,7 @@ const results = {
 
 **Q：SKILL.md 格式为什么能跨 Agent 通用？**
 
-> 因为它本质是 Markdown + YAML frontmatter——人类可读、Agent 可解析、不依赖特定运行时。任何支持 system prompt 注入的 Agent 都能加载 SKILL.md。这是"写一次，多处运行"的设计——你为 pi-mono 写的 Skill，在 Claude Code 中也能直接用。
+> 因为它本质是 Markdown + YAML frontmatter——人类可读、Agent 可解析、不依赖特定运行时。任何支持 system prompt 注入的 Agent 都能加载 SKILL.md。这是"写一次，多处运行"的设计——你为 Pi 写的 Skill，也可以迁移到其他兼容这一约定的 Agent。
 
 **Q：GBrain 为什么用"确定性操作优先于 LLM 判断"的原则？**
 
@@ -164,13 +164,13 @@ const results = {
 ## 准备清单
 
 ```
-□ GitHub 有你的 pi-mono fork（能跑，有你的改动）
+□ GitHub 有你的 Pi fork（能跑，有你的改动）
 □ README 写清楚改动说明和架构图
 □ 能流畅讲 Agent Loop 的 EventStream 模式（1 分钟内）
 □ 能回答 "Context Engine 的 assemble/compact 怎么工作"
 □ 能解释 "为什么不用 LangChain"（有判断依据，不是背的）
 □ 有 Eval 数字（pass rate + 改进前后对比）
-□ 能画出 pi-mono 的包结构和数据流图
+□ 能画出 Pi 的包结构和数据流图
 ```
 
 ---
