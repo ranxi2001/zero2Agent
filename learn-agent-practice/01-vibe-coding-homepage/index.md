@@ -1,13 +1,15 @@
 ---
 layout: default
-title: 从 0 开始 Vibe Coding：用 Codex 发布个人主页
-description: 从下载 VS Code、认识项目文件夹和终端，到用 Codex 创建网站并部署到 GitHub Pages
+title: 从 0 开始 Vibe Coding：用 AI Agent 发布个人主页
+description: 从下载 VS Code、认识项目文件夹和终端，到用 AI Coding Agent 创建网站并部署到 GitHub Pages
 eyebrow: Agent Practice / 01
 ---
 
-# 从 0 开始 Vibe Coding：用 Codex 发布个人主页
+# 从 0 开始 Vibe Coding：用 AI Agent 发布个人主页
 
-这篇从真正的零开始：你不需要先学完一门编程语言，也不需要理解复杂框架。我们会先把开发环境搭起来，再让 Codex 帮你完成第一个能公开访问的作品。
+这篇从真正的零开始：你不需要先学完一门编程语言，也不需要理解复杂框架。我们会先把开发环境搭起来，再让 AI Coding Agent 帮你完成第一个能公开访问的作品。
+
+> **关于工具选择**：本文用 Codex CLI 作为主要示例，但核心流程（建项目 → Agent 生成代码 → 本地预览 → Git 记录 → 发布）适用于所有 AI Coding Agent。每个关键步骤会标注 Claude Code 和 Cursor 的等价操作，你可以根据自己的偏好选择工具。
 
 最终你会得到：
 
