@@ -141,10 +141,12 @@ modules:
   - title: "Agent 应用实战"
     slug: "learn-agent-practice"
     articles:
+      - title: "从 0 开始 Vibe Coding：用 Codex 发布个人主页"
+        slug: "01-vibe-coding-homepage"
       - title: "AI Coding 面试：解题流程与交付策略"
-        slug: "01-ai-coding-interview"
+        slug: "02-ai-coding-interview"
       - title: "日常开发中的 Agent 工作流"
-        slug: "02-daily-dev-workflow"
+        slug: "03-daily-dev-workflow"
   - title: "Agent 面试通关"
     slug: "learn-agent-interview"
     articles:

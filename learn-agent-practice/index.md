@@ -1,30 +1,34 @@
 ---
 layout: default
 title: learn-agent-practice
-description: 从 Vibe Coding 到专业 Agent 工程——AI 辅助开发的进阶方法论
-eyebrow: Module 08
+description: 从第一次打开 VS Code，到用 Codex 发布作品，再到稳定的 Agent 工程工作流
+eyebrow: Module 09
 ---
 
 # learn-agent-practice
 
-**从 Vibe Coding 进阶到 Agent Engineering。**
+**从第一次打开 VS Code，到稳定使用 Agent 完成工程交付。**
 
-Vibe Coding 让每个人都能用自然语言写代码——"把想法丢给 AI，看看出来什么"。这很好，但如果你的目标不止是"能跑"，而是稳定产出、通过面试、应对大型项目，就需要方法论。
+Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法，而是理解项目文件夹、终端、运行环境和版本控制之间的关系。你需要知道 Codex 在哪个目录工作、修改了哪些文件，以及怎样把成果发布出去。
 
-这个模块就是 Vibe Coding 的下一步：**从随机产出变成可控产出，从碰运气变成有章法。**
+这个模块从零基础起步：先安装 VS Code 和 Codex，完成一个 GitHub Pages 个人主页；再进入面试交付和日常开发中的 Context、Harness、Loop Engineering。
 
-Claude Code、Cursor、Trae、Windsurf、Codex——工具越来越多，但 Vibe Coding 用户常见的瓶颈是：能做简单 Demo，遇到稍复杂的需求就反复改、改不对。差距不在工具，在于你能不能控制 Agent 的上下文、执行循环和退出条件。
+主线不是“记住更多提示词”，而是逐步建立完整闭环：**打开正确的项目 → 在正确目录启动 Agent → 验证修改 → 用 Git 记录 → 发布和交付。**
 
 这个模块面向的读者：
 
-- Vibe Coding 用户，想从"能跑 Demo"进阶到"稳定交付"
+- 从未创建过项目，不清楚文件夹、终端、Git 和 GitHub 区别的零基础读者
+- 想用 Codex 完成第一个可公开访问作品的 Vibe Coding 用户
 - 已经在用 AI Coding 工具，但产出质量不稳定、时好时坏
 - 面试中被要求做 AI Coding Demo，不知道怎么拿高分
 - 想建立一套可复用的 Agent 使用方法论，而不是每次碰运气
 
 ## 这部分的主线
 
-- Vibe Coding 的瓶颈在哪：为什么"随便试试"只适合简单场景
+- VS Code、项目文件夹、文件树和集成终端是什么关系
+- Python、Node.js、Git、GitHub 和 GitHub Pages 分别解决什么问题
+- 如何在项目目录启动 Codex，并理解默认权限与 `--yolo` 的风险
+- 如何让 Codex 创建、预览并发布一个个人主页
 - 面试场景下的 AI Coding 怎么拿高分
 - 日常开发中如何让 Agent 真正提效而不是添乱
 - 不同工具的适用场景和切换策略
@@ -32,5 +36,6 @@ Claude Code、Cursor、Trae、Windsurf、Codex——工具越来越多，但 Vib
 
 ## 建议阅读顺序
 
-1. [AI Coding 面试：解题流程与交付策略](./01-ai-coding-interview/index.html)
-2. [日常开发中的 Agent 工作流：从 Context 到 Loop 的实战方法论](./02-daily-dev-workflow/index.html)
+1. [从 0 开始 Vibe Coding：用 Codex 发布个人主页](./01-vibe-coding-homepage/index.html)
+2. [AI Coding 面试：解题流程与交付策略](./02-ai-coding-interview/index.html)
+3. [日常开发中的 Agent 工作流：从 Context 到 Loop 的实战方法论](./03-daily-dev-workflow/index.html)

@@ -2,7 +2,7 @@
 layout: default
 title: 日常开发中的 Agent 工作流：从 Context 到 Loop 的实战方法论
 description: 把 Context/Harness/Loop Engineering 落地到每天写代码的流程中
-eyebrow: Agent Practice / 02
+eyebrow: Agent Practice / 03
 ---
 
 # 日常开发中的 Agent 工作流：从 Context 到 Loop 的实战方法论
@@ -302,6 +302,6 @@ Final Session: 收尾
 - **大任务必须拆**：每个子任务可独立验证，每个 session 有明确的完成标准
 - **工具不是信仰**：不同场景切不同工具，在 Agent 和手动之间灵活切换
 
-下一篇建议继续看：
+上一篇：
 
-- [AI Coding 面试：解题流程与交付策略](../01-ai-coding-interview/index.html)——把这些方法论压缩到 30-60 分钟面试场景
+- [AI Coding 面试：解题流程与交付策略](../02-ai-coding-interview/index.html)——把这些方法论压缩到 30-60 分钟面试场景
