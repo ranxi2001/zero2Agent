@@ -18,25 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: narayann7/star-history-action@v1
-        id: chart
+      - uses: ranxi2001/star-history-ci@v2
         with:
-          repos: ranxi2001/zero2Agent
-          commit: 'false'
-          update-readme: 'false'
-          output-dir: star-history
-
-      - name: Rename to stable filenames
-        run: |
-          cd star-history
-          for f in star-history-light-*.svg; do [ -f "$f" ] && mv "$f" star-history-light.svg; done
-          for f in star-history-dark-*.svg; do [ -f "$f" ] && mv "$f" star-history-dark.svg; done
-          ls -la
-
-      - name: Push to output branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: star-history
-          publish_branch: output
-          force_orphan: true
+          repos: ${{ github.repository }}
+          token: ${{ secrets.STAR_HISTORY_TOKEN }}
