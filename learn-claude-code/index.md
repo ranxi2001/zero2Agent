@@ -18,11 +18,11 @@ description: 从 30 行代码出发，手写一个能真正干活的 Coding Agen
 
 12 节课，分两段：
 
-**基础 Harness（s01–s06）**：搭出 Agent 的核心骨架
+**基础 Harness（s01–s06）**：从 Agent Loop 开始，逐步加入工具、规划、上下文等机制，构成基础 Harness；Loop 是其中的执行内核，不等于完整 Harness
 
 | 章节 | 机制 | 核心思路 |
 |------|------|---------|
-| s01 | Agent Loop | `while True` + stop_reason = 整个 Agent |
+| s01 | Agent Loop | `while True` + stop_reason = 最小执行内核 |
 | s02 | Tool Use | dispatch map，加工具不改循环 |
 | s03 | TodoWrite | 规划层，防止模型在长任务中迷路 |
 | s04 | Subagent | 上下文隔离，子任务不污染主对话 |

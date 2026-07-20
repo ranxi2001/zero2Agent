@@ -76,7 +76,7 @@ flowchart TB
 
 **高手答**：
 
-这三个“工程”代表了 Agent 开发方法论的**三代演进**——不是替代关系，而是逐层递进：
+这三个“工程”代表三种关注范围。业界常把关注重点从 Prompt 扩展到 Context、再扩展到 Harness 描述成一种演进，但它们会同时存在，并不是互斥或严格逐层的架构：
 
 | 维度 | Prompt Engineering | Context Engineering | Harness Engineering |
 |------|-------------------|--------------------|--------------------|
@@ -96,9 +96,9 @@ flowchart TB
 
 **一句话总结**：Prompt Engineering 解决“说什么”，Context Engineering 解决“给什么”，Harness Engineering 解决“怎么保障”。
 
-**差距在哪**：新手只知道 Prompt Engineering，对后两者模糊。高手能清晰区分三者的层次关系——不是并列的三种方法，而是逐代演进的三种范式，解决的问题层级越来越高。面试官考的是你对 Agent 工程方法论的全景认知。
+**差距在哪**：新手只知道 Prompt Engineering，对后两者模糊。高手能清晰区分三者的操作对象和责任边界，也知道它们在同一个系统中互相配合。面试官考的是你对 Agent 工程方法论的全景认知。
 
-**追问变体**：加入 Loop Engineering 作为第四层（来源：成都某中厂 Agent 产品开发实习）——Loop Engineering 指的是让 Agent 在执行循环中自我纠错、反复迭代直到满足退出条件的工程实践，是 Harness 之上更高层的自主性设计。
+**追问变体**：加入 Loop Engineering 作为第四个观察视角（来源：成都某中厂 Agent 产品开发实习）——Loop Engineering 指的是对 Agent 执行循环的退出条件、纠错策略和资源约束进行系统化设计。它通常是 Harness 内部的循环控制部分，不是凌驾于 Harness 之上的独立层级；Harness 还包括上下文装配、工具权限、验证和人工审批等循环之外的能力。
 
 ---
 

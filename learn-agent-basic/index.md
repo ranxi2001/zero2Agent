@@ -22,6 +22,7 @@ eyebrow: Module 01
 - Agent 到底是什么
 - 它和普通 LLM App、Workflow 的边界在哪里
 - 一个可用的 Agent 系统最少由哪些部分组成
+- 大模型 API 的输入、输出和工具调用轨迹如何组成 Agent Loop
 - 为什么很多 Demo 能跑，但一落地就开始不稳定
 
 ## 学习目标
@@ -30,8 +31,9 @@ eyebrow: Module 01
 
 1. 能用工程视角解释什么是 Agent，而不是把它当成营销词。
 2. 能区分 Workflow、LLM App、Agent 这三类系统。
-3. 知道 Tool、Memory、Planning、RAG 在系统里分别扮演什么角色。
-4. 能判断一个 Agent 设计是“可用系统”，还是“看起来会动的 Demo”。
+3. 能读懂一轮模型 API 请求、响应、工具调用和结果回传。
+4. 知道 Context、State、Memory、Tool、Planning、RAG 在系统里分别扮演什么角色。
+5. 能判断一个 Agent 设计是“可用系统”，还是“看起来会动的 Demo”。
 
 ## 建议阅读顺序
 
@@ -39,8 +41,8 @@ eyebrow: Module 01
 2. [Workflow 和 Agent 的区别](./02-workflow-vs-agent/index.html)
 3. [一个 Agent 系统的核心组成](./03-core-components/index.html)
 4. [为什么很多 Agent Demo 一落地就不稳定](./04-why-agent-demos-break/index.html)
-5. [Tool Calling 入门](./05-tool-calling-basics/index.html)
-6. [Memory 设计模式](./06-memory-patterns/index.html)
+5. [大模型 API 输入输出与 Tool Calling](./05-tool-calling-basics/index.html)
+6. [Context、State 与 Memory](./06-memory-patterns/index.html)
 7. [Planning、Reflection、RAG 分别解决什么问题](./07-planning-reflection-rag/index.html)
 8. [单 Agent 和多 Agent 的边界](./08-single-vs-multi-agent/index.html)
 9. [Agent Infra：从 Harness 到生产环境](./09-agent-infra/index.html)
@@ -72,12 +74,22 @@ eyebrow: Module 01
 | [Workflow 和 Agent 的区别](./02-workflow-vs-agent/index.html) | 解决最常见的概念混淆 |
 | [一个 Agent 系统的核心组成](./03-core-components/index.html) | 拆开 Tool、State、Memory、Planning 等模块 |
 | [为什么很多 Agent Demo 一落地就不稳定](./04-why-agent-demos-break/index.html) | 提前建立工程视角，而不是只追求“能跑” |
-| [Tool Calling 入门](./05-tool-calling-basics/index.html) | 理解模型为什么需要外部工具，以及工具系统怎么设计 |
-| [Memory 设计模式](./06-memory-patterns/index.html) | 理清短期记忆、长期记忆和状态管理的边界 |
+| [大模型 API 输入输出与 Tool Calling](./05-tool-calling-basics/index.html) | 从请求、typed 响应、因果关联和流式事件看懂完整工具循环 |
+| [Context、State 与 Memory](./06-memory-patterns/index.html) | 理清消息轨迹、缓存、压缩、状态与长期记忆的边界 |
 | [Planning、Reflection、RAG 分别解决什么问题](./07-planning-reflection-rag/index.html) | 防止把三个高频概念混成一团 |
 | [单 Agent 和多 Agent 的边界](./08-single-vs-multi-agent/index.html) | 判断什么时候真的需要多 Agent，而不是跟风拆角色 |
 | [Agent Infra：从 Harness 到生产环境](./09-agent-infra/index.html) | 从 Harness 到上线，需要哪些基础设施支撑 |
 | [Loop Engineering：让 Agent 自主迭代直到正确](./10-loop-engineering/index.html) | Agent 循环的退出条件、纠错策略和防护设计 |
+
+## 配套实验
+
+[Agent API Lab](../examples/agent-api-lab/index.html) 不需要 API Key，使用确定性 Fake Provider 展示模型请求、工具调用、结果回传、流式组装和故障注入。它还会主动破坏消息轨迹，验证删除 assistant 工具请求、错配 call ID、拍平角色或机械滑窗为什么会失败。
+
+```powershell
+python examples/agent-api-lab/run_lab.py --scenario parallel
+python examples/agent-api-lab/run_lab.py --scenario parallel --all-ablations
+python -m unittest discover -s examples/agent-api-lab/tests -v
+```
 
 ## 读完之后再学什么
 

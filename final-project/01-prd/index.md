@@ -153,7 +153,7 @@ Sub-agent 职责划分：
 |----|------|------|
 | Runtime | Node.js + TypeScript | Agent 主循环，手写 event loop |
 | CLI | Commander.js | 命令入口 |
-| Agent Loop | 手写 Harness | 自实现 loop → tool dispatch → stream 解析 → 回传，不依赖 LangChain/LangGraph |
+| Agent Loop | 手写执行内核 | 自实现 loop → tool dispatch → stream 解析 → 回传，不依赖 LangChain/LangGraph |
 | LLM 接入 | Anthropic SDK + OpenAI SDK | 直接调 Claude / GPT-4o / DeepSeek（后两者共用 OpenAI SDK），自己封装 retry / stream / cache |
 | 存储 | SQLite (better-sqlite3) | Session / Memory / 审计日志，同步 API 无回调地狱 |
 | 知识库 | SQLite FTS5 + Embedding | 全文检索 + 语义检索双通道 |

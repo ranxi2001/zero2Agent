@@ -17,8 +17,10 @@ include:
   - learn-sdk-frameworks
   - learn-agent-survey
   - learn-agent-training
+  - learn-agent-practice
   - learn-agent-interview
   - final-project
+  - examples
   - docs
 
 exclude:
