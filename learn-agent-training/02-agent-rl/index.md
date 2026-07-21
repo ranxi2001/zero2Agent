@@ -327,6 +327,72 @@ RL 对推理链的改善：
 └── 信息利用效率   更好地利用工具返回的信息，减少重复查询
 ```
 
+## 进阶：RLVP、多轮信用分配与 On-Policy Distillation
+
+以下三个方向是 Agent RL 前沿中最有工程价值的补充。
+
+### RLVP：奖结果、罚过程
+
+传统 RL 要么只给结果 Reward（稀疏），要么人工设计过程 Reward（成本高）。RLVP（Reinforcement Learning with Verification and Penalization）的思路是：
+
+- **结果正确 → 奖励整条轨迹**（不追究中间走了弯路）
+- **结果错误 → 惩罚可定位的错误步骤**（而不是惩罚整条链）
+
+```text
+传统做法：
+  轨迹 A（10 步，结果正确）→ Reward = +1（均摊到 10 步）
+  轨迹 B（8 步，结果错误）  → Reward = -1（均摊到 8 步）
+
+RLVP 做法：
+  轨迹 A（10 步，结果正确）→ 所有步骤 Reward = +1
+  轨迹 B（8 步，结果错误）  → 第 5 步工具参数错误 → 只惩罚第 5 步
+```
+
+核心价值：**从失败轨迹中回收训练信号**。传统方法下，失败轨迹只能提供一个笼统的负信号；RLVP 可以精确告诉模型"哪一步错了"，让模型学到"避免特定错误"而不是"避免整个行为模式"。
+
+实现关键：需要一个 verifier 能定位错误步骤（代码场景用 test/compiler 自然定位；通用场景可用 PRM 或规则引擎近似）。
+
+### 多轮信用分配（Credit Assignment）
+
+Agent 任务通常有多个步骤，最终只有一个结果。问题是：如果 10 步中第 3 步是关键决策，怎么让梯度信号正确地回传到第 3 步？
+
+| 方法 | 思路 | 适用场景 |
+|---|---|---|
+| Outcome Reward + GAE | 用 advantage 估计逐步分配，但长链路衰减严重 | 短轨迹（<5 步） |
+| Process Reward Model | 训练一个模型给每步打分，作为密集 Reward | 有标注数据的场景 |
+| Monte Carlo Tree | 从每个中间状态采样多条轨迹，用成功率估计该步价值 | 计算预算充足时 |
+| 关键步骤标注 | 人工或自动标注"决策分叉点"，只在这些点给 Reward | 可明确识别关键决策的场景 |
+
+Agent 场景中最实用的组合是：**结果 Reward + 关键步骤的 Process Reward**。不需要给每一步都打分，只在工具选择和参数决策这些关键点加信号就能显著提升训练效率。
+
+### On-Policy Distillation：学生生成、教师反馈
+
+传统蒸馏：强模型生成数据 → 弱模型 SFT 学习。问题是弱模型可能产生强模型从不会产生的错误，SFT 阶段看不到这些错误的处理方式。
+
+On-Policy Distillation 的做法：
+
+1. **学生模型自己生成轨迹**（on-policy）
+2. **教师模型对学生的每一步提供 token 级反馈**（而不是直接给示范答案）
+3. 学生基于教师反馈更新策略
+
+```text
+传统蒸馏：
+  Teacher 生成轨迹 → Student SFT 模仿
+  问题：Student 自己生成时犯的错，训练中完全没见过
+
+On-Policy Distillation：
+  Student 生成轨迹 → Teacher 对每个 token 打分（这步好/这步差）→ Student RL 更新
+  优势：Student 的实际分布和训练分布一致，没有 exposure bias
+```
+
+工程优势：
+
+- 避免 Exposure Bias（学生在自己的分布上学习）
+- 教师的 token 级反馈比轨迹级 Reward 信号密集得多
+- 不需要设计复杂的 Reward 函数——教师模型本身就是 Reward 来源
+
+成本权衡：每条学生轨迹都需要教师 inference 一次，token 成本大约是纯 SFT 的 3-5 倍，但训练效率（达到同等质量所需的 step 数）通常好于纯 RL。
+
 ## 小结
 
 - SFT 的天花板是标注数据质量，RL 通过 Reward 信号让模型有机会超越模仿学习的上限
@@ -334,6 +400,7 @@ RL 对推理链的改善：
 - 算法选型：PPO 最稳、GRPO 省显存适合长轨迹、Rejection Sampling + SFT 是轻量替代
 - 工程挑战集中在 rollout 成本、沙箱环境和训练稳定性——Reward Hacking 是最常见的坑
 - RL 的实际收益体现在减少冗余步骤、提升工具调用准确率、改善复杂推理链的表现
+- RLVP 从失败轨迹回收信号，多轮信用分配解决长链路的梯度衰减，On-Policy Distillation 用教师密集反馈替代人工 Reward 设计
 
 下一篇建议继续看：
 
