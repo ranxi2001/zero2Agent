@@ -37,13 +37,13 @@
 | [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) | 13 篇 | ✅ 完成 | AgentScope · Mastra · Semantic Kernel · Eino · DeerFlow · LangChain · Google ADK · AutoGen · Vercel AI SDK 等 |
 | [OpenClaw Agent](https://onefly.top/zero2Agent/learn-openclaw/) | 9 篇 | ✅ 完成 | 60 行核心框架，从 Node 推导到 Agent，pi-mono 架构解析，部署实战 |
 | [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) | 12 篇 | ✅ 完成 | 12 节课手写 Coding Agent：Loop → Tools → Subagent → Teams → Worktree 隔离 |
-| [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) | 12 篇 | ✅ 完成 | 以官方 `dsh-v0.1.0-rc.8` 为基线，拆解 Cordis、Session Log、Agent Loop、工具、安全与 Subagent |
+| [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) | 13 篇 | ✅ 完成 | 从设计理念拆解可拼装的 Agent Runtime：插件、接缝、事实源、控制平面、安全与自进化边界 |
 | [Agent 训练实战](https://onefly.top/zero2Agent/learn-agent-training/) | 7 篇 | ✅ 完成 | SFT、RL、GRPO/PPO、数据配比、仿真沙箱、评估回流与部署 |
 | [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 4 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流与 Auto Harness 工程 |
 | [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
 | [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
 
-> **当前进度：112 篇文章，10 个完整模块，1 个模块持续更新**
+> **当前进度：113 篇文章，10 个完整模块，1 个模块持续更新**
 
 ---
 
@@ -130,9 +130,9 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 
 ### DeepSeek Harness
 
-这个模块以讲解为主，把 DeepSeek Harness 视为一个可组合的 Agent Runtime，而不是一套更长的 Prompt。文章从 Cordis 插件内核和 Profile 组装开始，沿着 Session Log、Agent Loop、Inbox 控制和 Tool Pipeline 展开，再解释 Code Mode、Context Compaction、Approval、Sandbox、Subagent 与不同运行面之间的边界。
+这个模块以设计理念为主，把 DeepSeek Harness 同时看成一个可以直接运行的 Coding Agent，以及一套可以重新拼装的 Agent 开发框架。它不是“固定内核加扩展槽”，而是尽量不保留不可替换的特权内核。官方 Web 和 headless 是预置 Profile；模型、工具、文件系统、Shell、沙箱、会话存储、Subagent、UI 甚至 Loop 都可以通过插件和接缝替换。文章先讲 Cordis 的依赖、事件与可逆副作用，再拆解插件树、LLM 接缝、事实源、控制平面、上下文成本和安全策略，最后讨论动态生成插件的实验性自进化边界。
 
-官方 API 说明固定参考 `dsh-v0.1.0-rc.8`；社区教程、电子书、白皮书和 NanoCordis 用于补充原理与教学实现。社区资料基于较早的 `rc.6` 时，README 不把它当作当前 API 规范，具体来源和许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+官方 API 仍固定参考 `dsh-v0.1.0-rc.8`，但 API 只作为设计判断的证据；社区教程、电子书、白皮书和 NanoCordis 用于补充原理与教学实现。社区资料基于较早的 `rc.6` 时，README 不把它当作当前 API 规范，具体来源和许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 ### 面试通关
 
@@ -211,7 +211,7 @@ zero2Agent/
 ├── learn-agent-survey/     # 框架调研（13 篇）
 ├── learn-openclaw/         # OpenClaw 框架教程（9 篇）
 ├── learn-claude-code/      # Claude Code 课程（12 篇）
-├── learn-deepseek-harness/ # DeepSeek Harness 运行时拆解（12 篇）
+├── learn-deepseek-harness/ # DeepSeek Harness 运行时拆解（13 篇）
 ├── learn-agent-training/   # Agent 训练实战（7 篇）
 ├── learn-agent-practice/   # Agent 应用实战（4 篇，持续更新）
 ├── learn-agent-interview/  # 大厂面试题拆解（15 篇）

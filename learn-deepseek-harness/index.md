@@ -1,58 +1,58 @@
 ---
 layout: default
 title: DeepSeek Harness
-description: 从 Cordis 插件内核、会话日志和 Agent Loop，到工具、安全、压缩与 Subagent 的系统拆解
+description: 从设计理念理解可组合 Agent Runtime 的工程边界
 eyebrow: Module 07
 ---
 
 # DeepSeek Harness
 
-**把一个可运行的 Agent，拆成可以验证、替换和治理的运行时。**
+**不是把 Prompt 写得更长，而是把 Agent 变成一个可恢复、可控制、可演进的运行时。**
 
-很多教程把 Harness 当成一段更长的 System Prompt，或把 Agent Loop 简化成一个 `while` 循环。DeepSeek Harness 提供了另一种观察角度：模型只是决策组件，真正决定系统能否长期运行的，是会话日志、上下文构造、工具边界、权限审批、沙箱、压缩和可观测事件组成的运行时。
+一个模型调用很容易写出来。难的是让它连续运行几十轮，允许用户中途改方向，能够从崩溃中恢复，在执行危险动作前停下来，并且能解释每一个副作用是怎样发生的。DeepSeek Harness 值得学习的地方，不是某个 CLI 或某组 TypeScript 类型，而是它对这些问题的系统性回答。
 
-本模块以讲解为主，围绕官方仓库 `deepseek-harness` 的 `dsh-v0.1.0-rc.8` 文档和源码建立主线。社区教程、电子书、白皮书与 NanoCordis 用来补充背景和教学实现；遇到 API 差异时，以官方版本化文档为准。
+## 七个设计判断
 
-## 阅读主线
+| 设计问题 | 核心判断 | 运行时承载 |
+| --- | --- | --- |
+| 什么是核心 | 不保留不可替换的特权内核 | Cordis Plugin Tree |
+| 状态从哪里来 | 事实应该追加保存，状态从事实派生 | Session Log |
+| 模型差异怎么隔离 | 用统一词汇表约束消息、流式输出和失败事实 | LLM Seam / Adapter Registry |
+| 能力如何扩展 | 用服务接缝组合能力，不把所有逻辑塞进 Loop | Cordis Plugin / Capability Seam |
+| 模型如何产生副作用 | 决策和执行分离，模型输出不等于授权 | Agent Loop / Tool Pipeline |
+| 长任务如何持续 | Context 是受管理的工作集，压缩要保持语义 | Compaction / Token Meter / Spill |
+| 如何守住边界 | 审批、沙箱和凭据由运行时强制，失败默认拒绝 | Approval / Sandbox / Policy |
+
+这些判断共同完成一次复杂度转移：用户只看到一个连续的任务体验，系统内部则把不确定的模型决策包在确定的日志、策略和生命周期里。代价是实现更复杂、服务契约更多、调试需要理解事件顺序；收益是系统可以恢复、审计、替换和测试。
+
+## 阅读顺序
 
 ```mermaid
 flowchart LR
-  A[配置与插件] --> B[会话日志]
-  B --> C[Agent Loop]
-  C --> D[工具与 Code Mode]
-  D --> E[压缩与成本]
-  E --> F[审批与沙箱]
-  F --> G[Subagent 与运行面]
+  A["复杂度转移"] --> B["能力组合"]
+  B --> C["事实源"]
+  C --> D["控制循环"]
+  D --> E["副作用边界"]
+  E --> F["上下文与成本"]
+  F --> G["安全与多运行面"]
 ```
 
-建议按顺序阅读。前 05 篇建立最小运行时模型，06–10 篇解释控制、工具、上下文和安全边界，最后两篇再讨论多 Agent 和不同宿主。
+1. [Agent Harness 与一切皆插件](./01-what-is-harness/index.html)：从无特权内核建立设计目标
+2. [声明式与命令式：Cordis 的五个核心概念](./02-cordis-plugin-kernel/index.html)：理解 DSH 为何承担更重的运行时复杂度
+3. [运行中的 DSH：插件树、组合层与能力接缝](./03-profile-bundle-patch/index.html)：理解产品如何从有序配置层启动
+4. [LLM 接缝：把模型差异关在适配器里](./04-llm-seam/index.html)：理解统一词汇表、流式协议与失败策略
+5. [Agent Loop：控制平面如何推进任务](./05-agent-loop/index.html)
+6. [Tool Pipeline：能力为什么不能直接等于权限](./06-tool-pipeline/index.html)
+7. [Session Log：为什么日志就是事实源](./07-session-log/index.html)：理解可恢复性的基础
+8. [Inbox 控制：为什么用户插话必须有自己的语义](./08-inbox-control/index.html)
+9. [Code Mode：上下文压缩不等于安全隔离](./09-code-mode/index.html)
+10. [Context Compaction：把上下文当作工作集管理](./10-context-compaction-cost/index.html)
+11. [安全边界：把信任放到模型之外](./11-security-boundary/index.html)
+12. [Subagent 编排：扩展能力而不是复制 Loop](./12-subagent-orchestration/index.html)
+13. [Runtime Surfaces：一个运行时如何服务多个宿主](./13-runtime-surfaces/index.html)
 
-## 文章目录
+## 资料边界
 
-1. [Harness 到底解决什么问题](./01-what-is-harness/index.html)
-2. [Cordis 插件内核：服务、事件与生命周期](./02-cordis-plugin-kernel/index.html)
-3. [Profile、Bundle 与 Patch：运行时如何组装](./03-profile-bundle-patch/index.html)
-4. [Session Log：为什么日志就是事实源](./04-session-log/index.html)
-5. [Agent Loop：Turn、Step 与请求边界](./05-agent-loop/index.html)
-6. [Inbox 控制：followup、steer、inject 的差别](./06-inbox-control/index.html)
-7. [Tool Pipeline：一次工具调用经过哪些门](./07-tool-pipeline/index.html)
-8. [Code Mode：把代码执行当作受控工具](./08-code-mode/index.html)
-9. [Context Compaction：压缩、计量与缓存](./09-context-compaction-cost/index.html)
-10. [安全边界：Approval、Sandbox 与凭据](./10-security-boundary/index.html)
-11. [Subagent 编排：可选能力而不是第二个 Loop](./11-subagent-orchestration/index.html)
-12. [Runtime Surfaces：Web、Headless、ACP 与 SDK](./12-runtime-surfaces/index.html)
+文章以官方仓库 [dsh-v0.1.0-rc.8](https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.8) 的架构和子系统文档为事实基线。社区教程、电子书、白皮书和 NanoCordis 用来帮助理解设计背景与教学实现；它们描述的 `rc.6` 或简化 API 不直接代表当前接口。
 
-## 资料与版本
-
-| 资料 | 用途 | 版本或许可 |
-| --- | --- | --- |
-| [DeepSeek Harness 官方仓库](https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.8) | API、服务契约、架构事实 | `dsh-v0.1.0-rc.8`，MIT |
-| [Cordis](https://github.com/shigma/Cordis/tree/8cc9e33) | 插件内核与依赖注入背景 | MIT |
-| [DeepSeek Harness 从零到一](https://github.com/yanhua1010/dsh-harness-tutorial/tree/2a29d03) | 中文 Demo 与教学实现 | MIT，社区资料 |
-| [从开机到拆开](https://github.com/alchaincyf/deepseek-harness-orange-book/tree/887f4b4) | 系统提示词、启动清单与原始会话日志 | 社区电子书，按上游声明使用 |
-| [解剖 DeepSeek Harness](https://xueai.app/slides/learn.html#dsh-1.html) | 交互式源码专题 | 在线资料 |
-| [Cordis 在做什么](https://blog.antinomie.org) | 从插件作者视角补充 Cordis 心智模型 | 在线短文 |
-| [DeepSeek Harness 白皮书](https://github.com/Electricitysheep/dsh-handbook/tree/6dafa52) | 安装、插件与安全的补充叙述 | CC BY-NC-SA 4.0，基于 `0.1.0-rc.6` |
-| [NanoCordis](https://github.com/SheltonLiu-N/nano-cordis/tree/caea7b0) | 可运行的简化框架 | MIT |
-
-社区材料基于较早的 `rc.6` 或教学 API，不能直接当作 `rc.8` 的接口说明。本文会明确标出推导、实现建议和仍需在本地验证的部分。
+本文更关心可迁移的设计问题：换成其他模型、Provider 或宿主后，为什么这些边界仍然成立。API 名称只在需要确认契约时出现。

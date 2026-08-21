@@ -1,43 +1,65 @@
 ---
 layout: default
-title: Harness 到底解决什么问题
-description: 区分模型、SDK、Agent、Harness 与 Runtime，建立 DeepSeek Harness 的系统边界
+title: Agent Harness 与一切皆插件
+description: 从无特权内核理解 DSH 的插件化设计
 eyebrow: DeepSeek Harness / 01
 ---
 
-# Harness 到底解决什么问题
+# Agent Harness 与一切皆插件
 
-如果一个 Agent 只需要调用一次模型，SDK 已经足够。真正麻烦的是它要运行数十轮：工具可能失败，用户会插话，上下文会超预算，危险操作需要审批，进程还要在重启后恢复。把这些问题全部塞进一个 `while` 循环，系统很快就无法解释和测试。
+做一个“帮我改代码”的 AI 助手并不只是接一次模型 API。它要读文件、运行命令、循环调用工具、保存会话、允许用户中途干预，还要把流式过程交给 Web、CLI 或其他客户端。Harness 就是把模型能力装配成这些产品行为的运行时。
 
-## 五个层次
+## DSH 最重要的判断：不存在特权内核
 
-| 层次 | 负责什么 | 典型边界 |
-| --- | --- | --- |
-| Model | 根据输入产生输出或工具调用 | 不负责权限和重试策略 |
-| SDK | 封装 Provider 的 HTTP、流式和类型 | 不保存完整会话事实 |
-| Agent | 根据轨迹循环请求模型、执行工具 | 负责任务推进 |
-| Harness | 为 Agent 提供日志、工具、上下文、审批、沙箱等可替换能力 | 负责运行时治理 |
-| Runtime surface | 把 Harness 暴露给 Web、CLI、ACP 或 SDK 客户端 | 负责宿主与生命周期 |
+常见插件架构仍然保留一个不可替换的 Kernel。插件只能在 Kernel 预留的 Hook 上工作：你可以增加一个工具，却不能换掉工具循环；可以接一个存储，却不能改变会话如何成为上下文。
 
-DeepSeek Harness 的关键判断是：**Agent Loop 是核心流程，能力通过服务接缝注入。** 因此 `ctx.sessions`、`ctx.tools`、`ctx.approval` 和 `ctx.sandbox` 都是可以被替换、测试和审计的模块，而不是散落在循环里的全局函数。
-
-## 最小闭环
+DSH 把边界再向内推了一步。模型适配器、工具注册表、会话日志和 Agent Loop 本身都是插件，可以从配置中替换。所谓“一切皆插件”不是插件数量很多，而是**重要性不再自动带来不可替换的特权**。
 
 ```mermaid
 flowchart TD
-  U[用户输入] --> L[Agent Loop]
-  L --> M[模型请求]
-  M -->|工具调用| T[Tool Pipeline]
-  T --> R[工具结果]
-  R --> L
-  L --> O[最终输出]
-  L -.-> S[Session Log]
+  C["共享 Context"]
+  C --> L["模型接缝"]
+  C --> T["工具接缝"]
+  C --> S["会话事实源"]
+  C --> A["Agent Loop"]
+  C --> U["UI 与宿主"]
+  C --> P["安全与策略"]
 ```
 
-日志不是旁路的调试输出，而是这条闭环的事实源。后续的上下文、压缩、恢复和审计都应能从日志重新推导。
+这些插件站在同一棵 Context 树中，通过服务、事件和可逆副作用协作。耦合关系主要存在于运行时注册，而不是消费者直接导入某个具体实现。
 
-## 阅读官方文档的方法
+## Harness 要回答的五类问题
 
-本模块引用的官方文档固定在 [dsh-v0.1.0-rc.8](https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.8)。阅读其他文章时，先确认它描述的是哪个 tag，再看它说的是公共 service seam、内部实现还是教学封装。一个名字相同的 `Agent` 或 `Tool`，在不同层次可能拥有完全不同的生命周期。
+| 工程问题 | DSH 的设计回答 | 典型接缝 |
+| --- | --- | --- |
+| 如何接不同模型 | 协议与 Provider 作为可替换适配器 | `ctx.llm` |
+| 如何让模型使用能力 | 工具声明、执行和策略组成管线 | `ctx.tools` |
+| 如何保存和恢复 | 追加式事件作为事实源 | `ctx.sessions` |
+| 如何干预中间过程 | 请求、工具和轮次暴露类型化事件 | `agent/*`、`tools/*` |
+| 如何组成不同产品 | Profile 组合插件树，Surface 只做宿主适配 | Web、headless、外部 Profile |
 
-官方总览见 [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/architecture.zh.md)。它描述了 Profile、Bundle、Patch 和 Harness Home 的组装关系，是后续所有 API 解释的入口。
+这张表不是 API 清单。它说明每个横切问题都拥有自己的可替换边界，而不是被硬编码进一个巨型 Agent 类。
+
+## 三个思维实验
+
+### 模型与工具协议继续变化
+
+如果工具循环、模型协议和 Provider 实现写死在同一个核心里，协议演进会变成内核手术。DSH 把 LLM、Tools 和 Agent Loop 分开，哪个边界变化就替换哪个插件，其他部分继续使用原有契约。
+
+### 产品形态无法提前枚举
+
+Web、一次性 headless 任务、TUI、ACP 或 SDK 都需要同一套会话和工具能力。DSH 让产品形态成为 Profile 的组合结果，而不是复制一份核心代码。官方 Web 和 headless 只是两份预置，不是全部可能性。
+
+### 个性化不应该都等待核心发版
+
+审计工具结果、请求前路由、给单个 Agent 增加隔离策略，都可以附着在已有服务或事件上。局部需求由局部插件承担，核心仓库不必为每个用户维护分支。
+
+## 这是不是过度设计
+
+有可能。对一次性问答、普通 Skill、搜索服务或短进程 MCP，改配置并重启通常更简单。DSH 的价值只有在你确实需要替换进程内有状态组件、改变控制流、维护多个产品形态，或探索运行时自我修改时才明显。
+
+因此，正确问题不是“一切皆插件是否更先进”，而是“你的系统是否需要把这个边界变成可替换能力”。可替换性提高了上限，也把依赖、生命周期、生态质量和版本兼容的成本带进了运行时。
+
+官方事实来源：[README](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/README.zh.md)、[Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/architecture.zh.md) 和 Cordis 论文 [A Programming Paradigm for Spatiotemporal Composability](https://github.com/cordiverse/paper)。
+
+下一篇建议继续看：[声明式与命令式：Cordis 的五个核心概念](../02-cordis-plugin-kernel/index.html)
