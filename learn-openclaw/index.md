@@ -2,6 +2,7 @@
 layout: default
 title: OpenClaw Agent
 description: 从 Pi Agent Harness 到 OpenClaw，理解生产级 Agent 的架构与实现
+eyebrow: Module 05
 ---
 
 # OpenClaw Agent

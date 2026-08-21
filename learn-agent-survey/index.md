@@ -2,7 +2,7 @@
 layout: default
 title: 框架调研
 description: 13 个主流 Agent 框架横向调研——阿里 AgentScope、字节 Eino/DeerFlow、微软 AutoGen/Semantic Kernel、Mastra、LangChain 等
-eyebrow: Module 06
+eyebrow: Module 04
 ---
 
 # 框架调研

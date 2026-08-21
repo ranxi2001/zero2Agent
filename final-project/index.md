@@ -2,7 +2,7 @@
 layout: default
 title: final-project
 description: OfferPilot —— 面试诊断 Agent 实战
-eyebrow: Module 05
+eyebrow: Module 11
 ---
 
 # Final Project：OfferPilot

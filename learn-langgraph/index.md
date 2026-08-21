@@ -2,7 +2,7 @@
 layout: default
 title: learn-langgraph
 description: 用状态图思维构建可维护的 Agent 系统——从最小示例到条件分支、并行执行和 LLM 集成
-eyebrow: Module 04
+eyebrow: Module 02
 ---
 
 # learn-langgraph

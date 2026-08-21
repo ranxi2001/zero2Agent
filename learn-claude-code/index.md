@@ -2,6 +2,7 @@
 layout: default
 title: Claude Code
 description: 从 30 行代码出发，手写一个能真正干活的 Coding Agent
+eyebrow: Module 06
 ---
 
 # Claude Code

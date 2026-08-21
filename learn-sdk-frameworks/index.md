@@ -2,7 +2,7 @@
 layout: default
 title: SDK 框架
 description: OpenAI Agents SDK、Google Gemini SDK、Claude Anthropic SDK——三大原厂 SDK 的核心用法与选型指南
-eyebrow: Module 05
+eyebrow: Module 03
 ---
 
 # SDK 框架

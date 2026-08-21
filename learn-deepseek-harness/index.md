@@ -2,7 +2,7 @@
 layout: default
 title: DeepSeek Harness
 description: 从 Cordis 插件内核、会话日志和 Agent Loop，到工具、安全、压缩与 Subagent 的系统拆解
-eyebrow: DeepSeek Harness / Core
+eyebrow: Module 07
 ---
 
 # DeepSeek Harness
