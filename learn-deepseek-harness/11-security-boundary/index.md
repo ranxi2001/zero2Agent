@@ -26,10 +26,26 @@ eyebrow: DeepSeek Harness / 11
 
 Approval 也不是一个弹窗。请求必须绑定工具、参数摘要、操作者、有效期和决定来源；重试同一动作时，不能默认复用上一次的允许。这样审批才是可审计协议，而不是 UI 装饰。
 
+## 实测攻击面：间接提示注入
+
+腾讯 AI-Infra-Guard 团队在 2026 年 8 月发布的系统性安全研究（[arxiv 2608.16393](https://arxiv.org/abs/2608.16393)）提供了量化证据：
+
+| 指标 | 数据 |
+| --- | --- |
+| 受控执行次数 | 14,560 |
+| 间接内容通道 | 16 种（文件内容、剪贴板、搜索结果等） |
+| 攻击方法 | 12 种 |
+| 最高攻击成功率（文件模式，隐藏 Unicode） | **25.5%** |
+| 最高攻击成功率（文本模式，fake-completion） | **17.0%** |
+
+这组数据说明：即使 DSH 在设计上把策略与决策分开，模型仍可能在间接内容中被诱导执行恶意指令。fail-closed 不是保守，而是在攻击成功率可达四分之一时的基本底线。
+
+值得注意的是，该研究基于 rc 版本，正式发布后攻击面可能变化。但它验证了一条规则：安全策略的有效性不能只看设计文档，必须有对抗性测试。
+
 ## 设计取舍
 
-外部策略会增加等待和配置成本，也可能让 Agent 看起来“不够聪明”。但它把信任从概率性输出转移到可以测试、撤销和审计的组件上，这是生产系统必须付出的成本。
+外部策略会增加等待和配置成本，也可能让 Agent 看起来”不够聪明”。但它把信任从概率性输出转移到可以测试、撤销和审计的组件上，这是生产系统必须付出的成本。
 
-参考 [Approval](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/subsystems/approval.zh.md) 与 [Sandbox](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/subsystems/sandbox.zh.md)。
+参考 [Approval](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/subsystems/approval.zh.md)、[Sandbox](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/subsystems/sandbox.zh.md) 与 [Indirect Prompt Injection Security Study](https://arxiv.org/abs/2608.16393)。
 
 下一篇建议继续看：[Subagent 编排：扩展能力而不是复制 Loop](../12-subagent-orchestration/index.html)

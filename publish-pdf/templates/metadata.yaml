@@ -1,0 +1,29 @@
+---
+title: "Agent 面试 500 问"
+subtitle: "大厂 AI Agent 岗位面试速查手册"
+series: "zero2Agent 绿皮书"
+author:
+  - "Onefly (github.com/ranxi2001)"
+date: "2026 年 8 月"
+lang: zh-CN
+repo: "https://github.com/ranxi2001/zero2Agent"
+license: "CC BY-NC-SA 4.0"
+copyright: |
+  本书内容版权归 Onefly 所有。
+  采用 CC BY-NC-SA 4.0 协议授权。
+  转载请注明出处，商业使用请联系作者获取授权。
+  项目仓库：https://github.com/ranxi2001/zero2Agent
+cover-note: |
+  本书为 zero2Agent 开源项目的 PDF 发行版（绿皮书系列）。
+  适合面试前速查速记，每题直给标准答案，不绕弯。
+  内容持续更新，最新版本请访问 GitHub 仓库获取。
+keywords:
+  - AI Agent 面试
+  - Agent 架构设计
+  - RAG 检索系统
+  - 多智能体协作
+  - Prompt 工程
+  - AI Coding
+  - 面试八股文
+  - 速查手册
+---

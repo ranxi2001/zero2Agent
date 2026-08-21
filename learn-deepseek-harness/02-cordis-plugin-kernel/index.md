@@ -87,7 +87,7 @@ Context 还可以派生局部作用域。`extend` 继承父级能力，`isolate`
 
 因此，Cordis 提供的是较高的工程下限，不是自动正确。只有当运行中替换有状态能力确实重要时，这份复杂度才值得承担。
 
-事实基线见官方 [Cordis Primer](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/cordis-primer.zh.md)、[Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/architecture.zh.md) 与 [Cordis 论文](https://github.com/cordiverse/paper)。
+事实基线见官方 [Cordis Primer](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/cordis-primer.zh.md)、[Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.1.0-rc.8/docs/architecture.zh.md) 与 [Cordis 论文](https://github.com/cordiverse/paper)。想动手验证的读者可参考 [NanoCordis](https://github.com/SheltonLiu-N/nano-cordis)——一个约 1600 行的教育复现，覆盖了 Plugin、Context、inject、Event 和 Effect 的核心机制，但有意省略了 streaming、per-session scopes、subagents、sandboxing 和审计事件；这些省略恰好标记了"Demo 能跑"与"生产可用"之间的差距。
 
 ## 小结
 

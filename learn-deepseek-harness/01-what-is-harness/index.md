@@ -1,13 +1,15 @@
 ---
 layout: default
-title: Agent Harness 与一切皆插件
-description: 从无特权内核理解 DSH 的插件化设计
+title: DeepSeek Harness：一切皆插件的 Agent 运行时
+description: 从 DSH 的产品定位和无特权内核理解它的设计起点
 eyebrow: DeepSeek Harness / 01
 ---
 
-# Agent Harness 与一切皆插件
+# DeepSeek Harness：一切皆插件的 Agent 运行时
 
-做一个“帮我改代码”的 AI 助手并不只是接一次模型 API。它要读文件、运行命令、循环调用工具、保存会话、允许用户中途干预，还要把流式过程交给 Web、CLI 或其他客户端。Harness 就是把模型能力装配成这些产品行为的运行时。
+DeepSeek Harness（DSH）是 DeepSeek 于 2026 年 8 月开源的 AI Agent 运行时框架。它不是一个 Prompt 模板或工具调用库，而是一个完整的产品级 Harness——负责把模型能力装配成可恢复、可控制、可审计的产品行为。开源后 GitHub 星数迅速突破 178k，说明社区对”模型之外的运行时工程”有强烈需求。
+
+DSH 要解决的不是”如何调一次 API”，而是：如何让 Agent 连续运行几十轮，允许用户中途改方向，能从崩溃中恢复，在执行危险动作前停下来，并且能解释每一个副作用是怎样发生的。
 
 ## DSH 最重要的判断：不存在特权内核
 

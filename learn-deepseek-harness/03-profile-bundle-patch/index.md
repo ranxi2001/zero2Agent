@@ -59,6 +59,19 @@ Bundle 解决复用和分发，Profile 解决产品形态，Patch 解决环境�
 
 因此评审一个 Seam 时，要沿依赖链追问：定义是否稳定，提供方是否完整，消费者是否都经过它，错误与取消语义是否一致。三者缺一，替换就只存在于配置表面。
 
+## 官方预置：四种 Agent Preset
+
+Profile 组合层最直观的产物是四种预置模式，每种是一份 `apps/cli/config/agent-presets/` 下的 YAML 配方：
+
+| 模式 | 预置名 | 能力范围 | 适合场景 |
+| --- | --- | --- | --- |
+| Standard | `standard` | 文件编辑、Shell、检索、Skills、规划 | 日常 Coding Agent |
+| PTC | `code` | TypeScript 程序组合，多步操作 | 需要精确多步流程编排 |
+| Minimal | `minimal` | 仅 bash + str_replace_editor | 基线测试、能力隔离实验 |
+| Creative | `cordis` | 运行时检查、插件实验 | 开发者探索 Cordis 机制 |
+
+四种模式说明一个关键事实：产品差异不在代码分支，而在 Profile 组合。Standard 装了搜索、规划和完整工具集；Minimal 只保留两个工具，其余能力通过不装对应插件来"关闭"。这比在代码里 `if (mode === 'minimal')` 更符合可替换设计：需要新模式时，写一份新 YAML 即可。
+
 ## 热更新改变的是依赖分支
 
 Patch 变化后，理想行为不是重启全部系统，而是找到受影响条目，卸载旧 Fiber，再让依赖解析器重新激活相关分支。Cordis 的可逆 Effect 使这件事可行；Profile 的确定顺序则使重组结果可预测。
