@@ -144,7 +144,7 @@ modules:
   - title: "DeepSeek Harness"
     slug: "learn-deepseek-harness"
     articles:
-      - title: "Agent Harness 与一切皆插件"
+      - title: "DeepSeek Harness：一切皆插件的 Agent 运行时"
         slug: "01-what-is-harness"
       - title: "声明式与命令式：Cordis 的五个核心概念"
         slug: "02-cordis-plugin-kernel"
