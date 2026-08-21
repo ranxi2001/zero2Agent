@@ -8,7 +8,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/ranxi2001/zero2Agent?style=social)](https://github.com/ranxi2001/zero2Agent)
 [![Site](https://img.shields.io/badge/Site-onefly.top%2FzeroAgent-brightgreen)](https://onefly.top/zero2Agent)
 
-[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [训练实战](https://onefly.top/zero2Agent/learn-agent-training/) · [应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) · [Final Project](https://onefly.top/zero2Agent/final-project/)
+[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [训练实战](https://onefly.top/zero2Agent/learn-agent-training/) · [应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) · [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) · [Final Project](https://onefly.top/zero2Agent/final-project/)
 
 </div>
 
@@ -39,10 +39,11 @@
 | [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) | 13 篇 | ✅ 完成 | AgentScope · Mastra · Semantic Kernel · Eino · DeerFlow · LangChain · Google ADK · AutoGen · Vercel AI SDK 等 |
 | [Agent 训练实战](https://onefly.top/zero2Agent/learn-agent-training/) | 7 篇 | ✅ 完成 | SFT、RL、GRPO/PPO、数据配比、仿真沙箱、评估回流与部署 |
 | [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 4 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流与 Auto Harness 工程 |
+| [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) | 12 篇 | ✅ 完成 | 以官方 `dsh-v0.1.0-rc.8` 为基线，拆解 Cordis、Session Log、Agent Loop、工具、安全与 Subagent |
 | [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
 | [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
 
-> **当前进度：100 篇文章，9 个完整模块，1 个模块持续更新**
+> **当前进度：112 篇文章，10 个完整模块，1 个模块持续更新**
 
 ---
 
@@ -147,6 +148,12 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 | 各公司偏好 | 按公司统计高频考点与面试风格 |
 | Agent 概念考察 | Harness Engineering、Context Engineering、MCP/Skills 前沿范式 |
 
+### DeepSeek Harness
+
+这个模块以讲解为主，把 DeepSeek Harness 视为一个可组合的 Agent Runtime，而不是一套更长的 Prompt。文章从 Cordis 插件内核和 Profile 组装开始，沿着 Session Log、Agent Loop、Inbox 控制和 Tool Pipeline 展开，再解释 Code Mode、Context Compaction、Approval、Sandbox、Subagent 与不同运行面之间的边界。
+
+官方 API 说明固定参考 `dsh-v0.1.0-rc.8`；社区教程、电子书、白皮书和 NanoCordis 用于补充原理与教学实现。社区资料基于较早的 `rc.6` 时，README 不把它当作当前 API 规范，具体来源和许可证见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
 ### Final Project：OfferPilot
 
 上传面试录音或文字稿，自动诊断回答质量，输出结构化改进建议。纯手写 Harness 10 层架构，不依赖 LangChain / LangGraph。
@@ -206,6 +213,7 @@ zero2Agent/
 ├── learn-agent-survey/     # 框架调研（13 篇）
 ├── learn-agent-training/   # Agent 训练实战（7 篇）
 ├── learn-agent-practice/   # Agent 应用实战（4 篇，持续更新）
+├── learn-deepseek-harness/ # DeepSeek Harness 运行时拆解（12 篇）
 ├── learn-agent-interview/  # 大厂面试题拆解（15 篇）
 └── final-project/          # OfferPilot 面试诊断 Agent 实战（12 篇）
 ```
@@ -239,6 +247,8 @@ bundle exec jekyll serve
 - **[pi-mcp/pi-mono](https://github.com/pi-mcp/pi-mono)** — 生产级 Coding Agent 的参考实现
 - **[SandeepMuhal88/LangGraph_BASIC_TO_Advance](https://github.com/SandeepMuhal88/LangGraph_BASIC_TO_Advance)** — LangGraph 模块的实战案例参考
 - **[ranxi2001/OfferPilot](https://github.com/ranxi2001/OfferPilot)** — Final Project 配套代码仓库，手写 Harness 10 层面试诊断 Agent
+- **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.8)** — DeepSeek Harness 模块的官方 API、架构和子系统基线
+- **[libukai/awesome-deepseek-harness](https://github.com/libukai/awesome-deepseek-harness)** — 教程、电子书、白皮书、交互式专题和 NanoCordis 等社区资料索引
 
 ---
 
