@@ -20,7 +20,7 @@
 
 - 覆盖 **15 大考察维度**、**500+ 高频面试题**
 - 蚂蚁、阿里、字节、腾讯、携程、百度等大厂真题
-- 每题只保留高手答，适合面试当天翻阅
+- 适合面试当天翻阅
 
 **下载**：[`publish-pdf/output/zero2Agent-绿皮书-Agent面试500问.pdf`](publish-pdf/output/zero2Agent-绿皮书-Agent面试500问.pdf)
 
