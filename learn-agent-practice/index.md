@@ -23,6 +23,7 @@ Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法�
 - 已经在用 AI Coding 工具，但产出质量不稳定、时好时坏 → 重点看 03
 - 想建立一套可复用的 Agent 使用方法论，而不是每次碰运气 → 重点看 03
 - 想让 Prompt、工具与工作流从失败轨迹中持续改进，同时守住评估和安全边界 → 重点看 04
+- 想用可测量的评估信号驱动 Agent 工作流改进，而不是凭感觉调 Prompt → 重点看 05
 
 ## 这部分的主线
 
@@ -50,9 +51,17 @@ Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法�
 - 从重复失败中生成可证伪的最小 Harness Diff
 - 比较新旧版本，并逐步开放 Prompt、Skill、工具和控制流的迭代
 
+**05 — Eval 驱动迭代：**
+
+- 用可测量的评估信号替代"感觉更好了"
+- Promptfoo / Braintrust / LangSmith 各自解决什么问题和代价
+- Prompt 回归测试接入 CI/CD 的最小路径
+- 何时不该依赖 Eval 自动化
+
 ## 建议阅读顺序
 
 1. [从 0 开始 Vibe Coding：用 AI Agent 发布个人主页](./01-vibe-coding-homepage/index.html)
 2. [AI Coding 面试：解题流程与交付策略](./02-ai-coding-interview/index.html)
 3. [日常开发中的 Agent 工作流：从 Context 到 Loop 的实战方法论](./03-daily-dev-workflow/index.html)
 4. [Auto Harness 实战：从失败轨迹迭代 Agent 运行骨架](./04-auto-harness/index.html)
+5. [Eval-Driven Agent Practice：用评估驱动 Agent 工作流迭代](./05-eval-driven-practice/index.html)

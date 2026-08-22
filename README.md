@@ -8,7 +8,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/ranxi2001/zero2Agent?style=social)](https://github.com/ranxi2001/zero2Agent)
 [![Site](https://img.shields.io/badge/Site-onefly.top%2FzeroAgent-brightgreen)](https://onefly.top/zero2Agent)
 
-[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) · [训练实战](https://onefly.top/zero2Agent/learn-agent-training/) · [应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) · [Final Project](https://onefly.top/zero2Agent/final-project/)
+[在线阅读](https://onefly.top/zero2Agent) · [Agent Basic](https://onefly.top/zero2Agent/learn-agent-basic/) · [LangGraph](https://onefly.top/zero2Agent/learn-langgraph/) · [SDK 框架](https://onefly.top/zero2Agent/learn-sdk-frameworks/) · [框架调研](https://onefly.top/zero2Agent/learn-agent-survey/) · [OpenClaw](https://onefly.top/zero2Agent/learn-openclaw/) · [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) · [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) · [Pi Framework](https://onefly.top/zero2Agent/learn-pi/) · [Codex CLI](https://onefly.top/zero2Agent/learn-codex/) · [训练实战](https://onefly.top/zero2Agent/learn-agent-training/) · [应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) · [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) · [Final Project](https://onefly.top/zero2Agent/final-project/)
 
 </div>
 
@@ -54,11 +54,13 @@
 | [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) | 12 篇 | ✅ 完成 | 12 节课手写 Coding Agent：Loop → Tools → Subagent → Teams → Worktree 隔离 |
 | [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) | 13 篇 | ✅ 完成 | 从设计理念拆解可拼装的 Agent Runtime：插件、接缝、事实源、控制平面、安全与自进化边界 |
 | [Agent 训练实战](https://onefly.top/zero2Agent/learn-agent-training/) | 7 篇 | ✅ 完成 | SFT、RL、GRPO/PPO、数据配比、仿真沙箱、评估回流与部署 |
-| [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 4 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流与 Auto Harness 工程 |
+| [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 5 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流、Auto Harness 工程与 Eval-Driven 实践 |
+| [Pi Framework](https://onefly.top/zero2Agent/learn-pi/) | 7 篇 | ✅ 完成 | 最小内核 Agent 框架：四包架构、Provider 适配、扩展体系、MCP 适配器、安全模型与生态 |
+| [Codex CLI](https://onefly.top/zero2Agent/learn-codex/) | 7 篇 | ✅ 完成 | OpenAI 终端 Agent：Rust 双层架构、TOML 配置、平台原生沙箱、MCP 集成、SDK 与横向对比 |
 | [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
 | [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
 
-> **当前进度：113 篇文章，10 个完整模块，1 个模块持续更新**
+> **当前进度：134 篇文章，12 个完整模块，1 个模块持续更新**
 
 ---
 
@@ -228,7 +230,9 @@ zero2Agent/
 ├── learn-claude-code/      # Claude Code 课程（12 篇）
 ├── learn-deepseek-harness/ # DeepSeek Harness 运行时拆解（13 篇）
 ├── learn-agent-training/   # Agent 训练实战（7 篇）
-├── learn-agent-practice/   # Agent 应用实战（4 篇，持续更新）
+├── learn-agent-practice/   # Agent 应用实战（5 篇，持续更新）
+├── learn-pi/               # Pi Agent Framework（7 篇）
+├── learn-codex/            # OpenAI Codex CLI（7 篇）
 ├── learn-agent-interview/  # 大厂面试题拆解（15 篇）
 └── final-project/          # OfferPilot 面试诊断 Agent 实战（12 篇）
 ```

@@ -22,7 +22,7 @@ echo "=== 预处理面试文章为速查格式 ==="
 if [[ -f "$MODULE_PATH/index.md" ]]; then
     sed -E '
         /^---$/,/^---$/d
-    ' "$MODULE_PATH/index.md" > "$STAGING/00-preface.md"
+    ' "$MODULE_PATH/index.md" | sed 's/^# .*/# 引言 {.unnumbered}/' > "$STAGING/00-preface.md"
     echo "  00-preface.md"
 fi
 
