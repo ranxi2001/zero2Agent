@@ -1,6 +1,6 @@
 % zero2Agent 绿皮书 LaTeX 模板
 % 基于 pandoc default template 定制
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$]{ctexbook}
+\documentclass[letterpaper,$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$]{ctexbook}
 
 % ---- 页面与排版 ----
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
@@ -9,12 +9,18 @@ $if(linestretch)$\setstretch{$linestretch$}$endif$
 
 % ---- 字体 ----
 \usepackage{fontspec}
-\setmainfont{STSong}[
-    BoldFont=STHeiti,
-    ItalicFont=STKaiti,
-]
-\setsansfont{STHeiti}
-\setmonofont{Menlo}[Scale=0.85]
+\IfFontExistsTF{SimHei}{
+    \setmainfont{SimSun}[BoldFont=SimHei, ItalicFont=KaiTi]
+    \setsansfont{Microsoft YaHei}
+}{
+    \setmainfont{STSong}[BoldFont=STHeiti, ItalicFont=STKaiti]
+    \setsansfont{STHeiti}
+}
+\IfFontExistsTF{Consolas}{
+    \setmonofont{Consolas}[Scale=0.85]
+}{
+    \setmonofont{Menlo}[Scale=0.85]
+}
 
 % 特殊符号替换（避免字体缺失）
 \usepackage{amssymb}
@@ -122,6 +128,7 @@ $if(linestretch)$\setstretch{$linestretch$}$endif$
 
 % ---- 图片 ----
 \usepackage{graphicx}
+\usepackage{eso-pic}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -186,61 +193,17 @@ $if(linestretch)$\setstretch{$linestretch$}$endif$
 
 % ==== 封面 ====
 \begin{titlepage}
-\newgeometry{margin=0pt}
-
-% 背景色块
-\noindent\colorbox{greenbook}{%
-\parbox[c][0.35\paperheight]{\paperwidth}{%
-\vspace{2cm}
-\begin{center}
-{\fontsize{14pt}{18pt}\selectfont\textcolor{white!80}{$series$}}\\[1.2cm]
-{\fontsize{40pt}{48pt}\selectfont\bfseries\textcolor{white}{$title$}}\\[0.8cm]
-{\fontsize{15pt}{20pt}\selectfont\textcolor{white!90}{$subtitle$}}
-\end{center}
-\vspace{1cm}
-}}
-
-\vspace{2.5cm}
-
-% 中部信息
-\begin{center}
-{\color{greenbook}\rule{0.6\paperwidth}{0.5pt}}\\[1.5cm]
-
-{\Large\textcolor{greenbook!80}{面试速查 \textbullet{} 八股速记 \textbullet{} 直给答案}}\\[1.5cm]
-
-{\large\textcolor{greenbook!60}{覆盖 15 大考察维度 \textbullet{} 500+ 高频面试题}}\\[0.5cm]
-{\large\textcolor{greenbook!60}{蚂蚁 \textbullet{} 阿里 \textbullet{} 字节 \textbullet{} 腾讯 \textbullet{} 携程 \textbullet{} 百度}}\\[2cm]
-
-{\color{greenbook}\rule{0.6\paperwidth}{0.5pt}}\\[1.5cm]
-
-{\large \href{https://github.com/ranxi2001}{Onefly (github.com/ranxi2001)}}\\[0.4cm]
-{\normalsize\textcolor{greenbook!60}{$date$}}
-
-\vfill
-
-% 底部版权框
-\begin{mdframed}[
-    linecolor=greenbook,
-    linewidth=1pt,
-    backgroundcolor=greenbooklight,
-    innerleftmargin=20pt,
-    innerrightmargin=20pt,
-    innertopmargin=12pt,
-    innerbottommargin=12pt,
-    roundcorner=3pt,
-    userdefinedwidth=0.75\paperwidth,
-    align=center,
-]
-\centering\small
-\textbf{开源项目}\quad \href{$repo$}{github.com/ranxi2001/zero2Agent}\\[4pt]
-\textbf{授权协议}\quad $license$\\[4pt]
-\textcolor{greenbook!60}{转载请注明出处，商业使用请联系作者获取授权}
-\end{mdframed}
-
-\vspace{1.5cm}
-\end{center}
-
-\restoregeometry
+\thispagestyle{empty}
+\AddToShipoutPictureBG*{%
+    \AtPageLowerLeft{%
+        \includegraphics[
+            width=8.5in,
+            height=11in,
+            keepaspectratio=false
+        ]{$cover-image$}%
+    }%
+}
+\null
 \end{titlepage}
 
 % ==== 版权页 ====
