@@ -115,8 +115,6 @@ img {
     gap: 24px;
     padding: 16px 0;
     position: relative;
-    flex-wrap: nowrap;
-    white-space: nowrap;
 }
 
 .brand {
@@ -150,8 +148,6 @@ img {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: nowrap;
-    white-space: nowrap;
 }
 
 .nav-links a {

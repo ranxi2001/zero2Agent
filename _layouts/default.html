@@ -57,7 +57,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/docs.css?v=13">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/docs.css?v=14">
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <script>if(document.documentElement.getAttribute('data-theme')==='light'){document.getElementById('hljs-theme').href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';}</script>
@@ -109,8 +109,9 @@
                 <nav class="doc-nav">
                     {% for module in site.data.nav.modules %}
                     <a href="{{ site.baseurl }}/{{ module.slug }}/index.html"
-                       {% if page.url contains module.slug %}class="is-active"{% endif %}>
-                        {{ module.title }}
+                       {% if page.url contains module.slug %}class="is-active"{% endif %}
+                       title="{{ module.title }}">
+                        {{ module.short_title | default: module.title }}
                     </a>
                     {% endfor %}
                     <div class="nav-dropdown">
