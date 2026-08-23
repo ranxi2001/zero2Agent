@@ -114,6 +114,9 @@ img {
     justify-content: space-between;
     gap: 24px;
     padding: 16px 0;
+    position: relative;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .brand {
@@ -147,6 +150,8 @@ img {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .nav-links a {
@@ -1047,7 +1052,7 @@ img {
 
 @media (max-width: 640px) {
     .nav-inner {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
 
     .nav-toggle {
@@ -1056,11 +1061,19 @@ img {
 
     .nav-links {
         display: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        z-index: 120;
         width: 100%;
         flex-direction: column;
         align-items: stretch;
         gap: 4px;
-        padding-top: 12px;
+        padding: 12px;
+        background: rgba(10, 10, 15, 0.98);
+        border: 1px solid var(--border);
+        border-radius: 0 0 12px 12px;
+        box-shadow: var(--shadow-md);
     }
 
     .nav-links.is-open {
@@ -1286,6 +1299,12 @@ html[data-theme="light"] {
 /* Nav background */
 html[data-theme="light"] .site-nav {
     background: rgba(245, 245, 247, 0.85);
+}
+
+@media (max-width: 640px) {
+    html[data-theme="light"] .nav-links {
+        background: rgba(255, 255, 255, 0.98);
+    }
 }
 
 html[data-theme="light"] .nav-links .github-star-btn {
