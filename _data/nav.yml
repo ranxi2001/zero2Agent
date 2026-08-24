@@ -207,6 +207,8 @@ modules:
         slug: "03-daily-dev-workflow"
       - title: "Auto Harness 迭代实战"
         slug: "04-auto-harness"
+      - title: "Eval-Driven Agent Practice：用评估驱动 Agent 工作流迭代"
+        slug: "05-eval-driven-practice"
   - title: "Agent 面试通关"
     short_title: "面试通关"
     slug: "learn-agent-interview"
