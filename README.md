@@ -55,7 +55,7 @@
 | [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) | 13 篇 | ✅ 完成 | 从设计理念拆解可拼装的 Agent Runtime：插件、接缝、事实源、控制平面、安全与自进化边界 |
 | [Agent 训练实战](https://onefly.top/zero2Agent/learn-agent-training/) | 7 篇 | ✅ 完成 | SFT、RL、GRPO/PPO、数据配比、仿真沙箱、评估回流与部署 |
 | [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 5 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流、Auto Harness 工程与 Eval-Driven 实践 |
-| [Pi Coding Agent](https://onefly.top/zero2Agent/learn-pi/) | 8 篇 | ✅ 完成 | Agent Loop、Provider、Skill/Extension/Package、MCP 边界、安全与 Session Runtime |
+| [Pi Coding Agent](https://onefly.top/zero2Agent/learn-pi/) | 8 篇 | ✅ 完成 | 可验证 Agent Loop、Provider、Skill/Extension/Package、MCP、安全与树形 Session Runtime |
 | [Codex CLI](https://onefly.top/zero2Agent/learn-codex/) | 7 篇 | ✅ 完成 | OpenAI 终端 Agent：Rust 双层架构、TOML 配置、平台原生沙箱、MCP 集成、SDK 与横向对比 |
 | [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
 | [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
@@ -153,9 +153,9 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 
 ### Pi Coding Agent
 
-以 2026-08-24 核验的官方仓库 commit `a470b121` 为事实基线，从一次完整工具往返进入 Pi：区分运行事件与持久 transcript，理解 Provider 适配、Skill 的渐进披露、Extension 的运行时能力、Package 的分发职责，以及 MCP 只在协议互操作场景中的价值。最后通过 Session tree、resume/fork/clone、compaction、RPC 和 SDK，把 Pi 从终端工具还原成可恢复、可嵌入的 Agent Runtime。
+以 2026-08-24 核验的官方仓库 commit `a470b121` 为事实基线，从一次完整工具往返进入 Pi：区分运行事件、持久 transcript 与模型 Context，理解 Provider 适配、Skill 的渐进披露、Extension 的运行时能力、Package 的分发职责，以及 MCP 只在协议互操作场景中的价值。每篇都加入可复现步骤、失败实验和验收证据，最后通过 Session tree、resume/fork/clone、compaction、RPC 和 SDK，把 Pi 从终端工具还原成可恢复、可嵌入的 Agent Runtime。
 
-学习入口优先使用 [Pi 官网](https://pi.dev)、[官方文档](https://pi.dev/docs/latest/) 和 [官方源码](https://github.com/badlogic/pi-mono)；中文文档与 awesome 列表仅作辅助发现。
+学习入口优先使用 [Pi 官网](https://pi.dev)、[官方文档](https://pi.dev/docs/latest/) 和 [官方源码](https://github.com/badlogic/pi-mono)；[《动手学 Pi》](https://chasen-liao.github.io/pi-textbook-page/learn/prologue/)用于补充 checkpoint、聚焦测试和故障实验。中文文档只作辅助阅读，已归档的 awesome 列表只作历史发现。
 
 ### 面试通关
 
@@ -275,7 +275,8 @@ bundle exec jekyll serve
 - **[deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness/tree/dsh-v0.1.0-rc.8)** — DeepSeek Harness 模块的官方 API、架构和子系统基线
 - **[libukai/awesome-deepseek-harness](https://github.com/libukai/awesome-deepseek-harness)** — 教程、电子书、白皮书、交互式专题和 NanoCordis 等社区资料索引
 - **[badlogic/pi-mono@a470b121](https://github.com/badlogic/pi-mono/tree/a470b121bf683b4c2b9fc0b3a7c807de7e0cfe9c)** — Pi 模块的官方实现、文档与 API 事实基线
-- **[chasen-liao/pi-textbook-page](https://chasen-liao.github.io/pi-textbook-page/learn/prologue/)** — Pi 模块中 Agent Loop、transcript 与渐进式实操路径的教学参考
+- **[hahhforest/pi-textbook](https://github.com/hahhforest/pi-textbook)** — Chunhao Zhang 创作的《动手学 Pi》，为 Pi 模块提供 checkpoint、故障实验与验收式教学参考；用户提供的[在线镜像](https://chasen-liao.github.io/pi-textbook-page/learn/prologue/)用于阅读
+- **[nicobailon/pi-mcp-adapter](https://github.com/nicobailon/pi-mcp-adapter)** — Pi MCP 篇的 proxy/direct tools、生命周期、审批与输出边界参考实现
 
 ---
 
