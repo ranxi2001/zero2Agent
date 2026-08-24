@@ -1,60 +1,58 @@
 ---
 layout: default
-title: Pi Agent Framework
-description: 从最小内核与扩展生长理解轻量 Agent 框架的工程边界
-eyebrow: Module 11
+title: Pi Coding Agent
+description: 从真实运行闭环到扩展与会话工程
+eyebrow: Pi
 ---
 
-# Pi Agent Framework
+# Pi Coding Agent：少收藏，先跑通
 
-当一个 Coding Agent 框架说自己是"minimal terminal coding harness"，它在做一个明确的工程判断：**核心只负责循环和工具调度，其余一切通过扩展生长。**
+Pi 更新很快。真正有效的学习方法不是收集几十个链接，而是先让一次任务完整跑通，再沿着 Agent Loop、会话、Skill 和 Extension 逐层拆解。
 
-Pi（GitHub ~95k stars，earendil-works 组织维护，原 badlogic/pi-mono）是这个判断最典型的实践者。它不内置权限系统，不绑定单一模型 Provider，不提供 IDE 集成。它选择把安全交给容器化基础设施，把模型差异交给统一适配层，把产品功能交给社区扩展。这些选择有明确的收益，也有真实的代价。
+本模块以 **2026-08-24** 核验的官方仓库 commit `a470b121` 为事实基线；[《动手学 Pi》序章](https://chasen-liao.github.io/pi-textbook-page/learn/prologue/)用于组织教学路径，不替代官方文档和源码。
 
-这个模块不是 Pi 的使用教程。它关心的是：一个轻量 Agent 框架如何划定自己的工程边界，这些边界在什么条件下成立，什么条件下会崩塌。
+## 先做一个最小实操
 
----
+在临时 Git 仓库中让 Pi 完成一项小任务：读取 `README.md`、修改一处文字、运行检查，然后查看 `git diff`。观察这条轨迹：
 
-## 这个模块的主线
+```text
+用户目标 → 模型请求工具 → 工具返回事实 → 模型继续推理 → 验证结果
+```
 
-你可以把 Pi 的设计哲学概括为三个递进的判断：
-
-1. **内核应该尽可能小。** Agent Loop + 工具调度 + 扩展注册，不多不少。
-2. **安全不是框架的事。** 容器化环境提供隔离，框架内部不做权限检查。
-3. **功能通过扩展生长。** Extension、Skill、Package 三层抽象覆盖从工具到完整工作流。
-
-这三个判断互相支撑：内核小才能让扩展自由，安全外置才能让内核保持简单，扩展体系才能弥补内核不做的事。但它们也互相绑定——如果容器化假设不成立，整个体系的安全性就会失效。
+工具调用只是“模型想做什么”，工具结果才是“环境实际发生了什么”。先理解这个闭环，再谈插件数量。
 
 ## 阅读顺序
 
-1. [Pi 是什么：定位、架构与安全模型](./01-what-is-pi/index.html)
-2. [pi-ai：统一多 Provider 的适配层设计](./02-pi-ai-provider/index.html)
-3. [扩展体系：从 Extension 到 Package 的能力组合](./03-extension-system/index.html)
-4. [pi-mcp-adapter：MCP 工具的 Token 经济学](./04-mcp-adapter/index.html)
-5. [安全模型深入：容器化隔离的实际边界](./05-security-model/index.html)
-6. [社区生态：Fork、移植与跨框架兼容](./06-ecosystem/index.html)
-7. [Pi vs Claude Code vs DSH：三种 Harness 哲学的工程对比](./07-comparison/index.html)
+1. [Pi 是什么：从一次工具往返理解运行时](./01-what-is-pi/index.html)
+2. [pi-ai：统一 Provider 的边界](./02-pi-ai-provider/index.html)
+3. [Skill、Extension 与 Package 怎么选](./03-extension-system/index.html)
+4. [先写 Skill：什么时候才需要 MCP](./04-mcp-adapter/index.html)
+5. [安全边界：信任、权限与隔离](./05-security-model/index.html)
+6. [生态使用：发现不等于信任](./06-ecosystem/index.html)
+7. [Pi、Claude Code 与 DSH：按约束选 Harness](./07-comparison/index.html)
+8. [Session Runtime：恢复、分支与压缩](./08-session-runtime/index.html)
 
-## 每篇文章的作用
+## 只保留这些入口
 
-| 文章 | 核心问题 |
-| --- | --- |
-| 01 定位与架构 | Pi 是什么、不是什么，四包结构如何划分职责 |
-| 02 Provider 适配 | pi-ai 如何用一个接口统一 OpenAI/Anthropic/Google/Bedrock |
-| 03 扩展体系 | Extension、Skill、Package 三层抽象的边界和组合方式 |
-| 04 MCP 适配 | pi-mcp-adapter 把 MCP 工具 token 从 10k+ 降到 ~200 的设计 |
-| 05 安全模型 | 不内置权限在生产环境中意味着什么，容器化隔离的实际边界 |
-| 06 社区生态 | Senpi、Pix-mono、pi-mono-python、pi_agent_rust 如何继承和分叉 |
-| 07 横向对比 | 三种 Harness 哲学（最小内核 / 内置安全 / 可组合运行时）的工程 tradeoff |
+### 主要入口
 
-## 前置知识
+- [Pi 官网](https://pi.dev)：安装、更新、配置和文档总入口。
+- [Skills](https://pi.dev/docs/latest/skills)：重复流程如何写成 `SKILL.md`。
+- [Extensions](https://pi.dev/docs/latest/extensions)：新增命令、工具、事件拦截或状态栏行为。
+- [Pi Packages](https://pi.dev/docs/latest/packages)：`pi install`、包结构、作用域和更新。
+- [Package 市场](https://pi.dev/packages)：先在官方目录发现包，再审查源码。
+- [官方源码](https://github.com/badlogic/pi-mono)：API、示例和安全边界的最终依据。
 
-- 已读 [learn-agent-basic](../learn-agent-basic/index.html) 的前 10 篇，理解 Agent Loop、工具调用和上下文管理
-- 了解 [Claude Code](../learn-claude-code/index.html) 或 [DeepSeek Harness](../learn-deepseek-harness/index.html) 中至少一个框架的设计方式（用于对比）
-- 基本的 TypeScript 阅读能力（Pi 核心是 TypeScript monorepo）
+### 辅助入口
 
-## 资料边界
+- [Pi 中文文档](https://pi-doc.com)：用于快速入门；与官方 latest 冲突时以后者为准。
+- [awesome-pi-agent](https://github.com/qualisero/awesome-pi-agent)：只当社区目录，不当安全背书。
 
-文章以 [earendil-works/pi](https://github.com/earendil-works/pi) 仓库（原 badlogic/pi-mono）的架构和 README 为事实基线。社区 fork（Senpi、Pix-mono）和语言移植（pi-mono-python、pi_agent_rust）用来说明设计选择的后果，不代表官方实现。生产案例（如 BreachWeave——腾讯云黑客松冠军的渗透测试多 Agent 系统）引用时会标注其特殊上下文。
+## 一个实用判断
 
-Pi 迭代快，API 变动频繁。本模块关心可迁移的设计问题——最小内核的收益与代价、扩展体系的边界、安全模型的 tradeoff——而不是追踪最新版本号。
+- 想让 Agent 重复执行一套流程：先写 **Skill**。
+- 想改变 Pi 运行时、注册工具或拦截危险操作：写 **Extension**。
+- 想分发 Skill、Extension、模板或主题：做 **Package**。
+- 想连接已有 MCP Server，或让工具跨多个宿主复用：再接 **MCP**。
+
+收藏不能替代反馈闭环。每学一项能力，都应留下可验证产物：一份 diff、一次测试、一个会话恢复记录，或一条被正确拦截的危险操作。

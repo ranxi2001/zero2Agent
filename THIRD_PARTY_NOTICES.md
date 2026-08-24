@@ -21,6 +21,15 @@ The DeepSeek Harness module uses the following public projects as reference mate
 
 The local research checkout and downloaded releases are kept under the Git-ignored `.codex-tmp/` directory and are not published as site content.
 
+## Pi Coding Agent Module
+
+The Pi module uses the following public sources as references. Its Chinese prose, examples, comparisons, and learning structure are independently written for zero2Agent; no upstream source code or textbook prose is copied into this repository.
+
+- [badlogic/pi-mono@a470b121bf683b4c2b9fc0b3a7c807de7e0cfe9c](https://github.com/badlogic/pi-mono/tree/a470b121bf683b4c2b9fc0b3a7c807de7e0cfe9c) — official implementation and documentation baseline, verified on 2026-08-24. Refer to the upstream repository for package-specific licenses and notices.
+- [Pi official documentation](https://pi.dev/docs/latest/) — current Skills, Extensions, Packages, Sessions, security, SDK, RPC, and runtime behavior.
+- [Chasen Liao, *Build Your Own Pi*](https://chasen-liao.github.io/pi-textbook-page/learn/prologue/) — teaching reference for the observable Agent Loop, tool-call/result pairing, canonical transcript, session recovery, context rebuilding, trust gates, and evaluation checkpoints.
+- [Pi Chinese documentation](https://pi-doc.com) and [qualisero/awesome-pi-agent](https://github.com/qualisero/awesome-pi-agent) — auxiliary navigation and community discovery only; neither is treated as the API or security source of truth.
+
 ## Nowcoder Interview Recollections
 
 The interview-question updates dated 2026-08-16 were independently summarized from public interview recollections published from 2026-08-12 through 2026-08-15 in Nowcoder's [interview feed](https://www.nowcoder.com/?type=818_1). Public tutorial pages retain only generalized technical questions and company, role, or interview-round attribution.
