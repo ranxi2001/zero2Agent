@@ -1,27 +1,27 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-08-24（已逐篇人工核查前 114/246 篇——累计新增 33 道 Agent 工程题、增强 12 道已有题来源与追问；传统八股已分发 132→146，新增候选继续整理）
+> 最后更新：2026-08-25（246/246 篇已逐篇人工核查——累计新增 48 道 Agent 工程题、增强 12 道已有题来源与追问；传统八股已分发 132→176，其余候选继续按价值分批落库）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
 | 01-architecture-design | 41 |
-| 02-tool-management | 33 |
+| 02-tool-management | 36 |
 | 03-fault-tolerance | 33 |
 | 04-memory-context | 59 |
-| 05-eval-and-vision | 38 |
-| 06-multi-agent-collab | 30 |
-| 07-engineering-pitfalls | 62 |
-| 08-prompt-engineering | 27 |
+| 05-eval-and-vision | 40 |
+| 06-multi-agent-collab | 32 |
+| 07-engineering-pitfalls | 64 |
+| 08-prompt-engineering | 28 |
 | 09-rag-retrieval | 63 |
-| 10-training-and-data | 60 |
-| 11-ai-code-testing | 11 |
-| 12-business-ai-engineering | 13 |
+| 10-training-and-data | 61 |
+| 11-ai-code-testing | 12 |
+| 12-business-ai-engineering | 15 |
 | 13-project-deep-dive | 20 |
-| 15-agent-concepts | 15 |
-| **总计** | **505** |
+| 15-agent-concepts | 16 |
+| **总计** | **520** |
 
 ## 01-architecture-design（41题）
 
@@ -67,7 +67,7 @@
 40. ReAct 在工程实现中，消息和状态协议应该怎么设计？ — 字节跳动AI Agent秋招一面（新增）
 41. 设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ — 百度 Agent算法岗二面（新增）
 
-## 02-tool-management（33题）
+## 02-tool-management（36题）
 
 1. 工具描述写得再好，模型也瞎传参数怎么办？ — 腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】
 2. 工具库有上百个工具，怎么让模型快速选对？ — 腾讯终面 【淘天一面追问：100+工具召回偏差与分层路由】
@@ -102,6 +102,9 @@
 31. 一个 Agent 如何同时连接多个 MCP Server，并保证用户与会话隔离？ — 百度秋招后端一面（新增）
 32. CLI、Skill 与 sub-agent 的职责边界是什么？CLI 直接调用 LLM 和 Skill 拉起 sub-agent 应如何取舍？ — 小得盈满 AI 相关岗位一面（新增）
 33. Agent 调用启动较慢的外部工具时，如何设计异步任务和结果回调？ — 途游 Agent二面（新增）
+34. 跨平台工具授权即将过期时，Agent 如何调整调用顺序并安全续权？ — TikTok Agent工程师面试（新增）
+35. MCP 工具治理为什么需要审计？应该审计哪些证据？ — 拓竹 AI Agent算法一面（新增）
+36. Tool Result 回写模型时，消息契约应该包含哪些字段？ — Newegg一面（新增）
 
 ## 03-fault-tolerance（33题）
 
@@ -201,7 +204,7 @@
 58. 金融 Agent 执行股价提醒等定时任务时，应该携带哪些历史上下文？ — 顺极 Agent开发二面（新增）
 59. 上下文预算不足时，如何按任务依赖压缩，而不是按时间删除旧消息？ — 腾讯互娱全栈开发（AI）二面（新增）
 
-## 05-eval-and-vision（38题）
+## 05-eval-and-vision（40题）
 
 1. 如何量化评估一个上线的 Agent 好坏？除了准确率 — 腾讯终面
 2. 当前阻碍 Agent 大规模落地的最大挑战？ — 腾讯终面
@@ -241,8 +244,10 @@
 36. 独立 Verifier 和 LLM-as-Judge 应该如何分工？ — 阿里千问 C端算法实习一面（新增）
 37. 供应商不返回 usage 时，如何核算 Agent 的 Token 和成本？ — 成都晓多科技 Agent开发岗二面（新增）
 38. 什么是 AI-native 团队？如何判断团队离 AI-first 还有多远？ — HR系统一面（新增）
+39. 如何判断用户反馈真的让 Agent 变好，而不是噪声或选择偏差？ — MiniMax平台研发一面（新增）
+40. 评审 Agent 为什么要左移？应该左移到需求、设计还是编码阶段？ — 字节社招一面（新增）
 
-## 06-multi-agent-collab（30题）
+## 06-multi-agent-collab（32题）
 
 1. 多智能体怎么协作？ — 腾讯终面
 2. 多 Agent 系统里，怎么防止踢皮球或死循环？ — 腾讯终面
@@ -274,8 +279,10 @@
 28. 智能体可信通信怎么实现？ — 已有正文（补录索引）
 29. 业务模块增删时，如何治理 Multi-Agent 能力拓扑，避免 Agent 增殖和路由配置失控？ — 懂车帝 Agent 开发一面（新增）
 30. 大规模 Multi-Agent 如何做调度、背压和资源隔离？调度器崩溃或 Leader 派错任务时怎么恢复？ — 深信服 Agent 开发一面、钉学科技 FDE 实习一面（新增）
+31. 如何按租户、任务和 Agent 层级设置分层并发预算？ — 小红书 AI Agent开发一面（新增）
+32. 如何保证多 Agent 通信结果明确、可验证，而不是自然语言互相猜？ — 国际业务 Agent一面（新增）
 
-## 07-engineering-pitfalls（62题）
+## 07-engineering-pitfalls（64题）
 
 
 1. 开发 Agent 时踩过什么坑？ — 高频题
@@ -340,8 +347,10 @@
 60. Agent 的中间与最终交付物应该如何版本化、校验和交接？ — 福田 FDE线下面试（新增）
 61. 多模型供应商如何抽象统一 Provider，而不丢失差异能力？ — 成都晓多科技 Agent开发岗二面（新增）
 62. 如何记录 Agent 的非确定性边界，实现可重复的故障回放？ — 腾讯互娱全栈开发（AI）二面（新增）
+63. 如何可靠采集 Coding Agent 轨迹，避免崩溃或异步退出时丢数据？ — MiniMax平台研发一面（新增）
+64. 自动回滚阈值如何设置，避免固定阈值误杀或放过回归？ — 深信服 Agent三面（新增）
 
-## 08-prompt-engineering（27题）
+## 08-prompt-engineering（28题）
 
 1. 提示词模板是怎么构建的？ — 抖音一面
 2. Skills 的原理有没有了解过？ — 蚂蚁一面 【高德实习一面追问：Skill 的本质理解】【蚂蚁Agent开发一面追问：创建 Skill 的方式（除自然语言描述外）】【小红书AI应用开发同题：Skills了解+如何管理】【CVTE AI应用工程师一面追问：怎么理解 Skill？能解决什么问题？怎么写 MCP？】【科大讯飞一面追问：写Skills和写提示词的区别与共同点】
@@ -370,6 +379,7 @@
 25. 团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？ — 电商 Agent三面、电商库存二面（新增）
 26. 如何让 Agent 自动沉淀 Skill，同时保证生成的 Skill 准确、无害且不会无限膨胀？ — 电商库存二面（新增）
 27. OpenSpec/Spec 驱动开发与普通开发流程有什么区别？如何治理 Spec 过期？ — 浦金科一面、电商库存一面（新增）
+28. 为什么一个很短的 Skill 也可能有效？如何验证效果来自哪里？ — OPPO AI全栈一面（新增）
 
 ## 09-rag-retrieval（63题）
 
@@ -437,7 +447,7 @@
 62. 如何设计支持版本过滤和时间旅行查询的向量索引？ — 腾讯互娱全栈开发（AI）二面（新增）
 63. RAG 如何防止引用漂移和跨版本证据拼接？ — 腾讯互娱全栈开发（AI）二面（新增）
 
-## 10-training-and-data（60题）
+## 10-training-and-data（61题）
 
 1. 预训练数据清洗方法？ — 字节一面
 2. Agent 工具调用怎么训练？训练集包含什么？ — 腾讯二面
@@ -499,8 +509,9 @@
 58. LoRA 应该挂在哪些层？rank、alpha 和 dropout 如何共同影响效果？ — Shopee 大模型一面（新增）
 59. KV Cache Block 的哈希和逻辑到物理映射应该怎么设计？ — 智象未来 AI Infra一面（新增）
 60. Agent 动作空间过大导致探索低效时，如何裁剪和分层？ — 阿里千问 C端算法实习一面（新增）
+61. Agentic RL 与普通 LLM RL 的核心差异是什么？ — 腾讯大模型算法岗一二面（新增）
 
-## 11-ai-code-testing（11题）
+## 11-ai-code-testing（12题）
 
 1. 分支覆盖率是怎么统计的？代码插桩怎么实现？ — 蚂蚁一面
 2. 代码解析有没有前置分析？有效性判断？ — 蚂蚁一面
@@ -513,8 +524,9 @@
 9. AI 测试平台中，人和 AI 的职责边界如何划分？ — 快手测试开发实习一面（新增）
 10. TDD 如何接入 Coding Agent？测试门禁应该放在生成流程的哪个阶段？ — 深信服 Agent三面（新增）
 11. AI Coding 如何完成多来源账单分析应用，并证明交付结果可信？ — CVTE视源股份 AI Coding（新增）
+12. Coding Agent 如何做增量代码审查，避免大仓库全量逐行扫描？ — PDD秋招提前批一面（新增）
 
-## 12-business-ai-engineering（13题）
+## 12-business-ai-engineering（15题）
 
 1. 时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？ — 网易 AI Agent 开发实习
 2. 设计一个能根据用户行为自适应调整策略的 AI 系统，从技术架构上怎么做？ — 网易 AI Agent 开发实习
@@ -529,6 +541,8 @@
 11. 长文本内容安全审核如何区分“引用有害内容”与“表达有害立场”？ — 中国电信风控 Agent二面（新增）
 12. 如何设计会议转写 Agent 的端到端链路并评估质量？ — 字节 TikTok AI Agent开发一面（新增）
 13. 音视频 Agent 如何保护隐私并提供可验证删除？ — 字节 TikTok AI Agent开发一面（新增）
+14. 医疗 Skill 如何与 HIS 系统协同，同时满足权限和审计要求？ — 百川智能医疗大模型后训练一面（新增）
+15. 20K 流式长文本安全审核如何兼顾增量响应与全文语义？ — 中国电信风控 Agent二面（新增）
 
 ## 13-project-deep-dive（20题）
 
@@ -553,7 +567,7 @@
 19. 自我介绍 + 简单讲一下自己做过的 Agent 项目 — 视频面经汇总（新增）
 20. 你做过的不同 AI 项目之间，核心技术差异是什么？ — 已有正文（补录索引）
 
-## 15-agent-concepts（15题）
+## 15-agent-concepts（16题）
 
 1. Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ — 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】
 2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面 【阿里云暑期实习同题】【成都某中厂追问变体：加入 Loop Engineering 作为第四层】
@@ -570,6 +584,7 @@
 13. Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？ — 成都某中厂Agent产品开发实习面经（新增）
 14. Harness、Hermes 这种比较新的 Agent 设计了解吗？ — 已有正文（补录索引）
 15. LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？ — 哔哩哔哩 AI应用岗 Agent开发一面（新增）
+16. Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ — B站 Agent二面（新增）
 
 ---
 
