@@ -1,7 +1,7 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-08-26（补充百度大模型研发二面 C 端 Agent 与宣发 Agent 题；累计 590 题。传统八股 218 题）
+> 最后更新：2026-08-26（导入 Subject 前三篇面经新增题；累计 591 题。传统八股 227 题）
 
 ## 统计
 
@@ -9,7 +9,7 @@
 |------|------|
 | 01-architecture-design | 45 |
 | 02-tool-management | 37 |
-| 03-fault-tolerance | 33 |
+| 03-fault-tolerance | 34 |
 | 04-memory-context | 61 |
 | 05-eval-and-vision | 41 |
 | 06-multi-agent-collab | 34 |
@@ -23,7 +23,7 @@
 | 15-agent-concepts | 17 |
 | 16-agent-infra | 16 |
 | 17-ai-infra | 28 |
-| **总计** | **590** |
+| **总计** | **591** |
 
 ## 01-architecture-design（45题）
 
@@ -113,7 +113,7 @@
 36. Tool Result 回写模型时，消息契约应该包含哪些字段？ — Newegg一面（新增）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】
 37. 如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？ — 阿里控股 Agent Infra 暑期一面（新增）
 
-## 03-fault-tolerance（33题）
+## 03-fault-tolerance（34题）
 
 1. 调支付接口超时了，Agent 怎么处理？ — 腾讯终面
 2. Agent 错误删除了数据，系统设计上怎么防范？ — 腾讯终面
@@ -148,6 +148,7 @@
 31. LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？ — 小红书 Agent 岗一面（新增）
 32. 工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？ — 影石创新 AI Agent一面（新增）
 33. 如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？ — 中兴 AI大模型算法岗一面（新增）
+34. 为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？ — 字节中国交易与广告 Agent一面（新增）
 
 ## 04-memory-context（61题）
 

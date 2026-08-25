@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "updatedAt": "2026-08-26",
-  "questionCount": 590,
+  "questionCount": 591,
   "dimensions": {
     "01-architecture-design": 45,
     "02-tool-management": 37,
-    "03-fault-tolerance": 33,
+    "03-fault-tolerance": 34,
     "04-memory-context": 61,
     "05-eval-and-vision": 41,
     "06-multi-agent-collab": 34,
@@ -940,6 +940,14 @@
       "title": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？",
       "source": "中兴 AI大模型算法岗一面（新增）",
       "searchText": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？ 中兴 AI大模型算法岗一面（新增）"
+    },
+    {
+      "id": "03-fault-tolerance:034",
+      "dimension": "03-fault-tolerance",
+      "ordinal": 34,
+      "title": "为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？",
+      "source": "字节中国交易与广告 Agent一面（新增）",
+      "searchText": "为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？ 字节中国交易与广告 Agent一面（新增）"
     },
     {
       "id": "04-memory-context:001",
