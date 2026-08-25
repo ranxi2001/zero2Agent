@@ -16,6 +16,7 @@
  *   --home            首页推荐流模式
  *   --topic <url|id>  话题流模式；支持 subject URL、完整 URL 或 type 值 (默认 818_1)
  *   --pages <n>       最大页数；首页模式下表示连续滚动批次 (默认 1)
+ *   --limit <n>       列表去重和筛选后最多抓取前 n 篇详情 (默认不限)
  *   --since <date>    话题接口或搜索模式仅保留该日期及之后内容
  *   --until <date>    话题接口或搜索模式仅保留该日期及之前内容
  *   --keyword <kw>    按关键词筛选标题 (如 "AI"、"大模型")
@@ -58,6 +59,7 @@ function parseArgs() {
     home: false,
     topic: "",
     pages: 1,
+    limit: 0,
     since: "",
     until: "",
     keyword: "",
@@ -87,6 +89,10 @@ function parseArgs() {
         break;
       case "--pages":
         opts.pages = Number(nextValue(i, args[i]));
+        i++;
+        break;
+      case "--limit":
+        opts.limit = Number(nextValue(i, args[i]));
         i++;
         break;
       case "--since":
@@ -123,6 +129,9 @@ function parseArgs() {
   }
   if (!Number.isInteger(opts.pages) || opts.pages < 1) {
     throw new Error("--pages 必须是大于等于 1 的整数");
+  }
+  if (!Number.isInteger(opts.limit) || opts.limit < 0) {
+    throw new Error("--limit 必须是大于等于 0 的整数");
   }
   if (!Number.isInteger(opts.port) || opts.port < 1 || opts.port > 65535) {
     throw new Error("--port 必须是 1 到 65535 之间的整数");
@@ -849,9 +858,10 @@ async function loadExistingArticles(outputDir) {
 
     const markdown = await readFile(join(outputDir, filename), "utf-8");
     const source = markdown.match(/^\*\*来源\*\*：\s*(https?:\/\/\S+)\s*$/m)?.[1];
+    const title = markdown.match(/^#\s+(.+)\s*$/m)?.[1]?.trim() || "";
     const normalizedSource = normalizeArticleUrl(source);
     if (normalizedSource && !articlesByUrl.has(normalizedSource)) {
-      articlesByUrl.set(normalizedSource, { filename, markdown });
+      articlesByUrl.set(normalizedSource, { filename, markdown, title });
     }
   }
   return articlesByUrl;
@@ -1106,6 +1116,11 @@ async function main() {
       );
     }
 
+    if (opts.limit > 0 && allArticles.length > opts.limit) {
+      allArticles = allArticles.slice(0, opts.limit);
+      console.log(`[scrape] --limit ${opts.limit}：仅保留前 ${allArticles.length} 篇`);
+    }
+
     console.log(`[scrape] 去重后共 ${allArticles.length} 篇\n`);
 
     // 输出目录
@@ -1153,6 +1168,7 @@ async function main() {
           }
           addResult({
             ...article,
+            title: existing.title || article.title,
             publishedDate: existingDate,
             reused: true,
             localSourcePath: join(existing.directory, existing.filename),

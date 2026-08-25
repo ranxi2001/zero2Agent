@@ -119,6 +119,52 @@ class ExtractAndRecallTest(unittest.TestCase):
         )
         self.assertFalse(result["isInterviewExperience"])
 
+    def test_batched_rerank_keeps_question_and_candidate_ids_scoped(self):
+        config = MODULE.CodexAPIConfig(
+            base_url="https://example.test/v1",
+            token="secret",
+            model="test-model",
+            wire_api="responses",
+            source="test",
+        )
+        candidate = lambda title, score: {
+            "title": title,
+            "dimension": "test",
+            "score": score,
+            "bm25": score,
+            "ngram": score,
+        }
+        items = [
+            ("Q1", [candidate("Q1 wrong", 0.8), candidate("Q1 same", 0.5)]),
+            ("Q2", [candidate("Q2 same", 0.5), candidate("Q2 wrong", 0.8)]),
+        ]
+        payload = {
+            "results": [
+                {
+                    "questionId": 1,
+                    "judgments": [
+                        {"candidateId": 1, "relation": "different", "confidence": 1, "reason": "x"},
+                        {"candidateId": 2, "relation": "same", "confidence": 1, "reason": "y"},
+                    ],
+                },
+                {
+                    "questionId": 2,
+                    "judgments": [
+                        {"candidateId": 1, "relation": "same", "confidence": 1, "reason": "z"},
+                        {"candidateId": 2, "relation": "different", "confidence": 1, "reason": "w"},
+                    ],
+                },
+            ]
+        }
+        original = MODULE.call_model
+        MODULE.call_model = lambda *args, **kwargs: payload
+        try:
+            reranked = MODULE.llm_rerank_batch(items, config, 1)
+        finally:
+            MODULE.call_model = original
+        self.assertEqual(reranked[0][0][0]["title"], "Q1 same")
+        self.assertEqual(reranked[1][0][0]["title"], "Q2 same")
+
 
 if __name__ == "__main__":
     unittest.main()

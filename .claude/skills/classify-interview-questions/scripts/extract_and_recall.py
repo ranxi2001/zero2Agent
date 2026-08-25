@@ -7,6 +7,7 @@ import argparse
 import concurrent.futures
 import html
 import json
+import math
 import os
 import re
 import sys
@@ -452,6 +453,13 @@ def llm_rerank(
             "reason": str(judgment.get("reason") or "").strip(),
         }
 
+    return apply_judgments(candidates, judgments), ""
+
+
+def apply_judgments(
+    candidates: list[dict[str, object]],
+    judgments: dict[int, dict[str, Any]],
+) -> list[dict[str, object]]:
     relation_weight = {"same": 1.0, "overlap": 0.65, "different": 0.05}
     reranked: list[dict[str, object]] = []
     for candidate_id, candidate in enumerate(candidates, start=1):
@@ -466,7 +474,65 @@ def llm_rerank(
             result["score"] = round(0.4 * float(result["recallScore"]) + 0.6 * semantic_score, 6)
         reranked.append(result)
     reranked.sort(key=lambda item: (-float(item["score"]), str(item["title"])))
-    return reranked, ""
+    return reranked
+
+
+def llm_rerank_batch(
+    items: list[tuple[str, list[dict[str, object]]]],
+    config: CodexAPIConfig,
+    timeout: float,
+) -> list[tuple[list[dict[str, object]], str]]:
+    blocks: list[str] = []
+    for question_id, (question, candidates) in enumerate(items, start=1):
+        blocks.append(f"问题 {question_id}：{question}")
+        blocks.extend(
+            f"  候选 {question_id}.{candidate_id}：[{candidate['dimension']}] {candidate['title']}"
+            for candidate_id, candidate in enumerate(candidates, start=1)
+        )
+    system_prompt = (
+        "你是面试题语义去重评审器。分别判断每个问题下所有候选的核心考点和工程约束是否相同。"
+        "same=同一道题，overlap=部分覆盖但约束不同，different=不同题。"
+        "返回严格 JSON："
+        '{"results":[{"questionId":1,"judgments":[{"candidateId":1,'
+        '"relation":"same|overlap|different","confidence":0.0,"reason":"一句话"}]}]}。'
+        "每个问题的每个候选都必须返回，不能跨问题比较。"
+    )
+    try:
+        payload = call_model(config, system_prompt, "\n".join(blocks), timeout)
+    except RuntimeError as error:
+        return [(candidates, str(error)) for _, candidates in items]
+
+    results_by_question: dict[int, dict[int, dict[str, Any]]] = {}
+    for question_result in payload.get("results") or []:
+        try:
+            question_id = int(question_result.get("questionId"))
+        except (TypeError, ValueError):
+            continue
+        judgments: dict[int, dict[str, Any]] = {}
+        for judgment in question_result.get("judgments") or []:
+            try:
+                candidate_id = int(judgment.get("candidateId"))
+                confidence = max(0.0, min(1.0, float(judgment.get("confidence", 0.0))))
+            except (TypeError, ValueError):
+                continue
+            relation = str(judgment.get("relation") or "different").lower()
+            if relation not in {"same", "overlap", "different"}:
+                continue
+            judgments[candidate_id] = {
+                "relation": relation,
+                "confidence": confidence,
+                "reason": str(judgment.get("reason") or "").strip(),
+            }
+        results_by_question[question_id] = judgments
+
+    output: list[tuple[list[dict[str, object]], str]] = []
+    for question_id, (_, candidates) in enumerate(items, start=1):
+        judgments = results_by_question.get(question_id)
+        if not judgments:
+            output.append((candidates, f"LLM batch omitted question {question_id}"))
+            continue
+        output.append((apply_judgments(candidates, judgments), ""))
+    return output
 
 
 def clean_candidate(value: str) -> str:
@@ -590,6 +656,7 @@ def main() -> int:
     parser.add_argument("--codex-config", help="Explicit Codex JSON/TOML config path")
     parser.add_argument("--llm-model", help="Override model from Codex config")
     parser.add_argument("--workers", type=int, default=8, help="Parallel LLM calls")
+    parser.add_argument("--rerank-batch-size", type=int, default=1, help="Questions per LLM rerank call")
     parser.add_argument("--llm-timeout", type=float, default=90.0, help="Seconds per API call")
     parser.add_argument(
         "--allow-non-interview",
@@ -603,6 +670,8 @@ def main() -> int:
         parser.error("--candidate-k must be greater than or equal to --top-k")
     if arguments.workers < 1:
         parser.error("--workers must be at least 1")
+    if arguments.rerank_batch_size < 1:
+        parser.error("--rerank-batch-size must be at least 1")
 
     try:
         title, text, source_value = load_source(arguments)
@@ -657,6 +726,8 @@ def main() -> int:
             "indexedQuestionCount": len(documents),
             "topK": arguments.top_k,
             "candidateK": arguments.candidate_k,
+            "rerankBatchSize": arguments.rerank_batch_size,
+            "rerankRequestCount": math.ceil(len(questions) / arguments.rerank_batch_size),
         },
         "questions": [],
     }
@@ -669,18 +740,22 @@ def main() -> int:
     reranked_matches = local_matches
     rerank_errors = [""] * len(questions)
     if api_config and (arguments.llm or arguments.llm_rerank):
+        batches = [
+            list(zip(questions[start : start + arguments.rerank_batch_size], local_matches[start : start + arguments.rerank_batch_size]))
+            for start in range(0, len(questions), arguments.rerank_batch_size)
+        ]
         with concurrent.futures.ThreadPoolExecutor(max_workers=arguments.workers) as executor:
             futures = [
                 executor.submit(
-                    llm_rerank,
-                    question,
-                    matches,
+                    llm_rerank_batch,
+                    batch,
                     api_config,
                     arguments.llm_timeout,
                 )
-                for question, matches in zip(questions, local_matches)
+                for batch in batches
             ]
-            completed = [future.result() for future in futures]
+            completed_batches = [future.result() for future in futures]
+        completed = [item for batch in completed_batches for item in batch]
         reranked_matches = [matches for matches, _ in completed]
         rerank_errors = [error for _, error in completed]
         llm_errors.extend(error for error in rerank_errors if error)

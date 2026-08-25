@@ -44,6 +44,7 @@ node .claude/skills/scrape-nowcoder/scrape.mjs [选项]
 | `--home` | — | 抓取首页推荐流，通过连续下拉加载后续内容 |
 | `--topic <url\|id>` | `818_1` | 抓取话题流；支持 `creation/subject/<uuid>` URL、其他完整牛客 URL 或 `type` 值 |
 | `--pages <n>` | 1 | 最大页数；首页模式下为连续滚动批次 |
+| `--limit <n>` | 0 | 列表去重和关键词筛选后最多抓取前 n 篇详情；0 表示不限 |
 | `--since <date>` | (空) | 标准话题接口或搜索模式仅保留该日及之后内容；话题接口连续两页全部更早时停止 |
 | `--until <date>` | (空) | 标准话题接口或搜索模式仅保留该日及之前内容；与 `--since` 组合限定月份/区间 |
 | `--keyword <kw>` | (空) | 按关键词筛选标题和列表摘要（如“AI”、“大模型”） |
@@ -63,6 +64,9 @@ node .claude/skills/scrape-nowcoder/scrape.mjs --topic "https://www.nowcoder.com
 
 # 抓 creation/subject 无限滚动话题：初始可见页 + 9 次加载
 node .claude/skills/scrape-nowcoder/scrape.mjs --topic "https://www.nowcoder.com/creation/subject/14710425d5b74593b2ef7103d293606f" --pages 10
+
+# 只取 subject 首屏前 3 篇做流水线冒烟测试
+node .claude/skills/scrape-nowcoder/scrape.mjs --topic "https://www.nowcoder.com/creation/subject/14710425d5b74593b2ef7103d293606f" --pages 1 --limit 3
 
 # 首页推荐流连续滚动 3 个批次，只保留 AI 相关内容
 node .claude/skills/scrape-nowcoder/scrape.mjs --home --pages 3 --keyword "AI"

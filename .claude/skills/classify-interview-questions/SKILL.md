@@ -87,12 +87,12 @@ python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py
 # 复用 Codex 配置中的 base URL、token、model 和 wire API，并行抽题与语义重排
 python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
   --url "https://www.nowcoder.com/discuss/<id>" --llm --workers 8 \
-  --candidate-k 12 --top-k 5 --format json --out audit.json
+  --rerank-batch-size 1 --candidate-k 12 --top-k 5 --format json --out audit.json
 ```
 
 流水线只解析原帖 SSR `contentData`，不读取评论和推荐区；默认同时加载 zero2Agent 索引、相邻 zero2Leetcode 夏季八股和算法题单，输出每道题的 BM25、字符 n-gram、综合分、维度和 Top-K 标题。`high/review/low` 只是召回置信带，不是新增判定。
 
-`--llm` 默认从 Codex 配置读取连接信息：优先显式 `--codex-config` 或 `~/.codex/config.json` / `codex.json`，否则读取官方 `~/.codex/config.toml` 当前 `model_provider` 和 `auth.json`。兼容 `baseURL/base_url`、`token/apiKey`，按 `wire_api` 调用 Responses 或 Chat Completions。Token 只在内存中使用，输出仅包含配置来源、API host、模型名和 wire API。`--llm-extract`、`--llm-rerank` 可单独启用；某个并行请求失败时保留本地召回并在 `llmErrors` 中报告，不静默丢题。
+`--llm` 默认从 Codex 配置读取连接信息：优先显式 `--codex-config` 或 `~/.codex/config.json` / `codex.json`，否则读取官方 `~/.codex/config.toml` 当前 `model_provider` 和 `auth.json`。兼容 `baseURL/base_url`、`token/apiKey`，按 `wire_api` 调用 Responses 或 Chat Completions。Token 只在内存中使用，输出仅包含配置来源、API host、模型名和 wire API。默认每题一个请求并用 `--workers` 并行；限流严格或网络开销高时可增大 `--rerank-batch-size`，但必须用真实面经基准测试，批量更大不保证更快。`--llm-extract`、`--llm-rerank` 可单独启用。某个批次失败时保留本地召回并在 `llmErrors` 中报告，不静默丢题。
 
 优先运行随 Skill 提供的确定性召回工具：
 
