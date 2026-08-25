@@ -16,17 +16,18 @@
  *   --home            首页推荐流模式
  *   --topic <url|id>  话题流模式；支持完整 URL 或 type 值 (默认 818_1)
  *   --pages <n>       最大页数；首页模式下表示连续滚动批次 (默认 1)
- *   --since <date>    标准 type 话题仅抓该日期及之后内容，并保守提前停页
+ *   --since <date>    话题接口或搜索模式仅保留该日期及之后内容
+ *   --until <date>    话题接口或搜索模式仅保留该日期及之前内容
  *   --keyword <kw>    按关键词筛选标题 (如 "AI"、"大模型")
- *   --search <query>  搜索模式，按关键词在搜索页抓取
+ *   --search <query>  面经搜索模式（subType=818），按关键词翻页抓取
  *   --out <dir>       输出目录 (默认 .claude/skills/scrape-nowcoder/nowcoder-output)
  *   --port <port>     Chrome 调试端口 (默认 9222)
  *   --delay <ms>      请求间隔毫秒数 (默认 2000，避免反爬)
  */
 
 import { spawn } from "node:child_process";
-import { mkdir, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { createInterface } from "node:readline";
 import { existsSync } from "node:fs";
@@ -46,6 +47,7 @@ const CHROME_CANDIDATES = [
 ].filter(Boolean);
 const CHROME_PATH = CHROME_CANDIDATES.find(existsSync);
 const CHROME_USER_DIR = join(homedir(), ".chrome-nowcoder");
+const SEARCH_INTERVIEW_SUBTYPE = "818";
 
 // ─── 参数解析 ───────────────────────────────────────────────────────────────────
 
@@ -57,6 +59,7 @@ function parseArgs() {
     topic: "",
     pages: 1,
     since: "",
+    until: "",
     keyword: "",
     search: "",
     out: join(import.meta.dirname, "nowcoder-output"),
@@ -88,6 +91,10 @@ function parseArgs() {
         break;
       case "--since":
         opts.since = nextValue(i, args[i]);
+        i++;
+        break;
+      case "--until":
+        opts.until = nextValue(i, args[i]);
         i++;
         break;
       case "--keyword":
@@ -132,7 +139,12 @@ function resolveFeedMode(opts) {
   if (explicitModes > 1) {
     throw new Error("--home、--topic 和 --search 只能选择一种模式");
   }
-  if (opts.search) return { mode: "search", label: `搜索:\"${opts.search}\"` };
+  if (opts.search) {
+    return {
+      mode: "search",
+      label: `面经搜索:subType=${SEARCH_INTERVIEW_SUBTYPE}, query=\"${opts.search}\"`,
+    };
+  }
   if (opts.home) {
     return { mode: "home", label: "首页推荐流", url: "https://www.nowcoder.com/" };
   }
@@ -161,11 +173,11 @@ function resolveFeedMode(opts) {
   };
 }
 
-function parseSince(value) {
+function parseDateOption(value, option) {
   if (!value) return 0;
   const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!match) {
-    throw new Error(`--since 格式应为 YYYY-MM-DD，当前为 ${value}`);
+    throw new Error(`${option} 格式应为 YYYY-MM-DD，当前为 ${value}`);
   }
   const year = Number(match[1]);
   const month = Number(match[2]);
@@ -173,10 +185,10 @@ function parseSince(value) {
   const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
   const daysInMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   if (month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
-    throw new Error(`--since 不是有效日期，当前为 ${value}`);
+    throw new Error(`${option} 不是有效日期，当前为 ${value}`);
   }
   const timestamp = Date.parse(`${value}T00:00:00+08:00`);
-  if (!Number.isFinite(timestamp)) throw new Error(`无法解析 --since ${value}`);
+  if (!Number.isFinite(timestamp)) throw new Error(`无法解析 ${option} ${value}`);
   return timestamp;
 }
 
@@ -516,20 +528,46 @@ async function getSearchPageState(cdp) {
             .some((node) => node.offsetParent !== null)
         : true;
       return {
+        rootPresent: Boolean(resultRoot),
         activePage: document.querySelector("ul.pager li.active")?.textContent.trim() || "",
         fingerprint: Array.from(new Set(urls)).join("\\n"),
         loading
       };
     })()`
-  )) || { activePage: "", fingerprint: "", loading: true };
+  )) || { rootPresent: false, activePage: "", fingerprint: "", loading: true };
 }
 
 async function scrapeSearchPage(cdp, query, pageNum) {
   if (pageNum === 1) {
-    // 第一页：直接导航到搜索 URL
-    const url = `https://www.nowcoder.com/search/all?query=${encodeURIComponent(query)}&type=all&searchType=${encodeURIComponent("顶部导航栏")}`;
+    // 固定在面经分类内搜索，避免混入题库、课程等全站结果。
+    const params = new URLSearchParams({
+      query,
+      type: "all",
+      searchType: "顶部导航栏",
+      subType: SEARCH_INTERVIEW_SUBTYPE,
+    });
+    const url = `https://www.nowcoder.com/search/all?${params.toString()}`;
     await navigate(cdp, url);
-    await sleep(3000);
+    const deadline = Date.now() + 10000;
+    let stableFingerprint = "";
+    let stableRounds = 0;
+    while (Date.now() < deadline) {
+      const state = await getSearchPageState(cdp);
+      if (state.rootPresent && !state.loading) {
+        const fingerprint = state.fingerprint || "__empty__";
+        if (fingerprint === stableFingerprint) {
+          stableRounds += 1;
+        } else {
+          stableFingerprint = fingerprint;
+          stableRounds = 0;
+        }
+        if (stableRounds >= 2) break;
+      }
+      await sleep(250);
+    }
+    if (stableRounds < 2) {
+      throw new Error("搜索第一页在 10 秒内未稳定加载，请检查登录态或网络");
+    }
   } else {
     // 后续页：点击分页按钮
     const previousState = await getSearchPageState(cdp);
@@ -542,6 +580,18 @@ async function scrapeSearchPage(cdp, query, pageNum) {
         for (var i = 0; i < items.length; i++) {
           if (items[i].textContent.trim() === "${pageNum}") {
             items[i].click();
+            return true;
+          }
+        }
+        var active = Number(document.querySelector("ul.pager li.active")?.textContent.trim() || 0);
+        if (active + 1 !== ${pageNum}) return false;
+        for (var j = 0; j < items.length; j++) {
+          var text = items[j].textContent.trim();
+          var classes = items[j].className || "";
+          var title = items[j].getAttribute("title") || "";
+          if (text === "下一页" || title.includes("下一页") || /(^|\\s)next(\\s|$)/i.test(classes)) {
+            if (/disabled/i.test(classes)) return false;
+            items[j].click();
             return true;
           }
         }
@@ -599,23 +649,54 @@ async function scrapeSearchPage(cdp, query, pageNum) {
         title = title.replace(/\\s+[\\d.]+[WwKk万]?\\s*$/, "").trim();
         if (title.length > 150 || title.length < 4) continue;
 
-        // 搜索结果中进一步过滤：必须包含面试相关词
-        var interviewKeywords = ["面经", "面试", "一面", "二面", "三面", "HR面", "实习", "秋招", "春招", "暑期", "校招", "笔试"];
-        var isInterview = false;
-        for (var k = 0; k < interviewKeywords.length; k++) {
-          if (title.includes(interviewKeywords[k])) { isInterview = true; break; }
+        var row = a;
+        while (row.parentElement && row.parentElement !== resultRoot) {
+          row = row.parentElement;
         }
-        if (!isInterview) continue;
+        if (!resultRoot || row.parentElement !== resultRoot) row = null;
+        var publishedTime = '';
+        if (row) {
+          var timeNodes = row.querySelectorAll(
+            'time, [class*="publish-time"], [class*="create-time"], [class*="post-time"], [class*="date"], [class*="time"]'
+          );
+          for (var t = 0; t < timeNodes.length; t++) {
+            var node = timeNodes[t];
+            var candidates = [
+              node.getAttribute('datetime'),
+              node.getAttribute('title'),
+              node.getAttribute('data-time'),
+              node.getAttribute('data-timestamp'),
+              node.textContent
+            ];
+            for (var c = 0; c < candidates.length; c++) {
+              var value = (candidates[c] || '').trim();
+              if (/20\\d{2}[年\\-\\/.]\\d{1,2}[月\\-\\/.]\\d{1,2}|(?:今天|昨天|前天|刚刚)|\\d+\\s*(?:分钟|小时)前|\\d{1,2}[月\\-\\/.]\\d{1,2}/.test(value)) {
+                publishedTime = value;
+                break;
+              }
+            }
+            if (publishedTime) break;
+          }
+        }
 
         seen[href] = true;
-        items.push({ title: title, url: href, author: "", preview: "" });
+        items.push({ title: title, url: href, author: "", preview: "", publishedTime: publishedTime });
       }
 
       return items;
     })()`
   );
 
-  return articles || [];
+  const capturedAt = Date.now();
+  return (articles || []).map((article) => {
+    const publishedDate = extractDate(article.publishedTime, capturedAt);
+    return {
+      ...article,
+      publishedAt: publishedDate === "unknown"
+        ? 0
+        : parseDateOption(publishedDate, "搜索列表发布日期"),
+    };
+  });
 }
 
 // ─── 详情页抓取 ──────────────────────────────────────────────────────────────────
@@ -719,6 +800,58 @@ function toMarkdown(article) {
   return lines.join("\n");
 }
 
+async function loadExistingArticles(outputDir) {
+  const articlesByUrl = new Map();
+  for (const filename of await readdir(outputDir)) {
+    if (!filename.endsWith(".md") || ["index.md", "all-in-one.md", "manual-audit.md"].includes(filename)) {
+      continue;
+    }
+
+    const markdown = await readFile(join(outputDir, filename), "utf-8");
+    const source = markdown.match(/^\*\*来源\*\*：\s*(https?:\/\/\S+)\s*$/m)?.[1];
+    const normalizedSource = normalizeArticleUrl(source);
+    if (normalizedSource && !articlesByUrl.has(normalizedSource)) {
+      articlesByUrl.set(normalizedSource, { filename, markdown });
+    }
+  }
+  return articlesByUrl;
+}
+
+async function loadGlobalExistingArticles(outputDir) {
+  const directories = [resolve(outputDir)];
+  const skillEntries = await readdir(import.meta.dirname, { withFileTypes: true });
+  for (const entry of skillEntries) {
+    if (!entry.isDirectory()) continue;
+    if (entry.name !== "nowcoder-agent-excellent-full" && !entry.name.startsWith("nowcoder-output")) continue;
+    const directory = resolve(import.meta.dirname, entry.name);
+    if (!directories.includes(directory)) directories.push(directory);
+  }
+
+  const articlesByUrl = new Map();
+  for (const directory of directories) {
+    if (!existsSync(directory)) continue;
+    for (const [url, article] of await loadExistingArticles(directory)) {
+      if (!articlesByUrl.has(url)) {
+        articlesByUrl.set(url, { ...article, directory });
+      }
+    }
+  }
+  return articlesByUrl;
+}
+
+function normalizeArticleUrl(value) {
+  if (!value) return "";
+  try {
+    const url = new URL(value.trim());
+    url.search = "";
+    url.hash = "";
+    url.pathname = url.pathname.replace(/\/+$/, "");
+    return url.toString();
+  } catch {
+    return value.trim().split(/[?#]/, 1)[0].replace(/\/+$/, "");
+  }
+}
+
 function sanitizeFilename(name) {
   return name
     .replace(/[\/\\:*?"<>|\n\r]/g, "")
@@ -726,7 +859,7 @@ function sanitizeFilename(name) {
     .slice(0, 50);
 }
 
-function extractDate(timeStr) {
+function extractDate(timeStr, capturedAt = 0) {
   if (!timeStr) return "unknown";
   const m = timeStr.match(/(\d{4})[年\-\/.](\d{1,2})[月\-\/.](\d{1,2})/);
   if (m) return `${m[1]}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")}`;
@@ -735,7 +868,32 @@ function extractDate(timeStr) {
     const year = new Date().getFullYear();
     return `${year}-${m2[1].padStart(2, "0")}-${m2[2].padStart(2, "0")}`;
   }
+  if (capturedAt > 0) {
+    if (/前天/.test(timeStr)) return timestampToDate(capturedAt - 2 * 24 * 60 * 60 * 1000);
+    if (/昨天/.test(timeStr)) return timestampToDate(capturedAt - 24 * 60 * 60 * 1000);
+    const hourMatch = timeStr.match(/(\d+)\s*小时前/);
+    if (hourMatch) return timestampToDate(capturedAt - Number(hourMatch[1]) * 60 * 60 * 1000);
+    const minuteMatch = timeStr.match(/(\d+)\s*分钟前/);
+    if (minuteMatch) return timestampToDate(capturedAt - Number(minuteMatch[1]) * 60 * 1000);
+    if (/今天|刚刚/.test(timeStr)) return timestampToDate(capturedAt);
+  }
   return "unknown";
+}
+
+function extractExistingDate(existing) {
+  const filenameDate = existing.filename.match(/^(\d{4}-\d{2}-\d{2})-/)?.[1];
+  if (filenameDate) return filenameDate;
+  const metaLine = existing.markdown.match(/^>\s*(.+)$/m)?.[1] || "";
+  return extractDate(metaLine);
+}
+
+function isDateInRange(date, sinceTimestamp, untilExclusiveTimestamp) {
+  if (!sinceTimestamp && !untilExclusiveTimestamp) return true;
+  if (!date || date === "unknown") return false;
+  const timestamp = parseDateOption(date, "文章发布日期");
+  if (sinceTimestamp > 0 && timestamp < sinceTimestamp) return false;
+  if (untilExclusiveTimestamp > 0 && timestamp >= untilExclusiveTimestamp) return false;
+  return true;
 }
 
 function timestampToDate(timestamp) {
@@ -754,8 +912,16 @@ function timestampToDate(timestamp) {
 async function main() {
   const opts = parseArgs();
   const feed = resolveFeedMode(opts);
-  const requestedSinceTimestamp = parseSince(opts.since);
-  const sinceTimestamp = feed.topicApi ? requestedSinceTimestamp : 0;
+  const requestedSinceTimestamp = parseDateOption(opts.since, "--since");
+  const requestedUntilTimestamp = parseDateOption(opts.until, "--until");
+  if (requestedSinceTimestamp && requestedUntilTimestamp && requestedSinceTimestamp > requestedUntilTimestamp) {
+    throw new Error("--since 不能晚于 --until");
+  }
+  const supportsDateFilter = Boolean(feed.topicApi) || feed.mode === "search";
+  const sinceTimestamp = supportsDateFilter ? requestedSinceTimestamp : 0;
+  const untilExclusiveTimestamp = supportsDateFilter && requestedUntilTimestamp
+    ? requestedUntilTimestamp + 24 * 60 * 60 * 1000
+    : 0;
   const sinceSummary = sinceTimestamp
     ? opts.since
     : requestedSinceTimestamp
@@ -769,9 +935,9 @@ async function main() {
   }
 
   console.log(`[scrape] 牛客面经抓取 — CDP 方案`);
-  console.log(`[scrape] 配置: mode=${feed.label}, pages=${opts.pages}, keyword="${opts.keyword}", since="${opts.since}", delay=${opts.delay}ms`);
-  if (requestedSinceTimestamp && !feed.topicApi) {
-    console.log("[scrape] 提示: --since 仅对带 type=<tab>_<category> 的话题接口生效，本次忽略");
+  console.log(`[scrape] 配置: mode=${feed.label}, pages=${opts.pages}, keyword="${opts.keyword}", since="${opts.since}", until="${opts.until}", delay=${opts.delay}ms`);
+  if ((requestedSinceTimestamp || requestedUntilTimestamp) && !supportsDateFilter) {
+    console.log("[scrape] 提示: --since/--until 仅对标准话题接口和搜索模式生效，本次忽略");
   }
   console.log(`[scrape] 输出目录: ${opts.out}`);
   console.log();
@@ -805,6 +971,9 @@ async function main() {
     let allArticles = [];
     const listSeenUrls = new Set();
     let oldOnlyPageStreak = 0;
+    let pagesScanned = 0;
+    let listCandidateCount = 0;
+    let listOutOfRangeCount = 0;
 
     for (let p = 1; p <= opts.pages; p++) {
       const unit = feed.mode === "search" || feed.topicApi ? "页" : "滚动批次";
@@ -824,7 +993,11 @@ async function main() {
         console.log(`[scrape]   → 搜索结果没有第 ${p} 页，提前停止`);
         break;
       }
-      console.log(`[scrape]   → ${articles.length} 篇`);
+      pagesScanned += 1;
+      const datedSummary = feed.mode === "search"
+        ? `，列表日期可解析 ${articles.filter((article) => article.publishedAt > 0).length} 篇`
+        : "";
+      console.log(`[scrape]   → ${articles.length} 篇${datedSummary}`);
       const usesInfiniteScroll = feed.mode === "home"
         || (feed.mode === "topic" && !feed.topicApi);
       const newArticles = usesInfiniteScroll
@@ -841,9 +1014,14 @@ async function main() {
           (article) => article.publishedAt > 0 && article.publishedAt < sinceTimestamp
         );
       oldOnlyPageStreak = oldOnlyPage ? oldOnlyPageStreak + 1 : 0;
-      const pageArticles = sinceTimestamp > 0
-        ? newArticles.filter((article) => !article.publishedAt || article.publishedAt >= sinceTimestamp)
-        : newArticles;
+      const pageArticles = newArticles.filter((article) => {
+        if (!article.publishedAt) return true;
+        if (sinceTimestamp > 0 && article.publishedAt < sinceTimestamp) return false;
+        if (untilExclusiveTimestamp > 0 && article.publishedAt >= untilExclusiveTimestamp) return false;
+        return true;
+      });
+      listCandidateCount += newArticles.length;
+      listOutOfRangeCount += newArticles.length - pageArticles.length;
       allArticles.push(...pageArticles);
       if (oldOnlyPageStreak >= 2) {
         console.log(`[scrape]   → 连续两页内容均早于 ${opts.since}，提前停止`);
@@ -866,6 +1044,8 @@ async function main() {
     // 去重
     const seen = new Set();
     allArticles = allArticles.filter((a) => {
+      a.url = normalizeArticleUrl(a.url);
+      if (!a.url) return false;
       if (seen.has(a.url)) return false;
       seen.add(a.url);
       return true;
@@ -888,69 +1068,206 @@ async function main() {
 
     // 输出目录
     await mkdir(opts.out, { recursive: true });
-
-    // 索引文件
-    const indexLines = [
-      "# 牛客面经抓取结果\n",
-      `抓取时间：${new Date().toLocaleString("zh-CN")}\n`,
-      `模式：${feed.label} | 筛选：${opts.keyword || "无"} | 起始日期：${sinceSummary} | 页数：${opts.pages}\n`,
-      "| # | 日期 | 标题 | 作者 |",
-      "|---|------|------|------|",
-    ];
-    allArticles.forEach((a, i) => {
-      const date = a.publishedAt ? timestampToDate(a.publishedAt) : "";
-      indexLines.push(`| ${i + 1} | ${date} | [${a.title}](${a.url}) | ${a.author} |`);
-    });
-    await writeFile(join(opts.out, "index.md"), indexLines.join("\n"), "utf-8");
+    const existingArticles = await loadGlobalExistingArticles(opts.out);
+    if (existingArticles.size > 0) {
+      console.log(`[scrape] 历史数据区已有 ${existingArticles.size} 个唯一来源 URL，将直接复用相同链接\n`);
+    }
 
     // 逐篇抓详情
     console.log("[scrape] === 抓取文章详情 ===");
-    const results = [];
+    const resultMarkdowns = [];
+    const resultArticles = [];
+    const resultSeenUrls = new Set();
+    let reusedCount = 0;
+    let outOfRangeCount = 0;
+    let unknownDateCount = 0;
+    let detailFailedCount = 0;
+    let canonicalDuplicateCount = 0;
+    const addResult = (resultArticle, markdown) => {
+      if (resultSeenUrls.has(resultArticle.url)) return false;
+      resultSeenUrls.add(resultArticle.url);
+      resultArticles.push(resultArticle);
+      resultMarkdowns.push(markdown);
+      return true;
+    };
     for (let i = 0; i < allArticles.length; i++) {
       const article = allArticles[i];
       console.log(
         `[scrape] [${i + 1}/${allArticles.length}] ${article.title}`
       );
-      try {
-        const detail = await scrapeArticleDetail(cdp, article.url);
-        results.push(detail);
-
-        const datePrefix = article.publishedAt
+      const existing = existingArticles.get(article.url);
+      if (existing) {
+        const verifyExistingDetail = feed.mode === "search"
+          && Boolean(sinceTimestamp || untilExclusiveTimestamp);
+        const existingDate = article.publishedAt
           ? timestampToDate(article.publishedAt)
-          : extractDate(detail.time);
+          : extractExistingDate(existing);
+        if (!verifyExistingDetail
+          && (existingDate !== "unknown" || (!sinceTimestamp && !untilExclusiveTimestamp))) {
+          if (!isDateInRange(existingDate, sinceTimestamp, untilExclusiveTimestamp)) {
+            outOfRangeCount += 1;
+            console.log(`[scrape]   跳过：发布日期 ${existingDate} 不在目标区间`);
+            continue;
+          }
+          addResult({
+            ...article,
+            publishedDate: existingDate,
+            reused: true,
+            localSourcePath: join(existing.directory, existing.filename),
+          }, existing.markdown);
+          reusedCount += 1;
+          console.log(`[scrape]   ♻️ 已存在同一来源，复用 ${join(existing.directory, existing.filename)}`);
+          continue;
+        }
+        console.log("[scrape]   搜索日期模式重新打开详情，补验历史文件发布日期");
+      }
+
+      try {
+        const capturedAt = Date.now();
+        const detail = await scrapeArticleDetail(cdp, article.url);
+        const publishedDate = feed.mode !== "search" && article.publishedAt
+          ? timestampToDate(article.publishedAt)
+          : extractDate(detail.time, capturedAt);
+        if (publishedDate === "unknown") {
+          unknownDateCount += 1;
+          if (sinceTimestamp || untilExclusiveTimestamp) {
+            console.log(`[scrape]   跳过：无法从详情时间“${detail.time || "(空)"}”解析发布日期`);
+            if (i < allArticles.length - 1) await sleep(opts.delay);
+            continue;
+          }
+          console.log(`[scrape]   提示：发布日期无法解析，按 unknown 保存`);
+        }
+        if (!isDateInRange(publishedDate, sinceTimestamp, untilExclusiveTimestamp)) {
+          outOfRangeCount += 1;
+          console.log(`[scrape]   跳过：发布日期 ${publishedDate} 不在目标区间`);
+          if (i < allArticles.length - 1) await sleep(opts.delay);
+          continue;
+        }
+        const canonicalUrl = normalizeArticleUrl(detail.url) || article.url;
+        if (resultSeenUrls.has(canonicalUrl)) {
+          canonicalDuplicateCount += 1;
+          console.log(`[scrape]   跳过：重定向后的来源 URL 已处理 ${canonicalUrl}`);
+          if (i < allArticles.length - 1) await sleep(opts.delay);
+          continue;
+        }
+
+        if (existing) {
+          addResult({
+            ...article,
+            url: canonicalUrl,
+            title: detail.title || article.title,
+            author: detail.author || article.author,
+            publishedDate,
+            reused: true,
+            localSourcePath: join(existing.directory, existing.filename),
+          }, existing.markdown);
+          reusedCount += 1;
+          console.log(`[scrape]   ♻️ 日期补验通过，复用 ${join(existing.directory, existing.filename)}`);
+          if (i < allArticles.length - 1) await sleep(opts.delay);
+          continue;
+        }
+
+        const normalizedDetail = {
+          ...detail,
+          url: canonicalUrl,
+        };
+        const markdown = toMarkdown(normalizedDetail);
+
+        const datePrefix = publishedDate;
         let filename = `${datePrefix}-${sanitizeFilename(detail.title)}.md`;
         if (existsSync(join(opts.out, filename))) {
           const id = article.url.split("/").filter(Boolean).pop().slice(0, 8);
           filename = `${datePrefix}-${sanitizeFilename(detail.title)}-${id}.md`;
         }
-        await writeFile(join(opts.out, filename), toMarkdown(detail), "utf-8");
+        await writeFile(join(opts.out, filename), markdown, "utf-8");
+        const savedArticle = {
+          filename,
+          markdown,
+          directory: resolve(opts.out),
+        };
+        existingArticles.set(article.url, savedArticle);
+        existingArticles.set(canonicalUrl, savedArticle);
+        addResult({
+          ...article,
+          url: canonicalUrl,
+          title: detail.title || article.title,
+          author: detail.author || article.author,
+          publishedDate,
+          reused: false,
+          localSourcePath: join(resolve(opts.out), filename),
+        }, markdown);
         console.log(`[scrape]   ✅ ${detail.content.length} 字`);
       } catch (err) {
         console.error(`[scrape]   ❌ ${err.message}`);
-        results.push({
-          ...article,
-          content: `(抓取失败: ${err.message})`,
-          tags: [],
-        });
+        detailFailedCount += 1;
+        console.log("[scrape]   跳过：详情失败，未写入 manifest 或合集");
       }
 
       if (i < allArticles.length - 1) await sleep(opts.delay);
     }
 
-    // 合并文件
-    const allMd = results.map((r, i) =>
-      toMarkdown({ ...r, title: r.title || allArticles[i].title })
+    // 搜索列表没有可靠日期，必须等逐篇详情过滤完成后再生成索引。
+    const indexLines = [
+      "# 牛客面经抓取结果\n",
+      `抓取时间：${new Date().toLocaleString("zh-CN")}\n`,
+      `模式：${feed.label} | 筛选：${opts.keyword || "无"} | 起始日期：${sinceSummary} | 结束日期：${opts.until || "无"} | 页数：${opts.pages}\n`,
+      "| # | 日期 | 标题 | 作者 |",
+      "|---|------|------|------|",
+    ];
+    resultArticles.forEach((article, index) => {
+      indexLines.push(
+        `| ${index + 1} | ${article.publishedDate || ""} | [${article.title}](${article.url}) | ${article.author || ""} |`
+      );
+    });
+    await writeFile(join(opts.out, "index.md"), indexLines.join("\n"), "utf-8");
+
+    const manifest = {
+      generatedAt: new Date().toISOString(),
+      mode: feed.label,
+      query: opts.search || "",
+      since: opts.since || null,
+      until: opts.until || null,
+      requestedPages: opts.pages,
+      scannedPages: pagesScanned,
+      stats: {
+        listCandidates: listCandidateCount,
+        listOutOfRange: listOutOfRangeCount,
+        detailCandidates: allArticles.length,
+        accepted: resultArticles.length,
+        reused: reusedCount,
+        outOfRange: outOfRangeCount,
+        unknownDate: unknownDateCount,
+        detailFailed: detailFailedCount,
+        canonicalDuplicates: canonicalDuplicateCount,
+      },
+      articles: resultArticles.map((article) => ({
+        title: article.title,
+        author: article.author || "",
+        publishedDate: article.publishedDate,
+        url: article.url,
+        reused: Boolean(article.reused),
+        localSourcePath: article.localSourcePath || "",
+      })),
+    };
+    await writeFile(
+      join(opts.out, "manifest.json"),
+      `${JSON.stringify(manifest, null, 2)}\n`,
+      "utf-8"
     );
+
+    // 合并文件
     await writeFile(
       join(opts.out, "all-in-one.md"),
-      allMd.join("\n\n---\n\n"),
+      resultMarkdowns.join("\n\n---\n\n"),
       "utf-8"
     );
 
     console.log(`\n[scrape] ════════════════════════════════════════`);
-    console.log(`[scrape] ✅ 完成！共 ${results.length} 篇面经`);
+    console.log(`[scrape] ✅ 完成！共 ${resultMarkdowns.length} 篇面经（复用 ${reusedCount} 篇）`);
+    console.log(`[scrape] 排除: 列表区间外 ${listOutOfRangeCount}，详情区间外 ${outOfRangeCount}，日期未知 ${unknownDateCount}，详情失败 ${detailFailedCount}，规范 URL 重复 ${canonicalDuplicateCount}`);
     console.log(`[scrape] 📂 ${opts.out}`);
     console.log(`[scrape]    index.md       — 目录`);
+    console.log(`[scrape]    manifest.json  — 本轮逐篇来源清单`);
     console.log(`[scrape]    all-in-one.md  — 合并版`);
     console.log(`[scrape]    YYYY-MM-DD-xx.md — 单篇（按发布日期命名）`);
     console.log(`[scrape] ════════════════════════════════════════\n`);
