@@ -33,10 +33,10 @@ class RecallSimilarQuestionsTest(unittest.TestCase):
         self.assertIn("Cookie、Session 和 JWT 有什么区别？JWT 的结构和验签流程是什么？", titles)
         self.assertGreater(len(documents), len(self.documents))
 
-    def test_machine_agent_index_has_591_questions(self):
+    def test_machine_agent_index_has_592_questions(self):
         json_index = Path(__file__).resolve().parents[1] / "question-index.json"
         documents = MODULE.parse_index(json_index)
-        self.assertEqual(len(documents), 591)
+        self.assertEqual(len(documents), 592)
 
     def test_exact_question_is_top_match(self):
         query = "一次 Agent 请求的完整执行链路是什么？"
@@ -101,6 +101,15 @@ class RecallSimilarQuestionsTest(unittest.TestCase):
         self.assertEqual(
             matches[0]["title"],
             "Cookie、Session 和 JWT 有什么区别？JWT 的结构和验签流程是什么？",
+        )
+
+    def test_os_memory_management_semantic_alias(self):
+        documents = MODULE.parse_indexes(MODULE.default_index_paths())
+        query = "操作系统是怎么进行内存管理的？为什么虚拟内存和物理内存要分开？"
+        matches = MODULE.recall(query, documents, 5)
+        self.assertEqual(
+            matches[0]["title"],
+            "操作系统如何管理内存？为什么要把虚拟内存与物理内存分开？",
         )
 
 

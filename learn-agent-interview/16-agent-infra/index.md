@@ -322,6 +322,24 @@ Infra 不会直接提高基础模型智力，但会扩大模型可可靠利用�
 
 ---
 
+## Q：Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？
+
+> 来源：字节 AML / 火山方舟 AI Infra 一面（2026-08-26）
+
+**新手答**：“让 Kubernetes 重启 Pod，再从 Checkpoint 继续执行。”
+
+**高手答**：
+
+先把 Sandbox 执行建模成带 `execution_id`、attempt 和 lease 的状态机：`PENDING → DISPATCHED → RUNNING → SUCCEEDED/FAILED/UNKNOWN`。调度前持久化执行意图，Sandbox 启动后上报心跳，并持续外传 stdout、错误、资源指标和 Artifact；Runtime 设置启动、空闲、单工具和全局 Deadline，不能等 HTTP 连接自然超时才发现崩溃。
+
+Sandbox 退出时区分正常非零码、OOM、硬超时、节点丢失和控制面失联。只读或幂等动作可在新的一次性环境中重试；可能已产生外部副作用但结果未提交时标记 `UNKNOWN`，先按幂等键查询或对账，不能盲目重放。恢复使用不可变镜像、输入 Artifact 和最近 Checkpoint，不复用可能残留进程、文件或凭据的脏环境。
+
+Kubernetes 只负责重建计算实例，Agent Runtime 才负责业务状态恢复。控制面还要回收孤儿 Pod、过期 lease、临时卷和短期凭据；在途取消必须传播到 Sandbox，终止后拒绝过期 Worker 提交结果。观测上分别统计启动失败、OOM、超时、节点故障、UNKNOWN 副作用和恢复成功率。
+
+**差距在哪**：新手把 Pod 重启等同于任务恢复，高手能处理状态提交、未知副作用、环境重建和孤儿资源回收四个故障边界。
+
+---
+
 ## Agent Infra 系统设计答题主线
 
 ```text

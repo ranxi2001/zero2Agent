@@ -165,6 +165,47 @@ class ExtractAndRecallTest(unittest.TestCase):
         self.assertEqual(reranked[0][0][0]["title"], "Q1 same")
         self.assertEqual(reranked[1][0][0]["title"], "Q2 same")
 
+    def test_incomplete_batch_falls_back_to_single_question_rerank(self):
+        config = MODULE.CodexAPIConfig(
+            base_url="https://example.test/v1",
+            token="secret",
+            model="test-model",
+            wire_api="responses",
+            source="test",
+        )
+        candidates = [
+            {"title": "wrong", "dimension": "test", "score": 0.8, "bm25": 0.8, "ngram": 0.8},
+            {"title": "same", "dimension": "test", "score": 0.5, "bm25": 0.5, "ngram": 0.5},
+        ]
+        responses = iter(
+            [
+                {
+                    "results": [
+                        {
+                            "questionId": 1,
+                            "judgments": [
+                                {"candidateId": 1, "relation": "different", "confidence": 1, "reason": "x"}
+                            ],
+                        }
+                    ]
+                },
+                {
+                    "judgments": [
+                        {"id": 1, "relation": "different", "confidence": 1, "reason": "x"},
+                        {"id": 2, "relation": "same", "confidence": 1, "reason": "y"},
+                    ]
+                },
+            ]
+        )
+        original = MODULE.call_model
+        MODULE.call_model = lambda *args, **kwargs: next(responses)
+        try:
+            result = MODULE.llm_rerank_batch([("Q", candidates)], config, 1)
+        finally:
+            MODULE.call_model = original
+        self.assertEqual(result[0][1], "")
+        self.assertEqual(result[0][0][0]["title"], "same")
+
 
 if __name__ == "__main__":
     unittest.main()

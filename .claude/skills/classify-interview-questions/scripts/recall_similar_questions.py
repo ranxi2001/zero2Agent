@@ -67,6 +67,13 @@ SEMANTIC_RULES = (
         re.compile(r"jwt.{0,24}(?:验证|验签|真实性|完整性|签名|结构)|(?:验证|验签|真实性|完整性|签名).{0,24}jwt"),
         "semantic:jwt-verification",
     ),
+    (
+        re.compile(
+            r"(?:操作系统|\bos\b).{0,12}内存管理|(?:为什么需要|为何需要).{0,6}虚拟内存|"
+            r"虚拟内存.{0,24}(?:物理内存|隔离|缺页|页面置换|swap|oom)"
+        ),
+        "semantic:os-memory-management",
+    ),
 )
 SOURCE_SEMANTIC_TAGS = frozenset({"semantic:coding-workflow", "semantic:context-skills"})
 

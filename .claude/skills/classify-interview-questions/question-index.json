@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "updatedAt": "2026-08-26",
-  "questionCount": 591,
+  "questionCount": 592,
   "dimensions": {
     "01-architecture-design": 45,
     "02-tool-management": 37,
@@ -17,7 +17,7 @@
     "12-business-ai-engineering": 17,
     "13-project-deep-dive": 21,
     "15-agent-concepts": 17,
-    "16-agent-infra": 16,
+    "16-agent-infra": 17,
     "17-ai-infra": 28
   },
   "questions": [
@@ -4524,6 +4524,14 @@
       "title": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？",
       "source": "字节 Agent 后端终面（新增）",
       "searchText": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ 字节 Agent 后端终面（新增）"
+    },
+    {
+      "id": "16-agent-infra:017",
+      "dimension": "16-agent-infra",
+      "ordinal": 17,
+      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
+      "source": "字节 AML / 火山方舟 AI Infra一面（新增）",
+      "searchText": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ 字节 AML / 火山方舟 AI Infra一面（新增）"
     },
     {
       "id": "17-ai-infra:001",

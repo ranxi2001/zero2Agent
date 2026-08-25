@@ -1,7 +1,7 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-08-26（导入 Subject 前三篇面经新增题；累计 591 题。传统八股 227 题）
+> 最后更新：2026-08-26（导入字节 AML / 火山方舟 AI Infra 面经；累计 592 题。传统八股 228 题）
 
 ## 统计
 
@@ -21,9 +21,9 @@
 | 12-business-ai-engineering | 17 |
 | 13-project-deep-dive | 21 |
 | 15-agent-concepts | 17 |
-| 16-agent-infra | 16 |
+| 16-agent-infra | 17 |
 | 17-ai-infra | 28 |
-| **总计** | **591** |
+| **总计** | **592** |
 
 ## 01-architecture-design（45题）
 
@@ -615,7 +615,7 @@
 16. Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ — B站 Agent二面（新增）
 17. 如何比较 Coding Agent、通用助手与办公 Agent？ — 百度大模型研发二面（新增）
 
-## 16-agent-infra（16题）
+## 16-agent-infra（17题）
 
 1. 如果让你设计一个 Agent Runtime，你会怎么拆？ — Agent Infra 系统设计高频题
 2. 一次 Agent 请求的完整执行链路是什么？ — Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】
@@ -633,6 +633,7 @@
 14. Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ — 美团/百度 AI Infra 面经（新增）
 15. Agent Router 应以什么运行形态存在，请求数据流如何设计？ — 字节 AI Infra 实习一面（新增）
 16. Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ — 字节 Agent 后端终面（新增）
+17. Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ — 字节 AML / 火山方舟 AI Infra一面（新增）
 
 ## 17-ai-infra（28题）
 

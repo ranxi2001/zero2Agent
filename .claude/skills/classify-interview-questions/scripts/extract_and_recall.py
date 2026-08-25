@@ -453,6 +453,9 @@ def llm_rerank(
             "reason": str(judgment.get("reason") or "").strip(),
         }
 
+    if len(judgments) != len(candidates):
+        return candidates, f"LLM returned {len(judgments)}/{len(candidates)} candidate judgments"
+
     return apply_judgments(candidates, judgments), ""
 
 
@@ -528,8 +531,15 @@ def llm_rerank_batch(
     output: list[tuple[list[dict[str, object]], str]] = []
     for question_id, (_, candidates) in enumerate(items, start=1):
         judgments = results_by_question.get(question_id)
-        if not judgments:
-            output.append((candidates, f"LLM batch omitted question {question_id}"))
+        if not judgments or len(judgments) != len(candidates):
+            fallback = llm_rerank(items[question_id - 1][0], candidates, config, timeout)
+            if fallback[1]:
+                detail = len(judgments or {})
+                output.append(
+                    (candidates, f"LLM batch returned {detail}/{len(candidates)} judgments; {fallback[1]}")
+                )
+            else:
+                output.append(fallback)
             continue
         output.append((apply_judgments(candidates, judgments), ""))
     return output
