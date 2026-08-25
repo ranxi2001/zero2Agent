@@ -16,7 +16,7 @@
 
 无论你是**校招**、**社招**还是**实习**，准备 Agent 相关岗位面试，这里的题目都能帮你建立系统性的知识框架。
 
-## 十五大考察维度 + 公司偏好速查
+## 十七大考察维度 + 公司偏好速查
 
 按能力维度分类，方便你系统性地补齐某个方向的短板：
 
@@ -37,6 +37,8 @@
 | **简历项目拷打** | 项目部署、框架选型、意图识别、工具设计、知识库构建、性能优化 | 淘宝闪购、阿里、字节 |
 | **概念考察** | Harness Engineering、Context Engineering、MCP/A2A、Vibe Coding、Skills 等前沿概念辨析 | 字节、阿里、快手、腾讯 |
 | **各公司面试偏好** | 按公司统计高频考点、面试风格分析、针对性备战策略 | 全部公司 |
+| **Agent Infra** | Runtime、Checkpoint、幂等、Sandbox、Kubernetes、调度与可观测 | 阿里、字节、平台工程团队 |
+| **AI Infra** | 分布式训练、LLM Serving、GPU 调度、模型发布与 AIOps | 阿里、字节、模型平台团队 |
 
 ## 谁适合读？
 
@@ -62,6 +64,8 @@
 13. [简历项目拷打：面试官追着你的 Agent 项目问到底](13-project-deep-dive/index.html)
 14. [各公司面试偏好：按公司备战的高频题速查](14-company-preferences/index.html)
 15. [概念考察：Harness Engineering、Context Engineering 与前沿范式](15-agent-concepts/index.html)
+16. [Agent Infra：Runtime、Sandbox 与可靠执行](16-agent-infra/index.html)
+17. [AI Infra：训练、推理与 GPU 平台工程](17-ai-infra/index.html)
 
 ## 常见问题
 

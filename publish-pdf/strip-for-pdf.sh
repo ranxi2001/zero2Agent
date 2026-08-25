@@ -68,6 +68,24 @@ content = re.sub(r'^---\n.*?\n---\n', '', content, count=1, flags=re.DOTALL)
 # 去 mermaid 代码块
 content = re.sub(r'\`\`\`mermaid\n.*?\`\`\`', '', content, flags=re.DOTALL)
 
+# XeLaTeX 模板中的正文/等宽字体不覆盖这些符号，转成稳定文本，避免 PDF 缺字方框。
+symbol_replacements = {
+    '🔴': '[Critical]',
+    '⚠️': '[警告]',
+    '⚠': '[警告]',
+    '✓': '[适用]',
+    '✗': '[不适用]',
+    '⊂': '属于',
+    '∈': '属于',
+    '²': '^2',
+    '≪': '远小于',
+    '∝': '正比于',
+    '↔': '<->',
+    '\ufe0f': '',
+}
+for source, replacement in symbol_replacements.items():
+    content = content.replace(source, replacement)
+
 # 清理多余空行（3行以上压缩为2行）
 content = re.sub(r'\n{3,}', '\n\n', content)
 

@@ -293,7 +293,7 @@ MCP Server 通过 `tools/list` 声明能力，Client 通过 `tools/call` 调用�
 
 | 维度 | MCP | A2A |
 |------|-----|-----|
-| **连接对象** | Agent ↔ 工具（Tool） | Agent ↔ Agent |
+| **连接对象** | Agent <-> 工具（Tool） | Agent <-> Agent |
 | **交互模式** | 请求-响应（调用工具，拿到结果） | 任务委托（发起任务，等待完成） |
 | **状态管理** | 无状态（每次调用独立） | 有状态（任务有生命周期：创建→执行→完成） |
 | **发现机制** | Server 声明 tools | Agent 声明 skills（能做什么任务） |
@@ -493,6 +493,34 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 
 ---
 
+## Q：LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？
+
+> 来源：哔哩哔哩 AI 应用岗 Agent 开发一面（2026-08-18）
+
+**新手答**：“LCEL 用管道符连接组件，写起来更简洁。”
+
+**高手答**：
+
+传统 Chain 往往由具体类封装固定调用流程，扩展、并行和流式行为取决于各类实现。LCEL 把 Prompt、模型、解析器、Retriever 和自定义函数统一抽象为 Runnable，通过 `|`、并行映射和分支组合声明数据流，并统一提供 `invoke/batch/stream/async`、配置传递、重试与 tracing 接口。
+
+它的价值不只是语法短，而是让组合后的链仍保留批处理、流式、异步和观测能力，便于局部替换和测试。LCEL 适合无复杂持久状态的可组合数据流；需要循环、长期状态、人工中断和 checkpoint 时，应使用 LangGraph 等状态图，不要把 LCEL 管道硬拗成工作流引擎。
+
+**差距在哪**：新手只看到运算符，高手说清统一 Runnable 协议、组合能力和与状态图的边界。
+
+---
+
+## Q：Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？
+
+> 来源：B站 Agent 二面（2026-08-19）
+
+**新手答**：“在工具调用前后运行 Hook，做日志和安全检查。”
+
+**高手答**：Hooks 可位于请求进入、上下文组装、模型调用、工具前后、状态提交和最终输出，但每个 Hook 必须有明确输入、超时、失败策略和副作用。权限、路径、参数和发布门禁由确定性 Hook 强制执行；Prompt 只提供行为指导。Hook 版本进入 trace，禁止任意插件获取全量秘密；高风险阻断需可解释、可审批和可回滚。
+
+**差距在哪**：新手把 Hook 当回调，高手把它当模型之外的策略执行点。
+
+---
+
 ## 这类题的答题模式
 
 概念考察题的核心是**独立思考 + 结构化表达**：
@@ -516,7 +544,7 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 | Harness Engineering | 用外部工程体系约束和增强 Agent | “怎么构建？”“项目里怎么体现？” |
 | Context Engineering | 精准控制上下文窗口内的信息编排 | “和 Prompt Engineering 区别？” |
 | Vibe Coding | 凭感觉用 AI 写代码，快速验证 | “和 Harness 怎么选？” |
-| Skills | 可复用的知识+指令单元，Agent 的岗位手册 | “和 MCP/Prompt 区别？””为什么需要？” |
+| Skills | 可复用的知识+指令单元，Agent 的岗位手册 | “和 MCP/Prompt 区别？”“为什么需要？” |
 | MCP | Agent 到工具的标准连接协议 | “和 Function Calling 区别？” |
 | A2A | Agent 之间的通信协议 | “和 MCP 什么关系？” |
 | Agentic RL | 用强化学习训练 Agent 行为策略 | “和 GRPO/PPO 的关系？” |
@@ -524,5 +552,6 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 
 下一篇建议继续看：
 
+- [Agent Infra：Runtime、Sandbox 与可靠执行](../16-agent-infra/index.html)
 - [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
 - [Prompt 工程与框架原理](../08-prompt-engineering/index.html)
