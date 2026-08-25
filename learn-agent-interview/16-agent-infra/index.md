@@ -43,7 +43,7 @@ Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版�
 
 ## Q：一次 Agent 请求的完整执行链路是什么？
 
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / Agent Runtime 完整管线设计高频题
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】
 
 **新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
 

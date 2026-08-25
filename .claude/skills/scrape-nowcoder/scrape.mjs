@@ -14,7 +14,7 @@
  * 选项：
  *   --login           打开浏览器让你登录牛客，cookie 保存在独立 profile 中
  *   --home            首页推荐流模式
- *   --topic <url|id>  话题流模式；支持完整 URL 或 type 值 (默认 818_1)
+ *   --topic <url|id>  话题流模式；支持 subject URL、完整 URL 或 type 值 (默认 818_1)
  *   --pages <n>       最大页数；首页模式下表示连续滚动批次 (默认 1)
  *   --since <date>    话题接口或搜索模式仅保留该日期及之后内容
  *   --until <date>    话题接口或搜索模式仅保留该日期及之前内容
@@ -157,11 +157,15 @@ function resolveFeedMode(opts) {
     }
     const type = url.searchParams.get("type") || "";
     const match = type.match(/^(\d+)_(\d+)$/);
+    const subjectMatch = url.pathname.match(/^\/creation\/subject\/([a-zA-Z0-9]+)\/?$/);
     return {
       mode: "topic",
-      label: `话题流:${url.href}`,
+      label: subjectMatch
+        ? `话题专题:subject=${subjectMatch[1]}`
+        : `话题流:${url.href}`,
       url: url.href,
       topicApi: match ? { tabId: match[1], categoryType: match[2] } : null,
+      subjectScroll: subjectMatch ? { uuid: subjectMatch[1] } : null,
     };
   }
   const match = topic.match(/^(\d+)_(\d+)$/);
@@ -465,6 +469,42 @@ async function scrapeListPage(cdp, pageNum, seenUrls, url) {
     staleRounds = grew ? 0 : staleRounds + 1;
   }
 
+  return articles;
+}
+
+async function waitForFeedGrowth(cdp, before, timeoutMs = 12000) {
+  const deadline = Date.now() + timeoutMs;
+  let current = before;
+  while (Date.now() < deadline) {
+    await sleep(400);
+    current = await getFeedState(cdp);
+    if (current.links > before.links || current.height > before.height) {
+      return true;
+    }
+  }
+  return false;
+}
+
+async function scrapeSubjectBatch(cdp, feed, pageNum, seenUrls) {
+  if (pageNum === 1) {
+    await navigate(cdp, feed.url);
+    await sleep(3000);
+  } else {
+    const before = await getFeedState(cdp);
+    await evaluate(
+      cdp,
+      `window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' })`
+    );
+    await waitForFeedGrowth(cdp, before);
+  }
+
+  const visible = await extractListArticles(cdp);
+  const articles = [];
+  for (const article of visible) {
+    if (seenUrls.has(article.url)) continue;
+    seenUrls.add(article.url);
+    articles.push(article);
+  }
   return articles;
 }
 
@@ -976,7 +1016,7 @@ async function main() {
     let listOutOfRangeCount = 0;
 
     for (let p = 1; p <= opts.pages; p++) {
-      const unit = feed.mode === "search" || feed.topicApi ? "页" : "滚动批次";
+      const unit = feed.mode === "search" || feed.topicApi ? "页" : "滚动页";
       console.log(`[scrape] 第 ${p}/${opts.pages} ${unit}...`);
       let articles;
       let lastPage = false;
@@ -986,6 +1026,8 @@ async function main() {
         const page = await scrapeTopicPage(cdp, feed, p);
         articles = page.articles;
         lastPage = p >= page.totalPage;
+      } else if (feed.subjectScroll) {
+        articles = await scrapeSubjectBatch(cdp, feed, p, listSeenUrls);
       } else {
         articles = await scrapeListPage(cdp, p, listSeenUrls, feed.url);
       }

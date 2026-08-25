@@ -46,7 +46,7 @@ eyebrow: Agent 面试通关 / 02
 
 ### Q：你们工具库有上百个工具，怎么让模型快速选对？
 
-> 来源：腾讯 Agent 岗终面
+> 来源：腾讯 Agent 岗终面【百度大模型研发二面追问：Agent 如何选择合适工具】
 
 **新手答**：“把所有工具描述发给模型让它选。”
 
@@ -1584,7 +1584,7 @@ CLI 直接调用 LLM 和 Skill 拉起 sub-agent 的取舍，要从五个维度�
 
 ## Q：Tool Result 回写模型时，消息契约应该包含哪些字段？
 
-> 来源：Newegg 一面（2026-08-22）
+> 来源：Newegg 一面（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】
 
 **新手答**：“返回 call_id 和工具执行结果。”
 

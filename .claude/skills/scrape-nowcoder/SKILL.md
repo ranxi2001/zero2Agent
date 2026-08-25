@@ -11,7 +11,7 @@ description: 基于 CDP 原生 WebSocket 抓取牛客网面经文章。当用户
 
 1. 连接 Chrome 调试端口（默认 9222）
 2. 如果端口不可达，自动启动独立 Chrome 实例（`~/.chrome-nowcoder`）
-3. 支持首页推荐流、面经话题流和面经分类搜索结果三种分页方式
+3. 支持首页推荐流、标准话题 API、`creation/subject` 无限滚动话题和面经分类搜索结果
 4. 在已登录的浏览器中操作，抓取完成后 Chrome 保持运行
 
 ## 前置条件
@@ -42,7 +42,7 @@ node .claude/skills/scrape-nowcoder/scrape.mjs [选项]
 |------|--------|------|
 | `--login` | — | 首次使用：启动 Chrome 并打开登录页 |
 | `--home` | — | 抓取首页推荐流，通过连续下拉加载后续内容 |
-| `--topic <url\|id>` | `818_1` | 抓取话题流；支持完整牛客 URL 或 `type` 值 |
+| `--topic <url\|id>` | `818_1` | 抓取话题流；支持 `creation/subject/<uuid>` URL、其他完整牛客 URL 或 `type` 值 |
 | `--pages <n>` | 1 | 最大页数；首页模式下为连续滚动批次 |
 | `--since <date>` | (空) | 标准话题接口或搜索模式仅保留该日及之后内容；话题接口连续两页全部更早时停止 |
 | `--until <date>` | (空) | 标准话题接口或搜索模式仅保留该日及之前内容；与 `--since` 组合限定月份/区间 |
@@ -60,6 +60,9 @@ node .claude/skills/scrape-nowcoder/scrape.mjs
 
 # 从面经话题抓 10 页，连续两页全部早于指定日期时自动停止
 node .claude/skills/scrape-nowcoder/scrape.mjs --topic "https://www.nowcoder.com/?type=818_1" --pages 10 --since "2026-08-12"
+
+# 抓 creation/subject 无限滚动话题：初始可见页 + 9 次加载
+node .claude/skills/scrape-nowcoder/scrape.mjs --topic "https://www.nowcoder.com/creation/subject/14710425d5b74593b2ef7103d293606f" --pages 10
 
 # 首页推荐流连续滚动 3 个批次，只保留 AI 相关内容
 node .claude/skills/scrape-nowcoder/scrape.mjs --home --pages 3 --keyword "AI"
@@ -79,17 +82,17 @@ node .claude/skills/scrape-nowcoder/scrape.mjs --port 9333
 
 ### 三种模式对比
 
-| | 首页模式（`--home`） | 话题模式（默认 / `--topic`） | 搜索模式（`--search`） |
-|---|---|---|---|
-| 数据源 | 牛客首页推荐流 | 牛客话题流；默认 `type=818_1` 面经 | 牛客搜索页 `/search/all?type=all&searchType=顶部导航栏&subType=818` |
-| 筛选方式 | `--keyword` 按标题和摘要过滤 | 全量面经，可叠加 `--keyword`；标准 `type` 话题可用 `--since` | `query` 在面经分类内检索；可用 `--since/--until` 按详情发布日期过滤 |
-| 翻页方式 | 连续下拉并等待懒加载 | `home/tab/content?pageNo=N`；非标准话题 URL 回退连续下拉 | 客户端点击分页按钮并确认活动页码和结果 URL 已切换 |
-| 适用场景 | 发现个性化推荐内容 | 按时间遍历面经，适合增量抓取 | 精准搜索公司、岗位或主题 |
+| | 首页模式（`--home`） | 标准话题（`?type=`） | Subject 话题（`creation/subject`） | 搜索模式（`--search`） |
+|---|---|---|---|---|
+| 数据源 | 牛客首页推荐流 | 牛客标准话题 API | 牛客专题无限滚动页 | 牛客搜索页 `/search/all?type=all&searchType=顶部导航栏&subType=818` |
+| 筛选方式 | `--keyword` 按标题和摘要过滤 | 可叠加 `--keyword` 和日期区间 | 可叠加 `--keyword`；日期区间不适用 | `query` 在面经分类内检索；可用日期区间 |
+| 翻页方式 | 每批多次连续下拉 | `home/tab/content?pageNo=N` | 初始可见页后每页触发一次加载，等待 URL/高度增长 | 客户端点击分页并确认页码与结果 URL |
+| 适用场景 | 发现个性化推荐内容 | 按时间遍历面经 | 完整扫描指定专题 | 精准搜索公司、岗位或主题 |
 
 三种模式都会按文章 URL 跨页去重；页码不存在、切换失败或某一页没有新增结果时会提前停止，避免重复抓取旧页。
 搜索模式先收集每页 URL，再逐篇打开详情解析可验证的发布日期；“今天”“昨天”等相对时间仅在实时详情读取时按 Asia/Shanghai 转换为绝对日期，历史文件中的相对时间不会按重跑日期重新解释。日期区间外或无法验证发布日期的文章不会进入本轮索引、manifest 或合集。索引在详情过滤完成后生成，因此不会留下列表阶段的越界条目。
 写盘前还会扫描整个 Skill 数据区内 `nowcoder-output*` 和 `nowcoder-agent-excellent-full` 的单篇 Markdown `**来源**` URL；URL 会先移除查询参数、锚点和末尾斜杠再比较。重跑命中同一来源时直接复用已有正文，也不在新目录生成单篇副本。标题相同但来源 URL 不同的帖子仍分别保留。
-非标准话题 URL 会回退为连续滚动，此时无法可靠获得发布时间，传入的 `--since/--until` 会明确标记为未应用。
+`creation/subject/<uuid>` 会进入专用滚动分页：`--pages 1` 只取初始可见结果，后续每页触发一次加载并等待 URL 数或页面高度增长；连续一页没有新增 URL 时停止。其他非标准话题 URL 仍回退为连续滚动。滚动模式无法可靠获得列表发布时间，传入的 `--since/--until` 会明确标记为未应用。
 
 ### 搜索覆盖边界
 

@@ -12,6 +12,7 @@ description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/
 - Agent、LLM、RAG、训练、多模态、AI Coding 与 AI 工程题：当前 `zero2Agent/learn-agent-interview/`。
 - Java/Go/Python、JVM、并发、操作系统、网络、数据库、缓存、消息队列、分布式、前端与通用工程八股：相邻 `../zero2Leetcode/_includes/interview-seasons/2026/summer.md`。
 - 算法/手撕题只进入 zero2leetcode 的算法题单，不计入传统八股总数；题干不完整时排除，不补造。
+- 机器召回使用本 Skill 的 `question-index.json`；`question-index.md` 是人工维护源。每次修改 Markdown 后必须重建 JSON 并运行 stale check。
 - 两个仓库分别检查 worktree、计数、提交和推送。不得把一个仓库的 commit 混入另一个。
 
 ## 维度分类表
@@ -44,6 +45,8 @@ description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/
 
 先读取两个仓库现有题目索引/标题。Agent 侧以本 Skill 的 `question-index.md` 为快速索引；后端侧读取 summer include 的编号标题。
 
+只有一手面经进入问题提取：必须有真实面试过程或明确公司/轮次/面试官问题证据。招聘、内推、Offer 选择、求助、学习路线、教程、题库汇总和付费推广即使包含问句也整篇拒绝，并在 ledger 记录原因。
+
 ### 2. 并行逐篇提取
 
 把连续且不重叠的文章区间分给多个子 Agent。每个子 Agent必须完整读取自己范围内的每篇正文，并逐篇返回：
@@ -69,6 +72,40 @@ Agent 新增候选
 ### 3. 相似度召回
 
 在逐篇语义提取之后，使用规范化文本、字符 n-gram、BM25 或 Embedding 与现有题标题计算相似度，给每个候选召回 Top-K 相近题。
+
+对于单篇牛客面经或本地原文，优先运行完整流水线，一次完成正文解析、问题提取和召回：
+
+```bash
+# 牛客 discuss 页面
+python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
+  --url "https://www.nowcoder.com/discuss/<id>" --top-k 5 --format markdown
+
+# 本地 Markdown 或纯文本
+python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
+  --input article.md --top-k 5 --format json --out audit.json
+
+# 复用 Codex 配置中的 base URL、token、model 和 wire API，并行抽题与语义重排
+python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
+  --url "https://www.nowcoder.com/discuss/<id>" --llm --workers 8 \
+  --candidate-k 12 --top-k 5 --format json --out audit.json
+```
+
+流水线只解析原帖 SSR `contentData`，不读取评论和推荐区；默认同时加载 zero2Agent 索引、相邻 zero2Leetcode 夏季八股和算法题单，输出每道题的 BM25、字符 n-gram、综合分、维度和 Top-K 标题。`high/review/low` 只是召回置信带，不是新增判定。
+
+`--llm` 默认从 Codex 配置读取连接信息：优先显式 `--codex-config` 或 `~/.codex/config.json` / `codex.json`，否则读取官方 `~/.codex/config.toml` 当前 `model_provider` 和 `auth.json`。兼容 `baseURL/base_url`、`token/apiKey`，按 `wire_api` 调用 Responses 或 Chat Completions。Token 只在内存中使用，输出仅包含配置来源、API host、模型名和 wire API。`--llm-extract`、`--llm-rerank` 可单独启用；某个并行请求失败时保留本地召回并在 `llmErrors` 中报告，不静默丢题。
+
+优先运行随 Skill 提供的确定性召回工具：
+
+```bash
+python .claude/skills/classify-interview-questions/scripts/recall_similar_questions.py \
+  --input candidates.txt --top-k 5
+
+# 也可从 stdin 输入，一行一道题
+python .claude/skills/classify-interview-questions/scripts/recall_similar_questions.py \
+  --input - --top-k 5 --json
+```
+
+工具从 `question-index.md` 同时识别所有维度和连续编号题目，输出字符 n-gram、BM25 与混合分数。批量处理时保存原始输出或在审计 ledger 中记录每题 Top-K，不能只写“已查重”而没有召回证据。
 
 相似度只是加速工具：
 
@@ -165,6 +202,12 @@ python3 .claude/skills/chinese-quotes-fix/fix_quotes.py "learn-agent-interview/{
 - 更新统计表中的题数和总计
 - 如果是增强已有题目（如追加追问），在索引中对应条目后标注追问信息
 - 更新"最后更新"日期
+- 重建并校验机器索引：
+
+```bash
+python .claude/skills/classify-interview-questions/scripts/build_question_index_json.py
+python .claude/skills/classify-interview-questions/scripts/build_question_index_json.py --check
+```
 
 ### 6. 汇报
 

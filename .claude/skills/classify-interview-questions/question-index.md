@@ -1,13 +1,13 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-08-25（逐篇审计 143 篇 Infra 搜索结果并完成分层入库；累计 586 题。传统八股 218 题）
+> 最后更新：2026-08-26（补充百度大模型研发二面 C 端 Agent 与宣发 Agent 题；累计 590 题。传统八股 218 题）
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 44 |
+| 01-architecture-design | 45 |
 | 02-tool-management | 37 |
 | 03-fault-tolerance | 33 |
 | 04-memory-context | 61 |
@@ -18,16 +18,16 @@
 | 09-rag-retrieval | 65 |
 | 10-training-and-data | 67 |
 | 11-ai-code-testing | 13 |
-| 12-business-ai-engineering | 15 |
+| 12-business-ai-engineering | 17 |
 | 13-project-deep-dive | 21 |
-| 15-agent-concepts | 16 |
+| 15-agent-concepts | 17 |
 | 16-agent-infra | 16 |
 | 17-ai-infra | 28 |
-| **总计** | **586** |
+| **总计** | **590** |
 
-## 01-architecture-design（44题）
+## 01-architecture-design（45题）
 
-1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】
+1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】
 2. Tree of Thoughts (ToT) 在线上系统里能用吗？成本不高？ — 腾讯终面
 3. Agent 的架构设计？从系统角度来拆分 — 阿里一面
 4. Agent 在学术上由哪些部分组成？ — 字节一面
@@ -61,21 +61,22 @@
 32. 基于强化学习的 Agent 与传统基于 Prompt 的 Agent 有何区别？各自的适用场景？ — Agent开发八股合集（南京大学）
 33. Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？ — 字节跳动Agent开发实习生一面
 34. AI 系统该做单域工具还是跨团队通用平台？怎么选？ — 数据智能查询平台面试（新增）
-35. Coding Agent 的完整链路是怎么运转的？从用户输入到代码产出的全流程 — 字节跳动Agent二面（Coding Agent）（新增）
+35. Coding Agent 的完整链路是怎么运转的？从用户输入到代码产出的全流程 — 字节跳动Agent二面（Coding Agent）【百度大模型研发二面追问：Claude Code 用户交互全流程】【字节火山引擎 Managed Agent 一面追问：输入到页面展示的数据流】
 36. 用拓扑排序（规则式）管理任务依赖 vs 让大模型推理决策执行顺序，各有什么问题？ — 广州某小厂Agent后端开发二面（新增）
-37. Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ — 腾讯AI应用开发实习生一面（新增）
-38. Agent 如何判断已经收集了足够的信息，最终给出输出结论？ — 字节跳动多模态算法一面（新增）
+37. Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ — 腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】
+38. Agent 如何判断已经收集了足够的信息，最终给出输出结论？ — 字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】
 39. 设计一个内部的多源文档问答 AI，架构设计是什么？ — 百度AI智能体开发一面（新增）
 40. ReAct 在工程实现中，消息和状态协议应该怎么设计？ — 字节跳动AI Agent秋招一面（新增）
 41. 设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ — 百度 Agent算法岗二面（新增）
 42. Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ — 腾讯 WXG微信读书一面（新增）
 43. 在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？ — 地图 Agent二面（新增）
 44. Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ — 北京四维图新面经（新增）
+45. 只有模型 API 和 VS Code，如何从零搭建一套可用的 Agent 应用？ — 百度大模型研发二面（新增）
 
 ## 02-tool-management（37题）
 
 1. 工具描述写得再好，模型也瞎传参数怎么办？ — 腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】
-2. 工具库有上百个工具，怎么让模型快速选对？ — 腾讯终面 【淘天一面追问：100+工具召回偏差与分层路由】
+2. 工具库有上百个工具，怎么让模型快速选对？ — 腾讯终面 【淘天一面追问：100+工具召回偏差与分层路由】【百度大模型研发二面追问：Agent 如何选择合适工具】
 3. 多工具场景下的调度策略？ — 腾讯终面
 4. Mock 是怎么实现的？在自动化生成测试的场景下 — 字节一面
 5. 工具调用成功但返回结果语义不完整，怎么设计中间层？ — 腾讯二面 【淘天二面追问：外部工具数据格式不匹配的自动映射】【淘天AI应用开发一面追问：MCP多工具返回格式不统一的标准化】【OPPO 一面追问：参数错误、失败和超时的统一处理】
@@ -109,7 +110,7 @@
 33. Agent 调用启动较慢的外部工具时，如何设计异步任务和结果回调？ — 途游 Agent二面（新增）
 34. 跨平台工具授权即将过期时，Agent 如何调整调用顺序并安全续权？ — TikTok Agent工程师面试（新增）
 35. MCP 工具治理为什么需要审计？应该审计哪些证据？ — 拓竹 AI Agent算法一面（新增）
-36. Tool Result 回写模型时，消息契约应该包含哪些字段？ — Newegg一面（新增）
+36. Tool Result 回写模型时，消息契约应该包含哪些字段？ — Newegg一面（新增）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】
 37. 如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？ — 阿里控股 Agent Infra 暑期一面（新增）
 
 ## 03-fault-tolerance（33题）
@@ -234,7 +235,7 @@
 18. 设计一个电商客服 Agent 的评测方案——商品咨询、售后处理、投诉安抚三类任务分别评估 — 淘天一面
 19. Ragas 评测框架是什么？Answer Relevance 偏低时，怎么区分是检索问题还是模型问题？ — 蚂蚁AI应用开发二面 【淘天AI应用开发一面追问：Context Precision 过低优化方案】
 20. 怎么理解 Vibe Coding？你有哪些实践经验？ — 蚂蚁AI应用开发二面 【科大讯飞一面追问：各Vibe Coding工具特点与CC/Codex使用感受对比】
-21. 通过什么方式去验证 Skill 的提升效果，指标是什么？ — 美团食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】
+21. 通过什么方式去验证 Skill 的提升效果，指标是什么？ — 美团食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】
 22. 用户在线反馈怎么收集？不同模型和 Prompt 的 AB 测试怎么设计？ — 快手AI应用开发一面
 23. AI 写代码越来越强，算法工程师的角色会怎么变？ — 字节TikTok AI应用开发一面
 24. 哪些类型的 Agent 产品在未来 2 年内最可能被淘汰？ — 字节TikTok AI应用开发一面
@@ -246,7 +247,7 @@
 30. 能不能不走“线上转线下评测集”，直接对线上 case 做无 GT 的打分和效果观测？ — 字节跳动AI Agent评测二面（新增）
 31. Skill 路由应该如何构造测试集并评估？ — 字节Agent测评一面（新增）
 32. Multi-Agent 出现 Badcase 时，如何定位责任 Agent，并判断是否需要 SFT？ — 字节Agent开发二面（新增）
-33. Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？ — 字节Agent开发实习生一面（新增）【电商库存一面追问：人工审批、C 端灰度与回滚】
+33. Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？ — 字节Agent开发实习生一面（新增）【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后验证提升】
 34. 如何证明 Agent 的最终答案真正使用了工具或检索证据，而不是凭模型常识猜中？ — Momenta Agent开发一面、阿里 Agent开发一面（新增）
 35. Skill 的调用量、Token 成本和效果埋点应该放在哪一层？ — 电商库存二面（新增）
 36. 独立 Verifier 和 LLM-as-Judge 应该如何分工？ — 阿里千问 C端算法实习一面（新增）
@@ -303,7 +304,7 @@
 5. 平时写的代码有多少是 AI 生成的？ — 腾讯一面 【百度实习一面追问：AI coding 占比的回答策略】
 6. 你熟悉的 Agent 框架，架构设计上有什么优势？ — 腾讯一面
 7. 自己做 Agent 时，踩过最大的坑？ — 腾讯一面
-8. 用过哪些 Code Agent？优缺点？ — 腾讯AI应用开发 【高德实习一面追问：日常 AI Coding 实战工作流】【蚂蚁Agent开发一面追问：企业多系统改需求AI Coding怎么处理】【淘天Agent开发追问：AI辅助编程工作流拆解+提示词策略与人工审核介入点】【视频面经追问：做代码重构时怎么用AI辅助】
+8. 用过哪些 Code Agent？优缺点？ — 腾讯AI应用开发 【高德实习一面追问：日常 AI Coding 实战工作流】【蚂蚁Agent开发一面追问：企业多系统改需求AI Coding怎么处理】【淘天Agent开发追问：AI辅助编程工作流拆解+提示词策略与人工审核介入点】【视频面经追问：做代码重构时怎么用AI辅助】【字节火山引擎 Managed Agent 一面追问：如何完成项目开发】
 9. 如何解决大模型 API 服务的响应延迟？ — 字节实习一面 【视频面经同题：提升模型响应速度的优化方向】【小红书数据库智能化二面追问：产品层面的等待体验优化】【小舒一面追问：异步调用与线程阻塞】
 10. AI Coding 产品怎么测试？ — 蚂蚁二面
 11. 什么是 SDD？它和 Skills 有什么区别？ — 蚂蚁一面
@@ -357,7 +358,7 @@
 59. 如何设计同时兼顾吞吐、首 Token 延迟和租户公平性的推理调度器？ — 智象未来 AI Infra一面（新增）
 60. Agent 的中间与最终交付物应该如何版本化、校验和交接？ — 福田 FDE线下面试（新增）
 61. 多模型供应商如何抽象统一 Provider，而不丢失差异能力？ — 成都晓多科技 Agent开发岗二面（新增）
-62. 如何记录 Agent 的非确定性边界，实现可重复的故障回放？ — 腾讯互娱全栈开发（AI）二面（新增）
+62. 如何记录 Agent 的非确定性边界，实现可重复的故障回放？ — 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】
 63. 如何可靠采集 Coding Agent 轨迹，避免崩溃或异步退出时丢数据？ — MiniMax平台研发一面（新增）
 64. 自动回滚阈值如何设置，避免固定阈值误杀或放过回归？ — 深信服 Agent三面（新增）
 65. 如何设计类似 LangFlow 的 Agent 工作流可视化编排画布？ — 商汤 AI Agent 开发面经（新增）
@@ -370,7 +371,7 @@
 3. Claude Code 的架构有什么比较创新的设计？ — 蚂蚁一面 【高德实习一面追问：从源码角度看设计哲学】
 4. 一个好的 Prompt 和一个差的 Prompt 的区别？ — 蚂蚁一面
 5. 为什么已经有了 MCP，Anthropic 还要做 Skill？Skill 里面有没有工具？ — 字节实习一面
-6. 如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？ — 字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】【阿里国际AI应用开发二面追问：多Skill可见时执行顺序保证+Plan模式协调】【阿里国际大模型应用开发一面追问：Skill自我迭代机制+质量评测】
+6. 如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？ — 字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】【阿里国际AI应用开发二面追问：多Skill可见时执行顺序保证+Plan模式协调】【阿里国际大模型应用开发一面追问：Skill自我迭代机制+质量评测】【字节火山引擎 Managed Agent 一面追问：开发、测试、运维 Skills 组织】
 7. LobeChat 的插件和 Claude Code 的 Skills 有什么本质区别？ — 字节实习二面
 8. 通常 Prompt 包含哪些结构？ — 淘宝闪购一面 【视频面经同题：一个完整Prompt通常包含哪些部分】
 9. 在调优 Prompt 时，你有哪些实战经验？如何利用 AI 辅助自己优化 Prompt？ — 字节二面
@@ -429,7 +430,7 @@
 30. 为什么 Claude Code 不用 RAG 检索代码，而是直接用 grep？ — 字节实习一面
 31. 向量数据库怎么选型？不同规模下该用什么方案？ — 阿里国际二面 【淘天Agent开发追问：为什么选pgvector】
 32. 升级 Embedding 模型后，怎么保证索引和检索向量的逻辑一致性？ — 阿里国际二面
-33. Deep Research 在代码层面是怎么实现的？和普通 RAG 有什么区别？ — bilibili AI研发实习一面
+33. Deep Research 在代码层面是怎么实现的？和普通 RAG 有什么区别？ — bilibili AI研发实习一面【字节火山引擎 Managed Agent 一面追问：Auto Research】
 34. PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？ — 腾讯AI应用开发二面
 35. RAG 知识库的噪声剔除和文档去重怎么做？ — 腾讯AI应用开发二面 【淘天Agent开发追问：防止AI批量生成虚假数据投毒】
 36. 图检索、向量检索、混合检索有什么区别？怎么选？ — 腾讯AI应用开发二面
@@ -549,7 +550,7 @@
 12. Coding Agent 如何做增量代码审查，避免大仓库全量逐行扫描？ — PDD秋招提前批一面（新增）
 13. 如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？ — 蚂蚁集团效能研发面经（新增）
 
-## 12-business-ai-engineering（15题）
+## 12-business-ai-engineering（17题）
 
 1. 时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？ — 网易 AI Agent 开发实习
 2. 设计一个能根据用户行为自适应调整策略的 AI 系统，从技术架构上怎么做？ — 网易 AI Agent 开发实习
@@ -566,6 +567,8 @@
 13. 音视频 Agent 如何保护隐私并提供可验证删除？ — 字节 TikTok AI Agent开发一面（新增）
 14. 医疗 Skill 如何与 HIS 系统协同，同时满足权限和审计要求？ — 百川智能医疗大模型后训练一面（新增）
 15. 20K 流式长文本安全审核如何兼顾增量响应与全文语义？ — 中国电信风控 Agent二面（新增）
+16. 面向 C 端的 Agent 应用应该包含哪些架构和模块？ — 百度大模型研发二面（新增）
+17. 设计一个“输入网站、输出宣发内容”的 Agent，完整链路是什么？ — 百度大模型研发二面（新增）
 
 ## 13-project-deep-dive（21题）
 
@@ -591,10 +594,10 @@
 20. 你做过的不同 AI 项目之间，核心技术差异是什么？ — 已有正文（补录索引）
 21. 跨机票、地铁与导航的地图 Agent，如何划定 Agent、数据和工具边界？ — 地图 Agent二面（新增）
 
-## 15-agent-concepts（16题）
+## 15-agent-concepts（17题）
 
 1. Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ — 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】
-2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面 【阿里云暑期实习同题】【成都某中厂追问变体：加入 Loop Engineering 作为第四层】
+2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面 【阿里云暑期实习同题】【成都某中厂追问变体：加入 Loop Engineering 作为第四层】【字节火山引擎 Managed Agent 一面追问：Context Engineering 与 Skills 组织】
 3. 讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering — 阿里淘天AI应用开发暑期二面
 4. 你的项目中体现了哪些 Harness Engineering 的思想？ — 阿里国际一面
 5. Vibe Coding 和 Harness，你更偏向哪种路线？为什么？ — 字节TikTok实习后端AI开发一面
@@ -609,11 +612,12 @@
 14. Harness、Hermes 这种比较新的 Agent 设计了解吗？ — 已有正文（补录索引）
 15. LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？ — 哔哩哔哩 AI应用岗 Agent开发一面（新增）
 16. Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ — B站 Agent二面（新增）
+17. 如何比较 Coding Agent、通用助手与办公 Agent？ — 百度大模型研发二面（新增）
 
 ## 16-agent-infra（16题）
 
 1. 如果让你设计一个 Agent Runtime，你会怎么拆？ — Agent Infra 系统设计高频题
-2. 一次 Agent 请求的完整执行链路是什么？ — Agent Runtime 管线高频题
+2. 一次 Agent 请求的完整执行链路是什么？ — Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】
 3. 为什么需要 Checkpoint，恢复时从哪里继续？ — 长任务状态管理高频题
 4. Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ — 分布式幂等高频题
 5. Agent Sandbox 解决什么问题，为什么容器不一定够？ — 代码执行隔离高频题

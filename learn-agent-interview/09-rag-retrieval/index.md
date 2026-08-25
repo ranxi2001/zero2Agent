@@ -1852,7 +1852,7 @@ flowchart TB
 
 ### Q：Deep Research 在代码层面是怎么实现的？和普通 RAG 有什么区别？
 
-> 来源：bilibili AI研发实习一面
+> 来源：bilibili AI研发实习一面【字节火山引擎 Managed Agent 一面追问：如何用 Agent 做 Auto Research】
 
 **新手答**：“就是多搜几次，然后总结一下。”
 
