@@ -1,7 +1,7 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-08-25（逐篇补扫 2026 年 8 月前面经——新增 10 道 Agent 工程题；累计 539 题。传统八股当前 189 题）
+> 最后更新：2026-08-25（逐篇审计 143 篇 Infra 搜索结果并完成分层入库；累计 586 题。传统八股 218 题）
 
 ## 统计
 
@@ -16,12 +16,14 @@
 | 07-engineering-pitfalls | 66 |
 | 08-prompt-engineering | 29 |
 | 09-rag-retrieval | 65 |
-| 10-training-and-data | 64 |
+| 10-training-and-data | 67 |
 | 11-ai-code-testing | 13 |
 | 12-business-ai-engineering | 15 |
 | 13-project-deep-dive | 21 |
 | 15-agent-concepts | 16 |
-| **总计** | **539** |
+| 16-agent-infra | 16 |
+| 17-ai-infra | 28 |
+| **总计** | **586** |
 
 ## 01-architecture-design（44题）
 
@@ -461,7 +463,7 @@
 64. RAG 前端如何展示长文档，并让引用稳定跳转到原文证据？ — 商汤 AI Agent 开发面经（新增）
 65. 知识图谱如何从文档构建、增量维护，并处理实体与关系冲突？ — 阿里云暑期 Agent 面经（新增）
 
-## 10-training-and-data（64题）
+## 10-training-and-data（67题）
 
 1. 预训练数据清洗方法？ — 字节一面
 2. Agent 工具调用怎么训练？训练集包含什么？ — 腾讯二面
@@ -527,6 +529,9 @@
 62. Agentic CFT 与 SFT、RL 的目标有何不同？为什么训练时要 Mask Observation Token？ — Shopee Agent开发一面（新增）
 63. 训练实验如何对 YAML 配置做规范化哈希，并保证单变量变化可复现？ — 大方云图研发实习一面（新增）
 64. 如何训练模型做高精度抽取式摘要？数据、目标、Loss 和评测如何设计？ — 百度大模型实习 Agent 面经（新增）
+65. 训练后量化的完整流程是什么？粒度、校准方法和离群值如何共同影响精度？ — 摩尔线程/智谱/百度 AI Infra 面经（新增）
+66. GPTQ、AWQ、SmoothQuant 与 AdaQuant 的核心思路有什么不同？ — 智谱/后摩智能/AI Infra 小厂面经（新增）
+67. 预训练与 SFT 在数据、目标函数、计算形态和基础设施上有什么区别？ — AI Infra 小厂实习面经（新增）
 
 ## 11-ai-code-testing（13题）
 
@@ -605,9 +610,58 @@
 15. LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？ — 哔哩哔哩 AI应用岗 Agent开发一面（新增）
 16. Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ — B站 Agent二面（新增）
 
+## 16-agent-infra（16题）
+
+1. 如果让你设计一个 Agent Runtime，你会怎么拆？ — Agent Infra 系统设计高频题
+2. 一次 Agent 请求的完整执行链路是什么？ — Agent Runtime 管线高频题
+3. 为什么需要 Checkpoint，恢复时从哪里继续？ — 长任务状态管理高频题
+4. Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ — 分布式幂等高频题
+5. Agent Sandbox 解决什么问题，为什么容器不一定够？ — 代码执行隔离高频题
+6. Kubernetes 在 Agent Infra 中负责什么？ — Kubernetes/Controller 高频题
+7. 如何支撑几十万并发 Agent Task，并把它观测清楚？ — 高并发调度高频题
+8. Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ — 百度/虾皮 AI Infra 面经（新增）
+9. Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ — 百度 AI Infra 面经（新增）
+10. Kubernetes Scheduler 的三个队列如何流转？ — 虾皮 AI Infra 二面（新增）
+11. Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ — 虾皮 AI Infra 面经（新增）
+12. Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ — 虾皮 AI Infra 面经（新增）
+13. Agentic RL 的 Rollout、Training 与推理引擎如何编排？ — AI Infra 小厂面经（新增）
+14. Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ — 美团/百度 AI Infra 面经（新增）
+15. Agent Router 应以什么运行形态存在，请求数据流如何设计？ — 字节 AI Infra 实习一面（新增）
+16. Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ — 字节 Agent 后端终面（新增）
+
+## 17-ai-infra（28题）
+
+1. AI Infra 和 Agent Infra 有什么区别？ — AI 平台边界高频题
+2. 如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ — AI 平台系统设计高频题
+3. Attention 与 FFN 的计算量和参数量谁更大？ — 阿里云/百度 AI Infra 一面
+4. KV Cache 占用如何计算，为什么不能只按请求数做容量规划？ — 抖音搜推/百度 AI Infra 一面
+5. PD 分离解决什么问题，Prefill 与 Decode 资源比例怎么定？ — 百度 AI Infra 一面
+6. 分布式训练为什么容易失败，如何恢复？ — 摩尔线程 AI Infra 一面
+7. 如何设计大模型在线推理服务？ — 百度/智象未来 AI Infra 一面
+8. GPU 利用率很低，但请求延迟很高，怎么排查？ — 小鹏 AI Infra 一面
+9. GPU 调度和普通 CPU 调度有什么不同？ — GPU Scheduler 高频题
+10. 模型版本升级如何做到可观测、可灰度、可回滚？ — 模型发布高频题
+11. CUDA 的 Thread、Warp、Block、Grid 和 SM 如何映射？SIMT、同步与 Warp 分歧如何影响性能？ — 小马智行/OPPO/蔚来/沐曦 AI Infra 面经（新增）
+12. GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？ — 阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）
+13. CUDA Graph 为什么能降低推理开销？为什么可能额外占显存，Prefill 与 Decode 哪个阶段更适合？ — 小马智行/爱奇艺 AI Infra 面经（新增）
+14. 如何用 Roofline 和算术强度指导 CUDA 算子优化？ — 美团/拼多多/小鹏/快手等 AI Infra 面经（新增）
+15. FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？ — 阿里国际/快手/美团等 AI Infra 面经（新增）
+16. 如何从模型结构估算参数量、FLOPs、训练显存、推理访存与 MFU？ — 美团/混元/讯飞/字节等 AI Infra 面经（新增）
+17. vLLM/SGLang 的请求调度与 Continuous Batching 如何工作？请求被抢占后如何恢复？ — 阿里国际/爱奇艺等 AI Infra 面经（新增）
+18. Prefill 与 Decode 的算子形态和瓶颈为何不同？ — 小马智行/阿里云/腾讯/爱奇艺 AI Infra 面经（新增）
+19. 如何估算 All-Reduce/All-to-All 通信量并实现计算通信重叠？ — 阶跃星辰/快手/字节/爱奇艺等 AI Infra 面经（新增）
+20. 流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？ — 快手/百度/美团 AI Infra 面经（新增）
+21. MoE 的 Expert Parallel 如何做 Dispatch/Combine、负载均衡和通信优化？ — 阿里/美团/快手/字节等 AI Infra 面经（新增）
+22. CPU、GPU 与 NPU 的体系结构和优化目标有什么差异？ — 蔚来/美团/讯飞/小鹏等 AI Infra 面经（新增）
+23. CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？ — 拼多多/小马智行/飞腾 AI Infra 面经（新增）
+24. FP8、NVFP4、INT8 与 W4A16 的数值格式、缩放粒度和硬件执行路径有何不同？ — 混元/讯飞/智谱/摩尔线程等 AI Infra 面经（新增）
+25. 量化后为什么不一定更快？量化 Matmul、反量化、Prefill 和 Decode 的瓶颈如何判断？ — 美团/拼多多/混元/爱奇艺 AI Infra 面经（新增）
+26. 投机采样中 Draft 与 Target 模型如何交互？什么时候会加速，什么时候反而变慢？ — AI Infra 小厂/爱奇艺面经（新增）
+27. 大模型训练吞吐低时，如何用 MFU、Profiler、通信和流水线空泡定位瓶颈？ — 阶跃星辰/快手等 AI Infra 面经（新增）
+28. Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？ — 字节/荣耀/OPPO AI Infra 面经（新增）
+
 ---
 
 ## 薄弱维度（题数 < 10）
 
-- **11-ai-code-testing**：8 题，垂直领域
-- **12-business-ai-engineering**：7 题，新建模块待扩充
+当前没有少于 10 题的维度。

@@ -659,7 +659,7 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 | Harness Engineering | 用外部工程体系约束和增强 Agent | “怎么构建？”“项目里怎么体现？” |
 | Context Engineering | 精准控制上下文窗口内的信息编排 | “和 Prompt Engineering 区别？” |
 | Vibe Coding | 凭感觉用 AI 写代码，快速验证 | “和 Harness 怎么选？” |
-| Skills | 可复用的知识+指令单元，Agent 的岗位手册 | “和 MCP/Prompt 区别？””为什么需要？” |
+| Skills | 可复用的知识+指令单元，Agent 的岗位手册 | “和 MCP/Prompt 区别？”“为什么需要？” |
 | MCP | Agent 到工具的标准连接协议 | “和 Function Calling 区别？” |
 | A2A | Agent 之间的通信协议 | “和 MCP 什么关系？” |
 | Agentic RL | 用强化学习训练 Agent 行为策略 | “和 GRPO/PPO 的关系？” |
@@ -667,5 +667,6 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 
 下一篇建议继续看：
 
+- [Agent Infra：Runtime、Sandbox 与可靠执行](../16-agent-infra/index.html)
 - [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
 - [Prompt 工程与框架原理](../08-prompt-engineering/index.html)

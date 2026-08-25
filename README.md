@@ -57,10 +57,10 @@
 | [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 5 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流、Auto Harness 工程与 Eval-Driven 实践 |
 | [Pi Coding Agent](https://onefly.top/zero2Agent/learn-pi/) | 8 篇 | ✅ 完成 | 可验证 Agent Loop、Provider、Skill/Extension/Package、MCP、安全与树形 Session Runtime |
 | [Codex CLI](https://onefly.top/zero2Agent/learn-codex/) | 7 篇 | ✅ 完成 | OpenAI 终端 Agent：Rust 双层架构、TOML 配置、平台原生沙箱、MCP 集成、SDK 与横向对比 |
-| [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 15 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，15 大考察维度，新手答 vs 高手答对比 |
+| [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 17 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，17 大考察维度，新手答 vs 高手答对比 |
 | [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
 
-> **当前进度：129 篇文章，12 个完整模块，1 个模块持续更新**
+> **当前进度：131 篇文章，12 个完整模块，1 个模块持续更新**
 
 ---
 
@@ -159,7 +159,7 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 
 ### 面试通关
 
-大厂 AI Agent 岗位高频面试题深度拆解，覆盖蚂蚁、阿里、字节、腾讯、携程等真实面试场景。每道题对比“新手答”和“高手答”，15 大考察维度：
+大厂 AI Agent 岗位高频面试题深度拆解，覆盖蚂蚁、阿里、字节、腾讯、携程等真实面试场景。每道题对比“新手答”和“高手答”，17 大考察维度：
 
 | 维度 | 核心考点 |
 |------|---------|
@@ -176,6 +176,8 @@ agent    = chatbot + tools    # 图内回路，模型驱动工具
 | 简历项目拷打 | 面试官追着你的 Agent 项目问到底 |
 | 各公司偏好 | 按公司统计高频考点与面试风格 |
 | Agent 概念考察 | Harness Engineering、Context Engineering、MCP/Skills 前沿范式 |
+| Agent Infra | Runtime、状态恢复、Sandbox、Kubernetes 与可靠执行 |
+| AI Infra | 分布式训练、LLM Serving、GPU 调度与 AIOps |
 
 ### Final Project：OfferPilot
 
@@ -239,7 +241,7 @@ zero2Agent/
 ├── learn-agent-practice/   # Agent 应用实战（5 篇，持续更新）
 ├── learn-pi/               # Pi Coding Agent（8 篇）
 ├── learn-codex/            # OpenAI Codex CLI（7 篇）
-├── learn-agent-interview/  # 大厂面试题拆解（15 篇）
+├── learn-agent-interview/  # 大厂面试题拆解（17 篇）
 └── final-project/          # OfferPilot 面试诊断 Agent 实战（12 篇）
 ```
 

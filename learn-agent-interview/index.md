@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Agent 面试通关：大厂 AI Agent 岗位高频面试题拆解
-description: 蚂蚁集团、阿里巴巴、字节跳动、腾讯等大厂 AI Agent 岗位面试题汇总与深度拆解。涵盖 Agent 架构选型、RAG 检索、多智能体协作、Prompt 工程、AI Coding 等 11 大考察维度，对比新手答与高手答。
+description: 蚂蚁集团、阿里巴巴、字节跳动、腾讯等大厂 AI Agent 岗位面试题汇总与深度拆解。涵盖 Agent 架构、RAG、Agent Infra、AI Infra 等 17 大考察维度，对比新手答与高手答。
 keywords: Agent面试题,AI Agent面试,蚂蚁AI Coding面试,蚂蚁Agent面试,蚂蚁集团AI面试,阿里Agent研发,阿里Agent开发,阿里巴巴Agent面试,字节跳动Agent面试,字节Agent开发,腾讯Agent面试,百度Agent面试,大厂Agent面试题,AI Agent工程师面试,Agent研发面试,Agent开发面试,LLM Agent面试,AI Coding Agent,Agent架构设计,ReAct面试,Plan-and-Execute,多智能体协作面试,RAG面试题,Prompt工程面试,AI代码生成面试,Agent岗位面试准备,携程Agent面试,美团Agent面试,京东Agent面试,AI Agent校招,AI Agent社招,Agent实习面试,蚂蚁实习面试,阿里实习AI面试,2025大厂AI面试,2026大厂AI面试,Agent面经,AI面经,大模型Agent面试,LangChain面试,LangGraph面试,Claude Code,OpenAI Agent,智能体开发面试,智能体工程师
 eyebrow: Module 10
 ---
@@ -23,7 +23,7 @@ eyebrow: Module 10
 
 无论你是**校招**、**社招**还是**实习**，准备 Agent 相关岗位面试，这里的题目都能帮你建立系统性的知识框架。
 
-## 十五大考察维度 + 公司偏好速查
+## 十七大考察维度 + 公司偏好速查
 
 按能力维度分类，方便你系统性地补齐某个方向的短板：
 
@@ -44,6 +44,8 @@ eyebrow: Module 10
 | **简历项目拷打** | 项目部署、框架选型、意图识别、工具设计、知识库构建、性能优化 | 淘宝闪购、阿里、字节 |
 | **概念考察** | Harness Engineering、Context Engineering、MCP/A2A、Vibe Coding、Skills 等前沿概念辨析 | 字节、阿里、快手、腾讯 |
 | **各公司面试偏好** | 按公司统计高频考点、面试风格分析、针对性备战策略 | 全部公司 |
+| **Agent Infra** | Runtime、Checkpoint、幂等、Sandbox、Kubernetes、调度与可观测 | 阿里、字节、平台工程团队 |
+| **AI Infra** | 分布式训练、LLM Serving、GPU 调度、模型发布与 AIOps | 阿里、字节、模型平台团队 |
 
 ## 谁适合读？
 
@@ -69,6 +71,8 @@ eyebrow: Module 10
 13. [简历项目拷打：面试官追着你的 Agent 项目问到底](13-project-deep-dive/index.html)
 14. [各公司面试偏好：按公司备战的高频题速查](14-company-preferences/index.html)
 15. [概念考察：Harness Engineering、Context Engineering 与前沿范式](15-agent-concepts/index.html)
+16. [Agent Infra：Runtime、Sandbox 与可靠执行](16-agent-infra/index.html)
+17. [AI Infra：训练、推理与 GPU 平台工程](17-ai-infra/index.html)
 
 ## 常见问题
 

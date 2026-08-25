@@ -2720,6 +2720,60 @@ Agent 轨迹通常交错出现 `assistant action -> environment observation -> a
 
 ---
 
+## Q：训练后量化的完整流程是什么？粒度、校准方法和离群值如何共同影响精度？
+
+> 来源：[摩尔线程 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/e1ac5e7fccf243c5898394d80911b3c0)、[智谱 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/846a09e34fea4fe9a7e14da2a88e3f72)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e7b7f56f4f0e4752a08c6b78566324f0)
+
+**新手答**：“准备一批校准数据，统计最大最小值，再把 FP16 权重转成 INT8 或 INT4。”
+
+**高手答**：
+
+先确定量化对象和部署约束：只量化权重，还是同时量化激活、KV Cache；目标后端是否有对应 Kernel；允许多大精度回退。然后使用与线上分布一致、覆盖长短输入和困难样本的校准集采集张量统计，按 Per-Tensor、Per-Channel 或 Per-Group 选择缩放粒度，再决定对称/非对称量化、数据格式和舍入策略。
+
+MinMax 实现简单，但单个离群值会拉大范围；Percentile 通过裁剪尾部换取主体分辨率；KL、MSE 等方法直接搜索量化前后分布或误差的折中。激活离群明显时，可采用通道级缩放、离群通道保留高精度或权重与激活重参数化。粒度越细通常误差越小，但 Scale 元数据、反量化和 Kernel 复杂度越高。
+
+验收不能只看权重重构误差：需要逐层定位敏感模块，对困惑度、下游任务、安全集和长上下文分层回归，同时实测 TTFT、TPOT、吞吐、显存和成本。若后端没有高效低精度 Kernel，模型虽然更小，也可能因反量化或 Shape 不合适而更慢。
+
+**差距在哪**：新手把 PTQ 当类型转换，高手把校准分布、粒度、离群值、Kernel 支持和端到端验收串成一条决策链。
+
+---
+
+## Q：GPTQ、AWQ、SmoothQuant 与 AdaQuant 的核心思路有什么不同？
+
+> 来源：[智谱 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/846a09e34fea4fe9a7e14da2a88e3f72)、[后摩智能 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/9b2e184532094836bfeb0658f3c0f22a)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/c7eee5b04fb8424aa4847f0e21fab875)
+
+**新手答**：“它们都是低比特量化方法，GPTQ 和 AWQ 量权重，SmoothQuant 量激活。”
+
+**高手答**：
+
+这些方法处理的困难不同。GPTQ 用校准数据近似二阶信息，按块逐步量化权重并补偿误差，重点是 Weight-only PTQ 的重构质量；AWQ 根据激活统计识别对输出更敏感的权重通道，通过缩放保护显著权重，再做低比特权重量化；SmoothQuant 把激活中的离群难度通过等价缩放迁移到更容易量化的权重侧，主要服务 W8A8 一类权重和激活同时量化场景。
+
+AdaQuant 这一名称在不同论文或实现中可能指不同的自适应量化方案，不能只背缩写。回答时应先锁定具体论文或库，再说明它优化 Scale、舍入还是逐层重构。方法可以组合，但组合后的格式必须被 Serving 后端支持，否则离线误差更低也不等于线上收益更高。
+
+选型要看模型结构、目标位宽、是否量化激活、校准数据、允许的校准成本和硬件 Kernel。最终用同一基线比较质量、模型大小、预处理时间、端到端时延和吞吐，不能引用脱离模型与硬件的固定加速倍数。
+
+**差距在哪**：新手记方法标签，高手说清每种方法在解决哪类误差、依赖什么统计，以及算法收益如何受部署后端约束。
+
+---
+
+## Q：预训练与 SFT 在数据、目标函数、计算形态和基础设施上有什么区别？
+
+> 来源：[AI Infra 小厂实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)
+
+**新手答**：“预训练用海量无标注数据学习通用能力，SFT 用问答数据让模型学会对话。”
+
+**高手答**：
+
+两者都常使用下一个 Token 预测，但数据分布和 Loss Mask 不同。预训练面对大规模连续语料，通常对绝大多数有效 Token 计算 Loss，重点是数据去重、混合比例、长序列装箱和稳定扩展；SFT 使用指令、对话或 Agent 轨迹，通常只监督 Assistant 动作，System/User/Tool Observation 作为条件输入并 Mask，重点是任务覆盖、格式正确、边界样本和防止能力遗忘。
+
+计算侧，预训练规模大、周期长，主要追求集群 MFU、并行效率、Checkpoint 和故障恢复；SFT 数据更小、实验更频繁，常用 LoRA/QLoRA 或较小学习率，关注多版本评测、快速回滚和数据配方可追溯。SFT 也可能全参训练，预训练也不一定只有纯文本，不能用“是否微调参数”定义两者。
+
+验收目标也不同：预训练看 Loss、Scaling 趋势和通用能力，SFT 看指令遵循、领域任务、工具调用、安全以及基础能力回归。生产中应固定基座、Tokenizer、模板、Mask 规则和数据版本，否则无法判断提升来自训练目标还是协议变化。
+
+**差距在哪**：新手只按数据量区分，高手能连接 Loss Mask、数据管线、并行与实验迭代方式，以及两阶段不同的验收目标。
+
+---
+
 ## 这类题的答题模式
 
 训练与数据题的核心是**全链路思维**：
