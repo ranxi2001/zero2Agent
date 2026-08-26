@@ -13,6 +13,7 @@ description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/
 - Java/Go/Python、JVM、并发、操作系统、网络、数据库、缓存、消息队列、分布式、前端与通用工程八股：相邻 `../zero2Leetcode/_includes/interview-seasons/2026/summer.md`。
 - 算法/手撕题只进入 zero2leetcode 的算法题单，不计入传统八股总数；题干不完整时排除，不补造。
 - 机器召回使用本 Skill 的 `question-index.json`；`question-index.md` 是人工维护源。每次修改 Markdown 后必须重建 JSON 并运行 stale check。
+- `question-frequency.json` 是 Agent 题单频次事实源。`frequency` 等于 `evidence` 中可归因的独立面经出现次数；题库汇总、“高频题”等不可追溯标签不计数。正文只在现有最小主题组内按频次降序排列，同频按稳定的 `firstSeenOrder` 排列。
 - 两个仓库分别检查 worktree、计数、提交和推送。不得把一个仓库的 commit 混入另一个。
 
 ## 维度分类表
@@ -30,7 +31,12 @@ description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/
 | 09 | RAG 与检索 | `09-rag-retrieval/` | chunk 设计、查询改写、召回精排、Embedding/ReRank 微调 |
 | 10 | 训练与模型 | `10-training-and-data/` | 数据清洗、LoRA、PPO/DPO/GRPO、位置编码、归一化、量化部署、多模态 |
 | 11 | AI 代码测试 | `11-ai-code-testing/` | 覆盖率插桩、前置分析、代码过滤 |
+| 12 | 业务 AI 工程 | `12-business-ai-engineering/` | 业务需求拆解、方案选型、效果评估、智能客服与业务落地 |
 | 13 | 简历项目拷打 | `13-project-deep-dive/` | 项目部署、框架选型、意图识别、工具设计、知识库构建、性能优化 |
+| 14 | 公司偏好（派生页） | `14-company-preferences/` | 从各维度来源统计公司考察偏好，不直接写入新题 |
+| 15 | Agent 概念 | `15-agent-concepts/` | Harness/Context Engineering、Vibe Coding、MCP、Skills 等概念辨析 |
+| 16 | Agent Infra | `16-agent-infra/` | Runtime、Checkpoint、幂等、Sandbox、Kubernetes、调度与可观测 |
+| 17 | AI Infra | `17-ai-infra/` | 分布式训练、LLM Serving、GPU 调度、模型发布与 AIOps |
 
 ## 模式选择
 
@@ -128,7 +134,7 @@ python .claude/skills/classify-interview-questions/scripts/recall_similar_questi
 
 把最终确认的新题按**互不重叠的目标文件**分配给写作子 Agent。一个文件同一时间只允许一个写作者；会写同一文件的题合并成一个任务。
 
-写作子 Agent必须读取目标全文及相邻问题，按本 Skill 标准格式在“这类题的答题模式”前插入。它只修改被分配的文件，不改 `question-index.md`、导航或其他仓库。
+写作子 Agent必须读取目标全文及相邻问题，把新题插入最匹配的现有主题组。它只修改被分配的文件，不改 `question-index.md`、`question-frequency.json`、导航或其他仓库；主 Agent 合并后统一按频次重排。
 
 传统后端题由独立子 Agent 按连续编号写入 zero2leetcode summer include；它同时返回新增题数，但不自行更新入口总数。
 
@@ -138,9 +144,10 @@ python .claude/skills/classify-interview-questions/scripts/recall_similar_questi
 
 1. 审查所有子 Agent diff，解决语义重复和文件冲突。
 2. 更新 Agent `question-index.md` 的连续编号、维度数、总数、来源追问和日期。
-3. 更新 zero2leetcode summer 总数及 `05_interview/index.md` 的入口计数。
-4. 核对正文标题数与索引总数完全一致。
-5. 汇报原始文章数、扫描数、新增数、增强数，以及重复、教程/推广、算法、个人化、空正文、题干不完整等排除数。
+3. 更新 `question-frequency.json`：同题新增面经时追加唯一 evidence，新题新增完整记录，然后执行组内频次排序。
+4. 更新 zero2leetcode summer 总数及 `05_interview/index.md` 的入口计数。
+5. 核对正文标题数、人工索引、频次 JSON 和机器索引总数完全一致。
+6. 汇报原始文章数、扫描数、新增数、增强数，以及重复、教程/推广、算法、个人化、空正文、题干不完整等排除数。
 
 ## 少量题执行步骤
 
@@ -149,18 +156,18 @@ python .claude/skills/classify-interview-questions/scripts/recall_similar_questi
 收到面试题后，逐题判断属于哪个维度：
 - 如果题目明显属于某个维度 → 直接分配
 - 如果题目跨维度 → 选最核心的那个维度
-- 如果题目太个人化（如"你简历上的XX项目"）→ 剥离简历细节，转为通用问题再分配
+- 如果题目太个人化（如“你简历上的XX项目”）→ 剥离简历细节，转为通用问题再分配
 - 如果题目和已有题目高度重复 → 增强已有答案，不新增
 
 输出分类结果表格供用户确认（如果题量大可直接执行）。
 
 ### 2. 检查已有内容
 
-**先读取 `question-index.md`**（位于本 skill 目录下），快速判断新题是否与已有题目重复或高度相似，无需逐个扫描 11 篇 md 文件。仅在需要精确定位插入位置时才读取目标 md 文件。
+**先读取 `question-index.md`**（位于本 skill 目录下），快速判断新题是否与已有题目重复或高度相似；再读取 `question-frequency.json`，确认已有题的历史面经证据。仅在需要定位主题组和插入位置时读取目标 md 文件。
 
 对每篇目标文章：
 - 检查是否已有相同或相似问题
-- 找到插入位置（在"这类题的答题模式"段落之前）
+- 找到最匹配的现有主题组；先完成内容写入，最终位置由频次排序脚本确定
 
 ### 3. 写答案并插入
 
@@ -184,7 +191,7 @@ python .claude/skills/classify-interview-questions/scripts/recall_similar_questi
 - 多阶段管线（如 RAG 检索 → 精排 → 生成）
 - 对比（如有/无某方案的效果对比）
 - 架构分层（如 Agent 四层架构）
-- 决策分支（如"什么场景用什么方案"）
+- 决策分支（如“什么场景用什么方案”）
 
 不需要每道题都加图，只在图比文字更清晰时使用。
 
@@ -195,16 +202,26 @@ python .claude/skills/classify-interview-questions/scripts/recall_similar_questi
 python3 .claude/skills/chinese-quotes-fix/fix_quotes.py "learn-agent-interview/{目标目录}/index.md"
 ```
 
-### 5. 更新题目索引
+### 5. 更新索引与题单频次
 
 分发完成后，更新 `question-index.md`：
-- 在对应维度下追加新增题目（保持编号连续）
+- 在对应维度记录新增题目，增强题补充来源追问
 - 更新统计表中的题数和总计
-- 如果是增强已有题目（如追加追问），在索引中对应条目后标注追问信息
-- 更新"最后更新"日期
-- 重建并校验机器索引：
+- 更新“最后更新”日期
+
+同步维护 `question-frequency.json`：
+- 一篇面经对同一核心题只贡献一次 evidence；重复转载、题库汇总和无法归因的“高频题”标签不计数
+- 同题增强时追加新的唯一 evidence，并令 `frequency == evidence.length`
+- `firstSeenOrder` 记录题目在当前维度的初次入库顺序，只在新题首次建档时分配，后续重排不得修改
+- 新题可以先运行同步脚本生成记录，再人工核对 evidence；题目改名时同步修改 JSON，不能丢失原证据
+
+最后执行稳定排序并校验三个索引：
 
 ```bash
+python .claude/skills/classify-interview-questions/scripts/sync_question_frequency.py
+python .claude/skills/classify-interview-questions/scripts/sort_questions_by_frequency.py
+python .claude/skills/classify-interview-questions/scripts/sync_question_frequency.py --check
+python .claude/skills/classify-interview-questions/scripts/sort_questions_by_frequency.py --check
 python .claude/skills/classify-interview-questions/scripts/build_question_index_json.py
 python .claude/skills/classify-interview-questions/scripts/build_question_index_json.py --check
 ```
@@ -221,14 +238,14 @@ python .claude/skills/classify-interview-questions/scripts/build_question_index_
 ## 并发与写入安全
 
 - 优先并行只读提取、相似度分析和资料调研。
-- 写入只按互不重叠文件并行；`question-index.md`、总数入口和最终统计始终由主 Agent 单点维护。
+- 写入只按互不重叠文件并行；`question-index.md`、`question-frequency.json`、总数入口、频次排序和最终统计始终由主 Agent 单点维护。
 - 子 Agent 不提交、不推送。主 Agent 在全部结果合并、验证后再按仓库分别提交。
 - 如果用户要求 push，先同步远端、检查精确 diff，再推送并观察两个 Pages 工作流。
 
 ## 注意事项
 
-- **绝不新建面经实录文章**（如 12-xxx/），所有题目分发到 01-11 的已有维度文章
-- 个人化问题（"你用过XX吗""你简历上的XX"）必须转为通用问题
+- **绝不新建面经实录文章**。Agent 题分发到现有 01-13、15-17 维度；14 是公司偏好派生页，不直接收题
+- 个人化问题（“你用过XX吗”“你简历上的XX”）必须转为通用问题
 - 与已有题目重复时，增强已有答案而非新增
 - 来源标注保留原始公司/岗位信息
 - 自动相似度不能决定新增；逐篇人工语义判断才是最终事实源
