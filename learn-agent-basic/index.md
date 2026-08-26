@@ -33,8 +33,8 @@ eyebrow: Module 01
 2. 能区分 Workflow、LLM App、Agent 这三类系统。
 3. 能读懂一轮模型 API 请求、响应、工具调用和结果回传。
 4. 知道 Context、State、Memory、Tool、Planning、RAG 在系统里分别扮演什么角色。
-5. 能判断一个 Agent 设计是”可用系统”，还是”看起来会动的 Demo”。
-6. 知道怎么评估 Agent 的质量，而不是只凭直觉说”能跑”。
+5. 能判断一个 Agent 设计是“可用系统”，还是“看起来会动的 Demo”。
+6. 知道怎么评估 Agent 的质量，而不是只凭直觉说“能跑”。
 7. 理解为什么 Coding Agent 是当前最成功的落地形态，以及它的成功模式如何迁移。
 8. 了解多模态 Agent（Voice、Computer Use）、异步架构和 Agent 自进化的工程模式。
 9. 掌握高级 RAG（GraphRAG、Contextual Retrieval）和双层记忆架构的设计思路。
@@ -74,7 +74,7 @@ eyebrow: Module 01
 5. 根据结果更新状态
 6. 判断是否继续，直到完成或退出
 
-真正的区别不在于”它是不是调用了大模型”，而在于：
+真正的区别不在于“它是不是调用了大模型”，而在于：
 
 - 它是否有状态
 - 它是否能根据中间结果改变下一步行为
@@ -90,7 +90,7 @@ eyebrow: Module 01
 | [什么是 Agent](./01-what-is-an-agent/index.html) | 建立最基本的定义和闭环认知 |
 | [Workflow 和 Agent 的区别](./02-workflow-vs-agent/index.html) | 解决最常见的概念混淆 |
 | [一个 Agent 系统的核心组成](./03-core-components/index.html) | 拆开 Tool、State、Memory、Planning 等模块 |
-| [为什么很多 Agent Demo 一落地就不稳定](./04-why-agent-demos-break/index.html) | 提前建立工程视角，而不是只追求”能跑” |
+| [为什么很多 Agent Demo 一落地就不稳定](./04-why-agent-demos-break/index.html) | 提前建立工程视角，而不是只追求“能跑” |
 | [大模型 API 输入输出与 Tool Calling](./05-tool-calling-basics/index.html) | 从请求、typed 响应、因果关联和流式事件看懂完整工具循环 |
 | [Context、State 与 Memory](./06-memory-patterns/index.html) | 理清消息轨迹、缓存、压缩、状态与长期记忆的边界 |
 | [Planning、Reflection、RAG 分别解决什么问题](./07-planning-reflection-rag/index.html) | 防止把三个高频概念混成一团 |

@@ -33,7 +33,7 @@ eyebrow: "Agent Basic / 15"
 发现问题 → 人工分析原因 → 修改 prompt/工具 → 测试验证 → 部署
 ```
 
-这个循环的瓶颈在"人工分析"和"修改"环节。一个复杂的 Agent 系统可能有几十个 prompt 模板和上百个工具，每次调整都需要工程师深入理解上下文。
+这个循环的瓶颈在“人工分析”和“修改”环节。一个复杂的 Agent 系统可能有几十个 prompt 模板和上百个工具，每次调整都需要工程师深入理解上下文。
 
 ### 理想状态：Agent 改善 Agent
 
@@ -78,14 +78,14 @@ flowchart TB
 
 **为什么比 RL 高效？**
 
-传统强化学习通过梯度更新来"记住"经验，需要大量样本才能改变模型行为。而经验学习通过上下文学习（In-Context Learning）实现，样本效率高 250-400 倍：
+传统强化学习通过梯度更新来“记住”经验，需要大量样本才能改变模型行为。而经验学习通过上下文学习（In-Context Learning）实现，样本效率高 250-400 倍：
 
 | 方法 | 学习方式 | 所需样本量 | 更新速度 |
 | --- | --- | --- | --- |
 | 强化学习 | 梯度更新权重 | 数千-数万 | 需要训练 |
 | 经验学习 | 检索注入 Context | 1-5 个相关案例 | 即时生效 |
 
-差距的来源很直观：In-Context Learning 不需要通过反复试错来"压入"权重，只需要在推理时把相关经验放进 Context 就行。
+差距的来源很直观：In-Context Learning 不需要通过反复试错来“压入”权重，只需要在推理时把相关经验放进 Context 就行。
 
 **工程实现流程：**
 
@@ -104,7 +104,7 @@ flowchart TD
 
 ### 机制二：从 Tool User 到 Tool Creator
 
-在 12 篇中我们讲过，Coding Agent 的核心优势是"创造工具的工具"。自进化场景中，这个能力可以被系统化：
+在 12 篇中我们讲过，Coding Agent 的核心优势是“创造工具的工具”。自进化场景中，这个能力可以被系统化：
 
 1. Agent 在执行任务时发现现有工具无法完成某个子步骤
 2. Agent 生成新工具的代码（函数实现 + 参数 Schema + 文档）
@@ -236,7 +236,7 @@ prompt_v1.0 → prompt_v1.1(+日期处理规则) → prompt_v1.2(+错误恢复�
 - **时间衰减**：超过 N 天未被成功复用的经验，降低检索权重
 - **失败追踪**：经验被复用但导致失败时，标记 `failure_count`
 - **自动淘汰**：`failure_count / (success_count + failure_count) > 0.3` 时自动归档
-- **环境变更感知**：当检测到工具定义或 API 接口变化时，标记相关经验为"待验证"
+- **环境变更感知**：当检测到工具定义或 API 接口变化时，标记相关经验为“待验证”
 
 ## 自进化的风险与约束
 
@@ -286,7 +286,7 @@ Agent 创建了越来越多的工具，能力范围不断扩大，可能超出�
 
 ### 风险四：评估漂移
 
-Agent 自己修改了自己的评估标准（比如调整了"成功"的定义），导致指标看起来在提升但实际质量在下降。
+Agent 自己修改了自己的评估标准（比如调整了“成功”的定义），导致指标看起来在提升但实际质量在下降。
 
 **对策：固定外部测试集**
 
@@ -309,10 +309,10 @@ Agent 自己修改了自己的评估标准（比如调整了"成功"的定义）
 实践中两者配合使用：
 
 1. 日常改进用自进化（快、低成本、可回滚）
-2. 积累足够多的经验数据后，用 SFT 将通用模式"烧入"权重
+2. 积累足够多的经验数据后，用 SFT 将通用模式“烧入”权重
 3. 烧入后清理对应的经验库条目，释放 Context 空间
 
-这形成了一个从"运行时适应"到"永久学习"的梯度：
+这形成了一个从“运行时适应”到“永久学习”的梯度：
 
 ```text
 即时适应 ←──────────────────────────→ 永久学习
@@ -326,13 +326,13 @@ Context注入    经验库    Prompt修改    SFT    RL
 - 三种核心机制：经验学习（改 Context）、工具创造（改 Tool Library）、策略优化（改 Prompt）
 - 经验学习的样本效率比 RL 高两个数量级，是最实用的自进化手段
 - 自进化必须有约束：版本控制、权限隔离、固定外部评估、自动回滚
-- 自进化和训练不是替代关系，而是"快速适应"和"永久固化"的梯度两端
+- 自进化和训练不是替代关系，而是“快速适应”和“永久固化”的梯度两端
 
 工程上的核心建议：先实现经验库（成本最低、收益最直接），再考虑工具创造（需要沙箱基础设施），最后做策略自优化（风险最高、需要完善的评估体系）。
 
 ## 参考资料
 
 - 李博杰.《深入理解 AI Agent：设计原理与工程实践》第八章. Fixed commit e3883f8c
-- Zhao et al. "ExpeL: LLM Agents Are Experiential Learners." NeurIPS 2023
-- Wang et al. "VOYAGER: An Open-Ended Embodied Agent with Large Language Models." NeurIPS 2023
-- Qian et al. "CREATOR: Tool Creation for Disentangling Abstract and Concrete Reasoning of Large Language Models." EMNLP 2023
+- Zhao et al. “ExpeL: LLM Agents Are Experiential Learners.” NeurIPS 2023
+- Wang et al. “VOYAGER: An Open-Ended Embodied Agent with Large Language Models.” NeurIPS 2023
+- Qian et al. “CREATOR: Tool Creation for Disentangling Abstract and Concrete Reasoning of Large Language Models.” EMNLP 2023

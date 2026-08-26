@@ -167,12 +167,16 @@ def analyze_segment_quotes(segment, convert=False, fix_pairing=False,
     for index, char in enumerate(chars):
         # --- Curly double quotes ---
         if char == '\u201c':
-            if not expect_open_double and fix_pairing:
+            if not expect_open_double:
                 role = _classify_straight_quote(segment, index, expect_open_double)
                 if role == 'close':
-                    chars[index] = '\u201d'
-                    stats['right'] += 1
-                    stats['pairing_fixed'] += 1
+                    stats['pairing_issues'] += 1
+                    if fix_pairing:
+                        chars[index] = '\u201d'
+                        stats['right'] += 1
+                        stats['pairing_fixed'] += 1
+                    else:
+                        stats['left'] += 1
                     expect_open_double = True
                     continue
             stats['left'] += 1
@@ -182,12 +186,16 @@ def analyze_segment_quotes(segment, convert=False, fix_pairing=False,
             continue
 
         if char == '\u201d':
-            if expect_open_double and fix_pairing:
+            if expect_open_double:
                 role = _classify_straight_quote(segment, index, expect_open_double)
                 if role == 'open':
-                    chars[index] = '\u201c'
-                    stats['left'] += 1
-                    stats['pairing_fixed'] += 1
+                    stats['pairing_issues'] += 1
+                    if fix_pairing:
+                        chars[index] = '\u201c'
+                        stats['left'] += 1
+                        stats['pairing_fixed'] += 1
+                    else:
+                        stats['right'] += 1
                     expect_open_double = False
                     continue
             stats['right'] += 1
@@ -198,12 +206,16 @@ def analyze_segment_quotes(segment, convert=False, fix_pairing=False,
 
         # --- Curly single quotes ---
         if char == '\u2018':
-            if not expect_open_single and fix_pairing:
+            if not expect_open_single:
                 role = _classify_straight_quote(segment, index, expect_open_single)
                 if role == 'close':
-                    chars[index] = '\u2019'
-                    stats['right_single'] += 1
-                    stats['single_pairing_fixed'] += 1
+                    stats['single_pairing_issues'] += 1
+                    if fix_pairing:
+                        chars[index] = '\u2019'
+                        stats['right_single'] += 1
+                        stats['single_pairing_fixed'] += 1
+                    else:
+                        stats['left_single'] += 1
                     expect_open_single = True
                     continue
             stats['left_single'] += 1
@@ -213,12 +225,16 @@ def analyze_segment_quotes(segment, convert=False, fix_pairing=False,
             continue
 
         if char == '\u2019':
-            if expect_open_single and fix_pairing:
+            if expect_open_single:
                 role = _classify_straight_quote(segment, index, expect_open_single)
                 if role == 'open':
-                    chars[index] = '\u2018'
-                    stats['left_single'] += 1
-                    stats['single_pairing_fixed'] += 1
+                    stats['single_pairing_issues'] += 1
+                    if fix_pairing:
+                        chars[index] = '\u2018'
+                        stats['left_single'] += 1
+                        stats['single_pairing_fixed'] += 1
+                    else:
+                        stats['right_single'] += 1
                     expect_open_single = False
                     continue
             stats['right_single'] += 1

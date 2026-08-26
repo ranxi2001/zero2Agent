@@ -90,7 +90,7 @@ def main():
     file_args = [arg for arg in args if not arg.startswith('--')]
 
     if not file_args:
-        print('Chinese Quote Fixer v6 (double + single + pairing fix)')
+        print('Chinese Quote Fixer v7 (double + single + pairing fix)')
         print()
         print('Usage: python fix_quotes.py [--dry-run] [--fix-pairing] <file1.md> [file2.md] ...')
         print()

@@ -21,10 +21,10 @@ def check_file(file_path):
     file_name = os.path.basename(file_path)
     needs_fix_double = stats['straight_double_text'] > 0
     needs_fix_single = stats['straight_single_text'] > 0
-    needs_fix = needs_fix_double or needs_fix_single
     paired_double = stats['pairing_issues'] == 0
     paired_single = stats['single_pairing_issues'] == 0
     paired = paired_double and paired_single
+    needs_fix = needs_fix_double or needs_fix_single or not paired
 
     print(f'\n{file_name}')
     print(f'   Path: {file_path}')
@@ -75,7 +75,11 @@ def check_file(file_path):
     if not needs_fix and not (stats['left_double'] or stats['right_double'] or stats['left_single'] or stats['right_single']):
         print('   No quotes found in prose')
 
-    return {'needs_fix': needs_fix, 'paired': paired}
+    return {
+        'needs_fix': needs_fix,
+        'needs_straight_fix': needs_fix_double or needs_fix_single,
+        'paired': paired,
+    }
 
 
 def main():
@@ -100,6 +104,7 @@ def main():
     print(f'\nChecking {len(files)} file(s)...')
 
     needs_fix = 0
+    needs_straight_fix = 0
     unpaired = 0
     for file_path in files:
         result = check_file(file_path)
@@ -107,15 +112,20 @@ def main():
             continue
         if result['needs_fix']:
             needs_fix += 1
+        if result['needs_straight_fix']:
+            needs_straight_fix += 1
         if not result['paired']:
             unpaired += 1
 
-    print(f'\nSummary: {len(files)} checked, {needs_fix} need fix, {unpaired} pairing issues')
+    print(f'\nSummary: {len(files)} checked, {needs_fix} need fix, {unpaired} with pairing issues')
 
-    if needs_fix:
+    if needs_straight_fix:
         print(f'\nTo fix: python .claude/skills/chinese-quotes-fix/fix_quotes.py {" ".join(args)}')
     if unpaired:
         print(f'\nTo fix pairing: python .claude/skills/chinese-quotes-fix/fix_quotes.py --fix-pairing {" ".join(args)}')
+
+    if needs_fix or unpaired:
+        sys.exit(1)
 
 
 if __name__ == '__main__':
