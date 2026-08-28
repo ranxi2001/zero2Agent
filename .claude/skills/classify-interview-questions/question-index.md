@@ -1,7 +1,7 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-08-26（导入字节 AML / 火山方舟 AI Infra 面经；累计 592 题。传统八股 228 题）
+> 最后更新：2026-08-28（导入阿里 Agent Infra 一面题库；累计 594 题。传统八股 228 题）
 > 排序规则：正文与本索引在现有最小主题组内按 `question-frequency.json` 的频次降序排列；同频按 `firstSeenOrder` 排列。
 
 ## 统计
@@ -22,9 +22,9 @@
 | 12-business-ai-engineering | 17 |
 | 13-project-deep-dive | 21 |
 | 15-agent-concepts | 17 |
-| 16-agent-infra | 17 |
-| 17-ai-infra | 28 |
-| **总计** | **592** |
+| 16-agent-infra | 18 |
+| 17-ai-infra | 29 |
+| **总计** | **594** |
 
 ## 01-architecture-design（45题）
 
@@ -35,9 +35,9 @@
 5. Agent 在学术上由哪些部分组成？ — 字节一面
 6. 如果让你设计一个 Agent 的规划器，怎么避免路径震荡？ — 腾讯二面
 7. 如果模型不擅长遵守流程，怎么放进强约束工作流？ — 腾讯二面
-8. 什么时候该做 Agent？和 Workflow 的边界在哪？ — 30题 【科大讯飞一面追问：workflow和ReAct的区别与使用时机】【数据智能查询平台面试同题：整体是Workflow还是Agent自由调用】【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【曹操出行实习追问：脚本硬编码与 LangGraph Agent 的选型边界】
-9. 设计一个 AI Agent 爬取短视频平台内容 — 字节实习一面
-10. 生产级 Agent 的执行循环包含哪些阶段？ — 30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】
+8. 什么时候该做 Agent？和 Workflow 的边界在哪？ — 30题 【科大讯飞一面追问：workflow和ReAct的区别与使用时机】【数据智能查询平台面试同题：整体是Workflow还是Agent自由调用】【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【曹操出行实习追问：脚本硬编码与 LangGraph Agent 的选型边界】【阿里 Agent Infra 一面题库同题】
+9. 生产级 Agent 的执行循环包含哪些阶段？ — 30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】
+10. 设计一个 AI Agent 爬取短视频平台内容 — 字节实习一面
 11. 为什么很多团队做到最后是混合架构？ — 30题
 12. Agent 系统里，模型和系统代码的职责边界怎么划？ — 30题
 13. 如果面试官说“Agent 本质上就是套壳调用工具”，你怎么反驳？ — 30题
@@ -65,14 +65,14 @@
 35. Coding Agent 的完整链路是怎么运转的？从用户输入到代码产出的全流程 — 字节跳动Agent二面（Coding Agent）【百度大模型研发二面追问：Claude Code 用户交互全流程】【字节火山引擎 Managed Agent 一面追问：输入到页面展示的数据流】
 36. 只有模型 API 和 VS Code，如何从零搭建一套可用的 Agent 应用？ — 百度大模型研发二面（新增）
 37. 用拓扑排序（规则式）管理任务依赖 vs 让大模型推理决策执行顺序，各有什么问题？ — 广州某小厂Agent后端开发二面（新增）
-38. Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ — 腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】
-39. Agent 如何判断已经收集了足够的信息，最终给出输出结论？ — 字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】
-40. 设计一个内部的多源文档问答 AI，架构设计是什么？ — 百度AI智能体开发一面（新增）
-41. ReAct 在工程实现中，消息和状态协议应该怎么设计？ — 字节跳动AI Agent秋招一面（新增）
-42. 设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ — 百度 Agent算法岗二面（新增）
-43. Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ — 腾讯 WXG微信读书一面（新增）
-44. 在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？ — 地图 Agent二面（新增）
-45. Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ — 北京四维图新面经（新增）
+38. Agent 如何判断已经收集了足够的信息，最终给出输出结论？ — 字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】
+39. Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ — 腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】
+40. Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ — 北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】
+41. 设计一个内部的多源文档问答 AI，架构设计是什么？ — 百度AI智能体开发一面（新增）
+42. ReAct 在工程实现中，消息和状态协议应该怎么设计？ — 字节跳动AI Agent秋招一面（新增）
+43. 设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ — 百度 Agent算法岗二面（新增）
+44. Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ — 腾讯 WXG微信读书一面（新增）
+45. 在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？ — 地图 Agent二面（新增）
 
 ## 02-tool-management（37题）
 
@@ -120,7 +120,7 @@
 2. 你怎么设计 Agent 的失败恢复机制？ — 腾讯二面 【淘天AI应用开发一面追问：工具报错时prompt引导自主重试】
 3. 调支付接口超时了，Agent 怎么处理？ — 腾讯终面
 4. Agent 错误删除了数据，系统设计上怎么防范？ — 腾讯终面
-5. 如何限制 Agent 的思考深度、工具调用次数，避免无限循环？ — 30题 【淘天一面追问：思维死循环专项检测与打断】【快手AI应用开发一面追问：调用指纹去重+相同参数只允许一次+终止条件设计】【百度大模型研发二面追问：工具失败后重复调用保护】
+5. 如何限制 Agent 的思考深度、工具调用次数，避免无限循环？ — 30题 【淘天一面追问：思维死循环专项检测与打断】【快手AI应用开发一面追问：调用指纹去重+相同参数只允许一次+终止条件设计】【百度大模型研发二面追问：工具失败后重复调用保护】【阿里 Agent Infra 一面题库同题：重复 Tool Call 与停止条件】
 6. 幻觉的各种治理手段，优缺点？行为限制在什么阶段做？ — 蚂蚁一面 【视频面经追问：从RAG/Prompt/输出约束三个角度拆解幻觉控制】
 7. Agent 在中间步骤已经偏了，怎么尽早发现？ — 30题
 8. Agent 执行 shell 命令怎么保证安全？还有哪些安全问题？ — 蚂蚁一面 【蚂蚁AI应用开发二面追问：文件操作与代码执行权限管理】【小红书 Agent 岗一面追问：拦截时机与规则引擎】
@@ -137,31 +137,31 @@
 19. NL2SQL 场景下的 SQL 安全防护怎么做？ — 已有正文（补录索引）
 20. 如果上下文爆炸或工具循环调用，怎么解决？ — 慧疗互联网医院Agent开发一面 【字节Agent开发实习生一面同题：三级压缩】
 21. Agent 系统的 fallback 是怎么做的？ — 字节Agent开发一面
-22. 整体的失败重试机制（node、RAG链、tools）分别怎么做？ — 字节Agent开发一面
-23. 状态机卡死悬停/死循环的排查与熔断机制？ — 百度AI Agent前端研发实习生一面
+22. 整体的失败重试机制（node、RAG链、tools）分别怎么做？ — 字节Agent开发一面【阿里 Agent Infra 一面题库追问：分层 Timeout 与 Retry】
+23. 状态机卡死悬停/死循环的排查与熔断机制？ — 百度AI Agent前端研发实习生一面【阿里 Agent Infra 一面题库追问：Circuit Breaker】
 24. 工具调用返回结果为空或调用失败，Agent 应该怎么处理？是直接重试还是换策略？ — 最有料AI实习生面经（新增）
 25. 在跨境汇款等金融业务场景下，Agent 超时/失败如何应对并保证资金安全？ — 腾讯AI应用开发（新增）
 26. 所有模型超时或故障时怎么兜底？什么时候用规则引擎，什么时候转人工，服务恢复后怎么回切？ — 商汤大模型算法应用实习二面 【拼多多 AI Agent 提前批二面追问：API Provider 故障切换、负载均衡、自动恢复与回切】
-27. Coding Agent 看到 .env 文件会怎样？如何设计安全边界？ — Coding Agent面经（新增）
-28. Agent 失败通常有哪些原因？如何快速定位责任层？ — 点点互动Agent开发秋招一面（新增）
-29. Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？ — 字节剪映Agent一面（新增）
-30. 长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？ — 小红书 Agent 岗一面（新增）
-31. LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？ — 小红书 Agent 岗一面（新增）
-32. 工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？ — 影石创新 AI Agent一面（新增）
-33. 如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？ — 中兴 AI大模型算法岗一面（新增）
+27. Agent 失败通常有哪些原因？如何快速定位责任层？ — 点点互动Agent开发秋招一面（新增）【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】
+28. 如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？ — 中兴 AI大模型算法岗一面（新增）【阿里 Agent Infra 一面题库追问：Prompt Injection 的 Infra 防线】
+29. Coding Agent 看到 .env 文件会怎样？如何设计安全边界？ — Coding Agent面经（新增）
+30. Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？ — 字节剪映Agent一面（新增）
+31. 长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？ — 小红书 Agent 岗一面（新增）
+32. LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？ — 小红书 Agent 岗一面（新增）
+33. 工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？ — 影石创新 AI Agent一面（新增）
 34. 为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？ — 字节中国交易与广告 Agent一面（新增）
 
 ## 04-memory-context（61题）
 
-1. 上下文窗口不够用，对话太长了怎么办？ — 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】
+1. 上下文窗口不够用，对话太长了怎么办？ — 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】
 2. 长上下文里，怎么让 Agent 不忘记关键信息？ — 腾讯终面 【淘天一面追问：模型层面遗忘缓解机制】
 3. 用户说“按老样子帮我订一下”，模糊需求怎么处理？ — 腾讯终面
 4. 多 Agent / 多异步任务下，如何防止上下文污染？ — 字节一面
 5. 讲一下 Agent 中的“长短期记忆” — 字节一面 【含追问：记忆更新策略】【淘天一面追问：短期/长期区分存储、更新策略】【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【快手AI应用开发一面追问：用户偏好记忆设计+压缩后 token 预算控制】【阿里国际/哔哩哔哩一面同题：分级存储与自动沉淀】
 6. 什么时候应该追问用户，什么时候自己继续推理？ — 腾讯二面 【淘天一面追问：主动澄清 vs 历史画像推断决策框架】【淘天一面追问：极度模糊表达的工程处理】
-7. 对于上下文工程有什么经验？有没有做过 to-do list？ — 抖音一面
-8. 三类上下文的优先级怎么处理？ — 腾讯二面
-9. 你怎么理解 Agent 里的“状态”而不是“上下文”？ — 腾讯二面
+7. 你怎么理解 Agent 里的“状态”而不是“上下文”？ — 腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】
+8. 对于上下文工程有什么经验？有没有做过 to-do list？ — 抖音一面
+9. 三类上下文的优先级怎么处理？ — 腾讯二面
 10. Agent 记忆系统里的「做梦机制」（Dreaming）是什么？和 Reflection 有什么区别？ — 阿里云暑期实习Agent面经
 11. 设计亿级用户、千亿级记忆条目的记忆系统 — 后端AI八股
 12. 如何处理记忆的“新鲜度”与“重要性”之间的冲突？ — 后端AI八股
@@ -184,11 +184,11 @@
 29. 摘要总结往往会丢失关键细节，在长文本 Agent 中一般怎么来处理这一块？ — 淘天一面
 30. 有没有了解过最前沿的记忆设计？ — 字节实习一面 【淘宝闪购一面追问：OpenClaw vs Hermes 分层压缩记忆对比】【美团Keeta一面追问：Mem0 原理与自实现记忆的区别】【CVTE AI应用工程师一面追问：OpenClaw 记忆机制借鉴】
 31. Claude Code 的记忆架构是什么？上下文真的等于记忆吗？ — 字节实习一面 【小红书数据库智能化一面追问：主流 Agent 与 Claude Code 的上下文管理策略】
-32. 会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？ — 高德实习一面
-33. 设计会话记忆系统时需要考虑哪些维度？ — 高德实习一面
-34. 用户对话中频繁切换话题，会话记忆该怎么设计？ — 高德实习一面
-35. Lost in the Middle 问题是什么？有哪些解决方案？ — 淘宝闪购一面
-36. 什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？ — 蚂蚁AI应用开发二面
+32. 什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？ — 蚂蚁AI应用开发二面【阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache】
+33. 会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？ — 高德实习一面
+34. 设计会话记忆系统时需要考虑哪些维度？ — 高德实习一面
+35. 用户对话中频繁切换话题，会话记忆该怎么设计？ — 高德实习一面
+36. Lost in the Middle 问题是什么？有哪些解决方案？ — 淘宝闪购一面
 37. 长周期对话（间隔数周后继续）如何管理历史？冷启动怎么做？ — 淘宝闪购一面
 38. 怎么判断当前用户的提问需不需要去检索长期记忆？ — 淘天Agent开发
 39. 怎么实现多轮对话过程中，根据用户反馈自我调整的功能？ — 腾讯AI应用开发实习一面
@@ -332,7 +332,7 @@
 31. Agent 异步任务管线中引入消息中间件（Kafka），会不会反而变慢或成为瓶颈？扫表 vs 消息驱动选型 — 淘天Agent开发
 32. 用 AI Coding 工具写代码达不到预期怎么办？ — CVTE AI应用工程师一面
 33. LangGraph 的 State Snapshot（状态快照）机制是怎么实现的？ — 快手AI应用开发算法一面
-34. Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ — 美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】
+34. Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ — 美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】
 35. SSE 流式输出中断后如何保证之前的输出不丢失？ — 某教育agent开发 【视频面经追问：用户中途关浏览器后内容保留与恢复】
 36. 产品的用户量、每日 token 消耗和底层模型选型怎么估算？ — 快手AI应用开发一面
 37. Agent 如何做版本管理与灰度？ — Agent面经八股系列
@@ -341,11 +341,11 @@
 40. 高并发场景下，如何设计 Agent 服务的弹性伸缩策略？ — 已有正文（补录索引）
 41. 如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？ — Agent开发八股合集（南京大学）
 42. 流式返回时，如何插入非文本事件（工具调用标记、思考过程、错误提示），且不影响前端渲染？ — 牛客Agent面经汇总
-43. SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ — 成都agent面试（社招）
+43. SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ — 成都agent面试（社招）【阿里 Agent Infra 一面题库同题】
 44. AgentState 的作用是什么？为什么不使用全局变量？ — 字节Agent开发一面
-45. 从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？ — 电商库存一面、小得盈满一面（新增）
-46. 如何记录 Agent 的非确定性边界，实现可重复的故障回放？ — 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】
-47. 系统里多租户隔离是怎么实现的？ — 视频面经汇总（新增）
+45. 系统里多租户隔离是怎么实现的？ — 视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】
+46. 从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？ — 电商库存一面、小得盈满一面（新增）
+47. 如何记录 Agent 的非确定性边界，实现可重复的故障回放？ — 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】
 48. 了解 Kubernetes 吗？在 Agent 项目里有没有实际用到？ — 视频面经汇总（新增）
 49. 进程、线程、协程有什么区别？什么场景下协程更有优势？ — 视频面经汇总（新增）
 50. 子 Agent 和工具调用的 Token 用量统计缺失，怎么做容错补偿？ — 深信服AI全栈开发二面（新增）
@@ -427,7 +427,7 @@
 25. RAG 系统的端到端性能如何优化？ — 快手一面
 26. GraphRAG 在处理 Agent 复杂关联查询时的优势在哪里？ — 淘天一面 【蚂蚁AI应用开发二面同题：GraphRAG 理解与应用】【蚂蚁AI应用开发二面追问：Self-Reflection/CoT 噪声过滤】【腾讯AI应用开发二面追问：三元组抽取幻觉控制 + Community Summary 设计】【字节二面追问：多跳推理/复杂逻辑查询场景下RAG架构优化】【币安AI大模型实习一面追问：叶子节点在智能客服中如何触发】
 27. 分块策略怎么设计？不同策略的优缺点？ — 高德实习一面 【腾讯AI应用开发二面追问：chunk边界修正+表格跨块修复】【字节AI一面追问：领域文档语义感知切片】【Shopee 一面追问：为什么不能只按固定 Token 数切分】
-28. 知识库整体怎么设计？从文档接入到检索的完整架构 — 高德实习一面 【字节二面同题：RAG完整流程从文档切块到生成】
+28. 知识库整体怎么设计？从文档接入到检索的完整架构 — 高德实习一面 【字节二面同题：RAG完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】
 29. 向量数据库怎么选型？不同规模下该用什么方案？ — 阿里国际二面 【淘天Agent开发追问：为什么选pgvector】
 30. Embedding 模型怎么选？选型时考虑哪些因素？ — 高德实习一面
 31. 为什么 Claude Code 不用 RAG 检索代码，而是直接用 grep？ — 字节实习一面
@@ -605,7 +605,7 @@
 5. Vibe Coding 和 Harness，你更偏向哪种路线？为什么？ — 字节TikTok实习后端AI开发一面
 6. 你会关注 Harness、Context Engineering 这类行业热点吗？优势劣势？ — 腾讯CDG产品经理一面 【字节大模型算法暑期二面追问：harness/Hermes新Agent设计】【网易互娱二面同题】
 7. Harness、Hermes 这种比较新的 Agent 设计了解吗？ — 已有正文（补录索引）
-8. MCP 是什么？它解决了 Function Calling 的什么根本问题？ — 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】
+8. MCP 是什么？它解决了 Function Calling 的什么根本问题？ — 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】
 9. MCP 和 A2A 分别解决什么层面的问题？为什么需要两个协议？ — Agent 30题 【蚂蚁一面/币安AI大模型实习一面追问】
 10. Skills 是什么？为什么有了 MCP 和 Function Calling 还需要 Skills？ — 字节实习一面 【蚂蚁一面/小红书/CVTE/科大讯飞同题】
 11. Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？ — 蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】
@@ -616,27 +616,28 @@
 16. 如何比较 Coding Agent、通用助手与办公 Agent？ — 百度大模型研发二面（新增）
 17. Agent 和 Siri 这种传统助手的核心差别在哪？ — 高频题
 
-## 16-agent-infra（17题）
+## 16-agent-infra（18题）
 
-1. Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ — 百度/虾皮 AI Infra 面经（新增）
-2. Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ — 美团/百度 AI Infra 面经（新增）
-3. Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ — 字节 AML / 火山方舟 AI Infra一面（新增）
-4. 一次 Agent 请求的完整执行链路是什么？ — Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】
-5. Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ — 百度 AI Infra 面经（新增）
-6. Kubernetes Scheduler 的三个队列如何流转？ — 虾皮 AI Infra 二面（新增）
-7. Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ — 虾皮 AI Infra 面经（新增）
-8. Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ — 虾皮 AI Infra 面经（新增）
-9. Agentic RL 的 Rollout、Training 与推理引擎如何编排？ — AI Infra 小厂面经（新增）
-10. Agent Router 应以什么运行形态存在，请求数据流如何设计？ — 字节 AI Infra 实习一面（新增）
-11. Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ — 字节 Agent 后端终面（新增）
-12. 如果让你设计一个 Agent Runtime，你会怎么拆？ — Agent Infra 系统设计高频题
-13. 为什么需要 Checkpoint，恢复时从哪里继续？ — 长任务状态管理高频题
-14. Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ — 分布式幂等高频题
-15. Agent Sandbox 解决什么问题，为什么容器不一定够？ — 代码执行隔离高频题
-16. Kubernetes 在 Agent Infra 中负责什么？ — Kubernetes/Controller 高频题
-17. 如何支撑几十万并发 Agent Task，并把它观测清楚？ — 高并发调度高频题
+1. Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ — 百度/虾皮 AI Infra 面经（新增）【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】
+2. 一次 Agent 请求的完整执行链路是什么？ — Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】
+3. Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ — 美团/百度 AI Infra 面经（新增）
+4. Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ — 字节 AML / 火山方舟 AI Infra一面（新增）
+5. 如果让你设计一个 Agent Runtime，你会怎么拆？ — Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】
+6. 为什么需要 Checkpoint，恢复时从哪里继续？ — 长任务状态管理高频题【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】
+7. Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ — 分布式幂等高频题【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】
+8. Agent Sandbox 解决什么问题，为什么容器不一定够？ — 代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】
+9. Kubernetes 在 Agent Infra 中负责什么？ — Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】
+10. 如何支撑几十万并发 Agent Task，并把它观测清楚？ — 高并发调度高频题【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】
+11. Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ — 百度 AI Infra 面经（新增）
+12. Kubernetes Scheduler 的三个队列如何流转？ — 虾皮 AI Infra 二面（新增）
+13. Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ — 虾皮 AI Infra 面经（新增）
+14. Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ — 虾皮 AI Infra 面经（新增）
+15. Agentic RL 的 Rollout、Training 与推理引擎如何编排？ — AI Infra 小厂面经（新增）
+16. Agent Router 应以什么运行形态存在，请求数据流如何设计？ — 字节 AI Infra 实习一面（新增）
+17. Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ — 字节 Agent 后端终面（新增）
+18. Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？ — 阿里 Agent Infra 一面题库（新增）
 
-## 17-ai-infra（28题）
+## 17-ai-infra（29题）
 
 1. CUDA 的 Thread、Warp、Block、Grid 和 SM 如何映射？SIMT、同步与 Warp 分歧如何影响性能？ — 小马智行/OPPO/蔚来/沐曦 AI Infra 面经（新增）
 2. 如何用 Roofline 和算术强度指导 CUDA 算子优化？ — 美团/拼多多/小鹏/快手等 AI Infra 面经（新增）
@@ -647,13 +648,13 @@
 7. CPU、GPU 与 NPU 的体系结构和优化目标有什么差异？ — 蔚来/美团/讯飞/小鹏等 AI Infra 面经（新增）
 8. FP8、NVFP4、INT8 与 W4A16 的数值格式、缩放粒度和硬件执行路径有何不同？ — 混元/讯飞/智谱/摩尔线程等 AI Infra 面经（新增）
 9. 量化后为什么不一定更快？量化 Matmul、反量化、Prefill 和 Decode 的瓶颈如何判断？ — 美团/拼多多/混元/爱奇艺 AI Infra 面经（新增）
-10. GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？ — 阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）
-11. FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？ — 阿里国际/快手/美团等 AI Infra 面经（新增）
-12. 流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？ — 快手/百度/美团 AI Infra 面经（新增）
-13. CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？ — 拼多多/小马智行/飞腾 AI Infra 面经（新增）
-14. Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？ — 字节/荣耀/OPPO AI Infra 面经（新增）
-15. Attention 与 FFN 的计算量和参数量谁更大？ — 阿里云/百度 AI Infra 一面
-16. KV Cache 占用如何计算，为什么不能只按请求数做容量规划？ — 抖音搜推/百度 AI Infra 一面
+10. KV Cache 占用如何计算，为什么不能只按请求数做容量规划？ — 抖音搜推/百度 AI Infra 一面【阿里 Agent Infra 一面题库追问：KV Cache 原理】
+11. GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？ — 阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）
+12. FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？ — 阿里国际/快手/美团等 AI Infra 面经（新增）
+13. 流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？ — 快手/百度/美团 AI Infra 面经（新增）
+14. CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？ — 拼多多/小马智行/飞腾 AI Infra 面经（新增）
+15. Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？ — 字节/荣耀/OPPO AI Infra 面经（新增）
+16. Attention 与 FFN 的计算量和参数量谁更大？ — 阿里云/百度 AI Infra 一面
 17. 如何设计大模型在线推理服务？ — 百度/智象未来 AI Infra 一面
 18. CUDA Graph 为什么能降低推理开销？为什么可能额外占显存，Prefill 与 Decode 哪个阶段更适合？ — 小马智行/爱奇艺 AI Infra 面经（新增）
 19. vLLM/SGLang 的请求调度与 Continuous Batching 如何工作？请求被抢占后如何恢复？ — 阿里国际/爱奇艺等 AI Infra 面经（新增）
@@ -662,10 +663,11 @@
 22. PD 分离解决什么问题，Prefill 与 Decode 资源比例怎么定？ — 百度 AI Infra 一面
 23. 分布式训练为什么容易失败，如何恢复？ — 摩尔线程 AI Infra 一面
 24. GPU 利用率很低，但请求延迟很高，怎么排查？ — 小鹏 AI Infra 一面
-25. AI Infra 和 Agent Infra 有什么区别？ — AI 平台边界高频题
-26. 如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ — AI 平台系统设计高频题
-27. GPU 调度和普通 CPU 调度有什么不同？ — GPU Scheduler 高频题
-28. 模型版本升级如何做到可观测、可灰度、可回滚？ — 模型发布高频题
+25. AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？ — 阿里 Agent Infra 一面题库（新增）
+26. AI Infra 和 Agent Infra 有什么区别？ — AI 平台边界高频题
+27. 如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ — AI 平台系统设计高频题
+28. GPU 调度和普通 CPU 调度有什么不同？ — GPU Scheduler 高频题
+29. 模型版本升级如何做到可观测、可灰度、可回滚？ — 模型发布高频题
 
 ---
 

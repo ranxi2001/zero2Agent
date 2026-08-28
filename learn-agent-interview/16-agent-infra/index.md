@@ -17,7 +17,7 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 
 ## Q：Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？
 
-> 来源：[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6)
+> 来源：[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】
 
 **新手答**：“请求交给 API Server，Scheduler 选节点，Kubelet 拉起容器。”
 
@@ -28,6 +28,32 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 这是一组异步、最终一致的 Reconcile，不是一条同步 RPC。CSI、CNI 的具体调用位置还受运行时、插件和 Kubernetes 版本影响，回答时应说明组件责任，不硬背一条固定时序。
 
 **差距在哪**：新手背组件顺序，高手能讲清对象所有权、watch/reconcile、调度绑定与数据面就绪的边界。
+
+---
+
+## Q：一次 Agent 请求的完整执行链路是什么？
+
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】
+
+**新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
+
+**高手答**：
+
+```text
+1. Gateway 完成身份、租户、限流和请求幂等校验
+2. Control Plane 创建 Run，持久化初始状态和版本快照
+3. Scheduler 发放带 lease 的下一步任务
+4. Worker 装配 Context，调用模型并持久化响应或 Tool Call
+5. Policy 层校验工具、参数、权限、预算和审批要求
+6. Tool Runtime 以 execution_id 执行动作
+7. 结果进入 SUCCEEDED、FAILED 或 UNKNOWN，并写入事件日志
+8. 状态机决定继续、降级、等待、补偿或结束
+9. 全链路记录 Trace、成本、版本和审计信息
+```
+
+这里记录的是模型响应和结构化决策，不依赖保存模型私有推理过程。Run 还要有最大步骤、总 Deadline、Token/Cost Budget 和取消传播，防止模型循环无限消耗资源。
+
+**差距在哪**：新手只描述模型循环，高手能指出接入幂等、租约、策略门禁、状态提交和退出条件。
 
 ---
 
@@ -65,29 +91,144 @@ Kubernetes 只负责重建计算实例，Agent Runtime 才负责业务状态恢�
 
 ---
 
-## Q：一次 Agent 请求的完整执行链路是什么？
+## Q：如果让你设计一个 Agent Runtime，你会怎么拆？
 
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】
+> 来源：Agent Infra / 平台工程系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】
 
-**新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
+**新手答**：“接入 LLM，再提供工具、Memory 和日志，最后部署到 Kubernetes。”
 
 **高手答**：
 
+我会先把一次 Agent Run 建模为**可能暂停和恢复的有状态执行**，再拆成管理面、控制面和执行面：
+
 ```text
-1. Gateway 完成身份、租户、限流和请求幂等校验
-2. Control Plane 创建 Run，持久化初始状态和版本快照
-3. Scheduler 发放带 lease 的下一步任务
-4. Worker 装配 Context，调用模型并持久化响应或 Tool Call
-5. Policy 层校验工具、参数、权限、预算和审批要求
-6. Tool Runtime 以 execution_id 执行动作
-7. 结果进入 SUCCEEDED、FAILED 或 UNKNOWN，并写入事件日志
-8. 状态机决定继续、降级、等待、补偿或结束
-9. 全链路记录 Trace、成本、版本和审计信息
+Management Plane：Agent/Tool/Skill 注册、版本、发布与租户配置
+Control Plane：状态机、租约、调度、超时、配额与恢复
+Execution Plane：LLM Worker、Tool Worker、Sandbox
+Data Plane：Run State、事件日志、Checkpoint、Artifact、Memory
+Observability：Trace、Metrics、Logs、Eval、Cost、Audit
 ```
 
-这里记录的是模型响应和结构化决策，不依赖保存模型私有推理过程。Run 还要有最大步骤、总 Deadline、Token/Cost Budget 和取消传播，防止模型循环无限消耗资源。
+Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版本号，Worker 通过 lease 领取任务，提交结果时检查 lease 和状态版本，避免过期 Worker 覆盖新结果。暂停等待人工审批时释放 Worker，审批事件到达后再唤醒任务。
 
-**差距在哪**：新手只描述模型循环，高手能指出接入幂等、租约、策略门禁、状态提交和退出条件。
+LangChain、LangGraph 等 Framework 主要提供 Agent/Graph 的开发抽象；Runtime 负责租约、持久化、恢复、隔离、配额和跨 Framework 的执行治理。两者可以集成，但不能把“Graph 能表达状态”误认为“平台已经具备生产运行语义”。
+
+生产目标通常是 **at-least-once 调度 + 幂等副作用**，而不是轻易承诺 exactly-once。还要为每个 Run 固定模型、Prompt、Tool 和策略版本，否则恢复后可能在另一套行为定义上继续执行。
+
+**差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
+
+---
+
+## Q：为什么需要 Checkpoint，恢复时从哪里继续？
+
+> 来源：长任务恢复与状态管理高频题【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】
+
+**新手答**：“每一步保存消息，Pod 挂了以后读取最后一条继续执行。”
+
+**高手答**：
+
+我会区分三类持久化数据：
+
+| 数据 | 作用 | 典型内容 |
+|------|------|---------|
+| 事件日志 | 记录已经发生的事实 | 状态转换、模型响应、Tool 执行状态 |
+| Checkpoint | 加速恢复 | 当前 Step、Context 引用、Budget、版本 |
+| 副作用记录 | 去重和对账 | `execution_id`、下游请求 ID、结果摘要 |
+
+Checkpoint 应围绕一致性边界保存，而不是机械地“每轮保存一次”。模型已经产生 Tool Call、工具即将分发、工具结果提交、进入人工等待，都是重要边界。
+
+恢复时先取得 Run 的新 lease，加载最近 Checkpoint，再重放后续事件，最后检查未决 Tool Call。只有状态明确为未执行且重试安全时才继续；如果外部操作可能成功但结果未落库，应进入 `UNKNOWN`，通过下游幂等查询或对账确认，不能直接重放。
+
+**差距在哪**：新手把 Checkpoint 当消息快照，高手能处理快照之后的事件、并发恢复和不确定副作用。
+
+---
+
+## Q：Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？
+
+> 来源：分布式幂等与部分失败高频题【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】
+
+**新手答**：“给 Tool Call 加一个唯一 ID，恢复时查数据库。”
+
+**高手答**：
+
+唯一 ID 只有被副作用边界识别才有价值。我会为逻辑动作生成稳定的 `execution_id`，重试时保持不变，并优先把它传给下游作为幂等键：
+
+```text
+PENDING → DISPATCHED → RUNNING → SUCCEEDED
+                              ├→ FAILED
+                              └→ UNKNOWN
+```
+
+- 下游支持幂等键：重复请求返回同一业务结果；
+- 同一数据库内：用唯一约束、事务或 Transactional Outbox；
+- 下游支持查询：按业务键查询并对账；
+- 下游既不幂等也不可查询：超时后标记 `UNKNOWN`，交由人工确认或补偿流程。
+
+对支付、发消息、删除资源等操作还应增加审批、操作分级和审计。Saga 补偿也不等于回滚，补偿本身可能失败并且必须幂等。
+
+**差距在哪**：新手只说“去重”，高手知道最危险的是执行结果未知，并能按下游能力选择事务、对账或人工介入。
+
+---
+
+## Q：Agent Sandbox 解决什么问题，为什么容器不一定够？
+
+> 来源：[荣耀 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/60ab2e3a45074b7391199acb9b5c6ca3) / [百度 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / 代码执行与隔离设计高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】
+
+**新手答**：“Docker 有 Namespace 和 Cgroup，可以安全运行模型生成的代码。”
+
+**高手答**：
+
+Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还要控制文件系统、网络、系统调用、凭据、进程树、磁盘和执行时间。容器共享宿主机内核，隔离强度取决于 user namespace、capabilities、seccomp、SELinux/AppArmor 和宿主配置，不能把“用了 Docker”直接等同于安全。
+
+| 场景 | 可选隔离 | 主要代价 |
+|------|---------|---------|
+| 内部只读工具 | 加固容器 | 隔离较轻，启动快 |
+| 多租户代码执行 | gVisor / Kata | 兼容性或启动开销 |
+| 高风险不可信代码 | MicroVM | 镜像、池化和运维成本 |
+
+无论采用哪种方案，都应使用短期身份、只读根文件系统、默认拒绝网络、资源上限和硬 Deadline。复用预热 Sandbox 可以降低冷启动，但必须证明租户间文件、进程、缓存和凭据已经清理；高风险任务更适合一次性销毁环境。
+
+当 Agent 代表用户调用外部系统时，Runtime 应把已认证用户映射为短期、限定 audience/scope 的委托凭证，并在受控传输层注入；长期密钥、刷新令牌和授权决策不能进入 Prompt。模型只提出 Tool Call，Runtime 仍要按用户、租户、工具和资源重新做 AuthZ，高风险操作再绑定审批范围与审计记录。
+
+进程地址空间隔离只能阻止普通进程直接读取彼此内存，不等于完整安全边界；容器仍要面对共享内核、错误授权和网络外泄等攻击面。Namespace 负责隔离“看见什么”，Cgroup 负责约束“能用多少”，两者也都不能替代系统调用和身份权限控制。
+
+**差距在哪**：新手只比较容器技术名称，高手从威胁模型、信任等级和清理边界选择隔离方案。
+
+---
+
+## Q：Kubernetes 在 Agent Infra 中负责什么？
+
+> 来源：Kubernetes 调度与 Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】
+
+**新手答**：“负责创建 Pod、自动扩容和故障迁移。”
+
+**高手答**：
+
+Kubernetes 管的是计算实例和资源期望状态，不负责恢复 Agent 的业务状态。Pod 被重建以后，Run 能否继续取决于外部状态、lease、Checkpoint 和工具幂等。
+
+它适合承担 Worker/Sandbox 生命周期、资源请求与限制、节点选择、弹性伸缩、ServiceAccount 和 NetworkPolicy。Controller 的 Reconcile 是 level-triggered：每次都根据 Desired State 和 Actual State 收敛，必须能处理重复事件、缓存陈旧和部分成功。
+
+“一个 Agent 一个 Pod”还会带来 API Server/etcd 对象规模、Scheduler 吞吐、镜像拉取、IP 消耗、资源碎片和回收压力。短任务可以使用 Worker Pool 或预热 Sandbox；强隔离任务可以保留一任务一环境，但要通过池化和容量规划控制冷启动。
+
+**差距在哪**：新手把 Kubernetes 当业务恢复系统，高手明确基础设施重调度与 Agent 状态恢复的责任边界。
+
+---
+
+## Q：如何支撑几十万并发 Agent Task，并把它观测清楚？
+
+> 来源：高并发调度与 Agent Observability 高频题【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】
+
+**新手答**：“用 MQ 解耦，再水平扩容 Worker，接入日志、指标和链路追踪。”
+
+**高手答**：
+
+我会先澄清“几十万并发”是活跃会话、等待任务还是同时计算，并给出到达率、平均步骤数、各阶段耗时和 SLO。大量 Run 可能在等待 LLM、Tool 或人工事件，不能都占用 Worker。
+
+控制面按租户、优先级和资源类型分队列；用 visibility timeout/lease、ack、DLQ 和毒任务隔离保证消费；用 weighted fair scheduling、并发配额和 admission control 防止大租户挤占资源；对 LLM、GPU 和外部 Tool 分别实施背压，而不是只按 CPU 扩容。
+
+一个 Run 是根 Trace，模型、检索、工具、Sandbox 和状态提交是 Span。核心指标包括任务语义成功率、基础设施失败率、队列等待、端到端延迟、步骤数、Token/Cost 和 `UNKNOWN` 副作用数。Prompt、Tool 参数和结果可能包含隐私，必须脱敏、采样、分级存储和审计，不能直接放进高基数 Metrics Label。
+
+**差距在哪**：新手会画 Queue + Worker，高手先定义负载模型，并同时处理公平性、下游瓶颈和可观测数据治理。
 
 ---
 
@@ -203,140 +344,23 @@ Infra 不会直接提高基础模型智力，但会扩大模型可可靠利用�
 
 ---
 
-## Q：如果让你设计一个 Agent Runtime，你会怎么拆？
+## Q：Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？
 
-> 来源：Agent Infra / 平台工程系统设计高频题
+> 来源：阿里 Agent Infra 一面题库
 
-**新手答**：“接入 LLM，再提供工具、Memory 和日志，最后部署到 Kubernetes。”
-
-**高手答**：
-
-我会先把一次 Agent Run 建模为**可能暂停和恢复的有状态执行**，再拆成管理面、控制面和执行面：
-
-```text
-Management Plane：Agent/Tool/Skill 注册、版本、发布与租户配置
-Control Plane：状态机、租约、调度、超时、配额与恢复
-Execution Plane：LLM Worker、Tool Worker、Sandbox
-Data Plane：Run State、事件日志、Checkpoint、Artifact、Memory
-Observability：Trace、Metrics、Logs、Eval、Cost、Audit
-```
-
-Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版本号，Worker 通过 lease 领取任务，提交结果时检查 lease 和状态版本，避免过期 Worker 覆盖新结果。暂停等待人工审批时释放 Worker，审批事件到达后再唤醒任务。
-
-生产目标通常是 **at-least-once 调度 + 幂等副作用**，而不是轻易承诺 exactly-once。还要为每个 Run 固定模型、Prompt、Tool 和策略版本，否则恢复后可能在另一套行为定义上继续执行。
-
-**差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
-
----
-
-## Q：为什么需要 Checkpoint，恢复时从哪里继续？
-
-> 来源：长任务恢复与状态管理高频题
-
-**新手答**：“每一步保存消息，Pod 挂了以后读取最后一条继续执行。”
+**新手答**：“适合。定义一个 AgentTask CRD，再写 Controller 创建 Pod，Kubernetes 会负责状态管理和失败恢复。”
 
 **高手答**：
 
-我会区分三类持久化数据：
+先判断对象是否符合 Kubernetes 的资源语义，而不是因为任务跑在集群里就做 CRD。Kubernetes [Custom Resources 官方文档](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/)建议在对象适合声明式 API、天然属于集群或 Namespace、需要 `kubectl`/RBAC/审计及 Controller 持续 Reconcile 时使用自定义资源。
 
-| 数据 | 作用 | 典型内容 |
-|------|------|---------|
-| 事件日志 | 记录已经发生的事实 | 状态转换、模型响应、Tool 执行状态 |
-| Checkpoint | 加速恢复 | 当前 Step、Context 引用、Budget、版本 |
-| 副作用记录 | 去重和对账 | `execution_id`、下游请求 ID、结果摘要 |
+因此，长生命周期、数量受控的 `AgentPool`、`SandboxClass`、租户执行环境或需要运维人员声明目标状态的 Agent Run 可以建模为 CRD。`spec` 保存期望状态和不可变版本引用，`status` 保存 Controller 观察到的阶段、Condition 与关联资源；Reconcile 必须幂等，并处理 Finalizer、取消、过期 Worker 回写和孤儿资源回收。
 
-Checkpoint 应围绕一致性边界保存，而不是机械地“每轮保存一次”。模型已经产生 Tool Call、工具即将分发、工具结果提交、进入人工等待，都是重要边界。
+但每个 LLM Step、Tool Call 或几秒钟完成的高频 Task 不适合直接写成 CR。它们会产生大量创建、状态更新、List/Watch 和删除流量，把业务任务吞吐耦合到 API Server、etcd 和 Controller 队列；Prompt、消息、Trace 和 Artifact 也不适合塞进 Kubernetes 对象。此时应把任务事实放进专用数据库、事件日志和 Queue，只让 CRD 管理较粗粒度的执行环境，并在两侧保存稳定引用。
 
-恢复时先取得 Run 的新 lease，加载最近 Checkpoint，再重放后续事件，最后检查未决 Tool Call。只有状态明确为未执行且重试安全时才继续；如果外部操作可能成功但结果未落库，应进入 `UNKNOWN`，通过下游幂等查询或对账确认，不能直接重放。
+最终要用对象基数、创建峰值、状态更新频率、保留周期、单对象大小和控制面 SLO 压测决定。需要 Watch 时还要正确处理 `resourceVersion`、断线重连和 `410 Gone`，不能把 Watch 当作永久可靠的消息队列。
 
-**差距在哪**：新手把 Checkpoint 当消息快照，高手能处理快照之后的事件、并发恢复和不确定副作用。
-
----
-
-## Q：Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？
-
-> 来源：分布式幂等与部分失败高频题
-
-**新手答**：“给 Tool Call 加一个唯一 ID，恢复时查数据库。”
-
-**高手答**：
-
-唯一 ID 只有被副作用边界识别才有价值。我会为逻辑动作生成稳定的 `execution_id`，重试时保持不变，并优先把它传给下游作为幂等键：
-
-```text
-PENDING → DISPATCHED → RUNNING → SUCCEEDED
-                              ├→ FAILED
-                              └→ UNKNOWN
-```
-
-- 下游支持幂等键：重复请求返回同一业务结果；
-- 同一数据库内：用唯一约束、事务或 Transactional Outbox；
-- 下游支持查询：按业务键查询并对账；
-- 下游既不幂等也不可查询：超时后标记 `UNKNOWN`，交由人工确认或补偿流程。
-
-对支付、发消息、删除资源等操作还应增加审批、操作分级和审计。Saga 补偿也不等于回滚，补偿本身可能失败并且必须幂等。
-
-**差距在哪**：新手只说“去重”，高手知道最危险的是执行结果未知，并能按下游能力选择事务、对账或人工介入。
-
----
-
-## Q：Agent Sandbox 解决什么问题，为什么容器不一定够？
-
-> 来源：[荣耀 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/60ab2e3a45074b7391199acb9b5c6ca3) / [百度 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / 代码执行与隔离设计高频题
-
-**新手答**：“Docker 有 Namespace 和 Cgroup，可以安全运行模型生成的代码。”
-
-**高手答**：
-
-Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还要控制文件系统、网络、系统调用、凭据、进程树、磁盘和执行时间。容器共享宿主机内核，隔离强度取决于 user namespace、capabilities、seccomp、SELinux/AppArmor 和宿主配置，不能把“用了 Docker”直接等同于安全。
-
-| 场景 | 可选隔离 | 主要代价 |
-|------|---------|---------|
-| 内部只读工具 | 加固容器 | 隔离较轻，启动快 |
-| 多租户代码执行 | gVisor / Kata | 兼容性或启动开销 |
-| 高风险不可信代码 | MicroVM | 镜像、池化和运维成本 |
-
-无论采用哪种方案，都应使用短期身份、只读根文件系统、默认拒绝网络、资源上限和硬 Deadline。复用预热 Sandbox 可以降低冷启动，但必须证明租户间文件、进程、缓存和凭据已经清理；高风险任务更适合一次性销毁环境。
-
-进程地址空间隔离只能阻止普通进程直接读取彼此内存，不等于完整安全边界；容器仍要面对共享内核、错误授权和网络外泄等攻击面。Namespace 负责隔离“看见什么”，Cgroup 负责约束“能用多少”，两者也都不能替代系统调用和身份权限控制。
-
-**差距在哪**：新手只比较容器技术名称，高手从威胁模型、信任等级和清理边界选择隔离方案。
-
----
-
-## Q：Kubernetes 在 Agent Infra 中负责什么？
-
-> 来源：Kubernetes 调度与 Controller 高频题
-
-**新手答**：“负责创建 Pod、自动扩容和故障迁移。”
-
-**高手答**：
-
-Kubernetes 管的是计算实例和资源期望状态，不负责恢复 Agent 的业务状态。Pod 被重建以后，Run 能否继续取决于外部状态、lease、Checkpoint 和工具幂等。
-
-它适合承担 Worker/Sandbox 生命周期、资源请求与限制、节点选择、弹性伸缩、ServiceAccount 和 NetworkPolicy。Controller 的 Reconcile 是 level-triggered：每次都根据 Desired State 和 Actual State 收敛，必须能处理重复事件、缓存陈旧和部分成功。
-
-“一个 Agent 一个 Pod”还会带来 API Server/etcd 对象规模、Scheduler 吞吐、镜像拉取、IP 消耗、资源碎片和回收压力。短任务可以使用 Worker Pool 或预热 Sandbox；强隔离任务可以保留一任务一环境，但要通过池化和容量规划控制冷启动。
-
-**差距在哪**：新手把 Kubernetes 当业务恢复系统，高手明确基础设施重调度与 Agent 状态恢复的责任边界。
-
----
-
-## Q：如何支撑几十万并发 Agent Task，并把它观测清楚？
-
-> 来源：高并发调度与 Agent Observability 高频题
-
-**新手答**：“用 MQ 解耦，再水平扩容 Worker，接入日志、指标和链路追踪。”
-
-**高手答**：
-
-我会先澄清“几十万并发”是活跃会话、等待任务还是同时计算，并给出到达率、平均步骤数、各阶段耗时和 SLO。大量 Run 可能在等待 LLM、Tool 或人工事件，不能都占用 Worker。
-
-控制面按租户、优先级和资源类型分队列；用 visibility timeout/lease、ack、DLQ 和毒任务隔离保证消费；用 weighted fair scheduling、并发配额和 admission control 防止大租户挤占资源；对 LLM、GPU 和外部 Tool 分别实施背压，而不是只按 CPU 扩容。
-
-一个 Run 是根 Trace，模型、检索、工具、Sandbox 和状态提交是 Span。核心指标包括任务语义成功率、基础设施失败率、队列等待、端到端延迟、步骤数、Token/Cost 和 `UNKNOWN` 副作用数。Prompt、Tool 参数和结果可能包含隐私，必须脱敏、采样、分级存储和审计，不能直接放进高基数 Metrics Label。
-
-**差距在哪**：新手会画 Queue + Worker，高手先定义负载模型，并同时处理公平性、下游瓶颈和可观测数据治理。
+**差距在哪**：新手把 CRD 当免费数据库，高手会先判断资源语义，再隔离 Kubernetes 控制面与 Agent 高频执行面的容量和一致性边界。
 
 ---
 

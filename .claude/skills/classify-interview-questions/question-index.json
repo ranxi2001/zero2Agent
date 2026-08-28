@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-26",
-  "questionCount": 592,
+  "updatedAt": "2026-08-28",
+  "questionCount": 594,
   "dimensions": {
     "01-architecture-design": 45,
     "02-tool-management": 37,
@@ -17,8 +17,8 @@
     "12-business-ai-engineering": 17,
     "13-project-deep-dive": 21,
     "15-agent-concepts": 17,
-    "16-agent-infra": 17,
-    "17-ai-infra": 28
+    "16-agent-infra": 18,
+    "17-ai-infra": 29
   },
   "questions": [
     {
@@ -82,24 +82,24 @@
       "dimension": "01-architecture-design",
       "ordinal": 8,
       "title": "什么时候该做 Agent？和 Workflow 的边界在哪？",
-      "source": "30题 【科大讯飞一面追问：workflow和ReAct的区别与使用时机】【数据智能查询平台面试同题：整体是Workflow还是Agent自由调用】【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【曹操出行实习追问：脚本硬编码与 LangGraph Agent 的选型边界】",
-      "searchText": "什么时候该做 Agent？和 Workflow 的边界在哪？ 30题 【科大讯飞一面追问：workflow和ReAct的区别与使用时机】【数据智能查询平台面试同题：整体是Workflow还是Agent自由调用】【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【曹操出行实习追问：脚本硬编码与 LangGraph Agent 的选型边界】"
+      "source": "30题 【科大讯飞一面追问：workflow和ReAct的区别与使用时机】【数据智能查询平台面试同题：整体是Workflow还是Agent自由调用】【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【曹操出行实习追问：脚本硬编码与 LangGraph Agent 的选型边界】【阿里 Agent Infra 一面题库同题】",
+      "searchText": "什么时候该做 Agent？和 Workflow 的边界在哪？ 30题 【科大讯飞一面追问：workflow和ReAct的区别与使用时机】【数据智能查询平台面试同题：整体是Workflow还是Agent自由调用】【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【曹操出行实习追问：脚本硬编码与 LangGraph Agent 的选型边界】【阿里 Agent Infra 一面题库同题】"
     },
     {
       "id": "01-architecture-design:009",
       "dimension": "01-architecture-design",
       "ordinal": 9,
-      "title": "设计一个 AI Agent 爬取短视频平台内容",
-      "source": "字节实习一面",
-      "searchText": "设计一个 AI Agent 爬取短视频平台内容 字节实习一面"
+      "title": "生产级 Agent 的执行循环包含哪些阶段？",
+      "source": "30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】",
+      "searchText": "生产级 Agent 的执行循环包含哪些阶段？ 30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】"
     },
     {
       "id": "01-architecture-design:010",
       "dimension": "01-architecture-design",
       "ordinal": 10,
-      "title": "生产级 Agent 的执行循环包含哪些阶段？",
-      "source": "30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】",
-      "searchText": "生产级 Agent 的执行循环包含哪些阶段？ 30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】"
+      "title": "设计一个 AI Agent 爬取短视频平台内容",
+      "source": "字节实习一面",
+      "searchText": "设计一个 AI Agent 爬取短视频平台内容 字节实习一面"
     },
     {
       "id": "01-architecture-design:011",
@@ -321,65 +321,65 @@
       "id": "01-architecture-design:038",
       "dimension": "01-architecture-design",
       "ordinal": 38,
-      "title": "Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？",
-      "source": "腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】",
-      "searchText": "Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ 腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】"
+      "title": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？",
+      "source": "字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】",
+      "searchText": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？ 字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】"
     },
     {
       "id": "01-architecture-design:039",
       "dimension": "01-architecture-design",
       "ordinal": 39,
-      "title": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？",
-      "source": "字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】",
-      "searchText": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？ 字节跳动多模态算法一面（新增）【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】"
+      "title": "Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？",
+      "source": "腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】",
+      "searchText": "Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？ 腾讯AI应用开发实习生一面（新增）【字节火山引擎 Managed Agent 一面同题】"
     },
     {
       "id": "01-architecture-design:040",
       "dimension": "01-architecture-design",
       "ordinal": 40,
-      "title": "设计一个内部的多源文档问答 AI，架构设计是什么？",
-      "source": "百度AI智能体开发一面（新增）",
-      "searchText": "设计一个内部的多源文档问答 AI，架构设计是什么？ 百度AI智能体开发一面（新增）"
+      "title": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？",
+      "source": "北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】",
+      "searchText": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ 北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】"
     },
     {
       "id": "01-architecture-design:041",
       "dimension": "01-architecture-design",
       "ordinal": 41,
-      "title": "ReAct 在工程实现中，消息和状态协议应该怎么设计？",
-      "source": "字节跳动AI Agent秋招一面（新增）",
-      "searchText": "ReAct 在工程实现中，消息和状态协议应该怎么设计？ 字节跳动AI Agent秋招一面（新增）"
+      "title": "设计一个内部的多源文档问答 AI，架构设计是什么？",
+      "source": "百度AI智能体开发一面（新增）",
+      "searchText": "设计一个内部的多源文档问答 AI，架构设计是什么？ 百度AI智能体开发一面（新增）"
     },
     {
       "id": "01-architecture-design:042",
       "dimension": "01-architecture-design",
       "ordinal": 42,
-      "title": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？",
-      "source": "百度 Agent算法岗二面（新增）",
-      "searchText": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ 百度 Agent算法岗二面（新增）"
+      "title": "ReAct 在工程实现中，消息和状态协议应该怎么设计？",
+      "source": "字节跳动AI Agent秋招一面（新增）",
+      "searchText": "ReAct 在工程实现中，消息和状态协议应该怎么设计？ 字节跳动AI Agent秋招一面（新增）"
     },
     {
       "id": "01-architecture-design:043",
       "dimension": "01-architecture-design",
       "ordinal": 43,
-      "title": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？",
-      "source": "腾讯 WXG微信读书一面（新增）",
-      "searchText": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ 腾讯 WXG微信读书一面（新增）"
+      "title": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？",
+      "source": "百度 Agent算法岗二面（新增）",
+      "searchText": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ 百度 Agent算法岗二面（新增）"
     },
     {
       "id": "01-architecture-design:044",
       "dimension": "01-architecture-design",
       "ordinal": 44,
-      "title": "在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？",
-      "source": "地图 Agent二面（新增）",
-      "searchText": "在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？ 地图 Agent二面（新增）"
+      "title": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？",
+      "source": "腾讯 WXG微信读书一面（新增）",
+      "searchText": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ 腾讯 WXG微信读书一面（新增）"
     },
     {
       "id": "01-architecture-design:045",
       "dimension": "01-architecture-design",
       "ordinal": 45,
-      "title": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？",
-      "source": "北京四维图新面经（新增）",
-      "searchText": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ 北京四维图新面经（新增）"
+      "title": "在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？",
+      "source": "地图 Agent二面（新增）",
+      "searchText": "在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？ 地图 Agent二面（新增）"
     },
     {
       "id": "02-tool-management:001",
@@ -714,8 +714,8 @@
       "dimension": "03-fault-tolerance",
       "ordinal": 5,
       "title": "如何限制 Agent 的思考深度、工具调用次数，避免无限循环？",
-      "source": "30题 【淘天一面追问：思维死循环专项检测与打断】【快手AI应用开发一面追问：调用指纹去重+相同参数只允许一次+终止条件设计】【百度大模型研发二面追问：工具失败后重复调用保护】",
-      "searchText": "如何限制 Agent 的思考深度、工具调用次数，避免无限循环？ 30题 【淘天一面追问：思维死循环专项检测与打断】【快手AI应用开发一面追问：调用指纹去重+相同参数只允许一次+终止条件设计】【百度大模型研发二面追问：工具失败后重复调用保护】"
+      "source": "30题 【淘天一面追问：思维死循环专项检测与打断】【快手AI应用开发一面追问：调用指纹去重+相同参数只允许一次+终止条件设计】【百度大模型研发二面追问：工具失败后重复调用保护】【阿里 Agent Infra 一面题库同题：重复 Tool Call 与停止条件】",
+      "searchText": "如何限制 Agent 的思考深度、工具调用次数，避免无限循环？ 30题 【淘天一面追问：思维死循环专项检测与打断】【快手AI应用开发一面追问：调用指纹去重+相同参数只允许一次+终止条件设计】【百度大模型研发二面追问：工具失败后重复调用保护】【阿里 Agent Infra 一面题库同题：重复 Tool Call 与停止条件】"
     },
     {
       "id": "03-fault-tolerance:006",
@@ -850,16 +850,16 @@
       "dimension": "03-fault-tolerance",
       "ordinal": 22,
       "title": "整体的失败重试机制（node、RAG链、tools）分别怎么做？",
-      "source": "字节Agent开发一面",
-      "searchText": "整体的失败重试机制（node、RAG链、tools）分别怎么做？ 字节Agent开发一面"
+      "source": "字节Agent开发一面【阿里 Agent Infra 一面题库追问：分层 Timeout 与 Retry】",
+      "searchText": "整体的失败重试机制（node、RAG链、tools）分别怎么做？ 字节Agent开发一面【阿里 Agent Infra 一面题库追问：分层 Timeout 与 Retry】"
     },
     {
       "id": "03-fault-tolerance:023",
       "dimension": "03-fault-tolerance",
       "ordinal": 23,
       "title": "状态机卡死悬停/死循环的排查与熔断机制？",
-      "source": "百度AI Agent前端研发实习生一面",
-      "searchText": "状态机卡死悬停/死循环的排查与熔断机制？ 百度AI Agent前端研发实习生一面"
+      "source": "百度AI Agent前端研发实习生一面【阿里 Agent Infra 一面题库追问：Circuit Breaker】",
+      "searchText": "状态机卡死悬停/死循环的排查与熔断机制？ 百度AI Agent前端研发实习生一面【阿里 Agent Infra 一面题库追问：Circuit Breaker】"
     },
     {
       "id": "03-fault-tolerance:024",
@@ -889,57 +889,57 @@
       "id": "03-fault-tolerance:027",
       "dimension": "03-fault-tolerance",
       "ordinal": 27,
-      "title": "Coding Agent 看到 .env 文件会怎样？如何设计安全边界？",
-      "source": "Coding Agent面经（新增）",
-      "searchText": "Coding Agent 看到 .env 文件会怎样？如何设计安全边界？ Coding Agent面经（新增）"
+      "title": "Agent 失败通常有哪些原因？如何快速定位责任层？",
+      "source": "点点互动Agent开发秋招一面（新增）【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】",
+      "searchText": "Agent 失败通常有哪些原因？如何快速定位责任层？ 点点互动Agent开发秋招一面（新增）【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】"
     },
     {
       "id": "03-fault-tolerance:028",
       "dimension": "03-fault-tolerance",
       "ordinal": 28,
-      "title": "Agent 失败通常有哪些原因？如何快速定位责任层？",
-      "source": "点点互动Agent开发秋招一面（新增）",
-      "searchText": "Agent 失败通常有哪些原因？如何快速定位责任层？ 点点互动Agent开发秋招一面（新增）"
+      "title": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？",
+      "source": "中兴 AI大模型算法岗一面（新增）【阿里 Agent Infra 一面题库追问：Prompt Injection 的 Infra 防线】",
+      "searchText": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？ 中兴 AI大模型算法岗一面（新增）【阿里 Agent Infra 一面题库追问：Prompt Injection 的 Infra 防线】"
     },
     {
       "id": "03-fault-tolerance:029",
       "dimension": "03-fault-tolerance",
       "ordinal": 29,
-      "title": "Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？",
-      "source": "字节剪映Agent一面（新增）",
-      "searchText": "Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？ 字节剪映Agent一面（新增）"
+      "title": "Coding Agent 看到 .env 文件会怎样？如何设计安全边界？",
+      "source": "Coding Agent面经（新增）",
+      "searchText": "Coding Agent 看到 .env 文件会怎样？如何设计安全边界？ Coding Agent面经（新增）"
     },
     {
       "id": "03-fault-tolerance:030",
       "dimension": "03-fault-tolerance",
       "ordinal": 30,
-      "title": "长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？",
-      "source": "小红书 Agent 岗一面（新增）",
-      "searchText": "长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？ 小红书 Agent 岗一面（新增）"
+      "title": "Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？",
+      "source": "字节剪映Agent一面（新增）",
+      "searchText": "Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？ 字节剪映Agent一面（新增）"
     },
     {
       "id": "03-fault-tolerance:031",
       "dimension": "03-fault-tolerance",
       "ordinal": 31,
-      "title": "LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？",
+      "title": "长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？",
       "source": "小红书 Agent 岗一面（新增）",
-      "searchText": "LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？ 小红书 Agent 岗一面（新增）"
+      "searchText": "长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？ 小红书 Agent 岗一面（新增）"
     },
     {
       "id": "03-fault-tolerance:032",
       "dimension": "03-fault-tolerance",
       "ordinal": 32,
-      "title": "工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？",
-      "source": "影石创新 AI Agent一面（新增）",
-      "searchText": "工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？ 影石创新 AI Agent一面（新增）"
+      "title": "LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？",
+      "source": "小红书 Agent 岗一面（新增）",
+      "searchText": "LLM 没有走标准 Tool Call，而是在文本里直接输出命令请求，系统如何识别、执行并拦截风险？ 小红书 Agent 岗一面（新增）"
     },
     {
       "id": "03-fault-tolerance:033",
       "dimension": "03-fault-tolerance",
       "ordinal": 33,
-      "title": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？",
-      "source": "中兴 AI大模型算法岗一面（新增）",
-      "searchText": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？ 中兴 AI大模型算法岗一面（新增）"
+      "title": "工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？",
+      "source": "影石创新 AI Agent一面（新增）",
+      "searchText": "工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？ 影石创新 AI Agent一面（新增）"
     },
     {
       "id": "03-fault-tolerance:034",
@@ -954,8 +954,8 @@
       "dimension": "04-memory-context",
       "ordinal": 1,
       "title": "上下文窗口不够用，对话太长了怎么办？",
-      "source": "字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】",
-      "searchText": "上下文窗口不够用，对话太长了怎么办？ 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】"
+      "source": "字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】",
+      "searchText": "上下文窗口不够用，对话太长了怎么办？ 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】"
     },
     {
       "id": "04-memory-context:002",
@@ -1001,25 +1001,25 @@
       "id": "04-memory-context:007",
       "dimension": "04-memory-context",
       "ordinal": 7,
-      "title": "对于上下文工程有什么经验？有没有做过 to-do list？",
-      "source": "抖音一面",
-      "searchText": "对于上下文工程有什么经验？有没有做过 to-do list？ 抖音一面"
+      "title": "你怎么理解 Agent 里的“状态”而不是“上下文”？",
+      "source": "腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】",
+      "searchText": "你怎么理解 Agent 里的“状态”而不是“上下文”？ 腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】"
     },
     {
       "id": "04-memory-context:008",
       "dimension": "04-memory-context",
       "ordinal": 8,
-      "title": "三类上下文的优先级怎么处理？",
-      "source": "腾讯二面",
-      "searchText": "三类上下文的优先级怎么处理？ 腾讯二面"
+      "title": "对于上下文工程有什么经验？有没有做过 to-do list？",
+      "source": "抖音一面",
+      "searchText": "对于上下文工程有什么经验？有没有做过 to-do list？ 抖音一面"
     },
     {
       "id": "04-memory-context:009",
       "dimension": "04-memory-context",
       "ordinal": 9,
-      "title": "你怎么理解 Agent 里的“状态”而不是“上下文”？",
+      "title": "三类上下文的优先级怎么处理？",
       "source": "腾讯二面",
-      "searchText": "你怎么理解 Agent 里的“状态”而不是“上下文”？ 腾讯二面"
+      "searchText": "三类上下文的优先级怎么处理？ 腾讯二面"
     },
     {
       "id": "04-memory-context:010",
@@ -1201,41 +1201,41 @@
       "id": "04-memory-context:032",
       "dimension": "04-memory-context",
       "ordinal": 32,
-      "title": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？",
-      "source": "高德实习一面",
-      "searchText": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？ 高德实习一面"
+      "title": "什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？",
+      "source": "蚂蚁AI应用开发二面【阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache】",
+      "searchText": "什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？ 蚂蚁AI应用开发二面【阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache】"
     },
     {
       "id": "04-memory-context:033",
       "dimension": "04-memory-context",
       "ordinal": 33,
-      "title": "设计会话记忆系统时需要考虑哪些维度？",
+      "title": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？",
       "source": "高德实习一面",
-      "searchText": "设计会话记忆系统时需要考虑哪些维度？ 高德实习一面"
+      "searchText": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？ 高德实习一面"
     },
     {
       "id": "04-memory-context:034",
       "dimension": "04-memory-context",
       "ordinal": 34,
-      "title": "用户对话中频繁切换话题，会话记忆该怎么设计？",
+      "title": "设计会话记忆系统时需要考虑哪些维度？",
       "source": "高德实习一面",
-      "searchText": "用户对话中频繁切换话题，会话记忆该怎么设计？ 高德实习一面"
+      "searchText": "设计会话记忆系统时需要考虑哪些维度？ 高德实习一面"
     },
     {
       "id": "04-memory-context:035",
       "dimension": "04-memory-context",
       "ordinal": 35,
-      "title": "Lost in the Middle 问题是什么？有哪些解决方案？",
-      "source": "淘宝闪购一面",
-      "searchText": "Lost in the Middle 问题是什么？有哪些解决方案？ 淘宝闪购一面"
+      "title": "用户对话中频繁切换话题，会话记忆该怎么设计？",
+      "source": "高德实习一面",
+      "searchText": "用户对话中频繁切换话题，会话记忆该怎么设计？ 高德实习一面"
     },
     {
       "id": "04-memory-context:036",
       "dimension": "04-memory-context",
       "ordinal": 36,
-      "title": "什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？",
-      "source": "蚂蚁AI应用开发二面",
-      "searchText": "什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？ 蚂蚁AI应用开发二面"
+      "title": "Lost in the Middle 问题是什么？有哪些解决方案？",
+      "source": "淘宝闪购一面",
+      "searchText": "Lost in the Middle 问题是什么？有哪些解决方案？ 淘宝闪购一面"
     },
     {
       "id": "04-memory-context:037",
@@ -2306,8 +2306,8 @@
       "dimension": "07-engineering-pitfalls",
       "ordinal": 34,
       "title": "Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？",
-      "source": "美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】",
-      "searchText": "Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ 美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】"
+      "source": "美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】",
+      "searchText": "Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ 美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】"
     },
     {
       "id": "07-engineering-pitfalls:035",
@@ -2378,8 +2378,8 @@
       "dimension": "07-engineering-pitfalls",
       "ordinal": 43,
       "title": "SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？",
-      "source": "成都agent面试（社招）",
-      "searchText": "SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ 成都agent面试（社招）"
+      "source": "成都agent面试（社招）【阿里 Agent Infra 一面题库同题】",
+      "searchText": "SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ 成都agent面试（社招）【阿里 Agent Infra 一面题库同题】"
     },
     {
       "id": "07-engineering-pitfalls:044",
@@ -2393,25 +2393,25 @@
       "id": "07-engineering-pitfalls:045",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 45,
-      "title": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？",
-      "source": "电商库存一面、小得盈满一面（新增）",
-      "searchText": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？ 电商库存一面、小得盈满一面（新增）"
+      "title": "系统里多租户隔离是怎么实现的？",
+      "source": "视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】",
+      "searchText": "系统里多租户隔离是怎么实现的？ 视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】"
     },
     {
       "id": "07-engineering-pitfalls:046",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 46,
-      "title": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？",
-      "source": "腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】",
-      "searchText": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？ 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】"
+      "title": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？",
+      "source": "电商库存一面、小得盈满一面（新增）",
+      "searchText": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？ 电商库存一面、小得盈满一面（新增）"
     },
     {
       "id": "07-engineering-pitfalls:047",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 47,
-      "title": "系统里多租户隔离是怎么实现的？",
-      "source": "视频面经汇总（新增）",
-      "searchText": "系统里多租户隔离是怎么实现的？ 视频面经汇总（新增）"
+      "title": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？",
+      "source": "腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】",
+      "searchText": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？ 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】"
     },
     {
       "id": "07-engineering-pitfalls:048",
@@ -3018,8 +3018,8 @@
       "dimension": "09-rag-retrieval",
       "ordinal": 28,
       "title": "知识库整体怎么设计？从文档接入到检索的完整架构",
-      "source": "高德实习一面 【字节二面同题：RAG完整流程从文档切块到生成】",
-      "searchText": "知识库整体怎么设计？从文档接入到检索的完整架构 高德实习一面 【字节二面同题：RAG完整流程从文档切块到生成】"
+      "source": "高德实习一面 【字节二面同题：RAG完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】",
+      "searchText": "知识库整体怎么设计？从文档接入到检索的完整架构 高德实习一面 【字节二面同题：RAG完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】"
     },
     {
       "id": "09-rag-retrieval:029",
@@ -4322,8 +4322,8 @@
       "dimension": "15-agent-concepts",
       "ordinal": 8,
       "title": "MCP 是什么？它解决了 Function Calling 的什么根本问题？",
-      "source": "蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】",
-      "searchText": "MCP 是什么？它解决了 Function Calling 的什么根本问题？ 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】"
+      "source": "蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】",
+      "searchText": "MCP 是什么？它解决了 Function Calling 的什么根本问题？ 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】"
     },
     {
       "id": "15-agent-concepts:009",
@@ -4402,136 +4402,144 @@
       "dimension": "16-agent-infra",
       "ordinal": 1,
       "title": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？",
-      "source": "百度/虾皮 AI Infra 面经（新增）",
-      "searchText": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ 百度/虾皮 AI Infra 面经（新增）"
+      "source": "百度/虾皮 AI Infra 面经（新增）【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】",
+      "searchText": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ 百度/虾皮 AI Infra 面经（新增）【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】"
     },
     {
       "id": "16-agent-infra:002",
       "dimension": "16-agent-infra",
       "ordinal": 2,
-      "title": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？",
-      "source": "美团/百度 AI Infra 面经（新增）",
-      "searchText": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ 美团/百度 AI Infra 面经（新增）"
+      "title": "一次 Agent 请求的完整执行链路是什么？",
+      "source": "Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】",
+      "searchText": "一次 Agent 请求的完整执行链路是什么？ Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】"
     },
     {
       "id": "16-agent-infra:003",
       "dimension": "16-agent-infra",
       "ordinal": 3,
-      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
-      "source": "字节 AML / 火山方舟 AI Infra一面（新增）",
-      "searchText": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ 字节 AML / 火山方舟 AI Infra一面（新增）"
+      "title": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？",
+      "source": "美团/百度 AI Infra 面经（新增）",
+      "searchText": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ 美团/百度 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:004",
       "dimension": "16-agent-infra",
       "ordinal": 4,
-      "title": "一次 Agent 请求的完整执行链路是什么？",
-      "source": "Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】",
-      "searchText": "一次 Agent 请求的完整执行链路是什么？ Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】"
+      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
+      "source": "字节 AML / 火山方舟 AI Infra一面（新增）",
+      "searchText": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ 字节 AML / 火山方舟 AI Infra一面（新增）"
     },
     {
       "id": "16-agent-infra:005",
       "dimension": "16-agent-infra",
       "ordinal": 5,
-      "title": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？",
-      "source": "百度 AI Infra 面经（新增）",
-      "searchText": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ 百度 AI Infra 面经（新增）"
+      "title": "如果让你设计一个 Agent Runtime，你会怎么拆？",
+      "source": "Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】",
+      "searchText": "如果让你设计一个 Agent Runtime，你会怎么拆？ Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】"
     },
     {
       "id": "16-agent-infra:006",
       "dimension": "16-agent-infra",
       "ordinal": 6,
-      "title": "Kubernetes Scheduler 的三个队列如何流转？",
-      "source": "虾皮 AI Infra 二面（新增）",
-      "searchText": "Kubernetes Scheduler 的三个队列如何流转？ 虾皮 AI Infra 二面（新增）"
+      "title": "为什么需要 Checkpoint，恢复时从哪里继续？",
+      "source": "长任务状态管理高频题【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】",
+      "searchText": "为什么需要 Checkpoint，恢复时从哪里继续？ 长任务状态管理高频题【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】"
     },
     {
       "id": "16-agent-infra:007",
       "dimension": "16-agent-infra",
       "ordinal": 7,
-      "title": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？",
-      "source": "虾皮 AI Infra 面经（新增）",
-      "searchText": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ 虾皮 AI Infra 面经（新增）"
+      "title": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？",
+      "source": "分布式幂等高频题【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】",
+      "searchText": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ 分布式幂等高频题【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】"
     },
     {
       "id": "16-agent-infra:008",
       "dimension": "16-agent-infra",
       "ordinal": 8,
-      "title": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？",
-      "source": "虾皮 AI Infra 面经（新增）",
-      "searchText": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ 虾皮 AI Infra 面经（新增）"
+      "title": "Agent Sandbox 解决什么问题，为什么容器不一定够？",
+      "source": "代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】",
+      "searchText": "Agent Sandbox 解决什么问题，为什么容器不一定够？ 代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】"
     },
     {
       "id": "16-agent-infra:009",
       "dimension": "16-agent-infra",
       "ordinal": 9,
-      "title": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？",
-      "source": "AI Infra 小厂面经（新增）",
-      "searchText": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？ AI Infra 小厂面经（新增）"
+      "title": "Kubernetes 在 Agent Infra 中负责什么？",
+      "source": "Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】",
+      "searchText": "Kubernetes 在 Agent Infra 中负责什么？ Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】"
     },
     {
       "id": "16-agent-infra:010",
       "dimension": "16-agent-infra",
       "ordinal": 10,
-      "title": "Agent Router 应以什么运行形态存在，请求数据流如何设计？",
-      "source": "字节 AI Infra 实习一面（新增）",
-      "searchText": "Agent Router 应以什么运行形态存在，请求数据流如何设计？ 字节 AI Infra 实习一面（新增）"
+      "title": "如何支撑几十万并发 Agent Task，并把它观测清楚？",
+      "source": "高并发调度高频题【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】",
+      "searchText": "如何支撑几十万并发 Agent Task，并把它观测清楚？ 高并发调度高频题【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】"
     },
     {
       "id": "16-agent-infra:011",
       "dimension": "16-agent-infra",
       "ordinal": 11,
-      "title": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？",
-      "source": "字节 Agent 后端终面（新增）",
-      "searchText": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ 字节 Agent 后端终面（新增）"
+      "title": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？",
+      "source": "百度 AI Infra 面经（新增）",
+      "searchText": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ 百度 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:012",
       "dimension": "16-agent-infra",
       "ordinal": 12,
-      "title": "如果让你设计一个 Agent Runtime，你会怎么拆？",
-      "source": "Agent Infra 系统设计高频题",
-      "searchText": "如果让你设计一个 Agent Runtime，你会怎么拆？ Agent Infra 系统设计高频题"
+      "title": "Kubernetes Scheduler 的三个队列如何流转？",
+      "source": "虾皮 AI Infra 二面（新增）",
+      "searchText": "Kubernetes Scheduler 的三个队列如何流转？ 虾皮 AI Infra 二面（新增）"
     },
     {
       "id": "16-agent-infra:013",
       "dimension": "16-agent-infra",
       "ordinal": 13,
-      "title": "为什么需要 Checkpoint，恢复时从哪里继续？",
-      "source": "长任务状态管理高频题",
-      "searchText": "为什么需要 Checkpoint，恢复时从哪里继续？ 长任务状态管理高频题"
+      "title": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？",
+      "source": "虾皮 AI Infra 面经（新增）",
+      "searchText": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ 虾皮 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:014",
       "dimension": "16-agent-infra",
       "ordinal": 14,
-      "title": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？",
-      "source": "分布式幂等高频题",
-      "searchText": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ 分布式幂等高频题"
+      "title": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？",
+      "source": "虾皮 AI Infra 面经（新增）",
+      "searchText": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ 虾皮 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:015",
       "dimension": "16-agent-infra",
       "ordinal": 15,
-      "title": "Agent Sandbox 解决什么问题，为什么容器不一定够？",
-      "source": "代码执行隔离高频题",
-      "searchText": "Agent Sandbox 解决什么问题，为什么容器不一定够？ 代码执行隔离高频题"
+      "title": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？",
+      "source": "AI Infra 小厂面经（新增）",
+      "searchText": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？ AI Infra 小厂面经（新增）"
     },
     {
       "id": "16-agent-infra:016",
       "dimension": "16-agent-infra",
       "ordinal": 16,
-      "title": "Kubernetes 在 Agent Infra 中负责什么？",
-      "source": "Kubernetes/Controller 高频题",
-      "searchText": "Kubernetes 在 Agent Infra 中负责什么？ Kubernetes/Controller 高频题"
+      "title": "Agent Router 应以什么运行形态存在，请求数据流如何设计？",
+      "source": "字节 AI Infra 实习一面（新增）",
+      "searchText": "Agent Router 应以什么运行形态存在，请求数据流如何设计？ 字节 AI Infra 实习一面（新增）"
     },
     {
       "id": "16-agent-infra:017",
       "dimension": "16-agent-infra",
       "ordinal": 17,
-      "title": "如何支撑几十万并发 Agent Task，并把它观测清楚？",
-      "source": "高并发调度高频题",
-      "searchText": "如何支撑几十万并发 Agent Task，并把它观测清楚？ 高并发调度高频题"
+      "title": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？",
+      "source": "字节 Agent 后端终面（新增）",
+      "searchText": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ 字节 Agent 后端终面（新增）"
+    },
+    {
+      "id": "16-agent-infra:018",
+      "dimension": "16-agent-infra",
+      "ordinal": 18,
+      "title": "Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？",
+      "source": "阿里 Agent Infra 一面题库（新增）",
+      "searchText": "Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？ 阿里 Agent Infra 一面题库（新增）"
     },
     {
       "id": "17-ai-infra:001",
@@ -4609,57 +4617,57 @@
       "id": "17-ai-infra:010",
       "dimension": "17-ai-infra",
       "ordinal": 10,
-      "title": "GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？",
-      "source": "阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）",
-      "searchText": "GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？ 阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）"
+      "title": "KV Cache 占用如何计算，为什么不能只按请求数做容量规划？",
+      "source": "抖音搜推/百度 AI Infra 一面【阿里 Agent Infra 一面题库追问：KV Cache 原理】",
+      "searchText": "KV Cache 占用如何计算，为什么不能只按请求数做容量规划？ 抖音搜推/百度 AI Infra 一面【阿里 Agent Infra 一面题库追问：KV Cache 原理】"
     },
     {
       "id": "17-ai-infra:011",
       "dimension": "17-ai-infra",
       "ordinal": 11,
-      "title": "FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？",
-      "source": "阿里国际/快手/美团等 AI Infra 面经（新增）",
-      "searchText": "FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？ 阿里国际/快手/美团等 AI Infra 面经（新增）"
+      "title": "GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？",
+      "source": "阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）",
+      "searchText": "GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？ 阿里国际/阶跃星辰/快手等 AI Infra 面经（新增）"
     },
     {
       "id": "17-ai-infra:012",
       "dimension": "17-ai-infra",
       "ordinal": 12,
-      "title": "流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？",
-      "source": "快手/百度/美团 AI Infra 面经（新增）",
-      "searchText": "流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？ 快手/百度/美团 AI Infra 面经（新增）"
+      "title": "FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？",
+      "source": "阿里国际/快手/美团等 AI Infra 面经（新增）",
+      "searchText": "FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？ 阿里国际/快手/美团等 AI Infra 面经（新增）"
     },
     {
       "id": "17-ai-infra:013",
       "dimension": "17-ai-infra",
       "ordinal": 13,
-      "title": "CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？",
-      "source": "拼多多/小马智行/飞腾 AI Infra 面经（新增）",
-      "searchText": "CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？ 拼多多/小马智行/飞腾 AI Infra 面经（新增）"
+      "title": "流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？",
+      "source": "快手/百度/美团 AI Infra 面经（新增）",
+      "searchText": "流水线并行的 Bubble 从哪里来？1F1B、Zero-Bubble 与 DualPipe 如何调度？ 快手/百度/美团 AI Infra 面经（新增）"
     },
     {
       "id": "17-ai-infra:014",
       "dimension": "17-ai-infra",
       "ordinal": 14,
-      "title": "Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？",
-      "source": "字节/荣耀/OPPO AI Infra 面经（新增）",
-      "searchText": "Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？ 字节/荣耀/OPPO AI Infra 面经（新增）"
+      "title": "CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？",
+      "source": "拼多多/小马智行/飞腾 AI Infra 面经（新增）",
+      "searchText": "CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？ 拼多多/小马智行/飞腾 AI Infra 面经（新增）"
     },
     {
       "id": "17-ai-infra:015",
       "dimension": "17-ai-infra",
       "ordinal": 15,
-      "title": "Attention 与 FFN 的计算量和参数量谁更大？",
-      "source": "阿里云/百度 AI Infra 一面",
-      "searchText": "Attention 与 FFN 的计算量和参数量谁更大？ 阿里云/百度 AI Infra 一面"
+      "title": "Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？",
+      "source": "字节/荣耀/OPPO AI Infra 面经（新增）",
+      "searchText": "Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？ 字节/荣耀/OPPO AI Infra 面经（新增）"
     },
     {
       "id": "17-ai-infra:016",
       "dimension": "17-ai-infra",
       "ordinal": 16,
-      "title": "KV Cache 占用如何计算，为什么不能只按请求数做容量规划？",
-      "source": "抖音搜推/百度 AI Infra 一面",
-      "searchText": "KV Cache 占用如何计算，为什么不能只按请求数做容量规划？ 抖音搜推/百度 AI Infra 一面"
+      "title": "Attention 与 FFN 的计算量和参数量谁更大？",
+      "source": "阿里云/百度 AI Infra 一面",
+      "searchText": "Attention 与 FFN 的计算量和参数量谁更大？ 阿里云/百度 AI Infra 一面"
     },
     {
       "id": "17-ai-infra:017",
@@ -4729,30 +4737,38 @@
       "id": "17-ai-infra:025",
       "dimension": "17-ai-infra",
       "ordinal": 25,
-      "title": "AI Infra 和 Agent Infra 有什么区别？",
-      "source": "AI 平台边界高频题",
-      "searchText": "AI Infra 和 Agent Infra 有什么区别？ AI 平台边界高频题"
+      "title": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？",
+      "source": "阿里 Agent Infra 一面题库（新增）",
+      "searchText": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？ 阿里 Agent Infra 一面题库（新增）"
     },
     {
       "id": "17-ai-infra:026",
       "dimension": "17-ai-infra",
       "ordinal": 26,
-      "title": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？",
-      "source": "AI 平台系统设计高频题",
-      "searchText": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ AI 平台系统设计高频题"
+      "title": "AI Infra 和 Agent Infra 有什么区别？",
+      "source": "AI 平台边界高频题",
+      "searchText": "AI Infra 和 Agent Infra 有什么区别？ AI 平台边界高频题"
     },
     {
       "id": "17-ai-infra:027",
       "dimension": "17-ai-infra",
       "ordinal": 27,
-      "title": "GPU 调度和普通 CPU 调度有什么不同？",
-      "source": "GPU Scheduler 高频题",
-      "searchText": "GPU 调度和普通 CPU 调度有什么不同？ GPU Scheduler 高频题"
+      "title": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？",
+      "source": "AI 平台系统设计高频题",
+      "searchText": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ AI 平台系统设计高频题"
     },
     {
       "id": "17-ai-infra:028",
       "dimension": "17-ai-infra",
       "ordinal": 28,
+      "title": "GPU 调度和普通 CPU 调度有什么不同？",
+      "source": "GPU Scheduler 高频题",
+      "searchText": "GPU 调度和普通 CPU 调度有什么不同？ GPU Scheduler 高频题"
+    },
+    {
+      "id": "17-ai-infra:029",
+      "dimension": "17-ai-infra",
+      "ordinal": 29,
       "title": "模型版本升级如何做到可观测、可灰度、可回滚？",
       "source": "模型发布高频题",
       "searchText": "模型版本升级如何做到可观测、可灰度、可回滚？ 模型发布高频题"

@@ -37,3 +37,13 @@ The Pi module uses the following public sources as references. Its Chinese prose
 The interview-question updates dated 2026-08-16 were independently summarized from public interview recollections published from 2026-08-12 through 2026-08-15 in Nowcoder's [interview feed](https://www.nowcoder.com/?type=818_1). Public tutorial pages retain only generalized technical questions and company, role, or interview-round attribution.
 
 At the user's explicit request, `.claude/skills/scrape-nowcoder/nowcoder-agent-excellent-full/` also keeps a non-site maintenance archive of selected interview recollections. New entries preserve the complete recorded interview sequence, including technical follow-ups, the author's recorded answers and interviewer feedback, coding tasks, and questions asked back to the interviewer. Each entry links to its Nowcoder source; account names, schools, author locations, specific personal outcomes, comments, recommendations, browser profiles, and login data are excluded. The complete browser scrape remains in a Git-ignored working directory and is not part of the repository archive.
+
+## Agent Infra Interview Answers
+
+The Agent Infra and AIOps interview answers added on 2026-08-28 were independently written and checked against these primary references:
+
+- [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) and [Kubernetes API Concepts](https://kubernetes.io/docs/reference/using-api/api-concepts/) — declarative resource fit, List/Watch behavior, `resourceVersion`, and control-plane boundaries.
+- [OpenTelemetry Context Propagation](https://opentelemetry.io/docs/concepts/context-propagation/) — correlation of traces, logs, and metrics across service boundaries.
+- [Google SRE Incident Management Guide](https://sre.google/resources/practices-and-processes/incident-management-guide/) — symptom-based actionable alerting, incident automation, mitigation, and post-incident learning.
+
+No upstream prose or diagrams are reproduced. Product- and version-specific behavior remains subject to the linked projects' current documentation.

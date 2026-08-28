@@ -139,6 +139,29 @@ CPU 用较少但复杂的核心、较强缓存和分支预测换低延迟与通�
 
 ---
 
+## Q：KV Cache 占用如何计算，为什么不能只按请求数做容量规划？
+
+> 来源：[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)【阿里 Agent Infra 一面题库追问：KV Cache 原理】
+
+**新手答**：“KV Cache 和上下文长度成正比，显存不够就减少并发。”
+
+**高手答**：
+
+对常见 Decoder-only 模型，可以从下面的近似式开始估算：
+
+```text
+KV bytes ≈ 2 × layers × tokens × kv_heads × head_dim × bytes_per_element
+总容量再乘以并发序列数，并加 block 尾部浪费、元数据和运行时预留
+```
+
+前面的 `2` 代表 K 和 V。MHA 中 `kv_heads` 通常等于 query heads；MQA/GQA 会减少 KV heads；MLA 的缓存结构要按具体实现重新计算，不能套同一个维度。Prefill 后每生成一个 Token 都继续增长 KV，因此相同请求数下，长上下文与长输出可能相差几个数量级。
+
+生产准入应按预计 Token Budget、可回收 block 和租户 SLO 做，而不是只限制并发请求数。Paged KV 能减少连续分配和外部碎片，但仍有尾块浪费、页表元数据和间接寻址开销；Prefix Cache 还必须把模型、Tokenizer、Adapter 和模板版本纳入正确性边界。
+
+**差距在哪**：新手只知道 KV Cache 占显存，高手能从模型结构算容量，并把分页、准入和缓存正确性连起来。
+
+---
+
 ## Q：GPU 内存层次如何使用？Pinned Memory、Shared Memory、Bank Conflict 与异步 H2D/D2H 分别解决什么问题？
 
 > 来源：[阿里国际 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/6cbfd441972d4a96ae47e1cdf54a3fef)、[阶跃星辰 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/320def38cd484da3bb26b01932996ef2)、[快手 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/eccb5cafdfce452c8d56374ef070685d)、[蔚来 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/738d29de77ef4675bbac0a7d18ed1371)、[文远知行 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/cc35269c89d645c3a510c22504355ce0)、[寒武纪 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7dfe46da13ad4ae8a3dd94c3ca7f5d05)
@@ -222,29 +245,6 @@ FlashAttention 的核心是 IO-aware，而不是把稠密 Attention 的数学计
 参数量同样主要取决于投影矩阵：标准 Attention 约为 `4H²`，FFN 约为 `2HI`，若 `I≈4H`，FFN 参数通常更多。GQA、MLA、MoE、门控 FFN 和稀疏激活都会改变公式。单请求 Decode 的矩阵形状还可能更接近 GEMV，而训练、Prefill 或批量 Decode 通常仍可组织成 GEMM；最终要以真实 batch、序列长度和 Profiler 为准。
 
 **差距在哪**：新手只背复杂度标签，高手先写出维度和工作负载，再判断参数、算力与访存瓶颈。
-
----
-
-## Q：KV Cache 占用如何计算，为什么不能只按请求数做容量规划？
-
-> 来源：[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)
-
-**新手答**：“KV Cache 和上下文长度成正比，显存不够就减少并发。”
-
-**高手答**：
-
-对常见 Decoder-only 模型，可以从下面的近似式开始估算：
-
-```text
-KV bytes ≈ 2 × layers × tokens × kv_heads × head_dim × bytes_per_element
-总容量再乘以并发序列数，并加 block 尾部浪费、元数据和运行时预留
-```
-
-前面的 `2` 代表 K 和 V。MHA 中 `kv_heads` 通常等于 query heads；MQA/GQA 会减少 KV heads；MLA 的缓存结构要按具体实现重新计算，不能套同一个维度。Prefill 后每生成一个 Token 都继续增长 KV，因此相同请求数下，长上下文与长输出可能相差几个数量级。
-
-生产准入应按预计 Token Budget、可回收 block 和租户 SLO 做，而不是只限制并发请求数。Paged KV 能减少连续分配和外部碎片，但仍有尾块浪费、页表元数据和间接寻址开销；Prefix Cache 还必须把模型、Tokenizer、Adapter 和模板版本纳入正确性边界。
-
-**差距在哪**：新手只知道 KV Cache 占显存，高手能从模型结构算容量，并把分页、准入和缓存正确性连起来。
 
 ---
 
@@ -381,6 +381,26 @@ Checkpoint 不只是模型权重，还可能包含 Optimizer、Scheduler、随�
 排查时关联请求 Trace、Serving Scheduler 指标、GPU Profile、节点和网络遥测，找到延迟增加的第一个等待阶段。AIOps 可以做异常检测、相似故障检索和根因候选排序，但自动扩容或重启必须经过 SLO、容量和冷却时间约束，不能把相关性直接当因果。
 
 **差距在哪**：新手看到低利用率就加卡，高手先分解等待时间和硬件指标，再判断瓶颈在 CPU、GPU、通信还是调度。
+
+---
+
+## Q：AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？
+
+> 来源：阿里 Agent Infra 一面题库
+
+**新手答**：“把日志和监控交给大模型，让它分析根因；确定故障后自动重启服务。”
+
+**高手答**：
+
+AIOps 不是给告警接一个聊天模型，而是把检测、诊断、处置和验证做成受约束闭环。先用用户侧 SLO、错误率和延迟确认影响，再按租户、地域、版本、模型、Tool 和资源池切分 Scope；随后关联发布变更、配置、依赖拓扑和同一时间窗内的 Logs、Metrics、Trace。OpenTelemetry 的[上下文传播](https://opentelemetry.io/docs/concepts/context-propagation/)能用 Trace/Span 上下文关联跨服务信号，但“同时发生”仍只是候选证据，不自动等于因果关系。
+
+RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪个节点最先异常、上游是否正常、哪个变更与异常重合、相似历史事件是否具有相同错误签名，以及还缺什么验证。LLM/Agent 适合查询多数据源、归纳时间线和生成验证计划；拓扑约束、错误分类、变更记录和探针结果才是事实基础。可以通过回滚配置、切换小流量或执行只读探针验证候选原因，不能让模型根据相关性直接宣布 Root Cause。
+
+自动处置按风险分级：只读诊断和证据收集可自动执行；限流、摘除单实例、扩容等可逆动作先做小范围 Canary；删除数据、全局回滚、权限变更等高风险动作必须审批。每个动作绑定目标范围、幂等键、Deadline、冷却时间、最大影响面和回滚条件，执行后重新检查 SLO；指标未恢复就停止扩大，而不是连续重试。Google SRE 的[事件管理指南](https://sre.google/resources/practices-and-processes/incident-management-guide/)也强调告警应面向用户症状、保持可操作，并让自动化辅助分析和缓解而不是替代事件控制。
+
+最后把确认根因、有效处置、失败尝试和新检测规则回写事件库与 Runbook。衡量 AIOps 不能只看“自动化次数”，还要看告警压缩率、候选根因 Top-K 命中率、MTTD/MTTR、误处置率、回滚率和实际减少的用户影响。
+
+**差距在哪**：新手让模型从相关性直接跳到重启，高手把影响确认、证据关联、因果验证、分级处置和 SLO 回验串成可审计闭环。
 
 ---
 

@@ -286,7 +286,7 @@ Harness（外部）和 Hermes（内部）不矛盾——最佳实践是结合：
 
 ### Q：MCP 是什么？它解决了 Function Calling 的什么根本问题？
 
-> 来源：蚂蚁集团智能体与大模型应用二面 【蚂蚁Agent开发一面追问：“有了FC是否可以没有MCP”】【高德实习一面同题：“MCP协议的完整调用过程”】【字节实习Agent开发一面追问：“MCP和Function Calling的关系”】
+> 来源：蚂蚁集团智能体与大模型应用二面 【蚂蚁Agent开发一面追问：“有了FC是否可以没有MCP”】【高德实习一面同题：“MCP协议的完整调用过程”】【字节实习Agent开发一面追问：“MCP和Function Calling的关系”】【阿里 Agent Infra 一面题库同题】
 
 **新手答**：“MCP 就是 Anthropic 出的一个调用工具的协议，跟 Function Calling 差不多。”
 
