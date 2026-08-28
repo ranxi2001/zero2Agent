@@ -33,10 +33,10 @@ class RecallSimilarQuestionsTest(unittest.TestCase):
         self.assertIn("Cookie、Session 和 JWT 有什么区别？JWT 的结构和验签流程是什么？", titles)
         self.assertGreater(len(documents), len(self.documents))
 
-    def test_machine_agent_index_has_592_questions(self):
+    def test_machine_agent_index_matches_markdown_index(self):
         json_index = Path(__file__).resolve().parents[1] / "question-index.json"
         documents = MODULE.parse_index(json_index)
-        self.assertEqual(len(documents), 592)
+        self.assertEqual(len(documents), len(self.documents))
 
     def test_exact_question_is_top_match(self):
         query = "一次 Agent 请求的完整执行链路是什么？"

@@ -47,3 +47,19 @@ The Agent Infra and AIOps interview answers added on 2026-08-28 were independent
 - [Google SRE Incident Management Guide](https://sre.google/resources/practices-and-processes/incident-management-guide/) — symptom-based actionable alerting, incident automation, mitigation, and post-incident learning.
 
 No upstream prose or diagrams are reproduced. Product- and version-specific behavior remains subject to the linked projects' current documentation.
+
+## Weekly Interview Answer References (2026-08-28)
+
+The answers derived from the 2026-08-22 through 2026-08-28 interview audit were independently written and checked against these primary references:
+
+- [Playwright Locators](https://playwright.dev/docs/locators) and [Trace Viewer](https://playwright.dev/docs/trace-viewer) — resilient page interaction, failure evidence, and replay-oriented debugging.
+- [Model Context Protocol Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization), [Tools](https://modelcontextprotocol.io/specification/2025-11-25/server/tools), and [Cancellation](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation) — authorization boundaries, Tool contracts, and optional cancellation semantics.
+- [ECMA-376 Office Open XML](https://ecma-international.org/publications-and-standards/standards/ecma-376/), [CommonMark](https://spec.commonmark.org/), and [OpenTelemetry semantic conventions](https://opentelemetry.io/docs/specs/semconv/) — document validation and trace/error evidence.
+- [Kubernetes Secrets](https://kubernetes.io/docs/concepts/configuration/secret/), [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/), and [Service Accounts](https://kubernetes.io/docs/concepts/security/service-accounts/) — secret handling and execution-boundary controls.
+- [Qdrant Filtering](https://qdrant.tech/documentation/concepts/filtering/) and [PostgreSQL Row Security](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) — retrieval-time document and Chunk authorization.
+- [ONNX Runtime Web](https://onnxruntime.ai/docs/tutorials/web/), [W3C WebGPU](https://www.w3.org/TR/webgpu/), [pypdf text extraction](https://pypdf.readthedocs.io/en/stable/user/extract-text.html), and [W3C Markup Validation](https://validator.w3.org/docs/) — browser inference and PDF/HTML artifact verification.
+- [NIST AI 600-1](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf) — generative-AI risk-management framing for content-safety workflows; the repository does not present it as jurisdiction-specific legal advice.
+- [LeRobot Dataset v3](https://huggingface.co/docs/lerobot/lerobot-dataset-v3), [TRL SFT Trainer](https://huggingface.co/docs/trl/sft_trainer), [XGBoost model tutorial](https://xgboost.readthedocs.io/en/latest/tutorials/model.html), [ONNX IR](https://onnx.ai/onnx/repo-docs/IR.html), and [Ultralytics export documentation](https://docs.ultralytics.com/modes/export/) — data annotation, SFT sample contracts, model structure, interchange format, and runtime export boundaries.
+- [KubeEdge EdgeHub](https://kubeedge.io/docs/architecture/edge/edgehub/) and [verl AgentLoop source at commit 8df88be](https://github.com/verl-project/verl/blob/8df88be746801b6d87c42e15f9a5a0ec1d5eeeae/verl/experimental/agent_loop/agent_loop.py) with its [AgentLoop documentation](https://verl.readthedocs.io/en/latest/advance/agent_loop.html) — edge/cloud coordination and the explicitly versioned alpha AgentLoop API.
+
+No upstream prose, code, diagrams, or benchmark claims are reproduced. Framework-specific behavior remains tied to the linked version or current official documentation; architecture recommendations are identified as engineering judgment rather than product guarantees.

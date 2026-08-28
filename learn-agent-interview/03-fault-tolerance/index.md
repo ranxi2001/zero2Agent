@@ -556,6 +556,40 @@ flowchart TB
 
 ---
 
+## Q：Skill 间需要传递敏感信息时，如何做到内部可用、对用户不可见？
+
+> 来源：[百度 Coding Agent 二面](https://www.nowcoder.com/feed/main/detail/b9521e2b51e04afeac0a3a32e13f4da9)
+
+**新手答**：“在 Prompt 里告诉模型不要把密钥输出给用户。”
+
+**高手答**：
+
+Prompt 不是机密性边界。真正的设计目标是：**让下游 Skill 获得使用秘密的能力，而不是获得秘密本身**。密码、Token、私钥和敏感业务字段默认不进入模型上下文、Tool Message、流式事件或可检索记忆。
+
+先把跨 Skill 数据分成两条通道：
+
+| 通道 | 内容 | 约束 |
+|---|---|---|
+| 模型可见状态 | 脱敏摘要、资源 ID、权限结论、操作结果 | 可进入上下文，但仍按租户和任务隔离 |
+| 运行时机密状态 | Secret reference、短期凭证、原始敏感字段 | 通过模型外 envelope 传递，只由受控 Connector 解引用 |
+
+`secret_ref` 不进入 Prompt 或普通 Tool Message，而是放在模型外 envelope 中，并绑定 `run_id + tool_id + audience + scope + TTL`；它不可转让，也不能由可执行任意代码的下游 Skill 自行兑换。编排器检查调用方身份、任务目的和目标资源后，只让可信 Connector 在真正发请求时解引用，并向模型返回“授权成功/失败”和脱敏结果。
+
+当前 MCP [Authorization 规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)适用于启用授权的 HTTP transport，不代表所有 transport 都自动具备 OAuth 边界。MCP Client 获得的 Token 也不得透传给下游 API；Connector 应为目标资源换取或注入独立 audience 的短期凭证。“哪些字段可进入模型和用户输出”仍是应用侧的信息流策略。
+
+还要对所有输出 sink 做统一门禁：
+
+1. **Prompt/Tool Result**：只允许白名单字段，原始错误栈和响应头先脱敏。
+2. **日志/Trace**：敏感值不落明文，保留分类标签、哈希或受权引用。
+3. **流式响应/最终答复**：输出前再次做字段级策略检查，不能只扫敏感词。
+4. **持久化与回放**：机密状态有独立 TTL、吊销和删除流程；回放环境使用替代凭证。
+
+如果无法证明一条数据从 source 到 sink 的授权链，系统应拒绝传递或转人工，而不是让模型决定“这次应该没事”。
+
+**差距在哪**：新手把保密寄托在模型自律。高手把数据分级、Secret reference、短期授权和输出 sink 做成模型外的确定性信息流控制，让 Skill 能完成任务却拿不到可泄露的长期秘密。
+
+---
+
 
 ## 高风险场景防护
 
@@ -740,7 +774,7 @@ flowchart TD
 
 ### Q：高风险在线环境中，Agent 的异常管控方案怎么设计？
 
-> 来源：淘宝闪购 Agent 一面
+> 来源：淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】
 
 **新手答**：“加个 try-catch 兜底，出错就重试。”
 
@@ -769,6 +803,8 @@ flowchart TD
 - 开发、预发布、生产环境严格隔离，Agent 在生产环境仅可调用白名单内的工具
 - 文件系统操作限制在指定目录，禁止跨目录访问
 - 网络请求限制在白名单域名，防止数据外泄
+
+高安全场景还要把身份、Secret 和供应链纳入这一层。用户信息与端侧配置先分级，私钥、长期 Token 不进入 Prompt、镜像或普通日志；Worker 只在执行时获取绑定任务和资源的短期凭证。容器采用非特权、只读根文件系统、受限网络和最小挂载；Kubernetes 官方的 [Secret 使用建议](https://kubernetes.io/docs/concepts/security/secrets-good-practices/)强调静态加密、最小权限和读取后的数据保护，[Restricted Pod Security Standard](https://kubernetes.io/docs/concepts/security/pod-security-standards/)可作为容器基线，但具体策略仍要结合运行时和业务威胁模型。镜像、依赖和策略版本进入发布扫描与签名校验，发现泄露时能立即吊销凭证并冻结相关任务。
 
 **第四层：结构化审计日志**
 
@@ -1143,6 +1179,29 @@ Agent 的重试预算：
 
 ---
 
+## Q：页面结构变化导致 Skill 失效时，如何检测、降级与修复？
+
+> 来源：[百度 Coding Agent 二面](https://www.nowcoder.com/feed/main/detail/b9521e2b51e04afeac0a3a32e13f4da9)
+
+**新手答**：“Selector 找不到就换一个，失败时多重试几次。”
+
+**高手答**：
+
+页面变化属于**外部契约漂移**，原样重试通常没有意义。运行时应先区分网络故障、登录过期、A/B 页面差异和 DOM/语义结构变化，再决定是否重试；否则 Agent 可能把“按钮改版”误判成临时超时，反复点击甚至点到错误操作。
+
+检测不能只等 Selector 抛异常。每个页面 Skill 都应声明前置条件、关键元素语义、允许的页面版本和操作后置条件：
+
+- 进入页面后检查 URL/页面角色、关键标题和元素集合，而不是只看“加载成功”。
+- 优先使用贴近用户语义的 role、label、text 或显式 test id；Playwright 官方也说明长 CSS/XPath 链会随 DOM 结构变化而失效，推荐使用更稳定的 [Locator 契约](https://playwright.dev/docs/locators)。
+- 点击后验证业务终态，例如订单状态或保存结果；“元素被点击”不是成功证据。
+- 连续出现定位歧义、关键元素缺失或页面指纹变化时，标记 `contract_drift`，不要归入普通超时。
+
+触发漂移后按风险降级：只读操作可以切备用 API、搜索或人工选择；写入、支付、删除等副作用立即冻结，不允许模型猜 Selector。系统保存页面快照、DOM/可访问性树、操作轨迹和版本信息，方便复现；修复时更新 Skill 版本，用历史页面和新页面 fixture 跑契约回归，再 shadow/小流量发布。Playwright 的 [Trace Viewer](https://playwright.dev/docs/trace-viewer)可以辅助查看动作、DOM 快照和网络证据，但自动判定“哪个新元素等价”仍是工程推断，必须经过验收。
+
+**差距在哪**：新手把页面变化当普通异常。高手把它建模为版本化外部契约，靠语义定位、前后置条件和 trace 主动检测；高风险操作先停，再通过回归和灰度修复，避免“自愈”成误操作。
+
+---
+
 ### Q：在跨境汇款等金融业务场景下，Agent 超时/失败如何应对，并保证资金安全？
 
 > 来源：腾讯AI应用开发（Agent后端）
@@ -1412,7 +1471,7 @@ flowchart LR
 
 ## Q：为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？
 
-> 来源：字节中国交易与广告 Agent 一面（2026-08-24）
+> 来源：[字节中国交易与广告 Agent 一面](https://www.nowcoder.com/feed/main/detail/6dede073825e4ab493fcbce7f598a6c8)（2026-08-24）
 
 **新手答**：“大模型有幻觉、速度慢，所以攻击检测应该使用规则。”
 

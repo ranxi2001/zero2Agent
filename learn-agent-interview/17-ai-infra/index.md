@@ -13,6 +13,29 @@ AI Infra 不是“给 Kubernetes 加几台 GPU”。模型训练关心吞吐、C
 
 ---
 
+## Q：KV Cache 占用如何计算，为什么不能只按请求数做容量规划？
+
+> 来源：[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)、[字节 App Infra Agent 一面](https://www.nowcoder.com/feed/main/detail/0bec32fbb3344ff98f16b97f47c7b857)、[字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：KV Cache 原理】
+
+**新手答**：“KV Cache 和上下文长度成正比，显存不够就减少并发。”
+
+**高手答**：
+
+对常见 Decoder-only 模型，可以从下面的近似式开始估算：
+
+```text
+KV bytes ≈ 2 × layers × tokens × kv_heads × head_dim × bytes_per_element
+总容量再乘以并发序列数，并加 block 尾部浪费、元数据和运行时预留
+```
+
+前面的 `2` 代表 K 和 V。MHA 中 `kv_heads` 通常等于 query heads；MQA/GQA 会减少 KV heads；MLA 的缓存结构要按具体实现重新计算，不能套同一个维度。Prefill 后每生成一个 Token 都继续增长 KV，因此相同请求数下，长上下文与长输出可能相差几个数量级。
+
+生产准入应按预计 Token Budget、可回收 block 和租户 SLO 做，而不是只限制并发请求数。Paged KV 能减少连续分配和外部碎片，但仍有尾块浪费、页表元数据和间接寻址开销；Prefix Cache 还必须把模型、Tokenizer、Adapter 和模板版本纳入正确性边界。
+
+**差距在哪**：新手只知道 KV Cache 占显存，高手能从模型结构算容量，并把分页、准入和缓存正确性连起来。
+
+---
+
 ## Q：CUDA 的 Thread、Warp、Block、Grid 和 SM 如何映射？SIMT、同步与 Warp 分歧如何影响性能？
 
 > 来源：[小马智行 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/0e543b8a02b84b05950e55851687450f)、[OPPO AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/d8bc7618c7234ca8b67d18866ddc4542)、[蔚来 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/738d29de77ef4675bbac0a7d18ed1371)、[沐曦 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/5f3629b12be346de8dbc954a75d0990f)
@@ -136,29 +159,6 @@ CPU 用较少但复杂的核心、较强缓存和分支预测换低延迟与通�
 量化首先减少存储和搬运字节数，但端到端速度还取决于计算路径。若硬件与 Kernel 原生支持该格式，Decode 这类频繁读取权重、带宽敏感的阶段更可能受益；Prefill 的大矩阵计算利用率较高，收益可能受反量化、Scale 读取、数据重排和累加格式限制。某些 Batch、Shape 或算子没有合适 Kernel 时还会回退到较高精度，甚至增加转换和 Launch 开销。排查时先确认实际选中的 Kernel 与输入格式，再分别测权重带宽、反量化占比、Tensor Core/矩阵单元利用、TTFT、TPOT 和端到端成本，同时做质量回归。结论必须绑定模型、硬件、框架版本和流量分布。
 
 **差距在哪**：新手把压缩率等同于加速比，高手能沿真实数据路径解释量化收益为何因阶段和实现而异。
-
----
-
-## Q：KV Cache 占用如何计算，为什么不能只按请求数做容量规划？
-
-> 来源：[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)【阿里 Agent Infra 一面题库追问：KV Cache 原理】
-
-**新手答**：“KV Cache 和上下文长度成正比，显存不够就减少并发。”
-
-**高手答**：
-
-对常见 Decoder-only 模型，可以从下面的近似式开始估算：
-
-```text
-KV bytes ≈ 2 × layers × tokens × kv_heads × head_dim × bytes_per_element
-总容量再乘以并发序列数，并加 block 尾部浪费、元数据和运行时预留
-```
-
-前面的 `2` 代表 K 和 V。MHA 中 `kv_heads` 通常等于 query heads；MQA/GQA 会减少 KV heads；MLA 的缓存结构要按具体实现重新计算，不能套同一个维度。Prefill 后每生成一个 Token 都继续增长 KV，因此相同请求数下，长上下文与长输出可能相差几个数量级。
-
-生产准入应按预计 Token Budget、可回收 block 和租户 SLO 做，而不是只限制并发请求数。Paged KV 能减少连续分配和外部碎片，但仍有尾块浪费、页表元数据和间接寻址开销；Prefix Cache 还必须把模型、Tokenizer、Adapter 和模板版本纳入正确性边界。
-
-**差距在哪**：新手只知道 KV Cache 占显存，高手能从模型结构算容量，并把分页、准入和缓存正确性连起来。
 
 ---
 
@@ -362,25 +362,25 @@ Checkpoint 不只是模型权重，还可能包含 Optimizer、Scheduler、随�
 
 ---
 
-## Q：GPU 利用率很低，但请求延迟很高，怎么排查？
+## Q：模型版本升级如何做到可观测、可灰度、可回滚？
 
-> 来源：[小鹏 AI Infra 一面](https://www.nowcoder.com/discuss/920776068619829248)
+> 来源：模型发布与稳定性高频题【[Momenta 大模型算法工程师一面](https://www.nowcoder.com/feed/main/detail/f7518c865e07491cb1518d288698813c)追问：离线效果更好为何仍保留旧模型】
 
-**新手答**：“可能 GPU 不够，增加实例或者调大 batch。”
+**新手答**：“部署新版本，先放 10% 流量，指标异常就回滚。”
 
 **高手答**：
 
-先确认指标口径：低的是 SM Active、Tensor Core 利用、显存带宽还是平均 GPU Utilization。然后按等待链路拆分：
+发布单元必须绑定模型权重、Tokenizer、推理参数、量化方式、镜像和 Prompt/Adapter 兼容信息。上线前完成离线质量、安全、性能和资源回归；线上先 shadow 验证协议与容量，再按租户或任务类型 canary，避免随机流量掩盖分布差异。
 
-```text
-入口排队 → Tokenize → Prefill → Decode → 通信 → Detokenize/Streaming
-```
+**追问：新模型离线效果更好，线上为什么仍可能保留旧模型？**
 
-常见根因包括 batch 太小、CPU Tokenizer 饱和、Host-to-Device 拷贝、同步点过多、长短请求互相阻塞、KV Cache 碎片、模型并行通信或下游流式消费慢。训练场景还要看 DataLoader、存储吞吐、NCCL straggler 和数据倾斜。
+离线分数不是发布决策的充分条件。新模型可能需要更多显存、降低可承载并发、拉高 TTFT/TPOT，或只在平均指标上提升而伤害关键业务切片；新算子、Tokenizer、量化和上下文长度还可能改变故障面。应把质量增益换算到目标流量与单位成本，在 shadow 中验证协议和资源，再用 canary 测真实收益。收益不足以覆盖容量、迁移和回滚风险时，保留旧模型是正确决策，不是技术保守。
 
-排查时关联请求 Trace、Serving Scheduler 指标、GPU Profile、节点和网络遥测，找到延迟增加的第一个等待阶段。AIOps 可以做异常检测、相似故障检索和根因候选排序，但自动扩容或重启必须经过 SLO、容量和冷却时间约束，不能把相关性直接当因果。
+同时观察两类指标：系统指标包括 TTFT、TPOT、P99、错误率、OOM 和成本；质量指标包括任务成功率、拒答率、安全率和分层 Eval。质量指标通常反馈更慢，不能只靠五分钟技术监控判定成功。
 
-**差距在哪**：新手看到低利用率就加卡，高手先分解等待时间和硬件指标，再判断瓶颈在 CPU、GPU、通信还是调度。
+回滚也要预留旧版本权重、副本容量和路由配置，并考虑会话粘性、KV Cache 不兼容以及 Agent Run 的版本固定。Kubernetes [Deployment 官方文档](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)提供滚动替换与回滚基础能力，但模型质量门禁、制品兼容和会话版本仍由 AI 平台负责。审计记录必须回答“谁在何时把哪套制品以什么配置发布给了哪些流量”。
+
+**差距在哪**：新手只有流量百分比，高手把制品一致性、质量评估、容量和有状态会话纳入发布计划。
 
 ---
 
@@ -450,6 +450,28 @@ Observability/AIOps：Metrics、Logs、Trace、Profile、告警与自动处置
 
 ---
 
+## Q：GPU 利用率很低，但请求延迟很高，怎么排查？
+
+> 来源：[小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）
+
+**新手答**：“可能 GPU 不够，增加实例或者调大 batch。”
+
+**高手答**：
+
+先确认指标口径：低的是 SM Active、Tensor Core 利用、显存带宽还是平均 GPU Utilization。然后按等待链路拆分：
+
+```text
+入口排队 → Tokenize → Prefill → Decode → 通信 → Detokenize/Streaming
+```
+
+常见根因包括 batch 太小、CPU Tokenizer 饱和、Host-to-Device 拷贝、同步点过多、长短请求互相阻塞、KV Cache 碎片、模型并行通信或下游流式消费慢。训练场景还要看 DataLoader、存储吞吐、NCCL straggler 和数据倾斜。
+
+排查时关联请求 Trace、Serving Scheduler 指标、GPU Profile、节点和网络遥测，找到延迟增加的第一个等待阶段。AIOps 可以做异常检测、相似故障检索和根因候选排序，但自动扩容或重启必须经过 SLO、容量和冷却时间约束，不能把相关性直接当因果。
+
+**差距在哪**：新手看到低利用率就加卡，高手先分解等待时间和硬件指标，再判断瓶颈在 CPU、GPU、通信还是调度。
+
+---
+
 ## Q：GPU 调度和普通 CPU 调度有什么不同？
 
 > 来源：Kubernetes GPU Scheduler 高频题
@@ -465,24 +487,6 @@ GPU 通常是稀缺、异构且拓扑敏感的资源。除了型号和显存，�
 还要维护 GPU 健康状态：对 Xid、ECC、温度、掉卡和链路降速进行检测，隔离问题设备并保留诊断证据，避免任务在坏节点上反复失败。
 
 **差距在哪**：新手只会写资源声明，高手理解拓扑、成组调度、碎片、公平性和设备健康。
-
----
-
-## Q：模型版本升级如何做到可观测、可灰度、可回滚？
-
-> 来源：模型发布与稳定性高频题
-
-**新手答**：“部署新版本，先放 10% 流量，指标异常就回滚。”
-
-**高手答**：
-
-发布单元必须绑定模型权重、Tokenizer、推理参数、量化方式、镜像和 Prompt/Adapter 兼容信息。上线前完成离线质量、安全、性能和资源回归；线上先 shadow 验证协议与容量，再按租户或任务类型 canary，避免随机流量掩盖分布差异。
-
-同时观察两类指标：系统指标包括 TTFT、TPOT、P99、错误率、OOM 和成本；质量指标包括任务成功率、拒答率、安全率和分层 Eval。质量指标通常反馈更慢，不能只靠五分钟技术监控判定成功。
-
-回滚也要预留旧版本权重、副本容量和路由配置，并考虑会话粘性、KV Cache 不兼容以及 Agent Run 的版本固定。审计记录必须回答“谁在何时把哪套制品以什么配置发布给了哪些流量”。
-
-**差距在哪**：新手只有流量百分比，高手把制品一致性、质量评估、容量和有状态会话纳入发布计划。
 
 ---
 

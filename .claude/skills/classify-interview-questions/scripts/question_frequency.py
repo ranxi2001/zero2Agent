@@ -13,6 +13,7 @@ SECTION_RE = re.compile(r"^##\s+([0-9]{2}-[^（\s]+)（(\d+)题）\s*$")
 QUESTION_RE = re.compile(r"^(\d+)\.\s+(.+?)(?:\s+—\s+(.*))?$")
 ANNOTATION_RE = re.compile(r"【([^】]+)】")
 NEW_MARK_RE = re.compile(r"（(?:新增|补录索引)）")
+MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(https?://[^)]+\)")
 GENERIC_SOURCE_RE = re.compile(
     r"30题|后端AI八股|已有正文|高频题|"
     r"八股合集|问题汇总|面试题汇总|题库汇总|面试题单"
@@ -65,6 +66,9 @@ def _expand_evidence(value: str) -> list[str]:
     value = _clean_evidence(value)
     if not value:
         return []
+    links = MARKDOWN_LINK_RE.findall(value)
+    if len(links) > 1:
+        return links
     descriptor = re.split(r"[：:]", value, maxsplit=1)[0]
     multiplicity = 1 + descriptor.count("、")
     if "http" not in descriptor.casefold():

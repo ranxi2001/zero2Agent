@@ -1763,7 +1763,7 @@ flowchart LR
 
 ### Q：Agent 如何判断已经收集了足够的信息，并最终给出输出结论？
 
-> 来源：字节跳动多模态算法一面【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】
+> 来源：字节跳动多模态算法一面【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】【[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)追问：Agent 偷懒、过早结束或省略必要步骤】【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：任务结束与会话终止策略】
 
 **新手答**：“设置最大循环次数，到了就输出。”
 
@@ -1789,6 +1789,10 @@ flowchart LR
 - max_iterations 作为硬兜底
 - token budget 作为成本约束
 - 相同工具+相同参数连续调用 → 强制跳出（死循环检测）
+
+还要区分**任务完成**和**会话结束**。任务只能由成功条件和外部证据关闭，不能因为模型输出了 `finish` 就完成；会话则可以在任务进入 `COMPLETED / FAILED / CANCELLED` 后按 TTL 回收交互状态。任务等待用户时应进入 `WAITING_FOR_USER` 并释放执行资源，而不是提前清空状态或无限占用 Worker。
+
+为防止 Agent “偷懒”，Verifier 应逐项检查子目标、必需步骤和交付物，且关键证据来自工具结果、测试或业务终态，不能让执行模型自证完成。缺少证据时回到补充执行、澄清或明确的部分完成状态；预算耗尽只代表停止执行，不代表目标已经达成。
 
 **差距在哪**：新手只知道 max iterations。高手理解“够不够”是一个多信号融合决策——目标覆盖、信息增量、置信度收敛三个维度联合判断，并用工程防护兜底。这直接决定了 Agent 的“智商”——太早停会漏信息，太晚停会烧 token。
 
@@ -1944,7 +1948,7 @@ flowchart TB
 
 ## Q：Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？
 
-> 来源：腾讯 WXG 微信读书一面（2026-08-24）
+> 来源：[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）
 
 **新手答**：“把目标写进 System Prompt，每轮提醒模型，并设置最大循环次数。”
 
@@ -1960,7 +1964,7 @@ flowchart TB
 
 ## Q：在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？
 
-> 来源：地图 Agent 二面（2026-08-24）
+> 来源：[地图 Agent 二面](https://www.nowcoder.com/feed/main/detail/0208597586e744c884bdc571dc441fad)（2026-08-24）
 
 **新手答**：“DDD 能让代码结构更清晰，AI 生成代码时更容易理解项目。”
 

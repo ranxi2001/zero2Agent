@@ -91,21 +91,21 @@
     },
     {
       "dimension": "01-architecture-design",
-      "title": "设计一个 AI Agent 爬取短视频平台内容",
-      "frequency": 1,
-      "firstSeenOrder": 8,
-      "evidence": [
-        "字节实习一面"
-      ]
-    },
-    {
-      "dimension": "01-architecture-design",
       "title": "生产级 Agent 的执行循环包含哪些阶段？",
       "frequency": 2,
       "firstSeenOrder": 13,
       "evidence": [
         "快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）",
         "阿里 Agent Infra 一面题库追问：Agent Loop"
+      ]
+    },
+    {
+      "dimension": "01-architecture-design",
+      "title": "设计一个 AI Agent 爬取短视频平台内容",
+      "frequency": 1,
+      "firstSeenOrder": 8,
+      "evidence": [
+        "字节实习一面"
       ]
     },
     {
@@ -349,6 +349,19 @@
     },
     {
       "dimension": "01-architecture-design",
+      "title": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？",
+      "frequency": 5,
+      "firstSeenOrder": 39,
+      "evidence": [
+        "字节跳动多模态算法一面",
+        "字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件",
+        "阿里 Agent Infra 一面题库同题：停止条件",
+        "[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)追问：Agent 偷懒、过早结束或省略必要步骤",
+        "[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：任务结束与会话终止策略"
+      ]
+    },
+    {
+      "dimension": "01-architecture-design",
       "title": "Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？",
       "frequency": 2,
       "firstSeenOrder": 38,
@@ -359,13 +372,12 @@
     },
     {
       "dimension": "01-architecture-design",
-      "title": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？",
-      "frequency": 3,
-      "firstSeenOrder": 39,
+      "title": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？",
+      "frequency": 2,
+      "firstSeenOrder": 45,
       "evidence": [
-        "字节跳动多模态算法一面",
-        "字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件",
-        "阿里 Agent Infra 一面题库同题：停止条件"
+        "北京四维图新面经",
+        "阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机"
       ]
     },
     {
@@ -401,7 +413,7 @@
       "frequency": 1,
       "firstSeenOrder": 43,
       "evidence": [
-        "腾讯 WXG微信读书一面"
+        "[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）"
       ]
     },
     {
@@ -410,17 +422,7 @@
       "frequency": 1,
       "firstSeenOrder": 44,
       "evidence": [
-        "地图 Agent二面"
-      ]
-    },
-    {
-      "dimension": "01-architecture-design",
-      "title": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？",
-      "frequency": 2,
-      "firstSeenOrder": 45,
-      "evidence": [
-        "北京四维图新面经",
-        "阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机"
+        "[地图 Agent 二面](https://www.nowcoder.com/feed/main/detail/0208597586e744c884bdc571dc441fad)（2026-08-24）"
       ]
     },
     {
@@ -681,8 +683,18 @@
       "frequency": 2,
       "firstSeenOrder": 36,
       "evidence": [
-        "Newegg一面",
+        "[Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）",
         "字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文"
+      ]
+    },
+    {
+      "dimension": "02-tool-management",
+      "title": "如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？",
+      "frequency": 2,
+      "firstSeenOrder": 37,
+      "evidence": [
+        "阿里控股 Agent Infra 暑期一面",
+        "[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：如何判断 CLI/MCP 是否 AI-Friendly"
       ]
     },
     {
@@ -755,15 +767,6 @@
       "firstSeenOrder": 35,
       "evidence": [
         "拓竹 AI Agent算法一面"
-      ]
-    },
-    {
-      "dimension": "02-tool-management",
-      "title": "如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？",
-      "frequency": 1,
-      "firstSeenOrder": 37,
-      "evidence": [
-        "阿里控股 Agent Infra 暑期一面"
       ]
     },
     {
@@ -875,6 +878,15 @@
     },
     {
       "dimension": "03-fault-tolerance",
+      "title": "Skill 间需要传递敏感信息时，如何做到内部可用、对用户不可见？",
+      "frequency": 1,
+      "firstSeenOrder": 37,
+      "evidence": [
+        "[百度 Coding Agent 二面](https://www.nowcoder.com/feed/main/detail/b9521e2b51e04afeac0a3a32e13f4da9)"
+      ]
+    },
+    {
+      "dimension": "03-fault-tolerance",
       "title": "为什么在复杂的 Agent 闭环场景中，仅靠 RAG 无法彻底解决幻觉问题？",
       "frequency": 3,
       "firstSeenOrder": 12,
@@ -907,10 +919,11 @@
     {
       "dimension": "03-fault-tolerance",
       "title": "高风险在线环境中，Agent 的异常管控方案怎么设计？",
-      "frequency": 1,
+      "frequency": 2,
       "firstSeenOrder": 15,
       "evidence": [
-        "淘宝闪购一面"
+        "淘宝闪购一面",
+        "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护"
       ]
     },
     {
@@ -997,6 +1010,15 @@
     },
     {
       "dimension": "03-fault-tolerance",
+      "title": "页面结构变化导致 Skill 失效时，如何检测、降级与修复？",
+      "frequency": 1,
+      "firstSeenOrder": 38,
+      "evidence": [
+        "[百度 Coding Agent 二面](https://www.nowcoder.com/feed/main/detail/b9521e2b51e04afeac0a3a32e13f4da9)"
+      ]
+    },
+    {
+      "dimension": "03-fault-tolerance",
       "title": "在跨境汇款等金融业务场景下，Agent 超时/失败如何应对并保证资金安全？",
       "frequency": 1,
       "firstSeenOrder": 25,
@@ -1016,21 +1038,31 @@
     },
     {
       "dimension": "03-fault-tolerance",
-      "title": "Coding Agent 看到 .env 文件会怎样？如何设计安全边界？",
-      "frequency": 1,
-      "firstSeenOrder": 26,
-      "evidence": [
-        "Coding Agent面经"
-      ]
-    },
-    {
-      "dimension": "03-fault-tolerance",
       "title": "Agent 失败通常有哪些原因？如何快速定位责任层？",
       "frequency": 2,
       "firstSeenOrder": 28,
       "evidence": [
         "点点互动Agent开发秋招一面",
         "阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因"
+      ]
+    },
+    {
+      "dimension": "03-fault-tolerance",
+      "title": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？",
+      "frequency": 2,
+      "firstSeenOrder": 33,
+      "evidence": [
+        "中兴 AI大模型算法岗一面",
+        "阿里 Agent Infra 一面题库追问：Prompt Injection 的 Infra 防线"
+      ]
+    },
+    {
+      "dimension": "03-fault-tolerance",
+      "title": "Coding Agent 看到 .env 文件会怎样？如何设计安全边界？",
+      "frequency": 1,
+      "firstSeenOrder": 26,
+      "evidence": [
+        "Coding Agent面经"
       ]
     },
     {
@@ -1071,21 +1103,11 @@
     },
     {
       "dimension": "03-fault-tolerance",
-      "title": "如何对自己的 Agent 做系统化红队测试，而不是只测 Prompt Injection？",
-      "frequency": 2,
-      "firstSeenOrder": 33,
-      "evidence": [
-        "中兴 AI大模型算法岗一面",
-        "阿里 Agent Infra 一面题库追问：Prompt Injection 的 Infra 防线"
-      ]
-    },
-    {
-      "dimension": "03-fault-tolerance",
       "title": "为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？",
       "frequency": 1,
       "firstSeenOrder": 34,
       "evidence": [
-        "字节中国交易与广告 Agent一面"
+        "[字节中国交易与广告 Agent 一面](https://www.nowcoder.com/feed/main/detail/6dede073825e4ab493fcbce7f598a6c8)（2026-08-24）"
       ]
     },
     {
@@ -1160,6 +1182,16 @@
     },
     {
       "dimension": "04-memory-context",
+      "title": "你怎么理解 Agent 里的“状态”而不是“上下文”？",
+      "frequency": 2,
+      "firstSeenOrder": 8,
+      "evidence": [
+        "腾讯二面",
+        "阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别"
+      ]
+    },
+    {
+      "dimension": "04-memory-context",
       "title": "对于上下文工程有什么经验？有没有做过 to-do list？",
       "frequency": 1,
       "firstSeenOrder": 6,
@@ -1174,16 +1206,6 @@
       "firstSeenOrder": 7,
       "evidence": [
         "腾讯二面"
-      ]
-    },
-    {
-      "dimension": "04-memory-context",
-      "title": "你怎么理解 Agent 里的“状态”而不是“上下文”？",
-      "frequency": 2,
-      "firstSeenOrder": 8,
-      "evidence": [
-        "腾讯二面",
-        "阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别"
       ]
     },
     {
@@ -1215,6 +1237,15 @@
       "frequency": 0,
       "firstSeenOrder": 12,
       "evidence": []
+    },
+    {
+      "dimension": "04-memory-context",
+      "title": "如何沉淀部门级 Agent 记忆，既避免经验随人流失，又控制错误、过期和权限风险？",
+      "frequency": 1,
+      "firstSeenOrder": 63,
+      "evidence": [
+        "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)"
+      ]
     },
     {
       "dimension": "04-memory-context",
@@ -1370,6 +1401,16 @@
     },
     {
       "dimension": "04-memory-context",
+      "title": "什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？",
+      "frequency": 2,
+      "firstSeenOrder": 36,
+      "evidence": [
+        "蚂蚁AI应用开发二面",
+        "阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache"
+      ]
+    },
+    {
+      "dimension": "04-memory-context",
       "title": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？",
       "frequency": 1,
       "firstSeenOrder": 30,
@@ -1402,16 +1443,6 @@
       "firstSeenOrder": 35,
       "evidence": [
         "淘宝闪购一面"
-      ]
-    },
-    {
-      "dimension": "04-memory-context",
-      "title": "什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？",
-      "frequency": 2,
-      "firstSeenOrder": 36,
-      "evidence": [
-        "蚂蚁AI应用开发二面",
-        "阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache"
       ]
     },
     {
@@ -1627,7 +1658,7 @@
       "frequency": 1,
       "firstSeenOrder": 60,
       "evidence": [
-        "腾讯 WXG微信读书一面"
+        "[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）"
       ]
     },
     {
@@ -1798,6 +1829,15 @@
       "evidence": [
         "蚂蚁AI应用开发二面",
         "淘天AI应用开发一面追问：Context Precision 过低优化方案"
+      ]
+    },
+    {
+      "dimension": "05-eval-and-vision",
+      "title": "如何为 Word、PDF、Markdown 等文档生成与编辑能力设计通用自动评测框架？",
+      "frequency": 1,
+      "firstSeenOrder": 45,
+      "evidence": [
+        "[百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)"
       ]
     },
     {
@@ -2005,10 +2045,29 @@
     {
       "dimension": "05-eval-and-vision",
       "title": "树形意图识别和逐层路由应该如何设计，并构造评测集避免误差级联？",
-      "frequency": 1,
+      "frequency": 2,
       "firstSeenOrder": 41,
       "evidence": [
-        "快手 AI应用开发一面"
+        "快手 AI应用开发一面",
+        "[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)追问：双阶段路由的专精与错误阻断"
+      ]
+    },
+    {
+      "dimension": "05-eval-and-vision",
+      "title": "如何通过两套 Harness 的同任务对照与组件消融定位效果差异？",
+      "frequency": 1,
+      "firstSeenOrder": 46,
+      "evidence": [
+        "[Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)"
+      ]
+    },
+    {
+      "dimension": "05-eval-and-vision",
+      "title": "如何为跨任务重复出现的安全或质量问题生成稳定 Fingerprint，并安全接入自动修复 Agent？",
+      "frequency": 1,
+      "firstSeenOrder": 47,
+      "evidence": [
+        "[元石科技后端/Agent 一面](https://www.nowcoder.com/discuss/921742843704549376)"
       ]
     },
     {
@@ -2071,9 +2130,11 @@
     {
       "dimension": "06-multi-agent-collab",
       "title": "按“职能拆分”和“阶段拆分”各有什么优缺点？",
-      "frequency": 0,
+      "frequency": 1,
       "firstSeenOrder": 7,
-      "evidence": []
+      "evidence": [
+        "Agent 开发面试 30 题"
+      ]
     },
     {
       "dimension": "06-multi-agent-collab",
@@ -2233,6 +2294,16 @@
     },
     {
       "dimension": "06-multi-agent-collab",
+      "title": "如何按租户、任务和 Agent 层级设置分层并发预算？",
+      "frequency": 2,
+      "firstSeenOrder": 31,
+      "evidence": [
+        "小红书 AI Agent开发一面",
+        "[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：模型配额、CPU/内存、工具与依赖图如何共同决定上限"
+      ]
+    },
+    {
+      "dimension": "06-multi-agent-collab",
       "title": "多个 Agent 并行跑的时候状态竞争怎么避免？",
       "frequency": 1,
       "firstSeenOrder": 25,
@@ -2278,20 +2349,11 @@
     },
     {
       "dimension": "06-multi-agent-collab",
-      "title": "如何按租户、任务和 Agent 层级设置分层并发预算？",
-      "frequency": 1,
-      "firstSeenOrder": 31,
-      "evidence": [
-        "小红书 AI Agent开发一面"
-      ]
-    },
-    {
-      "dimension": "06-multi-agent-collab",
       "title": "如何保证多 Agent 通信结果明确、可验证，而不是自然语言互相猜？",
       "frequency": 1,
       "firstSeenOrder": 32,
       "evidence": [
-        "国际业务 Agent一面"
+        "[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)（2026-08-22）"
       ]
     },
     {
@@ -2300,7 +2362,7 @@
       "frequency": 1,
       "firstSeenOrder": 33,
       "evidence": [
-        "小红书 Agent开发实习一面"
+        "[小红书/百度 Agent 实习一面](https://www.nowcoder.com/feed/main/detail/e319aadc79a9479397a6661a7f5ca088)（2026-08-24）"
       ]
     },
     {
@@ -2315,10 +2377,11 @@
     {
       "dimension": "07-engineering-pitfalls",
       "title": "Agent 的成本怎么控制？",
-      "frequency": 1,
+      "frequency": 2,
       "firstSeenOrder": 2,
       "evidence": [
-        "字节实习二面追问：LobeChat 为什么烧 token"
+        "字节实习二面追问：LobeChat 为什么烧 token",
+        "[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理"
       ]
     },
     {
@@ -2717,6 +2780,16 @@
     },
     {
       "dimension": "07-engineering-pitfalls",
+      "title": "系统里多租户隔离是怎么实现的？",
+      "frequency": 2,
+      "firstSeenOrder": 45,
+      "evidence": [
+        "视频面经汇总",
+        "阿里 Agent Infra 一面题库同题：数据、资源与权限隔离"
+      ]
+    },
+    {
+      "dimension": "07-engineering-pitfalls",
       "title": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？",
       "frequency": 2,
       "firstSeenOrder": 57,
@@ -2733,16 +2806,6 @@
       "evidence": [
         "腾讯互娱全栈开发（AI）二面",
         "字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线"
-      ]
-    },
-    {
-      "dimension": "07-engineering-pitfalls",
-      "title": "系统里多租户隔离是怎么实现的？",
-      "frequency": 2,
-      "firstSeenOrder": 45,
-      "evidence": [
-        "视频面经汇总",
-        "阿里 Agent Infra 一面题库同题：数据、资源与权限隔离"
       ]
     },
     {
@@ -2895,7 +2958,7 @@
       "frequency": 1,
       "firstSeenOrder": 64,
       "evidence": [
-        "深信服 Agent三面"
+        "[深信服 Agent 三面](https://www.nowcoder.com/feed/main/detail/b64e8fddbfc642ec9aa33bcdb9aab9aa)（2026-08-23）"
       ]
     },
     {
@@ -3072,12 +3135,22 @@
     },
     {
       "dimension": "08-prompt-engineering",
+      "title": "Skill 的 Prompt 配置上线后出错，如何快速止损和修复？",
+      "frequency": 2,
+      "firstSeenOrder": 23,
+      "evidence": [
+        "百度秋招后端一面",
+        "[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度"
+      ]
+    },
+    {
+      "dimension": "08-prompt-engineering",
       "title": "团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？",
       "frequency": 2,
       "firstSeenOrder": 25,
       "evidence": [
-        "电商 Agent三面、电商库存二面 [1/2]",
-        "电商 Agent三面、电商库存二面 [2/2]"
+        "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)",
+        "电商库存二面（2026-08-17）"
       ]
     },
     {
@@ -3146,15 +3219,6 @@
     },
     {
       "dimension": "08-prompt-engineering",
-      "title": "Skill 的 Prompt 配置上线后出错，如何快速止损和修复？",
-      "frequency": 1,
-      "firstSeenOrder": 23,
-      "evidence": [
-        "百度秋招后端一面"
-      ]
-    },
-    {
-      "dimension": "08-prompt-engineering",
       "title": "为什么 Coding Agent 的 Skills 通常放在 System 上下文，而不是用户 Query 中？",
       "frequency": 1,
       "firstSeenOrder": 24,
@@ -3177,7 +3241,7 @@
       "frequency": 1,
       "firstSeenOrder": 28,
       "evidence": [
-        "OPPO AI全栈一面"
+        "[OPPO AI 全栈一面](https://www.nowcoder.com/discuss/920830730643443712)（2026-08-23）"
       ]
     },
     {
@@ -3192,11 +3256,12 @@
     {
       "dimension": "09-rag-retrieval",
       "title": "多维度的查询改写是什么？",
-      "frequency": 2,
+      "frequency": 3,
       "firstSeenOrder": 2,
       "evidence": [
-        "抖音一面",
-        "淘天一面追问：改写为何提升精准度的底层原理"
+        "抖音基础架构 Agent 一面",
+        "淘天一面追问：改写为何提升精准度的底层原理",
+        "[美团 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/58159306df52463ab75d72daa80d66df)追问：短 Query 与长 Chunk 的非对称召回"
       ]
     },
     {
@@ -3440,13 +3505,14 @@
     {
       "dimension": "09-rag-retrieval",
       "title": "分块策略怎么设计？不同策略的优缺点？",
-      "frequency": 4,
+      "frequency": 5,
       "firstSeenOrder": 29,
       "evidence": [
-        "高德实习一面",
+        "高德 AI 应用开发实习一面",
         "腾讯AI应用开发二面追问：chunk边界修正+表格跨块修复",
         "字节AI一面追问：领域文档语义感知切片",
-        "Shopee 一面追问：为什么不能只按固定 Token 数切分"
+        "Shopee 一面追问：为什么不能只按固定 Token 数切分",
+        "[字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a)追问：跨物理页 Chunk 与页码引用"
       ]
     },
     {
@@ -3455,9 +3521,18 @@
       "frequency": 3,
       "firstSeenOrder": 28,
       "evidence": [
-        "高德实习一面",
+        "高德 AI 应用开发实习一面",
         "字节二面同题：RAG完整流程从文档切块到生成",
         "阿里 Agent Infra 一面题库同题"
+      ]
+    },
+    {
+      "dimension": "09-rag-retrieval",
+      "title": "RAG 召回数据层应如何设计文档、Chunk、Embedding、版本和权限 Schema？",
+      "frequency": 1,
+      "firstSeenOrder": 70,
+      "evidence": [
+        "[Newegg AI 软件工程实习一面](https://www.nowcoder.com/discuss/920719616005898240)"
       ]
     },
     {
@@ -3486,6 +3561,15 @@
       "firstSeenOrder": 30,
       "evidence": [
         "字节实习一面"
+      ]
+    },
+    {
+      "dimension": "09-rag-retrieval",
+      "title": "Coding Agent 应从代码反向理解领域知识，还是维护独立知识库/规则库？",
+      "frequency": 1,
+      "firstSeenOrder": 71,
+      "evidence": [
+        "[国际业务 Agent 二面](https://www.nowcoder.com/feed/main/detail/b163baeb304e432d9b4c9c218ed467fa)"
       ]
     },
     {
@@ -3575,10 +3659,11 @@
     {
       "dimension": "09-rag-retrieval",
       "title": "如何处理 RAG 过程中的权限隔离和时效性问题？",
-      "frequency": 1,
+      "frequency": 2,
       "firstSeenOrder": 41,
       "evidence": [
-        "字节二面"
+        "字节二面",
+        "[阿里千问 AI 应用研发一面](https://www.nowcoder.com/feed/main/detail/da6d74a34ceb4e52b9b4fbcac25cfb3b)追问：文档/Chunk ACL、缓存与引用泄露"
       ]
     },
     {
@@ -3796,11 +3881,13 @@
     {
       "dimension": "10-training-and-data",
       "title": "构造数据集遇到过什么难点？",
-      "frequency": 2,
+      "frequency": 4,
       "firstSeenOrder": 3,
       "evidence": [
         "腾讯AI应用开发",
-        "CVTE AI应用工程师一面追问：合成数据集质量达不到预期怎么办"
+        "CVTE AI应用工程师一面追问：合成数据集质量达不到预期怎么办",
+        "[字节 Seed 具身数据一面](https://www.nowcoder.com/feed/main/detail/657dfac8ca5c49f28492a1110b95f7cd)追问：标注一致性与自动质检",
+        "[Momenta 大模型算法工程师一面](https://www.nowcoder.com/feed/main/detail/f7518c865e07491cb1518d288698813c)追问：长尾样本对齐"
       ]
     },
     {
@@ -3819,6 +3906,33 @@
       "firstSeenOrder": 2,
       "evidence": [
         "腾讯二面"
+      ]
+    },
+    {
+      "dimension": "10-training-and-data",
+      "title": "训练数据标注粒度应该越细越好还是按任务适配？如何权衡成本、信息量和泛化？",
+      "frequency": 1,
+      "firstSeenOrder": 74,
+      "evidence": [
+        "[字节 Seed 具身数据一面](https://www.nowcoder.com/feed/main/detail/657dfac8ca5c49f28492a1110b95f7cd)"
+      ]
+    },
+    {
+      "dimension": "10-training-and-data",
+      "title": "自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？",
+      "frequency": 1,
+      "firstSeenOrder": 75,
+      "evidence": [
+        "[字节 Seed 具身数据一面](https://www.nowcoder.com/feed/main/detail/657dfac8ca5c49f28492a1110b95f7cd)"
+      ]
+    },
+    {
+      "dimension": "10-training-and-data",
+      "title": "SFT 数据字段如何映射？instruction 与 input 重叠时如何定义清洗和拼接契约？",
+      "frequency": 1,
+      "firstSeenOrder": 76,
+      "evidence": [
+        "[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)"
       ]
     },
     {
@@ -3846,10 +3960,11 @@
     {
       "dimension": "10-training-and-data",
       "title": "给定时间序列，如何用 ML 筛选特征再基于规则建模？",
-      "frequency": 1,
+      "frequency": 2,
       "firstSeenOrder": 6,
       "evidence": [
-        "字节一面"
+        "字节一面",
+        "[OPPO 大模型算法面经](https://www.nowcoder.com/feed/main/detail/685479ec75b542bebf1156c47f1d4e88)追问：组合特征盲点"
       ]
     },
     {
@@ -3859,6 +3974,15 @@
       "firstSeenOrder": 7,
       "evidence": [
         "字节一面"
+      ]
+    },
+    {
+      "dimension": "10-training-and-data",
+      "title": "XGBoost 相比单棵决策树，在目标函数、正则和集成机制上做了什么改进？",
+      "frequency": 1,
+      "firstSeenOrder": 77,
+      "evidence": [
+        "[OPPO 大模型算法面经](https://www.nowcoder.com/feed/main/detail/685479ec75b542bebf1156c47f1d4e88)"
       ]
     },
     {
@@ -3948,6 +4072,15 @@
       "firstSeenOrder": 19,
       "evidence": [
         "爱奇艺大模型算法追问：CLIP图文对齐+图像Token冗余解决方案"
+      ]
+    },
+    {
+      "dimension": "10-training-and-data",
+      "title": "OCR、多模态模型、YOLO 与 ONNX 分别处于任务、模型和运行时哪个层次？如何组合？",
+      "frequency": 1,
+      "firstSeenOrder": 78,
+      "evidence": [
+        "[北京金蝶二面](https://www.nowcoder.com/feed/main/detail/6edec13bc5f34f0ca137b4a4911dcb10)"
       ]
     },
     {
@@ -4322,7 +4455,7 @@
       "frequency": 1,
       "firstSeenOrder": 56,
       "evidence": [
-        "阿里云 AI Infer一面"
+        "[阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)（2026-08-23）"
       ]
     },
     {
@@ -4376,7 +4509,7 @@
       "frequency": 1,
       "firstSeenOrder": 62,
       "evidence": [
-        "Shopee Agent开发一面"
+        "[Shopee Agent 开发一面](https://www.nowcoder.com/feed/main/detail/79fe3fc8f8cb4c4d9beca478f4279e3a)（2026-08-24）"
       ]
     },
     {
@@ -4385,7 +4518,7 @@
       "frequency": 1,
       "firstSeenOrder": 63,
       "evidence": [
-        "大方云图研发实习一面"
+        "[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)（2026-08-24）"
       ]
     },
     {
@@ -4404,6 +4537,15 @@
       "firstSeenOrder": 67,
       "evidence": [
         "AI Infra 小厂实习面经"
+      ]
+    },
+    {
+      "dimension": "10-training-and-data",
+      "title": "Agentic RL 数据筛选为什么会排除部分学生错误轨迹？哪些可恢复错误反而值得保留？",
+      "frequency": 1,
+      "firstSeenOrder": 79,
+      "evidence": [
+        "[阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)"
       ]
     },
     {
@@ -4458,6 +4600,16 @@
     },
     {
       "dimension": "11-ai-code-testing",
+      "title": "如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？",
+      "frequency": 2,
+      "firstSeenOrder": 13,
+      "evidence": [
+        "蚂蚁集团效能研发面经",
+        "[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理"
+      ]
+    },
+    {
+      "dimension": "11-ai-code-testing",
       "title": "工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？",
       "frequency": 1,
       "firstSeenOrder": 6,
@@ -4498,7 +4650,7 @@
       "frequency": 1,
       "firstSeenOrder": 10,
       "evidence": [
-        "深信服 Agent三面"
+        "[深信服 Agent 三面](https://www.nowcoder.com/feed/main/detail/b64e8fddbfc642ec9aa33bcdb9aab9aa)（2026-08-23）"
       ]
     },
     {
@@ -4521,11 +4673,11 @@
     },
     {
       "dimension": "11-ai-code-testing",
-      "title": "如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？",
+      "title": "Coding Agent 能否自举开发自身？如何避免生成器与验证器同源导致循环确认？",
       "frequency": 1,
-      "firstSeenOrder": 13,
+      "firstSeenOrder": 15,
       "evidence": [
-        "蚂蚁集团效能研发面经"
+        "[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)"
       ]
     },
     {
@@ -4584,21 +4736,22 @@
     },
     {
       "dimension": "12-business-ai-engineering",
+      "title": "Agent 项目如何从 Demo 进行企业级落地？从原型到生产需要补全哪些工程能力？",
+      "frequency": 2,
+      "firstSeenOrder": 7,
+      "evidence": [
+        "哆咔互娱Agent开发实习一面",
+        "[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界"
+      ]
+    },
+    {
+      "dimension": "12-business-ai-engineering",
       "title": "设计订单客服 Agent 时，如何处理转人工和意图识别调优？",
       "frequency": 2,
       "firstSeenOrder": 10,
       "evidence": [
         "某 Java/Agent 岗面经 [1/2]",
         "某 Java/Agent 岗面经 [2/2]"
-      ]
-    },
-    {
-      "dimension": "12-business-ai-engineering",
-      "title": "Agent 项目如何从 Demo 进行企业级落地？从原型到生产需要补全哪些工程能力？",
-      "frequency": 1,
-      "firstSeenOrder": 7,
-      "evidence": [
-        "哆咔互娱Agent开发实习一面"
       ]
     },
     {
@@ -4625,7 +4778,7 @@
       "frequency": 1,
       "firstSeenOrder": 11,
       "evidence": [
-        "中国电信风控 Agent二面"
+        "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)（2026-08-22）"
       ]
     },
     {
@@ -4652,7 +4805,7 @@
       "frequency": 1,
       "firstSeenOrder": 14,
       "evidence": [
-        "百川智能医疗大模型后训练一面"
+        "[百川智能医疗大模型后训练一面](https://www.nowcoder.com/feed/main/detail/d209892dc2cf43c6859a776c5e526eca)（2026-08-22）"
       ]
     },
     {
@@ -4661,7 +4814,7 @@
       "frequency": 1,
       "firstSeenOrder": 15,
       "evidence": [
-        "中国电信风控 Agent二面"
+        "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)（2026-08-22）"
       ]
     },
     {
@@ -4680,6 +4833,42 @@
       "firstSeenOrder": 17,
       "evidence": [
         "百度大模型研发二面"
+      ]
+    },
+    {
+      "dimension": "12-business-ai-engineering",
+      "title": "有害内容安全改写如何兼顾风险控制与用户真实诉求，并验证语义保持？",
+      "frequency": 1,
+      "firstSeenOrder": 22,
+      "evidence": [
+        "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)"
+      ]
+    },
+    {
+      "dimension": "12-business-ai-engineering",
+      "title": "内容安全误杀后，如何通过申诉、分层策略和回归集持续治理？",
+      "frequency": 1,
+      "firstSeenOrder": 23,
+      "evidence": [
+        "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)"
+      ]
+    },
+    {
+      "dimension": "12-business-ai-engineering",
+      "title": "浏览器端运行小模型有什么价值？隐私、算力和能力边界是什么？",
+      "frequency": 1,
+      "firstSeenOrder": 24,
+      "evidence": [
+        "[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)"
+      ]
+    },
+    {
+      "dimension": "12-business-ai-engineering",
+      "title": "如何设计批量 PDF 转 HTML 并与知识库核对的 LLM Workflow？",
+      "frequency": 1,
+      "firstSeenOrder": 25,
+      "evidence": [
+        "[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)"
       ]
     },
     {
@@ -4908,10 +5097,11 @@
     {
       "dimension": "15-agent-concepts",
       "title": "讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering",
-      "frequency": 1,
+      "frequency": 2,
       "firstSeenOrder": 3,
       "evidence": [
-        "阿里淘天AI应用开发暑期二面"
+        "阿里淘天AI应用开发暑期二面",
+        "[淘天 AI 应用开发秋招二面](https://www.nowcoder.com/feed/main/detail/1b201d12219c45818b447bc7633fd62c)追问：模型升级与 Harness 的边界"
       ]
     },
     {
@@ -5052,12 +5242,57 @@
     {
       "dimension": "16-agent-infra",
       "title": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？",
-      "frequency": 3,
+      "frequency": 5,
       "firstSeenOrder": 8,
       "evidence": [
-        "百度/虾皮 AI Infra 面经 [1/2]",
-        "百度/虾皮 AI Infra 面经 [2/2]",
+        "[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec)",
+        "[虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e)",
+        "[虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6)",
+        "[字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)",
         "阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "为什么需要 Checkpoint，恢复时从哪里继续？",
+      "frequency": 4,
+      "firstSeenOrder": 3,
+      "evidence": [
+        "阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机",
+        "[字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a)",
+        "[MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c)",
+        "[哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "如何支撑几十万并发 Agent Task，并把它观测清楚？",
+      "frequency": 3,
+      "firstSeenOrder": 7,
+      "evidence": [
+        "阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分",
+        "[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)",
+        "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "一次 Agent 请求的完整执行链路是什么？",
+      "frequency": 2,
+      "firstSeenOrder": 2,
+      "evidence": [
+        "字节火山引擎 Managed Agent 一面同题",
+        "阿里 Agent Infra 一面题库同题"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？",
+      "frequency": 2,
+      "firstSeenOrder": 4,
+      "evidence": [
+        "阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功",
+        "[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题"
       ]
     },
     {
@@ -5072,22 +5307,39 @@
     },
     {
       "dimension": "16-agent-infra",
-      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
+      "title": "Agent 平台或 Runtime 出现新框架时，如何评估迁移收益、兼容老旧服务并决定是否淘汰旧方案？",
       "frequency": 2,
-      "firstSeenOrder": 17,
+      "firstSeenOrder": 24,
       "evidence": [
-        "字节 AML / 火山方舟 AI Infra一面 [1/2]",
-        "字节 AML / 火山方舟 AI Infra一面 [2/2]"
+        "[虾皮 Agent 二面](https://www.nowcoder.com/feed/main/detail/345b668e35a9451bb397a9189dfdc943)",
+        "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)"
       ]
     },
     {
       "dimension": "16-agent-infra",
-      "title": "一次 Agent 请求的完整执行链路是什么？",
-      "frequency": 2,
-      "firstSeenOrder": 2,
+      "title": "如果让你设计一个 Agent Runtime，你会怎么拆？",
+      "frequency": 1,
+      "firstSeenOrder": 1,
       "evidence": [
-        "字节火山引擎 Managed Agent 一面同题",
-        "阿里 Agent Infra 一面题库同题"
+        "阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "Agent Sandbox 解决什么问题，为什么容器不一定够？",
+      "frequency": 1,
+      "firstSeenOrder": 5,
+      "evidence": [
+        "阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "Kubernetes 在 Agent Infra 中负责什么？",
+      "frequency": 1,
+      "firstSeenOrder": 6,
+      "evidence": [
+        "阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等"
       ]
     },
     {
@@ -5155,56 +5407,11 @@
     },
     {
       "dimension": "16-agent-infra",
-      "title": "如果让你设计一个 Agent Runtime，你会怎么拆？",
+      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
       "frequency": 1,
-      "firstSeenOrder": 1,
+      "firstSeenOrder": 17,
       "evidence": [
-        "阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker"
-      ]
-    },
-    {
-      "dimension": "16-agent-infra",
-      "title": "为什么需要 Checkpoint，恢复时从哪里继续？",
-      "frequency": 1,
-      "firstSeenOrder": 3,
-      "evidence": [
-        "阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机"
-      ]
-    },
-    {
-      "dimension": "16-agent-infra",
-      "title": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？",
-      "frequency": 1,
-      "firstSeenOrder": 4,
-      "evidence": [
-        "阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功"
-      ]
-    },
-    {
-      "dimension": "16-agent-infra",
-      "title": "Agent Sandbox 解决什么问题，为什么容器不一定够？",
-      "frequency": 1,
-      "firstSeenOrder": 5,
-      "evidence": [
-        "阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份"
-      ]
-    },
-    {
-      "dimension": "16-agent-infra",
-      "title": "Kubernetes 在 Agent Infra 中负责什么？",
-      "frequency": 1,
-      "firstSeenOrder": 6,
-      "evidence": [
-        "阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等"
-      ]
-    },
-    {
-      "dimension": "16-agent-infra",
-      "title": "如何支撑几十万并发 Agent Task，并把它观测清楚？",
-      "frequency": 1,
-      "firstSeenOrder": 7,
-      "evidence": [
-        "阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分"
+        "[字节 AML / 火山方舟 AI Infra 一面](https://www.nowcoder.com/discuss/921927475611869184)（2026-08-26）"
       ]
     },
     {
@@ -5214,6 +5421,46 @@
       "firstSeenOrder": 18,
       "evidence": [
         "阿里 Agent Infra 一面题库"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？",
+      "frequency": 1,
+      "firstSeenOrder": 23,
+      "evidence": [
+        "[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f)"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "verl AgentLoop 的运行模型、状态与扩展点是什么？",
+      "frequency": 1,
+      "firstSeenOrder": 25,
+      "evidence": [
+        "[阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)"
+      ]
+    },
+    {
+      "dimension": "16-agent-infra",
+      "title": "Agent 状态放在 Sandbox 内、用户状态放在 Sandbox 外时，边界如何设计？",
+      "frequency": 1,
+      "firstSeenOrder": 26,
+      "evidence": [
+        "[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)"
+      ]
+    },
+    {
+      "dimension": "17-ai-infra",
+      "title": "KV Cache 占用如何计算，为什么不能只按请求数做容量规划？",
+      "frequency": 5,
+      "firstSeenOrder": 4,
+      "evidence": [
+        "[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)",
+        "[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)",
+        "[字节 App Infra Agent 一面](https://www.nowcoder.com/feed/main/detail/0bec32fbb3344ff98f16b97f47c7b857)",
+        "[字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)",
+        "阿里 Agent Infra 一面题库追问：KV Cache 原理"
       ]
     },
     {
@@ -5391,17 +5638,6 @@
     },
     {
       "dimension": "17-ai-infra",
-      "title": "KV Cache 占用如何计算，为什么不能只按请求数做容量规划？",
-      "frequency": 3,
-      "firstSeenOrder": 4,
-      "evidence": [
-        "抖音搜推/百度 AI Infra 一面 [1/2]",
-        "抖音搜推/百度 AI Infra 一面 [2/2]",
-        "阿里 Agent Infra 一面题库追问：KV Cache 原理"
-      ]
-    },
-    {
-      "dimension": "17-ai-infra",
       "title": "如何设计大模型在线推理服务？",
       "frequency": 2,
       "firstSeenOrder": 7,
@@ -5470,11 +5706,20 @@
     },
     {
       "dimension": "17-ai-infra",
-      "title": "GPU 利用率很低，但请求延迟很高，怎么排查？",
+      "title": "模型版本升级如何做到可观测、可灰度、可回滚？",
       "frequency": 1,
-      "firstSeenOrder": 8,
+      "firstSeenOrder": 10,
       "evidence": [
-        "小鹏 AI Infra 一面"
+        "[Momenta 大模型算法工程师一面](https://www.nowcoder.com/feed/main/detail/f7518c865e07491cb1518d288698813c)追问：离线效果更好为何仍保留旧模型"
+      ]
+    },
+    {
+      "dimension": "17-ai-infra",
+      "title": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？",
+      "frequency": 1,
+      "firstSeenOrder": 29,
+      "evidence": [
+        "阿里 Agent Infra 一面题库"
       ]
     },
     {
@@ -5493,26 +5738,17 @@
     },
     {
       "dimension": "17-ai-infra",
+      "title": "GPU 利用率很低，但请求延迟很高，怎么排查？",
+      "frequency": 0,
+      "firstSeenOrder": 8,
+      "evidence": []
+    },
+    {
+      "dimension": "17-ai-infra",
       "title": "GPU 调度和普通 CPU 调度有什么不同？",
       "frequency": 0,
       "firstSeenOrder": 9,
       "evidence": []
-    },
-    {
-      "dimension": "17-ai-infra",
-      "title": "模型版本升级如何做到可观测、可灰度、可回滚？",
-      "frequency": 0,
-      "firstSeenOrder": 10,
-      "evidence": []
-    },
-    {
-      "dimension": "17-ai-infra",
-      "title": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？",
-      "frequency": 1,
-      "firstSeenOrder": 29,
-      "evidence": [
-        "阿里 Agent Infra 一面题库"
-      ]
     }
   ]
 }

@@ -46,6 +46,33 @@ class QuestionFrequencyTest(unittest.TestCase):
         evidence = MODULE.infer_evidence("字节一面 【高德/百度二面同题：如何压缩上下文】")
         self.assertEqual(len(evidence), 3)
 
+    def test_markdown_source_links_are_preserved_as_separate_evidence(self):
+        evidence = MODULE.infer_evidence(
+            "[阿里云 Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/a)"
+            "【[百度 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/b)】"
+        )
+        self.assertEqual(
+            evidence,
+            [
+                "[阿里云 Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/a)",
+                "[百度 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/b)",
+            ],
+        )
+
+    def test_multiple_markdown_links_in_one_source_block_are_split(self):
+        evidence = MODULE.infer_evidence(
+            "[百度一面](https://www.nowcoder.com/feed/main/detail/a) / "
+            "[虾皮一面](https://www.nowcoder.com/feed/main/detail/b) / "
+            "[字节一面](https://www.nowcoder.com/feed/main/detail/c)"
+        )
+        self.assertEqual(
+            evidence,
+            [
+                "[百度一面](https://www.nowcoder.com/feed/main/detail/a)",
+                "[虾皮一面](https://www.nowcoder.com/feed/main/detail/b)",
+                "[字节一面](https://www.nowcoder.com/feed/main/detail/c)",
+            ],
+        )
     def test_frequency_must_equal_evidence_count(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "frequency.json"
