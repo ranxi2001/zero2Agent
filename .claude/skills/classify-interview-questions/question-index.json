@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28",
-  "questionCount": 617,
+  "updatedAt": "2026-09-02",
+  "questionCount": 619,
   "dimensions": {
     "01-architecture-design": 45,
     "02-tool-management": 37,
     "03-fault-tolerance": 36,
     "04-memory-context": 62,
-    "05-eval-and-vision": 44,
+    "05-eval-and-vision": 45,
     "06-multi-agent-collab": 34,
     "07-engineering-pitfalls": 66,
     "08-prompt-engineering": 29,
@@ -17,7 +17,7 @@
     "12-business-ai-engineering": 21,
     "13-project-deep-dive": 21,
     "15-agent-concepts": 17,
-    "16-agent-infra": 22,
+    "16-agent-infra": 23,
     "17-ai-infra": 29
   },
   "questions": [
@@ -26,8 +26,8 @@
       "dimension": "01-architecture-design",
       "ordinal": 1,
       "title": "你用 ReAct 还是 Plan-and-Execute？为什么？",
-      "source": "腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】",
-      "searchText": "你用 ReAct 还是 Plan-and-Execute？为什么？ 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】"
+      "source": "腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "你用 ReAct 还是 Plan-and-Execute？为什么？ 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "01-architecture-design:002",
@@ -49,33 +49,33 @@
       "id": "01-architecture-design:004",
       "dimension": "01-architecture-design",
       "ordinal": 4,
-      "title": "Agent 的架构设计？从系统角度来拆分",
-      "source": "阿里一面",
-      "searchText": "Agent 的架构设计？从系统角度来拆分 阿里一面"
+      "title": "Agent 在学术上由哪些部分组成？",
+      "source": "字节一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "Agent 在学术上由哪些部分组成？ 字节一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "01-architecture-design:005",
       "dimension": "01-architecture-design",
       "ordinal": 5,
-      "title": "Agent 在学术上由哪些部分组成？",
-      "source": "字节一面",
-      "searchText": "Agent 在学术上由哪些部分组成？ 字节一面"
+      "title": "如果模型不擅长遵守流程，怎么放进强约束工作流？",
+      "source": "腾讯二面【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】",
+      "searchText": "如果模型不擅长遵守流程，怎么放进强约束工作流？ 腾讯二面【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】"
     },
     {
       "id": "01-architecture-design:006",
       "dimension": "01-architecture-design",
       "ordinal": 6,
-      "title": "如果让你设计一个 Agent 的规划器，怎么避免路径震荡？",
-      "source": "腾讯二面",
-      "searchText": "如果让你设计一个 Agent 的规划器，怎么避免路径震荡？ 腾讯二面"
+      "title": "Agent 的架构设计？从系统角度来拆分",
+      "source": "阿里一面",
+      "searchText": "Agent 的架构设计？从系统角度来拆分 阿里一面"
     },
     {
       "id": "01-architecture-design:007",
       "dimension": "01-architecture-design",
       "ordinal": 7,
-      "title": "如果模型不擅长遵守流程，怎么放进强约束工作流？",
+      "title": "如果让你设计一个 Agent 的规划器，怎么避免路径震荡？",
       "source": "腾讯二面",
-      "searchText": "如果模型不擅长遵守流程，怎么放进强约束工作流？ 腾讯二面"
+      "searchText": "如果让你设计一个 Agent 的规划器，怎么避免路径震荡？ 腾讯二面"
     },
     {
       "id": "01-architecture-design:008",
@@ -90,8 +90,8 @@
       "dimension": "01-architecture-design",
       "ordinal": 9,
       "title": "生产级 Agent 的执行循环包含哪些阶段？",
-      "source": "30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】",
-      "searchText": "生产级 Agent 的执行循环包含哪些阶段？ 30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】"
+      "source": "30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】",
+      "searchText": "生产级 Agent 的执行循环包含哪些阶段？ 30题 【快手AI应用开发一面追问：Agent Runtime 完整管线设计（Auth→Planner→Executor→Verifier→Trace）】【阿里 Agent Infra 一面题库追问：Agent Loop】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】"
     },
     {
       "id": "01-architecture-design:010",
@@ -153,33 +153,33 @@
       "id": "01-architecture-design:017",
       "dimension": "01-architecture-design",
       "ordinal": 17,
-      "title": "微服务怎么接入一个 Agent 系统？",
-      "source": "蚂蚁一面",
-      "searchText": "微服务怎么接入一个 Agent 系统？ 蚂蚁一面"
+      "title": "Agent 的任务规划是怎么做的？规划由模型还是规则？",
+      "source": "快手一面【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】",
+      "searchText": "Agent 的任务规划是怎么做的？规划由模型还是规则？ 快手一面【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】"
     },
     {
       "id": "01-architecture-design:018",
       "dimension": "01-architecture-design",
       "ordinal": 18,
-      "title": "如何保证规划 Agent plan 的结果正确？",
-      "source": "AI工程师面试",
-      "searchText": "如何保证规划 Agent plan 的结果正确？ AI工程师面试"
+      "title": "微服务怎么接入一个 Agent 系统？",
+      "source": "蚂蚁一面",
+      "searchText": "微服务怎么接入一个 Agent 系统？ 蚂蚁一面"
     },
     {
       "id": "01-architecture-design:019",
       "dimension": "01-architecture-design",
       "ordinal": 19,
-      "title": "SSE 怎么实现 Human-in-the-Loop？",
+      "title": "如何保证规划 Agent plan 的结果正确？",
       "source": "AI工程师面试",
-      "searchText": "SSE 怎么实现 Human-in-the-Loop？ AI工程师面试"
+      "searchText": "如何保证规划 Agent plan 的结果正确？ AI工程师面试"
     },
     {
       "id": "01-architecture-design:020",
       "dimension": "01-architecture-design",
       "ordinal": 20,
-      "title": "Agent 的任务规划是怎么做的？规划由模型还是规则？",
-      "source": "快手一面",
-      "searchText": "Agent 的任务规划是怎么做的？规划由模型还是规则？ 快手一面"
+      "title": "SSE 怎么实现 Human-in-the-Loop？",
+      "source": "AI工程师面试",
+      "searchText": "SSE 怎么实现 Human-in-the-Loop？ AI工程师面试"
     },
     {
       "id": "01-architecture-design:021",
@@ -193,73 +193,73 @@
       "id": "01-architecture-design:022",
       "dimension": "01-architecture-design",
       "ordinal": 22,
-      "title": "模型和 Agent 的区别到底是什么？",
-      "source": "字节实习一面 【视频面经同题：你怎么理解Agent？它和普通LLM应用最大的区别】",
-      "searchText": "模型和 Agent 的区别到底是什么？ 字节实习一面 【视频面经同题：你怎么理解Agent？它和普通LLM应用最大的区别】"
+      "title": "Agent 的 Self-Reflection 机制是什么？它怎么识别输出中的逻辑错误？",
+      "source": "蚂蚁AI应用开发二面 【小红书 Agent 开发一面追问：Planner、Executor、Critic 的边界及独立 Critic】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "Agent 的 Self-Reflection 机制是什么？它怎么识别输出中的逻辑错误？ 蚂蚁AI应用开发二面 【小红书 Agent 开发一面追问：Planner、Executor、Critic 的边界及独立 Critic】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "01-architecture-design:023",
       "dimension": "01-architecture-design",
       "ordinal": 23,
-      "title": "Agent 的 Self-Reflection 机制是什么？它怎么识别输出中的逻辑错误？",
-      "source": "蚂蚁AI应用开发二面 【小红书 Agent 开发一面追问：Planner、Executor、Critic 的边界及独立 Critic】",
-      "searchText": "Agent 的 Self-Reflection 机制是什么？它怎么识别输出中的逻辑错误？ 蚂蚁AI应用开发二面 【小红书 Agent 开发一面追问：Planner、Executor、Critic 的边界及独立 Critic】"
+      "title": "模型和 Agent 的区别到底是什么？",
+      "source": "字节实习一面 【视频面经同题：你怎么理解Agent？它和普通LLM应用最大的区别】",
+      "searchText": "模型和 Agent 的区别到底是什么？ 字节实习一面 【视频面经同题：你怎么理解Agent？它和普通LLM应用最大的区别】"
     },
     {
       "id": "01-architecture-design:024",
       "dimension": "01-architecture-design",
       "ordinal": 24,
-      "title": "在“推理-行动”循环中，如何设计来纠正逻辑塌缩或无效工具调用？",
-      "source": "淘天一面",
-      "searchText": "在“推理-行动”循环中，如何设计来纠正逻辑塌缩或无效工具调用？ 淘天一面"
+      "title": "场景题：设计一个日志分析 Agent，怎么设计架构和工具？",
+      "source": "腾讯AI应用开发实习一面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "场景题：设计一个日志分析 Agent，怎么设计架构和工具？ 腾讯AI应用开发实习一面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "01-architecture-design:025",
       "dimension": "01-architecture-design",
       "ordinal": 25,
-      "title": "设计一个智能导购助手 Agent，描述其感知、规划、记忆和执行四大模块在分布式架构下的协同逻辑",
+      "title": "在“推理-行动”循环中，如何设计来纠正逻辑塌缩或无效工具调用？",
       "source": "淘天一面",
-      "searchText": "设计一个智能导购助手 Agent，描述其感知、规划、记忆和执行四大模块在分布式架构下的协同逻辑 淘天一面"
+      "searchText": "在“推理-行动”循环中，如何设计来纠正逻辑塌缩或无效工具调用？ 淘天一面"
     },
     {
       "id": "01-architecture-design:026",
       "dimension": "01-architecture-design",
       "ordinal": 26,
-      "title": "如果设计一个科研辅助 Agent，整体流程应该怎么设计？",
-      "source": "bilibili AI研发实习一面",
-      "searchText": "如果设计一个科研辅助 Agent，整体流程应该怎么设计？ bilibili AI研发实习一面"
+      "title": "设计一个智能导购助手 Agent，描述其感知、规划、记忆和执行四大模块在分布式架构下的协同逻辑",
+      "source": "淘天一面",
+      "searchText": "设计一个智能导购助手 Agent，描述其感知、规划、记忆和执行四大模块在分布式架构下的协同逻辑 淘天一面"
     },
     {
       "id": "01-architecture-design:027",
       "dimension": "01-architecture-design",
       "ordinal": 27,
-      "title": "如何保障自然语言任务描述能精准转化为稳定、可靠的执行路径？",
-      "source": "蚂蚁AI应用开发二面",
-      "searchText": "如何保障自然语言任务描述能精准转化为稳定、可靠的执行路径？ 蚂蚁AI应用开发二面"
+      "title": "如果设计一个科研辅助 Agent，整体流程应该怎么设计？",
+      "source": "bilibili AI研发实习一面",
+      "searchText": "如果设计一个科研辅助 Agent，整体流程应该怎么设计？ bilibili AI研发实习一面"
     },
     {
       "id": "01-architecture-design:028",
       "dimension": "01-architecture-design",
       "ordinal": 28,
-      "title": "多角色智能客服场景（B/C/D 端），用 RAG 还是 Skill？怎么设计？",
-      "source": "美团Keeta一面",
-      "searchText": "多角色智能客服场景（B/C/D 端），用 RAG 还是 Skill？怎么设计？ 美团Keeta一面"
+      "title": "如何保障自然语言任务描述能精准转化为稳定、可靠的执行路径？",
+      "source": "蚂蚁AI应用开发二面",
+      "searchText": "如何保障自然语言任务描述能精准转化为稳定、可靠的执行路径？ 蚂蚁AI应用开发二面"
     },
     {
       "id": "01-architecture-design:029",
       "dimension": "01-architecture-design",
       "ordinal": 29,
-      "title": "场景题：设计一个日志分析 Agent，怎么设计架构和工具？",
-      "source": "腾讯AI应用开发实习一面",
-      "searchText": "场景题：设计一个日志分析 Agent，怎么设计架构和工具？ 腾讯AI应用开发实习一面"
+      "title": "多角色智能客服场景（B/C/D 端），用 RAG 还是 Skill？怎么设计？",
+      "source": "美团Keeta一面",
+      "searchText": "多角色智能客服场景（B/C/D 端），用 RAG 还是 Skill？怎么设计？ 美团Keeta一面"
     },
     {
       "id": "01-architecture-design:030",
       "dimension": "01-architecture-design",
       "ordinal": 30,
       "title": "Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？",
-      "source": "快手AI应用开发一面",
-      "searchText": "Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？ 快手AI应用开发一面"
+      "source": "快手AI应用开发一面【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？ 快手AI应用开发一面【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "01-architecture-design:031",
@@ -281,17 +281,17 @@
       "id": "01-architecture-design:033",
       "dimension": "01-architecture-design",
       "ordinal": 33,
-      "title": "Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？",
-      "source": "字节跳动Agent开发实习生一面",
-      "searchText": "Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？ 字节跳动Agent开发实习生一面"
+      "title": "AI 系统该做单域工具还是跨团队通用平台？怎么选？",
+      "source": "数据智能查询平台面试（新增）【[英迈软件一面](https://www.nowcoder.com/feed/main/detail/355e6818b7e7418ba6f2c88c6bc50351)】【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】",
+      "searchText": "AI 系统该做单域工具还是跨团队通用平台？怎么选？ 数据智能查询平台面试（新增）【[英迈软件一面](https://www.nowcoder.com/feed/main/detail/355e6818b7e7418ba6f2c88c6bc50351)】【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】"
     },
     {
       "id": "01-architecture-design:034",
       "dimension": "01-architecture-design",
       "ordinal": 34,
-      "title": "AI 系统该做单域工具还是跨团队通用平台？怎么选？",
-      "source": "数据智能查询平台面试（新增）",
-      "searchText": "AI 系统该做单域工具还是跨团队通用平台？怎么选？ 数据智能查询平台面试（新增）"
+      "title": "Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？",
+      "source": "字节跳动Agent开发实习生一面",
+      "searchText": "Agent 的 Middleware（中间件）是什么？在执行流中扮演什么角色？ 字节跳动Agent开发实习生一面"
     },
     {
       "id": "01-architecture-design:035",
@@ -322,8 +322,8 @@
       "dimension": "01-architecture-design",
       "ordinal": 38,
       "title": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？",
-      "source": "字节跳动多模态算法一面【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】【[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)追问：Agent 偷懒、过早结束或省略必要步骤】【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：任务结束与会话终止策略】",
-      "searchText": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？ 字节跳动多模态算法一面【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】【[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)追问：Agent 偷懒、过早结束或省略必要步骤】【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：任务结束与会话终止策略】"
+      "source": "字节跳动多模态算法一面【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】【[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)追问：Agent 偷懒、过早结束或省略必要步骤】【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：任务结束与会话终止策略】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "Agent 如何判断已经收集了足够的信息，最终给出输出结论？ 字节跳动多模态算法一面【字节火山引擎 Managed Agent 一面追问：Loop 继续与结束条件】【阿里 Agent Infra 一面题库同题：停止条件】【[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)追问：Agent 偷懒、过早结束或省略必要步骤】【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：任务结束与会话终止策略】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "01-architecture-design:039",
@@ -337,41 +337,41 @@
       "id": "01-architecture-design:040",
       "dimension": "01-architecture-design",
       "ordinal": 40,
-      "title": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？",
-      "source": "北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】",
-      "searchText": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ 北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】"
+      "title": "设计一个内部的多源文档问答 AI，架构设计是什么？",
+      "source": "百度AI智能体开发一面（新增）【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "设计一个内部的多源文档问答 AI，架构设计是什么？ 百度AI智能体开发一面（新增）【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "01-architecture-design:041",
       "dimension": "01-architecture-design",
       "ordinal": 41,
-      "title": "设计一个内部的多源文档问答 AI，架构设计是什么？",
-      "source": "百度AI智能体开发一面（新增）",
-      "searchText": "设计一个内部的多源文档问答 AI，架构设计是什么？ 百度AI智能体开发一面（新增）"
+      "title": "ReAct 在工程实现中，消息和状态协议应该怎么设计？",
+      "source": "字节跳动AI Agent秋招一面（新增）【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "ReAct 在工程实现中，消息和状态协议应该怎么设计？ 字节跳动AI Agent秋招一面（新增）【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "01-architecture-design:042",
       "dimension": "01-architecture-design",
       "ordinal": 42,
-      "title": "ReAct 在工程实现中，消息和状态协议应该怎么设计？",
-      "source": "字节跳动AI Agent秋招一面（新增）",
-      "searchText": "ReAct 在工程实现中，消息和状态协议应该怎么设计？ 字节跳动AI Agent秋招一面（新增）"
+      "title": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？",
+      "source": "[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】",
+      "searchText": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ [腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】"
     },
     {
       "id": "01-architecture-design:043",
       "dimension": "01-architecture-design",
       "ordinal": 43,
-      "title": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？",
-      "source": "百度 Agent算法岗二面（新增）",
-      "searchText": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ 百度 Agent算法岗二面（新增）"
+      "title": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？",
+      "source": "北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】",
+      "searchText": "Agent 组件拆解为什么适合责任链模式？与状态机、DAG 的边界是什么？ 北京四维图新面经（新增）【阿里 Agent Infra 一面题库追问：为什么 Agent 本质上是状态机】"
     },
     {
       "id": "01-architecture-design:044",
       "dimension": "01-architecture-design",
       "ordinal": 44,
-      "title": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？",
-      "source": "[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）",
-      "searchText": "Agent 如何持续推进 Goal，并避免行为漂移和目标漂移？ [腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）"
+      "title": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？",
+      "source": "百度 Agent算法岗二面（新增）",
+      "searchText": "设计一个预订机票的 Agent，如何处理澄清、支付确认和失败补偿？ 百度 Agent算法岗二面（新增）"
     },
     {
       "id": "01-architecture-design:045",
@@ -386,8 +386,8 @@
       "dimension": "02-tool-management",
       "ordinal": 1,
       "title": "工具描述写得再好，模型也瞎传参数怎么办？",
-      "source": "腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】",
-      "searchText": "工具描述写得再好，模型也瞎传参数怎么办？ 腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】"
+      "source": "腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "工具描述写得再好，模型也瞎传参数怎么办？ 腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "02-tool-management:002",
@@ -434,32 +434,32 @@
       "dimension": "02-tool-management",
       "ordinal": 7,
       "title": "大模型的 Function Call 是什么？Tool Use 一般怎么用？",
-      "source": "30题 【小红书AI应用开发追问：不做训练怎么让Agent调用工具+调用格式】【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：tool_use 捕获、执行与非标准命令请求】",
-      "searchText": "大模型的 Function Call 是什么？Tool Use 一般怎么用？ 30题 【小红书AI应用开发追问：不做训练怎么让Agent调用工具+调用格式】【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：tool_use 捕获、执行与非标准命令请求】"
+      "source": "30题 【小红书AI应用开发追问：不做训练怎么让Agent调用工具+调用格式】【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：tool_use 捕获、执行与非标准命令请求】【[BIGO 音频算法工程师一面](https://www.nowcoder.com/discuss/924359576990781440)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "大模型的 Function Call 是什么？Tool Use 一般怎么用？ 30题 【小红书AI应用开发追问：不做训练怎么让Agent调用工具+调用格式】【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：tool_use 捕获、执行与非标准命令请求】【[BIGO 音频算法工程师一面](https://www.nowcoder.com/discuss/924359576990781440)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "02-tool-management:008",
       "dimension": "02-tool-management",
       "ordinal": 8,
-      "title": "MCP 和 Skills 的本质区别是什么？",
-      "source": "蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】",
-      "searchText": "MCP 和 Skills 的本质区别是什么？ 蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】"
+      "title": "MCP Server 是怎么构建的？",
+      "source": "蚂蚁一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "MCP Server 是怎么构建的？ 蚂蚁一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "02-tool-management:009",
       "dimension": "02-tool-management",
       "ordinal": 9,
-      "title": "Function Calling 的本质价值是什么？",
-      "source": "30题 【蚂蚁Agent开发一面追问：有了FC是否可以没有MCP】【视频面经追问：FC/工具调用/普通Prompt调用三者区别】",
-      "searchText": "Function Calling 的本质价值是什么？ 30题 【蚂蚁Agent开发一面追问：有了FC是否可以没有MCP】【视频面经追问：FC/工具调用/普通Prompt调用三者区别】"
+      "title": "MCP 和 Skills 的本质区别是什么？",
+      "source": "蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】",
+      "searchText": "MCP 和 Skills 的本质区别是什么？ 蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】"
     },
     {
       "id": "02-tool-management:010",
       "dimension": "02-tool-management",
       "ordinal": 10,
-      "title": "MCP Server 是怎么构建的？",
-      "source": "蚂蚁一面",
-      "searchText": "MCP Server 是怎么构建的？ 蚂蚁一面"
+      "title": "Function Calling 的本质价值是什么？",
+      "source": "30题 【蚂蚁Agent开发一面追问：有了FC是否可以没有MCP】【视频面经追问：FC/工具调用/普通Prompt调用三者区别】",
+      "searchText": "Function Calling 的本质价值是什么？ 30题 【蚂蚁Agent开发一面追问：有了FC是否可以没有MCP】【视频面经追问：FC/工具调用/普通Prompt调用三者区别】"
     },
     {
       "id": "02-tool-management:011",
@@ -498,8 +498,8 @@
       "dimension": "02-tool-management",
       "ordinal": 15,
       "title": "MCP 协议的完整调用过程是怎样的？从 Host 到 Server 的每一步",
-      "source": "高德实习一面 【蚂蚁Agent开发一面同题：MCP通信方式+配置方法】【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后的内部链路】",
-      "searchText": "MCP 协议的完整调用过程是怎样的？从 Host 到 Server 的每一步 高德实习一面 【蚂蚁Agent开发一面同题：MCP通信方式+配置方法】【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后的内部链路】"
+      "source": "高德实习一面 【蚂蚁Agent开发一面同题：MCP通信方式+配置方法】【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后的内部链路】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "MCP 协议的完整调用过程是怎样的？从 Host 到 Server 的每一步 高德实习一面 【蚂蚁Agent开发一面同题：MCP通信方式+配置方法】【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后的内部链路】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "02-tool-management:016",
@@ -593,17 +593,17 @@
       "id": "02-tool-management:027",
       "dimension": "02-tool-management",
       "ordinal": 27,
-      "title": "没有 MCP 之前大模型调用工具走的是什么流程？MCP 本身有什么缺点或者挑战？",
-      "source": "淘天AI Agent一面（新增）【小得盈满一面追问：上下文膨胀、Secret 隔离与工具投毒】",
-      "searchText": "没有 MCP 之前大模型调用工具走的是什么流程？MCP 本身有什么缺点或者挑战？ 淘天AI Agent一面（新增）【小得盈满一面追问：上下文膨胀、Secret 隔离与工具投毒】"
+      "title": "Tool Result 回写模型时，消息契约应该包含哪些字段？",
+      "source": "[Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】",
+      "searchText": "Tool Result 回写模型时，消息契约应该包含哪些字段？ [Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】"
     },
     {
       "id": "02-tool-management:028",
       "dimension": "02-tool-management",
       "ordinal": 28,
-      "title": "Tool Result 回写模型时，消息契约应该包含哪些字段？",
-      "source": "[Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】",
-      "searchText": "Tool Result 回写模型时，消息契约应该包含哪些字段？ [Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】"
+      "title": "没有 MCP 之前大模型调用工具走的是什么流程？MCP 本身有什么缺点或者挑战？",
+      "source": "淘天AI Agent一面（新增）【小得盈满一面追问：上下文膨胀、Secret 隔离与工具投毒】",
+      "searchText": "没有 MCP 之前大模型调用工具走的是什么流程？MCP 本身有什么缺点或者挑战？ 淘天AI Agent一面（新增）【小得盈满一面追问：上下文膨胀、Secret 隔离与工具投毒】"
     },
     {
       "id": "02-tool-management:029",
@@ -682,16 +682,16 @@
       "dimension": "03-fault-tolerance",
       "ordinal": 1,
       "title": "Agent 如何减少幻觉？在工业场景下怎么做？",
-      "source": "字节一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】【字节大模型测开一面追问：Temperature→0时还会有幻觉吗】【影石创新一面追问：如何定位幻觉来自模型、上下文还是工具】",
-      "searchText": "Agent 如何减少幻觉？在工业场景下怎么做？ 字节一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】【字节大模型测开一面追问：Temperature→0时还会有幻觉吗】【影石创新一面追问：如何定位幻觉来自模型、上下文还是工具】"
+      "source": "字节一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】【字节大模型测开一面追问：Temperature→0时还会有幻觉吗】【影石创新一面追问：如何定位幻觉来自模型、上下文还是工具】【[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)】",
+      "searchText": "Agent 如何减少幻觉？在工业场景下怎么做？ 字节一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】【字节大模型测开一面追问：Temperature→0时还会有幻觉吗】【影石创新一面追问：如何定位幻觉来自模型、上下文还是工具】【[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)】"
     },
     {
       "id": "03-fault-tolerance:002",
       "dimension": "03-fault-tolerance",
       "ordinal": 2,
       "title": "你怎么设计 Agent 的失败恢复机制？",
-      "source": "腾讯二面 【淘天AI应用开发一面追问：工具报错时prompt引导自主重试】",
-      "searchText": "你怎么设计 Agent 的失败恢复机制？ 腾讯二面 【淘天AI应用开发一面追问：工具报错时prompt引导自主重试】"
+      "source": "腾讯二面 【淘天AI应用开发一面追问：工具报错时prompt引导自主重试】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】",
+      "searchText": "你怎么设计 Agent 的失败恢复机制？ 腾讯二面 【淘天AI应用开发一面追问：工具报错时prompt引导自主重试】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】"
     },
     {
       "id": "03-fault-tolerance:003",
@@ -722,8 +722,8 @@
       "dimension": "03-fault-tolerance",
       "ordinal": 6,
       "title": "幻觉的各种治理手段，优缺点？行为限制在什么阶段做？",
-      "source": "蚂蚁一面 【视频面经追问：从RAG/Prompt/输出约束三个角度拆解幻觉控制】",
-      "searchText": "幻觉的各种治理手段，优缺点？行为限制在什么阶段做？ 蚂蚁一面 【视频面经追问：从RAG/Prompt/输出约束三个角度拆解幻觉控制】"
+      "source": "蚂蚁一面 【视频面经追问：从RAG/Prompt/输出约束三个角度拆解幻觉控制】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "幻觉的各种治理手段，优缺点？行为限制在什么阶段做？ 蚂蚁一面 【视频面经追问：从RAG/Prompt/输出约束三个角度拆解幻觉控制】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "03-fault-tolerance:007",
@@ -785,25 +785,25 @@
       "id": "03-fault-tolerance:014",
       "dimension": "03-fault-tolerance",
       "ordinal": 14,
-      "title": "支付等高敏感操作场景下，Human-in-the-Loop 流程怎么设计？",
-      "source": "蚂蚁AI应用开发二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】",
-      "searchText": "支付等高敏感操作场景下，Human-in-the-Loop 流程怎么设计？ 蚂蚁AI应用开发二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】"
+      "title": "高风险在线环境中，Agent 的异常管控方案怎么设计？",
+      "source": "淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "高风险在线环境中，Agent 的异常管控方案怎么设计？ 淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "03-fault-tolerance:015",
       "dimension": "03-fault-tolerance",
       "ordinal": 15,
-      "title": "Agent 的 Self-Reflection 机制怎么识别输出中的逻辑错误？（容错角度）",
-      "source": "蚂蚁AI应用开发二面 【字节AI一面追问：Reflection 连续失败 3 次后的降级策略】",
-      "searchText": "Agent 的 Self-Reflection 机制怎么识别输出中的逻辑错误？（容错角度） 蚂蚁AI应用开发二面 【字节AI一面追问：Reflection 连续失败 3 次后的降级策略】"
+      "title": "支付等高敏感操作场景下，Human-in-the-Loop 流程怎么设计？",
+      "source": "蚂蚁AI应用开发二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】",
+      "searchText": "支付等高敏感操作场景下，Human-in-the-Loop 流程怎么设计？ 蚂蚁AI应用开发二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】"
     },
     {
       "id": "03-fault-tolerance:016",
       "dimension": "03-fault-tolerance",
       "ordinal": 16,
-      "title": "高风险在线环境中，Agent 的异常管控方案怎么设计？",
-      "source": "淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】",
-      "searchText": "高风险在线环境中，Agent 的异常管控方案怎么设计？ 淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】"
+      "title": "Agent 的 Self-Reflection 机制怎么识别输出中的逻辑错误？（容错角度）",
+      "source": "蚂蚁AI应用开发二面 【字节AI一面追问：Reflection 连续失败 3 次后的降级策略】",
+      "searchText": "Agent 的 Self-Reflection 机制怎么识别输出中的逻辑错误？（容错角度） 蚂蚁AI应用开发二面 【字节AI一面追问：Reflection 连续失败 3 次后的降级策略】"
     },
     {
       "id": "03-fault-tolerance:017",
@@ -850,8 +850,8 @@
       "dimension": "03-fault-tolerance",
       "ordinal": 22,
       "title": "Agent 系统的 fallback 是怎么做的？",
-      "source": "字节Agent开发一面",
-      "searchText": "Agent 系统的 fallback 是怎么做的？ 字节Agent开发一面"
+      "source": "字节Agent开发一面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "Agent 系统的 fallback 是怎么做的？ 字节Agent开发一面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "03-fault-tolerance:023",
@@ -970,8 +970,8 @@
       "dimension": "04-memory-context",
       "ordinal": 1,
       "title": "上下文窗口不够用，对话太长了怎么办？",
-      "source": "字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】",
-      "searchText": "上下文窗口不够用，对话太长了怎么办？ 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】"
+      "source": "字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】",
+      "searchText": "上下文窗口不够用，对话太长了怎么办？ 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】"
     },
     {
       "id": "04-memory-context:002",
@@ -1002,24 +1002,24 @@
       "dimension": "04-memory-context",
       "ordinal": 5,
       "title": "讲一下 Agent 中的“长短期记忆”",
-      "source": "字节一面 【含追问：记忆更新策略】【淘天一面追问：短期/长期区分存储、更新策略】【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【快手AI应用开发一面追问：用户偏好记忆设计+压缩后 token 预算控制】【阿里国际/哔哩哔哩一面同题：分级存储与自动沉淀】",
-      "searchText": "讲一下 Agent 中的“长短期记忆” 字节一面 【含追问：记忆更新策略】【淘天一面追问：短期/长期区分存储、更新策略】【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【快手AI应用开发一面追问：用户偏好记忆设计+压缩后 token 预算控制】【阿里国际/哔哩哔哩一面同题：分级存储与自动沉淀】"
+      "source": "字节一面 【含追问：记忆更新策略】【淘天一面追问：短期/长期区分存储、更新策略】【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【快手AI应用开发一面追问：用户偏好记忆设计+压缩后 token 预算控制】【阿里国际/哔哩哔哩一面同题：分级存储与自动沉淀】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "讲一下 Agent 中的“长短期记忆” 字节一面 【含追问：记忆更新策略】【淘天一面追问：短期/长期区分存储、更新策略】【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【快手AI应用开发一面追问：用户偏好记忆设计+压缩后 token 预算控制】【阿里国际/哔哩哔哩一面同题：分级存储与自动沉淀】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "04-memory-context:006",
       "dimension": "04-memory-context",
       "ordinal": 6,
-      "title": "什么时候应该追问用户，什么时候自己继续推理？",
-      "source": "腾讯二面 【淘天一面追问：主动澄清 vs 历史画像推断决策框架】【淘天一面追问：极度模糊表达的工程处理】",
-      "searchText": "什么时候应该追问用户，什么时候自己继续推理？ 腾讯二面 【淘天一面追问：主动澄清 vs 历史画像推断决策框架】【淘天一面追问：极度模糊表达的工程处理】"
+      "title": "你怎么理解 Agent 里的“状态”而不是“上下文”？",
+      "source": "腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "你怎么理解 Agent 里的“状态”而不是“上下文”？ 腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "04-memory-context:007",
       "dimension": "04-memory-context",
       "ordinal": 7,
-      "title": "你怎么理解 Agent 里的“状态”而不是“上下文”？",
-      "source": "腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】",
-      "searchText": "你怎么理解 Agent 里的“状态”而不是“上下文”？ 腾讯二面【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】"
+      "title": "什么时候应该追问用户，什么时候自己继续推理？",
+      "source": "腾讯二面 【淘天一面追问：主动澄清 vs 历史画像推断决策框架】【淘天一面追问：极度模糊表达的工程处理】",
+      "searchText": "什么时候应该追问用户，什么时候自己继续推理？ 腾讯二面 【淘天一面追问：主动澄清 vs 历史画像推断决策框架】【淘天一面追问：极度模糊表达的工程处理】"
     },
     {
       "id": "04-memory-context:008",
@@ -1074,8 +1074,8 @@
       "dimension": "04-memory-context",
       "ordinal": 14,
       "title": "如何沉淀部门级 Agent 记忆，既避免经验随人流失，又控制错误、过期和权限风险？",
-      "source": "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）",
-      "searchText": "如何沉淀部门级 Agent 记忆，既避免经验随人流失，又控制错误、过期和权限风险？ [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）"
+      "source": "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】",
+      "searchText": "如何沉淀部门级 Agent 记忆，既避免经验随人流失，又控制错误、过期和权限风险？ [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】"
     },
     {
       "id": "04-memory-context:015",
@@ -1129,17 +1129,17 @@
       "id": "04-memory-context:021",
       "dimension": "04-memory-context",
       "ordinal": 21,
-      "title": "记忆摘要、压缩、去重、合并的触发时机？",
-      "source": "30题 【淘天AI应用开发一面追问：向量记忆库去重方案与语义合并】",
-      "searchText": "记忆摘要、压缩、去重、合并的触发时机？ 30题 【淘天AI应用开发一面追问：向量记忆库去重方案与语义合并】"
+      "title": "一条历史信息该进长期记忆还是只留当前会话？",
+      "source": "30题【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "一条历史信息该进长期记忆还是只留当前会话？ 30题【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "04-memory-context:022",
       "dimension": "04-memory-context",
       "ordinal": 22,
-      "title": "一条历史信息该进长期记忆还是只留当前会话？",
-      "source": "30题",
-      "searchText": "一条历史信息该进长期记忆还是只留当前会话？ 30题"
+      "title": "记忆摘要、压缩、去重、合并的触发时机？",
+      "source": "30题 【淘天AI应用开发一面追问：向量记忆库去重方案与语义合并】",
+      "searchText": "记忆摘要、压缩、去重、合并的触发时机？ 30题 【淘天AI应用开发一面追问：向量记忆库去重方案与语义合并】"
     },
     {
       "id": "04-memory-context:023",
@@ -1170,8 +1170,8 @@
       "dimension": "04-memory-context",
       "ordinal": 26,
       "title": "Code Agent 的上下文工程，和普通对话 Agent 有哪些独特挑战？",
-      "source": "蚂蚁一面",
-      "searchText": "Code Agent 的上下文工程，和普通对话 Agent 有哪些独特挑战？ 蚂蚁一面"
+      "source": "蚂蚁一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "Code Agent 的上下文工程，和普通对话 Agent 有哪些独特挑战？ 蚂蚁一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "04-memory-context:027",
@@ -1233,41 +1233,41 @@
       "id": "04-memory-context:034",
       "dimension": "04-memory-context",
       "ordinal": 34,
-      "title": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？",
-      "source": "高德实习一面",
-      "searchText": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？ 高德实习一面"
+      "title": "长周期对话（间隔数周后继续）如何管理历史？冷启动怎么做？",
+      "source": "淘宝闪购一面【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】",
+      "searchText": "长周期对话（间隔数周后继续）如何管理历史？冷启动怎么做？ 淘宝闪购一面【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】"
     },
     {
       "id": "04-memory-context:035",
       "dimension": "04-memory-context",
       "ordinal": 35,
-      "title": "设计会话记忆系统时需要考虑哪些维度？",
+      "title": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？",
       "source": "高德实习一面",
-      "searchText": "设计会话记忆系统时需要考虑哪些维度？ 高德实习一面"
+      "searchText": "会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？ 高德实习一面"
     },
     {
       "id": "04-memory-context:036",
       "dimension": "04-memory-context",
       "ordinal": 36,
-      "title": "用户对话中频繁切换话题，会话记忆该怎么设计？",
+      "title": "设计会话记忆系统时需要考虑哪些维度？",
       "source": "高德实习一面",
-      "searchText": "用户对话中频繁切换话题，会话记忆该怎么设计？ 高德实习一面"
+      "searchText": "设计会话记忆系统时需要考虑哪些维度？ 高德实习一面"
     },
     {
       "id": "04-memory-context:037",
       "dimension": "04-memory-context",
       "ordinal": 37,
-      "title": "Lost in the Middle 问题是什么？有哪些解决方案？",
-      "source": "淘宝闪购一面",
-      "searchText": "Lost in the Middle 问题是什么？有哪些解决方案？ 淘宝闪购一面"
+      "title": "用户对话中频繁切换话题，会话记忆该怎么设计？",
+      "source": "高德实习一面",
+      "searchText": "用户对话中频繁切换话题，会话记忆该怎么设计？ 高德实习一面"
     },
     {
       "id": "04-memory-context:038",
       "dimension": "04-memory-context",
       "ordinal": 38,
-      "title": "长周期对话（间隔数周后继续）如何管理历史？冷启动怎么做？",
+      "title": "Lost in the Middle 问题是什么？有哪些解决方案？",
       "source": "淘宝闪购一面",
-      "searchText": "长周期对话（间隔数周后继续）如何管理历史？冷启动怎么做？ 淘宝闪购一面"
+      "searchText": "Lost in the Middle 问题是什么？有哪些解决方案？ 淘宝闪购一面"
     },
     {
       "id": "04-memory-context:039",
@@ -1313,17 +1313,17 @@
       "id": "04-memory-context:044",
       "dimension": "04-memory-context",
       "ordinal": 44,
-      "title": "压缩过程中会丢失工具调用历史，导致模型重复调用工具，怎么解决？",
-      "source": "美团Agent开发（智能客服方向）二面",
-      "searchText": "压缩过程中会丢失工具调用历史，导致模型重复调用工具，怎么解决？ 美团Agent开发（智能客服方向）二面"
+      "title": "记忆冲突怎么解决？比如用户前后说了不同的过敏信息",
+      "source": "美团Agent开发（智能客服方向）二面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "记忆冲突怎么解决？比如用户前后说了不同的过敏信息 美团Agent开发（智能客服方向）二面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "04-memory-context:045",
       "dimension": "04-memory-context",
       "ordinal": 45,
-      "title": "记忆冲突怎么解决？比如用户前后说了不同的过敏信息",
+      "title": "压缩过程中会丢失工具调用历史，导致模型重复调用工具，怎么解决？",
       "source": "美团Agent开发（智能客服方向）二面",
-      "searchText": "记忆冲突怎么解决？比如用户前后说了不同的过敏信息 美团Agent开发（智能客服方向）二面"
+      "searchText": "压缩过程中会丢失工具调用历史，导致模型重复调用工具，怎么解决？ 美团Agent开发（智能客服方向）二面"
     },
     {
       "id": "04-memory-context:046",
@@ -1361,89 +1361,89 @@
       "id": "04-memory-context:050",
       "dimension": "04-memory-context",
       "ordinal": 50,
-      "title": "已进行 10 轮并做了总结，第 11 轮开始时，总结怎么处理？是重算前 11 轮还是叠加？",
-      "source": "月之暗面Agent开发岗（新增）",
-      "searchText": "已进行 10 轮并做了总结，第 11 轮开始时，总结怎么处理？是重算前 11 轮还是叠加？ 月之暗面Agent开发岗（新增）"
+      "title": "上下文预算不足时，如何按任务依赖压缩，而不是按时间删除旧消息？",
+      "source": "腾讯互娱全栈开发（AI）二面（新增）【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】",
+      "searchText": "上下文预算不足时，如何按任务依赖压缩，而不是按时间删除旧消息？ 腾讯互娱全栈开发（AI）二面（新增）【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】"
     },
     {
       "id": "04-memory-context:051",
       "dimension": "04-memory-context",
       "ordinal": 51,
-      "title": "前 10 轮都变成了总结，之前的原始上下文就不需要了吗？",
+      "title": "已进行 10 轮并做了总结，第 11 轮开始时，总结怎么处理？是重算前 11 轮还是叠加？",
       "source": "月之暗面Agent开发岗（新增）",
-      "searchText": "前 10 轮都变成了总结，之前的原始上下文就不需要了吗？ 月之暗面Agent开发岗（新增）"
+      "searchText": "已进行 10 轮并做了总结，第 11 轮开始时，总结怎么处理？是重算前 11 轮还是叠加？ 月之暗面Agent开发岗（新增）"
     },
     {
       "id": "04-memory-context:052",
       "dimension": "04-memory-context",
       "ordinal": 52,
-      "title": "当用户对话零碎、跨轮次且意图发生跳跃时，如何结合上下文准确判断当前意图？",
-      "source": "某小厂FOSHO AI应用开发二面（新增）",
-      "searchText": "当用户对话零碎、跨轮次且意图发生跳跃时，如何结合上下文准确判断当前意图？ 某小厂FOSHO AI应用开发二面（新增）"
+      "title": "前 10 轮都变成了总结，之前的原始上下文就不需要了吗？",
+      "source": "月之暗面Agent开发岗（新增）",
+      "searchText": "前 10 轮都变成了总结，之前的原始上下文就不需要了吗？ 月之暗面Agent开发岗（新增）"
     },
     {
       "id": "04-memory-context:053",
       "dimension": "04-memory-context",
       "ordinal": 53,
-      "title": "session 里的临时文件存主服务还是 skill 进程服务，要不要删，什么时候删？",
-      "source": "阿里淘天Agent开发一面（新增）",
-      "searchText": "session 里的临时文件存主服务还是 skill 进程服务，要不要删，什么时候删？ 阿里淘天Agent开发一面（新增）"
+      "title": "当用户对话零碎、跨轮次且意图发生跳跃时，如何结合上下文准确判断当前意图？",
+      "source": "某小厂FOSHO AI应用开发二面（新增）",
+      "searchText": "当用户对话零碎、跨轮次且意图发生跳跃时，如何结合上下文准确判断当前意图？ 某小厂FOSHO AI应用开发二面（新增）"
     },
     {
       "id": "04-memory-context:054",
       "dimension": "04-memory-context",
       "ordinal": 54,
-      "title": "Agent 做上下文压缩后，如何验证没有破坏当前任务？",
-      "source": "Coding Agent面经（新增）",
-      "searchText": "Agent 做上下文压缩后，如何验证没有破坏当前任务？ Coding Agent面经（新增）"
+      "title": "session 里的临时文件存主服务还是 skill 进程服务，要不要删，什么时候删？",
+      "source": "阿里淘天Agent开发一面（新增）",
+      "searchText": "session 里的临时文件存主服务还是 skill 进程服务，要不要删，什么时候删？ 阿里淘天Agent开发一面（新增）"
     },
     {
       "id": "04-memory-context:055",
       "dimension": "04-memory-context",
       "ordinal": 55,
-      "title": "大体积工具结果落盘后，为什么还要返回预览？预览内容应该如何选择？",
-      "source": "小红书 Agent 岗一面（新增）",
-      "searchText": "大体积工具结果落盘后，为什么还要返回预览？预览内容应该如何选择？ 小红书 Agent 岗一面（新增）"
+      "title": "Agent 做上下文压缩后，如何验证没有破坏当前任务？",
+      "source": "Coding Agent面经（新增）",
+      "searchText": "Agent 做上下文压缩后，如何验证没有破坏当前任务？ Coding Agent面经（新增）"
     },
     {
       "id": "04-memory-context:056",
       "dimension": "04-memory-context",
       "ordinal": 56,
-      "title": "跨会话记忆如何从对话中提取？哪些信息值得写入长期记忆？",
+      "title": "大体积工具结果落盘后，为什么还要返回预览？预览内容应该如何选择？",
       "source": "小红书 Agent 岗一面（新增）",
-      "searchText": "跨会话记忆如何从对话中提取？哪些信息值得写入长期记忆？ 小红书 Agent 岗一面（新增）"
+      "searchText": "大体积工具结果落盘后，为什么还要返回预览？预览内容应该如何选择？ 小红书 Agent 岗一面（新增）"
     },
     {
       "id": "04-memory-context:057",
       "dimension": "04-memory-context",
       "ordinal": 57,
-      "title": "如何用 Prompt 提取用户风格偏好？风格偏好应包含哪些内容？",
+      "title": "跨会话记忆如何从对话中提取？哪些信息值得写入长期记忆？",
       "source": "小红书 Agent 岗一面（新增）",
-      "searchText": "如何用 Prompt 提取用户风格偏好？风格偏好应包含哪些内容？ 小红书 Agent 岗一面（新增）"
+      "searchText": "跨会话记忆如何从对话中提取？哪些信息值得写入长期记忆？ 小红书 Agent 岗一面（新增）"
     },
     {
       "id": "04-memory-context:058",
       "dimension": "04-memory-context",
       "ordinal": 58,
-      "title": "大模型生成会话摘要时，如何避免摘要内容污染用户偏好？新结论推翻旧结论时怎么保留？",
-      "source": "百度内容营销与广告日常实习一面（新增）",
-      "searchText": "大模型生成会话摘要时，如何避免摘要内容污染用户偏好？新结论推翻旧结论时怎么保留？ 百度内容营销与广告日常实习一面（新增）"
+      "title": "如何用 Prompt 提取用户风格偏好？风格偏好应包含哪些内容？",
+      "source": "小红书 Agent 岗一面（新增）",
+      "searchText": "如何用 Prompt 提取用户风格偏好？风格偏好应包含哪些内容？ 小红书 Agent 岗一面（新增）"
     },
     {
       "id": "04-memory-context:059",
       "dimension": "04-memory-context",
       "ordinal": 59,
-      "title": "金融 Agent 执行股价提醒等定时任务时，应该携带哪些历史上下文？",
-      "source": "顺极 Agent开发二面（新增）",
-      "searchText": "金融 Agent 执行股价提醒等定时任务时，应该携带哪些历史上下文？ 顺极 Agent开发二面（新增）"
+      "title": "大模型生成会话摘要时，如何避免摘要内容污染用户偏好？新结论推翻旧结论时怎么保留？",
+      "source": "百度内容营销与广告日常实习一面（新增）",
+      "searchText": "大模型生成会话摘要时，如何避免摘要内容污染用户偏好？新结论推翻旧结论时怎么保留？ 百度内容营销与广告日常实习一面（新增）"
     },
     {
       "id": "04-memory-context:060",
       "dimension": "04-memory-context",
       "ordinal": 60,
-      "title": "上下文预算不足时，如何按任务依赖压缩，而不是按时间删除旧消息？",
-      "source": "腾讯互娱全栈开发（AI）二面（新增）",
-      "searchText": "上下文预算不足时，如何按任务依赖压缩，而不是按时间删除旧消息？ 腾讯互娱全栈开发（AI）二面（新增）"
+      "title": "金融 Agent 执行股价提醒等定时任务时，应该携带哪些历史上下文？",
+      "source": "顺极 Agent开发二面（新增）",
+      "searchText": "金融 Agent 执行股价提醒等定时任务时，应该携带哪些历史上下文？ 顺极 Agent开发二面（新增）"
     },
     {
       "id": "04-memory-context:061",
@@ -1498,40 +1498,40 @@
       "dimension": "05-eval-and-vision",
       "ordinal": 5,
       "title": "AI 工具最大的帮助场景是什么？",
-      "source": "腾讯一面 【视频面经追问：平时用哪些AI工具+差异对比】",
-      "searchText": "AI 工具最大的帮助场景是什么？ 腾讯一面 【视频面经追问：平时用哪些AI工具+差异对比】"
+      "source": "腾讯一面 【视频面经追问：平时用哪些AI工具+差异对比】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "AI 工具最大的帮助场景是什么？ 腾讯一面 【视频面经追问：平时用哪些AI工具+差异对比】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "05-eval-and-vision:006",
       "dimension": "05-eval-and-vision",
       "ordinal": 6,
-      "title": "有没有遇到过 AI 工具无法解决的场景？",
-      "source": "腾讯一面",
-      "searchText": "有没有遇到过 AI 工具无法解决的场景？ 腾讯一面"
+      "title": "从开发者角度，做 Agent 最难的部分？",
+      "source": "腾讯一面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "从开发者角度，做 Agent 最难的部分？ 腾讯一面【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "05-eval-and-vision:007",
       "dimension": "05-eval-and-vision",
       "ordinal": 7,
-      "title": "Agent 框架还有哪些地方可以改进？",
+      "title": "有没有遇到过 AI 工具无法解决的场景？",
       "source": "腾讯一面",
-      "searchText": "Agent 框架还有哪些地方可以改进？ 腾讯一面"
+      "searchText": "有没有遇到过 AI 工具无法解决的场景？ 腾讯一面"
     },
     {
       "id": "05-eval-and-vision:008",
       "dimension": "05-eval-and-vision",
       "ordinal": 8,
-      "title": "从开发者角度，做 Agent 最难的部分？",
+      "title": "Agent 框架还有哪些地方可以改进？",
       "source": "腾讯一面",
-      "searchText": "从开发者角度，做 Agent 最难的部分？ 腾讯一面"
+      "searchText": "Agent 框架还有哪些地方可以改进？ 腾讯一面"
     },
     {
       "id": "05-eval-and-vision:009",
       "dimension": "05-eval-and-vision",
       "ordinal": 9,
       "title": "怎么给 Agent 建立评测体系？只看成功率为什么不够？",
-      "source": "30题 【阿里国际二面追问：调优 case + 评测集构建】【顺极/曹操出行一面追问：验证环节、长链路稳定性和 Agent 评测】",
-      "searchText": "怎么给 Agent 建立评测体系？只看成功率为什么不够？ 30题 【阿里国际二面追问：调优 case + 评测集构建】【顺极/曹操出行一面追问：验证环节、长链路稳定性和 Agent 评测】"
+      "source": "30题 【阿里国际二面追问：调优 case + 评测集构建】【顺极/曹操出行一面追问：验证环节、长链路稳定性和 Agent 评测】【[阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[字节 AI Agent 研发一面](https://www.nowcoder.com/feed/main/detail/2ba7e96d48634777990b28c2cb322f40)】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "怎么给 Agent 建立评测体系？只看成功率为什么不够？ 30题 【阿里国际二面追问：调优 case + 评测集构建】【顺极/曹操出行一面追问：验证环节、长链路稳定性和 Agent 评测】【[阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[字节 AI Agent 研发一面](https://www.nowcoder.com/feed/main/detail/2ba7e96d48634777990b28c2cb322f40)】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "05-eval-and-vision:010",
@@ -1545,270 +1545,278 @@
       "id": "05-eval-and-vision:011",
       "dimension": "05-eval-and-vision",
       "ordinal": 11,
-      "title": "线上反馈“有时好有时差”，第一步看什么？",
-      "source": "30题",
-      "searchText": "线上反馈“有时好有时差”，第一步看什么？ 30题"
+      "title": "如何从真实 Issue 构建可复现的缺陷修复 Agent Benchmark，并防止污染和假修复？",
+      "source": "[字节 AI Agent 研发一面](https://www.nowcoder.com/feed/main/detail/2ba7e96d48634777990b28c2cb322f40)（新增）",
+      "searchText": "如何从真实 Issue 构建可复现的缺陷修复 Agent Benchmark，并防止污染和假修复？ [字节 AI Agent 研发一面](https://www.nowcoder.com/feed/main/detail/2ba7e96d48634777990b28c2cb322f40)（新增）"
     },
     {
       "id": "05-eval-and-vision:012",
       "dimension": "05-eval-and-vision",
       "ordinal": 12,
-      "title": "Agent 上线到生产环境，最容易被低估的三个风险点？",
+      "title": "线上反馈“有时好有时差”，第一步看什么？",
       "source": "30题",
-      "searchText": "Agent 上线到生产环境，最容易被低估的三个风险点？ 30题"
+      "searchText": "线上反馈“有时好有时差”，第一步看什么？ 30题"
     },
     {
       "id": "05-eval-and-vision:013",
       "dimension": "05-eval-and-vision",
       "ordinal": 13,
-      "title": "2026 年做 Agent 应用开发，跟去年相比最大的变化？",
+      "title": "Agent 上线到生产环境，最容易被低估的三个风险点？",
       "source": "30题",
-      "searchText": "2026 年做 Agent 应用开发，跟去年相比最大的变化？ 30题"
+      "searchText": "Agent 上线到生产环境，最容易被低估的三个风险点？ 30题"
     },
     {
       "id": "05-eval-and-vision:014",
       "dimension": "05-eval-and-vision",
       "ordinal": 14,
-      "title": "了解最近 AI 的新方向吗？",
+      "title": "2026 年做 Agent 应用开发，跟去年相比最大的变化？",
       "source": "30题",
-      "searchText": "了解最近 AI 的新方向吗？ 30题"
+      "searchText": "2026 年做 Agent 应用开发，跟去年相比最大的变化？ 30题"
     },
     {
       "id": "05-eval-and-vision:015",
       "dimension": "05-eval-and-vision",
       "ordinal": 15,
-      "title": "Agent 端到端成功率和工具误调用率怎么量化？怎么改进？",
-      "source": "腾讯AI应用开发二面 【快手AI应用开发一面追问：Tool 调用准确率拆分（工具选择/参数填充/无效调用/重复调用/任务成功率）】【科大讯飞一面追问：自动建单结果的评估维度设计】",
-      "searchText": "Agent 端到端成功率和工具误调用率怎么量化？怎么改进？ 腾讯AI应用开发二面 【快手AI应用开发一面追问：Tool 调用准确率拆分（工具选择/参数填充/无效调用/重复调用/任务成功率）】【科大讯飞一面追问：自动建单结果的评估维度设计】"
+      "title": "了解最近 AI 的新方向吗？",
+      "source": "30题",
+      "searchText": "了解最近 AI 的新方向吗？ 30题"
     },
     {
       "id": "05-eval-and-vision:016",
       "dimension": "05-eval-and-vision",
       "ordinal": 16,
       "title": "通过什么方式去验证 Skill 的提升效果，指标是什么？",
-      "source": "美团食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】",
-      "searchText": "通过什么方式去验证 Skill 的提升效果，指标是什么？ 美团食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】"
+      "source": "美团食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "通过什么方式去验证 Skill 的提升效果，指标是什么？ 美团食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "05-eval-and-vision:017",
       "dimension": "05-eval-and-vision",
       "ordinal": 17,
       "title": "RAG 系统如何评测？评测维度和指标？评测数据集怎么构建？",
-      "source": "快手一面 【字节AI一面追问：评测集规模/分布/baseline 三件套】",
-      "searchText": "RAG 系统如何评测？评测维度和指标？评测数据集怎么构建？ 快手一面 【字节AI一面追问：评测集规模/分布/baseline 三件套】"
+      "source": "快手一面 【字节AI一面追问：评测集规模/分布/baseline 三件套】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "RAG 系统如何评测？评测维度和指标？评测数据集怎么构建？ 快手一面 【字节AI一面追问：评测集规模/分布/baseline 三件套】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "05-eval-and-vision:018",
       "dimension": "05-eval-and-vision",
       "ordinal": 18,
-      "title": "Ragas 评测框架是什么？Answer Relevance 偏低时，怎么区分是检索问题还是模型问题？",
-      "source": "蚂蚁AI应用开发二面 【淘天AI应用开发一面追问：Context Precision 过低优化方案】",
-      "searchText": "Ragas 评测框架是什么？Answer Relevance 偏低时，怎么区分是检索问题还是模型问题？ 蚂蚁AI应用开发二面 【淘天AI应用开发一面追问：Context Precision 过低优化方案】"
+      "title": "Agent 端到端成功率和工具误调用率怎么量化？怎么改进？",
+      "source": "腾讯AI应用开发二面 【快手AI应用开发一面追问：Tool 调用准确率拆分（工具选择/参数填充/无效调用/重复调用/任务成功率）】【科大讯飞一面追问：自动建单结果的评估维度设计】",
+      "searchText": "Agent 端到端成功率和工具误调用率怎么量化？怎么改进？ 腾讯AI应用开发二面 【快手AI应用开发一面追问：Tool 调用准确率拆分（工具选择/参数填充/无效调用/重复调用/任务成功率）】【科大讯飞一面追问：自动建单结果的评估维度设计】"
     },
     {
       "id": "05-eval-and-vision:019",
       "dimension": "05-eval-and-vision",
       "ordinal": 19,
-      "title": "如何为 Word、PDF、Markdown 等文档生成与编辑能力设计通用自动评测框架？",
-      "source": "[百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)（新增）",
-      "searchText": "如何为 Word、PDF、Markdown 等文档生成与编辑能力设计通用自动评测框架？ [百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)（新增）"
+      "title": "Ragas 评测框架是什么？Answer Relevance 偏低时，怎么区分是检索问题还是模型问题？",
+      "source": "蚂蚁AI应用开发二面 【淘天AI应用开发一面追问：Context Precision 过低优化方案】",
+      "searchText": "Ragas 评测框架是什么？Answer Relevance 偏低时，怎么区分是检索问题还是模型问题？ 蚂蚁AI应用开发二面 【淘天AI应用开发一面追问：Context Precision 过低优化方案】"
     },
     {
       "id": "05-eval-and-vision:020",
       "dimension": "05-eval-and-vision",
       "ordinal": 20,
-      "title": "怎么理解 Vibe Coding？你有哪些实践经验？",
-      "source": "蚂蚁AI应用开发二面 【科大讯飞一面追问：各Vibe Coding工具特点与CC/Codex使用感受对比】",
-      "searchText": "怎么理解 Vibe Coding？你有哪些实践经验？ 蚂蚁AI应用开发二面 【科大讯飞一面追问：各Vibe Coding工具特点与CC/Codex使用感受对比】"
+      "title": "如何为 Word、PDF、Markdown 等文档生成与编辑能力设计通用自动评测框架？",
+      "source": "[百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)（新增）",
+      "searchText": "如何为 Word、PDF、Markdown 等文档生成与编辑能力设计通用自动评测框架？ [百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)（新增）"
     },
     {
       "id": "05-eval-and-vision:021",
       "dimension": "05-eval-and-vision",
       "ordinal": 21,
-      "title": "如何衡量 Agent 的 Planning 能力 vs Hallucination Rate？",
-      "source": "淘天一面",
-      "searchText": "如何衡量 Agent 的 Planning 能力 vs Hallucination Rate？ 淘天一面"
+      "title": "怎么理解 Vibe Coding？你有哪些实践经验？",
+      "source": "蚂蚁AI应用开发二面 【科大讯飞一面追问：各Vibe Coding工具特点与CC/Codex使用感受对比】",
+      "searchText": "怎么理解 Vibe Coding？你有哪些实践经验？ 蚂蚁AI应用开发二面 【科大讯飞一面追问：各Vibe Coding工具特点与CC/Codex使用感受对比】"
     },
     {
       "id": "05-eval-and-vision:022",
       "dimension": "05-eval-and-vision",
       "ordinal": 22,
-      "title": "设计一个电商客服 Agent 的评测方案——商品咨询、售后处理、投诉安抚三类任务分别评估",
+      "title": "如何衡量 Agent 的 Planning 能力 vs Hallucination Rate？",
       "source": "淘天一面",
-      "searchText": "设计一个电商客服 Agent 的评测方案——商品咨询、售后处理、投诉安抚三类任务分别评估 淘天一面"
+      "searchText": "如何衡量 Agent 的 Planning 能力 vs Hallucination Rate？ 淘天一面"
     },
     {
       "id": "05-eval-and-vision:023",
       "dimension": "05-eval-and-vision",
       "ordinal": 23,
-      "title": "用户在线反馈怎么收集？不同模型和 Prompt 的 AB 测试怎么设计？",
-      "source": "快手AI应用开发一面",
-      "searchText": "用户在线反馈怎么收集？不同模型和 Prompt 的 AB 测试怎么设计？ 快手AI应用开发一面"
+      "title": "设计一个电商客服 Agent 的评测方案——商品咨询、售后处理、投诉安抚三类任务分别评估",
+      "source": "淘天一面",
+      "searchText": "设计一个电商客服 Agent 的评测方案——商品咨询、售后处理、投诉安抚三类任务分别评估 淘天一面"
     },
     {
       "id": "05-eval-and-vision:024",
       "dimension": "05-eval-and-vision",
       "ordinal": 24,
       "title": "AI 写代码越来越强，算法工程师的角色会怎么变？",
-      "source": "字节TikTok AI应用开发一面",
-      "searchText": "AI 写代码越来越强，算法工程师的角色会怎么变？ 字节TikTok AI应用开发一面"
+      "source": "字节TikTok AI应用开发一面【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】",
+      "searchText": "AI 写代码越来越强，算法工程师的角色会怎么变？ 字节TikTok AI应用开发一面【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】"
     },
     {
       "id": "05-eval-and-vision:025",
       "dimension": "05-eval-and-vision",
       "ordinal": 25,
-      "title": "哪些类型的 Agent 产品在未来 2 年内最可能被淘汰？",
-      "source": "字节TikTok AI应用开发一面",
-      "searchText": "哪些类型的 Agent 产品在未来 2 年内最可能被淘汰？ 字节TikTok AI应用开发一面"
+      "title": "用户在线反馈怎么收集？不同模型和 Prompt 的 AB 测试怎么设计？",
+      "source": "快手AI应用开发一面",
+      "searchText": "用户在线反馈怎么收集？不同模型和 Prompt 的 AB 测试怎么设计？ 快手AI应用开发一面"
     },
     {
       "id": "05-eval-and-vision:026",
       "dimension": "05-eval-and-vision",
       "ordinal": 26,
-      "title": "Agent 后续的发展方向？哪些场景更容易落地？",
-      "source": "视频面经汇总（新增）",
-      "searchText": "Agent 后续的发展方向？哪些场景更容易落地？ 视频面经汇总（新增）"
+      "title": "哪些类型的 Agent 产品在未来 2 年内最可能被淘汰？",
+      "source": "字节TikTok AI应用开发一面",
+      "searchText": "哪些类型的 Agent 产品在未来 2 年内最可能被淘汰？ 字节TikTok AI应用开发一面"
     },
     {
       "id": "05-eval-and-vision:027",
       "dimension": "05-eval-and-vision",
       "ordinal": 27,
-      "title": "面试反问环节：怎么提出有深度的问题？",
-      "source": "视频面经汇总（新增）",
-      "searchText": "面试反问环节：怎么提出有深度的问题？ 视频面经汇总（新增）"
+      "title": "线上 log 是海量的，怎么转化成有限的线下评测集？随机抽样为什么不行？",
+      "source": "字节跳动AI Agent评测二面（新增）【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "线上 log 是海量的，怎么转化成有限的线下评测集？随机抽样为什么不行？ 字节跳动AI Agent评测二面（新增）【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "05-eval-and-vision:028",
       "dimension": "05-eval-and-vision",
       "ordinal": 28,
-      "title": "Text2SQL 系统的准确性评测与用户反馈回流机制",
-      "source": "数据智能查询平台面试（新增）",
-      "searchText": "Text2SQL 系统的准确性评测与用户反馈回流机制 数据智能查询平台面试（新增）"
+      "title": "Agent 后续的发展方向？哪些场景更容易落地？",
+      "source": "视频面经汇总（新增）",
+      "searchText": "Agent 后续的发展方向？哪些场景更容易落地？ 视频面经汇总（新增）"
     },
     {
       "id": "05-eval-and-vision:029",
       "dimension": "05-eval-and-vision",
       "ordinal": 29,
-      "title": "RAG 召回链路监控与召回漂移检测",
-      "source": "数据智能查询平台面试（新增）",
-      "searchText": "RAG 召回链路监控与召回漂移检测 数据智能查询平台面试（新增）"
+      "title": "面试反问环节：怎么提出有深度的问题？",
+      "source": "视频面经汇总（新增）",
+      "searchText": "面试反问环节：怎么提出有深度的问题？ 视频面经汇总（新增）"
     },
     {
       "id": "05-eval-and-vision:030",
       "dimension": "05-eval-and-vision",
       "ordinal": 30,
-      "title": "线上 log 是海量的，怎么转化成有限的线下评测集？随机抽样为什么不行？",
-      "source": "字节跳动AI Agent评测二面（新增）",
-      "searchText": "线上 log 是海量的，怎么转化成有限的线下评测集？随机抽样为什么不行？ 字节跳动AI Agent评测二面（新增）"
+      "title": "Text2SQL 系统的准确性评测与用户反馈回流机制",
+      "source": "数据智能查询平台面试（新增）",
+      "searchText": "Text2SQL 系统的准确性评测与用户反馈回流机制 数据智能查询平台面试（新增）"
     },
     {
       "id": "05-eval-and-vision:031",
       "dimension": "05-eval-and-vision",
       "ordinal": 31,
-      "title": "能不能不走“线上转线下评测集”，直接对线上 case 做无 GT 的打分和效果观测？",
-      "source": "字节跳动AI Agent评测二面（新增）",
-      "searchText": "能不能不走“线上转线下评测集”，直接对线上 case 做无 GT 的打分和效果观测？ 字节跳动AI Agent评测二面（新增）"
+      "title": "RAG 召回链路监控与召回漂移检测",
+      "source": "数据智能查询平台面试（新增）",
+      "searchText": "RAG 召回链路监控与召回漂移检测 数据智能查询平台面试（新增）"
     },
     {
       "id": "05-eval-and-vision:032",
       "dimension": "05-eval-and-vision",
       "ordinal": 32,
-      "title": "Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？",
-      "source": "字节Agent开发实习生一面（新增）【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后验证提升】",
-      "searchText": "Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？ 字节Agent开发实习生一面（新增）【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后验证提升】"
+      "title": "能不能不走“线上转线下评测集”，直接对线上 case 做无 GT 的打分和效果观测？",
+      "source": "字节跳动AI Agent评测二面（新增）",
+      "searchText": "能不能不走“线上转线下评测集”，直接对线上 case 做无 GT 的打分和效果观测？ 字节跳动AI Agent评测二面（新增）"
     },
     {
       "id": "05-eval-and-vision:033",
       "dimension": "05-eval-and-vision",
       "ordinal": 33,
-      "title": "如何证明 Agent 的最终答案真正使用了工具或检索证据，而不是凭模型常识猜中？",
-      "source": "Momenta Agent开发一面、阿里 Agent开发一面（新增）",
-      "searchText": "如何证明 Agent 的最终答案真正使用了工具或检索证据，而不是凭模型常识猜中？ Momenta Agent开发一面、阿里 Agent开发一面（新增）"
+      "title": "Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？",
+      "source": "字节Agent开发实习生一面（新增）【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后验证提升】【[阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a)】",
+      "searchText": "Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？ 字节Agent开发实习生一面（新增）【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后验证提升】【[阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a)】"
     },
     {
       "id": "05-eval-and-vision:034",
       "dimension": "05-eval-and-vision",
       "ordinal": 34,
-      "title": "树形意图识别和逐层路由应该如何设计，并构造评测集避免误差级联？",
-      "source": "快手 AI应用开发一面【[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)追问：双阶段路由的专精与错误阻断】",
-      "searchText": "树形意图识别和逐层路由应该如何设计，并构造评测集避免误差级联？ 快手 AI应用开发一面【[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)追问：双阶段路由的专精与错误阻断】"
+      "title": "如何证明 Agent 的最终答案真正使用了工具或检索证据，而不是凭模型常识猜中？",
+      "source": "Momenta Agent开发一面、阿里 Agent开发一面（新增）",
+      "searchText": "如何证明 Agent 的最终答案真正使用了工具或检索证据，而不是凭模型常识猜中？ Momenta Agent开发一面、阿里 Agent开发一面（新增）"
     },
     {
       "id": "05-eval-and-vision:035",
       "dimension": "05-eval-and-vision",
       "ordinal": 35,
-      "title": "Skill 路由应该如何构造测试集并评估？",
-      "source": "字节Agent测评一面（新增）",
-      "searchText": "Skill 路由应该如何构造测试集并评估？ 字节Agent测评一面（新增）"
+      "title": "独立 Verifier 和 LLM-as-Judge 应该如何分工？",
+      "source": "阿里千问 C端算法实习一面（新增）【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】",
+      "searchText": "独立 Verifier 和 LLM-as-Judge 应该如何分工？ 阿里千问 C端算法实习一面（新增）【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】"
     },
     {
       "id": "05-eval-and-vision:036",
       "dimension": "05-eval-and-vision",
       "ordinal": 36,
-      "title": "Multi-Agent 出现 Badcase 时，如何定位责任 Agent，并判断是否需要 SFT？",
-      "source": "字节Agent开发二面（新增）",
-      "searchText": "Multi-Agent 出现 Badcase 时，如何定位责任 Agent，并判断是否需要 SFT？ 字节Agent开发二面（新增）"
+      "title": "树形意图识别和逐层路由应该如何设计，并构造评测集避免误差级联？",
+      "source": "快手 AI应用开发一面【[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)追问：双阶段路由的专精与错误阻断】",
+      "searchText": "树形意图识别和逐层路由应该如何设计，并构造评测集避免误差级联？ 快手 AI应用开发一面【[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)追问：双阶段路由的专精与错误阻断】"
     },
     {
       "id": "05-eval-and-vision:037",
       "dimension": "05-eval-and-vision",
       "ordinal": 37,
-      "title": "Skill 的调用量、Token 成本和效果埋点应该放在哪一层？",
-      "source": "电商库存二面（新增）",
-      "searchText": "Skill 的调用量、Token 成本和效果埋点应该放在哪一层？ 电商库存二面（新增）"
+      "title": "Skill 路由应该如何构造测试集并评估？",
+      "source": "字节Agent测评一面（新增）",
+      "searchText": "Skill 路由应该如何构造测试集并评估？ 字节Agent测评一面（新增）"
     },
     {
       "id": "05-eval-and-vision:038",
       "dimension": "05-eval-and-vision",
       "ordinal": 38,
-      "title": "独立 Verifier 和 LLM-as-Judge 应该如何分工？",
-      "source": "阿里千问 C端算法实习一面（新增）",
-      "searchText": "独立 Verifier 和 LLM-as-Judge 应该如何分工？ 阿里千问 C端算法实习一面（新增）"
+      "title": "Multi-Agent 出现 Badcase 时，如何定位责任 Agent，并判断是否需要 SFT？",
+      "source": "字节Agent开发二面（新增）",
+      "searchText": "Multi-Agent 出现 Badcase 时，如何定位责任 Agent，并判断是否需要 SFT？ 字节Agent开发二面（新增）"
     },
     {
       "id": "05-eval-and-vision:039",
       "dimension": "05-eval-and-vision",
       "ordinal": 39,
-      "title": "供应商不返回 usage 时，如何核算 Agent 的 Token 和成本？",
-      "source": "成都晓多科技 Agent开发岗二面（新增）",
-      "searchText": "供应商不返回 usage 时，如何核算 Agent 的 Token 和成本？ 成都晓多科技 Agent开发岗二面（新增）"
+      "title": "Skill 的调用量、Token 成本和效果埋点应该放在哪一层？",
+      "source": "电商库存二面（新增）",
+      "searchText": "Skill 的调用量、Token 成本和效果埋点应该放在哪一层？ 电商库存二面（新增）"
     },
     {
       "id": "05-eval-and-vision:040",
       "dimension": "05-eval-and-vision",
       "ordinal": 40,
-      "title": "什么是 AI-native 团队？如何判断团队离 AI-first 还有多远？",
-      "source": "HR系统一面（新增）",
-      "searchText": "什么是 AI-native 团队？如何判断团队离 AI-first 还有多远？ HR系统一面（新增）"
+      "title": "供应商不返回 usage 时，如何核算 Agent 的 Token 和成本？",
+      "source": "成都晓多科技 Agent开发岗二面（新增）",
+      "searchText": "供应商不返回 usage 时，如何核算 Agent 的 Token 和成本？ 成都晓多科技 Agent开发岗二面（新增）"
     },
     {
       "id": "05-eval-and-vision:041",
       "dimension": "05-eval-and-vision",
       "ordinal": 41,
-      "title": "如何判断用户反馈真的让 Agent 变好，而不是噪声或选择偏差？",
-      "source": "MiniMax平台研发一面（新增）",
-      "searchText": "如何判断用户反馈真的让 Agent 变好，而不是噪声或选择偏差？ MiniMax平台研发一面（新增）"
+      "title": "什么是 AI-native 团队？如何判断团队离 AI-first 还有多远？",
+      "source": "HR系统一面（新增）",
+      "searchText": "什么是 AI-native 团队？如何判断团队离 AI-first 还有多远？ HR系统一面（新增）"
     },
     {
       "id": "05-eval-and-vision:042",
       "dimension": "05-eval-and-vision",
       "ordinal": 42,
-      "title": "评审 Agent 为什么要左移？应该左移到需求、设计还是编码阶段？",
-      "source": "字节社招一面（新增）",
-      "searchText": "评审 Agent 为什么要左移？应该左移到需求、设计还是编码阶段？ 字节社招一面（新增）"
+      "title": "如何判断用户反馈真的让 Agent 变好，而不是噪声或选择偏差？",
+      "source": "MiniMax平台研发一面（新增）",
+      "searchText": "如何判断用户反馈真的让 Agent 变好，而不是噪声或选择偏差？ MiniMax平台研发一面（新增）"
     },
     {
       "id": "05-eval-and-vision:043",
       "dimension": "05-eval-and-vision",
       "ordinal": 43,
-      "title": "如何通过两套 Harness 的同任务对照与组件消融定位效果差异？",
-      "source": "[Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)（新增）",
-      "searchText": "如何通过两套 Harness 的同任务对照与组件消融定位效果差异？ [Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)（新增）"
+      "title": "评审 Agent 为什么要左移？应该左移到需求、设计还是编码阶段？",
+      "source": "字节社招一面（新增）",
+      "searchText": "评审 Agent 为什么要左移？应该左移到需求、设计还是编码阶段？ 字节社招一面（新增）"
     },
     {
       "id": "05-eval-and-vision:044",
       "dimension": "05-eval-and-vision",
       "ordinal": 44,
+      "title": "如何通过两套 Harness 的同任务对照与组件消融定位效果差异？",
+      "source": "[Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)（新增）",
+      "searchText": "如何通过两套 Harness 的同任务对照与组件消融定位效果差异？ [Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)（新增）"
+    },
+    {
+      "id": "05-eval-and-vision:045",
+      "dimension": "05-eval-and-vision",
+      "ordinal": 45,
       "title": "如何为跨任务重复出现的安全或质量问题生成稳定 Fingerprint，并安全接入自动修复 Agent？",
       "source": "[元石科技后端/Agent 一面](https://www.nowcoder.com/discuss/921742843704549376)（新增）",
       "searchText": "如何为跨任务重复出现的安全或质量问题生成稳定 Fingerprint，并安全接入自动修复 Agent？ [元石科技后端/Agent 一面](https://www.nowcoder.com/discuss/921742843704549376)（新增）"
@@ -1817,17 +1825,17 @@
       "id": "06-multi-agent-collab:001",
       "dimension": "06-multi-agent-collab",
       "ordinal": 1,
-      "title": "多智能体怎么协作？",
-      "source": "腾讯终面",
-      "searchText": "多智能体怎么协作？ 腾讯终面"
+      "title": "多 Agent 系统里，怎么防止踢皮球或死循环？",
+      "source": "腾讯终面【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】",
+      "searchText": "多 Agent 系统里，怎么防止踢皮球或死循环？ 腾讯终面【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】"
     },
     {
       "id": "06-multi-agent-collab:002",
       "dimension": "06-multi-agent-collab",
       "ordinal": 2,
-      "title": "多 Agent 系统里，怎么防止踢皮球或死循环？",
+      "title": "多智能体怎么协作？",
       "source": "腾讯终面",
-      "searchText": "多 Agent 系统里，怎么防止踢皮球或死循环？ 腾讯终面"
+      "searchText": "多智能体怎么协作？ 腾讯终面"
     },
     {
       "id": "06-multi-agent-collab:003",
@@ -1842,8 +1850,8 @@
       "dimension": "06-multi-agent-collab",
       "ordinal": 4,
       "title": "怎么判断该做单 Agent 还是多 Agent？",
-      "source": "30题 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】【PDD/国际业务 Agent 一面追问：代码生成保障与单体/多 Agent 边界】",
-      "searchText": "怎么判断该做单 Agent 还是多 Agent？ 30题 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】【PDD/国际业务 Agent 一面追问：代码生成保障与单体/多 Agent 边界】"
+      "source": "30题 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】【PDD/国际业务 Agent 一面追问：代码生成保障与单体/多 Agent 边界】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】",
+      "searchText": "怎么判断该做单 Agent 还是多 Agent？ 30题 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】【PDD/国际业务 Agent 一面追问：代码生成保障与单体/多 Agent 边界】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】"
     },
     {
       "id": "06-multi-agent-collab:005",
@@ -1921,41 +1929,41 @@
       "id": "06-multi-agent-collab:014",
       "dimension": "06-multi-agent-collab",
       "ordinal": 14,
-      "title": "多 Agent 怎么编排的？用的什么编排模式？",
-      "source": "百度实习一面",
-      "searchText": "多 Agent 怎么编排的？用的什么编排模式？ 百度实习一面"
+      "title": "Multi-Agent 如何通信？不同项目分别用了哪些通信方法？（含 MCP vs A2A 协议层次对比）",
+      "source": "币安AI大模型实习一面【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】",
+      "searchText": "Multi-Agent 如何通信？不同项目分别用了哪些通信方法？（含 MCP vs A2A 协议层次对比） 币安AI大模型实习一面【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】"
     },
     {
       "id": "06-multi-agent-collab:015",
       "dimension": "06-multi-agent-collab",
       "ordinal": 15,
-      "title": "Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？",
-      "source": "蚂蚁AI应用开发二面",
-      "searchText": "Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？ 蚂蚁AI应用开发二面"
+      "title": "多 Agent 怎么编排的？用的什么编排模式？",
+      "source": "百度实习一面",
+      "searchText": "多 Agent 怎么编排的？用的什么编排模式？ 百度实习一面"
     },
     {
       "id": "06-multi-agent-collab:016",
       "dimension": "06-multi-agent-collab",
       "ordinal": 16,
-      "title": "三层 Agent（Root/Main+Fallback/Sub-Agent）协同策略 + 跨层上下文传递",
-      "source": "淘天Agent开发",
-      "searchText": "三层 Agent（Root/Main+Fallback/Sub-Agent）协同策略 + 跨层上下文传递 淘天Agent开发"
+      "title": "Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？",
+      "source": "蚂蚁AI应用开发二面",
+      "searchText": "Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？ 蚂蚁AI应用开发二面"
     },
     {
       "id": "06-multi-agent-collab:017",
       "dimension": "06-multi-agent-collab",
       "ordinal": 17,
-      "title": "为什么大家都在用 Multi-Agent？从一开始到现在原因是否有变化？",
-      "source": "币安AI大模型实习一面",
-      "searchText": "为什么大家都在用 Multi-Agent？从一开始到现在原因是否有变化？ 币安AI大模型实习一面"
+      "title": "三层 Agent（Root/Main+Fallback/Sub-Agent）协同策略 + 跨层上下文传递",
+      "source": "淘天Agent开发",
+      "searchText": "三层 Agent（Root/Main+Fallback/Sub-Agent）协同策略 + 跨层上下文传递 淘天Agent开发"
     },
     {
       "id": "06-multi-agent-collab:018",
       "dimension": "06-multi-agent-collab",
       "ordinal": 18,
-      "title": "Multi-Agent 如何通信？不同项目分别用了哪些通信方法？（含 MCP vs A2A 协议层次对比）",
+      "title": "为什么大家都在用 Multi-Agent？从一开始到现在原因是否有变化？",
       "source": "币安AI大模型实习一面",
-      "searchText": "Multi-Agent 如何通信？不同项目分别用了哪些通信方法？（含 MCP vs A2A 协议层次对比） 币安AI大模型实习一面"
+      "searchText": "为什么大家都在用 Multi-Agent？从一开始到现在原因是否有变化？ 币安AI大模型实习一面"
     },
     {
       "id": "06-multi-agent-collab:019",
@@ -1977,17 +1985,17 @@
       "id": "06-multi-agent-collab:021",
       "dimension": "06-multi-agent-collab",
       "ordinal": 21,
-      "title": "子 Agent 之间的上下文怎么传递？传什么、不传什么？",
-      "source": "阿里Agent面经（新增）",
-      "searchText": "子 Agent 之间的上下文怎么传递？传什么、不传什么？ 阿里Agent面经（新增）"
+      "title": "多 Agent 协作常见模式有哪些？各自适合什么任务类型？",
+      "source": "阿里Agent面经（新增）【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】",
+      "searchText": "多 Agent 协作常见模式有哪些？各自适合什么任务类型？ 阿里Agent面经（新增）【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】"
     },
     {
       "id": "06-multi-agent-collab:022",
       "dimension": "06-multi-agent-collab",
       "ordinal": 22,
-      "title": "多 Agent 协作常见模式有哪些？各自适合什么任务类型？",
+      "title": "子 Agent 之间的上下文怎么传递？传什么、不传什么？",
       "source": "阿里Agent面经（新增）",
-      "searchText": "多 Agent 协作常见模式有哪些？各自适合什么任务类型？ 阿里Agent面经（新增）"
+      "searchText": "子 Agent 之间的上下文怎么传递？传什么、不传什么？ 阿里Agent面经（新增）"
     },
     {
       "id": "06-multi-agent-collab:023",
@@ -2090,48 +2098,48 @@
       "dimension": "07-engineering-pitfalls",
       "ordinal": 1,
       "title": "Agent 的成本怎么控制？",
-      "source": "Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】",
-      "searchText": "Agent 的成本怎么控制？ Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】"
+      "source": "Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】",
+      "searchText": "Agent 的成本怎么控制？ Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】"
     },
     {
       "id": "07-engineering-pitfalls:002",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 2,
-      "title": "为什么很多 Agent Demo 很惊艳，一上线就不稳定？",
-      "source": "腾讯二面",
-      "searchText": "为什么很多 Agent Demo 很惊艳，一上线就不稳定？ 腾讯二面"
+      "title": "开发 Agent 时踩过什么坑？",
+      "source": "高频题【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "开发 Agent 时踩过什么坑？ 高频题【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "07-engineering-pitfalls:003",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 3,
-      "title": "开发 Agent 时踩过什么坑？",
-      "source": "高频题",
-      "searchText": "开发 Agent 时踩过什么坑？ 高频题"
+      "title": "为什么很多 Agent Demo 很惊艳，一上线就不稳定？",
+      "source": "腾讯二面",
+      "searchText": "为什么很多 Agent Demo 很惊艳，一上线就不稳定？ 腾讯二面"
     },
     {
       "id": "07-engineering-pitfalls:004",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 4,
       "title": "用过哪些 Code Agent？优缺点？",
-      "source": "腾讯AI应用开发 【高德实习一面追问：日常 AI Coding 实战工作流】【蚂蚁Agent开发一面追问：企业多系统改需求AI Coding怎么处理】【淘天Agent开发追问：AI辅助编程工作流拆解+提示词策略与人工审核介入点】【视频面经追问：做代码重构时怎么用AI辅助】【字节火山引擎 Managed Agent 一面追问：如何完成项目开发】",
-      "searchText": "用过哪些 Code Agent？优缺点？ 腾讯AI应用开发 【高德实习一面追问：日常 AI Coding 实战工作流】【蚂蚁Agent开发一面追问：企业多系统改需求AI Coding怎么处理】【淘天Agent开发追问：AI辅助编程工作流拆解+提示词策略与人工审核介入点】【视频面经追问：做代码重构时怎么用AI辅助】【字节火山引擎 Managed Agent 一面追问：如何完成项目开发】"
+      "source": "腾讯AI应用开发 【高德实习一面追问：日常 AI Coding 实战工作流】【蚂蚁Agent开发一面追问：企业多系统改需求AI Coding怎么处理】【淘天Agent开发追问：AI辅助编程工作流拆解+提示词策略与人工审核介入点】【视频面经追问：做代码重构时怎么用AI辅助】【字节火山引擎 Managed Agent 一面追问：如何完成项目开发】【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "用过哪些 Code Agent？优缺点？ 腾讯AI应用开发 【高德实习一面追问：日常 AI Coding 实战工作流】【蚂蚁Agent开发一面追问：企业多系统改需求AI Coding怎么处理】【淘天Agent开发追问：AI辅助编程工作流拆解+提示词策略与人工审核介入点】【视频面经追问：做代码重构时怎么用AI辅助】【字节火山引擎 Managed Agent 一面追问：如何完成项目开发】【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "07-engineering-pitfalls:005",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 5,
       "title": "平时写的代码有多少是 AI 生成的？",
-      "source": "腾讯一面 【百度实习一面追问：AI coding 占比的回答策略】",
-      "searchText": "平时写的代码有多少是 AI 生成的？ 腾讯一面 【百度实习一面追问：AI coding 占比的回答策略】"
+      "source": "腾讯一面 【百度实习一面追问：AI coding 占比的回答策略】【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】",
+      "searchText": "平时写的代码有多少是 AI 生成的？ 腾讯一面 【百度实习一面追问：AI coding 占比的回答策略】【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】"
     },
     {
       "id": "07-engineering-pitfalls:006",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 6,
       "title": "平时用过哪些 AI Agent 工具？",
-      "source": "腾讯一面",
-      "searchText": "平时用过哪些 AI Agent 工具？ 腾讯一面"
+      "source": "腾讯一面【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】",
+      "searchText": "平时用过哪些 AI Agent 工具？ 腾讯一面【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】"
     },
     {
       "id": "07-engineering-pitfalls:007",
@@ -2154,32 +2162,32 @@
       "dimension": "07-engineering-pitfalls",
       "ordinal": 9,
       "title": "如何解决大模型 API 服务的响应延迟？",
-      "source": "字节实习一面 【视频面经同题：提升模型响应速度的优化方向】【小红书数据库智能化二面追问：产品层面的等待体验优化】【小舒一面追问：异步调用与线程阻塞】",
-      "searchText": "如何解决大模型 API 服务的响应延迟？ 字节实习一面 【视频面经同题：提升模型响应速度的优化方向】【小红书数据库智能化二面追问：产品层面的等待体验优化】【小舒一面追问：异步调用与线程阻塞】"
+      "source": "字节实习一面 【视频面经同题：提升模型响应速度的优化方向】【小红书数据库智能化二面追问：产品层面的等待体验优化】【小舒一面追问：异步调用与线程阻塞】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】",
+      "searchText": "如何解决大模型 API 服务的响应延迟？ 字节实习一面 【视频面经同题：提升模型响应速度的优化方向】【小红书数据库智能化二面追问：产品层面的等待体验优化】【小舒一面追问：异步调用与线程阻塞】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】"
     },
     {
       "id": "07-engineering-pitfalls:010",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 10,
-      "title": "AI Coding 产品怎么测试？",
-      "source": "蚂蚁二面",
-      "searchText": "AI Coding 产品怎么测试？ 蚂蚁二面"
+      "title": "如何保证 AI 代码生成的质量与掌控性？",
+      "source": "蚂蚁一面【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】",
+      "searchText": "如何保证 AI 代码生成的质量与掌控性？ 蚂蚁一面【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】"
     },
     {
       "id": "07-engineering-pitfalls:011",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 11,
-      "title": "什么是 SDD？它和 Skills 有什么区别？",
-      "source": "蚂蚁一面",
-      "searchText": "什么是 SDD？它和 Skills 有什么区别？ 蚂蚁一面"
+      "title": "AI Coding 产品怎么测试？",
+      "source": "蚂蚁二面",
+      "searchText": "AI Coding 产品怎么测试？ 蚂蚁二面"
     },
     {
       "id": "07-engineering-pitfalls:012",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 12,
-      "title": "如何保证 AI 代码生成的质量与掌控性？",
+      "title": "什么是 SDD？它和 Skills 有什么区别？",
       "source": "蚂蚁一面",
-      "searchText": "如何保证 AI 代码生成的质量与掌控性？ 蚂蚁一面"
+      "searchText": "什么是 SDD？它和 Skills 有什么区别？ 蚂蚁一面"
     },
     {
       "id": "07-engineering-pitfalls:013",
@@ -2241,25 +2249,25 @@
       "id": "07-engineering-pitfalls:020",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 20,
-      "title": "针对包含 3 个以上工具调用且高频请求的任务，如何压低端到端延迟？",
-      "source": "淘天一面",
-      "searchText": "针对包含 3 个以上工具调用且高频请求的任务，如何压低端到端延迟？ 淘天一面"
+      "title": "开发 Agent 的时候，你用的是什么开发流程？",
+      "source": "字节实习一面【[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)】",
+      "searchText": "开发 Agent 的时候，你用的是什么开发流程？ 字节实习一面【[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)】"
     },
     {
       "id": "07-engineering-pitfalls:021",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 21,
-      "title": "任务执行远大于单次 Token 限制时，如何设计断点继续生成？",
+      "title": "针对包含 3 个以上工具调用且高频请求的任务，如何压低端到端延迟？",
       "source": "淘天一面",
-      "searchText": "任务执行远大于单次 Token 限制时，如何设计断点继续生成？ 淘天一面"
+      "searchText": "针对包含 3 个以上工具调用且高频请求的任务，如何压低端到端延迟？ 淘天一面"
     },
     {
       "id": "07-engineering-pitfalls:022",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 22,
-      "title": "开发 Agent 的时候，你用的是什么开发流程？",
-      "source": "字节实习一面",
-      "searchText": "开发 Agent 的时候，你用的是什么开发流程？ 字节实习一面"
+      "title": "任务执行远大于单次 Token 限制时，如何设计断点继续生成？",
+      "source": "淘天一面",
+      "searchText": "任务执行远大于单次 Token 限制时，如何设计断点继续生成？ 淘天一面"
     },
     {
       "id": "07-engineering-pitfalls:023",
@@ -2354,40 +2362,40 @@
       "dimension": "07-engineering-pitfalls",
       "ordinal": 34,
       "title": "Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？",
-      "source": "美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】",
-      "searchText": "Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ 美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】"
+      "source": "美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】",
+      "searchText": "Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？ 美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库同题：Agent Trace 字段与成功率突降排查】【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】"
     },
     {
       "id": "07-engineering-pitfalls:035",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 35,
-      "title": "SSE 流式输出中断后如何保证之前的输出不丢失？",
-      "source": "某教育agent开发 【视频面经追问：用户中途关浏览器后内容保留与恢复】",
-      "searchText": "SSE 流式输出中断后如何保证之前的输出不丢失？ 某教育agent开发 【视频面经追问：用户中途关浏览器后内容保留与恢复】"
+      "title": "Agent 如何做版本管理与灰度？",
+      "source": "Agent面经八股系列【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】",
+      "searchText": "Agent 如何做版本管理与灰度？ Agent面经八股系列【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】"
     },
     {
       "id": "07-engineering-pitfalls:036",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 36,
-      "title": "产品的用户量、每日 token 消耗和底层模型选型怎么估算？",
-      "source": "快手AI应用开发一面",
-      "searchText": "产品的用户量、每日 token 消耗和底层模型选型怎么估算？ 快手AI应用开发一面"
+      "title": "怎么设计一个大模型网关系统？",
+      "source": "猎豹移动Agent全栈开发【[阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1)】",
+      "searchText": "怎么设计一个大模型网关系统？ 猎豹移动Agent全栈开发【[阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1)】"
     },
     {
       "id": "07-engineering-pitfalls:037",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 37,
-      "title": "Agent 如何做版本管理与灰度？",
-      "source": "Agent面经八股系列",
-      "searchText": "Agent 如何做版本管理与灰度？ Agent面经八股系列"
+      "title": "SSE 流式输出中断后如何保证之前的输出不丢失？",
+      "source": "某教育agent开发 【视频面经追问：用户中途关浏览器后内容保留与恢复】",
+      "searchText": "SSE 流式输出中断后如何保证之前的输出不丢失？ 某教育agent开发 【视频面经追问：用户中途关浏览器后内容保留与恢复】"
     },
     {
       "id": "07-engineering-pitfalls:038",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 38,
-      "title": "怎么设计一个大模型网关系统？",
-      "source": "猎豹移动Agent全栈开发",
-      "searchText": "怎么设计一个大模型网关系统？ 猎豹移动Agent全栈开发"
+      "title": "产品的用户量、每日 token 消耗和底层模型选型怎么估算？",
+      "source": "快手AI应用开发一面",
+      "searchText": "产品的用户量、每日 token 消耗和底层模型选型怎么估算？ 快手AI应用开发一面"
     },
     {
       "id": "07-engineering-pitfalls:039",
@@ -2401,17 +2409,17 @@
       "id": "07-engineering-pitfalls:040",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 40,
-      "title": "高并发场景下，如何设计 Agent 服务的弹性伸缩策略？",
-      "source": "已有正文（补录索引）",
-      "searchText": "高并发场景下，如何设计 Agent 服务的弹性伸缩策略？ 已有正文（补录索引）"
+      "title": "如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？",
+      "source": "Agent开发八股合集（南京大学）【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】",
+      "searchText": "如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？ Agent开发八股合集（南京大学）【[阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)】"
     },
     {
       "id": "07-engineering-pitfalls:041",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 41,
-      "title": "如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？",
-      "source": "Agent开发八股合集（南京大学）",
-      "searchText": "如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？ Agent开发八股合集（南京大学）"
+      "title": "高并发场景下，如何设计 Agent 服务的弹性伸缩策略？",
+      "source": "已有正文（补录索引）",
+      "searchText": "高并发场景下，如何设计 Agent 服务的弹性伸缩策略？ 已有正文（补录索引）"
     },
     {
       "id": "07-engineering-pitfalls:042",
@@ -2426,8 +2434,8 @@
       "dimension": "07-engineering-pitfalls",
       "ordinal": 43,
       "title": "SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？",
-      "source": "成都agent面试（社招）【阿里 Agent Infra 一面题库同题】",
-      "searchText": "SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ 成都agent面试（社招）【阿里 Agent Infra 一面题库同题】"
+      "source": "成都agent面试（社招）【阿里 Agent Infra 一面题库同题】【[阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1)】",
+      "searchText": "SSE 和 WebSocket、单次调用的区别是什么？Agent 场景该怎么选？ 成都agent面试（社招）【阿里 Agent Infra 一面题库同题】【[阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1)】"
     },
     {
       "id": "07-engineering-pitfalls:044",
@@ -2441,33 +2449,33 @@
       "id": "07-engineering-pitfalls:045",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 45,
-      "title": "系统里多租户隔离是怎么实现的？",
-      "source": "视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】",
-      "searchText": "系统里多租户隔离是怎么实现的？ 视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】"
+      "title": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？",
+      "source": "电商库存一面、小得盈满一面（新增）【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】",
+      "searchText": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？ 电商库存一面、小得盈满一面（新增）【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】"
     },
     {
       "id": "07-engineering-pitfalls:046",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 46,
-      "title": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？",
-      "source": "电商库存一面、小得盈满一面（新增）",
-      "searchText": "从原始诉求到可执行 PRD/Spec，如何清洗需求、判断完备性并设置质量门禁？ 电商库存一面、小得盈满一面（新增）"
+      "title": "系统里多租户隔离是怎么实现的？",
+      "source": "视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】",
+      "searchText": "系统里多租户隔离是怎么实现的？ 视频面经汇总（新增）【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】"
     },
     {
       "id": "07-engineering-pitfalls:047",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 47,
-      "title": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？",
-      "source": "腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】",
-      "searchText": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？ 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】"
+      "title": "了解 Kubernetes 吗？在 Agent 项目里有没有实际用到？",
+      "source": "视频面经汇总（新增）【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】",
+      "searchText": "了解 Kubernetes 吗？在 Agent 项目里有没有实际用到？ 视频面经汇总（新增）【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】"
     },
     {
       "id": "07-engineering-pitfalls:048",
       "dimension": "07-engineering-pitfalls",
       "ordinal": 48,
-      "title": "了解 Kubernetes 吗？在 Agent 项目里有没有实际用到？",
-      "source": "视频面经汇总（新增）",
-      "searchText": "了解 Kubernetes 吗？在 Agent 项目里有没有实际用到？ 视频面经汇总（新增）"
+      "title": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？",
+      "source": "腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】",
+      "searchText": "如何记录 Agent 的非确定性边界，实现可重复的故障回放？ 腾讯互娱全栈开发（AI）二面（新增）【字节火山引擎 Managed Agent 一面追问：耗时、Token、结果和失败路线】"
     },
     {
       "id": "07-engineering-pitfalls:049",
@@ -2642,8 +2650,8 @@
       "dimension": "08-prompt-engineering",
       "ordinal": 4,
       "title": "如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？",
-      "source": "字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】【阿里国际AI应用开发二面追问：多Skill可见时执行顺序保证+Plan模式协调】【阿里国际大模型应用开发一面追问：Skill自我迭代机制+质量评测】【字节火山引擎 Managed Agent 一面追问：开发、测试、运维 Skills 组织】",
-      "searchText": "如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？ 字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】【阿里国际AI应用开发二面追问：多Skill可见时执行顺序保证+Plan模式协调】【阿里国际大模型应用开发一面追问：Skill自我迭代机制+质量评测】【字节火山引擎 Managed Agent 一面追问：开发、测试、运维 Skills 组织】"
+      "source": "字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】【阿里国际AI应用开发二面追问：多Skill可见时执行顺序保证+Plan模式协调】【阿里国际大模型应用开发一面追问：Skill自我迭代机制+质量评测】【字节火山引擎 Managed Agent 一面追问：开发、测试、运维 Skills 组织】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "如果让你从零设计一个 Skill 系统，需要实现哪些核心能力？ 字节实习一面 【蚂蚁AI应用开发二面追问：单一 Skill 模块设计思路】【字节抖音一面追问：手撕 Skill 注册/发现/调用实现】【阿里国际AI应用开发二面追问：多Skill可见时执行顺序保证+Plan模式协调】【阿里国际大模型应用开发一面追问：Skill自我迭代机制+质量评测】【字节火山引擎 Managed Agent 一面追问：开发、测试、运维 Skills 组织】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "08-prompt-engineering:005",
@@ -2681,25 +2689,25 @@
       "id": "08-prompt-engineering:009",
       "dimension": "08-prompt-engineering",
       "ordinal": 9,
-      "title": "在调优 Prompt 时，你有哪些实战经验？如何利用 AI 辅助自己优化 Prompt？",
-      "source": "字节二面",
-      "searchText": "在调优 Prompt 时，你有哪些实战经验？如何利用 AI 辅助自己优化 Prompt？ 字节二面"
+      "title": "Skill 的渐进式披露怎么实现？Skill 之间的沙箱隔离和通信机制是什么？",
+      "source": "快手AI应用开发一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "Skill 的渐进式披露怎么实现？Skill 之间的沙箱隔离和通信机制是什么？ 快手AI应用开发一面【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "08-prompt-engineering:010",
       "dimension": "08-prompt-engineering",
       "ordinal": 10,
-      "title": "Harness Engineering 是什么？它如何演进的？",
-      "source": "CVTE AI应用工程师一面",
-      "searchText": "Harness Engineering 是什么？它如何演进的？ CVTE AI应用工程师一面"
+      "title": "在调优 Prompt 时，你有哪些实战经验？如何利用 AI 辅助自己优化 Prompt？",
+      "source": "字节二面",
+      "searchText": "在调优 Prompt 时，你有哪些实战经验？如何利用 AI 辅助自己优化 Prompt？ 字节二面"
     },
     {
       "id": "08-prompt-engineering:011",
       "dimension": "08-prompt-engineering",
       "ordinal": 11,
-      "title": "Skill 的渐进式披露怎么实现？Skill 之间的沙箱隔离和通信机制是什么？",
-      "source": "快手AI应用开发一面",
-      "searchText": "Skill 的渐进式披露怎么实现？Skill 之间的沙箱隔离和通信机制是什么？ 快手AI应用开发一面"
+      "title": "Harness Engineering 是什么？它如何演进的？",
+      "source": "CVTE AI应用工程师一面",
+      "searchText": "Harness Engineering 是什么？它如何演进的？ CVTE AI应用工程师一面"
     },
     {
       "id": "08-prompt-engineering:012",
@@ -2722,48 +2730,48 @@
       "dimension": "08-prompt-engineering",
       "ordinal": 14,
       "title": "DSPy 是什么？它在 Agent 提示词优化和流程构建上有什么优势？",
-      "source": "Agent开发八股合集（南京大学）",
-      "searchText": "DSPy 是什么？它在 Agent 提示词优化和流程构建上有什么优势？ Agent开发八股合集（南京大学）"
+      "source": "Agent开发八股合集（南京大学）【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "DSPy 是什么？它在 Agent 提示词优化和流程构建上有什么优势？ Agent开发八股合集（南京大学）【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "08-prompt-engineering:015",
       "dimension": "08-prompt-engineering",
       "ordinal": 15,
-      "title": "Prompt 层面让模型回答更快、更稳定的方法？",
-      "source": "视频面经汇总（新增）",
-      "searchText": "Prompt 层面让模型回答更快、更稳定的方法？ 视频面经汇总（新增）"
+      "title": "一个 Skill 写得好不好，应该看哪些评价标准？",
+      "source": "视频面经汇总（新增）【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "一个 Skill 写得好不好，应该看哪些评价标准？ 视频面经汇总（新增）【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "08-prompt-engineering:016",
       "dimension": "08-prompt-engineering",
       "ordinal": 16,
-      "title": "一个 Skill 写得好不好，应该看哪些评价标准？",
+      "title": "Prompt 层面让模型回答更快、更稳定的方法？",
       "source": "视频面经汇总（新增）",
-      "searchText": "一个 Skill 写得好不好，应该看哪些评价标准？ 视频面经汇总（新增）"
+      "searchText": "Prompt 层面让模型回答更快、更稳定的方法？ 视频面经汇总（新增）"
     },
     {
       "id": "08-prompt-engineering:017",
       "dimension": "08-prompt-engineering",
       "ordinal": 17,
-      "title": "Skill 的 Prompt 配置上线后出错，如何快速止损和修复？",
-      "source": "百度秋招后端一面 【[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度】",
-      "searchText": "Skill 的 Prompt 配置上线后出错，如何快速止损和修复？ 百度秋招后端一面 【[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度】"
+      "title": "OpenSpec/Spec 驱动开发与普通开发流程有什么区别？如何治理 Spec 过期？",
+      "source": "浦金科一面、电商库存一面（新增）【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】",
+      "searchText": "OpenSpec/Spec 驱动开发与普通开发流程有什么区别？如何治理 Spec 过期？ 浦金科一面、电商库存一面（新增）【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】"
     },
     {
       "id": "08-prompt-engineering:018",
       "dimension": "08-prompt-engineering",
       "ordinal": 18,
-      "title": "团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？",
-      "source": "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)【电商库存二面（2026-08-17）】",
-      "searchText": "团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？ [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)【电商库存二面（2026-08-17）】"
+      "title": "Skill 的 Prompt 配置上线后出错，如何快速止损和修复？",
+      "source": "百度秋招后端一面 【[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度】",
+      "searchText": "Skill 的 Prompt 配置上线后出错，如何快速止损和修复？ 百度秋招后端一面 【[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度】"
     },
     {
       "id": "08-prompt-engineering:019",
       "dimension": "08-prompt-engineering",
       "ordinal": 19,
-      "title": "OpenSpec/Spec 驱动开发与普通开发流程有什么区别？如何治理 Spec 过期？",
-      "source": "浦金科一面、电商库存一面（新增）",
-      "searchText": "OpenSpec/Spec 驱动开发与普通开发流程有什么区别？如何治理 Spec 过期？ 浦金科一面、电商库存一面（新增）"
+      "title": "团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？",
+      "source": "[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)【电商库存二面（2026-08-17）】",
+      "searchText": "团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？ [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)【电商库存二面（2026-08-17）】"
     },
     {
       "id": "08-prompt-engineering:020",
@@ -2858,8 +2866,8 @@
       "dimension": "09-rag-retrieval",
       "ordinal": 2,
       "title": "RAG 的检索如何实现？",
-      "source": "阿里一面",
-      "searchText": "RAG 的检索如何实现？ 阿里一面"
+      "source": "阿里一面【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "RAG 的检索如何实现？ 阿里一面【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "09-rag-retrieval:003",
@@ -3058,16 +3066,16 @@
       "dimension": "09-rag-retrieval",
       "ordinal": 27,
       "title": "分块策略怎么设计？不同策略的优缺点？",
-      "source": "高德 AI 应用开发实习一面【腾讯AI应用开发二面追问：chunk 边界修正 + 表格跨块修复】【字节AI一面追问：领域文档语义感知切片】【Shopee 一面追问：为什么不能只按固定 Token 数切分】【[字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a)追问：跨物理页 Chunk 与页码引用】",
-      "searchText": "分块策略怎么设计？不同策略的优缺点？ 高德 AI 应用开发实习一面【腾讯AI应用开发二面追问：chunk 边界修正 + 表格跨块修复】【字节AI一面追问：领域文档语义感知切片】【Shopee 一面追问：为什么不能只按固定 Token 数切分】【[字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a)追问：跨物理页 Chunk 与页码引用】"
+      "source": "高德 AI 应用开发实习一面【腾讯AI应用开发二面追问：chunk 边界修正 + 表格跨块修复】【字节AI一面追问：领域文档语义感知切片】【Shopee 一面追问：为什么不能只按固定 Token 数切分】【[字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a)追问：跨物理页 Chunk 与页码引用】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "分块策略怎么设计？不同策略的优缺点？ 高德 AI 应用开发实习一面【腾讯AI应用开发二面追问：chunk 边界修正 + 表格跨块修复】【字节AI一面追问：领域文档语义感知切片】【Shopee 一面追问：为什么不能只按固定 Token 数切分】【[字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a)追问：跨物理页 Chunk 与页码引用】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "09-rag-retrieval:028",
       "dimension": "09-rag-retrieval",
       "ordinal": 28,
       "title": "知识库整体怎么设计？从文档接入到检索的完整架构",
-      "source": "高德 AI 应用开发实习一面【字节二面同题：RAG 完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】",
-      "searchText": "知识库整体怎么设计？从文档接入到检索的完整架构 高德 AI 应用开发实习一面【字节二面同题：RAG 完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】"
+      "source": "高德 AI 应用开发实习一面【字节二面同题：RAG 完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】",
+      "searchText": "知识库整体怎么设计？从文档接入到检索的完整架构 高德 AI 应用开发实习一面【字节二面同题：RAG 完整流程从文档切块到生成】【阿里 Agent Infra 一面题库同题】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】"
     },
     {
       "id": "09-rag-retrieval:029",
@@ -3082,8 +3090,8 @@
       "dimension": "09-rag-retrieval",
       "ordinal": 30,
       "title": "向量数据库怎么选型？不同规模下该用什么方案？",
-      "source": "阿里国际二面 【淘天Agent开发追问：为什么选pgvector】",
-      "searchText": "向量数据库怎么选型？不同规模下该用什么方案？ 阿里国际二面 【淘天Agent开发追问：为什么选pgvector】"
+      "source": "阿里国际二面 【淘天Agent开发追问：为什么选pgvector】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "向量数据库怎么选型？不同规模下该用什么方案？ 阿里国际二面 【淘天Agent开发追问：为什么选pgvector】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "09-rag-retrieval:031",
@@ -3137,33 +3145,33 @@
       "id": "09-rag-retrieval:037",
       "dimension": "09-rag-retrieval",
       "ordinal": 37,
-      "title": "RAG 架构与模型微调（Fine-tuning）相比，各自的适用场景和优缺点是什么？",
-      "source": "字节二面 【淘天转正实习一面追问：预训练语料已包含相关知识为什么还要RAG】",
-      "searchText": "RAG 架构与模型微调（Fine-tuning）相比，各自的适用场景和优缺点是什么？ 字节二面 【淘天转正实习一面追问：预训练语料已包含相关知识为什么还要RAG】"
+      "title": "图检索、向量检索、混合检索有什么区别？怎么选？",
+      "source": "腾讯AI应用开发二面【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】",
+      "searchText": "图检索、向量检索、混合检索有什么区别？怎么选？ 腾讯AI应用开发二面【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】"
     },
     {
       "id": "09-rag-retrieval:038",
       "dimension": "09-rag-retrieval",
       "ordinal": 38,
-      "title": "如何处理 RAG 过程中的权限隔离和时效性问题？",
-      "source": "字节二面【[阿里千问 AI 应用研发一面](https://www.nowcoder.com/feed/main/detail/da6d74a34ceb4e52b9b4fbcac25cfb3b)追问：文档/Chunk ACL、缓存与引用泄露】",
-      "searchText": "如何处理 RAG 过程中的权限隔离和时效性问题？ 字节二面【[阿里千问 AI 应用研发一面](https://www.nowcoder.com/feed/main/detail/da6d74a34ceb4e52b9b4fbcac25cfb3b)追问：文档/Chunk ACL、缓存与引用泄露】"
+      "title": "RAG 架构与模型微调（Fine-tuning）相比，各自的适用场景和优缺点是什么？",
+      "source": "字节二面 【淘天转正实习一面追问：预训练语料已包含相关知识为什么还要RAG】",
+      "searchText": "RAG 架构与模型微调（Fine-tuning）相比，各自的适用场景和优缺点是什么？ 字节二面 【淘天转正实习一面追问：预训练语料已包含相关知识为什么还要RAG】"
     },
     {
       "id": "09-rag-retrieval:039",
       "dimension": "09-rag-retrieval",
       "ordinal": 39,
-      "title": "PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？",
-      "source": "腾讯AI应用开发二面",
-      "searchText": "PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？ 腾讯AI应用开发二面"
+      "title": "如何处理 RAG 过程中的权限隔离和时效性问题？",
+      "source": "字节二面【[阿里千问 AI 应用研发一面](https://www.nowcoder.com/feed/main/detail/da6d74a34ceb4e52b9b4fbcac25cfb3b)追问：文档/Chunk ACL、缓存与引用泄露】",
+      "searchText": "如何处理 RAG 过程中的权限隔离和时效性问题？ 字节二面【[阿里千问 AI 应用研发一面](https://www.nowcoder.com/feed/main/detail/da6d74a34ceb4e52b9b4fbcac25cfb3b)追问：文档/Chunk ACL、缓存与引用泄露】"
     },
     {
       "id": "09-rag-retrieval:040",
       "dimension": "09-rag-retrieval",
       "ordinal": 40,
-      "title": "图检索、向量检索、混合检索有什么区别？怎么选？",
+      "title": "PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？",
       "source": "腾讯AI应用开发二面",
-      "searchText": "图检索、向量检索、混合检索有什么区别？怎么选？ 腾讯AI应用开发二面"
+      "searchText": "PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？ 腾讯AI应用开发二面"
     },
     {
       "id": "09-rag-retrieval:041",
@@ -3282,8 +3290,8 @@
       "dimension": "09-rag-retrieval",
       "ordinal": 55,
       "title": "Text2SQL 的 RAG 架构里，DDL 层和规则层分别解决什么问题？业务表频繁变更时怎么保持可用？",
-      "source": "已有正文（补录索引）",
-      "searchText": "Text2SQL 的 RAG 架构里，DDL 层和规则层分别解决什么问题？业务表频繁变更时怎么保持可用？ 已有正文（补录索引）"
+      "source": "已有正文（补录索引）【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】",
+      "searchText": "Text2SQL 的 RAG 架构里，DDL 层和规则层分别解决什么问题？业务表频繁变更时怎么保持可用？ 已有正文（补录索引）【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】"
     },
     {
       "id": "09-rag-retrieval:056",
@@ -3434,8 +3442,8 @@
       "dimension": "10-training-and-data",
       "ordinal": 7,
       "title": "DPO、PPO、GRPO 的区别和优缺点？",
-      "source": "高频题 【阿里国际一面追问：PPO vs GRPO 深度对比】【淘天AI应用开发一面追问：DPO不需要在线采样的原因+数据格式】【美团Keeta一面追问：chosen/rejected数据生成实操与常见坑】【阿里国际一面追问：重要性采样在策略差异大时失效+GRPO vs PPO KL散度区别】",
-      "searchText": "DPO、PPO、GRPO 的区别和优缺点？ 高频题 【阿里国际一面追问：PPO vs GRPO 深度对比】【淘天AI应用开发一面追问：DPO不需要在线采样的原因+数据格式】【美团Keeta一面追问：chosen/rejected数据生成实操与常见坑】【阿里国际一面追问：重要性采样在策略差异大时失效+GRPO vs PPO KL散度区别】"
+      "source": "高频题 【阿里国际一面追问：PPO vs GRPO 深度对比】【淘天AI应用开发一面追问：DPO不需要在线采样的原因+数据格式】【美团Keeta一面追问：chosen/rejected数据生成实操与常见坑】【阿里国际一面追问：重要性采样在策略差异大时失效+GRPO vs PPO KL散度区别】【[快手广告大模型一面](https://www.nowcoder.com/discuss/923996140154953728)】",
+      "searchText": "DPO、PPO、GRPO 的区别和优缺点？ 高频题 【阿里国际一面追问：PPO vs GRPO 深度对比】【淘天AI应用开发一面追问：DPO不需要在线采样的原因+数据格式】【美团Keeta一面追问：chosen/rejected数据生成实操与常见坑】【阿里国际一面追问：重要性采样在策略差异大时失效+GRPO vs PPO KL散度区别】【[快手广告大模型一面](https://www.nowcoder.com/discuss/923996140154953728)】"
     },
     {
       "id": "10-training-and-data:008",
@@ -3817,121 +3825,121 @@
       "id": "10-training-and-data:055",
       "dimension": "10-training-and-data",
       "ordinal": 55,
-      "title": "Tool-use SFT 训练时，长轨迹采用截断、切分还是掩码？如何避免破坏工具依赖关系？",
-      "source": "唯品会NLP算法实习一面（新增）",
-      "searchText": "Tool-use SFT 训练时，长轨迹采用截断、切分还是掩码？如何避免破坏工具依赖关系？ 唯品会NLP算法实习一面（新增）"
+      "title": "Agentic CFT 与 SFT、RL 的目标有何不同？为什么训练时要 Mask Observation Token？",
+      "source": "[Shopee Agent 开发一面](https://www.nowcoder.com/feed/main/detail/79fe3fc8f8cb4c4d9beca478f4279e3a)（2026-08-24）【[腾讯一面微调 Mask 追问](https://www.nowcoder.com/discuss/924026569318727680)】",
+      "searchText": "Agentic CFT 与 SFT、RL 的目标有何不同？为什么训练时要 Mask Observation Token？ [Shopee Agent 开发一面](https://www.nowcoder.com/feed/main/detail/79fe3fc8f8cb4c4d9beca478f4279e3a)（2026-08-24）【[腾讯一面微调 Mask 追问](https://www.nowcoder.com/discuss/924026569318727680)】"
     },
     {
       "id": "10-training-and-data:056",
       "dimension": "10-training-and-data",
       "ordinal": 56,
-      "title": "为什么 Step-level SFT 之后再进行 GRPO，通常比直接从基座模型开始做 GRPO 稳定？",
+      "title": "Tool-use SFT 训练时，长轨迹采用截断、切分还是掩码？如何避免破坏工具依赖关系？",
       "source": "唯品会NLP算法实习一面（新增）",
-      "searchText": "为什么 Step-level SFT 之后再进行 GRPO，通常比直接从基座模型开始做 GRPO 稳定？ 唯品会NLP算法实习一面（新增）"
+      "searchText": "Tool-use SFT 训练时，长轨迹采用截断、切分还是掩码？如何避免破坏工具依赖关系？ 唯品会NLP算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:057",
       "dimension": "10-training-and-data",
       "ordinal": 57,
-      "title": "GRPO 中相对奖励是如何计算的？同一组奖励方差接近零时如何处理？",
+      "title": "为什么 Step-level SFT 之后再进行 GRPO，通常比直接从基座模型开始做 GRPO 稳定？",
       "source": "唯品会NLP算法实习一面（新增）",
-      "searchText": "GRPO 中相对奖励是如何计算的？同一组奖励方差接近零时如何处理？ 唯品会NLP算法实习一面（新增）"
+      "searchText": "为什么 Step-level SFT 之后再进行 GRPO，通常比直接从基座模型开始做 GRPO 稳定？ 唯品会NLP算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:058",
       "dimension": "10-training-and-data",
       "ordinal": 58,
-      "title": "Tool-use 轨迹长度与任务复杂度有什么关系？训练数据应如何分布？",
-      "source": "唯品会大模型算法实习一面（新增）",
-      "searchText": "Tool-use 轨迹长度与任务复杂度有什么关系？训练数据应如何分布？ 唯品会大模型算法实习一面（新增）"
+      "title": "GRPO 中相对奖励是如何计算的？同一组奖励方差接近零时如何处理？",
+      "source": "唯品会NLP算法实习一面（新增）",
+      "searchText": "GRPO 中相对奖励是如何计算的？同一组奖励方差接近零时如何处理？ 唯品会NLP算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:059",
       "dimension": "10-training-and-data",
       "ordinal": 59,
-      "title": "Tool-use 强化学习中的内容奖励应如何设计？",
+      "title": "Tool-use 轨迹长度与任务复杂度有什么关系？训练数据应如何分布？",
       "source": "唯品会大模型算法实习一面（新增）",
-      "searchText": "Tool-use 强化学习中的内容奖励应如何设计？ 唯品会大模型算法实习一面（新增）"
+      "searchText": "Tool-use 轨迹长度与任务复杂度有什么关系？训练数据应如何分布？ 唯品会大模型算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:060",
       "dimension": "10-training-and-data",
       "ordinal": 60,
-      "title": "多工具调用存在依赖关系时，Reward 应如何做信用分配？",
+      "title": "Tool-use 强化学习中的内容奖励应如何设计？",
       "source": "唯品会大模型算法实习一面（新增）",
-      "searchText": "多工具调用存在依赖关系时，Reward 应如何做信用分配？ 唯品会大模型算法实习一面（新增）"
+      "searchText": "Tool-use 强化学习中的内容奖励应如何设计？ 唯品会大模型算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:061",
       "dimension": "10-training-and-data",
       "ordinal": 61,
-      "title": "Agent 交互轨迹与普通语言模型语料有什么区别？如何仿真高质量轨迹？",
-      "source": "字节Agent算法实习一面（新增）",
-      "searchText": "Agent 交互轨迹与普通语言模型语料有什么区别？如何仿真高质量轨迹？ 字节Agent算法实习一面（新增）"
+      "title": "多工具调用存在依赖关系时，Reward 应如何做信用分配？",
+      "source": "唯品会大模型算法实习一面（新增）",
+      "searchText": "多工具调用存在依赖关系时，Reward 应如何做信用分配？ 唯品会大模型算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:062",
       "dimension": "10-training-and-data",
       "ordinal": 62,
-      "title": "Agentic CPT、SFT、RL 三阶段分别训练什么能力？",
-      "source": "字节跳动AI Agent秋招一面（新增）",
-      "searchText": "Agentic CPT、SFT、RL 三阶段分别训练什么能力？ 字节跳动AI Agent秋招一面（新增）"
+      "title": "Agent 交互轨迹与普通语言模型语料有什么区别？如何仿真高质量轨迹？",
+      "source": "字节Agent算法实习一面（新增）",
+      "searchText": "Agent 交互轨迹与普通语言模型语料有什么区别？如何仿真高质量轨迹？ 字节Agent算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:063",
       "dimension": "10-training-and-data",
       "ordinal": 63,
-      "title": "多轮对话 RL 如何设计过程奖励与终局奖励，并避免用户模拟器过拟合？",
-      "source": "[阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)（2026-08-23）",
-      "searchText": "多轮对话 RL 如何设计过程奖励与终局奖励，并避免用户模拟器过拟合？ [阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)（2026-08-23）"
+      "title": "Agentic CPT、SFT、RL 三阶段分别训练什么能力？",
+      "source": "字节跳动AI Agent秋招一面（新增）",
+      "searchText": "Agentic CPT、SFT、RL 三阶段分别训练什么能力？ 字节跳动AI Agent秋招一面（新增）"
     },
     {
       "id": "10-training-and-data:064",
       "dimension": "10-training-and-data",
       "ordinal": 64,
-      "title": "为什么 SFT 后继续做 DPO/PPO 等偏好优化可能导致基础能力退化？",
-      "source": "哔哩哔哩 AI 后端开发凉经（新增）",
-      "searchText": "为什么 SFT 后继续做 DPO/PPO 等偏好优化可能导致基础能力退化？ 哔哩哔哩 AI 后端开发凉经（新增）"
+      "title": "多轮对话 RL 如何设计过程奖励与终局奖励，并避免用户模拟器过拟合？",
+      "source": "[阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)（2026-08-23）",
+      "searchText": "多轮对话 RL 如何设计过程奖励与终局奖励，并避免用户模拟器过拟合？ [阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)（2026-08-23）"
     },
     {
       "id": "10-training-and-data:065",
       "dimension": "10-training-and-data",
       "ordinal": 65,
-      "title": "LoRA 应该挂在哪些层？rank、alpha 和 dropout 如何共同影响效果？",
-      "source": "Shopee 大模型一面（新增）",
-      "searchText": "LoRA 应该挂在哪些层？rank、alpha 和 dropout 如何共同影响效果？ Shopee 大模型一面（新增）"
+      "title": "为什么 SFT 后继续做 DPO/PPO 等偏好优化可能导致基础能力退化？",
+      "source": "哔哩哔哩 AI 后端开发凉经（新增）",
+      "searchText": "为什么 SFT 后继续做 DPO/PPO 等偏好优化可能导致基础能力退化？ 哔哩哔哩 AI 后端开发凉经（新增）"
     },
     {
       "id": "10-training-and-data:066",
       "dimension": "10-training-and-data",
       "ordinal": 66,
-      "title": "KV Cache Block 的哈希和逻辑到物理映射应该怎么设计？",
-      "source": "智象未来 AI Infra一面（新增）",
-      "searchText": "KV Cache Block 的哈希和逻辑到物理映射应该怎么设计？ 智象未来 AI Infra一面（新增）"
+      "title": "LoRA 应该挂在哪些层？rank、alpha 和 dropout 如何共同影响效果？",
+      "source": "Shopee 大模型一面（新增）",
+      "searchText": "LoRA 应该挂在哪些层？rank、alpha 和 dropout 如何共同影响效果？ Shopee 大模型一面（新增）"
     },
     {
       "id": "10-training-and-data:067",
       "dimension": "10-training-and-data",
       "ordinal": 67,
-      "title": "Agent 动作空间过大导致探索低效时，如何裁剪和分层？",
-      "source": "阿里千问 C端算法实习一面（新增）",
-      "searchText": "Agent 动作空间过大导致探索低效时，如何裁剪和分层？ 阿里千问 C端算法实习一面（新增）"
+      "title": "KV Cache Block 的哈希和逻辑到物理映射应该怎么设计？",
+      "source": "智象未来 AI Infra一面（新增）",
+      "searchText": "KV Cache Block 的哈希和逻辑到物理映射应该怎么设计？ 智象未来 AI Infra一面（新增）"
     },
     {
       "id": "10-training-and-data:068",
       "dimension": "10-training-and-data",
       "ordinal": 68,
-      "title": "Agentic RL 与普通 LLM RL 的核心差异是什么？",
-      "source": "腾讯大模型算法岗一二面（新增）",
-      "searchText": "Agentic RL 与普通 LLM RL 的核心差异是什么？ 腾讯大模型算法岗一二面（新增）"
+      "title": "Agent 动作空间过大导致探索低效时，如何裁剪和分层？",
+      "source": "阿里千问 C端算法实习一面（新增）",
+      "searchText": "Agent 动作空间过大导致探索低效时，如何裁剪和分层？ 阿里千问 C端算法实习一面（新增）"
     },
     {
       "id": "10-training-and-data:069",
       "dimension": "10-training-and-data",
       "ordinal": 69,
-      "title": "Agentic CFT 与 SFT、RL 的目标有何不同？为什么训练时要 Mask Observation Token？",
-      "source": "[Shopee Agent 开发一面](https://www.nowcoder.com/feed/main/detail/79fe3fc8f8cb4c4d9beca478f4279e3a)（2026-08-24）",
-      "searchText": "Agentic CFT 与 SFT、RL 的目标有何不同？为什么训练时要 Mask Observation Token？ [Shopee Agent 开发一面](https://www.nowcoder.com/feed/main/detail/79fe3fc8f8cb4c4d9beca478f4279e3a)（2026-08-24）"
+      "title": "Agentic RL 与普通 LLM RL 的核心差异是什么？",
+      "source": "腾讯大模型算法岗一二面（新增）",
+      "searchText": "Agentic RL 与普通 LLM RL 的核心差异是什么？ 腾讯大模型算法岗一二面（新增）"
     },
     {
       "id": "10-training-and-data:070",
@@ -3994,8 +4002,8 @@
       "dimension": "11-ai-code-testing",
       "ordinal": 4,
       "title": "如何测试 AI 生成代码的正确性？",
-      "source": "蚂蚁一面 【字节实习二面追问：AI 写的代码如何验证】【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序】【OPPO/深信服一面追问：修改验证与测试门禁】",
-      "searchText": "如何测试 AI 生成代码的正确性？ 蚂蚁一面 【字节实习二面追问：AI 写的代码如何验证】【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序】【OPPO/深信服一面追问：修改验证与测试门禁】"
+      "source": "蚂蚁一面 【字节实习二面追问：AI 写的代码如何验证】【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序】【OPPO/深信服一面追问：修改验证与测试门禁】【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】",
+      "searchText": "如何测试 AI 生成代码的正确性？ 蚂蚁一面 【字节实习二面追问：AI 写的代码如何验证】【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序】【OPPO/深信服一面追问：修改验证与测试门禁】【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】"
     },
     {
       "id": "11-ai-code-testing:005",
@@ -4009,33 +4017,33 @@
       "id": "11-ai-code-testing:006",
       "dimension": "11-ai-code-testing",
       "ordinal": 6,
-      "title": "如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？",
-      "source": "蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】",
-      "searchText": "如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？ 蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】"
+      "title": "工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？",
+      "source": "蚂蚁Agent一二面（Code Agent方向）【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】",
+      "searchText": "工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？ 蚂蚁Agent一二面（Code Agent方向）【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】"
     },
     {
       "id": "11-ai-code-testing:007",
       "dimension": "11-ai-code-testing",
       "ordinal": 7,
-      "title": "工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？",
-      "source": "蚂蚁Agent一二面（Code Agent方向）",
-      "searchText": "工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？ 蚂蚁Agent一二面（Code Agent方向）"
+      "title": "Coding Agent 如何执行人工交互测试，例如操作浏览器并验证页面行为？",
+      "source": "小红书 Agent 岗一面（新增）【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】",
+      "searchText": "Coding Agent 如何执行人工交互测试，例如操作浏览器并验证页面行为？ 小红书 Agent 岗一面（新增）【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】"
     },
     {
       "id": "11-ai-code-testing:008",
       "dimension": "11-ai-code-testing",
       "ordinal": 8,
-      "title": "AI 生成代码在哪些场景更具落地价值？应用边界在哪？",
-      "source": "蚂蚁Agent一二面（Code Agent方向）",
-      "searchText": "AI 生成代码在哪些场景更具落地价值？应用边界在哪？ 蚂蚁Agent一二面（Code Agent方向）"
+      "title": "如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？",
+      "source": "蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】",
+      "searchText": "如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？ 蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】"
     },
     {
       "id": "11-ai-code-testing:009",
       "dimension": "11-ai-code-testing",
       "ordinal": 9,
-      "title": "Coding Agent 如何执行人工交互测试，例如操作浏览器并验证页面行为？",
-      "source": "小红书 Agent 岗一面（新增）",
-      "searchText": "Coding Agent 如何执行人工交互测试，例如操作浏览器并验证页面行为？ 小红书 Agent 岗一面（新增）"
+      "title": "AI 生成代码在哪些场景更具落地价值？应用边界在哪？",
+      "source": "蚂蚁Agent一二面（Code Agent方向）",
+      "searchText": "AI 生成代码在哪些场景更具落地价值？应用边界在哪？ 蚂蚁Agent一二面（Code Agent方向）"
     },
     {
       "id": "11-ai-code-testing:010",
@@ -4082,8 +4090,8 @@
       "dimension": "12-business-ai-engineering",
       "ordinal": 1,
       "title": "时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？",
-      "source": "网易 AI Agent 开发实习",
-      "searchText": "时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？ 网易 AI Agent 开发实习"
+      "source": "网易 AI Agent 开发实习【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】",
+      "searchText": "时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？ 网易 AI Agent 开发实习【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】"
     },
     {
       "id": "12-business-ai-engineering:002",
@@ -4145,33 +4153,33 @@
       "id": "12-business-ai-engineering:009",
       "dimension": "12-business-ai-engineering",
       "ordinal": 9,
-      "title": "什么时候接入 MCP 是合理设计，什么时候属于过度设计？",
-      "source": "拼多多 AI Agent 提前批二面（新增）",
-      "searchText": "什么时候接入 MCP 是合理设计，什么时候属于过度设计？ 拼多多 AI Agent 提前批二面（新增）"
+      "title": "如何设计会议转写 Agent 的端到端链路并评估质量？",
+      "source": "字节 TikTok AI Agent开发一面（新增）【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】",
+      "searchText": "如何设计会议转写 Agent 的端到端链路并评估质量？ 字节 TikTok AI Agent开发一面（新增）【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】"
     },
     {
       "id": "12-business-ai-engineering:010",
       "dimension": "12-business-ai-engineering",
       "ordinal": 10,
-      "title": "设计一个群聊 Agent，如何同时处理权限、上下文和并行请求？",
-      "source": "小红书数据库智能化日常实习一面（新增）",
-      "searchText": "设计一个群聊 Agent，如何同时处理权限、上下文和并行请求？ 小红书数据库智能化日常实习一面（新增）"
+      "title": "什么时候接入 MCP 是合理设计，什么时候属于过度设计？",
+      "source": "拼多多 AI Agent 提前批二面（新增）",
+      "searchText": "什么时候接入 MCP 是合理设计，什么时候属于过度设计？ 拼多多 AI Agent 提前批二面（新增）"
     },
     {
       "id": "12-business-ai-engineering:011",
       "dimension": "12-business-ai-engineering",
       "ordinal": 11,
-      "title": "长文本内容安全审核如何区分“引用有害内容”与“表达有害立场”？",
-      "source": "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)（2026-08-22）",
-      "searchText": "长文本内容安全审核如何区分“引用有害内容”与“表达有害立场”？ [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)（2026-08-22）"
+      "title": "设计一个群聊 Agent，如何同时处理权限、上下文和并行请求？",
+      "source": "小红书数据库智能化日常实习一面（新增）",
+      "searchText": "设计一个群聊 Agent，如何同时处理权限、上下文和并行请求？ 小红书数据库智能化日常实习一面（新增）"
     },
     {
       "id": "12-business-ai-engineering:012",
       "dimension": "12-business-ai-engineering",
       "ordinal": 12,
-      "title": "如何设计会议转写 Agent 的端到端链路并评估质量？",
-      "source": "字节 TikTok AI Agent开发一面（新增）",
-      "searchText": "如何设计会议转写 Agent 的端到端链路并评估质量？ 字节 TikTok AI Agent开发一面（新增）"
+      "title": "长文本内容安全审核如何区分“引用有害内容”与“表达有害立场”？",
+      "source": "[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)（2026-08-22）",
+      "searchText": "长文本内容安全审核如何区分“引用有害内容”与“表达有害立场”？ [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)（2026-08-22）"
     },
     {
       "id": "12-business-ai-engineering:013",
@@ -4250,8 +4258,8 @@
       "dimension": "13-project-deep-dive",
       "ordinal": 1,
       "title": "你的 Agent 项目用了什么框架？为什么选它？",
-      "source": "淘宝闪购一面 【淘宝闪购一面追问：安全合规下开源 vs 闭源框架选型】【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】",
-      "searchText": "你的 Agent 项目用了什么框架？为什么选它？ 淘宝闪购一面 【淘宝闪购一面追问：安全合规下开源 vs 闭源框架选型】【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】"
+      "source": "淘宝闪购一面 【淘宝闪购一面追问：安全合规下开源 vs 闭源框架选型】【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】",
+      "searchText": "你的 Agent 项目用了什么框架？为什么选它？ 淘宝闪购一面 【淘宝闪购一面追问：安全合规下开源 vs 闭源框架选型】【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】"
     },
     {
       "id": "13-project-deep-dive:002",
@@ -4266,8 +4274,8 @@
       "dimension": "13-project-deep-dive",
       "ordinal": 3,
       "title": "你的 Agent 有哪些工具？工具是怎么设计的？",
-      "source": "淘宝闪购一面 【视频面经追问：工具怎么注册/管理/调用】",
-      "searchText": "你的 Agent 有哪些工具？工具是怎么设计的？ 淘宝闪购一面 【视频面经追问：工具怎么注册/管理/调用】"
+      "source": "淘宝闪购一面 【视频面经追问：工具怎么注册/管理/调用】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】",
+      "searchText": "你的 Agent 有哪些工具？工具是怎么设计的？ 淘宝闪购一面 【视频面经追问：工具怎么注册/管理/调用】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】"
     },
     {
       "id": "13-project-deep-dive:004",
@@ -4330,8 +4338,8 @@
       "dimension": "13-project-deep-dive",
       "ordinal": 11,
       "title": "你的系统有没有用到 ReAct 模式？怎么用的？",
-      "source": "淘宝闪购一面 【美团食杂后端一面同题：如何基于 ReAct 架构开发的】",
-      "searchText": "你的系统有没有用到 ReAct 模式？怎么用的？ 淘宝闪购一面 【美团食杂后端一面同题：如何基于 ReAct 架构开发的】"
+      "source": "淘宝闪购一面 【美团食杂后端一面同题：如何基于 ReAct 架构开发的】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】",
+      "searchText": "你的系统有没有用到 ReAct 模式？怎么用的？ 淘宝闪购一面 【美团食杂后端一面同题：如何基于 ReAct 架构开发的】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】"
     },
     {
       "id": "13-project-deep-dive:012",
@@ -4345,49 +4353,49 @@
       "id": "13-project-deep-dive:013",
       "dimension": "13-project-deep-dive",
       "ordinal": 13,
-      "title": "怎么提升模型回答的性能？",
-      "source": "淘宝闪购一面",
-      "searchText": "怎么提升模型回答的性能？ 淘宝闪购一面"
+      "title": "开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？",
+      "source": "CVTE AI应用工程师一面【[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)】",
+      "searchText": "开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？ CVTE AI应用工程师一面【[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)】"
     },
     {
       "id": "13-project-deep-dive:014",
       "dimension": "13-project-deep-dive",
       "ordinal": 14,
-      "title": "你的 Agent 系统还有哪些未充分优化的地方？你的改进路线图是什么？",
+      "title": "怎么提升模型回答的性能？",
       "source": "淘宝闪购一面",
-      "searchText": "你的 Agent 系统还有哪些未充分优化的地方？你的改进路线图是什么？ 淘宝闪购一面"
+      "searchText": "怎么提升模型回答的性能？ 淘宝闪购一面"
     },
     {
       "id": "13-project-deep-dive:015",
       "dimension": "13-project-deep-dive",
       "ordinal": 15,
-      "title": "你的 Agent 和别人开发的相比，核心差异是什么？",
+      "title": "你的 Agent 系统还有哪些未充分优化的地方？你的改进路线图是什么？",
       "source": "淘宝闪购一面",
-      "searchText": "你的 Agent 和别人开发的相比，核心差异是什么？ 淘宝闪购一面"
+      "searchText": "你的 Agent 系统还有哪些未充分优化的地方？你的改进路线图是什么？ 淘宝闪购一面"
     },
     {
       "id": "13-project-deep-dive:016",
       "dimension": "13-project-deep-dive",
       "ordinal": 16,
-      "title": "新闻交易 Agent 项目管线如何搭建？Agent 响应延迟是多久？",
-      "source": "币安AI大模型实习一面",
-      "searchText": "新闻交易 Agent 项目管线如何搭建？Agent 响应延迟是多久？ 币安AI大模型实习一面"
+      "title": "你的 Agent 和别人开发的相比，核心差异是什么？",
+      "source": "淘宝闪购一面",
+      "searchText": "你的 Agent 和别人开发的相比，核心差异是什么？ 淘宝闪购一面"
     },
     {
       "id": "13-project-deep-dive:017",
       "dimension": "13-project-deep-dive",
       "ordinal": 17,
-      "title": "项目为什么选择 E2B 沙箱？选型理由和优势是什么？",
-      "source": "CVTE AI应用工程师一面",
-      "searchText": "项目为什么选择 E2B 沙箱？选型理由和优势是什么？ CVTE AI应用工程师一面"
+      "title": "新闻交易 Agent 项目管线如何搭建？Agent 响应延迟是多久？",
+      "source": "币安AI大模型实习一面",
+      "searchText": "新闻交易 Agent 项目管线如何搭建？Agent 响应延迟是多久？ 币安AI大模型实习一面"
     },
     {
       "id": "13-project-deep-dive:018",
       "dimension": "13-project-deep-dive",
       "ordinal": 18,
-      "title": "开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？",
+      "title": "项目为什么选择 E2B 沙箱？选型理由和优势是什么？",
       "source": "CVTE AI应用工程师一面",
-      "searchText": "开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？ CVTE AI应用工程师一面"
+      "searchText": "项目为什么选择 E2B 沙箱？选型理由和优势是什么？ CVTE AI应用工程师一面"
     },
     {
       "id": "13-project-deep-dive:019",
@@ -4418,8 +4426,8 @@
       "dimension": "15-agent-concepts",
       "ordinal": 1,
       "title": "Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？",
-      "source": "快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】",
-      "searchText": "Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】"
+      "source": "快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】",
+      "searchText": "Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】"
     },
     {
       "id": "15-agent-concepts:002",
@@ -4474,8 +4482,8 @@
       "dimension": "15-agent-concepts",
       "ordinal": 8,
       "title": "MCP 是什么？它解决了 Function Calling 的什么根本问题？",
-      "source": "蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】",
-      "searchText": "MCP 是什么？它解决了 Function Calling 的什么根本问题？ 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】"
+      "source": "蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】",
+      "searchText": "MCP 是什么？它解决了 Function Calling 的什么根本问题？ 蚂蚁智能体与大模型应用二面 【蚂蚁Agent开发一面/高德实习一面/字节实习Agent开发一面同题】【阿里 Agent Infra 一面题库同题】【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】"
     },
     {
       "id": "15-agent-concepts:009",
@@ -4498,48 +4506,48 @@
       "dimension": "15-agent-concepts",
       "ordinal": 11,
       "title": "Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？",
-      "source": "蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】",
-      "searchText": "Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？ 蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】"
+      "source": "蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】【[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)】【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】",
+      "searchText": "Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？ 蚂蚁一面 【快手AI应用开发一面追问：Tool/Skill/Agent三层抽象】【[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)】【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】"
     },
     {
       "id": "15-agent-concepts:012",
       "dimension": "15-agent-concepts",
       "ordinal": 12,
       "title": "Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？",
-      "source": "哆咔互娱Agent开发实习一面【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】",
-      "searchText": "Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？ 哆咔互娱Agent开发实习一面【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】"
+      "source": "哆咔互娱Agent开发实习一面【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】",
+      "searchText": "Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？ 哆咔互娱Agent开发实习一面【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)】"
     },
     {
       "id": "15-agent-concepts:013",
       "dimension": "15-agent-concepts",
       "ordinal": 13,
-      "title": "Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？",
-      "source": "成都某中厂Agent产品开发实习面经（新增）",
-      "searchText": "Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？ 成都某中厂Agent产品开发实习面经（新增）"
+      "title": "如何比较 Coding Agent、通用助手与办公 Agent？",
+      "source": "百度大模型研发二面（新增）【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】",
+      "searchText": "如何比较 Coding Agent、通用助手与办公 Agent？ 百度大模型研发二面（新增）【[杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)】"
     },
     {
       "id": "15-agent-concepts:014",
       "dimension": "15-agent-concepts",
       "ordinal": 14,
-      "title": "LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？",
-      "source": "哔哩哔哩 AI应用岗 Agent开发一面（新增）",
-      "searchText": "LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？ 哔哩哔哩 AI应用岗 Agent开发一面（新增）"
+      "title": "Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？",
+      "source": "成都某中厂Agent产品开发实习面经（新增）",
+      "searchText": "Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？ 成都某中厂Agent产品开发实习面经（新增）"
     },
     {
       "id": "15-agent-concepts:015",
       "dimension": "15-agent-concepts",
       "ordinal": 15,
-      "title": "Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？",
-      "source": "B站 Agent二面（新增）",
-      "searchText": "Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ B站 Agent二面（新增）"
+      "title": "LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？",
+      "source": "哔哩哔哩 AI应用岗 Agent开发一面（新增）",
+      "searchText": "LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？ 哔哩哔哩 AI应用岗 Agent开发一面（新增）"
     },
     {
       "id": "15-agent-concepts:016",
       "dimension": "15-agent-concepts",
       "ordinal": 16,
-      "title": "如何比较 Coding Agent、通用助手与办公 Agent？",
-      "source": "百度大模型研发二面（新增）",
-      "searchText": "如何比较 Coding Agent、通用助手与办公 Agent？ 百度大模型研发二面（新增）"
+      "title": "Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？",
+      "source": "B站 Agent二面（新增）",
+      "searchText": "Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ B站 Agent二面（新增）"
     },
     {
       "id": "15-agent-concepts:017",
@@ -4553,161 +4561,161 @@
       "id": "16-agent-infra:001",
       "dimension": "16-agent-infra",
       "ordinal": 1,
-      "title": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？",
-      "source": "[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】",
-      "searchText": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ [百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】"
+      "title": "如何支撑几十万并发 Agent Task，并把它观测清楚？",
+      "source": "高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】",
+      "searchText": "如何支撑几十万并发 Agent Task，并把它观测清楚？ 高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】"
     },
     {
       "id": "16-agent-infra:002",
       "dimension": "16-agent-infra",
       "ordinal": 2,
-      "title": "为什么需要 Checkpoint，恢复时从哪里继续？",
-      "source": "长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】",
-      "searchText": "为什么需要 Checkpoint，恢复时从哪里继续？ 长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】"
+      "title": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？",
+      "source": "[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】",
+      "searchText": "Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？ [百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】"
     },
     {
       "id": "16-agent-infra:003",
       "dimension": "16-agent-infra",
       "ordinal": 3,
-      "title": "如何支撑几十万并发 Agent Task，并把它观测清楚？",
-      "source": "高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】",
-      "searchText": "如何支撑几十万并发 Agent Task，并把它观测清楚？ 高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】"
+      "title": "为什么需要 Checkpoint，恢复时从哪里继续？",
+      "source": "长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】",
+      "searchText": "为什么需要 Checkpoint，恢复时从哪里继续？ 长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】"
     },
     {
       "id": "16-agent-infra:004",
       "dimension": "16-agent-infra",
       "ordinal": 4,
       "title": "一次 Agent 请求的完整执行链路是什么？",
-      "source": "Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】",
-      "searchText": "一次 Agent 请求的完整执行链路是什么？ Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】"
+      "source": "Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a)】",
+      "searchText": "一次 Agent 请求的完整执行链路是什么？ Agent Runtime 管线高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a)】"
     },
     {
       "id": "16-agent-infra:005",
       "dimension": "16-agent-infra",
       "ordinal": 5,
-      "title": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？",
-      "source": "分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】",
-      "searchText": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ 分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】"
+      "title": "如果让你设计一个 Agent Runtime，你会怎么拆？",
+      "source": "Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】",
+      "searchText": "如果让你设计一个 Agent Runtime，你会怎么拆？ Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)】"
     },
     {
       "id": "16-agent-infra:006",
       "dimension": "16-agent-infra",
       "ordinal": 6,
-      "title": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？",
-      "source": "美团/百度 AI Infra 面经（新增）",
-      "searchText": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ 美团/百度 AI Infra 面经（新增）"
+      "title": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？",
+      "source": "分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】",
+      "searchText": "Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？ 分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】"
     },
     {
       "id": "16-agent-infra:007",
       "dimension": "16-agent-infra",
       "ordinal": 7,
-      "title": "Agent 平台或 Runtime 出现新框架时，如何评估迁移收益、兼容老旧服务并决定是否淘汰旧方案？",
-      "source": "[虾皮 Agent 二面](https://www.nowcoder.com/feed/main/detail/345b668e35a9451bb397a9189dfdc943) / [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）",
-      "searchText": "Agent 平台或 Runtime 出现新框架时，如何评估迁移收益、兼容老旧服务并决定是否淘汰旧方案？ [虾皮 Agent 二面](https://www.nowcoder.com/feed/main/detail/345b668e35a9451bb397a9189dfdc943) / [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）"
+      "title": "Agent Sandbox 解决什么问题，为什么容器不一定够？",
+      "source": "代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】",
+      "searchText": "Agent Sandbox 解决什么问题，为什么容器不一定够？ 代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】"
     },
     {
       "id": "16-agent-infra:008",
       "dimension": "16-agent-infra",
       "ordinal": 8,
-      "title": "如果让你设计一个 Agent Runtime，你会怎么拆？",
-      "source": "Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】",
-      "searchText": "如果让你设计一个 Agent Runtime，你会怎么拆？ Agent Infra 系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】"
+      "title": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？",
+      "source": "美团/百度 AI Infra 面经（新增）",
+      "searchText": "Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？ 美团/百度 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:009",
       "dimension": "16-agent-infra",
       "ordinal": 9,
-      "title": "Agent Sandbox 解决什么问题，为什么容器不一定够？",
-      "source": "代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】",
-      "searchText": "Agent Sandbox 解决什么问题，为什么容器不一定够？ 代码执行隔离高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】"
+      "title": "大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？",
+      "source": "[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f)（新增）【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】",
+      "searchText": "大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？ [小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f)（新增）【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】"
     },
     {
       "id": "16-agent-infra:010",
       "dimension": "16-agent-infra",
       "ordinal": 10,
-      "title": "Kubernetes 在 Agent Infra 中负责什么？",
-      "source": "Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】",
-      "searchText": "Kubernetes 在 Agent Infra 中负责什么？ Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】"
+      "title": "Agent 平台或 Runtime 出现新框架时，如何评估迁移收益、兼容老旧服务并决定是否淘汰旧方案？",
+      "source": "[虾皮 Agent 二面](https://www.nowcoder.com/feed/main/detail/345b668e35a9451bb397a9189dfdc943) / [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）",
+      "searchText": "Agent 平台或 Runtime 出现新框架时，如何评估迁移收益、兼容老旧服务并决定是否淘汰旧方案？ [虾皮 Agent 二面](https://www.nowcoder.com/feed/main/detail/345b668e35a9451bb397a9189dfdc943) / [电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)（新增）"
     },
     {
       "id": "16-agent-infra:011",
       "dimension": "16-agent-infra",
       "ordinal": 11,
-      "title": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？",
-      "source": "百度 AI Infra 面经（新增）",
-      "searchText": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ 百度 AI Infra 面经（新增）"
+      "title": "Kubernetes 在 Agent Infra 中负责什么？",
+      "source": "Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】",
+      "searchText": "Kubernetes 在 Agent Infra 中负责什么？ Kubernetes/Controller 高频题【阿里 Agent Infra 一面题库同题：单 Agent 单 Pod、冷启动与 Reconcile 幂等】"
     },
     {
       "id": "16-agent-infra:012",
       "dimension": "16-agent-infra",
       "ordinal": 12,
-      "title": "Kubernetes Scheduler 的三个队列如何流转？",
-      "source": "虾皮 AI Infra 二面（新增）",
-      "searchText": "Kubernetes Scheduler 的三个队列如何流转？ 虾皮 AI Infra 二面（新增）"
+      "title": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？",
+      "source": "百度 AI Infra 面经（新增）",
+      "searchText": "Kubernetes 的 Request 与 Limit 分别怎样影响调度和资源隔离？ 百度 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:013",
       "dimension": "16-agent-infra",
       "ordinal": 13,
-      "title": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？",
-      "source": "虾皮 AI Infra 面经（新增）",
-      "searchText": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ 虾皮 AI Infra 面经（新增）"
+      "title": "Kubernetes Scheduler 的三个队列如何流转？",
+      "source": "虾皮 AI Infra 二面（新增）",
+      "searchText": "Kubernetes Scheduler 的三个队列如何流转？ 虾皮 AI Infra 二面（新增）"
     },
     {
       "id": "16-agent-infra:014",
       "dimension": "16-agent-infra",
       "ordinal": 14,
-      "title": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？",
+      "title": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？",
       "source": "虾皮 AI Infra 面经（新增）",
-      "searchText": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ 虾皮 AI Infra 面经（新增）"
+      "searchText": "Agent Worker 或 Sandbox 滚动发布时，如何逐步切流并保护长任务？ 虾皮 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:015",
       "dimension": "16-agent-infra",
       "ordinal": 15,
-      "title": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？",
-      "source": "AI Infra 小厂面经（新增）",
-      "searchText": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？ AI Infra 小厂面经（新增）"
+      "title": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？",
+      "source": "虾皮 AI Infra 面经（新增）",
+      "searchText": "Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？ 虾皮 AI Infra 面经（新增）"
     },
     {
       "id": "16-agent-infra:016",
       "dimension": "16-agent-infra",
       "ordinal": 16,
-      "title": "Agent Router 应以什么运行形态存在，请求数据流如何设计？",
-      "source": "字节 AI Infra 实习一面（新增）",
-      "searchText": "Agent Router 应以什么运行形态存在，请求数据流如何设计？ 字节 AI Infra 实习一面（新增）"
+      "title": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？",
+      "source": "AI Infra 小厂面经（新增）",
+      "searchText": "Agentic RL 的 Rollout、Training 与推理引擎如何编排？ AI Infra 小厂面经（新增）"
     },
     {
       "id": "16-agent-infra:017",
       "dimension": "16-agent-infra",
       "ordinal": 17,
-      "title": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？",
-      "source": "字节 Agent 后端终面（新增）",
-      "searchText": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ 字节 Agent 后端终面（新增）"
+      "title": "Agent Router 应以什么运行形态存在，请求数据流如何设计？",
+      "source": "字节 AI Infra 实习一面（新增）",
+      "searchText": "Agent Router 应以什么运行形态存在，请求数据流如何设计？ 字节 AI Infra 实习一面（新增）"
     },
     {
       "id": "16-agent-infra:018",
       "dimension": "16-agent-infra",
       "ordinal": 18,
-      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
-      "source": "[字节 AML / 火山方舟 AI Infra 一面](https://www.nowcoder.com/discuss/921927475611869184)（2026-08-26）",
-      "searchText": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ [字节 AML / 火山方舟 AI Infra 一面](https://www.nowcoder.com/discuss/921927475611869184)（2026-08-26）"
+      "title": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？",
+      "source": "字节 Agent 后端终面（新增）",
+      "searchText": "Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？ 字节 Agent 后端终面（新增）"
     },
     {
       "id": "16-agent-infra:019",
       "dimension": "16-agent-infra",
       "ordinal": 19,
-      "title": "Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？",
-      "source": "阿里 Agent Infra 一面题库（新增）",
-      "searchText": "Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？ 阿里 Agent Infra 一面题库（新增）"
+      "title": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？",
+      "source": "[字节 AML / 火山方舟 AI Infra 一面](https://www.nowcoder.com/discuss/921927475611869184)（2026-08-26）",
+      "searchText": "Agent 调用 Sandbox 的链路如何容错？Sandbox 运行中崩溃后怎么恢复？ [字节 AML / 火山方舟 AI Infra 一面](https://www.nowcoder.com/discuss/921927475611869184)（2026-08-26）"
     },
     {
       "id": "16-agent-infra:020",
       "dimension": "16-agent-infra",
       "ordinal": 20,
-      "title": "大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？",
-      "source": "[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f)（新增）",
-      "searchText": "大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？ [小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f)（新增）"
+      "title": "Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？",
+      "source": "阿里 Agent Infra 一面题库（新增）",
+      "searchText": "Agent Task 适合建模为 Kubernetes CRD 吗？如何权衡声明式管理与高频任务吞吐？ 阿里 Agent Infra 一面题库（新增）"
     },
     {
       "id": "16-agent-infra:021",
@@ -4724,6 +4732,14 @@
       "title": "Agent 状态放在 Sandbox 内、用户状态放在 Sandbox 外时，边界如何设计？",
       "source": "[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)（新增）",
       "searchText": "Agent 状态放在 Sandbox 内、用户状态放在 Sandbox 外时，边界如何设计？ [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)（新增）"
+    },
+    {
+      "id": "16-agent-infra:023",
+      "dimension": "16-agent-infra",
+      "ordinal": 23,
+      "title": "周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？",
+      "source": "[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)（新增）",
+      "searchText": "周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？ [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)（新增）"
     },
     {
       "id": "17-ai-infra:001",

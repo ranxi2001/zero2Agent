@@ -63,3 +63,14 @@ The answers derived from the 2026-08-22 through 2026-08-28 interview audit were 
 - [KubeEdge EdgeHub](https://kubeedge.io/docs/architecture/edge/edgehub/) and [verl AgentLoop source at commit 8df88be](https://github.com/verl-project/verl/blob/8df88be746801b6d87c42e15f9a5a0ec1d5eeeae/verl/experimental/agent_loop/agent_loop.py) with its [AgentLoop documentation](https://verl.readthedocs.io/en/latest/advance/agent_loop.html) — edge/cloud coordination and the explicitly versioned alpha AgentLoop API.
 
 No upstream prose, code, diagrams, or benchmark claims are reproduced. Framework-specific behavior remains tied to the linked version or current official documentation; architecture recommendations are identified as engineering judgment rather than product guarantees.
+
+## Weekly Interview Answer References (2026-09-02)
+
+The answers derived from the 2026-08-29 through 2026-09-02 interview audit were independently written and checked against these primary references:
+
+- [Kubernetes CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) and [SWE-bench](https://github.com/swe-bench/SWE-bench/blob/main/README.md) - scheduled-run concurrency and missed-trigger semantics, plus reproducible repository-level repair evaluation.
+- [MCP Transports](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports) and [DSPy MIPROv2](https://dspy.ai/api/optimizers/MIPROv2/) - current stdio/Streamable HTTP boundaries and evaluation-driven prompt candidate optimization.
+- [ECMA-376 Office Open XML](https://ecma-international.org/publications-and-standards/standards/ecma-376/), [Cube semantic-layer introduction](https://docs.cube.dev/docs/introduction), and [Cube joins](https://docs.cube.dev/docs/data-modeling/joins) - packaged Word relationships and governed metrics, entities, joins, and access rules for enterprise question answering.
+- [Linux `/proc/<pid>/status`](https://man7.org/linux/man-pages/man5/proc_pid_status.5.html), [`/proc/<pid>/stat`](https://man7.org/linux/man-pages/man5/proc_pid_stat.5.html), [`pidfd_open`](https://man7.org/linux/man-pages/man2/pidfd_open.2.html), and [cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html) - process observation fields, start time, stable process handles, resource boundaries, and controlled process-group actions.
+
+No upstream prose, code, diagrams, datasets, or benchmark results are reproduced. Version-specific behavior remains tied to the linked documentation; the surrounding architecture and safety recommendations are independent engineering analysis.

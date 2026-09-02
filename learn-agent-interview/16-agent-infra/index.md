@@ -15,6 +15,28 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 
 ---
 
+## Q：如何支撑几十万并发 Agent Task，并把它观测清楚？
+
+> 来源：高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc) / [互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71) / [百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】
+
+**新手答**：“用 MQ 解耦，再水平扩容 Worker，接入日志、指标和链路追踪。”
+
+**高手答**：
+
+我会先澄清“几十万并发”是活跃会话、等待任务还是同时计算，并给出到达率、平均步骤数、各阶段耗时和 SLO。大量 Run 可能在等待 LLM、Tool 或人工事件，不能都占用 Worker。
+
+控制面按租户、优先级和资源类型分队列；用 visibility timeout/lease、ack、DLQ 和毒任务隔离保证消费；用 weighted fair scheduling、并发配额和 admission control 防止大租户挤占资源；对 LLM、GPU 和外部 Tool 分别实施背压，而不是只按 CPU 扩容。
+
+全量开放前还要把模型分层和成本预算放进准入：简单步骤走低成本模型，复杂或高风险步骤才升级；Run、租户和平台分别设置 Token、金额、并发和 Deadline 上限。容量规划用到达率、各资源阶段服务时间和长尾分布估算，不能把“sub-agent 最多开几个”写成固定常数。容器 CPU/内存水位、GPU/KV 容量、模型配额和外部 Tool 限流必须分别观测，哪个先饱和就在哪一层背压。
+
+Sandbox 容量要单独建模：区分冷启动、预热池、活跃执行和回收中实例，按租户与风险等级设并发配额。扩容信号不只看队列长度，还要看队列等待时间、启动耗时、CPU/内存/磁盘水位和回收失败率。预热复用必须先验证文件、进程、缓存和凭证已清理，否则优先牺牲冷启动时延而保持一次性隔离。
+
+一个 Run 是根 Trace，模型、检索、工具、Sandbox 和状态提交是 Span。核心指标包括任务语义成功率、基础设施失败率、队列等待、端到端延迟、步骤数、Token/Cost 和 `UNKNOWN` 副作用数。Prompt、Tool 参数和结果可能包含隐私，必须脱敏、采样、分级存储和审计，不能直接放进高基数 Metrics Label。
+
+**差距在哪**：新手会画 Queue + Worker，高手先定义负载模型，并同时处理公平性、下游瓶颈和可观测数据治理。
+
+---
+
 ## Q：Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？
 
 > 来源：[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】
@@ -57,29 +79,9 @@ Worker 中断时还要验证 Checkpoint 之后的事件是否完整、Artifact �
 
 ---
 
-## Q：如何支撑几十万并发 Agent Task，并把它观测清楚？
-
-> 来源：高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】
-
-**新手答**：“用 MQ 解耦，再水平扩容 Worker，接入日志、指标和链路追踪。”
-
-**高手答**：
-
-我会先澄清“几十万并发”是活跃会话、等待任务还是同时计算，并给出到达率、平均步骤数、各阶段耗时和 SLO。大量 Run 可能在等待 LLM、Tool 或人工事件，不能都占用 Worker。
-
-控制面按租户、优先级和资源类型分队列；用 visibility timeout/lease、ack、DLQ 和毒任务隔离保证消费；用 weighted fair scheduling、并发配额和 admission control 防止大租户挤占资源；对 LLM、GPU 和外部 Tool 分别实施背压，而不是只按 CPU 扩容。
-
-全量开放前还要把模型分层和成本预算放进准入：简单步骤走低成本模型，复杂或高风险步骤才升级；Run、租户和平台分别设置 Token、金额、并发和 Deadline 上限。容量规划用到达率、各资源阶段服务时间和长尾分布估算，不能把“sub-agent 最多开几个”写成固定常数。容器 CPU/内存水位、GPU/KV 容量、模型配额和外部 Tool 限流必须分别观测，哪个先饱和就在哪一层背压。
-
-一个 Run 是根 Trace，模型、检索、工具、Sandbox 和状态提交是 Span。核心指标包括任务语义成功率、基础设施失败率、队列等待、端到端延迟、步骤数、Token/Cost 和 `UNKNOWN` 副作用数。Prompt、Tool 参数和结果可能包含隐私，必须脱敏、采样、分级存储和审计，不能直接放进高基数 Metrics Label。
-
-**差距在哪**：新手会画 Queue + Worker，高手先定义负载模型，并同时处理公平性、下游瓶颈和可观测数据治理。
-
----
-
 ## Q：一次 Agent 请求的完整执行链路是什么？
 
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】
 
 **新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
 
@@ -100,6 +102,38 @@ Worker 中断时还要验证 Checkpoint 之后的事件是否完整、Artifact �
 这里记录的是模型响应和结构化决策，不依赖保存模型私有推理过程。Run 还要有最大步骤、总 Deadline、Token/Cost Budget 和取消传播，防止模型循环无限消耗资源。
 
 **差距在哪**：新手只描述模型循环，高手能指出接入幂等、租约、策略门禁、状态提交和退出条件。
+
+---
+
+## Q：如果让你设计一个 Agent Runtime，你会怎么拆？
+
+> 来源：Agent Infra / 平台工程系统设计高频题 / [字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】
+
+**新手答**：“接入 LLM，再提供工具、Memory 和日志，最后部署到 Kubernetes。”
+
+**高手答**：
+
+我会先把一次 Agent Run 建模为**可能暂停和恢复的有状态执行**，再拆成管理面、控制面和执行面：
+
+```text
+Management Plane：Agent/Tool/Skill 注册、版本、发布与租户配置
+Control Plane：状态机、租约、调度、超时、配额与恢复
+Execution Plane：LLM Worker、Tool Worker、Sandbox
+Data Plane：Run State、事件日志、Checkpoint、Artifact、Memory
+Observability：Trace、Metrics、Logs、Eval、Cost、Audit
+```
+
+Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版本号，Worker 通过 lease 领取任务，提交结果时检查 lease 和状态版本，避免过期 Worker 覆盖新结果。暂停等待人工审批时释放 Worker，审批事件到达后再唤醒任务。
+
+LangChain、LangGraph 等 Framework 主要提供 Agent/Graph 的开发抽象；Runtime 负责租约、持久化、恢复、隔离、配额和跨 Framework 的执行治理。两者可以集成，但不能把“Graph 能表达状态”误认为“平台已经具备生产运行语义”。
+
+生产目标通常是 **at-least-once 调度 + 幂等副作用**，而不是轻易承诺 exactly-once。还要为每个 Run 固定模型、Prompt、Tool 和策略版本，否则恢复后可能在另一套行为定义上继续执行。
+
+取消也是一次并发状态转换，不是发一个中断信号就结束。Runtime 先持久化 `CANCEL_REQUESTED`，停止派发新 Step，再把取消传播到模型、Tool 和 Sandbox。完成结果与取消同时到达时，用状态版本和明确的转换表决定胜者；过期 Worker 的迟到结果只可审计，不能覆盖终态。
+
+对发送消息、付款、写外部系统等不可逆副作用，取消只能阻止尚未发生的动作；已分发但结果未知的进入 `UNKNOWN`，通过幂等查询、对账或补偿收敛。最终给用户的结果应区分“已取消且无副作用”、“部分完成”和“结果待确认”，并保留已完成步骤的证据。
+
+**差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
 
 ---
 
@@ -130,6 +164,34 @@ PENDING → DISPATCHED → RUNNING → SUCCEEDED
 
 ---
 
+## Q：Agent Sandbox 解决什么问题，为什么容器不一定够？
+
+> 来源：[荣耀 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/60ab2e3a45074b7391199acb9b5c6ca3) / [百度 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71) / 代码执行与隔离设计高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】
+
+**新手答**：“Docker 有 Namespace 和 Cgroup，可以安全运行模型生成的代码。”
+
+**高手答**：
+
+Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还要控制文件系统、网络、系统调用、凭据、进程树、磁盘和执行时间。容器共享宿主机内核，隔离强度取决于 user namespace、capabilities、seccomp、SELinux/AppArmor 和宿主配置，不能把“用了 Docker”直接等同于安全。
+
+| 场景 | 可选隔离 | 主要代价 |
+|------|---------|---------|
+| 内部只读工具 | 加固容器 | 隔离较轻，启动快 |
+| 多租户代码执行 | gVisor / Kata | 兼容性或启动开销 |
+| 高风险不可信代码 | MicroVM | 镜像、池化和运维成本 |
+
+无论采用哪种方案，都应使用短期身份、只读根文件系统、默认拒绝网络、资源上限和硬 Deadline。复用预热 Sandbox 可以降低冷启动，但必须证明租户间文件、进程、缓存和凭据已经清理；高风险任务更适合一次性销毁环境。
+
+当 Agent 代表用户调用外部系统时，Runtime 应把已认证用户映射为短期、限定 audience/scope 的委托凭证，并在受控传输层注入；长期密钥、刷新令牌和授权决策不能进入 Prompt。模型只提出 Tool Call，Runtime 仍要按用户、租户、工具和资源重新做 AuthZ，高风险操作再绑定审批范围与审计记录。
+
+进程地址空间隔离只能阻止普通进程直接读取彼此内存，不等于完整安全边界；容器仍要面对共享内核、错误授权和网络外泄等攻击面。Namespace 负责隔离“看见什么”，Cgroup 负责约束“能用多少”，两者也都不能替代系统调用和身份权限控制。
+
+隔离单元要与信任边界对齐：高风险且不可信的代码通常按 Run 或 Task 创建一次性 Sandbox，不因为属于同一用户就复用全部环境。若为了性能按用户或租户复用预热实例，必须将工作区、进程树、网络、凭证和资源计量继续按 Task 分区，并在复用前执行可验证的清理。
+
+**差距在哪**：新手只比较容器技术名称，高手从威胁模型、信任等级和清理边界选择隔离方案。
+
+---
+
 ## Q：Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？
 
 > 来源：[美团 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/c94734d67c9f461ab950bf1d800c5643) / [百度 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/4a848f5616cf4f8783020b3143a68fbc) / [AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)
@@ -143,6 +205,33 @@ PENDING → DISPATCHED → RUNNING → SUCCEEDED
 工程上要给轨迹标记 `policy_version`，设置最大滞后和有界队列，对过旧样本丢弃、降权或重采；是否使用重要性采样、裁剪等校正必须服从具体算法，不能套一个万能公式。监控应同时看版本滞后分布、队列等待、有效样本量、KL、吞吐和 Reward，而非只看 MFU。
 
 **差距在哪**：新手只看吞吐，高手能把调度产生的数据陈旧性连接到算法偏差，并给出可观测门槛。
+
+---
+
+## Q：大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？
+
+> 来源：[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f) / [互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)
+
+**新手答**：“端侧断网时先缓存，联网后同步到云端；复杂任务都放云上跑。”
+
+**高手答**：
+
+先按数据所有权拆分，不能做一个“双向同步所有状态”的大接口：
+
+| 状态 | 权威方 | 离线策略 |
+|------|--------|----------|
+| 用户身份、授权和配额 | 云端控制面 | 端侧持有短期、限定 scope 的快照，过期后降权或停止高风险动作 |
+| 设备能力、实时传感器和本地文件 | 端侧 | 本地读取，按最小必要原则上传摘要或 Artifact 引用 |
+| Run 事件、Checkpoint 和副作用 | 创建该 Run 的控制面 | 用单调序号、幂等键和 lease 同步，不能靠最后写入覆盖 |
+| 模型、Prompt、Tool 和策略版本 | 云端发布面 | 端侧缓存已签名版本，离线期间固定版本运行 |
+
+断网时端侧只能执行预先授权、可撤销、风险受限的动作，并把事件写入有界本地队列。恢复连接后先做身份续期和版本协商，再按 `run_id + event_seq + execution_id` 上传；服务端逐条确认，重复事件幂等吸收，冲突进入显式仲裁。KubeEdge 的 [EdgeHub](https://kubeedge.io/docs/architecture/edge/edgehub/)和 [Device Controller](https://kubeedge.io/docs/architecture/cloud/device_controller/)展示了端云连接、上/下行状态和 desired/reported state 分离，但 Agent 的用户授权与副作用语义仍需业务层自己实现。
+
+任务迁移只在语义 Checkpoint 处发生：冻结旧执行者、提交工作区/Artifact 清单、释放 lease，新执行者取得 fencing token 后校验模型与工具版本，再查询未知副作用并继续。没有可迁移状态的本地进程应从可验证步骤重建，而不是复制内存快照后假定外部世界没有变化。
+
+从本地迁到云端前先做能力与数据分类：可携带的是结构化 Run State、已授权 Artifact 和版本化执行契约；设备私钥、本地绝对路径、未授权文件与活进程不直接上传。云端先验证目标 Tool/模型版本和数据驻留约束，不兼容时应停在已验证 Checkpoint 并显式降级，而不是让云端在缺失上下文时猜测继续。
+
+**差距在哪**：新手只有“缓存后同步”，高手能定义权威状态、离线权限、冲突协议和任务唯一执行权。
 
 ---
 
@@ -166,60 +255,6 @@ PENDING → DISPATCHED → RUNNING → SUCCEEDED
 框架 API 会演进，版本兼容必须成为发布门禁。Kubernetes 的 [API Deprecation Policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)说明了稳定 API 不能在同一版本中随意移除；Agent 平台虽不必复制其时间规则，但应采用相同思路：版本化 schema、明确弃用窗口和转换器。Trace 字段也应基于版本化的 [OpenTelemetry Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/)，不要让迁移前后同名指标含义改变。
 
 **差距在哪**：新手把迁移当换 SDK，高手会治理协议、在途状态、双轨证据、旧服务适配和退出成本。
-
----
-
-## Q：如果让你设计一个 Agent Runtime，你会怎么拆？
-
-> 来源：Agent Infra / 平台工程系统设计高频题【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】
-
-**新手答**：“接入 LLM，再提供工具、Memory 和日志，最后部署到 Kubernetes。”
-
-**高手答**：
-
-我会先把一次 Agent Run 建模为**可能暂停和恢复的有状态执行**，再拆成管理面、控制面和执行面：
-
-```text
-Management Plane：Agent/Tool/Skill 注册、版本、发布与租户配置
-Control Plane：状态机、租约、调度、超时、配额与恢复
-Execution Plane：LLM Worker、Tool Worker、Sandbox
-Data Plane：Run State、事件日志、Checkpoint、Artifact、Memory
-Observability：Trace、Metrics、Logs、Eval、Cost、Audit
-```
-
-Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版本号，Worker 通过 lease 领取任务，提交结果时检查 lease 和状态版本，避免过期 Worker 覆盖新结果。暂停等待人工审批时释放 Worker，审批事件到达后再唤醒任务。
-
-LangChain、LangGraph 等 Framework 主要提供 Agent/Graph 的开发抽象；Runtime 负责租约、持久化、恢复、隔离、配额和跨 Framework 的执行治理。两者可以集成，但不能把“Graph 能表达状态”误认为“平台已经具备生产运行语义”。
-
-生产目标通常是 **at-least-once 调度 + 幂等副作用**，而不是轻易承诺 exactly-once。还要为每个 Run 固定模型、Prompt、Tool 和策略版本，否则恢复后可能在另一套行为定义上继续执行。
-
-**差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
-
----
-
-## Q：Agent Sandbox 解决什么问题，为什么容器不一定够？
-
-> 来源：[荣耀 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/60ab2e3a45074b7391199acb9b5c6ca3) / [百度 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / 代码执行与隔离设计高频题【阿里 Agent Infra 一面题库追问：隔离选型、资源约束与委托身份】
-
-**新手答**：“Docker 有 Namespace 和 Cgroup，可以安全运行模型生成的代码。”
-
-**高手答**：
-
-Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还要控制文件系统、网络、系统调用、凭据、进程树、磁盘和执行时间。容器共享宿主机内核，隔离强度取决于 user namespace、capabilities、seccomp、SELinux/AppArmor 和宿主配置，不能把“用了 Docker”直接等同于安全。
-
-| 场景 | 可选隔离 | 主要代价 |
-|------|---------|---------|
-| 内部只读工具 | 加固容器 | 隔离较轻，启动快 |
-| 多租户代码执行 | gVisor / Kata | 兼容性或启动开销 |
-| 高风险不可信代码 | MicroVM | 镜像、池化和运维成本 |
-
-无论采用哪种方案，都应使用短期身份、只读根文件系统、默认拒绝网络、资源上限和硬 Deadline。复用预热 Sandbox 可以降低冷启动，但必须证明租户间文件、进程、缓存和凭据已经清理；高风险任务更适合一次性销毁环境。
-
-当 Agent 代表用户调用外部系统时，Runtime 应把已认证用户映射为短期、限定 audience/scope 的委托凭证，并在受控传输层注入；长期密钥、刷新令牌和授权决策不能进入 Prompt。模型只提出 Tool Call，Runtime 仍要按用户、租户、工具和资源重新做 AuthZ，高风险操作再绑定审批范围与审计记录。
-
-进程地址空间隔离只能阻止普通进程直接读取彼此内存，不等于完整安全边界；容器仍要面对共享内核、错误授权和网络外泄等攻击面。Namespace 负责隔离“看见什么”，Cgroup 负责约束“能用多少”，两者也都不能替代系统调用和身份权限控制。
-
-**差距在哪**：新手只比较容器技术名称，高手从威胁模型、信任等级和清理边界选择隔离方案。
 
 ---
 
@@ -391,31 +426,6 @@ Kubernetes 只负责重建计算实例，Agent Runtime 才负责业务状态恢�
 
 ---
 
-## Q：大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？
-
-> 来源：[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f)
-
-**新手答**：“端侧断网时先缓存，联网后同步到云端；复杂任务都放云上跑。”
-
-**高手答**：
-
-先按数据所有权拆分，不能做一个“双向同步所有状态”的大接口：
-
-| 状态 | 权威方 | 离线策略 |
-|------|--------|----------|
-| 用户身份、授权和配额 | 云端控制面 | 端侧持有短期、限定 scope 的快照，过期后降权或停止高风险动作 |
-| 设备能力、实时传感器和本地文件 | 端侧 | 本地读取，按最小必要原则上传摘要或 Artifact 引用 |
-| Run 事件、Checkpoint 和副作用 | 创建该 Run 的控制面 | 用单调序号、幂等键和 lease 同步，不能靠最后写入覆盖 |
-| 模型、Prompt、Tool 和策略版本 | 云端发布面 | 端侧缓存已签名版本，离线期间固定版本运行 |
-
-断网时端侧只能执行预先授权、可撤销、风险受限的动作，并把事件写入有界本地队列。恢复连接后先做身份续期和版本协商，再按 `run_id + event_seq + execution_id` 上传；服务端逐条确认，重复事件幂等吸收，冲突进入显式仲裁。KubeEdge 的 [EdgeHub](https://kubeedge.io/docs/architecture/edge/edgehub/)和 [Device Controller](https://kubeedge.io/docs/architecture/cloud/device_controller/)展示了端云连接、上/下行状态和 desired/reported state 分离，但 Agent 的用户授权与副作用语义仍需业务层自己实现。
-
-任务迁移只在语义 Checkpoint 处发生：冻结旧执行者、提交工作区/Artifact 清单、释放 lease，新执行者取得 fencing token 后校验模型与工具版本，再查询未知副作用并继续。没有可迁移状态的本地进程应从可验证步骤重建，而不是复制内存快照后假定外部世界没有变化。
-
-**差距在哪**：新手只有“缓存后同步”，高手能定义权威状态、离线权限、冲突协议和任务唯一执行权。
-
----
-
 ## Q：verl AgentLoop 的运行模型、状态与扩展点是什么？
 
 > 来源：[阿里云 AI Infer 一面](https://www.nowcoder.com/discuss/921086976030150656)
@@ -473,6 +483,26 @@ Kubernetes [Local Ephemeral Storage](https://kubernetes.io/docs/concepts/storage
 状态提交采用 `run_id + state_version + execution_id`，Sandbox 只提出增量；控制面校验 lease、schema、权限和副作用后再提交。Sandbox 销毁时清理工作区、进程、挂载和凭据；复用池必须验证租户隔离，否则省下的冷启动会换来数据串扰。
 
 **差距在哪**：新手按保存时长分层，高手按事实所有权、恢复语义和信任边界决定状态位置。
+
+---
+
+## Q：周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？
+
+> 来源：[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)
+
+**新手答**：“用定时器每隔一段时间触发 Agent，失败就重试和发告警。”
+
+**高手答**：
+
+`Schedule` 是可变更的触发契约，保存调度表达式、时区、有效期、漏跑策略、并发策略、任务模板和通知规则；每个 `Run` 是某个逻辑触发时刻生成的不可变执行实例，固定 `schedule_id + logical_fire_time`、输入、配置版本和执行状态。这样修改 Schedule 不会偷偷改写已经创建的 Run，历史也可以按逻辑触发时刻对账。
+
+时区必须显式存 IANA 标识并定义 DST 重复或跳过时的行为，不依赖服务器本地时区。Scheduler 扫描逻辑时间窗口：对短时漏跑可限定 catch-up 窗口补跑，超窗口则记录 `MISSED` 并通知，避免恢复后瞬间补齐大量过期任务。并发策略至少区分 `ALLOW`、`FORBID` 和 `REPLACE`；`REPLACE` 仍要遵守取消语义，不能假定旧 Run 的外部副作用已撤销。
+
+创建 Run 时以 `schedule_id + logical_fire_time` 建唯一约束，调度器用 lease/fencing 避免多实例重复创建；工具副作用再使用稳定 `execution_id` 做下游幂等。不宣称 exactly-once：失败按错误类型做有界重试，最终进入失败终态或人工队列。通知事件本身也带幂等键，包含最后成功时间、本次失败阶段、重试次数和下次触发时间。
+
+这套语义可参考 Kubernetes [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) 对时区、错过调度和并发策略的处理，但 Agent Runtime 仍需自己定义 Run 状态、Tool 幂等和通知收敛，不把设计绑定到某个调度框架。
+
+**差距在哪**：新手只有“定时器 + 重试”，高手把配置和执行实例分开，并为时间语义、重复触发、重叠执行、副作用幂等和可操作告警定义了可恢复契约。
 
 ---
 
