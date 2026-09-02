@@ -1,6 +1,6 @@
 ---
 name: classify-interview-questions
-description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/AI工程题写入 zero2Agent 的 learn-agent-interview，传统后端八股写入相邻 zero2Leetcode 的夏季八股。大批量输入使用并行子 Agent 逐篇审计、相似度召回、并行调研和并行写答案；不新建面经实录文章。
+description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/AI工程题写入 zero2Agent 的 learn-agent-interview，传统后端八股写入相邻 zero2Leetcode 的夏季八股。大批量输入使用 gpt-5.6-luna API 逐篇并发抽题和语义召回，再审查、去重和写答案；不新建面经实录文章。
 ---
 
 # classify-interview-questions：面试题分类分发
@@ -72,116 +72,106 @@ description: 将批量面经或零散面试题逐题去重并分发：Agent/LLM/
 ## 模式选择
 
 - 少量零散题：直接执行“分类 → 索引查重 → 写答案 → 校验”。
-- 多篇面经或完整抓取目录：必须使用下面的并行流水线。题量大时无需先向用户展示确认表。
+- 多篇面经或完整抓取目录：必须使用下面的 Luna 批处理流水线。不得把原始文章区间分给多个 Agent 逐篇阅读抽题；这种做法容易因上下文窗口、注意力分配和中途摘要造成静默遗漏。
 
-## 批量并行流水线
+## 批量 Luna 抽取与召回流水线
 
 ### 1. 建立输入清单
 
-以本轮完整原始抓取目录为输入，不只读取优秀面经归档。按日期、索引或稳定文件名生成唯一序号，排除 `index.md`、合集和审计产物。
+以本轮抓取的 `manifest.json` 为唯一输入清单，按 `articles[]` 顺序生成稳定序号。每篇必须使用 `localSourcePath` 指向的原文；不能只遍历当前输出目录，因为复用文章可能位于历史目录。
 
 先读取两个仓库现有题目索引/标题。Agent 侧以本 Skill 的 `question-index.md` 为快速索引；后端侧读取 summer include 的编号标题。
 
-只有一手面经进入问题提取：必须有真实面试过程或明确公司/轮次/面试官问题证据。招聘、内推、Offer 选择、求助、学习路线、教程、题库汇总和付费推广即使包含问句也整篇拒绝，并在 ledger 记录原因。
+### 2. 用 gpt-5.6-luna 批量并发抽题
 
-### 2. 并行逐篇提取
-
-把连续且不重叠的文章区间分给多个子 Agent。每个子 Agent必须完整读取自己范围内的每篇正文，并逐篇返回：
-
-```text
-序号 | 标题 | 来源 URL
-Agent 新增候选
-后端新增候选
-已有题/可增强追问
-排除项与原因
-```
-
-约束：
-
-- 子 Agent 只读，不直接编辑共享题库或同一个 ledger，避免并发写冲突。
-- 评论、相关推荐、热榜和作者个人信息不算原帖问题。
-- 重复账号稿、改公司名扩写稿、纯教程、推广和付费截断内容要标明可信边界。
-- 付费/推广文章不能整篇静默跳过；仍逐题判断是否存在可归因的真实问题，但不采用营销答案和未验证数字。
-- 题干不完整、术语不确定时保留原文并排除，不擅自修正成另一道题。
-
-主 Agent 合并所有区间结果，确认原始文章数等于已扫描文章数，并维护逐篇审计 ledger。
-
-ledger 中的来源 URL 使用原始 canonical URL；同一篇文章的跟踪参数、移动端地址或重复抓取地址要归一为一个证据。
-
-### 3. 相似度召回
-
-在逐篇语义提取之后，使用规范化文本、字符 n-gram、BM25 或 Embedding 与现有题标题计算相似度，给每个候选召回 Top-K 相近题。
-
-对于单篇牛客面经或本地原文，优先运行完整流水线，一次完成正文解析、问题提取和召回：
+批量任务统一运行维护脚本：
 
 ```bash
-# 牛客 discuss 页面
-python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
-  --url "https://www.nowcoder.com/discuss/<id>" --top-k 5 --format markdown
-
-# 本地 Markdown 或纯文本
-python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
-  --input article.md --top-k 5 --format json --out audit.json
-
-# 复用 Codex 配置中的 base URL、token、model 和 wire API，并行抽题与语义重排
-python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
-  --url "https://www.nowcoder.com/discuss/<id>" --llm --workers 8 \
-  --rerank-batch-size 1 --candidate-k 12 --top-k 5 --format json --out audit.json
+python .claude/skills/classify-interview-questions/scripts/batch_extract_and_recall.py \
+  --manifest ".claude/skills/scrape-nowcoder/nowcoder-output-<range>/manifest.json" \
+  --out ".codex-tmp/llm-interview-audit-<range>" \
+  --model "gpt-5.6-luna" \
+  --outer-workers 3 --workers 8 \
+  --rerank-batch-size 1 --candidate-k 12 --top-k 5
 ```
 
-流水线只解析原帖 SSR `contentData`，不读取评论和推荐区；默认同时加载 zero2Agent 索引、相邻 zero2Leetcode 夏季八股和算法题单，输出每道题的 BM25、字符 n-gram、综合分、维度和 Top-K 标题。`high/review/low` 只是召回置信带，不是新增判定。
+固定约束：
 
-`--llm` 默认从 Codex 配置读取连接信息：优先显式 `--codex-config` 或 `~/.codex/config.json` / `codex.json`，否则读取官方 `~/.codex/config.toml` 当前 `model_provider` 和 `auth.json`。兼容 `baseURL/base_url`、`token/apiKey`，按 `wire_api` 调用 Responses 或 Chat Completions。Token 只在内存中使用，输出仅包含配置来源、API host、模型名和 wire API。默认每题一个请求并用 `--workers` 并行；限流严格或网络开销高时可增大 `--rerank-batch-size`，但必须用真实面经基准测试，批量更大不保证更快。`--llm-extract`、`--llm-rerank` 可单独启用。某个批次失败时保留本地召回并在 `llmErrors` 中报告，不静默丢题。
+- 默认模型是 `gpt-5.6-luna`。除非用户明确指定，不使用更慢的模型跑整批原文。
+- 每篇文章独立调用 `extract_and_recall.py --llm`，不能把 `all-in-one.md` 当成一篇输入；否则会丢失文章归因和 canonical URL 边界。
+- 外层并发负责文章级吞吐，单篇 `--workers` 负责问题级重排。默认 `3 x 8`；遇到限流时先降低外层并发，不降低抽取完整性。
+- 每题先召回 12 个本地候选，再由 Luna 语义重排到 Top-5。`high/review/low` 只是召回带，不直接决定新增。
+- Token 只在内存中使用。结果目录只保存逐篇 JSON 和 `batch-summary.json`，不保存配置密钥。
+- 脚本默认断点续跑：复用成功 JSON 和已确认的 `gate_rejected`，自动重试 `failed`。需要重新检查门禁拒绝项时显式加 `--retry-gate-rejected`。
+- 抽题前先做本地 source preflight：空稿、失效页、付费/标准答案模板、跨 URL 近重复正文，以及多数帖子已命中这些规则的内容账号，直接记为 `pre_gate_rejected`，不调用抽题 API。
+- 通过本地门禁后，单篇脚本先调用 Luna 严格判断是否为作者亲历的技术面试；`gate_rejected` 同样不会进入抽题阶段。
+- 每完成一篇，脚本立即重建五个题目队列：`duplicate-evidence.jsonl`、`enhancement.jsonl`、`novel.jsonl`、`review.jsonl`、`out-of-scope.jsonl`。中断时已完成文章的队列结果仍可恢复。
 
-优先运行随 Skill 提供的确定性召回工具：
+对于单篇诊断仍可直接运行：
 
 ```bash
-python .claude/skills/classify-interview-questions/scripts/recall_similar_questions.py \
-  --input candidates.txt --top-k 5
-
-# 也可从 stdin 输入，一行一道题
-python .claude/skills/classify-interview-questions/scripts/recall_similar_questions.py \
-  --input - --top-k 5 --json
+python .claude/skills/classify-interview-questions/scripts/extract_and_recall.py \
+  --input article.md --llm --llm-model gpt-5.6-luna --workers 8 \
+  --rerank-batch-size 1 --candidate-k 12 --top-k 5 \
+  --format json --out audit.json
 ```
 
-工具从 `question-index.md` 同时识别所有维度和连续编号题目，输出字符 n-gram、BM25 与混合分数。批量处理时保存原始输出或在审计 ledger 中记录每题 Top-K，不能只写“已查重”而没有召回证据。
+### 3. 验收批处理账本
 
-相似度只是加速工具：
+读取 `batch-summary.json` 并验证：
 
-- 高相似候选由子 Agent/主 Agent 判断是同题、追问增强还是约束不同的新题。
-- 低相似不自动等于新题；答案句、项目描述和无来源问题仍需排除。
-- 自动匹配必须同时识别 `## Q：` 与 `### Q：` 等现有标题格式，运行后校验加载到的题数与索引总计一致。
-- 禁止用相似度结果替代逐篇读取和逐题语义判断。
+- `articleCount == completedCount == manifest.articles.length`。
+- `failed == 0` 且所有成功结果的 `llmErrorCount == 0`。`no_questions` 表示 Luna 完成判断但没有抽出完整题干，是可审计的空结果；真正失败项必须重跑，不能用确定性抽取静默替代。
+- `model` 和逐篇 `llm.model` 均为本轮指定的 Luna 模型。
+- `gate_rejected` 保留在账本中，并与空正文、失效页、教程、推广、付费聚合和重复账号稿核对。
+- 如果明确的一手面经被门禁误拒，先人工确认原文边界，再对该单篇使用 `extract_and_recall.py --allow-non-interview --llm` 重跑；禁止整批绕过门禁。
+- 每个成功 JSON 都保留 `sourceClassification`、完整问题、Top-K、`llmRelation`、`llmConfidence` 和原因。不得只留最终题目清单。
 
-### 4. 并行语义去重与调研
+### 4. 从结构化结果生成候选 ledger
 
-按维度或互不重叠的候选集合分给子 Agent。每个子 Agent读取相近题正文并输出：
+候选判断只消费逐篇 JSON、四类队列和必要的现有目标题块，不再重新把整篇原文交给 Agent 阅读。默认自动归并规则：
+
+- `same` 置信度不低于 0.85：从新题候选中丢弃，进入 `duplicate-evidence`，用于补来源和 frequency。
+- 没有高置信 `same`，但 `overlap` 不低于 0.80：进入 `enhancement`，补追问、反例或答案缺口。
+- Top-K 没有 `same/overlap`，且 `different` 不低于 0.85：进入 `novel` 新题候选队列。
+- 关系混合但低于阈值、缺少 LLM judgment 或出现降级：进入 `review`，禁止自动新增。
+- 职业规划、Offer/转正、职级地点等非技术问题进入 `out_of_scope`；缺少指代对象或题干截断的问题进入 `review`。它们不能因为与技术题库不同而进入 novel。
+
+可随时用结果账本重新生成队列：
+
+```bash
+python .claude/skills/classify-interview-questions/scripts/build_recall_queues.py \
+  --summary ".codex-tmp/llm-interview-audit-<range>/batch-summary.json" \
+  --out ".codex-tmp/llm-interview-audit-<range>/queues"
+```
+
+最终逐题输出：
 
 - `新增`：核心考点或工程约束确实不同。
 - `增强`：同一核心题，只追加来源、追问、反例或现有答案缺失部分。
 - `排除`：非目标域、个人化且无法通用、题干不完整、重复/推广/无可靠来源。
 
-对需要当前事实、协议、框架或模型细节的新增题，子 Agent 使用当前一手资料调研，返回支持具体结论的官方直达链接，并明确事实与推断。不要让调研 Agent 直接编辑题库。
+LLM 的 `same/overlap/different` 和置信度是证据，不是最终裁决。高相似仍可能是约束不同的新题；低相似也可能是已有题的换词。每项 ledger 必须记录原始文章序号、canonical URL、LLM 问题文本、Top-K 和最终理由。
 
-### 5. 并行写答案
+对需要当前事实、协议、框架或模型细节的新增题，查当前一手资料，返回支持具体结论的官方直达链接，并明确事实与推断。调研阶段不直接编辑题库。
 
-把最终确认的新题按**互不重叠的目标文件**分配给写作子 Agent。一个文件同一时间只允许一个写作者；会写同一文件的题合并成一个任务。
+### 5. 按互不重叠文件写答案
 
-写作子 Agent必须读取目标全文及相邻问题，把新题插入最匹配的现有主题组。它只修改被分配的文件，不改 `question-index.md`、`question-frequency.json`、导航或其他仓库；主 Agent 合并后统一按频次重排。
+把最终确认的新题和增强映射按目标文件分组。一个文件同一时间只允许一个写作者；写作者只读取目标全文、相邻问题和结构化候选，不重新扫描原始面经。共享的 `question-index.md`、`question-frequency.json`、入口计数和排序由主流程最后单点维护。
 
-传统后端题由独立子 Agent 按连续编号写入 zero2leetcode summer include；它同时返回新增题数，但不自行更新入口总数。
+传统后端题按连续编号写入 zero2leetcode summer include；算法题只更新算法题单，不占传统八股编号。
 
-### 6. 主 Agent 合并
+### 6. 合并、校验和汇报
 
-主 Agent负责：
+主流程负责：
 
-1. 审查所有子 Agent diff，解决语义重复和文件冲突。
+1. 审查所有正文 diff，解决语义重复和文件冲突。
 2. 更新 Agent `question-index.md` 的连续编号、维度数、总数、来源追问和日期。
 3. 更新 `question-frequency.json`：同题新增面经时追加唯一 evidence，新题新增完整记录，然后执行组内频次排序。
 4. 更新 zero2leetcode summer 总数及 `05_interview/index.md` 的入口计数。
 5. 核对正文标题数、人工索引、频次 JSON 和机器索引总数完全一致。
 6. 核对新增/增强题的正文来源、人工索引和频次 evidence 链接一致，并抽查链接落到原始页面。
-7. 汇报原始文章数、扫描数、新增数、增强数、公开原文链接数、授权但无公开 URL 的来源数，以及重复、教程/推广、算法、个人化、空正文、题干不完整等排除数。
+7. 汇报 manifest 文章数、Luna 成功抽取数、门禁拒绝数、失败/`llmErrors`、抽取题数、新增数、增强数、公开原文链接数、授权但无公开 URL 的来源数，以及各类排除数。
 
 ## 少量题执行步骤
 
@@ -281,9 +271,10 @@ python .claude/skills/classify-interview-questions/scripts/build_question_index_
 
 ## 并发与写入安全
 
-- 优先并行只读提取、相似度分析和资料调研。
+- 原始文章的分类、抽题和 Top-K 重排只由 Luna 批处理脚本执行；不创建原文分片阅读任务。
+- 后续审查只消费逐篇 JSON、候选 Top-K 和必要的现有题块，避免重新加载整批原文。
 - 写入只按互不重叠文件并行；`question-index.md`、`question-frequency.json`、总数入口、频次排序和最终统计始终由主 Agent 单点维护。
-- 子 Agent 不提交、不推送。主 Agent 在全部结果合并、验证后再按仓库分别提交。
+- 全部结果合并并验证前不提交、不推送；两个仓库保持独立 commit。
 - 如果用户要求 push，先同步远端、检查精确 diff，再推送并观察两个 Pages 工作流。
 
 ## 注意事项
@@ -292,4 +283,4 @@ python .claude/skills/classify-interview-questions/scripts/build_question_index_
 - 个人化问题（“你用过XX吗”“你简历上的XX”）必须转为通用问题
 - 与已有题目重复时，增强已有答案而非新增
 - 来源标注保留原始公司/岗位/轮次和原文超链接；无公开 URL 时明确标注可信边界
-- 自动相似度不能决定新增；逐篇人工语义判断才是最终事实源
+- Luna 的关系分类和相似度不能单独决定新增；结构化候选的语义裁决才是最终题库事实源

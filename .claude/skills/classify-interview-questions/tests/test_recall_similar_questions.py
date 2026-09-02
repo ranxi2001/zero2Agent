@@ -88,6 +88,30 @@ class RecallSimilarQuestionsTest(unittest.TestCase):
         self.assertGreaterEqual(sum("ReAct" in title for title in titles), 2)
         self.assertGreater(matches[0]["score"], 0.5)
 
+    def test_frontend_react_does_not_trigger_agent_react_tag(self):
+        self.assertNotIn("semantic:react-loop", MODULE.semantic_tags("讲一下对 React 的理解"))
+
+    def test_bilingual_int_string_recalls_existing_handwrite(self):
+        documents = MODULE.parse_indexes(MODULE.default_index_paths())
+        matches = MODULE.recall("写一个 int 转 string 的库函数", documents, 5)
+        titles = {match["title"] for match in matches[:3]}
+        self.assertIn("手写整数转字符串", titles)
+
+    def test_text_to_sql_business_terms_recall_rule_layer(self):
+        query = "Text-to-SQL 怎么处理业务黑话和同义表达？"
+        matches = MODULE.recall(query, self.documents, 5)
+        titles = {match["title"] for match in matches[:3]}
+        self.assertIn(
+            "Text2SQL 的 RAG 架构里，DDL 层和规则层分别解决什么问题？业务表频繁变更时怎么保持可用？",
+            titles,
+        )
+
+    def test_dns_implementation_recalls_url_request_chain(self):
+        documents = MODULE.parse_indexes(MODULE.default_index_paths())
+        matches = MODULE.recall("DNS 底层如何实现？", documents, 5)
+        titles = {match["title"] for match in matches[:3]}
+        self.assertIn("浏览器输入 URL 到页面返回，DNS 如何解析，局域网里怎么找到目标 MAC？", titles)
+
     def test_full_chain_paraphrase(self):
         query = "一次 Agent 请求从用户输入到最终回答的完整链路是什么？"
         matches = MODULE.recall(query, self.documents, 5)

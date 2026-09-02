@@ -60,8 +60,28 @@ SEMANTIC_RULES = (
         "semantic:context-skills",
     ),
     (
-        re.compile(r"\breact\b|reasoning.{0,12}action|推理.{0,8}行动.{0,8}循环"),
+        re.compile(
+            r"(?:agent|llm|reasoning|plan).{0,12}\breact\b|"
+            r"\breact\b.{0,12}(?:agent|llm|reasoning|action|plan)|"
+            r"reasoning.{0,12}action|推理.{0,8}行动.{0,8}循环"
+        ),
         "semantic:react-loop",
+    ),
+    (
+        re.compile(r"text\s*(?:-?to-?|2)\s*sql|text2sql|智能问数", re.IGNORECASE),
+        "semantic:text-to-sql",
+    ),
+    (
+        re.compile(r"重要性采样|on[- ]?policy|off[- ]?policy|\bdpo\b|\bppo\b|\bgrpo\b"),
+        "semantic:policy-optimization",
+    ),
+    (
+        re.compile(r"\blru\b|最近最少使用"),
+        "semantic:lru",
+    ),
+    (
+        re.compile(r"\bdns\b|域名解析|递归解析器|权威服务器"),
+        "semantic:dns",
     ),
     (
         re.compile(r"jwt.{0,24}(?:验证|验签|真实性|完整性|签名|结构)|(?:验证|验签|真实性|完整性|签名).{0,24}jwt"),
@@ -74,6 +94,10 @@ SEMANTIC_RULES = (
         ),
         "semantic:os-memory-management",
     ),
+)
+TERM_EXPANSIONS = (
+    (re.compile(r"\bint(?:eger)?\b"), "int 整数"),
+    (re.compile(r"\bstring\b"), "string 字符串"),
 )
 SOURCE_SEMANTIC_TAGS = frozenset({"semantic:coding-workflow", "semantic:context-skills"})
 
@@ -91,8 +115,15 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def expand_terms(text: str) -> str:
+    expanded = normalize(text)
+    for pattern, replacement in TERM_EXPANSIONS:
+        expanded = pattern.sub(replacement, expanded)
+    return expanded
+
+
 def character_grams(text: str) -> frozenset[str]:
-    compact = re.sub(r"[^a-z0-9\u3400-\u4dbf\u4e00-\u9fff]+", "", normalize(text))
+    compact = re.sub(r"[^a-z0-9\u3400-\u4dbf\u4e00-\u9fff]+", "", expand_terms(text))
     grams: set[str] = set()
     for size in (2, 3):
         grams.update(compact[i : i + size] for i in range(max(0, len(compact) - size + 1)))
@@ -105,7 +136,7 @@ def semantic_tags(text: str) -> tuple[str, ...]:
 
 
 def tokenize(text: str, semantic_text: str | None = None) -> tuple[str, ...]:
-    normalized = normalize(text)
+    normalized = expand_terms(text)
     tokens = list(ASCII_TOKEN_RE.findall(normalized))
     for chunk in CJK_RE.findall(normalized):
         tokens.extend(chunk[i : i + 2] for i in range(max(0, len(chunk) - 1)))
