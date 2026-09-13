@@ -85,3 +85,14 @@ The answers derived from the 2026-09-02 through 2026-09-08 interview audit were 
 - [EnCodec](https://github.com/facebookresearch/encodec) and [SpeechTokenizer](https://arxiv.org/abs/2308.16692) - neural audio codec, residual vector quantization, and hierarchical semantic/acoustic Token design.
 
 No upstream prose, code, diagrams, datasets, or benchmark claims are reproduced. Framework behavior remains tied to the linked versions and current documentation; the architecture, evaluation, and safety recommendations are independent engineering analysis.
+
+## Weekly Interview Answer References (2026-09-13)
+
+The answers added from the 2026-09-07 through 2026-09-13 interview audit were independently written and checked against these primary references:
+
+- [Qwen2-VL official repository](https://github.com/QwenLM/Qwen2-VL) — visual tokenization and dynamic-resolution implementation boundaries.
+- [DeepSpeed ZeRO documentation](https://www.deepspeed.ai/tutorials/zero/) — optimizer, gradient, and parameter sharding stages.
+- [CUDA Runtime API stream synchronization](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__STREAM.html) — stream and event synchronization semantics.
+- [XGBoost model documentation](https://xgboost.readthedocs.io/en/latest/tutorials/model.html) — tree-model terminology used in the comparison answer.
+
+No upstream prose, code, diagrams, datasets, or benchmark results are reproduced. Version-specific behavior remains tied to the linked documentation; the surrounding explanations and engineering recommendations are independent analysis.

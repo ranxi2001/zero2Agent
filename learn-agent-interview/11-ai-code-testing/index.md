@@ -117,7 +117,7 @@ else:
 
 ### Q：如何测试 AI 生成代码的正确性？
 
-> 来源：蚂蚁集团 Agent 开发一面 【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序的实现】 / [字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07) / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)
+> 来源：蚂蚁集团 Agent 开发一面 【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序的实现】 / [字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07) / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)；本轮追问：看程序找出当前程序中存在的问题，然后进行修改（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：站在测试开发角度，怎么验证功能是否符合预期？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；本轮追问：AI 生成代码后，怎么做测试校验和部署测试？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）；本轮追问：这个项目中哪些代码和设计是你亲自完成的，哪些是 AI Coding 辅助完成的？你如何验收 AI 生成的代码？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
 
 **新手答**：“跑一下看能不能通过。”
 
@@ -253,7 +253,7 @@ flowchart TB
 
 ## Q：如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？
 
-> 来源：蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果完全自动化地交给Agent不太放心，如何解决？】
+> 来源：蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果完全自动化地交给Agent不太放心，如何解决？】；本轮追问：AI 平台与真正执行测试的软件之间如何进行数据交互？（[本轮追问](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)）；本轮追问：自动化用力叠加你设计的边角场景测试策略，整体功能场景覆盖度如何预估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)
 
 **新手答**：“让 Agent 阅读需求和代码，生成测试用例，运行失败后自动修复，最后把报告交给人看。”
 
@@ -310,7 +310,7 @@ Oracle 是最容易被忽略的部分。HTTP 200、页面出现文字或“模�
 
 ## Q：Coding Agent 如何做增量代码审查，避免大仓库全量逐行扫描？
 
-> 来源：PDD 秋招提前批一面（2026-08-21）【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：代码审查 Agent 的全量扫描优化？】
+> 来源：PDD 秋招提前批一面（2026-08-21）【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：代码审查 Agent 的全量扫描优化？】；本轮追问：自己会看代码吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/559cdf0af1084459a82557b15d6a8a3e)）；本轮追问：假设代码仓库几十万行，直播间不止调那几处，可能要调整个直播间达到某个功能。比如假设有个功能不需要真人主播讲解，每次上品推品靠数字人Agent讲解、用户问答它来解答——这种场景，你们现有方案还适应吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）
 
 **新手答**：“只审查 git diff 和修改文件。”
 
@@ -322,7 +322,7 @@ Oracle 是最容易被忽略的部分。HTTP 200、页面出现文字或“模�
 
 ## Q：AI 生成代码在哪些场景更具落地价值？应用边界在哪？
 
-> 来源：蚂蚁Agent一二面（Code Agent方向）
+> 来源：蚂蚁Agent一二面（Code Agent方向）；本轮追问：AST 存在哪些局限性？可以用什么技术弥补？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）
 
 **新手答**：“写 CRUD 和简单逻辑的时候好用，复杂的不行。”
 
@@ -389,7 +389,7 @@ AI 适合处理开放且高成本的“候选生成和证据解释”，代码�
 
 ## Q：AI Coding 如何完成多来源账单分析应用，并证明交付结果可信？
 
-> 来源：CVTE 视源股份 AI Coding（2026-08-12）
+> 来源：CVTE 视源股份 AI Coding（2026-08-12）；本轮追问：如果不让模型读取算法内容，系统如何完成必须深入算法细节的归因？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“读取微信和支付宝 CSV，分类后生成图表。”
 
@@ -414,6 +414,71 @@ AI 适合处理开放且高成本的“候选生成和证据解释”，代码�
 发布采用影子运行或小流量灰度，比较稳定版与候选版的任务成功率、副作用、成本和回滚能力。候选只能提出下一代版本，不能递归触发无限自我改写；设置最大代数、预算和无进展检测。控制面、凭据管理、审计与回滚器不允许由被更新的 Agent 单独改写。
 
 **差距在哪**：新手把自举当普通代码生成，高手隔离稳定控制器与候选版本，用外部 Oracle、只读基线和发布门禁打破“自己生成、自己证明”的循环。
+
+
+## Q：什么是 AST，代码测试中如何使用？
+
+> 来源：[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+
+**新手答**：AST 是把源代码解析成表达语法结构的树，可用于静态检查和代码转换。
+
+**高手答**：
+
+解析器将源码转为节点、作用域和类型关系；规则可在 AST 上检测危险调用、复杂度或接口使用，避免正则误报。修改代码时保留位置信息并重新格式化、编译和测试；不同语言使用对应 parser，遇到宏、动态代码或语法错误要降级处理。
+
+**差距在哪**：考察是否理解 AST 的结构化优势及解析、改写、验证边界。
+
+
+## Q：污点分析通常包含哪三类核心节点？
+
+> 来源：[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+
+**新手答**：核心是污点源、传播节点和污点汇。
+
+**高手答**：
+
+源节点表示外部可控输入，传播节点表示赋值、拼接、函数参数等数据流转，汇节点表示敏感操作如 SQL 执行、命令调用或文件写入。分析器沿 CFG/调用图传播污点，结合 sanitizer 清除规则和跨过程摘要，最终输出路径与证据；要控制别名、反射和路径爆炸。
+
+**差距在哪**：考察数据流定义、跨过程分析和误报控制。
+
+
+## Q：请举例说明业务中的污点源和污点汇。
+
+> 来源：[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+
+**新手答**：HTTP 参数、上传文件和消息队列内容可作为污点源，SQL、命令执行和模板渲染是常见污点汇。
+
+**高手答**：
+
+例如 request.query → SQL execute，上传文件名 → 文件路径拼接，Webhook body → shell 命令，用户模板 → HTML 渲染。为每类汇配置编码、参数化查询或白名单 sanitizer，并在测试中构造可追踪 payload；规则应结合框架 API 和业务封装，避免仅按函数名匹配。
+
+**差距在哪**：考察能否把抽象数据流映射到真实业务并给出防护。
+
+
+## Q：代码 Agent 评测中，worktree 对照实验解决什么问题？
+
+> 来源：[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+
+**新手答**：它为不同实验创建隔离工作目录，避免互相覆盖代码和状态污染。
+
+**高手答**：
+
+从同一 commit 为基线创建独立 worktree，实验组和对照组使用相同任务、依赖和超时；分别收集 diff、测试结果、工具调用和成本。评测结束清理目录并固定环境，避免共享缓存、未提交文件或先后顺序影响结果。
+
+**差距在哪**：考察评测可重复性、环境隔离和证据采集。
+
+
+## Q：如何用工程手段治理代码规范，而不是只依赖模型提醒？
+
+> 来源：[百度Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)
+
+**新手答**：把规范变成可执行的检查，在提交和 CI 阶段自动阻断问题。
+
+**高手答**：
+
+将规则编码为 formatter、linter、AST 检查或 pre-commit hook；在代码生成前注入约束，生成后运行编译、测试和静态扫描。按风险分级设置 warning/block，提供自动修复和例外白名单；在 CI 记录规则版本、命中率和误报，逐步收紧门禁。
+
+**差距在哪**：考察能否形成从规则、执行到反馈的闭环。
 
 ---
 

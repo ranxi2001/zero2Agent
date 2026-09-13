@@ -470,7 +470,7 @@ subagent B 接收引用 → 需要时才通过 image_ref 加载原图
 
 ### Q：Multi Agent 系统中 Router 节点依据什么规则把任务分给子 Agent？
 
-> 来源：淘天 AI Agent 二面【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：复杂任务场景下，中心调度 Agent 如何路由调用不同的 subAgent？】
+> 来源：淘天 AI Agent 二面【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：复杂任务场景下，中心调度 Agent 如何路由调用不同的 subAgent？】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)
 
 **新手答**：“根据关键词匹配分发。”
 
@@ -664,7 +664,7 @@ flowchart TB
 
 ### Q：多 Agent 怎么编排的？用的什么编排模式？
 
-> 来源：百度实习 AI 应用开发一面
+> 来源：百度实习 AI 应用开发一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)；[本轮来源](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)；[本轮来源](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)
 
 **新手答**：“一个调一个，串行执行。”
 
@@ -725,7 +725,7 @@ flowchart TB
 
 ### Q：Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？
 
-> 来源：蚂蚁 AI应用开发 二面
+> 来源：蚂蚁 AI应用开发 二面；[本轮来源](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)
 
 **新手答**：「中心化就是有一个主 Agent 指挥别人，点对点是大家直接通信。」
 
@@ -852,7 +852,7 @@ Agent 间可信通信不只是传输层加密，还涉及身份认证和内容�
 
 ### Q：多个 Agent 并发操作数据库或文件，这种并发怎么处理？
 
-> 来源：蚂蚁Agent开发一面【[拼多多 - AI Agent 开发（工程化 + 数据库方向）](https://www.nowcoder.com/discuss/925527160763187200)追问：多 Agent 运行机制是怎样的？如何防止并发修改同一文件？】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：多 Agent 并发修改同一文件的冲突防止？】
+> 来源：蚂蚁Agent开发一面【[拼多多 - AI Agent 开发（工程化 + 数据库方向）](https://www.nowcoder.com/discuss/925527160763187200)追问：多 Agent 运行机制是怎样的？如何防止并发修改同一文件？】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：多 Agent 并发修改同一文件的冲突防止？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)
 
 **新手答**：“加锁，谁先拿到锁谁先执行。”
 
@@ -886,7 +886,7 @@ Multi-Agent 的并发和传统多线程并发有本质区别：Agent 的操作�
 
 ### Q：子 Agent 之间的上下文怎么传递？传什么、不传什么？
 
-> 来源：阿里 Agent 面经【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：各层 Agent 之间的上下文如何传递？；如何保证传给子 Agent 的上下文足够完整，不会遗漏关键信息？】
+> 来源：阿里 Agent 面经【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：各层 Agent 之间的上下文如何传递？；如何保证传给子 Agent 的上下文足够完整，不会遗漏关键信息？】；本轮追问：第一次 Agent 调用和第二次 Agent 调用分别需要什么上下文？（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)）
 
 **新手答**：“把上一个 Agent 的输出传给下一个就行。”
 
@@ -1032,7 +1032,7 @@ flowchart TB
 
 ### Q：主 Agent 与子 Agent 的通信和进度同步怎么做？是推还是拉？
 
-> 来源：广州某小厂 Agent 后端开发二面【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：主 Agent 与二级 Agent、子 Agent 之间如何通信？】
+> 来源：广州某小厂 Agent 后端开发二面【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：主 Agent 与二级 Agent、子 Agent 之间如何通信？】；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；本轮追问：项目中各模块之间如何配合？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/39ba19b7cc204f339ce07a6aced7565b)
 
 **新手答**：“子 Agent 做完了就告诉主 Agent。”
 
@@ -1327,7 +1327,7 @@ flowchart LR
 
 ## Q：在 A2A 场景下，如何防止两个 Agent 陷入递归对话？
 
-> 来源：AI应用开发进阶面
+> 来源：AI应用开发进阶面；[本轮来源](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)；本轮追问：如何防止 Agent 在求解过程中进入死循环？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）
 
 **新手答**：“设置最大轮次限制。”
 
@@ -1419,7 +1419,7 @@ Supervisor 汇总时先按位置和根因去重，再执行确定性优先级：
 
 ## Q：如何保证多 Agent 通信结果明确、可验证，而不是自然语言互相猜？
 
-> 来源：[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)（2026-08-22）
+> 来源：[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)（2026-08-22）；本轮追问：怎么保证多个模型输出的无缝衔接？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：站在测试角度，怎么验证多 Agent 通信这个模块？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）
 
 **新手答**：“统一 JSON 格式，并让接收 Agent 校验。”
 
@@ -1431,7 +1431,7 @@ Supervisor 汇总时先按位置和根因去重，再执行确定性优先级：
 
 ## Q：复杂 Agent 为什么拆成 LangGraph 子图而不是单条 Pipeline？子图的状态与 IO 契约如何设计？
 
-> 来源：[小红书/百度 Agent 实习一面](https://www.nowcoder.com/feed/main/detail/e319aadc79a9479397a6661a7f5ca088)（2026-08-24）
+> 来源：[小红书/百度 Agent 实习一面](https://www.nowcoder.com/feed/main/detail/e319aadc79a9479397a6661a7f5ca088)（2026-08-24）；本轮追问：pipeline的设计思路是啥？你觉得实现过程中最大的难点是啥？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；本轮追问：怎么样决定需要使用多个Agent，而不是由一个Agent自己执行？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；本轮追问：为什么配多 Agent 而不是全 CLI/脚本？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
 
 **新手答**：“子图更模块化，可以复用；每个子图定义自己的 State，输入输出用 JSON。”
 
@@ -1469,7 +1469,7 @@ Supervisor 汇总时先按位置和根因去重，再执行确定性优先级：
 
 ## Q：多人、多 Agent、跨设备协同与“群聊式多 Agent”有什么不同？
 
-> 来源：[跨设备多 Agent 项目一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)
+> 来源：[跨设备多 Agent 项目一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)；本轮追问：项目里面除了修复 Agent 以外还有其他的 Agent 吗？这是一个多 Agent 架构的项目吗？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）
 
 **新手答**：“群聊是多个 Agent 互相发消息，跨设备只是再加网络同步。”
 

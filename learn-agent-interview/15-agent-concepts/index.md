@@ -18,7 +18,7 @@ eyebrow: Agent 面试通关 / 15
 
 ### Q：Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？
 
-> 来源：快手 AI业务应用设计开发 / [阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【字节后端开发日常实习二面同题：“harness有了解吗”】【腾讯AI后端开发一面同题：“了解harness嘛，具体是做什么的”】【美团Agent方向面经同题：“harness工程了解吗？主要内容？项目里怎么用？还能补什么？”】【社招五年Go面经同题：“了解harness engineer吗”】【腾讯音乐暑期+日常同题：“有了解过Harness么？有用过Harness么？”】
+> 来源：快手 AI业务应用设计开发 / [阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【字节后端开发日常实习二面同题：“harness有了解吗”】【腾讯AI后端开发一面同题：“了解harness嘛，具体是做什么的”】【美团Agent方向面经同题：“harness工程了解吗？主要内容？项目里怎么用？还能补什么？”】【社招五年Go面经同题：“了解harness engineer吗”】【腾讯音乐暑期+日常同题：“有了解过Harness么？有用过Harness么？”】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)
 
 **新手答**：“好像是跟测试框架有关的东西？不太了解。”
 
@@ -159,7 +159,7 @@ flowchart LR
 
 ### Q：你的项目中体现了哪些 Harness Engineering 的思想？
 
-> 来源：阿里国际 一面
+> 来源：阿里国际 一面；本轮追问：LLM 和 Harness 你怎么看待？（[本轮追问](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)）
 
 **新手答**：“我用了 System Prompt 来约束模型行为，算 Harness 吗？”
 
@@ -501,7 +501,7 @@ flowchart TB
 
 ## Q：Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？
 
-> 来源：哆咔互娱 Agent开发实习一面 / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01) / [快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491) 【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】
+> 来源：哆咔互娱 Agent开发实习一面 / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01) / [快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491) 【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：有没有看过市面上流行的开源 Agent 框架，比如 openclaw？讲讲 claw 的实现、记忆机制？（[本轮追问](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)）；本轮追问：你认为 Claude Code 哪些功能做得比较好？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）
 
 **新手答**：“Claude Code 最强，其他的也差不多，都是用大模型写代码的工具。”
 
@@ -533,7 +533,7 @@ flowchart TB
 
 ## Q：如何比较 Coding Agent、通用助手与办公 Agent？
 
-> 来源：百度大模型研发工程师二面（2026-08-21） / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)
+> 来源：百度大模型研发工程师二面（2026-08-21） / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)；本轮追问：通用办公类的Agent你接触过吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）
 
 **新手答**：“Claude Code 和 Codex 用来写代码，豆包、千问办公等产品面向普通用户，底层都是大模型。”
 
@@ -555,25 +555,10 @@ Claude Code、Codex、Trae 等更接近开发环境中的 Coding Agent；豆包�
 
 ---
 
-## 这类题的答题模式
-
-概念考察题的核心是**独立思考 + 结构化表达**：
-
-```text
-1. 先给定义：一句话说清概念的本质（不要复述定义，要用自己的理解）
-2. 再讲演进：为什么出现这个概念？解决了什么之前解不了的问题？
-3. 做对比：和相关概念的关键区别是什么？（用表格最清晰）
-4. 给判断：你怎么看这个概念？适用场景和局限各是什么？
-5. 接项目：你在实际项目里怎么用的？或者为什么没用？
-```
-
-面试官问“你了解X吗”不是在考记忆力——“了解”只是入门，**有判断**才是高手。
-
----
 
 ## Q：Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？
 
-> 来源：成都某中厂 Agent 产品开发实习面经
+> 来源：成都某中厂 Agent 产品开发实习面经；本轮追问：这个产品相比其他 Agent 产品有哪些优势和缺点？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）
 
 **新手答**：“一个是拖拽的，一个是命令行的，都是做 AI 应用的工具。”
 
@@ -653,7 +638,7 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 
 ## Q：Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？
 
-> 来源：B站 Agent 二面（2026-08-19）
+> 来源：B站 Agent 二面（2026-08-19）；本轮追问：使用主 Agent 做输出约束，与另设一个 Agent 执行或评审任务有什么区别？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：你重写的 Agent 层到底对需求做了什么约束？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）
 
 **新手答**：“在工具调用前后运行 Hook，做日志和安全检查。”
 
@@ -663,24 +648,17 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 
 ---
 
-## Q：Agent 和 Siri 这种传统助手的核心差别在哪？
+## Q：Coding Agent 如何通过规则和 Skills 治理代码规范？
 
-> 来源：字节AI产品（智能体方向）
+> 来源：[百度 Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)
 
-**新手答**：“Agent 更智能，Siri 比较笨。”
+**新手答**：把规范写成可复用指令，在生成前约束、生成后检查。
 
 **高手答**：
 
-核心差别不在“智能程度”，而在架构范式：
+将项目规则、工具调用和验收步骤组织为版本化 Skills/配置；Agent 每次修改前读取适用规则，执行后运行 formatter、测试和 diff 检查。高风险操作需人工确认，规则结果写入日志；借鉴“上下文按需加载”和“工具边界”思路，但要结合本项目 CI、权限和回滚机制，不能只依赖提示词。
 
-1. **决策模式**：Siri 是“意图识别→槽位填充→调用固定 API”的管道式架构，每个能力是工程师预定义的；Agent 是“理解目标→自主规划→动态选择工具→反思调整”的闭环架构，能力边界由模型能力决定
-2. **任务复杂度**：Siri 处理单轮单意图（“设个闹钟”），Agent 能处理多步骤复合任务（“帮我规划周末行程并预订”）
-3. **容错方式**：Siri 失败了说“我不太明白”，Agent 失败了会自主尝试其他路径（Reflection + Retry）
-4. **上下文利用**：Siri 基本无记忆（每次对话独立），Agent 有长短期记忆，能利用历史交互持续优化
-5. **工具扩展性**：Siri 的技能由苹果开发团队预定义，Agent 可以通过 MCP/Function Calling 动态接入任意新工具
-6. **不确定性处理**：Siri 要求精确匹配意图才能执行，Agent 能处理模糊需求并主动澄清
-
-**差距在哪**：面试官考的是你对“Agent 本质是自主决策系统”的理解——传统助手是确定性流水线，Agent 是非确定性闭环。
+**差距在哪**：考察对 Coding Agent 机制的抽象和工程化迁移能力。
 
 ---
 
@@ -702,3 +680,39 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 - [Agent Infra：Runtime、Sandbox 与可靠执行](../16-agent-infra/index.html)
 - [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
 - [Prompt 工程与框架原理](../08-prompt-engineering/index.html)
+
+## Q：Agent 和 Siri 这种传统助手的核心差别在哪？
+
+> 来源：字节AI产品（智能体方向）
+
+**新手答**：“Agent 更智能，Siri 比较笨。”
+
+**高手答**：
+
+核心差别不在“智能程度”，而在架构范式：
+
+1. **决策模式**：Siri 是“意图识别→槽位填充→调用固定 API”的管道式架构，每个能力是工程师预定义的；Agent 是“理解目标→自主规划→动态选择工具→反思调整”的闭环架构，能力边界由模型能力决定
+2. **任务复杂度**：Siri 处理单轮单意图（“设个闹钟”），Agent 能处理多步骤复合任务（“帮我规划周末行程并预订”）
+3. **容错方式**：Siri 失败了说“我不太明白”，Agent 失败了会自主尝试其他路径（Reflection + Retry）
+4. **上下文利用**：Siri 基本无记忆（每次对话独立），Agent 有长短期记忆，能利用历史交互持续优化
+5. **工具扩展性**：Siri 的技能由苹果开发团队预定义，Agent 可以通过 MCP/Function Calling 动态接入任意新工具
+6. **不确定性处理**：Siri 要求精确匹配意图才能执行，Agent 能处理模糊需求并主动澄清
+
+**差距在哪**：面试官考的是你对“Agent 本质是自主决策系统”的理解——传统助手是确定性流水线，Agent 是非确定性闭环。
+
+
+## 这类题的答题模式
+
+概念考察题的核心是**独立思考 + 结构化表达**：
+
+```text
+1. 先给定义：一句话说清概念的本质（不要复述定义，要用自己的理解）
+2. 再讲演进：为什么出现这个概念？解决了什么之前解不了的问题？
+3. 做对比：和相关概念的关键区别是什么？（用表格最清晰）
+4. 给判断：你怎么看这个概念？适用场景和局限各是什么？
+5. 接项目：你在实际项目里怎么用的？或者为什么没用？
+```
+
+面试官问“你了解X吗”不是在考记忆力——“了解”只是入门，**有判断**才是高手。
+
+---

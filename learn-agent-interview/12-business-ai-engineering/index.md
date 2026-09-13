@@ -58,7 +58,7 @@ eyebrow: Agent 面试通关 / 12
 
 ### Q：设计一个能根据用户行为自适应调整策略的 AI 系统，从技术架构上怎么做？
 
-> 来源：网易 AI Agent 开发实习（原题：设计进化 BOSS 战 AI）
+> 来源：网易 AI Agent 开发实习（原题：设计进化 BOSS 战 AI）；本轮追问：那给用户推荐过的，就不再推荐给用户，你怎么设计实现？（[本轮追问](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)）
 
 **新手答**：“用强化学习，让 AI 从用户行为中学习。”
 
@@ -102,7 +102,7 @@ flowchart LR
 
 ### Q：如何验证 AI 方案确实提升了业务指标，而不是带来了副作用？
 
-> 来源：网易 AI Agent 开发实习（原题：验证 AI 提升游戏体验而非难度）【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：如何衡量后训练带来的实际业务增益？】
+> 来源：网易 AI Agent 开发实习（原题：验证 AI 提升游戏体验而非难度）【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：如何衡量后训练带来的实际业务增益？】；本轮追问：如何验证模型融合后确实提升了 NDCG、召回率和最终业务指标？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：大模型对业务的冲击？每个业务后训练小模型思路？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）；本轮追问：业务提效与AI标准化是否对立？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)）
 
 **新手答**：“看准确率提升了就行。”
 
@@ -151,7 +151,7 @@ AI 方案的目标不是“模型更准”，是“业务更好”。两者经�
 
 ### Q：业务方反馈“AI 效果差”，你怎么系统性定位问题？
 
-> 来源：网易 AI Agent 开发实习（原题：玩家反馈 AI 很蠢如何定位）【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果AI Agent效果没有达到预期、在某些指标上落后，你们怎么优化？】
+> 来源：网易 AI Agent 开发实习（原题：玩家反馈 AI 很蠢如何定位）【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果AI Agent效果没有达到预期、在某些指标上落后，你们怎么优化？】；本轮追问：能否详细讲讲在小米项目中，你观察到的一个 Agent 效果上的具体问题，以及你们最终是怎么迭代和改进的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：如果有人质疑你的 Skill 结论失真，你怎么排查和解决？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）
 
 **新手答**：“看看 bad case，调调 Prompt。”
 
@@ -257,7 +257,7 @@ flowchart TB
 
 ### Q：知识库 RAG 和智能客服 Agent 系统的成熟方案有哪些？标准方案的优点和局限性？
 
-> 来源：币安 AI大模型实习一面
+> 来源：币安 AI大模型实习一面；本轮追问：整体结构参考了哪些业界方案？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）；本轮追问：RAG 有哪些问题？（[本轮追问](https://www.nowcoder.com/discuss/928253581973553152)）；本轮追问：做过技术方案吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/0a081f7c63464a39b9888c1af7b121ab)）
 
 **新手答**：“用 RAG 检索知识库，然后 LLM 回答。”
 
@@ -306,7 +306,7 @@ flowchart LR
 
 ## Q：Agent 项目如何从 Demo 进行企业级落地？从原型到生产需要补全哪些工程能力？
 
-> 来源：哆咔互娱 Agent开发实习一面 【[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界】
+> 来源：哆咔互娱 Agent开发实习一面 【[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界】；本轮追问：你的经历主要集中在 Skill 开发，是否具备 Agent 工程落地经验？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)；本轮追问：介绍 Codex Pi 的实现，以及 Agent 如何与业务结合并提效？（[本轮追问](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)）；本轮追问：Agent项目是用于业务提效的，还是可以复制到全公司维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/beae35cec366487a918abee5421216f2)）
 
 **新手答**：“把 Demo 代码优化一下，加个前端界面，部署到服务器上就行了。”
 
@@ -380,7 +380,7 @@ graph LR
 
 ## Q：设计订单客服 Agent 时，如何处理转人工和意图识别调优？
 
-> 来源：某 Java/Agent 岗面经（2026-08-12）
+> 来源：某 Java/Agent 岗面经（2026-08-12）；本轮追问：意图识别有误时有什么逻辑兜底？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；本轮追问：是否有人工介入？（[本轮追问](https://www.nowcoder.com/feed/main/detail/39ba19b7cc204f339ce07a6aced7565b)）
 
 **新手答**：“分类用户意图，查订单后回答；模型不会就转人工。”
 
@@ -476,7 +476,7 @@ MCP 的价值是**跨 Host 复用、动态发现和协议标准化**，不是让
 
 ## Q：设计一个群聊 Agent，如何同时处理权限、上下文和并行请求？
 
-> 来源：小红书数据库智能化日常实习一面（2026-08-10）
+> 来源：小红书数据库智能化日常实习一面（2026-08-10）；本轮追问：Agent 创建阶段和查询阶段分别如何处理权限？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）
 
 **新手答**：“监听群里的 @ 消息，把群聊历史发给模型，并发调用就行。”
 
@@ -523,7 +523,7 @@ flowchart LR
 
 ## Q：音视频 Agent 如何保护隐私并提供可验证删除？
 
-> 来源：字节 TikTok AI Agent 开发一面（2026-08-13）
+> 来源：字节 TikTok AI Agent 开发一面（2026-08-13）；本轮追问：你对音视频领域有哪些了解或实践？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“传输和存储加密，用户删除时删数据库。”
 
@@ -635,6 +635,92 @@ flowchart LR
 
 ---
 
+
+## Q：如何设计一个自动驾驶行为评估 Agent？
+
+> 来源：[卓驭 正式批 一面 数据算法与测评工程师 已挂](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)
+
+**新手答**：它读取行驶轨迹和场景信息，按安全与舒适指标分析行为并生成报告。
+
+**高手答**：
+
+输入包含传感器/轨迹、地图和场景标签；Agent 调度规则计算、仿真回放和模型判别工具，输出碰撞风险、交通规则违反、舒适性等结构化指标及证据片段。对安全结论采用确定性规则和人工复核，模型只做解释和异常归因；建立离线场景集、阈值版本和回归监控。
+
+**差距在哪**：考察业务目标、工具编排和安全边界。
+
+
+## Q：如何预测车辆未来一段时间的网络强弱？
+
+> 来源：[小鹏汽车端侧agent一面](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
+
+**新手答**：利用历史网络指标和车辆位置、速度等特征训练时序分类模型。
+
+**高手答**：
+
+采集 RSRP、SINR、吞吐、丢包、基站切换及 GPS，按时间窗口构造标签并避免未来信息泄露；先用规则/树模型建立基线，再尝试 TCN/Transformer。按道路和时间做切分，输出概率和置信度；线上滑窗推理，遇到缺失数据降级，并监控漂移和分层召回率。
+
+**差距在哪**：考察时序建模、标签定义、数据泄漏和线上降级。
+
+
+## Q：网站访问量激增时，如何设计系统承载？
+
+> 来源：[9.11 Boss直聘--一面](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)
+
+**新手答**：用缓存、限流、负载均衡和水平扩展分担流量。
+
+**高手答**：
+
+先容量压测定位瓶颈；静态资源 CDN，热点数据多级缓存，入口限流和排队，服务无状态化后水平扩展，数据库读写分离与连接池保护。对突发流量启用熔断和降级，关键接口保底；以 P99、错误率和饱和度驱动扩容，并准备回滚和演练。
+
+**差距在哪**：考察从容量评估到稳定性保护的完整链路。
+
+
+## Q：智能评审系统如何落地，大模型承担什么职责？
+
+> 来源：[汇川技术-应用软件工程师-一面](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)
+
+**新手答**：系统先收集材料和规则，大模型负责理解、生成意见，规则和人工负责校验。
+
+**高手答**：
+
+将材料解析、脱敏、规则检索、模型评审和结果复核拆成流水线；模型输出固定 schema、证据引用和置信度，规则引擎检查硬约束，低置信度进入人工队列。记录输入版本、提示词和模型版本，离线评测一致性、召回与偏差，线上限制权限并支持申诉。
+
+**差距在哪**：考察模型职责边界、可解释性和人工兜底。
+
+
+## Q：如何说明一个 AI 系统在信审链路中的位置和职责？
+
+> 来源：[阿里 Token Foundry AI应用研发一面面经](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)
+
+**新手答**：明确它的输入、输出以及对上游和下游的依赖。
+
+**高手答**：
+
+画出申请、数据采集、规则初筛、模型评分、人工审核和放款链路，标明系统是决策前特征补充、风险筛查还是审核辅助。定义接口契约、超时和降级：模型不可用时回退规则，所有决策保留版本、特征和审计记录，禁止越权直接放款。
+
+**差距在哪**：考察业务边界、责任归属和可审计性。
+
+
+## Q：如何过滤广告、系统消息等垃圾信息？
+
+> 来源：[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)
+
+**新手答**：先用规则过滤明显广告，再用分类模型识别复杂文本。
+
+**高手答**：
+
+建立标签体系和负样本集，流水线依次做来源白名单、规则/正则、轻量分类、语义模型与人工抽检；输出垃圾类型和置信度，低置信度隔离。对抗样本、概念漂移和误杀需持续回流，分渠道评估 precision/recall，保留申诉和审计。
+
+**差距在哪**：考察内容治理的分层策略、误杀成本和运营闭环。
+
+---
+
+## 推荐阅读
+
+- [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
+- [评估与全局观：怎么量化 Agent 好坏、落地最大挑战](../05-eval-and-vision/index.html)
+- [工程化踩坑：死循环、状态丢失与成本控制](../07-engineering-pitfalls/index.html)
+
 ## 这类题的答题模式
 
 业务 AI 工程分析题的核心是**从业务出发，回到业务**：
@@ -647,11 +733,3 @@ flowchart LR
 ```
 
 面试官听到「用 RAG + Agent」就知道你在套方案。听到「这个场景的核心瓶颈是 X，所以我选 Y 方案，预期提升 Z 指标」，才会觉得你有业务 sense。
-
----
-
-## 推荐阅读
-
-- [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
-- [评估与全局观：怎么量化 Agent 好坏、落地最大挑战](../05-eval-and-vision/index.html)
-- [工程化踩坑：死循环、状态丢失与成本控制](../07-engineering-pitfalls/index.html)

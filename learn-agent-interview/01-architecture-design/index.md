@@ -116,7 +116,7 @@ Executor 按依赖关系执行每步，返回结构化结果：
 
 ### Q：了解过 Agent 的设计范式吗？
 
-> 来源：字节后端开发 Agent 一面 【淘宝闪购一面同题：Agent 有哪些模式】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：你的方案更接近哪一种 Agent 范式？】
+> 来源：字节后端开发 Agent 一面 【淘宝闪购一面同题：Agent 有哪些模式】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：你的方案更接近哪一种 Agent 范式？】；本轮追问：Agent 相关现在了解哪些？（[本轮追问](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)）
 
 **新手答**：“ReAct，就是边想边做。”
 
@@ -174,7 +174,7 @@ Executor 按依赖关系执行每步，返回结构化结果：
 
 ### Q：Agent 的架构设计？从系统角度来拆分
 
-> 来源：阿里 AI Agent 开发一面【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：Agent 项目的架构如何设计？解决了什么问题？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：为什么把系统设计成三级 Agent 架构？】
+> 来源：阿里 AI Agent 开发一面【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：Agent 项目的架构如何设计？解决了什么问题？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：为什么把系统设计成三级 Agent 架构？】；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[本轮来源](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)；本轮追问：Agent项目里承担什么角色，有参与架构设计吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/0a081f7c63464a39b9888c1af7b121ab)）；本轮追问：看你项目主要使用 Java 开发，视频平台项目技术栈和中间件较多，从技术架构角度介绍项目整体技术编排。（[本轮追问](https://www.nowcoder.com/feed/main/detail/4f486761a999482fa6819b3e45ae3346)）；本轮追问：画一下你自己这个项目的架构图。（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)）；本轮追问：Agent项目的多模式引擎怎么做的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)；本轮追问：这个项目为什么要设计成 Agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：你怎么会想着做这个系统？（项目背景）（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“用大模型接工具就行。”
 
@@ -273,7 +273,7 @@ Skill 只能告诉模型“应该怎么做”，不能证明模型一定照做�
 
 ### Q：什么时候该做 Agent？和 Workflow 的边界在哪？
 
-> 来源：Agent 开发面试 30 题 【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【阿里 Agent Infra 一面题库同题】【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：Agent 是人工触发任务吗？整体工作流程是否固定？】
+> 来源：Agent 开发面试 30 题 【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【阿里 Agent Infra 一面题库同题】【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：Agent 是人工触发任务吗？整体工作流程是否固定？】；本轮追问：Workflow 的优点和缺点是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；本轮追问：动态 Workflow 了解吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
 
 **新手答**：“需求复杂就用 Agent，简单就用 Workflow。”
 
@@ -555,7 +555,7 @@ API Wrapper 是确定性的——同样输入永远同样输出。Agent 是概�
 
 ### Q：Skill、MCP、Rule 三者有什么区别？
 
-> 来源：蚂蚁集团一面
+> 来源：蚂蚁集团一面；[本轮来源](https://www.nowcoder.com/discuss/928313631916199936)
 
 **新手答**：“都是给 Agent 加功能的方式吧。”
 
@@ -765,7 +765,7 @@ flowchart LR
 
 ### Q：如何保证规划 Agent plan 的结果正确？
 
-> 来源：AI 工程师面试
+> 来源：AI 工程师面试；本轮追问：除了检查是否路由到正确的 Skill、是否调用了正确工具和知识文档，还如何判断最终诊断结果是正确的？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：客户回答回来后，如何确保它对应的是正确的问题和正确的信审任务？（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)）
 
 **新手答**：“让模型多想想，加个 CoT 就行。”
 
@@ -887,7 +887,7 @@ data: {“node”: “search”}
 
 ### Q：LangChain 和 LangGraph 有什么区别？分别适合什么场景？
 
-> 来源：淘宝闪购 AI应用研发 一面【[0827-字节大模型应用开发(一面)-秋招](https://www.nowcoder.com/discuss/926086211272196096)追问：对于 LangChain 和 LangGraph 这些框架了解吗，能说说两者的区别吗？】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：LangGraph 和 LangChain 有什么区别？图状态机适用于哪些场景？】【[第三次去哪儿旅行一面，AI面试问的是前端吗？](https://www.nowcoder.com/feed/main/detail/2ed12b3fa1d4491f8bb029f99cf9de73)追问：LangChain和LangGraph有什么区别？为什么现在项目优先使用LangGraph？】【[pdd agent二面](https://www.nowcoder.com/feed/main/detail/f5e7351df8364147ac8da085b99d9d18)追问：LangChain与LangGraph核心区别？】
+> 来源：淘宝闪购 AI应用研发 一面【[0827-字节大模型应用开发(一面)-秋招](https://www.nowcoder.com/discuss/926086211272196096)追问：对于 LangChain 和 LangGraph 这些框架了解吗，能说说两者的区别吗？】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：LangGraph 和 LangChain 有什么区别？图状态机适用于哪些场景？】【[第三次去哪儿旅行一面，AI面试问的是前端吗？](https://www.nowcoder.com/feed/main/detail/2ed12b3fa1d4491f8bb029f99cf9de73)追问：LangChain和LangGraph有什么区别？为什么现在项目优先使用LangGraph？】【[pdd agent二面](https://www.nowcoder.com/feed/main/detail/f5e7351df8364147ac8da085b99d9d18)追问：LangChain与LangGraph核心区别？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：说说你对 Graph Engineer 的理解，图结构在安全 Agent 里有什么价值？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）
 
 **新手答**：“LangChain 是做大模型应用的框架，LangGraph 没怎么了解。”
 
@@ -985,7 +985,7 @@ flowchart LR
 
 ### Q：Agent 的 Self-Reflection 机制是什么？它怎么识别输出中的逻辑错误？
 
-> 来源：蚂蚁 AI应用开发 二面 【小红书 Agent 开发一面追问：Planner、Executor、Critic 的职责边界】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)追问：Critic 如何量化目标达成】
+> 来源：蚂蚁 AI应用开发 二面 【小红书 Agent 开发一面追问：Planner、Executor、Critic 的职责边界】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)追问：Critic 如何量化目标达成】；本轮追问：Critic 和 Executor 使用的同一个模型吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
 
 **新手答**：「让模型自己检查一遍输出，发现错误就修正。」
 
@@ -1252,7 +1252,7 @@ flowchart TB
 
 ### Q：如果设计一个科研辅助 Agent，整体流程应该怎么设计？
 
-> 来源：bilibili AI研发实习一面
+> 来源：bilibili AI研发实习一面；本轮追问：你们的agent是怎么设计的？你负责哪一部分？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；本轮追问：code agent 是怎么设计的，做了哪些优化？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；本轮追问：如果设计这些游戏里的 Agent，会怎么进行设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/85a64d94c3374a10afa20d7466d24d5d)）；本轮追问：如何设计一个 Agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）
 
 **新手答**：“让大模型帮忙搜论文、写摘要。”
 
@@ -1330,7 +1330,7 @@ Gemini Deep Research、Perplexity 的深度研究功能，本质上就是这套�
 
 ### Q：如何保障自然语言任务描述能精准转化为稳定、可靠的执行路径？
 
-> 来源：蚂蚁 AI应用开发 二面
+> 来源：蚂蚁 AI应用开发 二面；[本轮来源](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)；[本轮来源](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)
 
 **新手答**：「优化 Prompt，让模型更好地理解任务。」
 
@@ -1425,7 +1425,7 @@ flowchart TB
 
 ## Q：Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？
 
-> 来源：快手AI应用开发一面 【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)同题】
+> 来源：快手AI应用开发一面 【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)同题】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；本轮追问：为什么不用固定代码 workflow，而是用 prompt 描述流程？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；本轮追问：Loop Engineer 和 Graph Engineer 的区别是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）
 
 **新手答**：“Skill 就是一个功能模块，Workflow 是流程编排，两个差不多吧。”
 
@@ -1514,7 +1514,7 @@ Skill 的定义更像一个稳定接口：
 
 ## Q：基于强化学习的 Agent 与传统基于 Prompt 的 Agent 有何区别？各自的适用场景？
 
-> 来源：Agent开发八股合集（南京大学）
+> 来源：Agent开发八股合集（南京大学）；本轮追问：对 Agent 的学习了解多少？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5b7e7cb510914d3baa40af22ce602b4c)）
 
 **新手答**：“RL Agent 就是用强化学习训练模型，Prompt Agent 就是写提示词让模型做事，RL 更高级。”
 
@@ -1630,7 +1630,7 @@ flowchart LR
 
 ## Q：Coding Agent 的完整链路是怎么运转的？从用户输入到代码产出的全流程
 
-> 来源：字节跳动 Agent 二面（Coding Agent）【百度大模型研发二面追问：Claude Code 用户交互全流程数据流】
+> 来源：字节跳动 Agent 二面（Coding Agent）【百度大模型研发二面追问：Claude Code 用户交互全流程数据流】；本轮追问：当前任务主要由数据或其他 Agent 自动驱动，还是由用户通过人机交互发起？（[本轮追问](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)）
 
 **新手答**：“用户输入需求，模型生成代码，就这样。”
 
@@ -1686,7 +1686,7 @@ flowchart TB
 
 ## Q：只有模型 API 和 VS Code，如何从零搭建一套可用的 Agent 应用？
 
-> 来源：百度大模型研发工程师二面（2026-08-21）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：从零开始设计一个 Agent 应用时，整体规划如何制定？】
+> 来源：百度大模型研发工程师二面（2026-08-21）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：从零开始设计一个 Agent 应用时，整体规划如何制定？】；本轮追问：为什么自己去做一个 code agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）
 
 **新手答**：“写一个 while 循环调用模型，再把工具函数注册进去。”
 
@@ -1844,7 +1844,7 @@ flowchart LR
 
 ## Q：设计一个内部的多源文档问答 AI，架构设计是什么？
 
-> 来源：百度/AI智能体开发一面 【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)同题】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)追问：Word 图文上下文与图文混合响应】
+> 来源：百度/AI智能体开发一面 【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)同题】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)追问：Word 图文上下文与图文混合响应】；本轮追问：RAG 项目的问答对是什么形式？（[本轮追问](https://www.nowcoder.com/discuss/926677767104532480)）；本轮追问：有没有做什么内部的 QA 模型，来专门回答已有的一类问题？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）
 
 **新手答**：“用 RAG 就行，把文档切块建索引。”
 
@@ -1980,7 +1980,7 @@ Word 不能只按段落文本读取。`.docx` 属于 [ECMA-376 Office Open XML](
 
 ## Q：在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？
 
-> 来源：[地图 Agent 二面](https://www.nowcoder.com/feed/main/detail/0208597586e744c884bdc571dc441fad)（2026-08-24）
+> 来源：[地图 Agent 二面](https://www.nowcoder.com/feed/main/detail/0208597586e744c884bdc571dc441fad)（2026-08-24）；本轮追问：你的 AI 辅助编码工作流是怎样的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）
 
 **新手答**：“DDD 能让代码结构更清晰，AI 生成代码时更容易理解项目。”
 
@@ -2007,6 +2007,19 @@ DDD 也不能教条化：简单 CRUD 不必堆砌 Value Object 和 Repository。
 验收不能只看是否生成代码。还要比较任务成功率、计划变更率、用户确认次数、错误修改范围、回滚率、耗时和 Token 成本，并按重构、修 Bug、跨仓库变更等任务类型切片。这样 Solo/Plan 是风险与自治程度的控制面，而不是两个互不相干的产品按钮。
 
 **差距在哪**：新手只描述交互顺序，高手把计划版本、偏差处理、模式切换和验收指标设计成同一执行协议。
+
+
+## Q：什么时候需要自研或改造方案，而不是直接采用开源实现？
+
+> 来源：[腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)
+
+**新手答**：开源方案能减少开发成本，但功能、性能或合规不一定匹配业务。应先比较需求、成熟度和维护成本，再决定复用、扩展还是自研。
+
+**高手答**：
+
+先把硬约束写成指标：延迟、吞吐、准确率、数据合规、部署环境和交付周期；建立 POC 与基线，对开源方案做压测和故障演练。若只是接口或策略差异，优先封装或插件化扩展；只有在核心能力缺失、性能瓶颈或许可证/数据边界不满足时才自研，并保留可替换接口和迁移计划。
+
+**差距在哪**：考察是否能用成本、风险和约束做架构决策，而不是为了“技术先进”盲目自研。
 
 ---
 

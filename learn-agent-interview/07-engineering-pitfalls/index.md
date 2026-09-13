@@ -223,7 +223,7 @@ Demo 能跑通，只能说明“这个方向可能”。线上稳定，说明的
 
 ### Q：平时用过哪些 AI Agent 工具？
 
-> 来源：腾讯 Agent 应用开发一面 / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)
+> 来源：腾讯 Agent 应用开发一面 / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)；本轮追问：平时用什么AI编码工具？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；本轮追问：平时是否使用 AI Coding 或 AI 数据分析？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）；本轮追问：你对 AI 工程了解多少？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5b7e7cb510914d3baa40af22ce602b4c)）；本轮追问：平时工作中一般会用到哪些 Agent 工具和模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a241d73effc4540a857a752d987a6f8)）；本轮追问：你平时开发用什么模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“用过 ChatGPT。”
 
@@ -292,7 +292,7 @@ AI Agent 工具按用途分三类：
 
 ### Q：如何保证 AI 代码生成的质量与掌控性？
 
-> 来源：蚂蚁集团 Agent 开发一面 / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95) / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：AI Coding 习惯及代码质量保证？】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：如何确保 AI 生成代码逻辑可靠？；AI 编码工具（Cursor/Codex）如何协作及保证代码质量？】【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：如何让AI写业务代码？】【[作业帮一面 9.5](https://www.nowcoder.com/feed/main/detail/21ca46108ebf479fb8056c6e9f61d42f)追问：之后怎么保证代码质量？怎么验证？还有别的机制吗？】
+> 来源：蚂蚁集团 Agent 开发一面 / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95) / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：AI Coding 习惯及代码质量保证？】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：如何确保 AI 生成代码逻辑可靠？；AI 编码工具（Cursor/Codex）如何协作及保证代码质量？】【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：如何让AI写业务代码？】【[作业帮一面 9.5](https://www.nowcoder.com/feed/main/detail/21ca46108ebf479fb8056c6e9f61d42f)追问：之后怎么保证代码质量？怎么验证？还有别的机制吗？】；本轮追问：如何与AI协作的（[本轮追问](https://www.nowcoder.com/feed/main/detail/022ab580ee68432daf536a939e86aefa)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f38a9773d134e6fa18e00870dd42c59)；本轮追问：从 0 设计一个通用的、规范驱动的 CLI/SDK 代码生成平台（支持 OpenAI、Arazzo 等多样输入规范，支持 Java、Python 多语言，保证用户手写代码不被覆盖，支持团队多人协作），讲讲你的系统分层设计。（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）；本轮追问：这里面有好几个环节，产物的生成怎么保证？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）
 
 **新手答**：“生成后人工 review 一下。”
 
@@ -935,7 +935,7 @@ flowchart LR
 
 ### Q：AI 应用中 SSE 流式数据怎么处理？数据格式是什么？
 
-> 来源：百度实习 AI 应用开发一面【[字节agent一面](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)追问：SSE 在项目里用来做什么？推送的数据格式是什么样？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：有流式输出吗？具体的流式响应是怎么处理的？】
+> 来源：百度实习 AI 应用开发一面【[字节agent一面](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)追问：SSE 在项目里用来做什么？推送的数据格式是什么样？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：有流式输出吗？具体的流式响应是怎么处理的？】；本轮追问：这种流式协议是不是比较适合音频、视频这种流式数据？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）
 
 **新手答**：“就是后端一直发数据，前端一直收。”
 
@@ -1356,7 +1356,7 @@ AI 应用的前端缓存策略和普通 Web 应用一样，核心是**按资源�
 
 ### Q：AI Coding 检查错误的时间比自己写还长，怎么提效？
 
-> 来源：字节实习二面【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：日常 coding 或改策略往往是不确定的事情，怎么让 Agent 提效？】
+> 来源：字节实习二面【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：日常 coding 或改策略往往是不确定的事情，怎么让 Agent 提效？】；本轮追问：平时有用 Coding Agent 吗？如何提效？（[本轮追问](https://www.nowcoder.com/feed/main/detail/945e5869249d4f4b86d4b6460f4486dd)）；本轮追问：讲下你平时 AI Coding 工作流（CC/Codex）（[本轮追问](https://www.nowcoder.com/feed/main/detail/f68f0d54184944c391e0d7b6d1bb82c8)）
 
 **新手答**：“那就不用 AI 写了，自己写更快。”
 
@@ -1438,7 +1438,7 @@ Agent 和普通 LLM 推理不同——单次请求可能触发 5-15 次模型调
 
 ### Q：使用 LangGraph 开发 Agent，遇到最大的困难是什么？
 
-> 来源：bilibili AI研发实习一面
+> 来源：bilibili AI研发实习一面；本轮追问：你是否实际使用过 LangChain 或 LangGraph？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“文档看不太懂。”
 
@@ -1542,7 +1542,7 @@ LangGraph 的 checkpointer 机制允许在任意节点暂停和恢复，但实�
 
 ### Q：模型离线 AUC 很高但上线后效果暴跌，怎么排查？
 
-> 来源：淘宝闪购 Agent 一面（AI Coding 压轴题）
+> 来源：淘宝闪购 Agent 一面（AI Coding 压轴题）；本轮追问：线上效果是否一上来就是正向的？是否遇到过离线好但线上差的案例？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）
 
 **新手答**：“可能是数据有问题，重新训练一下。”
 
@@ -1741,7 +1741,7 @@ ProcessPoolExecutor     → CPU 密集（本地模型推理）
 
 ### Q：用 AI Coding 工具写代码达不到预期怎么办？
 
-> 来源：CVTE/AI应用工程师一面
+> 来源：CVTE/AI应用工程师一面；本轮追问：如何让AI写业务代码？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)
 
 **新手答**：“多试几次，换个写法描述需求，或者自己手写。”
 
@@ -1839,7 +1839,7 @@ Thread ≈ Git Branch（一条执行路径）
 
 ## Q：Agent 系统可观测性设计——怎样的结构才能更好地追踪整个 Trace？
 
-> 来源：美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库追问：Agent Trace 字段与成功率突降排查】 / [阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f) / [百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)【[阿里巴巴（阿里云）- Agent Infra](https://www.nowcoder.com/discuss/926273487512113152)追问：如何设计 Agent 全链路追踪（Trace）和可观测性（Metrics）？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：用户的一次请求在最终的 Trace 展示上是什么形式？Trace 具体怎么用，会做分析吗？】【[格物致信（一面过，二面线下拒）](https://www.nowcoder.com/feed/main/detail/f68f0d54184944c391e0d7b6d1bb82c8)追问：Agent很容易变成黑盒，任务失败你如何做可观测性？】
+> 来源：美团Agent开发（智能客服方向）二面 【懂车帝 Agent 开发一面追问：Trace、日志、指标和配置版本联合归因】【阿里 Agent Infra 一面题库追问：Agent Trace 字段与成功率突降排查】 / [阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f) / [百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)【[阿里巴巴（阿里云）- Agent Infra](https://www.nowcoder.com/discuss/926273487512113152)追问：如何设计 Agent 全链路追踪（Trace）和可观测性（Metrics）？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：用户的一次请求在最终的 Trace 展示上是什么形式？Trace 具体怎么用，会做分析吗？】【[格物致信（一面过，二面线下拒）](https://www.nowcoder.com/feed/main/detail/f68f0d54184944c391e0d7b6d1bb82c8)追问：Agent很容易变成黑盒，任务失败你如何做可观测性？】；本轮追问：怎么控制agent的，是否有观测的方式？（[本轮追问](https://www.nowcoder.com/feed/main/detail/39ba19b7cc204f339ce07a6aced7565b)）
 
 **新手答**：“每一步打个日志就行。”
 
@@ -1867,7 +1867,7 @@ Agent 的可观测性和传统微服务 tracing 有本质区别——它是非�
 
 ## Q：SSE 流式输出中断后如何保证之前的输出不丢失？
 
-> 来源：某教育agent开发【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计 SSE 流式输出网关，处理断线重连和消息重放？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何设计 SSE 流式网关，处理断线重连和消息重放？】
+> 来源：某教育agent开发【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计 SSE 流式输出网关，处理断线重连和消息重放？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何设计 SSE 流式网关，处理断线重连和消息重放？】；本轮追问：SSE 如何处理断连？心跳保活怎么做？（[本轮追问](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)）
 
 **新手答**：“断了就重新生成呗。”
 
@@ -1927,7 +1927,7 @@ Agent 的版本管理涉及三层：Prompt/Tool Schema/Model 各自独立版本�
 
 ## Q：产品的用户量、每日 token 消耗和底层模型选型怎么估算？
 
-> 来源：快手AI应用开发一面
+> 来源：快手AI应用开发一面；本轮追问：项目底层模型如何选择？选型的考量是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)）；本轮追问：估算此时此刻上空有多少架飞机，并说明完整推导过程。（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）；本轮追问：token的计费规则是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)）
 
 **新手答**：“看产品有多少用户，乘以每次对话的 token 数就行了。”
 
@@ -2003,7 +2003,7 @@ graph LR
 
 ## Q：如何设计 Agent 的流式输出以提升用户体验，特别是包含工具调用和多次大模型交互时？
 
-> 来源：Agent开发八股合集（南京大学） / [阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)
+> 来源：Agent开发八股合集（南京大学） / [阿里千问 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/463438ee0d9e403b98e8578a05ba4e3f)；本轮追问：大模型生成的内容如何与后续工具代码对接？如何约束输出规范？（[本轮追问](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)）
 
 **新手答**：“用 SSE 把模型输出一个字一个字推给前端就行了。”
 
@@ -2179,7 +2179,7 @@ SSE 重连能可靠重放的是**已持久化事件**，不是要求模型从相
 
 ### Q：AgentState 的作用是什么？为什么不使用全局变量？
 
-> 来源：字节Agent开发一面（某大厂）
+> 来源：字节Agent开发一面（某大厂）；本轮追问：C 语言中全局变量存储在哪里？（[本轮追问](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)）；本轮追问：本地 Agent 为什么会出现空转？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）
 
 **新手答**：“用全局变量也能存状态吧，AgentState 就是框架的封装。”
 
@@ -2217,7 +2217,7 @@ AgentState 解决的核心问题是**状态的可追踪、可回溯、可序列�
 
 ## Q：系统里多租户隔离是怎么实现的？
 
-> 来源：视频面经汇总【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计多租户隔离，包括状态和知识库隔离？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何实现多租户状态与知识库隔离？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：不同用户之间是怎么隔离的？】
+> 来源：视频面经汇总【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计多租户隔离，包括状态和知识库隔离？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何实现多租户状态与知识库隔离？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：不同用户之间是怎么隔离的？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)
 
 **新手答**：“每个租户一个数据库。”
 
@@ -2278,7 +2278,7 @@ PRD/Spec 必须版本化和可追溯：记录需求 ID、版本、变更原因�
 
 ## Q：多模型如何动态路由？根据视频特征、任务特征、成本、延迟和效果选模型？
 
-> 来源：商汤/大模型算法应用实习二面【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：模型路由的依据是什么？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：从大模型切到小模型主要是为了响应时长吗，实际效果对比大模型怎么样？】
+> 来源：商汤/大模型算法应用实习二面【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：模型路由的依据是什么？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：从大模型切到小模型主要是为了响应时长吗，实际效果对比大模型怎么样？】；本轮追问：小模型如何选择？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；本轮追问：后面是否会训练专门的路由模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）
 
 **新手答**：“根据任务类型写 if-else 选模型。”
 
@@ -2367,7 +2367,7 @@ K8s 在 Agent 项目中主要解决三个问题：
 
 ## Q：LangGraph 图状态机里，怎么捕获每个节点的执行结果并实时推前端？
 
-> 来源：淘天/AI Agent一面【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：能否完整描述这个图、图上的状态，以及每个节点的执行过程？】
+> 来源：淘天/AI Agent一面【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：能否完整描述这个图、图上的状态，以及每个节点的执行过程？】；本轮追问：单据的状态机怎么设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）
 
 **新手答**：“用回调函数。”
 
@@ -2436,7 +2436,7 @@ flowchart LR
 
 ## Q：如何记录 Agent 的非确定性边界，实现可重复的故障回放？
 
-> 来源：腾讯互娱全栈开发（AI）二面（2026-08-13）【字节火山引擎 Managed Agent 一面追问：记录耗时、Token、结果和失败路线】
+> 来源：腾讯互娱全栈开发（AI）二面（2026-08-13）【字节火山引擎 Managed Agent 一面追问：记录耗时、Token、结果和失败路线】；本轮追问：如何确认离线构造的故障、标准答案和线上真实排障流程一致？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“保存完整日志，回放时设置相同 temperature。”
 
@@ -2448,7 +2448,7 @@ flowchart LR
 
 ## Q：进程、线程、协程有什么区别？什么场景下协程更有优势？
 
-> 来源：视频面经汇总
+> 来源：视频面经汇总；本轮追问：Python 的 asyncio 有了解吗？什么场景下适合用这个？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：进程和线程有什么区别？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）
 
 **新手答**：“进程是资源分配单位，线程是执行单位，协程更轻量。”
 
@@ -2648,7 +2648,7 @@ flowchart LR
 
 ## Q：Agent 框架如何实现流式并行？了解 Claude Code 的流式并行是怎么做的吗？
 
-> 来源：广州某小厂 Agent 后端开发二面
+> 来源：广州某小厂 Agent 后端开发二面；本轮追问：MCP的stdio / Streamable HTTP这块是怎么实现的？Streamable HTTP是流式的吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）
 
 **新手答**：“用多线程同时跑多个 Agent 就行了。”
 
@@ -2732,7 +2732,7 @@ Claude Code 的 Agent 工具支持并行启动多个子 Agent（`run_in_backgrou
 
 ## Q：Redis 在 Agent 系统中适合承担哪些职责，哪些数据不应只放 Redis？
 
-> 来源：点点互动/Agent开发秋招一面
+> 来源：点点互动/Agent开发秋招一面；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)
 
 **新手答**：“Redis 可以缓存对话和工具结果，提高速度。”
 
@@ -2750,7 +2750,7 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ## Q：什么是死锁？死锁产生的条件、检测和解决方法是什么？
 
-> 来源：小红书 Agent 岗一面
+> 来源：小红书 Agent 岗一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)
 
 **新手答**：“两个线程互相等锁，所以程序卡住了。”
 
@@ -2797,7 +2797,7 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ## Q：在浏览器输入一个 URL 到页面显示，完整经历了哪些过程？
 
-> 来源：小红书 Agent 岗一面
+> 来源：小红书 Agent 岗一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)
 
 **新手答**：“DNS 找到服务器，HTTP 请求页面，然后浏览器渲染。”
 
@@ -2835,7 +2835,7 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ## Q：如何设计同时兼顾吞吐、首 Token 延迟和租户公平性的推理调度器？
 
-> 来源：智象未来 AI Infra 一面（2026-08-20）
+> 来源：智象未来 AI Infra 一面（2026-08-20）；本轮追问：有没有关注过LLM首token返回时间（KVCACHE）？（[本轮追问](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)）
 
 **新手答**：“做动态批处理，批次越大吞吐越高。”
 
@@ -2885,9 +2885,10 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ---
 
+
 ## Q：自动回滚阈值如何设置，避免固定阈值误杀或放过回归？
 
-> 来源：[深信服 Agent 三面](https://www.nowcoder.com/feed/main/detail/b64e8fddbfc642ec9aa33bcdb9aab9aa)（2026-08-23）
+> 来源：[深信服 Agent 三面](https://www.nowcoder.com/feed/main/detail/b64e8fddbfc642ec9aa33bcdb9aab9aa)（2026-08-23）；本轮追问：Agent自动回滚的触发条件是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/beae35cec366487a918abee5421216f2)）
 
 **新手答**：“成功率下降超过 5% 就回滚。”
 
@@ -2899,7 +2900,7 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ## Q：如何设计类似 LangFlow 的 Agent 工作流可视化编排画布？
 
-> 来源：商汤 AI Agent 开发面经（2026-03-05）
+> 来源：商汤 AI Agent 开发面经（2026-03-05）；本轮追问：Agent 动态工作流平台怎么实现的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
 
 **新手答**：“前端用节点编辑器画流程，后端把节点按连线顺序执行。”
 
@@ -2926,7 +2927,7 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ## Q：接入多个外部 Agent 时，如何用 Adapter 统一异构事件、工具调用和生命周期协议？
 
-> 来源：北京 B 端 AI 小厂面经（2026-07）
+> 来源：北京 B 端 AI 小厂面经（2026-07）；本轮追问：几千个业务能统一 Agent 流程吗？怎么合并？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
 
 **新手答**：“为每个 Agent 写一个 Adapter，把它们的 JSON 转成统一格式。”
 
@@ -2948,6 +2949,50 @@ Adapter 不只是改字段名，还要完成三类语义映射：
 
 ---
 
+## Q：如何统计 Agent 各模块耗时并定位瓶颈？
+
+> 来源：[寒武纪AI应用开发一面&二面](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)
+
+**新手答**：在每个模块前后打点，统计平均、P95/P99 和调用次数。
+
+**高手答**：
+
+采用统一 trace_id 和 span，覆盖排队、网络、模型首 token、生成、工具执行及序列化；用单调时钟记录耗时，异步链路传播上下文。按请求类型拆分分位数，结合 token、并发和错误率分析；采样保留原始 trace，聚合指标进监控，避免日志泄露提示词和隐私。
+
+**差距在哪**：考察端到端可观测性、分位数分析和隐私成本控制。
+
+
+## Q：如何估算 Agent 使用模型的月度成本？
+
+> 来源：[汇川技术一面](https://www.nowcoder.com/feed/main/detail/6a241d73effc4540a857a752d987a6f8)
+
+**新手答**：按调用量乘以输入、输出 token 单价，再加上工具和基础设施费用。
+
+**高手答**：
+
+建立成本模型：请求数 × 每次输入/输出 token × 对应价目，叠加重试、缓存未命中、Embedding、存储和 GPU。用真实 trace 统计 P50/P95，并按用户、功能和模型拆分预算；设置 token 上限、路由便宜模型、缓存和告警，按日核对账单。价格会变动，配置应来自可更新的价目表。
+
+**差距在哪**：考察是否能把成本落到可观测数据和可执行的控制手段。
+
+
+## Q：大型项目重构如何规划，如何处理模块正交与冗余？
+
+> 来源：[阿里控股 AI全栈开发 二面](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)
+
+**新手答**：先梳理依赖和职责，拆成可回滚的小步迁移，删除重复实现。
+
+**高手答**：
+
+以业务边界和变更原因建立模块地图，识别高耦合和重复逻辑；定义稳定接口与数据契约，采用绞杀者模式逐步迁移。正交模块只暴露必要依赖，公共能力下沉为版本化库；用静态依赖分析、覆盖率和线上指标验证，双写/回放期间监控差异，完成后删除旧路径。
+
+**差距在哪**：考察重构的边界设计、迁移风险和冗余治理。
+
+---
+
+下一篇建议继续看：
+
+- [Prompt 工程与框架原理：模板构建、Skills 机制](../08-prompt-engineering/index.html)
+
 ## 这类题的答题模式
 
 踩坑题的核心是**真实 + 系统性**：
@@ -2960,9 +3005,3 @@ Adapter 不只是改字段名，还要完成三类语义映射：
 ```
 
 面试官听到“模型不听话”就知道你只在 Notebook 里跑过。听到死循环计数器、状态外置存储、JSON 容错解析、token 预算熔断，才会觉得你真的在生产环境里摔过跤，并且摔完站起来做了系统性修复。
-
----
-
-下一篇建议继续看：
-
-- [Prompt 工程与框架原理：模板构建、Skills 机制](../08-prompt-engineering/index.html)

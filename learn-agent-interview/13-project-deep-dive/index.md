@@ -26,7 +26,7 @@ eyebrow: Agent 面试通关 / 13
 
 ### Q：你的 Agent 项目用了什么框架？为什么选它？
 
-> 来源：淘宝闪购 AI应用研发 一面 【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】；[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)；[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)
+> 来源：淘宝闪购 AI应用研发 一面 【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】；[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)；[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：第一个Coding Agent项目是基于什么开源项目改的吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）
 
 **新手答**：“用了 LangChain，因为最流行，社区资源多。”
 
@@ -116,7 +116,7 @@ eyebrow: Agent 面试通关 / 13
 
 ### Q：意图识别模块具体怎么做的？
 
-> 来源：淘宝闪购 AI应用研发 一面【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：意图识别模块应采用分类模型还是规则引擎？如何提升准确率？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：意图识别是怎么做的，使用的什么模型，介绍意图识别树结构。】
+> 来源：淘宝闪购 AI应用研发 一面【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：意图识别模块应采用分类模型还是规则引擎？如何提升准确率？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：意图识别是怎么做的，使用的什么模型，介绍意图识别树结构。】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；本轮追问：用户意图标签是在进入小程序前生成，还是在对话过程中生成？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：你具体改了哪个模块？是否改过第三方框架源码？（[本轮追问](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)）；本轮追问：为什么选择 Qwen 2.5 系列，并在意图分类环节使用 0.5B 量级模型？参数规模是如何考虑的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；本轮追问：AI意图识别依赖模型，选品推品跟模型结合，这里有针对它做什么研发吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）
 
 **新手答**：“用 Prompt 让模型判断用户意图，分成几个类别。”
 
@@ -163,7 +163,7 @@ flowchart LR
 
 ### Q：你的 Agent 有哪些工具？工具是怎么设计的？
 
-> 来源：淘宝闪购 AI应用研发 一面；[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)
+> 来源：淘宝闪购 AI应用研发 一面；[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)；本轮追问：Claude的设计模式是什么？它原有的工具有哪些？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
 
 **新手答**：“有搜索工具、数据库查询工具、计算工具，用 function calling 调用。”
 
@@ -197,7 +197,7 @@ flowchart LR
 
 ### Q：怎么提升工具调用的正确率？
 
-> 来源：淘宝闪购 AI应用研发 一面【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：Agent在执行过程中需要调用工具，这些工具都有固定的入参，需要模型结合上下文提供，如何保障工具调用的可靠性？】【[第三次去哪儿旅行一面，AI面试问的是前端吗？](https://www.nowcoder.com/feed/main/detail/2ed12b3fa1d4491f8bb029f99cf9de73)追问：Agent工具调用失败的常见原因有哪些？如何优化工具调用成功率？】
+> 来源：淘宝闪购 AI应用研发 一面【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：Agent在执行过程中需要调用工具，这些工具都有固定的入参，需要模型结合上下文提供，如何保障工具调用的可靠性？】【[第三次去哪儿旅行一面，AI面试问的是前端吗？](https://www.nowcoder.com/feed/main/detail/2ed12b3fa1d4491f8bb029f99cf9de73)追问：Agent工具调用失败的常见原因有哪些？如何优化工具调用成功率？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)
 
 **新手答**：“优化 Prompt，让模型更准确地选择工具。”
 
@@ -267,7 +267,7 @@ flowchart LR
 
 ### Q：知识库是怎么构建的？
 
-> 来源：淘宝闪购 AI应用研发 一面【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：IM 项目中的 AI 助手和知识检索是怎么做的？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们现在知识库具体是怎么做的？】
+> 来源：淘宝闪购 AI应用研发 一面【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：IM 项目中的 AI 助手和知识检索是怎么做的？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们现在知识库具体是怎么做的？】；本轮追问：项目中各模块的具体实现方式是什么？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；[本轮来源](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)
 
 **新手答**：“把文档切块，用 Embedding 模型转成向量，存进向量数据库，检索的时候做相似度匹配。”
 
@@ -317,7 +317,7 @@ flowchart LR
 
 ### Q：分块策略是怎么设计的？
 
-> 来源：淘宝闪购 AI应用研发 一面 【腾讯AI应用开发一面追问：分块方案选型理由与指标量化】
+> 来源：淘宝闪购 AI应用研发 一面 【腾讯AI应用开发一面追问：分块方案选型理由与指标量化】；[本轮来源](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)；[本轮来源](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)；本轮追问：截取策略是什么？如果重要信息在后面怎么办？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“按 512 个 token 固定切分，块之间有 50 token 的重叠。”
 
@@ -507,7 +507,7 @@ flowchart LR
 
 ### Q：LangGraph 中的 State 怎么定义和流转？节点多了怎么防止状态膨胀？
 
-> 来源：蚂蚁 AI应用开发 二面 【钉学科技 FDE 实习一面追问：State、Node、Edge 的设计优先级】
+> 来源：蚂蚁 AI应用开发 二面 【钉学科技 FDE 实习一面追问：State、Node、Edge 的设计优先级】；[本轮来源](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)
 
 **新手答**：“State 就是一个字典，每个节点往里面加数据。”
 
@@ -551,7 +551,7 @@ Node_A(state) → {"current_step": "search", "tool_results": {"query": "..."}}
 
 ### Q：你的 Agent 系统还有哪些未充分优化的地方？你的改进路线图是什么？
 
-> 来源：淘宝闪购 Agent 一面【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：AI Agent系统的优化过程如何？】
+> 来源：淘宝闪购 Agent 一面【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：AI Agent系统的优化过程如何？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[本轮来源](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)；本轮追问：距离真正上线还有哪些工作要做？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
 
 **新手答**：“目前已经比较完善了，主要是一些小bug需要修。”
 
@@ -587,7 +587,7 @@ Agent 不知道自己“不知道”——对低置信度任务没有主动上�
 
 ### Q：开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？
 
-> 来源：CVTE/AI应用工程师一面；[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)
+> 来源：CVTE/AI应用工程师一面；[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)；本轮追问：在PPT管线生成中遇到了哪些难题？你是如何克服的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）
 
 **新手答**：“遇到过模型输出不稳定的问题，后来调了 Prompt 就好了。”
 
@@ -681,7 +681,7 @@ Agent 不知道自己“不知道”——对低置信度任务没有主动上�
 
 ### Q：你的 Agent 和别人开发的相比，核心差异是什么？
 
-> 来源：淘宝闪购 Agent 一面
+> 来源：淘宝闪购 Agent 一面；本轮追问：你们的 Agent 开发是全部自主化开发的，还是基于第三方平台改造的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)）；本轮追问：我做的这种后台开发的一些 Agent 和他们游戏里的 Agent 有什么不同？（[本轮追问](https://www.nowcoder.com/feed/main/detail/85a64d94c3374a10afa20d7466d24d5d)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)
 
 **新手答**：“我用了更好的模型，效果更好。”
 
@@ -769,7 +769,7 @@ flowchart TB
 
 ### Q：项目为什么选择 E2B 沙箱？选型理由和优势是什么？
 
-> 来源：CVTE/AI应用工程师一面
+> 来源：CVTE/AI应用工程师一面；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：这个沙箱是数据上的沙箱，还是执行上的沙箱？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“E2B 比较方便，可以直接在云端跑代码。”
 
@@ -804,7 +804,7 @@ Agent 执行代码有两个硬需求：① 不能让 Agent 的代码破坏宿主
 
 ### Q：你做过的不同 AI 项目之间，核心技术差异是什么？
 
-> 来源：数据智能查询平台面试（通用化：订单售后问答 vs 数据智能查询）
+> 来源：数据智能查询平台面试（通用化：订单售后问答 vs 数据智能查询）；本轮追问：你在电信实习项目中使用了哪些技术栈（如Dify、LangChain）？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；本轮追问：研究生阶段几个强化学习项目的整体研究思路是什么？项目之间有关联吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）；本轮追问：Agent 的项目你做了什么？你觉得其中的难点在哪里？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5b7e7cb510914d3baa40af22ce602b4c)）
 
 **新手答**：“一个用了 RAG，一个用了 Agent。”
 
@@ -830,6 +830,42 @@ Agent 执行代码有两个硬需求：① 不能让 Agent 的代码破坏宿主
 
 ---
 
+## Q：视频 AI Agent 项目主要解决什么业务问题？
+
+> 来源：[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)；[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)
+> 来源：[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+
+**新手答**：让用户用自然语言检索、理解和总结长视频，减少人工浏览成本。
+
+**高手答**：
+
+先明确用户任务：按主题找片段、问答、摘要或剪辑建议；管线负责视频切片、ASR/OCR/视觉特征、向量检索和工具调用，Agent 负责规划和证据聚合。输出带时间戳引用，无法确认时拒答；以命中率、答案引用准确率、延迟和单次成本评估，并处理版权和隐私。
+
+**差距在哪**：考察项目目标、系统边界和可量化效果。
+
+---
+
+
+## Q：视频 Agent 的 VideoContext 数据结构应如何设计？
+
+> 来源：[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+
+**新手答**：保存视频标识、时间范围、片段特征、转写和当前任务状态。
+
+**高手答**：
+
+建议包含 `video_id`、版本、`duration`、`segments[{start,end,asr,ocr,frames,embedding_ref}]`、用户查询、已召回证据、工具轨迹和 token budget；大对象放对象存储，Context 只存引用。定义 schema 版本和校验，时间戳统一单位，支持增量更新、过期和权限过滤，避免把整段视频塞进上下文。
+
+**差距在哪**：考察上下文建模、可追溯性和存储边界。
+
+## 推荐阅读
+
+项目拷打题的知识基础，可以在以下维度文章中深入学习：
+
+- 工具设计相关 → [工具管理：参数校验、工具路由与百级工具库](../02-tool-management/index.html)
+- 知识库和检索相关 → [RAG 与检索系统：从 chunk 设计到多路召回](../09-rag-retrieval/index.html)
+- 架构选型相关 → [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
+- 工程化问题相关 → [工程化踩坑：死循环、状态丢失与成本控制](../07-engineering-pitfalls/index.html)
 ## Q：跨机票、地铁与导航的地图 Agent，如何划定 Agent、数据和工具边界？
 
 > 来源：地图 Agent 二面（2026-08-24）
@@ -847,6 +883,33 @@ Agent 执行代码有两个硬需求：① 不能让 Agent 的代码破坏宿主
 **差距在哪**：新手按三个业务名堆 API，高手把概率决策、权威数据和确定性副作用分开，并处理跨域 ID、时间、实时性、幂等与补偿边界。
 
 ---
+
+
+## Q：表格解析后如何保证结构和数值正确？
+
+> 来源：[上海沐润天海文化科技 agent开发一面](https://www.nowcoder.com/discuss/928253581973553152)
+
+**新手答**：通过格式校验、总计核对和抽样人工检查来验证。
+
+**高手答**：
+
+解析时保留单元格坐标、合并关系和类型；用 schema 校验列数、日期、金额精度及必填项，执行行列总计、跨页连续性和单位检查。对低置信 OCR 标记并复核，和原图做可视化 diff；入库前保存原文件、解析版本和校验结果，失败则阻断下游。
+
+**差距在哪**：考察数据质量证据链，而不是只说“调用 OCR”。
+
+
+## Q：如何介绍 PPT 自动生成管线的技术栈并说明选型？
+
+> 来源：[9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)
+
+**新手答**：按输入解析、内容生成、版式编排、文件渲染和服务部署分层说明。
+
+**高手答**：
+
+解析层处理文档和图片，规划层用 LLM 输出结构化大纲，版式层用模板/约束布局生成 PPTX，渲染层转图片做视觉回归，服务层提供队列、对象存储和任务状态。每层定义 schema 和可替换接口；以生成成功率、版式缺陷率、耗时和成本验证选型，避免把模型直接拼接成文件。
+
+**差距在哪**：考察是否掌握项目全链路和技术取舍。
+
 
 ## 这类题的答题模式
 
@@ -866,14 +929,3 @@ Agent 执行代码有两个硬需求：① 不能让 Agent 的代码破坏宿主
 ```
 
 **关键心态**：项目拷打不是要你证明项目有多完美，而是证明**你在这个项目中有深度思考和真实贡献**。坦诚地讲一个做了 60 分但你能说清楚为什么的项目，比吹一个 90 分但经不起追问的项目强得多。
-
----
-
-## 推荐阅读
-
-项目拷打题的知识基础，可以在以下维度文章中深入学习：
-
-- 工具设计相关 → [工具管理：参数校验、工具路由与百级工具库](../02-tool-management/index.html)
-- 知识库和检索相关 → [RAG 与检索系统：从 chunk 设计到多路召回](../09-rag-retrieval/index.html)
-- 架构选型相关 → [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
-- 工程化问题相关 → [工程化踩坑：死循环、状态丢失与成本控制](../07-engineering-pitfalls/index.html)

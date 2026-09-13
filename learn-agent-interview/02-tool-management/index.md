@@ -277,7 +277,7 @@ def test_get_user(mock_query):
 
 ### Q：大模型的 Function Call 是什么？Tool Use 一般怎么用？
 
-> 来源：蚂蚁集团智能体与大模型应用一面 【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：`tool_use` 捕获、执行与非标准命令请求】；[BIGO 音频算法工程师一面](https://www.nowcoder.com/discuss/924359576990781440)；[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)【[启云方AI Agent一面凉经](https://www.nowcoder.com/feed/main/detail/fea2d18bd59a421da7d16fe16223d38c)追问：“语言调用工具”中的“语言”和真正的 tool call / function call 到底是什么关系？】
+> 来源：蚂蚁集团智能体与大模型应用一面 【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：`tool_use` 捕获、执行与非标准命令请求】；[BIGO 音频算法工程师一面](https://www.nowcoder.com/discuss/924359576990781440)；[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)【[启云方AI Agent一面凉经](https://www.nowcoder.com/feed/main/detail/fea2d18bd59a421da7d16fe16223d38c)追问：“语言调用工具”中的“语言”和真正的 tool call / function call 到底是什么关系？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)
 
 **新手答**：“就是让模型调用函数。”
 
@@ -454,7 +454,7 @@ flowchart TB
 
 ### Q：MCP Server 是怎么构建的？
 
-> 来源：字节 Agent 实习二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：自己有去搭建过 MCP Server 吗？】
+> 来源：字节 Agent 实习二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：自己有去搭建过 MCP Server 吗？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
 
 **新手答**：“就是写个 API 接口。”
 
@@ -952,7 +952,7 @@ flowchart LR
 
 ### Q：LLM 是怎么从用户意图匹配到具体工具参数的？
 
-> 来源：高德 AI 应用开发实习一面【[启云方AI Agent一面凉经](https://www.nowcoder.com/feed/main/detail/fea2d18bd59a421da7d16fe16223d38c)追问：你提到“通过语言调用工具”，具体是怎么理解的？；以“查询天气工具”为例，用户说一句自然语言后，工具是怎么被触发的？】
+> 来源：高德 AI 应用开发实习一面【[启云方AI Agent一面凉经](https://www.nowcoder.com/feed/main/detail/fea2d18bd59a421da7d16fe16223d38c)追问：你提到“通过语言调用工具”，具体是怎么理解的？；以“查询天气工具”为例，用户说一句自然语言后，工具是怎么被触发的？】；本轮追问：你做过一个带多个检索分支的业务 Agent，它的意图理解和路由是怎样实现的？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“模型自己就能理解。”
 
@@ -1397,7 +1397,7 @@ flowchart LR
 
 ## Q：Agent 调用启动较慢的外部工具时，如何设计异步任务和结果回调？
 
-> 来源：途游 Agent 二面（2026-08-18）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：异步任务如何处理？】
+> 来源：途游 Agent 二面（2026-08-18）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：异步任务如何处理？】；本轮追问：模型调用 RPC 耗时长是怎么办？同步/异步链路怎么设计？异步用啥框架？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
 
 **新手答**：“开一个异步线程等待工具完成，完成后通知 Agent。”
 
@@ -1616,11 +1616,10 @@ CLI 直接调用 LLM 和 Skill 拉起 sub-agent 的取舍，要从五个维度�
 
 **差距在哪**：新手按“命令、提示词、多个模型”给组件贴标签。高手按控制面、知识规范和推理执行单元划边界，并能从确定性、稳定性、安全、可观测性和成本解释为什么门禁类任务通常偏向 CLI 直调，而开放式评审才可能值得委派给 sub-agent。
 
----
 
 ## Q：跨平台工具授权即将过期时，Agent 如何调整调用顺序并安全续权？
 
-> 来源：TikTok Agent 工程师面试（2026-08-18）
+> 来源：TikTok Agent 工程师面试（2026-08-18）；本轮追问：TikTok账号的私信/评论如何做托管？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）
 
 **新手答**：“Token 快过期就刷新，然后继续调用。”
 
@@ -1632,13 +1631,27 @@ CLI 直接调用 LLM 和 Skill 拉起 sub-agent 的取舍，要从五个维度�
 
 ## Q：MCP 工具治理为什么需要审计？应该审计哪些证据？
 
-> 来源：拓竹 AI Agent 算法一面（2026-08-18）
+> 来源：拓竹 AI Agent 算法一面（2026-08-18）；本轮追问：你的治理SOP是什么形式的？里面有哪些内容？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）
 
 **新手答**：“记录谁调用了哪个 MCP 工具和参数。”
 
 **高手答**：审计链应关联真实用户、Agent/run、Server 身份与版本、工具 schema、授权 scope、规范化参数、策略判定、结果摘要、外部副作用和审批证据。敏感内容脱敏但保留哈希与可验证引用；读写、高风险和跨租户调用使用不同保留期与告警。审计日志写入不可由模型修改的存储，并支持从业务对象反查调用链。
 
 **差距在哪**：新手做访问日志，高手建立责任归属、供应链版本和副作用证据链。
+
+---
+
+## Q：当治理规则需要修改服务代码时，如何安全落地？
+
+> 来源：[9.10 虾皮二面](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)
+
+**新手答**：先定位受影响代码，再自动生成补丁并经过测试和人工审核，最后灰度发布。
+
+**高手答**：
+
+把规则执行拆成扫描、修复建议、补丁生成、验证、审批和发布。AST 或类型分析用于精确定位；补丁必须在隔离 worktree 编译、单测和静态检查，生成 diff 与风险说明。高风险变更默认只给建议，低风险可自动合并；用 feature flag 灰度，记录规则版本、责任人和回滚点。
+
+**差距在哪**：考察自动修复的权限边界、验证闭环和可回滚性。
 
 ---
 

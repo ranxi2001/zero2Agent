@@ -29,7 +29,7 @@ AI Infra 不是“给 Kubernetes 加几台 GPU”。模型训练关心吞吐、C
 
 ## Q：KV Cache 占用如何计算，为什么不能只按请求数做容量规划？
 
-> 来源：[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)、[字节 App Infra Agent 一面](https://www.nowcoder.com/feed/main/detail/0bec32fbb3344ff98f16b97f47c7b857)、[字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：KV Cache 原理】【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：Transformer 推理中 KV Cache 显存估算及 batch 增大瓶颈？】
+> 来源：[抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)、[字节 App Infra Agent 一面](https://www.nowcoder.com/feed/main/detail/0bec32fbb3344ff98f16b97f47c7b857)、[字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：KV Cache 原理】【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：Transformer 推理中 KV Cache 显存估算及 batch 增大瓶颈？】；本轮追问：MHA、MQA、GQA 在 KV Cache 显存占用和模型效果上有什么区别？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：每周多少 token/需求数？24h 跑吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）；本轮追问：了解 KV cache 吗？它在什么场景下使用、起什么作用？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）
 
 **新手答**：“KV Cache 和上下文长度成正比，显存不够就减少并发。”
 
@@ -108,7 +108,7 @@ FlashAttention 的核心是 IO-aware，而不是把稠密 Attention 的数学计
 
 ## Q：如何从模型结构估算参数量、FLOPs、训练显存、推理访存与 MFU？
 
-> 来源：[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[混元 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/2a9106374f0842c6af57cdb3acb51190)、[讯飞飞星 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/aed72ed951f54745b240e723df9a9f96)、[荣耀 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/59dece94af144cba94157481f2e2b5ce)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)
+> 来源：[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[混元 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/2a9106374f0842c6af57cdb3acb51190)、[讯飞飞星 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/aed72ed951f54745b240e723df9a9f96)、[荣耀 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/59dece94af144cba94157481f2e2b5ce)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)；本轮追问：是否做了模型的 scaling up？模型的参数量和计算量在什么 level？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）
 
 **新手答**：“参数量乘数据类型字节数就是显存，FLOPs 越高训练越慢。”
 
@@ -250,7 +250,7 @@ CPU 用较少但复杂的核心、较强缓存和分支预测换低延迟与通�
 
 ## Q：如何设计大模型在线推理服务？
 
-> 来源：[百度 AI Infra 提前批一面](https://www.nowcoder.com/feed/main/detail/09c161adbf1f459f8e2799d908321420)、[智象未来 AI Infra 一面](https://www.nowcoder.com/discuss/920057298502811648)
+> 来源：[百度 AI Infra 提前批一面](https://www.nowcoder.com/feed/main/detail/09c161adbf1f459f8e2799d908321420)、[智象未来 AI Infra 一面](https://www.nowcoder.com/discuss/920057298502811648)；本轮追问：大模型生成的标签、轻量模型的训练和模型推理分别是离线还是在线的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“把模型加载到 GPU，通过 API 提供推理，再根据 QPS 自动扩容。”
 
@@ -304,7 +304,7 @@ CUDA Graph 不是算子融合，而是先捕获一段 Kernel、Memcpy 和依赖�
 
 ## Q：vLLM/SGLang 的请求调度与 Continuous Batching 如何工作？请求被抢占后如何恢复？
 
-> 来源：[阿里国际 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/6cbfd441972d4a96ae47e1cdf54a3fef)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)、[vLLM/SGLang 小厂面经](https://www.nowcoder.com/feed/main/detail/c7eee5b04fb8424aa4847f0e21fab875)、[爱奇艺 AI 平台研发面经](https://www.nowcoder.com/discuss/918635351327924224)
+> 来源：[阿里国际 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/6cbfd441972d4a96ae47e1cdf54a3fef)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)、[vLLM/SGLang 小厂面经](https://www.nowcoder.com/feed/main/detail/c7eee5b04fb8424aa4847f0e21fab875)、[爱奇艺 AI 平台研发面经](https://www.nowcoder.com/discuss/918635351327924224)；[本轮来源](https://www.nowcoder.com/feed/main/detail/945e5869249d4f4b86d4b6460f4486dd)
 
 **新手答**：“Continuous Batching 会不断把新请求塞进 Batch，所以 GPU 利用率更高。”
 
@@ -332,7 +332,7 @@ Draft 模型先提出一段候选 Token，Target 模型用一次并行前向验�
 
 ## Q：大模型训练吞吐低时，如何用 MFU、Profiler、通信和流水线空泡定位瓶颈？
 
-> 来源：[大模型算法题整理（低置信二手来源）](https://www.nowcoder.com/feed/main/detail/c8eac6f9d7804a488b41c98128108e3a)、[阶跃星辰 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/320def38cd484da3bb26b01932996ef2)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/12a74831ffa543cb9117c646faf214fd)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)
+> 来源：[大模型算法题整理（低置信二手来源）](https://www.nowcoder.com/feed/main/detail/c8eac6f9d7804a488b41c98128108e3a)、[阶跃星辰 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/320def38cd484da3bb26b01932996ef2)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/12a74831ffa543cb9117c646faf214fd)、[AI Infra 小厂面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)；本轮追问：MFU 提升的收益来源做过归因拆解吗？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）；本轮追问：接触过模型训练吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）
 
 **新手答**：“先看 GPU 利用率，低了就增加 Batch、开启混合精度或换更多 GPU。”
 
@@ -384,6 +384,28 @@ Checkpoint 不只是模型权重，还可能包含 Optimizer、Scheduler、随�
 
 ---
 
+## Q：GPU 利用率很低，但请求延迟很高，怎么排查？
+
+> 来源：[小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）
+
+**新手答**：“可能 GPU 不够，增加实例或者调大 batch。”
+
+**高手答**：
+
+先确认指标口径：低的是 SM Active、Tensor Core 利用、显存带宽还是平均 GPU Utilization。然后按等待链路拆分：
+
+```text
+入口排队 → Tokenize → Prefill → Decode → 通信 → Detokenize/Streaming
+```
+
+常见根因包括 batch 太小、CPU Tokenizer 饱和、Host-to-Device 拷贝、同步点过多、长短请求互相阻塞、KV Cache 碎片、模型并行通信或下游流式消费慢。训练场景还要看 DataLoader、存储吞吐、NCCL straggler 和数据倾斜。
+
+排查时关联请求 Trace、Serving Scheduler 指标、GPU Profile、节点和网络遥测，找到延迟增加的第一个等待阶段。AIOps 可以做异常检测、相似故障检索和根因候选排序，但自动扩容或重启必须经过 SLO、容量和冷却时间约束，不能把相关性直接当因果。
+
+**差距在哪**：新手看到低利用率就加卡，高手先分解等待时间和硬件指标，再判断瓶颈在 CPU、GPU、通信还是调度。
+
+---
+
 ## Q：AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？
 
 > 来源：阿里 Agent Infra 一面题库
@@ -406,7 +428,7 @@ RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪�
 
 ## Q：SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？
 
-> 来源：[沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)
+> 来源：[沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)；本轮追问：非序列特征为何要异构 FFN/QKV，序列特征为何可以同构？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）；本轮追问：大矩阵 GEMM 在 DCU 上如何切分和实现？（[本轮追问](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)）
 
 **新手答**：“GEMM 是稠密矩阵乘法，SpMV 是稀疏矩阵乘向量；前者算力密集，后者访存密集。”
 
@@ -420,9 +442,34 @@ SpMV 优化先按稀疏结构选格式和工作划分：规则块稀疏可用 BS
 
 ---
 
+## Q：GPU 上的同步方法代码可能有哪些问题，如何排查？
+
+> 来源：[本轮面经（文章 11）](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)
+
+**新手答**：“调用同步 API 等待 GPU 完成即可。”
+
+**高手答**：先区分 host/device、stream/event 和 kernel 内线程同步。`cudaDeviceSynchronize()` 会等待设备上所有工作并把异步错误暴露到当前点，范围过大可能串行化；`cudaStreamSynchronize()` 只等待指定 stream，event 可表达跨 stream 依赖（具体语义可查 [CUDA Runtime API](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__STREAM.html)）。代码还要检查是否在错误的 stream 上同步、是否遗漏 memory copy 的方向/生命周期、是否把 kernel launch 错误延迟到后续调用，以及同步是否发生在循环热路径。用 CUDA error check、event 计时和 Nsight Systems/Compute 对照依赖图，验证正确性后再缩小同步范围。
+
+**差距在哪**：新手只会“全局同步”，高手能定位同步域、异步错误、生命周期和性能串行化。
+
+---
+
+## Q：DeepSpeed ZeRO 的三个阶段分别做什么？
+
+> 来源：[本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)
+
+**新手答**：“Stage 1、2、3 逐步切分优化器、梯度和参数。”
+
+**高手答**：[DeepSpeed ZeRO 文档](https://www.deepspeed.ai/tutorials/zero/)所述的分片策略可减少数据并行下的冗余：Stage 1 分片 optimizer states，Stage 2 再分片 gradients，Stage 3 连 parameters 也分片，前向/反向需要按需 gather。Stage 越高通常显存节省越多，但通信、参数管理和 checkpoint 复杂度也会上升；选择要结合模型规模、GPU 显存、互联带宽、micro-batch、激活重计算和吞吐 SLO。还要确认 offload、参数持久化、保存/恢复和第三方算子兼容性，不能只按“Stage 3 最好”决策。
+
+**差距在哪**：新手只背三阶段顺序，高手能说明分片对象、通信代价和选型边界。
+
+---
+
+
 ## Q：AI Infra 和 Agent Infra 有什么区别？
 
-> 来源：AI 平台 / Agent 平台边界高频题
+> 来源：AI 平台 / Agent 平台边界高频题；本轮追问：ReAct和Agent有什么区别？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）
 
 **新手答**：“AI Infra 管模型和 GPU，Agent Infra 管 Agent 和工具。”
 
@@ -463,28 +510,6 @@ Observability/AIOps：Metrics、Logs、Trace、Profile、告警与自动处置
 所有训练和发布都应可追溯到代码、数据快照、配置、镜像和模型制品；上线链路包含离线评测、安全检查、压测、灰度和回滚。平台还要把交互式开发、离线训练和在线推理分成不同队列与配额，避免低优先级训练挤占在线容量。
 
 **差距在哪**：新手只讲算力和部署，高手覆盖制品血缘、发布门禁、租户治理与训练/推理隔离。
-
----
-
-## Q：GPU 利用率很低，但请求延迟很高，怎么排查？
-
-> 来源：[小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）
-
-**新手答**：“可能 GPU 不够，增加实例或者调大 batch。”
-
-**高手答**：
-
-先确认指标口径：低的是 SM Active、Tensor Core 利用、显存带宽还是平均 GPU Utilization。然后按等待链路拆分：
-
-```text
-入口排队 → Tokenize → Prefill → Decode → 通信 → Detokenize/Streaming
-```
-
-常见根因包括 batch 太小、CPU Tokenizer 饱和、Host-to-Device 拷贝、同步点过多、长短请求互相阻塞、KV Cache 碎片、模型并行通信或下游流式消费慢。训练场景还要看 DataLoader、存储吞吐、NCCL straggler 和数据倾斜。
-
-排查时关联请求 Trace、Serving Scheduler 指标、GPU Profile、节点和网络遥测，找到延迟增加的第一个等待阶段。AIOps 可以做异常检测、相似故障检索和根因候选排序，但自动扩容或重启必须经过 SLO、容量和冷却时间约束，不能把相关性直接当因果。
-
-**差距在哪**：新手看到低利用率就加卡，高手先分解等待时间和硬件指标，再判断瓶颈在 CPU、GPU、通信还是调度。
 
 ---
 

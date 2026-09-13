@@ -16,7 +16,7 @@ Agent 的容错设计是面试中最容易暴露“做没做过真实系统”�
 
 ### Q：Agent 如何减少幻觉？在工业场景下怎么做？
 
-> 来源：字节后端开发 Agent 一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】 / [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)
+> 来源：字节后端开发 Agent 一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】 / [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)；本轮追问：涉及财务数据时怎么降低大模型幻觉？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；本轮追问：有没有遇到一些幻觉严重、指令跟预期不达标的场景？（[本轮追问](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)
 
 **新手答**：“用 RAG 给模型提供事实依据。”
 
@@ -307,7 +307,7 @@ flowchart LR
 
 ### Q：Agent 执行 shell 命令怎么保证安全？还有哪些安全问题？
 
-> 来源：蚂蚁集团一面 【小红书 Agent 岗一面追问：危险命令拦截时机与规则引擎】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：Agent 生成代码、执行命令的安全沙箱如何设计？】
+> 来源：蚂蚁集团一面 【小红书 Agent 岗一面追问：危险命令拦截时机与规则引擎】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：Agent 生成代码、执行命令的安全沙箱如何设计？】；本轮追问：数据存在云端会有安全问题吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/39ba19b7cc204f339ce07a6aced7565b)）
 
 **新手答**：“加个白名单，只允许执行安全的命令。”
 
@@ -372,7 +372,7 @@ Agent 执行 shell 命令的安全问题本质上和**代码注入**一样——
 
 ### Q：Prompt 注入攻击如何防御？
 
-> 来源：快手 AI Agent 开发一面【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何防范 Prompt Injection 绕过系统指令？】
+> 来源：快手 AI Agent 开发一面【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何防范 Prompt Injection 绕过系统指令？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)
 
 **新手答**：“过滤掉恶意输入。”
 
@@ -560,7 +560,7 @@ flowchart TB
 
 ## Q：Skill 间需要传递敏感信息时，如何做到内部可用、对用户不可见？
 
-> 来源：[百度 Coding Agent 二面](https://www.nowcoder.com/feed/main/detail/b9521e2b51e04afeac0a3a32e13f4da9)【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：使用Skill实现时，如何防止向用户泄漏业务数据和核心脚本？】
+> 来源：[百度 Coding Agent 二面](https://www.nowcoder.com/feed/main/detail/b9521e2b51e04afeac0a3a32e13f4da9)【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：使用Skill实现时，如何防止向用户泄漏业务数据和核心脚本？】；本轮追问：你提到的鉴权逻辑，在 Skill 中是否实现？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“在 Prompt 里告诉模型不要把密钥输出给用户。”
 
@@ -597,7 +597,7 @@ Prompt 不是机密性边界。真正的设计目标是：**让下游 Skill 获�
 
 ### Q：为什么在复杂的 Agent 闭环场景中，仅靠 RAG 无法彻底解决幻觉问题？
 
-> 来源：淘天 AI Agent 一面 【腾讯金融科技一面追问：知识库无内容但模型输出正确时的信任边界】
+> 来源：淘天 AI Agent 一面 【腾讯金融科技一面追问：知识库无内容但模型输出正确时的信任边界】；本轮追问：输出不按约定输出、幻觉和降级检索之间是什么因果关系？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“加了 RAG 就不会幻觉了。”
 
@@ -684,7 +684,7 @@ RAG 是防幻觉的一层防线，但只是一层。完整的防幻觉体系需�
 
 ### Q：高风险在线环境中，Agent 的异常管控方案怎么设计？
 
-> 来源：淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)追问：模型不遵循 Skill 时如何防越权】
+> 来源：淘宝闪购一面【[中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)追问：央国企高安全水位、端侧配置与私钥保护】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)追问：模型不遵循 Skill 时如何防越权】；本轮追问：你在美团实习中负责的“上线前风险检测”方案是怎么设计的？最终形成的方案是什么样的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)
 
 **新手答**：“加个 try-catch 兜底，出错就重试。”
 
@@ -836,7 +836,7 @@ flowchart TD
 
 ### Q：Agent 系统的安全护栏怎么设计？敏感词拦截的工程方案有哪些？
 
-> 来源：小红书AI应用开发一面【[腾讯/csig/元宝/内容安全/日常实习/三轮技术面试](https://www.nowcoder.com/feed/main/detail/60f381f558a848ceac18c666268dc7da)追问：我现在需要对云端 Agent 的输出做安全校验，你会怎么设计校验方案？】
+> 来源：小红书AI应用开发一面【[腾讯/csig/元宝/内容安全/日常实习/三轮技术面试](https://www.nowcoder.com/feed/main/detail/60f381f558a848ceac18c666268dc7da)追问：我现在需要对云端 Agent 的输出做安全校验，你会怎么设计校验方案？】；本轮追问：如果从架构层面改造，你会怎样设计敏感内容的读取和输出流程？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）
 
 **新手答**：“用正则表达式匹配敏感词，匹配到就拒绝回答。”
 
@@ -1114,7 +1114,7 @@ Fallback 要分层设计——不同层级的失败对应不同的降级策略�
 
 ## Q：工具调用返回结果为空或调用失败，Agent 应该怎么处理？是直接重试还是换策略？
 
-> 来源：最有料 AI 实习生面经【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：工具调用失败率较高时，应从描述、重试、降级等哪些维度进行优化？】
+> 来源：最有料 AI 实习生面经【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：工具调用失败率较高时，应从描述、重试、降级等哪些维度进行优化？】；本轮追问：遇到 429 和 retry-after 连续重试时，在预算 6 步、8 次调用的约束下怎么修改？停止原因是什么？给用户返回什么？（[本轮追问](https://www.nowcoder.com/discuss/928253581973553152)）；本轮追问：如果订单查询连接失败，工具也没有执行，返回了空列表，应该怎么告诉用户？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)
 
 **新手答**：“重试几次，还不行就报错。”
 
@@ -1242,7 +1242,7 @@ Agent 的重试预算：
 
 ## Q：Agent 失败通常有哪些原因？如何快速定位责任层？
 
-> 来源：点点互动/Agent开发秋招一面【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：根因定位的 Agent 能详细讲一下吗？】
+> 来源：点点互动/Agent开发秋招一面【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：根因定位的 Agent 能详细讲一下吗？】；本轮追问：模型和Agent工具调用中间的过程终止，可能会有哪些原因？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；[本轮来源](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)；本轮追问：讲一下你在这个项目里遇到最难定位的一个 Bad Case 是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
 
 **新手答**：“可能是模型幻觉、工具报错或者网络超时，失败了就重试。”
 
@@ -1269,7 +1269,7 @@ Agent 的重试预算：
 
 ## Q：所有模型超时或故障时怎么兜底？什么时候用规则引擎，什么时候转人工，服务恢复后怎么回切？
 
-> 来源：商汤/大模型算法应用实习二面；拼多多 AI Agent 提前批二面（API Provider 故障切换、自动恢复与回切）
+> 来源：商汤/大模型算法应用实习二面；拼多多 AI Agent 提前批二面（API Provider 故障切换、自动恢复与回切）；本轮追问：你说的工具层“兜底”具体是做什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)
 
 **新手答**：“超时就重试，重试失败就报错给用户。”
 
@@ -1328,7 +1328,7 @@ flowchart LR
 
 ## Q：Agent Workflow 如何保证节点原子性，并在部分成功后安全回滚？
 
-> 来源：字节剪映/Agent 一面【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：Agent 回滚机制（修改异常时恢复）？】
+> 来源：字节剪映/Agent 一面【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：Agent 回滚机制（修改异常时恢复）？】；本轮追问：你所说的受控 Agent Workflow 具体受控在哪里？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
 
 **新手答**：“每个节点只做一件事，失败时把数据库事务回滚。”
 
@@ -1432,11 +1432,10 @@ flowchart TB
 
 **差距在哪**：新手只想到“忽略”——这依赖模型是否听话，不可靠。高手通过文件黑名单、内容脱敏、上下文隔离、操作审计四层递进防护，任何一层被突破都有下一层兜底。面试官通过这个具体场景考察你对 Agent 安全设计的系统性思维——不是“告诉 Agent 别看”就完了，是“系统层面让它看不到、看到也无害、操作要审批”。
 
----
 
 ## Q：长时间运行的 Coding Agent 等待用户决策时，如何避免任务永久卡住？
 
-> 来源：小红书 Agent 岗一面
+> 来源：小红书 Agent 岗一面；本轮追问：Agent 处理一次任务通常需要多长时间，是分钟级还是小时级？（[本轮追问](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)）
 
 **新手答**：“需要用户确认就一直等，用户回来后再继续。”
 
@@ -1459,7 +1458,7 @@ flowchart TB
 
 ## Q：工具失败后，哪些异常处理应由大模型参与，哪些必须由确定性程序控制？
 
-> 来源：影石创新 AI Agent 一面（2026-08-17）
+> 来源：影石创新 AI Agent 一面（2026-08-17）；本轮追问：当 Agent 回答失败、置信度不足或出现异常时，系统如何处理？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；本轮追问：如果一个非常长的任务运行到一半终止或出现异常，可以怎么处理？可以做哪些优化？（[本轮追问](https://www.nowcoder.com/discuss/927969546672046080)）；本轮追问：有考虑过把 Skill 拆分吗？哪些问题该由工程化解决、哪些该由大模型解决，如何判断？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）
 
 **新手答**：“把错误信息交给模型，让它决定重试还是换工具。”
 
@@ -1475,7 +1474,7 @@ flowchart TB
 
 ## Q：为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？
 
-> 来源：[字节中国交易与广告 Agent 一面](https://www.nowcoder.com/feed/main/detail/6dede073825e4ab493fcbce7f598a6c8)（2026-08-24）
+> 来源：[字节中国交易与广告 Agent 一面](https://www.nowcoder.com/feed/main/detail/6dede073825e4ab493fcbce7f598a6c8)（2026-08-24）；本轮追问：在内容审核方面应该使用什么大模型？（[本轮追问](https://www.nowcoder.com/discuss/926463586325495808)）
 
 **新手答**：“大模型有幻觉、速度慢，所以攻击检测应该使用规则。”
 
@@ -1493,7 +1492,7 @@ flowchart TB
 
 ## Q：Agent 无法处理任务时，“求助 / 升级”状态机应该如何设计？
 
-> 来源：[百度 Agent 研发岗一面](https://www.nowcoder.com/discuss/926273622006665216)
+> 来源：[百度 Agent 研发岗一面](https://www.nowcoder.com/discuss/926273622006665216)；本轮追问：如果使用了拒绝策略，但是仍然想执行被拒绝的任务，应该怎么办？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)；本轮追问：你给自己的子任务会分哪些状态？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）
 
 **新手答**：“连续失败几次就转人工，并把聊天记录发给人工。”
 
@@ -1504,6 +1503,20 @@ flowchart TB
 还要设置防振荡策略：同一路径连续升级失败时不能在主 Agent 与兜底 Agent 间循环；使用最大升级深度、冷却时间和已尝试能力集合。指标至少包括升级率、误升级率、接管后成功率、上下文补问次数、等待时间和重复副作用。
 
 **差距在哪**：新手把升级当转发聊天记录，高手把失败类型、所有权转移、上下文交接和防循环写成可验证状态机。
+
+---
+
+## Q：如何设计可靠的 Webhook 投递保障？
+
+> 来源：[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)
+
+**新手答**：通常从发送重试、签名验真和幂等去重三方面保证可靠性。
+
+**高手答**：
+
+发送端持久化事件，采用指数退避、抖动和最大重试次数，失败进入死信队列；请求携带时间戳和 HMAC 签名，接收端校验时间窗防重放；事件带唯一 ID，接收端以数据库唯一键或幂等表去重。再配合超时、熔断、投递状态监控和人工补偿，明确“至少一次”语义及重复处理要求。
+
+**差距在哪**：考察是否覆盖投递可靠性、安全性和业务幂等三个层面。
 
 ---
 

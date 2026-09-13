@@ -299,7 +299,7 @@ context: |
 
 ### Q：为什么已经有了 MCP，Anthropic 还要做 Skill？Skill 里面有没有工具？
 
-> 来源：字节 Agent 开发实习一面【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：早期流行MCP，现在大量转向Skill，背后的原因是什么？】
+> 来源：字节 Agent 开发实习一面【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：早期流行MCP，现在大量转向Skill，背后的原因是什么？】；本轮追问：Skill 的优点和缺点是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：Skill 包含什么东西？其中的 md 文件是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“Skill 就是 MCP 的升级版。”
 
@@ -355,7 +355,7 @@ MCP 给了 Agent 工具，但没有告诉它**怎么有效地使用这些工具*
 
 ### Q：一个好的 Prompt 和一个差的 Prompt 的区别？
 
-> 来源：腾讯 Agent 应用开发一面
+> 来源：腾讯 Agent 应用开发一面；本轮追问：请写一个 prompt。（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）
 
 **新手答**：“好的 Prompt 描述清楚，差的 Prompt 太模糊。”
 
@@ -472,7 +472,7 @@ Skill A 执行完 → 将结果写入 shared_context（结构化 JSON）
 
 ### Q：Harness Engineering 是什么？它如何演进的？
 
-> 来源：CVTE/AI应用工程师一面 | 更完整的 Harness 专题见 → [概念考察：Harness Engineering](../15-agent-concepts/index.html)【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：你怎么看 Harness 工程？】【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：你如何理解Agent中Harness的概念？】
+> 来源：CVTE/AI应用工程师一面 | 更完整的 Harness 专题见 → [概念考察：Harness Engineering](../15-agent-concepts/index.html)【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：你怎么看 Harness 工程？】【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：你如何理解Agent中Harness的概念？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)
 
 **新手答**：“不太了解这个概念，是不是跟测试框架有关？”
 
@@ -571,7 +571,7 @@ Few-shot 示例——展示期望的输入输出格式和推理方式。2-3 个�
 
 ### Q：什么是一个好的提示词？如何做好提示词的评估？
 
-> 来源：科大讯飞AI一面【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：如何设计提示词让AI讲产品卖点？】
+> 来源：科大讯飞AI一面【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：如何设计提示词让AI讲产品卖点？】；本轮追问：设计提示词时要注意哪些问题，才能降低模型幻觉？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）
 
 **新手答**：“好的提示词就是写得清楚，让模型能理解。”
 
@@ -610,7 +610,7 @@ Few-shot 示例——展示期望的输入输出格式和推理方式。2-3 个�
 
 ### Q：在调优 Prompt 时，你有哪些实战经验？如何利用 AI 辅助自己优化 Prompt？
 
-> 来源：字节后端 Agent 开发二面
+> 来源：字节后端 Agent 开发二面；本轮追问：你刚才提到用 AI 辅助开发，具体用了哪些工具？公司项目里有什么限制？（[本轮追问](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)）；本轮追问：哪些问题是用 AI 辅助的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/559cdf0af1084459a82557b15d6a8a3e)）
 
 **新手答**：“多试几遍，看哪个效果好就用哪个。”
 
@@ -799,7 +799,7 @@ DSPy 是斯坦福 NLP 实验室推出的框架，核心理念是**把 Prompt Eng
 
 ## Q：如何给 Agent 工具系统设计动态 Skill，而不让版本升级破坏历史任务？
 
-> 来源：关于skill的面试问题【[〔社招〕〔面经〕9月初XX科技(中厂) AI全栈工程师（Agent应用）一面 挂](https://www.nowcoder.com/discuss/926232883432296448)追问：Skill 里哪些是固定、哪些随观察动态调整？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：Agent 插件系统热插拔 Skill？】
+> 来源：关于skill的面试问题【[〔社招〕〔面经〕9月初XX科技(中厂) AI全栈工程师（Agent应用）一面 挂](https://www.nowcoder.com/discuss/926232883432296448)追问：Skill 里哪些是固定、哪些随观察动态调整？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：Agent 插件系统热插拔 Skill？】；本轮追问：工单分析 Skill 是怎么设计并发子任务调度的？踩过哪些坑？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）
 
 **新手答**：“做好版本管理就行。”
 
@@ -909,7 +909,7 @@ Skill Prompt 必须像代码一样发布，而不是直接覆盖数据库文本�
 
 ## Q：Skill 分层体系怎么设计？为什么这么分层？
 
-> 来源：字节跳动 Agent 二面（Coding Agent）
+> 来源：字节跳动 Agent 二面（Coding Agent）；本轮追问：你们的 Agent 是怎么分层的？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；本轮追问：Skill是怎么在项目中使用的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）
 
 **新手答**：“按功能分类，比如代码生成一类、文档处理一类。”
 
@@ -1115,7 +1115,7 @@ Token 预算分配：
 
 ## Q：如果让你设计一个代码审查的 Skill，你会如何设计？
 
-> 来源：最有料 AI 实习生面经
+> 来源：最有料 AI 实习生面经；本轮追问：给你一个 PRD，你会怎么和 AI 进行协同开发？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）
 
 **新手答**：“写一个 Prompt 让模型去审查代码，列出问题就行。”
 
@@ -1225,7 +1225,7 @@ Skill 式的代码审查不是替代 ESLint/Pylint，而是补充它们无法覆
 
 ## Q：如果 Agent 挂 100 个 Skill，如何提升召回率、准确度、F1 综合值？
 
-> 来源：关于skill的面试问题
+> 来源：关于skill的面试问题；本轮追问：精确率和召回率以及PR曲线是什么？（[本轮追问](https://www.nowcoder.com/discuss/926468630819213312)）；本轮追问：业务 Skill 怎么调优的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）
 
 **新手答**：“优化 skill 的描述，让模型更容易选对。”
 
@@ -1286,7 +1286,7 @@ flowchart LR
 
 ## Q：Skill 和 Agent 的关系，为什么不用 Skill 而用子 Agent？
 
-> 来源：AI应用开发进阶面
+> 来源：AI应用开发进阶面；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；本轮追问：为什么不用大模型判断是否使用Skill，而要使用向量匹配？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；本轮追问：你在京东实习期间是否涉及 Agent Skill？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）
 
 **新手答**：“Skill 比较简单，Agent 比较复杂。”
 
@@ -1368,7 +1368,7 @@ Skill 是宿主提供的能力说明和执行约束，不属于用户临时意�
 
 ## Q：如何让 Agent 自动沉淀 Skill，同时保证生成的 Skill 准确、无害且不会无限膨胀？
 
-> 来源：电商库存二面（2026-08-17）
+> 来源：电商库存二面（2026-08-17）；本轮追问：Skill 怎么呈现？非预设 Skill 怎么从对话沉淀？小模型怎么判“走弯路”、打分维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
 
 **新手答**：“任务成功后让模型总结成 Skill，人工审核后保存。”
 

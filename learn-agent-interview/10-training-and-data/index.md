@@ -47,7 +47,7 @@ Agent 岗位面试不只考“会不会用 Agent”，还考**“Agent 背后的
 
 ### Q：预训练数据清洗方法？
 
-> 来源：阿里 AI Agent 开发一面【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：数据清洗时，你如何筛选低质量样本？用过哪些启发式规则或模型过滤？】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：低质数据筛选的启发式规则或模型过滤方法？】
+> 来源：阿里 AI Agent 开发一面【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：数据清洗时，你如何筛选低质量样本？用过哪些启发式规则或模型过滤？】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：低质数据筛选的启发式规则或模型过滤方法？】；[本轮来源](https://www.nowcoder.com/discuss/928253581973553152)；本轮追问：ASR 清洗主要解决什么问题？具体有哪些清洗方式？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：在RAG数据清洗中，为什么选择使用SimHash + 汉明距离，为什么这么设置数值？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
 
 **新手答**：“去重，过滤脏数据。”
 
@@ -75,7 +75,7 @@ Agent 岗位面试不只考“会不会用 Agent”，还考**“Agent 背后的
 
 ### Q：自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？
 
-> 来源：[字节 Seed 具身数据一面](https://www.nowcoder.com/feed/main/detail/657dfac8ca5c49f28492a1110b95f7cd)【[百度具身研发一面](https://www.nowcoder.com/feed/main/detail/258695ecdfbb464790fc8ae55c9f1661)追问：标注相关，有做过自动化标注吗？】
+> 来源：[字节 Seed 具身数据一面](https://www.nowcoder.com/feed/main/detail/657dfac8ca5c49f28492a1110b95f7cd)【[百度具身研发一面](https://www.nowcoder.com/feed/main/detail/258695ecdfbb464790fc8ae55c9f1661)追问：标注相关，有做过自动化标注吗？】；本轮追问：为什么把置信度阈值设为 0.8？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；本轮追问：整个训练是开环还是闭环？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)）；本轮追问：置信度低会进行重试，如果重试后置信度还是很低，有没有做什么方案解决这个问题？（[本轮追问](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)）；本轮追问：如何降低自动化扫描产生的误报？安全场景中漏报和误报哪个更严重？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）
 
 **新手答**：“让大模型先标，低置信度的交给人工。”
 
@@ -183,7 +183,7 @@ Packing 不是天然的样本隔离保证。应结合 TRL 的[内存优化说明
 
 ### Q：DPO、PPO、GRPO 的区别和优缺点？
 
-> 来源：阿里 AI Agent 开发一面 / 腾讯 AI 应用开发 / 字节 Agent 实习二面 【阿里国际一面追问：重要性采样在策略差异大时失效 + GRPO vs PPO KL散度区别】；[快手广告大模型一面](https://www.nowcoder.com/discuss/923996140154953728)【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：GRPO 和 DPO 在代码实现上的区别是什么？】【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：PPO vs GRPO 优劣势？】【[8.13 百度一面挂 百度多模态算法工程师-北京](https://www.nowcoder.com/discuss/926467109717118976)追问：PPO 和 GRPO 的区别是什么？】
+> 来源：阿里 AI Agent 开发一面 / 腾讯 AI 应用开发 / 字节 Agent 实习二面 【阿里国际一面追问：重要性采样在策略差异大时失效 + GRPO vs PPO KL散度区别】；[快手广告大模型一面](https://www.nowcoder.com/discuss/923996140154953728)【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：GRPO 和 DPO 在代码实现上的区别是什么？】【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：PPO vs GRPO 优劣势？】【[8.13 百度一面挂 百度多模态算法工程师-北京](https://www.nowcoder.com/discuss/926467109717118976)追问：PPO 和 GRPO 的区别是什么？】；本轮追问：DPO、PPO、GRPO和RLHF之间有什么区别？（[本轮追问](https://www.nowcoder.com/discuss/926463586325495808)）；本轮追问：从强化学习中的 reward 最大化，到 DPO 中的 chosen / rejected 偏好对，中间进行了什么转换？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“都是对齐方法，PPO 用 RL，DPO 不用。”
 
@@ -487,7 +487,7 @@ Prediction = Σ tree_k(x)
 
 ### Q：手撕 Multi-Head Attention
 
-> 来源：腾讯 AI 应用开发【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：你对 AI 算法或模型架构有一定了解吗？Transformer、Attention 如何计算？】
+> 来源：腾讯 AI 应用开发【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：你对 AI 算法或模型架构有一定了解吗？Transformer、Attention 如何计算？】；本轮追问：Attention 运算中为什么要除以根号 dk？（[本轮追问](https://www.nowcoder.com/discuss/926677767104532480)）；本轮追问：Transformer 的 attention 公式是什么？大模型是否仍然使用这种 attention？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：Transformer 结构简单介绍，文本生成大模型用哪一部分？Attention、FFN 作用是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)）；本轮追问：大模型都基于那篇Transformer架构论文，你听过吗？解释一下那是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）
 
 **新手答**：写了个 `softmax(QK^T)V` 但没处理 mask 和多头。
 
@@ -755,7 +755,7 @@ DeepSeek-R1 的成功经验：数学和代码任务**纯用规则奖励**就够�
 
 ### Q：大模型推理加速技术有哪些？
 
-> 来源：字节 Agent 实习一面
+> 来源：字节 Agent 实习一面；本轮追问：用 8 张 A100 的机器做 7B VL 模型的 GRPO 训练，如何进行训练加速和推理加速？（[本轮追问](https://www.nowcoder.com/discuss/926467109717118976)）；本轮追问：Self-Attention有哪些优化可以提升训练效率或推理效率？（[本轮追问](https://www.nowcoder.com/discuss/927969546672046080)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)；本轮追问：讲讲大模型推理的并行方案，你了解哪些？（[本轮追问](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)）
 
 **新手答**：“用量化压缩模型。”
 
@@ -891,7 +891,7 @@ flowchart LR
 
 ### Q：有没有了解过端侧部署的模型？
 
-> 来源：腾讯 Agent 应用开发一面
+> 来源：腾讯 Agent 应用开发一面；本轮追问：使用什么工具部署本地模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)）；本轮追问：DeepSeek最新的模型是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）
 
 **新手答**：“手机上跑不了大模型吧。”
 
@@ -921,7 +921,7 @@ flowchart LR
 
 ### Q：OCR、多模态模型、YOLO 与 ONNX 分别处于任务、模型和运行时哪个层次？如何组合？
 
-> 来源：[北京金蝶二面](https://www.nowcoder.com/feed/main/detail/6edec13bc5f34f0ca137b4a4911dcb10)
+> 来源：[北京金蝶二面](https://www.nowcoder.com/feed/main/detail/6edec13bc5f34f0ca137b4a4911dcb10)；本轮追问：ASR、OCR 你选型有想过吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
 
 **新手答**：“它们都是视觉模型，YOLO 做检测，OCR 识别文字，最后可以转成 ONNX。”
 
@@ -1105,7 +1105,7 @@ flowchart LR
 
 ### Q：在 Agent 多轮对话任务中，标准 Attention 机制的平方复杂度在工程落地上主要引发了哪些问题？
 
-> 来源：淘天 AI Agent 一面
+> 来源：淘天 AI Agent 一面；本轮追问：大模型中常见的 attention 机制有哪些？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“用更大的 GPU。”
 
@@ -1183,7 +1183,7 @@ flowchart TD
 
 ### Q：SFT、蒸馏、GRPO 的技术选型——什么时候用什么？
 
-> 来源：阿里国际大模型算法一面 【腾讯金融科技一面追问：蒸馏时如何防止小模型学到大模型的错误推理链】
+> 来源：阿里国际大模型算法一面 【腾讯金融科技一面追问：蒸馏时如何防止小模型学到大模型的错误推理链】；本轮追问：为什么不直接将蒸馏后的模型用于实时链路？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：这个弱网预测适合用什么模型？千问？LSTM？Transformer？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）
 
 **新手答**：“数据多就 SFT，数据少就蒸馏。”
 
@@ -1276,7 +1276,7 @@ pass@1 已经很高（>90%）：
 
 ### Q：GRPO 的 Loss 函数、Advantages 计算与信用分配机制
 
-> 来源：阿里国际大模型算法一面 【阿里国际一面追问：GRPO训练中观测什么指标】
+> 来源：阿里国际大模型算法一面 【阿里国际一面追问：GRPO训练中观测什么指标】；本轮追问：为什么用一个头？loss 和 reward 怎么设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)）
 
 **新手答**：“就是 RLHF 的 loss。”
 
@@ -1394,7 +1394,7 @@ GRPO 用信用分配的精度换取了工程上的简洁性——去掉 Critic �
 
 ### Q：vLLM 的 PagedAttention 原理是什么？解决了什么问题？
 
-> 来源：快手AI应用开发一面【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：vLLM PagedAttention 如何解决碎片？】【[阿里巴巴（阿里云）- Agent Infra](https://www.nowcoder.com/discuss/926273487512113152)追问：vLLM 的 PagedAttention 如何解决显存碎片问题？】
+> 来源：快手AI应用开发一面【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：vLLM PagedAttention 如何解决碎片？】【[阿里巴巴（阿里云）- Agent Infra](https://www.nowcoder.com/discuss/926273487512113152)追问：vLLM 的 PagedAttention 如何解决显存碎片问题？】；本轮追问：KV Cache 解决了什么问题？有哪些常见优化方法？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“vLLM 速度快，用了一些优化。”
 
@@ -1554,7 +1554,7 @@ Transformer 的每一层都是 `LayerNorm(x + Attention(x))` 或 `LayerNorm(x + 
 
 ### Q：什么是灾难性遗忘？微调时如何缓解？
 
-> 来源：字节春招大模型测开一面【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：后训练中避免灾难性遗忘的方法？】
+> 来源：字节春招大模型测开一面【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：后训练中避免灾难性遗忘的方法？】；[本轮来源](https://www.nowcoder.com/discuss/926463586325495808)
 
 **新手答**：“就是模型学了新东西忘了旧东西。”
 
@@ -1604,19 +1604,19 @@ flowchart TB
         A1["500 条真实标注"] --> A2["按查询模式分类\n（单表/多表/聚合/嵌套/...）"]
         A2 --> A3["统计每个模式的覆盖量\n找出覆盖不足的模式"]
     end
-    
+
     subgraph stage2["阶段二：数据合成"]
         B1["模板化合成\n基于 SQL 模板 + 槽位替换"]
         B2["LLM 改写合成\n基于种子样本做多样化改写"]
         B3["Schema 驱动合成\n根据表结构自动生成合理 query"]
     end
-    
+
     subgraph stage3["阶段三：质量控制"]
         C1["SQL 可执行性校验\n在真实数据库上运行"]
         C2["语义一致性校验\nNL-SQL 对是否语义匹配"]
         C3["难度标签标注\n简单/中等/困难"]
     end
-    
+
     stage1 --> stage2 --> stage3
     C3 --> D["最终训练集\n~2000-3000 条"]
 ```
@@ -1700,7 +1700,7 @@ flowchart TB
 
 ### Q：Token 和字符有什么区别？
 
-> 来源：淘宝闪购 AI应用研发 一面
+> 来源：淘宝闪购 AI应用研发 一面；本轮追问：Token 化和 Embedding 有什么区别？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）
 
 **新手答**：“Token 就是模型切分文字的最小单位，一个词就是一个 token。”
 
@@ -1890,7 +1890,7 @@ Kaplan 等人（2020）和 Chinchilla（2022）的研究揭示了**幂律关系*
 
 ### Q：GQA 和 MLA 的原理是什么？各自解决什么问题？
 
-> 来源：阿里国际AI算法一面
+> 来源：阿里国际AI算法一面；本轮追问：Transformer的原理是什么？（[本轮追问](https://www.nowcoder.com/discuss/927969546672046080)）；本轮追问：GQA 主要解决什么问题？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“都是注意力机制的变体，用来加速推理。”
 
@@ -1978,7 +1978,7 @@ MoE 模型（如 Mixtral 8x7B，总参 47B）：
 
 ### Q：BF16 与 FP32 精度差异及训练推理选型？
 
-> 来源：爱奇艺大模型算法岗二面
+> 来源：爱奇艺大模型算法岗二面；本轮追问：BF16 和 FP 类型小数点位数有什么差异？什么场景下差异会被放大？（[本轮追问](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)）
 
 **新手答**：“BF16 精度低但快，FP32 精度高但慢。”
 
@@ -2091,7 +2091,7 @@ PyTorch Profiler / nsys → 哪个 kernel 耗时最长？
 
 ## Q：Agent 在细分场景（比如法律、医疗）落地时，微调策略和通用场景有什么不同？
 
-> 来源：字节TikTok AI应用开发一面
+> 来源：字节TikTok AI应用开发一面；本轮追问：我能理解是因为你们这个场景复杂度不够高？利用模型本身加一些人工微调就能达到九十以上的准确率？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）
 
 **新手答**：“收集领域数据做 SFT 就行了。”
 
@@ -2165,7 +2165,7 @@ Spec Coding 本质是“把需求写清楚让模型按规格实现”——适�
 
 ### Q：外部模型参数更大，14B 在 Agent 层面会不会不够？
 
-> 来源：小米 AI Agent 一面（暑期）
+> 来源：小米 AI Agent 一面（暑期）；本轮追问：你项目用的是什么模型？V4 Flash 和千问哪个参数量更大？千问 Plus 是多少参数？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
 
 **新手答**：“参数越大越好，14B 肯定不如 70B。”
 
@@ -2247,7 +2247,7 @@ Rerank 蒸馏的核心是把大 Cross-Encoder（如 bge-reranker-v2-m3）的排�
 
 ### Q：BERT 和 GPT 架构的区别是什么？
 
-> 来源：同程Agent开发实习一面
+> 来源：同程Agent开发实习一面；本轮追问：这个任务有什么难点？为什么从 BERT 换成大模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）
 
 **新手答**：“BERT 是双向的，GPT 是单向的。”
 
@@ -2283,7 +2283,7 @@ Rerank 蒸馏的核心是把大 Cross-Encoder（如 bge-reranker-v2-m3）的排�
 
 ### Q：为什么现在的大模型都是 Decoder-only 架构？
 
-> 来源：淘天 AI Agent 暑期实习一面
+> 来源：淘天 AI Agent 暑期实习一面；本轮追问：Qwen 或同类大模型通常采用什么样的整体架构？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“因为 GPT 用的就是 Decoder。”
 
@@ -2525,7 +2525,7 @@ flowchart LR
 
 ## Q：训练后量化的完整流程是什么？粒度、校准方法和离群值如何共同影响精度？
 
-> 来源：[摩尔线程 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/e1ac5e7fccf243c5898394d80911b3c0)、[智谱 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/846a09e34fea4fe9a7e14da2a88e3f72)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e7b7f56f4f0e4752a08c6b78566324f0)
+> 来源：[摩尔线程 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/e1ac5e7fccf243c5898394d80911b3c0)、[智谱 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/846a09e34fea4fe9a7e14da2a88e3f72)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e7b7f56f4f0e4752a08c6b78566324f0)；本轮追问：模型量化是怎么做的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)）
 
 **新手答**：“准备一批校准数据，统计最大最小值，再把 FP16 权重转成 INT8 或 INT4。”
 
@@ -2577,7 +2577,7 @@ AdaQuant 这一名称在不同论文或实现中可能指不同的自适应量�
 
 ## Q：Agentic CPT、SFT、RL 三阶段分别训练什么能力？
 
-> 来源：字节跳动/AI Agent 秋招一面【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：后训练全链路（数据→SFT→RL）详细介绍？】
+> 来源：字节跳动/AI Agent 秋招一面【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：后训练全链路（数据→SFT→RL）详细介绍？】；本轮追问：请介绍一下目前的大模型训练流程。（[本轮追问](https://www.nowcoder.com/discuss/927984221740630016)）
 
 **新手答**：“CPT 学领域知识，SFT 学格式，RL 提升效果。”
 
@@ -2601,7 +2601,7 @@ CPT 不能替代 RAG，它适合稳定、通用的领域模式，不适合频繁
 
 ## Q：LoRA 应该挂在哪些层？rank、alpha 和 dropout 如何共同影响效果？
 
-> 来源：Shopee 大模型一面（2026-08-22）【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：LoRA 的 rank 值越大越好吗？为什么？】
+> 来源：Shopee 大模型一面（2026-08-22）【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：LoRA 的 rank 值越大越好吗？为什么？】；本轮追问：LoRA如何初始化？A、B为什么不能全0？A、B矩阵哪一个初始化为0？（[本轮追问](https://www.nowcoder.com/discuss/926468630819213312)）；本轮追问：LoRA 是什么？（[本轮追问](https://www.nowcoder.com/discuss/926677767104532480)）
 
 **新手答**：“通常挂 Q、V，rank 越大能力越强，dropout 防过拟合。”
 
@@ -2637,7 +2637,7 @@ Agent 轨迹通常交错出现 `assistant action -> environment observation -> a
 
 ## Q：DAPO 为什么可以不使用额外 KL 惩罚？它如何维持策略更新稳定？
 
-> 来源：[字节大模型算法岗](https://www.nowcoder.com/discuss/926272098744438784)、[字节强化学习岗](https://www.nowcoder.com/discuss/925523582761857024)
+> 来源：[字节大模型算法岗](https://www.nowcoder.com/discuss/926272098744438784)、[字节强化学习岗](https://www.nowcoder.com/discuss/925523582761857024)；本轮追问：强化学习的核心目标是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）
 
 **新手答**：“DAPO 用 Clip 就能限制更新，所以不需要 KL。”
 
@@ -2694,7 +2694,7 @@ flowchart LR
 
 ## Q：GRPO 中相对奖励是如何计算的？同一组奖励方差接近零时如何处理？
 
-> 来源：唯品会/NLP算法实习一面
+> 来源：唯品会/NLP算法实习一面；本轮追问：DeepSeek-R1模型具体是如何训练的？（[本轮追问](https://www.nowcoder.com/discuss/926463586325495808)）
 
 **新手答**：“奖励减去均值再除以标准差。”
 
@@ -2743,7 +2743,7 @@ flowchart TB
 
 ## Q：Tool-use 轨迹长度与任务复杂度有什么关系？训练数据应如何分布？
 
-> 来源：唯品会/大模型算法实习
+> 来源：唯品会/大模型算法实习；本轮追问：序列长度怎么确定的？（[本轮追问](https://www.nowcoder.com/discuss/927381090602348544)）
 
 **新手答**：“简单任务轨迹短，复杂任务轨迹长，训练时都放一些。”
 
@@ -2768,7 +2768,7 @@ flowchart TB
 
 ## Q：Tool-use 强化学习中的内容奖励应如何设计？
 
-> 来源：唯品会/大模型算法实习（ToolRL 追问）
+> 来源：唯品会/大模型算法实习（ToolRL 追问）；本轮追问：在内容审核场景中应该使用什么强化学习算法？（[本轮追问](https://www.nowcoder.com/discuss/926463586325495808)）；本轮追问：在 AI 编程、大模型或前沿技术方面，你做过哪些学习或了解？（[本轮追问](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)）
 
 **新手答**：“用另一个大模型判断最终回答好不好。”
 
@@ -2819,7 +2819,7 @@ flowchart LR
 
 ## Q：Agent 交互轨迹与普通语言模型语料有什么区别？如何仿真高质量轨迹？
 
-> 来源：字节/Agent 算法实习一面
+> 来源：字节/Agent 算法实习一面；本轮追问：仿真中具体看哪些指标？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）；本轮追问：什么是“高质量数据”？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)）
 
 **新手答**：“Agent 数据多了工具调用和多轮对话，可以让强模型生成。”
 
@@ -2901,7 +2901,7 @@ flowchart LR
 
 ## Q：训练实验如何对 YAML 配置做规范化哈希，并保证单变量变化可复现？
 
-> 来源：[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)（2026-08-24）
+> 来源：[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)（2026-08-24）；本轮追问：说一下你记得的其他所有规范内容（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）
 
 **新手答**：“对 YAML 文件做 SHA-256；每次只改一个字段并保存 Git commit。”
 
@@ -2919,7 +2919,7 @@ flowchart LR
 
 ## Q：如何训练模型做高精度抽取式摘要？数据、目标、Loss 和评测如何设计？
 
-> 来源：百度大模型实习 Agent 面经（2026-03-11）
+> 来源：百度大模型实习 Agent 面经（2026-03-11）；本轮追问：你说预测结果不解码，只用高维特征，那怎么监督预测精度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)）；本轮追问：怎么理解数据、模型和评测之间的关系？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）
 
 **新手答**：“把文档中的重要句子标成 1，其他句子标成 0，用二分类 Loss 训练，再用 ROUGE 评测。”
 
@@ -2948,7 +2948,7 @@ flowchart LR
 
 ## Q：预训练与 SFT 在数据、目标函数、计算形态和基础设施上有什么区别？
 
-> 来源：[AI Infra 小厂实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)
+> 来源：[AI Infra 小厂实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)；本轮追问：BERT 的预训练任务和下游任务通常分别使用什么 loss？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：后训练数据形态是怎样的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)）
 
 **新手答**：“预训练用海量无标注数据学习通用能力，SFT 用问答数据让模型学会对话。”
 
@@ -3015,6 +3015,294 @@ flowchart LR
 生产上可以用 LLaMA-Factory 管标准化批量配方，用 TRL 承载需要改 Trainer 的实验，但要共享数据版本、模型制品、评测集和实验追踪。若二次封装过深，升级成本和行为漂移可能超过框架带来的便利，因此还要评估退出路径。
 
 **差距在哪**：新手按“易用 / 灵活”贴标签，高手按训练语义、扩展边界、可复现性和团队生命周期做条件化选择。
+
+---
+
+## Q：如何处理训练数据中的类别不平衡？
+
+> 来源：[本轮面经（文章 27）](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)
+
+**新手答**：“过采样少数类，或者给少数类更高权重。”
+
+**高手答**：先确认不平衡发生在标签、时间切片还是线上流量，并以业务代价选择指标。可组合分层采样、类别权重、focal loss、阈值移动和难例挖掘；验证集必须保持真实分布，不能把过采样后的分布当线上效果。过采样可能放大重复噪声，权重过大也会损害概率校准，因此要同时看分标签 precision/recall、PR-AUC、校准和关键少数类的成本。时间相关任务还要按时间切分，避免同一实体泄漏。
+
+**差距在哪**：新手只会报一种技巧，高手先定义分布和代价，再选择采样、损失与阈值并验证副作用。
+
+---
+
+## Q：自研自动驾驶方法与 UniAD 的主要区别应如何比较？
+
+> 来源：[本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
+
+**新手答**：“我们的模型结构不同，效果更好。”
+
+**高手答**：先固定比较坐标：输入传感器和历史窗口、感知/预测/规划任务、监督标签、时序融合方式、坐标系和评测指标。再分别说明差异落在共享 BEV 表征、任务查询、规划头、损失权重还是数据闭环，给出消融实验而不是只比较总分。若方案减少模块，需解释延迟、显存和长尾场景的代价；若增加模块，要证明增益覆盖复杂度和数据要求。UniAD 的具体实现会随版本变化，回答应以论文或代码版本为边界。
+
+**差距在哪**：新手用“结构不同”结束，高手能把架构差异映射到训练目标、消融证据和部署约束。
+
+---
+
+## Q：决策任务的 label 如何定义？预测任务如何设计监督信号？
+
+> 来源：[本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
+
+**新手答**：“决策标签是动作，预测标签是未来轨迹。”
+
+**高手答**：先定义决策粒度、时间范围和成功条件。离散决策可用动作类别与 mask，连续控制要标注目标速度、加速度或轨迹，并明确不可行动作和安全约束。预测监督要记录未来轨迹、置信度、有效时长及遮挡/失效标记，按时间对齐输入与标签，避免把未来信息泄漏进特征。多模态未来可用集合或分布监督，损失组合位置误差、终点误差和碰撞/可行性约束；评测按场景和长尾切片报告，不能只看平均 L2。
+
+**差距在哪**：新手只说标签名称，高手能说明标签 schema、对齐、mask、损失和评测如何闭环。
+
+---
+
+## Q：如何把“减速多少”映射为是否碰撞的风险？
+
+> 来源：[本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
+
+**新手答**：“减速越多，碰撞概率越低。”
+
+**高手答**：不要把动作与结果硬编码成单调规则。把当前状态、相对距离/速度、道路约束和候选减速度输入风险模型，输出未来时间窗内的碰撞概率或安全余量；用仿真和真实轨迹标注碰撞、近失效和舒适性代价。决策器再对风险、进度、乘坐舒适度做约束优化，并加入不确定性阈值和紧急制动兜底。要按场景校准概率，区分“未碰撞但过度保守”和“低概率高损失”，否则单一准确率会掩盖安全问题。
+
+**差距在哪**：新手凭直觉假设单调关系，高手把状态、概率校准、安全约束和兜底策略串起来。
+
+---
+
+## Q：LightGBM 和 XGBoost 有什么区别，如何选型？
+
+> 来源：[本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)
+
+**新手答**：“LightGBM 更快，XGBoost 更稳定。”
+
+**高手答**：两者都是梯度提升树，差异要落到实现和数据形态。LightGBM 常用 histogram、leaf-wise 生长和特征/数据采样，训练速度与大规模稀疏特征上有优势，但 leaf-wise 在小数据或参数不当时更易过拟合；XGBoost 的 level-wise/近似分裂、正则和工程生态成熟，便于控制树深和复现。实际选择要用同一切分、特征、早停和资源预算做基准，比较分层指标、训练时间、内存、模型大小和线上延迟，而不是依据固定结论。
+
+**差距在哪**：新手背性能标签，高手从树生长、数据规模、正则和可复现实验说明取舍。
+
+---
+
+## Q：树模型需要哪些特征工程？缺失值、初始化、默认值和分桶怎么处理？
+
+> 来源：[本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)
+
+**新手答**：“做归一化、填充缺失值，再把特征分桶。”
+
+**高手答**：树模型通常不要求统一尺度，但仍需处理类型、缺失、异常、时间泄漏和高基数类别。先定义特征 schema 与默认值语义：缺失是未知、未发生还是采集失败，不能用一个常数混淆。若引擎原生学习缺失方向，训练和推理必须保持一致；否则用训练集统计量填充并增加缺失指示。分桶适合表达非线性、稳定线上分布或降低噪声，但会损失精度，应通过分位点、业务边界和 OOS 验证选择。所有统计量只在训练集拟合，特征版本和初始化规则要可追溯。
+
+**差距在哪**：新手罗列预处理，高手关注缺失语义、泄漏、线上一致性和分桶的信息损失。
+
+---
+
+## Q：连续特征离散化有什么作用和代价？
+
+> 来源：[本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)
+
+**新手答**：“把连续值变成区间，模型更容易学习。”
+
+**高手答**：离散化能把非线性关系变成桶特征，提升鲁棒性、可解释性和线上缓存命中，也可降低异常值影响。常见做法有等宽、分位点、业务阈值和目标编码的变体；桶边界只能用训练数据拟合，并冻结版本。代价是边界不连续、细节丢失、桶稀疏和分布漂移，过细会过拟合，过粗会欠拟合。应与原始特征、样条/单调约束或树模型做消融，按切片和校准评估收益。
+
+**差距在哪**：新手只说“更容易学”，高手能讲清收益、边界、漂移和验证方法。
+
+---
+
+## Q：机器学习、LSTM 和大语言模型之间是什么关系？
+
+> 来源：[本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
+
+**新手答**：“LSTM 是机器学习模型，LLM 是更大的神经网络。”
+
+**高手答**：机器学习是从数据学习映射的总范畴，深度学习是其中使用多层神经网络的方法；LSTM 是带门控循环状态的序列模型，适合按时间递推处理序列；LLM 通常以 Transformer 为骨干，通过大规模自监督预训练获得语言建模能力，再进行指令微调或偏好优化。三者不是并列产品：LSTM 可以用于时间序列或低延迟场景，LLM 适合复杂语义与生成任务，选型取决于数据、上下文、延迟、成本和可验证性。
+
+**差距在哪**：新手按模型大小分类，高手说明范畴关系、结构差异与工作负载边界。
+
+---
+
+## Q：LSTM 的核心设计原理是什么？
+
+> 来源：[本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
+
+**新手答**：“有遗忘门、输入门和输出门，可以记住长期信息。”
+
+**高手答**：LSTM 维护细胞状态 `c_t` 与隐状态 `h_t`，用遗忘门决定保留多少旧状态，用输入门控制候选信息写入，用输出门决定暴露多少状态。细胞状态的加法路径改善长序列梯度传播，但仍可能受序列长度、门饱和和计算串行限制。工程上要处理 padding/mask、初始状态、截断反向传播和隐藏状态泄漏；与 Transformer 比较时应结合序列长度、并行度、数据量和延迟，而不是笼统说谁更强。
+
+**差距在哪**：新手会背三个门，高手能解释状态更新、梯度路径和部署约束。
+
+---
+
+## Q：为什么选择 AC 自动机、TextCNN、FastText 和 TinyBERT，而不是更深的模型？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“这些模型轻量，线上速度快。”
+
+**高手答**：按任务拆分模型职责：AC 自动机适合高精度词面规则，TextCNN/FastText 适合低延迟局部模式或基线，TinyBERT 在需要上下文语义时提供更强表达。更深模型可能提升复杂语义召回，却增加参数、延迟、蒸馏和维护成本。应以业务误报/漏报代价、长尾覆盖、CPU/GPU 预算和可解释性做分层级联，并通过统一数据、阈值和切片评测决定是否升级，而不是把“更深”当作必然更好。
+
+**差距在哪**：新手只讲轻量，高手能把模型放入级联链路并说明效果与成本证据。
+
+---
+
+## Q：使用大模型生成标签时，会遇到哪些问题？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“可能有幻觉，所以人工抽查。”
+
+**高手答**：风险包括标签定义歧义、格式错误、类别偏置、跨样本不一致、模型自信但错误，以及隐私和数据泄漏。先把标签 schema、示例、拒答条件和版本固化，使用结构化输出校验；对高风险类别采用金标、双人复核和仲裁，对低风险区保留随机抽检。按模型版本、Prompt、数据切片记录一致率、混淆矩阵、校准和人工修正率，失败样本回流主动学习。LLM 标签是候选标注，不能未经抽检直接当 ground truth。
+
+**差距在哪**：新手只想到“抽查”，高手覆盖规范、校验、偏差监控、人工闭环和可追溯性。
+
+---
+
+## Q：交叉熵损失的数学形式和含义是什么？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“真实标签和预测概率越接近，交叉熵越小。”
+
+**高手答**：多分类单样本交叉熵为 `L=-Σ_i y_i log q_i`，其中 `y` 是目标分布、`q` 是模型预测分布；one-hot 时等于 `-log q_y`。它衡量目标分布对预测分布的对数损失，错得越自信惩罚越大。实现时要使用 logits 版 `log_softmax`/`cross_entropy` 避免数值下溢，并明确 label smoothing、类别权重、ignore index 和 reduction 对梯度与指标的影响。
+
+**差距在哪**：新手只讲“接近”，高手能写出公式、解释惩罚形状并指出实现细节。
+
+---
+
+## Q：若真实标签分布为 P、预测分布为 Q，KL 散度如何表示？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“KL 是 P 和 Q 的差异，写成 `Σ P log(P/Q)`。”
+
+**高手答**：`D_KL(P‖Q)=Σ_x P(x) log[P(x)/Q(x)]`，连续变量对应积分。它是用 Q 近似 P 时的额外编码代价，非负但不对称，且当 P>0、Q=0 时发散。交叉熵满足 `H(P,Q)=H(P)+D_KL(P‖Q)`；蒸馏或策略约束中必须说明方向，因为 `D_KL(P‖Q)` 更关注覆盖 P 的质量，反向 KL 的偏好不同。实际训练还要处理零概率、温度和 mask，不能只报一个无方向的“KL”。
+
+**差距在哪**：新手记住公式，高手能解释方向、性质和训练中的数值边界。
+
+---
+
+## Q：图召回主要解决什么问题？如何划分负责环节？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“图召回通过用户和物品关系找相似内容。”
+
+**高手答**：图召回把用户、物品、行为、内容或业务实体建成带权、带时间的图，通过邻居扩展、路径规则或图表示学习补足协同信号稀疏、冷启动和多跳关系。职责要拆成图构建与特征更新、候选生成、过滤去重、排序特征、在线服务和效果评估，并明确数据延迟与回滚。评估不能只看召回率，还要按新用户、长尾和时效切片看覆盖、重复率、延迟及下游转化。
+
+**差距在哪**：新手只说“找相似”，高手能讲清图数据、链路边界、时效和评测。
+
+---
+
+## Q：为什么用图召回，而不是用户—物品行为模型、矩阵分解或双塔模型？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“图召回能利用更多关系，效果更好。”
+
+**高手答**：先看信号和约束。矩阵分解适合稳定的用户—物品交互，双塔便于大规模向量检索，图方法适合多类型节点、多跳关系和显式路径，但图构建、增量更新、邻居爆炸和在线解释成本更高。可采用混合召回：双塔覆盖主流语义，图路径补长尾与关系约束，再统一去重、配额和排序。最终以冷启动覆盖、时效、延迟、存储和增量维护成本做对照实验。
+
+**差距在哪**：新手宣称图方法更强，高手按信号、规模、更新和成本做条件化选型。
+
+---
+
+## Q：为什么在排序链路中同时使用 LightGBM 和 LambdaRank？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“LightGBM 是模型，LambdaRank 是排序算法，组合起来效果好。”
+
+**高手答**：LightGBM 是梯度提升树框架，LambdaRank 是按交换对排序指标收益构造梯度的目标思想，二者可以组合成树模型排序器。Lambda 梯度把 NDCG 等位置权重纳入训练，适合有 query 分组和相对偏好的排序数据；训练前要保证 group 边界、曝光偏差、缺失反馈和负样本策略正确。选型时比较 pointwise/pairwise/listwise 目标的离线排序指标、线上延迟与稳定性，避免把框架名称误当成两个独立模型叠加。
+
+**差距在哪**：新手只会背名词，高手能说明目标函数、分组数据和曝光偏差。
+
+---
+
+## Q：静态分和动态分在推荐链路中分别起什么作用？
+
+> 来源：[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+
+**新手答**：“静态分长期稳定，动态分根据实时行为变化。”
+
+**高手答**：静态分可表示内容质量、长期偏好或离线画像，适合缓存和稳定基线；动态分来自近期行为、上下文、库存或实时热度，能响应时效但受延迟、噪声和反馈回路影响。两者应在特征版本中明确时间窗、更新频率、缺失回退和归一化，再由排序模型或可解释加权融合。上线要监控新鲜度、缓存命中、漂移、冷启动和动态信号异常，防止短期热点吞没长期质量。
+
+**差距在哪**：新手只区分长期/实时，高手能讲更新契约、融合方式和反馈风险。
+
+---
+
+## Q：模型剪枝有哪些方法，如何评估是否值得？
+
+> 来源：[本轮面经（文章 93）](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)
+
+**新手答**：“删掉不重要的权重，再微调恢复精度。”
+
+**高手答**：剪枝可按结构分为非结构化、通道/层结构化和块稀疏；按时机分为训练后、渐进式或联合蒸馏。非结构化稀疏率高但需要硬件稀疏 Kernel 才可能加速，结构化更易获得实际吞吐收益却可能损失更多容量。应在目标硬件和真实 batch/序列上测端到端延迟、显存、能耗、质量切片与恢复训练成本，并保留未剪枝回退版本。剪枝阈值、校准集和微调步数必须版本化。
+
+**差距在哪**：新手把剪枝等同于删权重，高手能区分稀疏形式并用真实硬件验证收益。
+
+---
+
+## Q：序列较稀疏时，建模如何处理稀疏性？
+
+> 来源：[本轮面经（文章 101）](https://www.nowcoder.com/discuss/927381090602348544)
+
+**新手答**：“把缺失值补零，或者用插值补齐。”
+
+**高手答**：先区分结构性缺失、未观测和真实零值，并记录观测 mask、时间间隔和数据质量。可按任务选择事件驱动建模、带 mask/Δt 的 RNN/Transformer、稀疏卷积、分层聚合或基于业务先验的插值；插值只能作为特征，不能伪造标签。评估要做按缺失率、时间跨度和冷启动切片的回测，比较插值误差、预测误差、延迟和存储成本，并防止用未来观测填补过去。
+
+**差距在哪**：新手只会补值，高手先定义缺失语义，再选择模型并检查时间泄漏。
+
+---
+
+## Q：业界通常如何处理长视频理解？
+
+> 来源：[本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+
+**新手答**：“抽帧后把所有帧输入多模态大模型。”
+
+**高手答**：长视频通常分层处理：先按镜头/时间或音频事件切段，提取低成本视觉、ASR、OCR 和元数据；再对片段做摘要、检索或关键帧选择，最后只把相关片段送入跨模态模型。需要维护时间戳、模态质量、片段边界和摘要来源，避免摘要丢失关键证据。按视频长度、事件密度和查询类型动态分配 token 预算，评估检索召回、时间定位、答案准确率、延迟和成本；全量抽帧可能受上下文上限与冗余拖累。
+
+**差距在哪**：新手只想到抽帧，高手能拆分切片、摘要、检索和证据回溯链路。
+
+---
+
+## Q：视频没有语音时，视觉与多模态分析如何降级？
+
+> 来源：[本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+
+**新手答**：“没有语音就只看视频帧。”
+
+**高手答**：把音频当可选模态，先由媒体探针确认“无语音”与“音轨损坏”的区别。无语音时提高镜头变化、OCR、目标/动作和视觉摘要的预算；若有环境声但无 ASR 文本，可保留音频事件特征。融合层要支持 modality mask 和质量分数，按置信度动态选择视觉、OCR、元数据或人工复核，并在输出中标记证据来源。评测需单独报告无语音、低光、遮挡等切片，不能用有语音平均分掩盖降级失败。
+
+**差距在哪**：新手简单删掉音频，高手设计模态质量检测、降级路径和可审计证据。
+
+---
+
+## Q：一条 VideoSegment 数据结构应保存哪些内容？
+
+> 来源：[本轮面经（文章 160）](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)
+
+**新手答**：“保存开始时间、结束时间和视频帧。”
+
+**高手答**：至少包含稳定的 `segment_id`、视频/版本标识、起止时间与帧索引、关键帧或媒体引用、ASR/OCR 文本、模态质量与采样策略；若有摘要或 embedding，还要记录模型版本、时间范围和来源证据。把原始媒体引用与派生特征分开，支持重算和缓存失效；schema 需有单位、时区、缺失语义和校验规则。不要把大对象直接塞进消息，使用可寻址存储并保留血缘和权限。
+
+**差距在哪**：新手列三个字段，高手覆盖时序对齐、派生版本、存储边界和可追溯性。
+
+---
+
+## Q：持续学习有哪些方法，如何避免旧能力退化？
+
+> 来源：[本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)
+
+**新手答**：“定期用新数据继续训练，或者增量微调。”
+
+**高手答**：方法可分为回放式（混入代表性旧数据）、正则约束式（限制关键参数漂移）、参数隔离式（Adapter/专家）和蒸馏式（保持旧模型输出），也可通过主动学习只采集新分布中的高价值样本。上线前固定旧能力回归集与新分布评测，监控漂移、遗忘和数据污染；训练制品绑定数据窗口、模型版本和回滚点。持续学习不是自动吸收所有线上日志，必须先做隐私、质量和标签门禁。
+
+**差距在哪**：新手把增量训练当持续学习，高手能讲方法分类、遗忘评测和数据门禁。
+
+---
+
+## Q：Qwen-VL 的动态分辨率如何实现？
+
+> 来源：[本轮面经（文章 186）](https://www.nowcoder.com/discuss/926463586325495808)
+
+**新手答**：“根据图片大小动态调整输入分辨率。”
+
+**高手答**：动态分辨率的核心是让视觉编码器按输入尺寸或切片网格产生可变数量视觉 token，再通过投影层接入语言模型；实现时要定义最大 token 预算、长宽比策略、位置编码/网格映射和 batch padding。高分辨率能保留小目标细节，但会增加显存、Prefill 延迟和上下文占用，因此应按任务在原图、缩略图和局部 crop 间分配预算。具体 Qwen-VL 版本的视觉编码器与模板会变化，可对照 [Qwen2-VL 官方仓库](https://github.com/QwenLM/Qwen2-VL)确认实现边界，并用不同分辨率切片评估 OCR、定位、延迟和成本。
+
+**差距在哪**：新手只说“尺寸自适应”，高手能说明 token 预算、位置映射和精度成本权衡。
 
 ---
 
