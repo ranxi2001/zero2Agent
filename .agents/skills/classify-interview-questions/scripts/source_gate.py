@@ -13,7 +13,7 @@ from typing import Any
 
 EMPTY_BODY_RE = re.compile(r"^\s*(?:\(内容为空\)|内容为空|内容不存在[!！]?)\s*$", re.IGNORECASE)
 TEMPLATE_RE = re.compile(
-    r"以下根据.{0,20}(?:项目情况|实际情况).{0,20}补充|参考常见追问|标准答案|"
+    r"以下根据.{0,20}(?:项目情况|实际情况).{0,20}补充|参考常见追问|(?:标准答案|参考回答)\s*[:：]|"
     r"剩余\s*\d+%|购买.{0,8}专栏|付费专栏|解锁剩余|我的回答[:：]",
     re.IGNORECASE,
 )
@@ -71,6 +71,9 @@ def preflight_sources(
         text = path.read_text(encoding="utf-8", errors="ignore")
         body = article_body(text)
         compact = normalized_body(text)
+        if article.get("captureCompleteness") == "paid-preview":
+            rejected[index] = "paid-content preview confirmed by scrape manifest"
+            continue
         if EMPTY_BODY_RE.match(body) or body.startswith("内容不存在!") or body.startswith("内容不存在！"):
             rejected[index] = "empty or deleted source body"
             continue

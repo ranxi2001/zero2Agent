@@ -15,7 +15,7 @@ SPEC.loader.exec_module(MODULE)
 class SourceGateTest(unittest.TestCase):
     def write_source(self, directory, name, body):
         path = Path(directory) / name
-        path.write_text(f"# title\n\n**来源**：https://example.com/{name}\n\n---\n\n{body}\n")
+        path.write_text(f"# title\n\n**来源**：https://example.com/{name}\n\n---\n\n{body}\n", encoding="utf-8")
         return str(path)
 
     def test_empty_and_template_sources_are_rejected(self):
@@ -26,6 +26,16 @@ class SourceGateTest(unittest.TestCase):
             ]
             rejected = MODULE.preflight_sources(articles)
             self.assertEqual(set(rejected), {1, 2})
+
+    def test_paid_metadata_is_checked_even_when_notice_is_not_in_body(self):
+        with tempfile.TemporaryDirectory() as directory:
+            articles = [{"captureCompleteness": "paid-preview", "localSourcePath": self.write_source(directory, "preview.md", "ReAct 与 Workflow 如何选择？")}]
+            self.assertIn(1, MODULE.preflight_sources(articles))
+
+    def test_standard_answer_inside_evaluation_question_is_not_template(self):
+        with tempfile.TemporaryDirectory() as directory:
+            articles = [{"localSourcePath": self.write_source(directory, "interview.md", "没有标准答案的开放式场景如何评测？\n如何确认标准答案和线上真实排障流程一致？")}]
+            self.assertEqual(MODULE.preflight_sources(articles), {})
 
     def test_near_duplicate_bodies_are_both_rejected(self):
         body = "\n".join(f"{index}. 这是第{index}个完整技术问题，包含足够的上下文和约束？" for index in range(20))

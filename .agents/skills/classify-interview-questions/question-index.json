@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-08",
-  "questionCount": 630,
+  "updatedAt": "2026-09-13",
+  "questionCount": 693,
   "dimensions": {
-    "01-architecture-design": 46,
-    "02-tool-management": 37,
-    "03-fault-tolerance": 37,
-    "04-memory-context": 63,
-    "05-eval-and-vision": 46,
+    "01-architecture-design": 47,
+    "02-tool-management": 38,
+    "03-fault-tolerance": 38,
+    "04-memory-context": 64,
+    "05-eval-and-vision": 49,
     "06-multi-agent-collab": 35,
-    "07-engineering-pitfalls": 66,
+    "07-engineering-pitfalls": 69,
     "08-prompt-engineering": 30,
-    "09-rag-retrieval": 67,
-    "10-training-and-data": 77,
-    "11-ai-code-testing": 14,
-    "12-business-ai-engineering": 21,
-    "13-project-deep-dive": 21,
-    "15-agent-concepts": 17,
-    "16-agent-infra": 23,
-    "17-ai-infra": 30
+    "09-rag-retrieval": 73,
+    "10-training-and-data": 101,
+    "11-ai-code-testing": 19,
+    "12-business-ai-engineering": 27,
+    "13-project-deep-dive": 25,
+    "15-agent-concepts": 18,
+    "16-agent-infra": 28,
+    "17-ai-infra": 32
   },
   "questions": [
     {
@@ -390,6 +390,14 @@
       "searchText": "AI Coding Agent 的 Solo 模式和 Plan 模式应该如何设计？ [字节 Trae 二面](https://www.nowcoder.com/discuss/924821959647440896)（新增）"
     },
     {
+      "id": "01-architecture-design:047",
+      "dimension": "01-architecture-design",
+      "ordinal": 47,
+      "title": "什么时候需要自研或改造方案，而不是直接采用开源实现？",
+      "source": "[腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)",
+      "searchText": "什么时候需要自研或改造方案，而不是直接采用开源实现？ [腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)"
+    },
+    {
       "id": "02-tool-management:001",
       "dimension": "02-tool-management",
       "ordinal": 1,
@@ -686,6 +694,14 @@
       "searchText": "MCP 工具治理为什么需要审计？应该审计哪些证据？ 拓竹 AI Agent算法一面（新增）"
     },
     {
+      "id": "02-tool-management:038",
+      "dimension": "02-tool-management",
+      "ordinal": 38,
+      "title": "当治理规则需要修改服务代码时，如何安全落地？",
+      "source": "[9.10 虾皮二面](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)",
+      "searchText": "当治理规则需要修改服务代码时，如何安全落地？ [9.10 虾皮二面](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)"
+    },
+    {
       "id": "03-fault-tolerance:001",
       "dimension": "03-fault-tolerance",
       "ordinal": 1,
@@ -980,6 +996,14 @@
       "title": "Agent 无法处理任务时，“求助 / 升级”状态机应该如何设计？",
       "source": "[百度 Agent 研发岗一面](https://www.nowcoder.com/discuss/926273622006665216)（新增）",
       "searchText": "Agent 无法处理任务时，“求助 / 升级”状态机应该如何设计？ [百度 Agent 研发岗一面](https://www.nowcoder.com/discuss/926273622006665216)（新增）"
+    },
+    {
+      "id": "03-fault-tolerance:038",
+      "dimension": "03-fault-tolerance",
+      "ordinal": 38,
+      "title": "如何设计可靠的 Webhook 投递保障？",
+      "source": "[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)",
+      "searchText": "如何设计可靠的 Webhook 投递保障？ [要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)"
     },
     {
       "id": "04-memory-context:001",
@@ -1486,6 +1510,14 @@
       "searchText": "Codebase Memory 应该如何初始化、增量更新和失效？ [拼多多 Agent 开发岗一面](https://www.nowcoder.com/discuss/926273867092430848)（新增）"
     },
     {
+      "id": "04-memory-context:064",
+      "dimension": "04-memory-context",
+      "ordinal": 64,
+      "title": "为什么长视频通常需要切片和分阶段处理，而不是一次性输入大模型？",
+      "source": "[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)",
+      "searchText": "为什么长视频通常需要切片和分阶段处理，而不是一次性输入大模型？ [阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)"
+    },
+    {
       "id": "05-eval-and-vision:001",
       "dimension": "05-eval-and-vision",
       "ordinal": 1,
@@ -1852,6 +1884,30 @@
       "title": "如何实现基于 VLM 的 Benchmark 系统，并避免评测模型自说自话？",
       "source": "[深信服 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/83326f3bcc5546b2b556373ad29a6d71)（新增）",
       "searchText": "如何实现基于 VLM 的 Benchmark 系统，并避免评测模型自说自话？ [深信服 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/83326f3bcc5546b2b556373ad29a6d71)（新增）"
+    },
+    {
+      "id": "05-eval-and-vision:047",
+      "dimension": "05-eval-and-vision",
+      "ordinal": 47,
+      "title": "哪些业务场景不适合引入 Agent？",
+      "source": "[虾皮测开日常实习一面](https://www.nowcoder.com/discuss/927594784770764800)",
+      "searchText": "哪些业务场景不适合引入 Agent？ [虾皮测开日常实习一面](https://www.nowcoder.com/discuss/927594784770764800)"
+    },
+    {
+      "id": "05-eval-and-vision:048",
+      "dimension": "05-eval-and-vision",
+      "ordinal": 48,
+      "title": "如何设计消融实验并判断模块贡献？",
+      "source": "[美团面经-美团算法岗面经-01](https://www.nowcoder.com/discuss/927381090602348544)",
+      "searchText": "如何设计消融实验并判断模块贡献？ [美团面经-美团算法岗面经-01](https://www.nowcoder.com/discuss/927381090602348544)"
+    },
+    {
+      "id": "05-eval-and-vision:049",
+      "dimension": "05-eval-and-vision",
+      "ordinal": 49,
+      "title": "串行链路修改一个节点后，如何做精确归因？",
+      "source": "[知识科技 数据平台 二面](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)",
+      "searchText": "串行链路修改一个节点后，如何做精确归因？ [知识科技 数据平台 二面](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)"
     },
     {
       "id": "06-multi-agent-collab:001",
@@ -2662,6 +2718,30 @@
       "searchText": "接入多个外部 Agent 时，如何用 Adapter 统一异构事件、工具调用和生命周期协议？ 北京 B 端 AI 小厂面经（新增）"
     },
     {
+      "id": "07-engineering-pitfalls:067",
+      "dimension": "07-engineering-pitfalls",
+      "ordinal": 67,
+      "title": "如何统计 Agent 各模块耗时并定位瓶颈？",
+      "source": "[寒武纪AI应用开发一面&二面](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)",
+      "searchText": "如何统计 Agent 各模块耗时并定位瓶颈？ [寒武纪AI应用开发一面&二面](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)"
+    },
+    {
+      "id": "07-engineering-pitfalls:068",
+      "dimension": "07-engineering-pitfalls",
+      "ordinal": 68,
+      "title": "如何估算 Agent 使用模型的月度成本？",
+      "source": "[汇川技术一面](https://www.nowcoder.com/feed/main/detail/6a241d73effc4540a857a752d987a6f8)",
+      "searchText": "如何估算 Agent 使用模型的月度成本？ [汇川技术一面](https://www.nowcoder.com/feed/main/detail/6a241d73effc4540a857a752d987a6f8)"
+    },
+    {
+      "id": "07-engineering-pitfalls:069",
+      "dimension": "07-engineering-pitfalls",
+      "ordinal": 69,
+      "title": "大型项目重构如何规划，如何处理模块正交与冗余？",
+      "source": "[阿里控股 AI全栈开发 二面](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)",
+      "searchText": "大型项目重构如何规划，如何处理模块正交与冗余？ [阿里控股 AI全栈开发 二面](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)"
+    },
+    {
       "id": "08-prompt-engineering:001",
       "dimension": "08-prompt-engineering",
       "ordinal": 1,
@@ -3438,6 +3518,54 @@
       "searchText": "RAG 前端如何展示长文档，并让引用稳定跳转到原文证据？ 商汤 AI Agent 开发面经（新增）"
     },
     {
+      "id": "09-rag-retrieval:068",
+      "dimension": "09-rag-retrieval",
+      "ordinal": 68,
+      "title": "图召回如何缓解热门内容被过度推荐的问题？",
+      "source": "[28届双非本末9硕 腾讯wxg推荐算法面经](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "图召回如何缓解热门内容被过度推荐的问题？ [28届双非本末9硕 腾讯wxg推荐算法面经](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "09-rag-retrieval:069",
+      "dimension": "09-rag-retrieval",
+      "ordinal": 69,
+      "title": "RAG 检索结果如何安全地组装到提示词中？",
+      "source": "[腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)",
+      "searchText": "RAG 检索结果如何安全地组装到提示词中？ [腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)"
+    },
+    {
+      "id": "09-rag-retrieval:070",
+      "dimension": "09-rag-retrieval",
+      "ordinal": 70,
+      "title": "RAG 组装上下文后，如何选择最终生成模型？",
+      "source": "[腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)",
+      "searchText": "RAG 组装上下文后，如何选择最终生成模型？ [腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)"
+    },
+    {
+      "id": "09-rag-retrieval:071",
+      "dimension": "09-rag-retrieval",
+      "ordinal": 71,
+      "title": "生成教学蓝图时，如何识别语义歧义和超纲内容？",
+      "source": "[9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)",
+      "searchText": "生成教学蓝图时，如何识别语义歧义和超纲内容？ [9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)"
+    },
+    {
+      "id": "09-rag-retrieval:072",
+      "dimension": "09-rag-retrieval",
+      "ordinal": 72,
+      "title": "视频没有语音时，如何保持检索效果？",
+      "source": "[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)",
+      "searchText": "视频没有语音时，如何保持检索效果？ [阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)"
+    },
+    {
+      "id": "09-rag-retrieval:073",
+      "dimension": "09-rag-retrieval",
+      "ordinal": 73,
+      "title": "BGE 类文本 Embedding 模型的基本结构是什么？",
+      "source": "[腾讯音乐面经-腾讯音乐算法岗面经-01](https://www.nowcoder.com/discuss/926677767104532480)",
+      "searchText": "BGE 类文本 Embedding 模型的基本结构是什么？ [腾讯音乐面经-腾讯音乐算法岗面经-01](https://www.nowcoder.com/discuss/926677767104532480)"
+    },
+    {
       "id": "10-training-and-data:001",
       "dimension": "10-training-and-data",
       "ordinal": 1,
@@ -4054,6 +4182,198 @@
       "searchText": "LLaMA-Factory 和 TRL 等 SFT / RL 工具如何对比和选型？ [MiniMax 大模型算法岗一面](https://www.nowcoder.com/discuss/926272883872075776)（新增）"
     },
     {
+      "id": "10-training-and-data:078",
+      "dimension": "10-training-and-data",
+      "ordinal": 78,
+      "title": "如何处理训练数据中的类别不平衡？",
+      "source": "[本轮面经（文章 27）](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)",
+      "searchText": "如何处理训练数据中的类别不平衡？ [本轮面经（文章 27）](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)"
+    },
+    {
+      "id": "10-training-and-data:079",
+      "dimension": "10-training-and-data",
+      "ordinal": 79,
+      "title": "自研自动驾驶方法与 UniAD 的主要区别应如何比较？",
+      "source": "[本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)",
+      "searchText": "自研自动驾驶方法与 UniAD 的主要区别应如何比较？ [本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)"
+    },
+    {
+      "id": "10-training-and-data:080",
+      "dimension": "10-training-and-data",
+      "ordinal": 80,
+      "title": "决策任务的 label 如何定义？预测任务如何设计监督信号？",
+      "source": "[本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)",
+      "searchText": "决策任务的 label 如何定义？预测任务如何设计监督信号？ [本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)"
+    },
+    {
+      "id": "10-training-and-data:081",
+      "dimension": "10-training-and-data",
+      "ordinal": 81,
+      "title": "如何把“减速多少”映射为是否碰撞的风险？",
+      "source": "[本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)",
+      "searchText": "如何把“减速多少”映射为是否碰撞的风险？ [本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)"
+    },
+    {
+      "id": "10-training-and-data:082",
+      "dimension": "10-training-and-data",
+      "ordinal": 82,
+      "title": "LightGBM 和 XGBoost 有什么区别，如何选型？",
+      "source": "[本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)",
+      "searchText": "LightGBM 和 XGBoost 有什么区别，如何选型？ [本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)"
+    },
+    {
+      "id": "10-training-and-data:083",
+      "dimension": "10-training-and-data",
+      "ordinal": 83,
+      "title": "树模型需要哪些特征工程？缺失值、初始化、默认值和分桶怎么处理？",
+      "source": "[本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)",
+      "searchText": "树模型需要哪些特征工程？缺失值、初始化、默认值和分桶怎么处理？ [本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)"
+    },
+    {
+      "id": "10-training-and-data:084",
+      "dimension": "10-training-and-data",
+      "ordinal": 84,
+      "title": "连续特征离散化有什么作用和代价？",
+      "source": "[本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)",
+      "searchText": "连续特征离散化有什么作用和代价？ [本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)"
+    },
+    {
+      "id": "10-training-and-data:085",
+      "dimension": "10-training-and-data",
+      "ordinal": 85,
+      "title": "机器学习、LSTM 和大语言模型之间是什么关系？",
+      "source": "[本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)",
+      "searchText": "机器学习、LSTM 和大语言模型之间是什么关系？ [本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)"
+    },
+    {
+      "id": "10-training-and-data:086",
+      "dimension": "10-training-and-data",
+      "ordinal": 86,
+      "title": "LSTM 的核心设计原理是什么？",
+      "source": "[本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)",
+      "searchText": "LSTM 的核心设计原理是什么？ [本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)"
+    },
+    {
+      "id": "10-training-and-data:087",
+      "dimension": "10-training-and-data",
+      "ordinal": 87,
+      "title": "为什么选择 AC 自动机、TextCNN、FastText 和 TinyBERT，而不是更深的模型？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "为什么选择 AC 自动机、TextCNN、FastText 和 TinyBERT，而不是更深的模型？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:088",
+      "dimension": "10-training-and-data",
+      "ordinal": 88,
+      "title": "使用大模型生成标签时，会遇到哪些问题？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "使用大模型生成标签时，会遇到哪些问题？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:089",
+      "dimension": "10-training-and-data",
+      "ordinal": 89,
+      "title": "交叉熵损失的数学形式和含义是什么？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "交叉熵损失的数学形式和含义是什么？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:090",
+      "dimension": "10-training-and-data",
+      "ordinal": 90,
+      "title": "若真实标签分布为 P、预测分布为 Q，KL 散度如何表示？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "若真实标签分布为 P、预测分布为 Q，KL 散度如何表示？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:091",
+      "dimension": "10-training-and-data",
+      "ordinal": 91,
+      "title": "图召回主要解决什么问题？如何划分负责环节？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "图召回主要解决什么问题？如何划分负责环节？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:092",
+      "dimension": "10-training-and-data",
+      "ordinal": 92,
+      "title": "为什么用图召回，而不是用户—物品行为模型、矩阵分解或双塔模型？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "为什么用图召回，而不是用户—物品行为模型、矩阵分解或双塔模型？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:093",
+      "dimension": "10-training-and-data",
+      "ordinal": 93,
+      "title": "为什么在排序链路中同时使用 LightGBM 和 LambdaRank？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "为什么在排序链路中同时使用 LightGBM 和 LambdaRank？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:094",
+      "dimension": "10-training-and-data",
+      "ordinal": 94,
+      "title": "静态分和动态分在推荐链路中分别起什么作用？",
+      "source": "[本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)",
+      "searchText": "静态分和动态分在推荐链路中分别起什么作用？ [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)"
+    },
+    {
+      "id": "10-training-and-data:095",
+      "dimension": "10-training-and-data",
+      "ordinal": 95,
+      "title": "模型剪枝有哪些方法，如何评估是否值得？",
+      "source": "[本轮面经（文章 93）](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)",
+      "searchText": "模型剪枝有哪些方法，如何评估是否值得？ [本轮面经（文章 93）](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)"
+    },
+    {
+      "id": "10-training-and-data:096",
+      "dimension": "10-training-and-data",
+      "ordinal": 96,
+      "title": "序列较稀疏时，建模如何处理稀疏性？",
+      "source": "[本轮面经（文章 101）](https://www.nowcoder.com/discuss/927381090602348544)",
+      "searchText": "序列较稀疏时，建模如何处理稀疏性？ [本轮面经（文章 101）](https://www.nowcoder.com/discuss/927381090602348544)"
+    },
+    {
+      "id": "10-training-and-data:097",
+      "dimension": "10-training-and-data",
+      "ordinal": 97,
+      "title": "业界通常如何处理长视频理解？",
+      "source": "[本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)",
+      "searchText": "业界通常如何处理长视频理解？ [本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)"
+    },
+    {
+      "id": "10-training-and-data:098",
+      "dimension": "10-training-and-data",
+      "ordinal": 98,
+      "title": "视频没有语音时，视觉与多模态分析如何降级？",
+      "source": "[本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)",
+      "searchText": "视频没有语音时，视觉与多模态分析如何降级？ [本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)"
+    },
+    {
+      "id": "10-training-and-data:099",
+      "dimension": "10-training-and-data",
+      "ordinal": 99,
+      "title": "一条 VideoSegment 数据结构应保存哪些内容？",
+      "source": "[本轮面经（文章 160）](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)",
+      "searchText": "一条 VideoSegment 数据结构应保存哪些内容？ [本轮面经（文章 160）](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)"
+    },
+    {
+      "id": "10-training-and-data:100",
+      "dimension": "10-training-and-data",
+      "ordinal": 100,
+      "title": "持续学习有哪些方法，如何避免旧能力退化？",
+      "source": "[本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)",
+      "searchText": "持续学习有哪些方法，如何避免旧能力退化？ [本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)"
+    },
+    {
+      "id": "10-training-and-data:101",
+      "dimension": "10-training-and-data",
+      "ordinal": 101,
+      "title": "Qwen-VL 的动态分辨率如何实现？",
+      "source": "[本轮面经（文章 186）](https://www.nowcoder.com/discuss/926463586325495808)",
+      "searchText": "Qwen-VL 的动态分辨率如何实现？ [本轮面经（文章 186）](https://www.nowcoder.com/discuss/926463586325495808)"
+    },
+    {
       "id": "11-ai-code-testing:001",
       "dimension": "11-ai-code-testing",
       "ordinal": 1,
@@ -4164,6 +4484,46 @@
       "title": "Coding Agent 能否自举开发自身？如何避免生成器与验证器同源导致循环确认？",
       "source": "[平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)（新增）",
       "searchText": "Coding Agent 能否自举开发自身？如何避免生成器与验证器同源导致循环确认？ [平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)（新增）"
+    },
+    {
+      "id": "11-ai-code-testing:015",
+      "dimension": "11-ai-code-testing",
+      "ordinal": 15,
+      "title": "什么是 AST，代码测试中如何使用？",
+      "source": "[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)",
+      "searchText": "什么是 AST，代码测试中如何使用？ [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)"
+    },
+    {
+      "id": "11-ai-code-testing:016",
+      "dimension": "11-ai-code-testing",
+      "ordinal": 16,
+      "title": "污点分析通常包含哪三类核心节点？",
+      "source": "[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)",
+      "searchText": "污点分析通常包含哪三类核心节点？ [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)"
+    },
+    {
+      "id": "11-ai-code-testing:017",
+      "dimension": "11-ai-code-testing",
+      "ordinal": 17,
+      "title": "请举例说明业务中的污点源和污点汇。",
+      "source": "[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)",
+      "searchText": "请举例说明业务中的污点源和污点汇。 [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)"
+    },
+    {
+      "id": "11-ai-code-testing:018",
+      "dimension": "11-ai-code-testing",
+      "ordinal": 18,
+      "title": "代码 Agent 评测中，worktree 对照实验解决什么问题？",
+      "source": "[Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)",
+      "searchText": "代码 Agent 评测中，worktree 对照实验解决什么问题？ [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)"
+    },
+    {
+      "id": "11-ai-code-testing:019",
+      "dimension": "11-ai-code-testing",
+      "ordinal": 19,
+      "title": "如何用工程手段治理代码规范，而不是只依赖模型提醒？",
+      "source": "[百度Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)",
+      "searchText": "如何用工程手段治理代码规范，而不是只依赖模型提醒？ [百度Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)"
     },
     {
       "id": "12-business-ai-engineering:001",
@@ -4334,6 +4694,54 @@
       "searchText": "如何设计批量 PDF 转 HTML 并与知识库核对的 LLM Workflow？ [平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)（新增）"
     },
     {
+      "id": "12-business-ai-engineering:022",
+      "dimension": "12-business-ai-engineering",
+      "ordinal": 22,
+      "title": "如何设计一个自动驾驶行为评估 Agent？",
+      "source": "[卓驭 正式批 一面 数据算法与测评工程师 已挂](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)",
+      "searchText": "如何设计一个自动驾驶行为评估 Agent？ [卓驭 正式批 一面 数据算法与测评工程师 已挂](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)"
+    },
+    {
+      "id": "12-business-ai-engineering:023",
+      "dimension": "12-business-ai-engineering",
+      "ordinal": 23,
+      "title": "如何预测车辆未来一段时间的网络强弱？",
+      "source": "[小鹏汽车端侧agent一面](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)",
+      "searchText": "如何预测车辆未来一段时间的网络强弱？ [小鹏汽车端侧agent一面](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)"
+    },
+    {
+      "id": "12-business-ai-engineering:024",
+      "dimension": "12-business-ai-engineering",
+      "ordinal": 24,
+      "title": "网站访问量激增时，如何设计系统承载？",
+      "source": "[9.11 Boss直聘--一面](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)",
+      "searchText": "网站访问量激增时，如何设计系统承载？ [9.11 Boss直聘--一面](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)"
+    },
+    {
+      "id": "12-business-ai-engineering:025",
+      "dimension": "12-business-ai-engineering",
+      "ordinal": 25,
+      "title": "智能评审系统如何落地，大模型承担什么职责？",
+      "source": "[汇川技术-应用软件工程师-一面](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)",
+      "searchText": "智能评审系统如何落地，大模型承担什么职责？ [汇川技术-应用软件工程师-一面](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)"
+    },
+    {
+      "id": "12-business-ai-engineering:026",
+      "dimension": "12-business-ai-engineering",
+      "ordinal": 26,
+      "title": "如何说明一个 AI 系统在信审链路中的位置和职责？",
+      "source": "[阿里 Token Foundry AI应用研发一面面经](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)",
+      "searchText": "如何说明一个 AI 系统在信审链路中的位置和职责？ [阿里 Token Foundry AI应用研发一面面经](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)"
+    },
+    {
+      "id": "12-business-ai-engineering:027",
+      "dimension": "12-business-ai-engineering",
+      "ordinal": 27,
+      "title": "如何过滤广告、系统消息等垃圾信息？",
+      "source": "[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)",
+      "searchText": "如何过滤广告、系统消息等垃圾信息？ [要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)"
+    },
+    {
       "id": "13-project-deep-dive:001",
       "dimension": "13-project-deep-dive",
       "ordinal": 1,
@@ -4497,9 +4905,41 @@
       "id": "13-project-deep-dive:021",
       "dimension": "13-project-deep-dive",
       "ordinal": 21,
+      "title": "视频 AI Agent 项目主要解决什么业务问题？",
+      "source": "[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)；[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)",
+      "searchText": "视频 AI Agent 项目主要解决什么业务问题？ [阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)；[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)"
+    },
+    {
+      "id": "13-project-deep-dive:022",
+      "dimension": "13-project-deep-dive",
+      "ordinal": 22,
+      "title": "视频 Agent 的 VideoContext 数据结构应如何设计？",
+      "source": "[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)",
+      "searchText": "视频 Agent 的 VideoContext 数据结构应如何设计？ [阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)"
+    },
+    {
+      "id": "13-project-deep-dive:023",
+      "dimension": "13-project-deep-dive",
+      "ordinal": 23,
       "title": "跨机票、地铁与导航的地图 Agent，如何划定 Agent、数据和工具边界？",
       "source": "地图 Agent二面（新增）",
       "searchText": "跨机票、地铁与导航的地图 Agent，如何划定 Agent、数据和工具边界？ 地图 Agent二面（新增）"
+    },
+    {
+      "id": "13-project-deep-dive:024",
+      "dimension": "13-project-deep-dive",
+      "ordinal": 24,
+      "title": "表格解析后如何保证结构和数值正确？",
+      "source": "[上海沐润天海文化科技 agent开发一面](https://www.nowcoder.com/discuss/928253581973553152)",
+      "searchText": "表格解析后如何保证结构和数值正确？ [上海沐润天海文化科技 agent开发一面](https://www.nowcoder.com/discuss/928253581973553152)"
+    },
+    {
+      "id": "13-project-deep-dive:025",
+      "dimension": "13-project-deep-dive",
+      "ordinal": 25,
+      "title": "如何介绍 PPT 自动生成管线的技术栈并说明选型？",
+      "source": "[9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)",
+      "searchText": "如何介绍 PPT 自动生成管线的技术栈并说明选型？ [9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)"
     },
     {
       "id": "15-agent-concepts:001",
@@ -4633,6 +5073,14 @@
       "id": "15-agent-concepts:017",
       "dimension": "15-agent-concepts",
       "ordinal": 17,
+      "title": "Coding Agent 如何通过规则和 Skills 治理代码规范？",
+      "source": "[百度 Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)",
+      "searchText": "Coding Agent 如何通过规则和 Skills 治理代码规范？ [百度 Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)"
+    },
+    {
+      "id": "15-agent-concepts:018",
+      "dimension": "15-agent-concepts",
+      "ordinal": 18,
       "title": "Agent 和 Siri 这种传统助手的核心差别在哪？",
       "source": "高频题",
       "searchText": "Agent 和 Siri 这种传统助手的核心差别在哪？ 高频题"
@@ -4820,6 +5268,46 @@
       "title": "周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？",
       "source": "[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)（新增）",
       "searchText": "周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？ [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)（新增）"
+    },
+    {
+      "id": "16-agent-infra:024",
+      "dimension": "16-agent-infra",
+      "ordinal": 24,
+      "title": "Agent 如何实现主动向用户推送消息？",
+      "source": "[9.8 小厂 agent开发实习 面经](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)",
+      "searchText": "Agent 如何实现主动向用户推送消息？ [9.8 小厂 agent开发实习 面经](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)"
+    },
+    {
+      "id": "16-agent-infra:025",
+      "dimension": "16-agent-infra",
+      "ordinal": 25,
+      "title": "Agent 执行过程中如何提供安全停止功能？",
+      "source": "[青岛弯弓 Agent](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)",
+      "searchText": "Agent 执行过程中如何提供安全停止功能？ [青岛弯弓 Agent](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)"
+    },
+    {
+      "id": "16-agent-infra:026",
+      "dimension": "16-agent-infra",
+      "ordinal": 26,
+      "title": "用户点击停止后，系统需要完成哪些清理和收尾？",
+      "source": "[青岛弯弓 Agent](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)",
+      "searchText": "用户点击停止后，系统需要完成哪些清理和收尾？ [青岛弯弓 Agent](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)"
+    },
+    {
+      "id": "16-agent-infra:027",
+      "dimension": "16-agent-infra",
+      "ordinal": 27,
+      "title": "如何降低 Agent 依赖技术人员逐个配置的成本？",
+      "source": "[正浩创新 AI应用开发一面](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)",
+      "searchText": "如何降低 Agent 依赖技术人员逐个配置的成本？ [正浩创新 AI应用开发一面](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)"
+    },
+    {
+      "id": "16-agent-infra:028",
+      "dimension": "16-agent-infra",
+      "ordinal": 28,
+      "title": "如何让 Agent 执行过程可观测、可调试？",
+      "source": "[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)",
+      "searchText": "如何让 Agent 执行过程可观测、可调试？ [9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)"
     },
     {
       "id": "17-ai-infra:001",
@@ -5017,46 +5505,62 @@
       "id": "17-ai-infra:025",
       "dimension": "17-ai-infra",
       "ordinal": 25,
-      "title": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？",
-      "source": "阿里 Agent Infra 一面题库（新增）",
-      "searchText": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？ 阿里 Agent Infra 一面题库（新增）"
-    },
-    {
-      "id": "17-ai-infra:026",
-      "dimension": "17-ai-infra",
-      "ordinal": 26,
-      "title": "SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？",
-      "source": "[沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)（新增）",
-      "searchText": "SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？ [沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)（新增）"
-    },
-    {
-      "id": "17-ai-infra:027",
-      "dimension": "17-ai-infra",
-      "ordinal": 27,
-      "title": "AI Infra 和 Agent Infra 有什么区别？",
-      "source": "AI 平台边界高频题",
-      "searchText": "AI Infra 和 Agent Infra 有什么区别？ AI 平台边界高频题"
-    },
-    {
-      "id": "17-ai-infra:028",
-      "dimension": "17-ai-infra",
-      "ordinal": 28,
-      "title": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？",
-      "source": "AI 平台系统设计高频题",
-      "searchText": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ AI 平台系统设计高频题"
-    },
-    {
-      "id": "17-ai-infra:029",
-      "dimension": "17-ai-infra",
-      "ordinal": 29,
       "title": "GPU 利用率很低，但请求延迟很高，怎么排查？",
       "source": "[小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）",
       "searchText": "GPU 利用率很低，但请求延迟很高，怎么排查？ [小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）"
     },
     {
+      "id": "17-ai-infra:026",
+      "dimension": "17-ai-infra",
+      "ordinal": 26,
+      "title": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？",
+      "source": "阿里 Agent Infra 一面题库（新增）",
+      "searchText": "AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？ 阿里 Agent Infra 一面题库（新增）"
+    },
+    {
+      "id": "17-ai-infra:027",
+      "dimension": "17-ai-infra",
+      "ordinal": 27,
+      "title": "SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？",
+      "source": "[沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)（新增）",
+      "searchText": "SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？ [沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)（新增）"
+    },
+    {
+      "id": "17-ai-infra:028",
+      "dimension": "17-ai-infra",
+      "ordinal": 28,
+      "title": "GPU 上的同步方法代码可能有哪些问题，如何排查？",
+      "source": "[本轮面经（文章 11）](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)",
+      "searchText": "GPU 上的同步方法代码可能有哪些问题，如何排查？ [本轮面经（文章 11）](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)"
+    },
+    {
+      "id": "17-ai-infra:029",
+      "dimension": "17-ai-infra",
+      "ordinal": 29,
+      "title": "DeepSpeed ZeRO 的三个阶段分别做什么？",
+      "source": "[本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)",
+      "searchText": "DeepSpeed ZeRO 的三个阶段分别做什么？ [本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)"
+    },
+    {
       "id": "17-ai-infra:030",
       "dimension": "17-ai-infra",
       "ordinal": 30,
+      "title": "AI Infra 和 Agent Infra 有什么区别？",
+      "source": "AI 平台边界高频题",
+      "searchText": "AI Infra 和 Agent Infra 有什么区别？ AI 平台边界高频题"
+    },
+    {
+      "id": "17-ai-infra:031",
+      "dimension": "17-ai-infra",
+      "ordinal": 31,
+      "title": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？",
+      "source": "AI 平台系统设计高频题",
+      "searchText": "如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ AI 平台系统设计高频题"
+    },
+    {
+      "id": "17-ai-infra:032",
+      "dimension": "17-ai-infra",
+      "ordinal": 32,
       "title": "GPU 调度和普通 CPU 调度有什么不同？",
       "source": "GPU Scheduler 高频题",
       "searchText": "GPU 调度和普通 CPU 调度有什么不同？ GPU Scheduler 高频题"

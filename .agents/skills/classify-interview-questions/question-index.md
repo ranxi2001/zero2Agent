@@ -1,32 +1,32 @@
 # 面试题索引
 
 > 自动维护，每次分发面试题后更新。用于快速判断新题是否已有、避免重复扫描 md 文件。
-> 最后更新：2026-09-08（Luna API 扫描 2026-09-02 至 2026-09-08 牛客面经 147/147 篇；累计 630 题。传统八股 237 题）
+> 最后更新：2026-09-13（Luna API 扫描 2026-09-07 至 2026-09-13 牛客面经 202/202 篇；累计 693 题。传统八股 262 题）
 > 排序规则：正文与本索引在现有最小主题组内按 `question-frequency.json` 的频次降序排列；同频按 `firstSeenOrder` 排列。
 
 ## 统计
 
 | 维度 | 题数 |
 |------|------|
-| 01-architecture-design | 46 |
-| 02-tool-management | 37 |
-| 03-fault-tolerance | 37 |
-| 04-memory-context | 63 |
-| 05-eval-and-vision | 46 |
+| 01-architecture-design | 47 |
+| 02-tool-management | 38 |
+| 03-fault-tolerance | 38 |
+| 04-memory-context | 64 |
+| 05-eval-and-vision | 49 |
 | 06-multi-agent-collab | 35 |
-| 07-engineering-pitfalls | 66 |
+| 07-engineering-pitfalls | 69 |
 | 08-prompt-engineering | 30 |
-| 09-rag-retrieval | 67 |
-| 10-training-and-data | 77 |
-| 11-ai-code-testing | 14 |
-| 12-business-ai-engineering | 21 |
-| 13-project-deep-dive | 21 |
-| 15-agent-concepts | 17 |
-| 16-agent-infra | 23 |
-| 17-ai-infra | 30 |
-| **总计** | **630** |
+| 09-rag-retrieval | 73 |
+| 10-training-and-data | 101 |
+| 11-ai-code-testing | 19 |
+| 12-business-ai-engineering | 27 |
+| 13-project-deep-dive | 25 |
+| 15-agent-concepts | 18 |
+| 16-agent-infra | 28 |
+| 17-ai-infra | 32 |
+| **总计** | **693** |
 
-## 01-architecture-design（46题）
+## 01-architecture-design（47题）
 
 1. 你用 ReAct 还是 Plan-and-Execute？为什么？ — 腾讯终面 【淘天二面追问：CoT vs ReAct 核心区别】【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面追问：Planner↔Executor 通信协议与重规划模式】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【数据智能查询平台面试同题：ReAct vs Plan-Execute 区别与场景】【小红书 Agent 岗一面追问：双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)】【[去哪儿旅行AI面试+笔试](https://www.nowcoder.com/discuss/926507047238078464)追问：ReAct和Plan-and-Execute两种AI agent运行框架的核心差异？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：你这里支持 ReAct 循环，但又由 Planner 将任务拆分成带依赖关系和验收条件的 DAG，这是不是就不是经典 ReAct 了？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：在这个场景中，直接采用 ReAct + Tool 是否也能满足需求？】
 2. Tree of Thoughts (ToT) 在线上系统里能用吗？成本不高？ — 腾讯终面
@@ -75,7 +75,10 @@
 45. 在 AI/Agent 辅助编码时代，为什么 DDD 和清晰的领域边界反而更重要？ — [地图 Agent 二面](https://www.nowcoder.com/feed/main/detail/0208597586e744c884bdc571dc441fad)（2026-08-24）
 46. AI Coding Agent 的 Solo 模式和 Plan 模式应该如何设计？ — [字节 Trae 二面](https://www.nowcoder.com/discuss/924821959647440896)（新增）
 
-## 02-tool-management（37题）
+47. 什么时候需要自研或改造方案，而不是直接采用开源实现？ — [腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)
+
+
+## 02-tool-management（38题）
 
 1. 工具描述写得再好，模型也瞎传参数怎么办？ — 腾讯终面 【蚂蚁AI应用开发二面追问：参数幻觉与语法错误的自动化修正】【科大讯飞一面追问：后端ORM接口作为tools如何防止工具调用偏移】【[去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)】
 2. 工具库有上百个工具，怎么让模型快速选对？ — 腾讯终面 【淘天一面追问：100+工具召回偏差与分层路由】【百度大模型研发二面追问：Agent 如何选择合适工具】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：现在有100多个工具，AI想调用的时候能找到自己想要的接口吗？怎么保障？；工具检索是如何做的？】
@@ -115,7 +118,10 @@
 36. 跨平台工具授权即将过期时，Agent 如何调整调用顺序并安全续权？ — TikTok Agent工程师面试（新增）
 37. MCP 工具治理为什么需要审计？应该审计哪些证据？ — 拓竹 AI Agent算法一面（新增）
 
-## 03-fault-tolerance（37题）
+38. 当治理规则需要修改服务代码时，如何安全落地？ — [9.10 虾皮二面](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)
+
+
+## 03-fault-tolerance（38题）
 
 1. Agent 如何减少幻觉？在工业场景下怎么做？ — 字节一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】【字节大模型测开一面追问：Temperature→0时还会有幻觉吗】【影石创新一面追问：如何定位幻觉来自模型、上下文还是工具】【[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)】
 2. 你怎么设计 Agent 的失败恢复机制？ — 腾讯二面 【淘天AI应用开发一面追问：工具报错时prompt引导自主重试】【[中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)】
@@ -155,7 +161,10 @@
 36. 为什么安全攻击检测不能只依赖大模型？规则、专用模型和 LLM 应该如何分工？ — [字节中国交易与广告 Agent 一面](https://www.nowcoder.com/feed/main/detail/6dede073825e4ab493fcbce7f598a6c8)（2026-08-24）
 37. Agent 无法处理任务时，“求助 / 升级”状态机应该如何设计？ — [百度 Agent 研发岗一面](https://www.nowcoder.com/discuss/926273622006665216)（新增）
 
-## 04-memory-context（63题）
+38. 如何设计可靠的 Webhook 投递保障？ — [要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)
+
+
+## 04-memory-context（64题）
 
 1. 上下文窗口不够用，对话太长了怎么办？ — 字节实习二面 【币安AI大模型实习一面追问：智能客服场景下agent压缩机制优劣对比】【阿里国际AI应用开发二面追问：压缩后如何保留否定约束和硬性条件】【快手AI应用开发一面追问：Agent Runtime 中 token budget 分层分配（system/user/memory/evidence/RAG）】【小红书 Agent 岗一面追问：两层压缩与 LLM 保留判定】【高德/字节一面追问：摘要不能简单合并全部历史、如何选择保留信息】【阿里 Agent Infra 一面题库同题：长 Context 不能全部塞给模型】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)】【[虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：1M 也不够怎么办？】
 2. 长上下文里，怎么让 Agent 不忘记关键信息？ — 腾讯终面 【淘天一面追问：模型层面遗忘缓解机制】
@@ -221,7 +230,10 @@
 62. 按大纲分章节生成长文时，如何维持跨章节连续性与事实一致性？ — 成都 Agent 实习面经（新增）
 63. Codebase Memory 应该如何初始化、增量更新和失效？ — [拼多多 Agent 开发岗一面](https://www.nowcoder.com/discuss/926273867092430848)（新增）
 
-## 05-eval-and-vision（46题）
+64. 为什么长视频通常需要切片和分阶段处理，而不是一次性输入大模型？ — [阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)
+
+
+## 05-eval-and-vision（49题）
 
 1. 如何量化评估一个上线的 Agent 好坏？除了准确率 — 腾讯终面【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何量化 Agent 的“智能程度”（除准确率外）？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：任务完成率统计及避免主观评估？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：最终的效果怎么样？准确率达到了多少？怎么测评？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：你们怎么评估这个 Agent 的效果，以及后续怎么优化？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们用的 Agent 在实际过程中有没有评价指标？比如准确率、误报率，处理现网配置时有没有这类指标？】【[PDD Agent三面](https://www.nowcoder.com/feed/main/detail/9908477cdd4041fabacbfbf02febb13c)追问：Agent输出效果如何量化评估？】
 2. 当前阻碍 Agent 大规模落地的最大挑战？ — 腾讯终面【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：当前 Agent 系统面临的最大工程挑战是什么（上下文、工具、规划）？】
@@ -270,6 +282,11 @@
 45. 如何为跨任务重复出现的安全或质量问题生成稳定 Fingerprint，并安全接入自动修复 Agent？ — [元石科技后端/Agent 一面](https://www.nowcoder.com/discuss/921742843704549376)（新增）
 46. 如何实现基于 VLM 的 Benchmark 系统，并避免评测模型自说自话？ — [深信服 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/83326f3bcc5546b2b556373ad29a6d71)（新增）
 
+47. 哪些业务场景不适合引入 Agent？ — [虾皮测开日常实习一面](https://www.nowcoder.com/discuss/927594784770764800)
+48. 如何设计消融实验并判断模块贡献？ — [美团面经-美团算法岗面经-01](https://www.nowcoder.com/discuss/927381090602348544)
+49. 串行链路修改一个节点后，如何做精确归因？ — [知识科技 数据平台 二面](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)
+
+
 ## 06-multi-agent-collab（35题）
 
 1. 多智能体怎么协作？ — 腾讯终面【[百度正式批：一面结束第二天就约二面了](https://www.nowcoder.com/discuss/925108144831725568)追问：你项目做多智能体协同和xx，这有什么优点和难点吗？】
@@ -308,7 +325,7 @@
 34. 多 Agent 执行策略如何根据任务动态选择，并在运行中安全切换？ — 字节 AI Agent 二面实习面经（新增）
 35. 多人、多 Agent、跨设备协同与“群聊式多 Agent”有什么不同？ — [跨设备多 Agent 项目一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)（新增）
 
-## 07-engineering-pitfalls（66题）
+## 07-engineering-pitfalls（69题）
 
 
 1. Agent 的成本怎么控制？ — Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：大规模部署下如何控制 Token 成本（缓存、模型选型、结果复用）？】
@@ -378,6 +395,11 @@
 65. 如何设计类似 LangFlow 的 Agent 工作流可视化编排画布？ — 商汤 AI Agent 开发面经（新增）
 66. 接入多个外部 Agent 时，如何用 Adapter 统一异构事件、工具调用和生命周期协议？ — 北京 B 端 AI 小厂面经（新增）
 
+67. 如何统计 Agent 各模块耗时并定位瓶颈？ — [寒武纪AI应用开发一面&二面](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)
+68. 如何估算 Agent 使用模型的月度成本？ — [汇川技术一面](https://www.nowcoder.com/feed/main/detail/6a241d73effc4540a857a752d987a6f8)
+69. 大型项目重构如何规划，如何处理模块正交与冗余？ — [阿里控股 AI全栈开发 二面](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)
+
+
 ## 08-prompt-engineering（30题）
 
 1. 提示词模板是怎么构建的？ — 抖音一面
@@ -411,7 +433,7 @@
 29. 可演进能力为什么应封装为 Skill，而不是不断塞进 Prompt？Skill 的知识进化流水线如何治理？ — 小红书 Agent开发实习一面（新增）
 30. Skill 的多后端可插拔加载应该如何设计？ — [阿里边缘 BU 一面](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)（新增）
 
-## 09-rag-retrieval（67题）
+## 09-rag-retrieval（73题）
 
 1. 多维度的查询改写是什么？ — 抖音基础架构 Agent 一面【淘天一面追问：改写为何提升精准度的底层原理】【[美团 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/58159306df52463ab75d72daa80d66df)追问：短 Query 与长 Chunk 的非对称召回】【[阿里巴巴（淘天）- 大模型算法岗（搜推方向）](https://www.nowcoder.com/discuss/926272464059891712)追问：淘宝搜索中如何用大模型做 Query 理解和改写？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：RAG 召回不相关时 Query Rewrite 优化举例？】
 2. RAG 的检索如何实现？ — 阿里一面【[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)】
@@ -481,7 +503,15 @@
 66. RAG 如何防止引用漂移和跨版本证据拼接？ — 腾讯互娱全栈开发（AI）二面（新增）
 67. RAG 前端如何展示长文档，并让引用稳定跳转到原文证据？ — 商汤 AI Agent 开发面经（新增）
 
-## 10-training-and-data（77题）
+68. 图召回如何缓解热门内容被过度推荐的问题？ — [28届双非本末9硕 腾讯wxg推荐算法面经](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+69. RAG 检索结果如何安全地组装到提示词中？ — [腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)
+70. RAG 组装上下文后，如何选择最终生成模型？ — [腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)
+71. 生成教学蓝图时，如何识别语义歧义和超纲内容？ — [9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)
+72. 视频没有语音时，如何保持检索效果？ — [阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+73. BGE 类文本 Embedding 模型的基本结构是什么？ — [腾讯音乐面经-腾讯音乐算法岗面经-01](https://www.nowcoder.com/discuss/926677767104532480)
+
+
+## 10-training-and-data（101题）
 
 1. 构造数据集遇到过什么难点？ — 腾讯AI应用开发【CVTE AI应用工程师一面追问：合成数据集质量达不到预期怎么办】【[字节 Seed 具身数据一面](https://www.nowcoder.com/feed/main/detail/657dfac8ca5c49f28492a1110b95f7cd)追问：标注一致性与自动质检】【[Momenta 大模型算法工程师一面](https://www.nowcoder.com/feed/main/detail/f7518c865e07491cb1518d288698813c)追问：长尾样本对齐】
 2. 预训练数据清洗方法？ — 字节一面【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：数据清洗时，你如何筛选低质量样本？用过哪些启发式规则或模型过滤？】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：低质数据筛选的启发式规则或模型过滤方法？】
@@ -561,7 +591,33 @@
 76. TTS 音频如何被离散化为 Token，语义与音色信息如何取舍？ — [MiniMax 大模型算法岗一面](https://www.nowcoder.com/discuss/926272883872075776)（新增）
 77. LLaMA-Factory 和 TRL 等 SFT / RL 工具如何对比和选型？ — [MiniMax 大模型算法岗一面](https://www.nowcoder.com/discuss/926272883872075776)（新增）
 
-## 11-ai-code-testing（14题）
+78. 如何处理训练数据中的类别不平衡？ — [本轮面经（文章 27）](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)
+79. 自研自动驾驶方法与 UniAD 的主要区别应如何比较？ — [本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
+80. 决策任务的 label 如何定义？预测任务如何设计监督信号？ — [本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
+81. 如何把“减速多少”映射为是否碰撞的风险？ — [本轮面经（文章 30）](https://www.nowcoder.com/feed/main/detail/2981f94b70954a38bd30804a7a3071af)
+82. LightGBM 和 XGBoost 有什么区别，如何选型？ — [本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)
+83. 树模型需要哪些特征工程？缺失值、初始化、默认值和分桶怎么处理？ — [本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)
+84. 连续特征离散化有什么作用和代价？ — [本轮面经（文章 39）](https://www.nowcoder.com/discuss/927969546672046080)
+85. 机器学习、LSTM 和大语言模型之间是什么关系？ — [本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
+86. LSTM 的核心设计原理是什么？ — [本轮面经（文章 40）](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
+87. 为什么选择 AC 自动机、TextCNN、FastText 和 TinyBERT，而不是更深的模型？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+88. 使用大模型生成标签时，会遇到哪些问题？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+89. 交叉熵损失的数学形式和含义是什么？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+90. 若真实标签分布为 P、预测分布为 Q，KL 散度如何表示？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+91. 图召回主要解决什么问题？如何划分负责环节？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+92. 为什么用图召回，而不是用户—物品行为模型、矩阵分解或双塔模型？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+93. 为什么在排序链路中同时使用 LightGBM 和 LambdaRank？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+94. 静态分和动态分在推荐链路中分别起什么作用？ — [本轮面经（文章 77）](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)
+95. 模型剪枝有哪些方法，如何评估是否值得？ — [本轮面经（文章 93）](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)
+96. 序列较稀疏时，建模如何处理稀疏性？ — [本轮面经（文章 101）](https://www.nowcoder.com/discuss/927381090602348544)
+97. 业界通常如何处理长视频理解？ — [本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+98. 视频没有语音时，视觉与多模态分析如何降级？ — [本轮面经（文章 159）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+99. 一条 VideoSegment 数据结构应保存哪些内容？ — [本轮面经（文章 160）](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)
+100. 持续学习有哪些方法，如何避免旧能力退化？ — [本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)
+101. Qwen-VL 的动态分辨率如何实现？ — [本轮面经（文章 186）](https://www.nowcoder.com/discuss/926463586325495808)
+
+
+## 11-ai-code-testing（19题）
 
 1. 代码解析有没有前置分析？有效性判断？ — 蚂蚁一面【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：代码生成场景的安全漏洞防范（静态分析）？】
 2. 分支覆盖率是怎么统计的？代码插桩怎么实现？ — 蚂蚁一面
@@ -578,7 +634,14 @@
 13. AI Coding 如何完成多来源账单分析应用，并证明交付结果可信？ — CVTE视源股份 AI Coding（新增）
 14. Coding Agent 能否自举开发自身？如何避免生成器与验证器同源导致循环确认？ — [平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)（新增）
 
-## 12-business-ai-engineering（21题）
+15. 什么是 AST，代码测试中如何使用？ — [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+16. 污点分析通常包含哪三类核心节点？ — [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+17. 请举例说明业务中的污点源和污点汇。 — [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+18. 代码 Agent 评测中，worktree 对照实验解决什么问题？ — [Walmart-Onesec-Intern一面（已offer）](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)
+19. 如何用工程手段治理代码规范，而不是只依赖模型提醒？ — [百度Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)
+
+
+## 12-business-ai-engineering（27题）
 
 1. 时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？ — 网易 AI Agent 开发实习【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07)】
 2. 设计一个能根据用户行为自适应调整策略的 AI 系统，从技术架构上怎么做？ — 网易 AI Agent 开发实习
@@ -602,7 +665,15 @@
 20. 浏览器端运行小模型有什么价值？隐私、算力和能力边界是什么？ — [拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)（新增）
 21. 如何设计批量 PDF 转 HTML 并与知识库核对的 LLM Workflow？ — [平安健康保险 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/6c11a75a8bd44628943deff3e42ae15c)（新增）
 
-## 13-project-deep-dive（21题）
+22. 如何设计一个自动驾驶行为评估 Agent？ — [卓驭 正式批 一面 数据算法与测评工程师 已挂](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)
+23. 如何预测车辆未来一段时间的网络强弱？ — [小鹏汽车端侧agent一面](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)
+24. 网站访问量激增时，如何设计系统承载？ — [9.11 Boss直聘--一面](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)
+25. 智能评审系统如何落地，大模型承担什么职责？ — [汇川技术-应用软件工程师-一面](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)
+26. 如何说明一个 AI 系统在信审链路中的位置和职责？ — [阿里 Token Foundry AI应用研发一面面经](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)
+27. 如何过滤广告、系统消息等垃圾信息？ — [要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)
+
+
+## 13-project-deep-dive（25题）
 
 1. 你的 Agent 项目用了什么框架？为什么选它？ — 淘宝闪购一面 【淘宝闪购一面追问：安全合规下开源 vs 闭源框架选型】【CVTE AI应用工程师一面追问：为什么基于 LangGraph 做】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[百度 Agent 二面](https://www.nowcoder.com/feed/main/detail/bca7dc14bd654e91b89792608111b211)】
 2. Agent 项目有没有真正上线部署？线上效果怎么样？ — 淘宝闪购一面 【视频面经追问：上线后整体部署方式是怎样的】【[汇川技术-AI全栈开发工程师 技术一面 8/27 应届实习（含转正）](https://www.nowcoder.com/discuss/925156092424749056)追问：日常有没有将项目上线到云服务器？】
@@ -624,9 +695,15 @@
 18. 新闻交易 Agent 项目管线如何搭建？Agent 响应延迟是多久？ — 币安AI大模型实习一面
 19. 项目为什么选择 E2B 沙箱？选型理由和优势是什么？ — CVTE AI应用工程师一面
 20. 你做过的不同 AI 项目之间，核心技术差异是什么？ — 已有正文（补录索引）
-21. 跨机票、地铁与导航的地图 Agent，如何划定 Agent、数据和工具边界？ — 地图 Agent二面（新增）
+21. 视频 AI Agent 项目主要解决什么业务问题？ — [阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)；[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)
 
-## 15-agent-concepts（17题）
+22. 视频 Agent 的 VideoContext 数据结构应如何设计？ — [阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
+23. 跨机票、地铁与导航的地图 Agent，如何划定 Agent、数据和工具边界？ — 地图 Agent二面（新增）
+24. 表格解析后如何保证结构和数值正确？ — [上海沐润天海文化科技 agent开发一面](https://www.nowcoder.com/discuss/928253581973553152)
+25. 如何介绍 PPT 自动生成管线的技术栈并说明选型？ — [9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)
+
+
+## 15-agent-concepts（18题）
 
 1. Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？ — 快手AI业务应用设计开发 【字节后端开发日常实习二面/腾讯AI后端开发一面/美团Agent方向/社招五年Go/腾讯音乐/小红书一面同题】【[阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd)】【[阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39)】
 2. Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？ — 阿里淘天Agent开发日常实习一面 【阿里云暑期实习同题】【成都某中厂追问变体：加入 Loop Engineering 作为第四层】【字节火山引擎 Managed Agent 一面追问：Context Engineering 与 Skills 组织】
@@ -644,9 +721,12 @@
 14. Dify/Coze 这种低代码工作流平台和 Codex/Claude Code 这类 Coding Agent 的本质区别是什么？ — 成都某中厂Agent产品开发实习面经（新增）
 15. LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？ — 哔哩哔哩 AI应用岗 Agent开发一面（新增）
 16. Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？ — B站 Agent二面（新增）
-17. Agent 和 Siri 这种传统助手的核心差别在哪？ — 高频题
+17. Coding Agent 如何通过规则和 Skills 治理代码规范？ — [百度 Agent Harness 研发工程师 - 9月8日 - 一面 - 秋招](https://www.nowcoder.com/discuss/926928449204129792)
 
-## 16-agent-infra（23题）
+18. Agent 和 Siri 这种传统助手的核心差别在哪？ — 高频题
+
+
+## 16-agent-infra（28题）
 
 1. 为什么需要 Checkpoint，恢复时从哪里继续？ — 长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：断点恢复（服务重启后加载未完成状态）？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：这时候你是怎样恢复图的运行状态的？】
 2. 如何支撑几十万并发 Agent Task，并把它观测清楚？ — 高并发调度与 Agent Observability 高频题 / [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5) / [中国电信风控 Agent 二面](https://www.nowcoder.com/feed/main/detail/22e18a3d20734429aec41b37744beadc)【阿里 Agent Infra 一面题库同题：MQ、背压、多租户、Scheduler 与 Worker 拆分】【[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)】【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：长耗时 Agent 的资源占用及并发优化？】
@@ -672,7 +752,14 @@
 22. Agent 状态放在 Sandbox 内、用户状态放在 Sandbox 外时，边界如何设计？ — [顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)（新增）
 23. 周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？ — [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)（新增）
 
-## 17-ai-infra（30题）
+24. Agent 如何实现主动向用户推送消息？ — [9.8 小厂 agent开发实习 面经](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)
+25. Agent 执行过程中如何提供安全停止功能？ — [青岛弯弓 Agent](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)
+26. 用户点击停止后，系统需要完成哪些清理和收尾？ — [青岛弯弓 Agent](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)
+27. 如何降低 Agent 依赖技术人员逐个配置的成本？ — [正浩创新 AI应用开发一面](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)
+28. 如何让 Agent 执行过程可观测、可调试？ — [9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)
+
+
+## 17-ai-infra（32题）
 
 1. 如何用 Roofline 和算术强度指导 CUDA 算子优化？ — 美团/拼多多/小鹏/快手等 AI Infra 面经（新增）【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：如何用 Roofline 模型判断带宽瓶颈 vs 计算瓶颈？】【[昆仑芯 0903 一面（ai 高性能开发）](https://www.nowcoder.com/feed/main/detail/65b9990e774a4331bb603f0cf1ca4a88)追问：介绍一下 Roofline 模型和算术强度。】【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：大矩阵 GEMM 在 DCU 上如何切分和实现？】
 2. KV Cache 占用如何计算，为什么不能只按请求数做容量规划？ — [抖音搜推 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/e5f1a15d50414c86a0e64f2dbc13a02f)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)、[字节 App Infra Agent 一面](https://www.nowcoder.com/feed/main/detail/0bec32fbb3344ff98f16b97f47c7b857)、[字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：KV Cache 原理】【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：Transformer 推理中 KV Cache 显存估算及 batch 增大瓶颈？】
@@ -698,15 +785,20 @@
 22. 大模型训练吞吐低时，如何用 MFU、Profiler、通信和流水线空泡定位瓶颈？ — 阶跃星辰/快手等 AI Infra 面经（新增）
 23. PD 分离解决什么问题，Prefill 与 Decode 资源比例怎么定？ — 百度 AI Infra 一面
 24. 分布式训练为什么容易失败，如何恢复？ — 摩尔线程 AI Infra 一面
-25. AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？ — 阿里 Agent Infra 一面题库（新增）
-26. SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？ — [沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)（新增）
-27. AI Infra 和 Agent Infra 有什么区别？ — AI 平台边界高频题
-28. 如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ — AI 平台系统设计高频题
-29. GPU 利用率很低，但请求延迟很高，怎么排查？ — [小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）
-30. GPU 调度和普通 CPU 调度有什么不同？ — GPU Scheduler 高频题
+25. GPU 利用率很低，但请求延迟很高，怎么排查？ — [小鹏 AI Infra 一面题面线索](https://www.nowcoder.com/discuss/920776068619829248)（付费题库汇总线索，不计频次）
+26. AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？ — 阿里 Agent Infra 一面题库（新增）
+27. SpMV 和 GEMM 的计算、访存特征有什么不同？优化方向如何选择？ — [沐曦 AI 工程师一面](https://www.nowcoder.com/feed/main/detail/af4c228ca96f4f05b415f816d36a718c)（新增）
+28. GPU 上的同步方法代码可能有哪些问题，如何排查？ — [本轮面经（文章 11）](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)
+29. DeepSpeed ZeRO 的三个阶段分别做什么？ — [本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)
+30. AI Infra 和 Agent Infra 有什么区别？ — AI 平台边界高频题
 
 ---
 
 ## 薄弱维度（题数 < 10）
 
 当前没有少于 10 题的维度。
+
+31. 如果让你设计一个生产级 AI Infra 平台，你会怎么拆？ — AI 平台系统设计高频题
+32. GPU 调度和普通 CPU 调度有什么不同？ — GPU Scheduler 高频题
+
+

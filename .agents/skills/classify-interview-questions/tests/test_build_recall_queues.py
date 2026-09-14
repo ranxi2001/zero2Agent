@@ -1,5 +1,7 @@
 import importlib.util
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -16,6 +18,20 @@ def match(relation, confidence):
 
 
 class BuildRecallQueuesTest(unittest.TestCase):
+    def test_each_queue_record_preserves_its_own_result_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            articles = []
+            for index in (1, 2):
+                result = root / f"{index}.json"
+                result.write_text(json.dumps({"questions": [{"id": 1, "question": f"技术问题{index}？", "matches": [match("same", 0.95)]}]}), encoding="utf-8")
+                articles.append({"index": index, "title": f"Article {index}", "url": f"https://example.test/{index}", "status": "ok", "resultPath": str(result)})
+            summary = root / "summary.json"
+            summary.write_text(json.dumps({"articles": articles}), encoding="utf-8")
+            MODULE.build_queues(summary, root / "queues")
+            rows = [json.loads(line) for line in (root / "queues" / "duplicate-evidence.jsonl").read_text(encoding="utf-8").splitlines()]
+            self.assertEqual([row["resultPath"] for row in rows], [article["resultPath"] for article in articles])
+
     def test_high_confidence_same_is_duplicate_evidence(self):
         decision, _, _ = MODULE.classify_question(
             {"matches": [match("same", 0.9), match("different", 0.99)]}, 0.85, 0.8, 0.85

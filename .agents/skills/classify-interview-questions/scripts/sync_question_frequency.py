@@ -70,7 +70,16 @@ def main() -> int:
     for question in questions:
         key = question_key(question.dimension, question.title)
         if key in existing:
-            evidence = existing[key]["evidence"]
+            evidence = list(existing[key]["evidence"])
+            existing_fingerprints = ["".join(str(item).split()).casefold() for item in evidence]
+            for inferred in infer_evidence(question.source):
+                fingerprint = "".join(str(inferred).split()).casefold()
+                if fingerprint and not any(
+                    fingerprint in current or current in fingerprint
+                    for current in existing_fingerprints
+                ):
+                    evidence.append(inferred)
+                    existing_fingerprints.append(fingerprint)
             first_seen_order = existing[key]["firstSeenOrder"]
         else:
             evidence = infer_evidence(question.source)

@@ -3,7 +3,9 @@ import json
 import sys
 import tempfile
 import unittest
+from http.client import RemoteDisconnected
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 
 SCRIPT_DIR = Path(__file__).resolve().parents[1] / "scripts"
@@ -15,6 +17,14 @@ SPEC.loader.exec_module(MODULE)
 
 
 class ExtractAndRecallTest(unittest.TestCase):
+    def test_transient_remote_disconnect_is_retried(self):
+        config = MODULE.CodexAPIConfig("https://example.test", "test-token", "test-model", "responses", "test")
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = json.dumps({"output_text": '{"questions":["Q"]}'}).encode()
+        with patch.object(MODULE, "urlopen", side_effect=[RemoteDisconnected("closed"), response]) as request, patch.object(MODULE.time, "sleep"):
+            self.assertEqual(MODULE.call_model(config, "extract", "article", 1), {"questions": ["Q"]})
+            self.assertEqual(request.call_count, 2)
+
     def test_html_list_extraction(self):
         source = """
         <p>下面是面试问到的问题：</p>

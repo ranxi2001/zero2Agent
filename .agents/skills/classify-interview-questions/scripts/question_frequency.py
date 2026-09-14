@@ -67,8 +67,9 @@ def _expand_evidence(value: str) -> list[str]:
     if not value:
         return []
     links = MARKDOWN_LINK_RE.findall(value)
-    if len(links) > 1:
-        return links
+    if links:
+        residual = MARKDOWN_LINK_RE.sub("", value).strip(" /、，,；; ")
+        return ([residual] if residual else []) + links
     descriptor = re.split(r"[：:]", value, maxsplit=1)[0]
     multiplicity = 1 + descriptor.count("、")
     if "http" not in descriptor.casefold():
@@ -165,11 +166,11 @@ def validate_coverage(
             re.sub(r"\s+", "", str(item)).casefold()
             for item in record["evidence"]
         }
-        missing_evidence = [
-            item
-            for item in infer_evidence(question.source)
-            if re.sub(r"\s+", "", item).casefold() not in actual_evidence
-        ]
+        missing_evidence = []
+        for item in infer_evidence(question.source):
+            fingerprint = re.sub(r"\s+", "", item).casefold()
+            if not any(fingerprint in evidence or evidence in fingerprint for evidence in actual_evidence):
+                missing_evidence.append(item)
         if missing_evidence:
             raise ValueError(
                 f"Frequency evidence is stale for {question.dimension} / {question.title}: "

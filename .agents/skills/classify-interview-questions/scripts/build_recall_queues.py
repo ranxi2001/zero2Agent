@@ -132,6 +132,7 @@ def build_queues(
         article_payloads.append((article, payload))
 
     for article, payload in article_payloads:
+        result_path = Path(str(article["resultPath"]))
         source_classification = payload.get("sourceClassification") or {}
         for question in payload.get("questions") or []:
             question_text = str(question.get("question") or "").strip()

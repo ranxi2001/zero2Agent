@@ -15,6 +15,7 @@ import time
 import tomllib
 from dataclasses import dataclass
 from html.parser import HTMLParser
+from http.client import HTTPException
 from pathlib import Path
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -309,7 +310,7 @@ def call_model(
             with urlopen(request, timeout=timeout) as response:
                 payload = json.loads(response.read().decode("utf-8"))
             return parse_model_json(extract_model_text(payload))
-        except (HTTPError, URLError, TimeoutError, UnicodeError, json.JSONDecodeError, ValueError) as error:
+        except (HTTPError, URLError, TimeoutError, HTTPException, ConnectionError, UnicodeError, json.JSONDecodeError, ValueError) as error:
             last_error = error
             if attempt + 1 < retries:
                 time.sleep(2**attempt)
