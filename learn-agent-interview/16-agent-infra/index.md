@@ -15,6 +15,67 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 
 ---
 
+## Q：一次 Agent 请求的完整执行链路是什么？
+
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：处理流程可以讲一下吗？整体链路是怎样的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：如果问某上市公司去年毛利率下降，Agent 收到 Prompt 后的完整流程是什么？】；本轮追问：一个用户请求进入系统后，Skill 的完整诊断流程是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：介绍一下 AI 问数平台的整体架构和链路。（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；本轮追问：工具执行器这块能不能再展开讲一下？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；本轮追问：从用户上传视频到最终拿到分析结果，完整链路是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：DeepAgents 的结构是怎么样的？它的主流程和核心部分是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)
+
+**新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
+
+**高手答**：
+
+```text
+1. Gateway 完成身份、租户、限流和请求幂等校验
+2. Control Plane 创建 Run，持久化初始状态和版本快照
+3. Scheduler 发放带 lease 的下一步任务
+4. Worker 装配 Context，调用模型并持久化响应或 Tool Call
+5. Policy 层校验工具、参数、权限、预算和审批要求
+6. Tool Runtime 以 execution_id 执行动作
+7. 结果进入 SUCCEEDED、FAILED 或 UNKNOWN，并写入事件日志
+8. 状态机决定继续、降级、等待、补偿或结束
+9. 全链路记录 Trace、成本、版本和审计信息
+```
+
+这里记录的是模型响应和结构化决策，不依赖保存模型私有推理过程。Run 还要有最大步骤、总 Deadline、Token/Cost Budget 和取消传播，防止模型循环无限消耗资源。
+
+**差距在哪**：新手只描述模型循环，高手能指出接入幂等、租约、策略门禁、状态提交和退出条件。
+
+---
+
+## Q：如果让你设计一个 Agent Runtime，你会怎么拆？
+
+> 来源：Agent Infra / 平台工程系统设计高频题 / [字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：通用 Agent Runtime（兼容多种大模型）如何设计？】；本轮追问：为什么要独立设计一套 runtime，而不是直接以 skill 的形式集成在别人的 agent 上？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；本轮追问：如果让你设计多个Agent交互完成工作，你怎么设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；本轮追问：Agent Runtime是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)）；本轮追问：如果业务方只提供服务目标和流量意图，由 Agent 全面托管后续操作，你会如何设计这套系统？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）；本轮追问：如果让你设计一个通用Agent Runtime，兼容多个模型厂商，怎么抽象？（[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)）；本轮追问：你如何理解 Agent 运行治理/编排引擎？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；本轮追问：如果让你设计一个“多屏互动Agent”，协调仪表盘、中控、HUD，你会怎么做？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）
+
+**新手答**：“接入 LLM，再提供工具、Memory 和日志，最后部署到 Kubernetes。”
+
+**高手答**：
+
+我会先把一次 Agent Run 建模为**可能暂停和恢复的有状态执行**，再拆成管理面、控制面和执行面：
+
+```text
+Management Plane：Agent/Tool/Skill 注册、版本、发布与租户配置
+Control Plane：状态机、租约、调度、超时、配额与恢复
+Execution Plane：LLM Worker、Tool Worker、Sandbox
+Data Plane：Run State、事件日志、Checkpoint、Artifact、Memory
+Observability：Trace、Metrics、Logs、Eval、Cost、Audit
+```
+
+Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版本号，Worker 通过 lease 领取任务，提交结果时检查 lease 和状态版本，避免过期 Worker 覆盖新结果。暂停等待人工审批时释放 Worker，审批事件到达后再唤醒任务。
+
+LangChain、LangGraph 等 Framework 主要提供 Agent/Graph 的开发抽象；Runtime 负责租约、持久化、恢复、隔离、配额和跨 Framework 的执行治理。两者可以集成，但不能把“Graph 能表达状态”误认为“平台已经具备生产运行语义”。
+
+生产目标通常是 **at-least-once 调度 + 幂等副作用**，而不是轻易承诺 exactly-once。还要为每个 Run 固定模型、Prompt、Tool 和策略版本，否则恢复后可能在另一套行为定义上继续执行。
+
+取消也是一次并发状态转换，不是发一个中断信号就结束。Runtime 先持久化 `CANCEL_REQUESTED`，停止派发新 Step，再把取消传播到模型、Tool 和 Sandbox。完成结果与取消同时到达时，用状态版本和明确的转换表决定胜者；过期 Worker 的迟到结果只可审计，不能覆盖终态。
+
+对发送消息、付款、写外部系统等不可逆副作用，取消只能阻止尚未发生的动作；已分发但结果未知的进入 `UNKNOWN`，通过幂等查询、对账或补偿收敛。最终给用户的结果应区分“已取消且无副作用”、“部分完成”和“结果待确认”，并保留已完成步骤的证据。
+
+
+若业务只给目标和流量意图，Runtime需增加意图解析、计划生成、策略审批与可回滚执行；多模型通过统一消息、工具调用和流式事件协议接入，适配器屏蔽厂商差异。编排层用状态机或DAG协调多Agent，按能力路由并校验权限；多屏场景以设备能力注册和事件总线同步仪表盘、中控、HUD，关键动作保留人工确认。
+
+**差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
+
+---
+
 ## Q：为什么需要 Checkpoint，恢复时从哪里继续？
 
 > 来源：长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：断点恢复（服务重启后加载未完成状态）？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：这时候你是怎样恢复图的运行状态的？】；本轮追问：视频级 Checkpoint 和目标级 Checkpoint 为什么要分开？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）
@@ -63,51 +124,9 @@ Sandbox 容量要单独建模：区分冷启动、预热池、活跃执行和回
 
 ---
 
-## Q：一次 Agent 请求的完整执行链路是什么？
-
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：处理流程可以讲一下吗？整体链路是怎样的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：如果问某上市公司去年毛利率下降，Agent 收到 Prompt 后的完整流程是什么？】；本轮追问：一个用户请求进入系统后，Skill 的完整诊断流程是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：介绍一下 AI 问数平台的整体架构和链路。（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；本轮追问：工具执行器这块能不能再展开讲一下？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；本轮追问：从用户上传视频到最终拿到分析结果，完整链路是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：DeepAgents 的结构是怎么样的？它的主流程和核心部分是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）
-
-**新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
-
-**高手答**：
-
-```text
-1. Gateway 完成身份、租户、限流和请求幂等校验
-2. Control Plane 创建 Run，持久化初始状态和版本快照
-3. Scheduler 发放带 lease 的下一步任务
-4. Worker 装配 Context，调用模型并持久化响应或 Tool Call
-5. Policy 层校验工具、参数、权限、预算和审批要求
-6. Tool Runtime 以 execution_id 执行动作
-7. 结果进入 SUCCEEDED、FAILED 或 UNKNOWN，并写入事件日志
-8. 状态机决定继续、降级、等待、补偿或结束
-9. 全链路记录 Trace、成本、版本和审计信息
-```
-
-这里记录的是模型响应和结构化决策，不依赖保存模型私有推理过程。Run 还要有最大步骤、总 Deadline、Token/Cost Budget 和取消传播，防止模型循环无限消耗资源。
-
-**差距在哪**：新手只描述模型循环，高手能指出接入幂等、租约、策略门禁、状态提交和退出条件。
-
----
-
-## Q：Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？
-
-> 来源：[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】
-
-**新手答**：“请求交给 API Server，Scheduler 选节点，Kubelet 拉起容器。”
-
-**高手答**：
-
-客户端请求先经过 API Server 的鉴权、准入和校验，再持久化到 etcd。Deployment Controller 通过 watch/Informer 观察期望状态并创建 ReplicaSet，ReplicaSet 再创建 Pod。Scheduler 为未绑定 Pod 做过滤、评分并写入节点绑定；目标节点上的 Kubelet 调用 CRI 拉镜像和启动容器，按声明协调 CSI 存储与 CNI 网络。探针通过后 Pod 才 Ready，Service 对应的 EndpointSlice 随之更新。
-
-这是一组异步、最终一致的 Reconcile，不是一条同步 RPC。CSI、CNI 的具体调用位置还受运行时、插件和 Kubernetes 版本影响，回答时应说明组件责任，不硬背一条固定时序。
-
-**差距在哪**：新手背组件顺序，高手能讲清对象所有权、watch/reconcile、调度绑定与数据面就绪的边界。
-
----
-
 ## Q：Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？
 
-> 来源：分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】【[字节agent一面](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)追问：Agent 超时重复下单是高风险问题，你们怎么实现幂等避免重复操作？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：如果工具调用成功，但 Redis Checkpoint 写入失败，系统如何恢复并避免重复执行？】
+> 来源：分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】【[字节agent一面](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)追问：Agent 超时重复下单是高风险问题，你们怎么实现幂等避免重复操作？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：如果工具调用成功，但 Redis Checkpoint 写入失败，系统如何恢复并避免重复执行？】；本轮追问：客户端请求创建 AI 摘要任务发生超时，但服务端实际上已经完成入库；客户端重试后，如何避免重复创建任务或重复扣费？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）
 
 **新手答**：“给 Tool Call 加一个唯一 ID，恢复时查数据库。”
 
@@ -129,38 +148,6 @@ PENDING → DISPATCHED → RUNNING → SUCCEEDED
 对支付、发消息、删除资源等操作还应增加审批、操作分级和审计。Saga 补偿也不等于回滚，补偿本身可能失败并且必须幂等。
 
 **差距在哪**：新手只说“去重”，高手知道最危险的是执行结果未知，并能按下游能力选择事务、对账或人工介入。
-
----
-
-## Q：如果让你设计一个 Agent Runtime，你会怎么拆？
-
-> 来源：Agent Infra / 平台工程系统设计高频题 / [字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)【阿里 Agent Infra 一面题库追问：Runtime 定义、Framework 边界与无状态 Worker】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：通用 Agent Runtime（兼容多种大模型）如何设计？】；本轮追问：为什么要独立设计一套 runtime，而不是直接以 skill 的形式集成在别人的 agent 上？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；本轮追问：如果让你设计多个Agent交互完成工作，你怎么设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；本轮追问：Agent Runtime是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)）
-
-**新手答**：“接入 LLM，再提供工具、Memory 和日志，最后部署到 Kubernetes。”
-
-**高手答**：
-
-我会先把一次 Agent Run 建模为**可能暂停和恢复的有状态执行**，再拆成管理面、控制面和执行面：
-
-```text
-Management Plane：Agent/Tool/Skill 注册、版本、发布与租户配置
-Control Plane：状态机、租约、调度、超时、配额与恢复
-Execution Plane：LLM Worker、Tool Worker、Sandbox
-Data Plane：Run State、事件日志、Checkpoint、Artifact、Memory
-Observability：Trace、Metrics、Logs、Eval、Cost、Audit
-```
-
-Runtime 不应依赖某个 Worker 的本地内存。每次状态转换都带版本号，Worker 通过 lease 领取任务，提交结果时检查 lease 和状态版本，避免过期 Worker 覆盖新结果。暂停等待人工审批时释放 Worker，审批事件到达后再唤醒任务。
-
-LangChain、LangGraph 等 Framework 主要提供 Agent/Graph 的开发抽象；Runtime 负责租约、持久化、恢复、隔离、配额和跨 Framework 的执行治理。两者可以集成，但不能把“Graph 能表达状态”误认为“平台已经具备生产运行语义”。
-
-生产目标通常是 **at-least-once 调度 + 幂等副作用**，而不是轻易承诺 exactly-once。还要为每个 Run 固定模型、Prompt、Tool 和策略版本，否则恢复后可能在另一套行为定义上继续执行。
-
-取消也是一次并发状态转换，不是发一个中断信号就结束。Runtime 先持久化 `CANCEL_REQUESTED`，停止派发新 Step，再把取消传播到模型、Tool 和 Sandbox。完成结果与取消同时到达时，用状态版本和明确的转换表决定胜者；过期 Worker 的迟到结果只可审计，不能覆盖终态。
-
-对发送消息、付款、写外部系统等不可逆副作用，取消只能阻止尚未发生的动作；已分发但结果未知的进入 `UNKNOWN`，通过幂等查询、对账或补偿收敛。最终给用户的结果应区分“已取消且无副作用”、“部分完成”和“结果待确认”，并保留已完成步骤的证据。
-
-**差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
 
 ---
 
@@ -192,6 +179,38 @@ Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还�
 
 ---
 
+## Q：Kubernetes Pod/Deployment 从提交到就绪经历哪些控制链路？
+
+> 来源：[百度 AI Infra 校招面经](https://www.nowcoder.com/feed/main/detail/436228d68ccb4ec78d08644bc9227dec) / [虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6) / [字节社招一面](https://www.nowcoder.com/feed/main/detail/a385d6cc457d47c99c03cb8ea752ab89)【阿里 Agent Infra 一面题库追问：Kubernetes Scheduler 基本调度流程】
+
+**新手答**：“请求交给 API Server，Scheduler 选节点，Kubelet 拉起容器。”
+
+**高手答**：
+
+客户端请求先经过 API Server 的鉴权、准入和校验，再持久化到 etcd。Deployment Controller 通过 watch/Informer 观察期望状态并创建 ReplicaSet，ReplicaSet 再创建 Pod。Scheduler 为未绑定 Pod 做过滤、评分并写入节点绑定；目标节点上的 Kubelet 调用 CRI 拉镜像和启动容器，按声明协调 CSI 存储与 CNI 网络。探针通过后 Pod 才 Ready，Service 对应的 EndpointSlice 随之更新。
+
+这是一组异步、最终一致的 Reconcile，不是一条同步 RPC。CSI、CNI 的具体调用位置还受运行时、插件和 Kubernetes 版本影响，回答时应说明组件责任，不硬背一条固定时序。
+
+**差距在哪**：新手背组件顺序，高手能讲清对象所有权、watch/reconcile、调度绑定与数据面就绪的边界。
+
+---
+
+## Q：Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？
+
+> 来源：[虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6)；本轮追问：讲一下 Ray 的节点如何通信的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/945e5869249d4f4b86d4b6460f4486dd)）
+
+**新手答**：“Ray 会把任务调度到其他节点，失败后自动重试。”
+
+**高手答**：
+
+Driver 提交 Task/Actor，Raylet 按资源和放置约束调度 Worker，GCS 保存集群控制元数据，对象通过分布式 Object Store 传递。节点故障后，普通 Task 是否重试取决于 `max_retries` 等配置；丢失对象只有在 lineage 仍可用、生产任务可重放等条件满足时才能重建。Actor、应用状态和外部副作用另有生命周期，不能承诺透明恢复。
+
+节点内存紧张时，Ray 的 Memory Monitor 可能终止 Worker，但选择和重试策略具有版本边界。Agent Tool 写库、发消息等副作用仍需业务幂等，不能把 Ray 重试当成 exactly-once。
+
+**差距在哪**：新手把框架重试等同于恢复，高手会逐一检查任务、对象、Actor 和外部副作用的可重建条件。
+
+---
+
 ## Q：Agentic RL 采用同步还是异步 Rollout，如何权衡吞吐与稳定性？
 
 > 来源：[美团 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/c94734d67c9f461ab950bf1d800c5643) / [百度 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/4a848f5616cf4f8783020b3143a68fbc) / [AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)
@@ -208,6 +227,25 @@ Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还�
 
 ---
 
+## Q：Agentic RL 的 Rollout、Training 与推理引擎如何编排？
+
+> 来源：[AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)；本轮追问：VERL基于什么框架实现？底层训练和推理引擎是什么？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）
+
+**新手答**：“推理引擎生成轨迹，训练器算奖励并更新模型，然后同步权重。”
+
+**高手答**：
+
+系统通常包含 Actor/Learner、Rollout Engine、Reference Policy、Reward，以及算法需要时的 Critic。调度器把 Prompt 分发给 Rollout，轨迹连同模型版本进入奖励与训练阶段；Learner 产出新权重后，通过全量、分片或增量传输到推理侧。切换必须有 `policy_version`、完整性校验和原子激活，避免某条轨迹混用两版参数。
+
+Actor 与 Rollout 共置可降低权重传输成本，却会产生显存和计算争用；分离部署隔离更好，但增加网络和同步开销。具体角色、同步协议和一致性强度取决于框架，回答应先给不变量，再谈实现。
+
+
+以 verl 为例，其编排通常基于 Ray 的分布式执行；训练侧可对接 PyTorch FSDP 或 Megatron-LM，Rollout 侧可对接 vLLM、SGLang 等推理引擎。Ray 负责角色进程、任务和资源协同，具体后端由配置及版本决定。
+
+**差距在哪**：新手只会画训练循环，高手能说明资源编排、权重版本、轨迹可追溯性和共置取舍。
+
+---
+
 ## Q：Agent Router 应以什么运行形态存在，请求数据流如何设计？
 
 > 来源：[字节 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/fcf6cf54ae5f437eb9356b98cc69fd9f)【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何设计路由机制，将请求交给合适的 Agent？】；本轮追问：什么是数据流分析？能补齐 AST 的哪些短板？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）
@@ -221,33 +259,6 @@ Router 可以是进程内库、Workflow 节点或独立服务。低延迟、策�
 策略要支持灰度、热更新、回滚和确定性 Fallback，并记录候选集、决策版本与结果反馈。这里讨论的是通用 Router 设计，不把某个项目中的同名组件当成行业标准。
 
 **差距在哪**：新手只谈分类准确率，高手会交代部署边界、权限门禁、策略版本和端到端数据流。
-
----
-
-## Q：大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？
-
-> 来源：[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f) / [互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)
-
-**新手答**：“端侧断网时先缓存，联网后同步到云端；复杂任务都放云上跑。”
-
-**高手答**：
-
-先按数据所有权拆分，不能做一个“双向同步所有状态”的大接口：
-
-| 状态 | 权威方 | 离线策略 |
-|------|--------|----------|
-| 用户身份、授权和配额 | 云端控制面 | 端侧持有短期、限定 scope 的快照，过期后降权或停止高风险动作 |
-| 设备能力、实时传感器和本地文件 | 端侧 | 本地读取，按最小必要原则上传摘要或 Artifact 引用 |
-| Run 事件、Checkpoint 和副作用 | 创建该 Run 的控制面 | 用单调序号、幂等键和 lease 同步，不能靠最后写入覆盖 |
-| 模型、Prompt、Tool 和策略版本 | 云端发布面 | 端侧缓存已签名版本，离线期间固定版本运行 |
-
-断网时端侧只能执行预先授权、可撤销、风险受限的动作，并把事件写入有界本地队列。恢复连接后先做身份续期和版本协商，再按 `run_id + event_seq + execution_id` 上传；服务端逐条确认，重复事件幂等吸收，冲突进入显式仲裁。KubeEdge 的 [EdgeHub](https://kubeedge.io/docs/architecture/edge/edgehub/)和 [Device Controller](https://kubeedge.io/docs/architecture/cloud/device_controller/)展示了端云连接、上/下行状态和 desired/reported state 分离，但 Agent 的用户授权与副作用语义仍需业务层自己实现。
-
-任务迁移只在语义 Checkpoint 处发生：冻结旧执行者、提交工作区/Artifact 清单、释放 lease，新执行者取得 fencing token 后校验模型与工具版本，再查询未知副作用并继续。没有可迁移状态的本地进程应从可验证步骤重建，而不是复制内存快照后假定外部世界没有变化。
-
-从本地迁到云端前先做能力与数据分类：可携带的是结构化 Run State、已授权 Artifact 和版本化执行契约；设备私钥、本地绝对路径、未授权文件与活进程不直接上传。云端先验证目标 Tool/模型版本和数据驻留约束，不兼容时应停在已验证 Checkpoint 并显式降级，而不是让云端在缺失上下文时猜测继续。
-
-**差距在哪**：新手只有“缓存后同步”，高手能定义权威状态、离线权限、冲突协议和任务唯一执行权。
 
 ---
 
@@ -271,6 +282,25 @@ Router 可以是进程内库、Workflow 节点或独立服务。低延迟、策�
 框架 API 会演进，版本兼容必须成为发布门禁。Kubernetes 的 [API Deprecation Policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/)说明了稳定 API 不能在同一版本中随意移除；Agent 平台虽不必复制其时间规则，但应采用相同思路：版本化 schema、明确弃用窗口和转换器。Trace 字段也应基于版本化的 [OpenTelemetry Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/)，不要让迁移前后同名指标含义改变。
 
 **差距在哪**：新手把迁移当换 SDK，高手会治理协议、在途状态、双轨证据、旧服务适配和退出成本。
+
+---
+
+## Q：如何让 Agent 执行过程可观测、可调试？
+
+> 来源：[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；本轮追问：如何利用可观测链路定位首 Token 延迟、工具调用错误等问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）
+
+**新手答**：展示当前步骤、工具调用、状态和进度，而不是只返回最终答案。
+
+**高手答**：
+
+Runtime 为每次 run 生成 trace/span，记录计划版本、状态迁移、模型请求摘要、工具入参脱敏结果和耗时；通过 SSE/WebSocket 推送进度，前端区分 RUNNING、WAITING、BLOCKED 和 UNKNOWN。支持按 run 回放、日志检索和成本统计，敏感内容做 ACL 与脱敏，避免把内部提示词无条件暴露。
+
+
+排查时沿 trace 的时间线拆分排队、首字节/首 Token、生成和工具等待等 span，比较模型端与网关时间；工具 span 记录请求/响应摘要、状态码、超时、重试和 trace_id，按错误类型回放入参，区分工具失败、解析失败与模型误用。
+
+**差距在哪**：考察运行时事件模型、可观测性和信息安全。
+
+---
 
 ---
 
@@ -340,38 +370,6 @@ Deployment 通过新旧 ReplicaSet 和 `maxSurge`、`maxUnavailable` 控制替�
 
 ---
 
-## Q：Ray 的核心调度链路是什么，节点 OOM 或上游故障后如何恢复？
-
-> 来源：[虾皮 AI Infra 实习一面](https://www.nowcoder.com/feed/main/detail/e610f57cfd3548cd96a27d92e2f8b25e) / [虾皮 AI Infra 实习二面](https://www.nowcoder.com/feed/main/detail/62b9123e4b7f497285e7d6f68844cdd6)；本轮追问：讲一下 Ray 的节点如何通信的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/945e5869249d4f4b86d4b6460f4486dd)）
-
-**新手答**：“Ray 会把任务调度到其他节点，失败后自动重试。”
-
-**高手答**：
-
-Driver 提交 Task/Actor，Raylet 按资源和放置约束调度 Worker，GCS 保存集群控制元数据，对象通过分布式 Object Store 传递。节点故障后，普通 Task 是否重试取决于 `max_retries` 等配置；丢失对象只有在 lineage 仍可用、生产任务可重放等条件满足时才能重建。Actor、应用状态和外部副作用另有生命周期，不能承诺透明恢复。
-
-节点内存紧张时，Ray 的 Memory Monitor 可能终止 Worker，但选择和重试策略具有版本边界。Agent Tool 写库、发消息等副作用仍需业务幂等，不能把 Ray 重试当成 exactly-once。
-
-**差距在哪**：新手把框架重试等同于恢复，高手会逐一检查任务、对象、Actor 和外部副作用的可重建条件。
-
----
-
-## Q：Agentic RL 的 Rollout、Training 与推理引擎如何编排？
-
-> 来源：[AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)
-
-**新手答**：“推理引擎生成轨迹，训练器算奖励并更新模型，然后同步权重。”
-
-**高手答**：
-
-系统通常包含 Actor/Learner、Rollout Engine、Reference Policy、Reward，以及算法需要时的 Critic。调度器把 Prompt 分发给 Rollout，轨迹连同模型版本进入奖励与训练阶段；Learner 产出新权重后，通过全量、分片或增量传输到推理侧。切换必须有 `policy_version`、完整性校验和原子激活，避免某条轨迹混用两版参数。
-
-Actor 与 Rollout 共置可降低权重传输成本，却会产生显存和计算争用；分离部署隔离更好，但增加网络和同步开销。具体角色、同步协议和一致性强度取决于框架，回答应先给不变量，再谈实现。
-
-**差距在哪**：新手只会画训练循环，高手能说明资源编排、权重版本、轨迹可追溯性和共置取舍。
-
----
-
 ## Q：Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？
 
 > 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff)
@@ -385,6 +383,33 @@ Infra 不会直接提高基础模型智力，但会扩大模型可可靠利用�
 最难的是模型语义不确定性与分布式部分失败叠加：一次“成功”既要判断基础设施完成，也要判断任务语义正确。证明收益应在同模型、同任务集下做消融，对比任务成功率、步骤数、工具失败率、恢复率、延迟和成本，避免把流量变化误认为能力提升。
 
 **差距在哪**：新手把能力等同于可用性，高手能建立基础设施机制、效果指标与反馈闭环之间的因果关系。
+
+---
+
+## Q：大量本地端 Agent 与云端 Agent 如何协同？身份、状态、离线和任务迁移边界怎么设计？
+
+> 来源：[小红书 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/9f7361c709f4413396988b4f334a0d6f) / [互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)
+
+**新手答**：“端侧断网时先缓存，联网后同步到云端；复杂任务都放云上跑。”
+
+**高手答**：
+
+先按数据所有权拆分，不能做一个“双向同步所有状态”的大接口：
+
+| 状态 | 权威方 | 离线策略 |
+|------|--------|----------|
+| 用户身份、授权和配额 | 云端控制面 | 端侧持有短期、限定 scope 的快照，过期后降权或停止高风险动作 |
+| 设备能力、实时传感器和本地文件 | 端侧 | 本地读取，按最小必要原则上传摘要或 Artifact 引用 |
+| Run 事件、Checkpoint 和副作用 | 创建该 Run 的控制面 | 用单调序号、幂等键和 lease 同步，不能靠最后写入覆盖 |
+| 模型、Prompt、Tool 和策略版本 | 云端发布面 | 端侧缓存已签名版本，离线期间固定版本运行 |
+
+断网时端侧只能执行预先授权、可撤销、风险受限的动作，并把事件写入有界本地队列。恢复连接后先做身份续期和版本协商，再按 `run_id + event_seq + execution_id` 上传；服务端逐条确认，重复事件幂等吸收，冲突进入显式仲裁。KubeEdge 的 [EdgeHub](https://kubeedge.io/docs/architecture/edge/edgehub/)和 [Device Controller](https://kubeedge.io/docs/architecture/cloud/device_controller/)展示了端云连接、上/下行状态和 desired/reported state 分离，但 Agent 的用户授权与副作用语义仍需业务层自己实现。
+
+任务迁移只在语义 Checkpoint 处发生：冻结旧执行者、提交工作区/Artifact 清单、释放 lease，新执行者取得 fencing token 后校验模型与工具版本，再查询未知副作用并继续。没有可迁移状态的本地进程应从可验证步骤重建，而不是复制内存快照后假定外部世界没有变化。
+
+从本地迁到云端前先做能力与数据分类：可携带的是结构化 Run State、已授权 Artifact 和版本化执行契约；设备私钥、本地绝对路径、未授权文件与活进程不直接上传。云端先验证目标 Tool/模型版本和数据驻留约束，不兼容时应停在已验证 Checkpoint 并显式降级，而不是让云端在缺失上下文时猜测继续。
+
+**差距在哪**：新手只有“缓存后同步”，高手能定义权威状态、离线权限、冲突协议和任务唯一执行权。
 
 ---
 
@@ -553,19 +578,32 @@ Kubernetes [Local Ephemeral Storage](https://kubernetes.io/docs/concepts/storage
 
 **差距在哪**：考察平台化、配置治理和安全边界。
 
-## Q：如何让 Agent 执行过程可观测、可调试？
+## Q：Agent Workbench 解决什么问题？应具备哪些核心能力？
 
-> 来源：[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)
+> 来源：[去哪儿ai应用技术面（挂）](https://www.nowcoder.com/feed/main/detail/e79fbb2d602641569079523ef84445fe)
 
-**新手答**：展示当前步骤、工具调用、状态和进度，而不是只返回最终答案。
+**新手答**：“Agent Workbench 是用于统一开发、调试、评估和部署 Agent 的平台。”
 
 **高手答**：
 
-Runtime 为每次 run 生成 trace/span，记录计划版本、状态迁移、模型请求摘要、工具入参脱敏结果和耗时；通过 SSE/WebSocket 推送进度，前端区分 RUNNING、WAITING、BLOCKED 和 UNKNOWN。支持按 run 回放、日志检索和成本统计，敏感内容做 ACL 与脱敏，避免把内部提示词无条件暴露。
+Agent Workbench 的核心价值是把 Agent 从一次性 Demo 变成可复现、可观测、可治理的工程系统。它应提供提示词、模型、工具、记忆和工作流的配置管理，支持本地调试、版本发布、环境隔离、权限控制与密钥托管；运行层要记录输入输出、工具调用、延迟、成本、错误和人工接管，并对敏感数据脱敏。评估层应支持固定数据集、回放、模型或提示词对比、轨迹检查，以及正确性、安全性、鲁棒性和成本评估。生产上还需沙箱限制工具权限、超时重试、幂等设计、审批和回滚。平台越统一，越可能形成供应商耦合和流程负担，因此应保留开放接口，并通过真实脱敏流量和故障演练验证，而非只看 Demo 成功率。
 
-**差距在哪**：考察运行时事件模型、可观测性和信息安全。
+**差距在哪**：浅层把 Workbench 当作可视化开发工具，深入回答应覆盖全生命周期、可观测与评估、权限隔离、回滚及平台化带来的成本和耦合。
 
 ---
+
+## Q：如何判断一个 Agent 基础设施是否完备？应从哪些能力和质量指标评估？
+
+> 来源：[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)
+
+**新手答**：“完善的 Agent 基础设施应具备工具调用、状态管理、监控、权限控制、评估和故障恢复能力。”
+
+**高手答**：
+
+Agent 基础设施的角色是让 Agent 能稳定执行而非只完成一次 Demo。能力面应覆盖工作流编排与暂停恢复、版本化提示词和工具注册、结构化状态与长期记忆、超时重试和幂等、权限与密钥隔离、审计追踪、成本限额、人工接管及模型和工具评估。质量指标应同时看任务成功率、关键步骤正确率、工具调用失败率、延迟、成本、恢复率、越权拦截率和可追溯性，不能只看最终文本评分。验证方式包括离线基准、真实任务回放、对抗测试、故障注入、并发压测和灰度回滚；还要按模型、工具、租户和版本切分指标。平台能力越强，抽象和运维成本越高，因此应优先建设可观测、可恢复和安全边界，再扩展自治能力。
+
+**差距在哪**：浅层只列工具、记忆和监控，深入回答要建立从编排到安全、评估、恢复的能力模型，并用成功率、成本、延迟、越权和故障演练验证完备性。
+
 
 ## Agent Infra 系统设计答题主线
 

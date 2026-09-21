@@ -96,3 +96,15 @@ The answers added from the 2026-09-07 through 2026-09-13 interview audit were in
 - [XGBoost model documentation](https://xgboost.readthedocs.io/en/latest/tutorials/model.html) — tree-model terminology used in the comparison answer.
 
 No upstream prose, code, diagrams, datasets, or benchmark results are reproduced. Version-specific behavior remains tied to the linked documentation; the surrounding explanations and engineering recommendations are independent analysis.
+
+## Weekly Interview Answer References (2026-09-21)
+
+The answers added from the 2026-09-15 through 2026-09-21 interview audit were independently written and checked against these primary references:
+
+- [OpenAI Computer Use Guide](https://developers.openai.com/api/docs/guides/tools-computer-use) — screenshot/action loops, environment boundaries, and human-confirmation safety points.
+- [Spring AI Reference](https://docs.spring.io/spring-ai/reference/) and [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents) — current framework abstractions and agent/tool orchestration surfaces.
+- [NVIDIA Nsight Compute Documentation](https://docs.nvidia.com/nsight-compute/NsightCompute/index.html) and [Nsight Systems User Guide](https://docs.nvidia.com/nsight-systems/UserGuide/index.html) — kernel-level versus system-wide GPU performance analysis.
+- [OpenAI HumanEval](https://github.com/openai/human-eval), [Google Research MBPP](https://github.com/google-research/google-research/tree/master/mbpp), and [APPS](https://github.com/hendrycks/apps) — benchmark task formats and functional-evaluation boundaries.
+- [Relaxed On-Policy Distillation](https://arxiv.org/abs/2603.11137) and [Trust Region On-Policy Distillation](https://arxiv.org/abs/2606.01249) — OPD instability, teacher/student distribution mismatch, and stabilization mechanisms.
+
+No upstream prose, code, datasets, diagrams, or benchmark results are reproduced. Framework behavior remains tied to the linked documentation; architecture and evaluation recommendations are independent engineering analysis.

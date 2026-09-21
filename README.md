@@ -18,13 +18,13 @@
 
 **《Agent 面试 500 问》** 绿皮书 PDF v1.2.0 正式发布！面试前速查速记，保留“新手答 vs 高手答”对比，快速看清答案层次。
 
-- 覆盖 **17 大考察维度**、**693 道 Agent / AI 高频面试题**
+- 覆盖 **17 大考察维度**、**757 道 Agent / AI 高频面试题**
 - 蚂蚁、阿里、字节、腾讯、携程、百度等大厂真题
 - 同一主题内按真实面经出现频次排序，适合面试当天翻阅
 
 **下载**：[`publish-pdf/output/zero2Agent-绿皮书-Agent面试500问.pdf`](publish-pdf/output/zero2Agent-绿皮书-Agent面试500问.pdf)
 
-> 授权协议：CC BY-NC-SA 4.0 · 转载请注明出处  
+> 授权协议：CC BY-NC-SA 4.0 · 转载请注明出处
 > 作者：[Onefly](https://github.com/ranxi2001)
 
 ---
