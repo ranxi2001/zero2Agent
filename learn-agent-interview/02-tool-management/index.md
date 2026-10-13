@@ -164,48 +164,9 @@ eyebrow: Agent 面试通关 / 02
 
 ---
 
-### Q：Mock 是怎么实现的？在自动化生成测试的场景下
-
-> 来源：抖音基础架构 Agent 一面
-
-**新手答**：“用 `unittest.mock` 替换依赖。”
-
-**高手答**：
-
-Mock 的实现分三步：**识别依赖 → 生成 Mock 对象 → 注入测试**。
-
-**第一步：识别需要 Mock 的依赖**
-
-从 AST 和 import 分析中提取外部调用——数据库连接、HTTP 请求、文件 I/O、第三方 SDK 调用。判断标准是：**这个依赖在测试环境里能不能正常运行**。能运行的不 Mock，不能运行的才 Mock。
-
-**第二步：生成 Mock 对象**
-
-根据依赖的接口签名生成 Mock：
-- 函数调用：Mock 返回值，类型和实际返回一致
-- 类实例：Mock 整个类，保留方法签名，返回值用合理的默认值
-- 异步调用：生成 `AsyncMock`，保持 `await` 语义
-
-```python
-# 自动生成的 Mock 示例
-@patch('module.db_client.query')
-def test_get_user(mock_query):
-    mock_query.return_value = {"id": 1, "name": "test"}
-    result = get_user(1)
-    assert result["name"] == "test"
-    mock_query.assert_called_once_with(user_id=1)
-```
-
-**第三步：注入策略**
-
-不同语言注入方式不同——Python 用 `@patch` 装饰器或 `with` 语句，Java 用依赖注入框架（Mockito），JavaScript 用 `jest.mock`。关键是 Mock 的粒度：Mock 太多会让测试脱离真实行为，Mock 太少会因为环境依赖跑不起来。
-
-**差距在哪**：新手只知道用 Mock 库替换依赖。高手的回答展示了自动化场景下的完整 Mock 生成流程——先识别、再生成、再注入——且点出了 Mock 粒度的核心取舍。面试官考的不是你会不会用 Mock 库，而是你能不能让 Agent 自动决定“Mock 什么、怎么 Mock”。
-
----
-
 ### Q：如果工具调用是成功的，但返回结果语义不完整，模型很容易误判，你怎么设计中间层？
 
-> 来源：腾讯大模型应用开发二面；本轮追问：模型如何知道文件还没有读完？如何判断是否继续读取？工具应该返回哪些额外信息辅助判断？ / 假设文件有 1 万行，工具每次最多读取 2500 行，调用后返回的具体结果是什么？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）
+> 来源：腾讯大模型应用开发二面；本轮追问：模型如何知道文件还没有读完？如何判断是否继续读取？工具应该返回哪些额外信息辅助判断？ / 假设文件有 1 万行，工具每次最多读取 2500 行，调用后返回的具体结果是什么？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
 
 **新手答**：“让模型自己判断返回值是否完整。”
 
@@ -279,7 +240,115 @@ MCP 接多工具后，同一个“代码质量评测”请求，SonarQube 返回
 
 ---
 
+### Q：Mock 是怎么实现的？在自动化生成测试的场景下
+
+> 来源：抖音基础架构 Agent 一面
+
+**新手答**：“用 `unittest.mock` 替换依赖。”
+
+**高手答**：
+
+Mock 的实现分三步：**识别依赖 → 生成 Mock 对象 → 注入测试**。
+
+**第一步：识别需要 Mock 的依赖**
+
+从 AST 和 import 分析中提取外部调用——数据库连接、HTTP 请求、文件 I/O、第三方 SDK 调用。判断标准是：**这个依赖在测试环境里能不能正常运行**。能运行的不 Mock，不能运行的才 Mock。
+
+**第二步：生成 Mock 对象**
+
+根据依赖的接口签名生成 Mock：
+- 函数调用：Mock 返回值，类型和实际返回一致
+- 类实例：Mock 整个类，保留方法签名，返回值用合理的默认值
+- 异步调用：生成 `AsyncMock`，保持 `await` 语义
+
+```python
+# 自动生成的 Mock 示例
+@patch('module.db_client.query')
+def test_get_user(mock_query):
+    mock_query.return_value = {"id": 1, "name": "test"}
+    result = get_user(1)
+    assert result["name"] == "test"
+    mock_query.assert_called_once_with(user_id=1)
+```
+
+**第三步：注入策略**
+
+不同语言注入方式不同——Python 用 `@patch` 装饰器或 `with` 语句，Java 用依赖注入框架（Mockito），JavaScript 用 `jest.mock`。关键是 Mock 的粒度：Mock 太多会让测试脱离真实行为，Mock 太少会因为环境依赖跑不起来。
+
+**差距在哪**：新手只知道用 Mock 库替换依赖。高手的回答展示了自动化场景下的完整 Mock 生成流程——先识别、再生成、再注入——且点出了 Mock 粒度的核心取舍。面试官考的不是你会不会用 Mock 库，而是你能不能让 Agent 自动决定“Mock 什么、怎么 Mock”。
+
+---
+
 ## MCP 与 Function Calling
+
+### Q：MCP 和 Skills 的本质区别是什么？都是工具调用，为什么需要两套机制？
+
+> 来源：蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：MCP 跟 Skill 有什么区别？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：MCP 与 Skill 的核心区别是什么？迁移的原因是什么？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：MCP vs Skill 选型场景？】【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：MCP是什么，为什么项目没有选用MCP而选择自己封装？Skill与MCP的核心区别是什么？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：Agent、MCP 和 Skill 的区别是什么？（[绿盟科技一晚速通三面已offer](https://www.nowcoder.com/feed/main/detail/39776141d05c462aa212a9adc229052d)）；本轮追问：为什么 Agent 生态开始广泛使用 MCP？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)
+
+**新手答**：“MCP 是协议，Skills 是能力，不太一样。”
+
+**高手答**：
+
+MCP 和 Skills 解决的是**不同层次的问题**，虽然都和“Agent 如何使用工具”相关，但它们不在同一个抽象层级上：
+
+**MCP（Model Context Protocol）——工具调用的“通信协议”**
+
+MCP 解决的是：Agent 如何**发现、调用、获取结果**。它定义了一套标准的交互格式——工具怎么注册（`tools/list`）、参数怎么传（JSON Schema）、结果怎么返回。类比网络协议：MCP 是 HTTP，定义了请求/响应的格式，不关心你用这个请求做什么。
+
+**Skills——任务执行的“能力单元”**
+
+Skills 解决的是：Agent 面对某类任务时，**怎么思考、用什么工具、按什么流程执行**。一个 Skill 包含触发条件、专用 Prompt、可用工具集、输出约束。类比：Skill 是一个“微型 Agent 配置”，告诉 Agent“遇到这类问题时按这个方案办”。
+
+```mermaid
+flowchart TB
+    subgraph skill["Skill（能力单元）"]
+        direction TB
+        S1["触发条件：用户说「整理面经」"]
+        S2["专用 Prompt：分类+格式化指令"]
+        S3["工具集：文件读写、Grep 搜索"]
+        S4["输出约束：Markdown 格式"]
+    end
+
+    subgraph mcp["MCP（通信协议）"]
+        direction TB
+        M1["工具发现：tools/list"]
+        M2["参数规范：JSON Schema"]
+        M3["调用方式：stdio / HTTP"]
+        M4["结果格式：标准化响应"]
+    end
+
+    skill -->|"Skill 内部通过 MCP 调用工具"| mcp
+```
+
+**核心区别对照**：
+
+| 维度 | MCP | Skills |
+|------|-----|--------|
+| 抽象层级 | 通信协议层 | 业务能力层 |
+| 解决的问题 | “怎么调工具” | “什么场景用什么方案” |
+| 包含内容 | 工具描述、参数规范、传输方式 | 触发条件 + Prompt + 工具集 + 输出约束 |
+| 类比 | HTTP 协议 | Web 应用的一个 Controller |
+| 复用粒度 | 单个工具 | 一套完整方案 |
+
+**为什么需要两套机制**：
+
+只有 MCP 没有 Skills → Agent 知道怎么调工具，但不知道什么时候该调哪个，需要每次都靠模型自己推理，不稳定。
+
+只有 Skills 没有 MCP → Agent 知道该怎么办，但每个工具要单独写适配代码，不可扩展。
+
+两者结合：Skills 定义“策略”，MCP 提供“基础设施”。Skill 里的工具调用通过 MCP 协议完成——这样新增工具只需要写 MCP Server，不需要改 Skill 逻辑；新增能力只需要写 Skill，不需要改工具接口。
+
+
+Agent 是运行时的智能体或编排层，负责理解目标、维护上下文、规划并调用 Skill 或 MCP 工具；Skill 是面向任务的流程与约束，MCP 是连接外部工具和资源的标准协议。三者分别对应执行主体、能力封装和通信接口。
+
+
+生态广泛采用 MCP，主要因为它统一了工具发现、Schema 描述、调用和结果格式，使不同 Agent 客户端能复用同一批服务端工具，降低逐个适配成本；同时便于工具独立部署、替换和集中治理。
+
+**追问补充**：CLI 适合已有命令行程序、脚本化运维和本地自动化，直接封装即可；plugin 适合宿主平台内的扩展点，需要遵循宿主生命周期、权限和界面约束。通常由 Skill 编排任务，按部署边界选择 MCP、CLI 或 plugin，并统一做参数校验与权限治理。
+
+**差距在哪**：新手把 MCP 和 Skills 当成两个并列的概念。高手看到的是**分层架构**——MCP 在协议层解决“怎么调”，Skills 在业务层解决“怎么用”，两者是上下层关系而非替代关系。面试官考的是你能不能把 Agent 架构按层次拆清楚。
+
+---
 
 ### Q：大模型的 Function Call 是什么？Tool Use 一般怎么用？
 
@@ -397,73 +466,6 @@ System Prompt:
 
 ---
 
-### Q：MCP 和 Skills 的本质区别是什么？都是工具调用，为什么需要两套机制？
-
-> 来源：蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：MCP 跟 Skill 有什么区别？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：MCP 与 Skill 的核心区别是什么？迁移的原因是什么？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：MCP vs Skill 选型场景？】【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：MCP是什么，为什么项目没有选用MCP而选择自己封装？Skill与MCP的核心区别是什么？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：Agent、MCP 和 Skill 的区别是什么？（[绿盟科技一晚速通三面已offer](https://www.nowcoder.com/feed/main/detail/39776141d05c462aa212a9adc229052d)）；本轮追问：为什么 Agent 生态开始广泛使用 MCP？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)
-
-**新手答**：“MCP 是协议，Skills 是能力，不太一样。”
-
-**高手答**：
-
-MCP 和 Skills 解决的是**不同层次的问题**，虽然都和“Agent 如何使用工具”相关，但它们不在同一个抽象层级上：
-
-**MCP（Model Context Protocol）——工具调用的“通信协议”**
-
-MCP 解决的是：Agent 如何**发现、调用、获取结果**。它定义了一套标准的交互格式——工具怎么注册（`tools/list`）、参数怎么传（JSON Schema）、结果怎么返回。类比网络协议：MCP 是 HTTP，定义了请求/响应的格式，不关心你用这个请求做什么。
-
-**Skills——任务执行的“能力单元”**
-
-Skills 解决的是：Agent 面对某类任务时，**怎么思考、用什么工具、按什么流程执行**。一个 Skill 包含触发条件、专用 Prompt、可用工具集、输出约束。类比：Skill 是一个“微型 Agent 配置”，告诉 Agent“遇到这类问题时按这个方案办”。
-
-```mermaid
-flowchart TB
-    subgraph skill["Skill（能力单元）"]
-        direction TB
-        S1["触发条件：用户说「整理面经」"]
-        S2["专用 Prompt：分类+格式化指令"]
-        S3["工具集：文件读写、Grep 搜索"]
-        S4["输出约束：Markdown 格式"]
-    end
-
-    subgraph mcp["MCP（通信协议）"]
-        direction TB
-        M1["工具发现：tools/list"]
-        M2["参数规范：JSON Schema"]
-        M3["调用方式：stdio / HTTP"]
-        M4["结果格式：标准化响应"]
-    end
-
-    skill -->|"Skill 内部通过 MCP 调用工具"| mcp
-```
-
-**核心区别对照**：
-
-| 维度 | MCP | Skills |
-|------|-----|--------|
-| 抽象层级 | 通信协议层 | 业务能力层 |
-| 解决的问题 | “怎么调工具” | “什么场景用什么方案” |
-| 包含内容 | 工具描述、参数规范、传输方式 | 触发条件 + Prompt + 工具集 + 输出约束 |
-| 类比 | HTTP 协议 | Web 应用的一个 Controller |
-| 复用粒度 | 单个工具 | 一套完整方案 |
-
-**为什么需要两套机制**：
-
-只有 MCP 没有 Skills → Agent 知道怎么调工具，但不知道什么时候该调哪个，需要每次都靠模型自己推理，不稳定。
-
-只有 Skills 没有 MCP → Agent 知道该怎么办，但每个工具要单独写适配代码，不可扩展。
-
-两者结合：Skills 定义“策略”，MCP 提供“基础设施”。Skill 里的工具调用通过 MCP 协议完成——这样新增工具只需要写 MCP Server，不需要改 Skill 逻辑；新增能力只需要写 Skill，不需要改工具接口。
-
-
-Agent 是运行时的智能体或编排层，负责理解目标、维护上下文、规划并调用 Skill 或 MCP 工具；Skill 是面向任务的流程与约束，MCP 是连接外部工具和资源的标准协议。三者分别对应执行主体、能力封装和通信接口。
-
-
-生态广泛采用 MCP，主要因为它统一了工具发现、Schema 描述、调用和结果格式，使不同 Agent 客户端能复用同一批服务端工具，降低逐个适配成本；同时便于工具独立部署、替换和集中治理。
-
-**差距在哪**：新手把 MCP 和 Skills 当成两个并列的概念。高手看到的是**分层架构**——MCP 在协议层解决“怎么调”，Skills 在业务层解决“怎么用”，两者是上下层关系而非替代关系。面试官考的是你能不能把 Agent 架构按层次拆清楚。
-
----
-
 ### Q：MCP Server 是怎么构建的？
 
 > 来源：字节 Agent 实习二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：自己有去搭建过 MCP Server 吗？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)；[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)
@@ -510,7 +512,7 @@ MCP（Model Context Protocol）是 Anthropic 提出的**模型与外部工具/�
 
 ### Q：大厂开源的 CLI 工具（如 lark-cli）和 MCP 有什么区别？它们跟直接调 API 又有什么不同？
 
-> 来源：大厂 Agent 面试高频题；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[宏图智能一面](https://www.nowcoder.com/discuss/934206754898866176)
+> 来源：大厂 Agent 面试高频题；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[宏图智能一面](https://www.nowcoder.com/discuss/934206754898866176)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
 
 **新手答**：“CLI 就是命令行工具，MCP 就是协议，API 就是接口，三个不同的东西。”
 
@@ -762,7 +764,7 @@ result = agent.invoke({
 
 ### Q：你会如何设计工具 schema，才能降低模型传错参数、漏参数、乱调用的问题？
 
-> 来源：Agent 开发面试 30 题
+> 来源：Agent 开发面试 30 题；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
 
 **新手答**：“写清楚参数说明就行。”
 
@@ -803,6 +805,8 @@ result = agent.invoke({
 
 一个“大而全”的工具（既能搜索、又能预订、还能取消）会让模型在参数选择上出错。拆成 `search_hotel`、`book_hotel`、`cancel_booking` 三个工具，每个的参数空间小而确定。
 
+**追问补充**：权限不能只写在提示词或 Schema 中：工具注册时绑定允许的主体、资源范围和操作级权限，服务端执行鉴权与参数校验；写操作、敏感数据访问需二次确认或审批，并记录调用者、参数摘要、结果和审计日志。
+
 **差距在哪**：新手觉得“描述写清楚”就够了。高手从参数设计、描述技巧、命名规范、工具粒度四个角度系统性地降低出错率。面试官考的是你有没有做过“把模型对接到真实工具”的工程经验——只有踩过坑的人才知道 schema 设计有这么多讲究。
 
 ---
@@ -811,7 +815,7 @@ result = agent.invoke({
 
 ### Q：MCP 协议的完整调用过程是怎样的？
 
-> 来源：高德 AI 应用开发实习一面 【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后，Host、Client 与 Server 背后发生了什么】；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：一次 MCP 调用到底是谁发起、谁执行？；详细讲解一次 MCP 调用背后有哪些步骤。】【[去哪儿AI面试](https://www.nowcoder.com/discuss/924765100441903104)追问：MCP 的客户端和服务端交互的完整流程是怎么样的？中间的具体内容是什么？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：MCP 用过吗？Agent 和 MCP 的交互方式是怎样的？】；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；本轮追问：框架如何接入 MCP？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)
+> 来源：高德 AI 应用开发实习一面 【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后，Host、Client 与 Server 背后发生了什么】；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：一次 MCP 调用到底是谁发起、谁执行？；详细讲解一次 MCP 调用背后有哪些步骤。】【[去哪儿AI面试](https://www.nowcoder.com/discuss/924765100441903104)追问：MCP 的客户端和服务端交互的完整流程是怎么样的？中间的具体内容是什么？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：MCP 用过吗？Agent 和 MCP 的交互方式是怎样的？】；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；本轮追问：框架如何接入 MCP？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
 
 **新手答**：“就是调 API。”
 
@@ -885,6 +889,8 @@ sequenceDiagram
 
 
 框架接入时由 MCP Client 负责初始化、能力协商和工具发现，再将工具 Schema 适配为框架的统一 Tool 注册表；执行时按工具标识路由回 Client 调用，并统一处理超时、取消、错误和结果格式。运行中的编排应使用已缓存的能力快照，工具变更在下一轮生效。
+
+**追问补充**：同时请求 tools、resources、prompts 等能力时，协议本身不规定响应顺序；Client 用 JSON-RPC 请求 ID 匹配响应，Host 根据依赖关系决定并行或串行。Server 可按资源锁、优先级和并发额度调度，独立请求可并行，依赖请求需等待前置结果，并分别处理超时、取消和错误。 JSON-RPC 请求 ID 的对应规则见 [JSON-RPC 2.0 规范](https://www.jsonrpc.org/specification)。
 
 **差距在哪**：新手把 MCP 等同于调 API——完全忽略了三角色架构、初始化握手、能力协商这些协议层设计。高手能完整描述从初始化到工具发现到调用到结果回传的全链路，且清楚 stdio 和 Streamable HTTP（可选 SSE）两种标准传输的适用场景。面试官考的是你对 MCP 协议的理解是停留在“听说过”还是“真的看过协议规范”。
 
@@ -1039,7 +1045,7 @@ flowchart LR
 
 ### Q：Agent 做多轮工具调用和单轮调用相比，会面临哪些额外挑战？
 
-> 来源：阿里国际大模型算法一面；本轮追问：用户需求需要连续调用多个不同工具时，模型在多轮工具调用过程中具体承担什么核心工作？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）
+> 来源：阿里国际大模型算法一面；本轮追问：用户需求需要连续调用多个不同工具时，模型在多轮工具调用过程中具体承担什么核心工作？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)
 
 **新手答**：“多调几次工具而已，没什么区别。”
 
@@ -1095,6 +1101,8 @@ flowchart LR
 - **依赖管理** → 构建显式的工具依赖图（DAG），由编排引擎而非模型来决定执行顺序和并行策略
 - **状态一致性** → 关键操作设计为幂等的（重复调用不会产生副作用），配合乐观锁或预留/确认机制处理并发冲突
 - **延迟叠加** → 分析依赖图，把无依赖关系的工具调用并行执行；同时对用户做中间结果的流式返回，降低等待感
+
+**追问补充**：execute 可实现为带状态的循环：维护消息历史和轮次预算，解析模型返回的一个或多个工具调用；无依赖调用并行执行，结果校验后追加为 tool 消息再次推理，直到无调用或达到轮数、超时、失败重试和取消条件，并用调用 ID、幂等键避免重复副作用。
 
 **差距在哪**：新手觉得多轮和单轮就是“多调几次”的区别。高手能准确识别出错误累积、上下文膨胀、依赖管理、状态一致性、延迟叠加这五个多轮特有的系统性挑战，且每个挑战都有对应的工程解法。面试官考的是你对多轮工具调用的系统复杂度有没有真实的认知——只有做过多步 Agent 的人才会踩到这些坑。
 
@@ -1260,7 +1268,7 @@ LoRA 微调 → 解决模型“理解不了复杂意图”的根本能力问题
 
 ### Q：工具返回了非常大的数据超出了大模型的上下文窗口，怎么办？
 
-> 来源：唯品会一面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：工具返回数据量过大时，如何进行分块或流式处理？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具返回数据量过大时，如何处理？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：查询日志接口是现有的，怎么保证不会一次拉取过多日志导致上下文爆掉？】；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：上一轮 Tool 返回特别长怎么办？原始结果会保留吗？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：金融场景工具返回五六千只 A 股，用户要求全量输出，压缩的信息损失怎么办？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：以读文件工具为例，文件不存在或文件非常大时，分别返回什么结果？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：日志文件规模通常达到数百万行，模型上下文装不下时，工程上如何做高效检索过滤？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）
+> 来源：唯品会一面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：工具返回数据量过大时，如何进行分块或流式处理？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具返回数据量过大时，如何处理？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：查询日志接口是现有的，怎么保证不会一次拉取过多日志导致上下文爆掉？】；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：上一轮 Tool 返回特别长怎么办？原始结果会保留吗？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：金融场景工具返回五六千只 A 股，用户要求全量输出，压缩的信息损失怎么办？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：以读文件工具为例，文件不存在或文件非常大时，分别返回什么结果？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：日志文件规模通常达到数百万行，模型上下文装不下时，工程上如何做高效检索过滤？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)
 
 **新手答**：“截断数据，只取前面一部分给模型。”
 
@@ -1415,7 +1423,7 @@ flowchart LR
 
 ## Q：CLI、Skill 和 sub-agent 应该如何划分职责？CLI 直接调用 LLM 与 Skill 拉起 sub-agent 有什么差异？
 
-> 来源：小得盈满 / AI 相关岗位 / 一面；本轮追问：你们的 Skill、CLI 和 Agent Runtime 分别承担什么职责？一次工具调用是如何执行的？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）
+> 来源：小得盈满 / AI 相关岗位 / 一面；本轮追问：你们的 Skill、CLI 和 Agent Runtime 分别承担什么职责？一次工具调用是如何执行的？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
 
 **新手答**：“CLI 负责执行命令，Skill 写提示词，复杂任务就多拉几个 sub-agent。”
 
@@ -1444,8 +1452,26 @@ CLI 直接调用 LLM 和 Skill 拉起 sub-agent 的取舍，要从五个维度�
 
 一次工具调用通常由 Runtime 先解析 Skill 产出的结构化意图，再校验参数、用户权限、预算和幂等键；通过受控适配器执行工具，记录输入摘要、耗时、结果与 trace，失败按错误类型重试或返回可恢复状态，最后将脱敏结果交回 Agent 继续推理。
 
+**追问补充**：若重点追求低延迟，固定流程优先在 Runtime 内直接调用或使用轻量 CLI，减少进程、序列化和网络往返；需要跨语言、跨进程互操作时再选 MCP，并通过连接复用、批量调用和并行执行降低开销。Skill 只负责流程与约束，不应成为额外的传输层。
+
 **差距在哪**：新手按“命令、提示词、多个模型”给组件贴标签。高手按控制面、知识规范和推理执行单元划边界，并能从确定性、稳定性、安全、可观测性和成本解释为什么门禁类任务通常偏向 CLI 直调，而开放式评审才可能值得委派给 sub-agent。
 
+
+## Q：Agent 调用启动较慢的外部工具时，如何设计异步任务和结果回调？
+
+> 来源：途游 Agent 二面（2026-08-18）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：异步任务如何处理？】；本轮追问：模型调用 RPC 耗时长是怎么办？同步/异步链路怎么设计？异步用啥框架？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)
+
+**新手答**：“开一个异步线程等待工具完成，完成后通知 Agent。”
+
+**高手答**：
+
+先把工具调用建模为持久任务，而不是占住模型请求或 Web 线程等待。提交阶段生成 `task_id` 和幂等键，记录租户、调用参数摘要、deadline、回调地址与状态版本；工具服务异步启动并执行，状态通过消息队列、Webhook 或事件流回传。编排器收到事件后用 `task_id + event_id` 去重，校验任务版本和剩余预算，再恢复对应 checkpoint。
+
+客户端可以先收到“已受理 + 进度事件”，不必保持原始请求。超时后应取消或隔离迟到结果；工具不支持取消时，至少用 fencing token 防止旧任务回写覆盖新状态。重试只用于幂等、可恢复错误，并设置退避、上限和死信队列。模型负责根据结构化结果决定下一步，任务可靠性由编排器保证。
+
+**差距在哪**：新手把异步等同于线程，高手给出了任务账本、事件协议、幂等、超时和恢复边界。面试官考的是能否把慢工具接入可恢复的分布式工作流。
+
+---
 
 ## Q：Tool-use SFT 的训练目标是什么？基座模型已经具备工具调用能力时，SFT 还需要学习什么？
 
@@ -1513,86 +1539,9 @@ Web 层可由认证中间件解析用户身份，将请求路由到对应的 ses
 
 ---
 
-## Q：MCP 返回结果支不支持流式？
-
-> 来源：淘天/AI Agent一面
-
-**新手答**：“应该支持吧，MCP 用了 SSE。”
-
-**高手答**：
-
-需要区分**传输层的流式**和**工具结果的流式**——这是两件不同的事。
-
-**传输层**：MCP 支持 SSE（Server-Sent Events）作为传输方式，通信管道本身是流式的。
-
-**工具调用结果（tool result）**：在当前 MCP 规范中，`tools/call` 的返回是**一次性返回完整结果**，不支持 partial result 流式推送。
-
-**为什么这么设计**：
-
-模型需要完整的工具返回结果才能继续推理。如果工具结果是流式的（比如只返回了前半段），模型可能“看到一半就开始生成”，导致基于不完整信息做出错误判断。这是一个**正确性 vs 体验**的设计取舍——MCP 选择了正确性。
-
-**长耗时工具的变通方案**：
-
-| 方案 | 原理 | 适用场景 |
-|------|------|---------|
-| 分阶段工具调用 | 把一个大任务拆成多个独立 tool call，每个阶段独立返回 | 可拆分的多步骤任务 |
-| Progress Notification | MCP 的 `notifications/progress` 通知前端执行进度（百分比/状态） | 用户需要知道“还在跑” |
-| 异步模式 | 工具立即返回 `task_id`，后续轮次用另一个工具查询结果 | 执行时间 >30s 的任务 |
-| Streamable HTTP | 2025 年新增的传输方式，支持更灵活的流式通信 | 远程服务场景 |
-
-**差距在哪**：新手把“传输层支持 SSE”等同于“工具结果支持流式”——混淆了两个层次。高手能区分传输层流式和应用层流式，理解 MCP 为什么选择一次性返回，以及实际项目中如何用变通方案解决长耗时问题。面试官想看你是否真正用过 MCP、理解协议设计背后的取舍。
-
----
-
-## Q：Agent 调用启动较慢的外部工具时，如何设计异步任务和结果回调？
-
-> 来源：途游 Agent 二面（2026-08-18）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：异步任务如何处理？】；本轮追问：模型调用 RPC 耗时长是怎么办？同步/异步链路怎么设计？异步用啥框架？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
-
-**新手答**：“开一个异步线程等待工具完成，完成后通知 Agent。”
-
-**高手答**：
-
-先把工具调用建模为持久任务，而不是占住模型请求或 Web 线程等待。提交阶段生成 `task_id` 和幂等键，记录租户、调用参数摘要、deadline、回调地址与状态版本；工具服务异步启动并执行，状态通过消息队列、Webhook 或事件流回传。编排器收到事件后用 `task_id + event_id` 去重，校验任务版本和剩余预算，再恢复对应 checkpoint。
-
-客户端可以先收到“已受理 + 进度事件”，不必保持原始请求。超时后应取消或隔离迟到结果；工具不支持取消时，至少用 fencing token 防止旧任务回写覆盖新状态。重试只用于幂等、可恢复错误，并设置退避、上限和死信队列。模型负责根据结构化结果决定下一步，任务可靠性由编排器保证。
-
-**差距在哪**：新手把异步等同于线程，高手给出了任务账本、事件协议、幂等、超时和恢复边界。面试官考的是能否把慢工具接入可恢复的分布式工作流。
-
----
-
-## Q：跨平台工具授权即将过期时，Agent 如何调整调用顺序并安全续权？
-
-> 来源：TikTok Agent 工程师面试（2026-08-18）；本轮追问：TikTok账号的私信/评论如何做托管？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；本轮追问：Lease 过期后怎么办？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）
-
-**新手答**：“Token 快过期就刷新，然后继续调用。”
-
-**高手答**：规划器要把授权有效期、scope、刷新能力和副作用纳入工具元数据。先执行强依赖且耗时可控的授权步骤；不足以覆盖剩余链路时，在调用前续权或暂停请求用户确认。刷新凭据只由工具网关持有，模型不接触秘密；续权失败后不得重放已完成副作用，需根据 checkpoint 查询状态、换只读方案或转人工。
-
-
-Lease 已过期时立即禁止领取新步骤和新的有副作用调用，保留当前状态并尝试由授权网关续租；续租成功后用新 fencing token 恢复。续租失败则标记任务暂停，查询在途调用结果，确认未产生副作用后再重试或转人工，避免旧租约继续执行。
-
-**差距在哪**：新手只处理 HTTP 401，高手把授权生命周期放进任务规划和恢复协议。
-
----
-
-## Q：MCP 工具治理为什么需要审计？应该审计哪些证据？
-
-> 来源：拓竹 AI Agent 算法一面（2026-08-18）；本轮追问：你的治理SOP是什么形式的？里面有哪些内容？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；本轮追问：这类 Skill 和 MCP 有哪些安全规范？如何保证安全并避免漏洞？（[快手AI全栈三面](https://www.nowcoder.com/discuss/929747739645136896)）
-
-**新手答**：“记录谁调用了哪个 MCP 工具和参数。”
-
-**高手答**：审计链应关联真实用户、Agent/run、Server 身份与版本、工具 schema、授权 scope、规范化参数、策略判定、结果摘要、外部副作用和审批证据。敏感内容脱敏但保留哈希与可验证引用；读写、高风险和跨租户调用使用不同保留期与告警。审计日志写入不可由模型修改的存储，并支持从业务对象反查调用链。
-
-
-Skill 和 MCP 应遵循最小权限、服务端白名单、版本或签名校验及密钥隔离；对参数做 schema 校验和资源范围限制，防 SSRF、路径穿越与注入，工具运行置于沙箱，高风险写操作需人工审批，并支持审计、撤权和快速回滚。
-
-**差距在哪**：新手做访问日志，高手建立责任归属、供应链版本和副作用证据链。
-
----
-
 ## Q：Tool Result 回写模型时，消息契约应该包含哪些字段？
 
-> 来源：[Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】；[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)
+> 来源：[Newegg 一面](https://www.nowcoder.com/discuss/920719616005898240)（2026-08-22）【字节火山引擎 Managed Agent 一面追问：Function Call 与 Tool Result 回到上下文】；[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)
 
 **新手答**：“返回 call_id 和工具执行结果。”
 
@@ -1600,13 +1549,15 @@ Skill 和 MCP 应遵循最小权限、服务端白名单、版本或签名校验
 
 模型消息通常至少区分 System、User、Assistant 和 Tool：System 放宿主规则，User 表达任务，Assistant 可以携带文本或 `tool_calls`，Tool 消息只回写对应调用的执行结果。并行调用时每个 Tool Result 必须用协议字段与原始 `tool_call_id` 精确配对，不能靠消息顺序猜。进度、审批、重试调度和审计记录属于宿主运行事件；只有模型下一步确实需要的投影才进入对话消息，避免把内部事件流伪装成 User/Tool 消息污染上下文。
 
+**追问补充**：直接塞入数字会丢失单位、时间、来源、精度和业务状态，模型还可能把过期或不可信值当成事实。应保留带类型和证据的结构化结果，仅投影必要摘要；用固定任务做原始数字与结构化回写的A/B，比较事实准确率、误用率、Token和延迟。
+
 **差距在哪**：新手能串起协议，高手让结果可恢复、可审计且语义无歧义。
 
 ---
 
 ## Q：如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？
 
-> 来源：阿里控股 Agent Infra 暑期一面【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：如何判断 CLI/MCP 是否 AI-Friendly】；本轮追问：如何判断工具是否可信，并允许它在 Sandbox 中直接执行？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）
+> 来源：阿里控股 Agent Infra 暑期一面【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：如何判断 CLI/MCP 是否 AI-Friendly】；本轮追问：如何判断工具是否可信，并允许它在 Sandbox 中直接执行？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)
 
 **新手答**：“用 MCP Inspector 调通工具，再统计调用成功率和延迟；失败样本拿来改 Tool Description。”
 
@@ -1643,6 +1594,67 @@ Skill 和 MCP 应遵循最小权限、服务端白名单、版本或签名校验
 
 ---
 
+## Q：MCP 返回结果支不支持流式？
+
+> 来源：淘天/AI Agent一面
+
+**新手答**：“应该支持吧，MCP 用了 SSE。”
+
+**高手答**：
+
+需要区分**传输层的流式**和**工具结果的流式**——这是两件不同的事。
+
+**传输层**：MCP 支持 SSE（Server-Sent Events）作为传输方式，通信管道本身是流式的。
+
+**工具调用结果（tool result）**：在当前 MCP 规范中，`tools/call` 的返回是**一次性返回完整结果**，不支持 partial result 流式推送。
+
+**为什么这么设计**：
+
+模型需要完整的工具返回结果才能继续推理。如果工具结果是流式的（比如只返回了前半段），模型可能“看到一半就开始生成”，导致基于不完整信息做出错误判断。这是一个**正确性 vs 体验**的设计取舍——MCP 选择了正确性。
+
+**长耗时工具的变通方案**：
+
+| 方案 | 原理 | 适用场景 |
+|------|------|---------|
+| 分阶段工具调用 | 把一个大任务拆成多个独立 tool call，每个阶段独立返回 | 可拆分的多步骤任务 |
+| Progress Notification | MCP 的 `notifications/progress` 通知前端执行进度（百分比/状态） | 用户需要知道“还在跑” |
+| 异步模式 | 工具立即返回 `task_id`，后续轮次用另一个工具查询结果 | 执行时间 >30s 的任务 |
+| Streamable HTTP | 2025 年新增的传输方式，支持更灵活的流式通信 | 远程服务场景 |
+
+**差距在哪**：新手把“传输层支持 SSE”等同于“工具结果支持流式”——混淆了两个层次。高手能区分传输层流式和应用层流式，理解 MCP 为什么选择一次性返回，以及实际项目中如何用变通方案解决长耗时问题。面试官想看你是否真正用过 MCP、理解协议设计背后的取舍。
+
+---
+
+## Q：跨平台工具授权即将过期时，Agent 如何调整调用顺序并安全续权？
+
+> 来源：TikTok Agent 工程师面试（2026-08-18）；本轮追问：TikTok账号的私信/评论如何做托管？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；本轮追问：Lease 过期后怎么办？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）
+
+**新手答**：“Token 快过期就刷新，然后继续调用。”
+
+**高手答**：规划器要把授权有效期、scope、刷新能力和副作用纳入工具元数据。先执行强依赖且耗时可控的授权步骤；不足以覆盖剩余链路时，在调用前续权或暂停请求用户确认。刷新凭据只由工具网关持有，模型不接触秘密；续权失败后不得重放已完成副作用，需根据 checkpoint 查询状态、换只读方案或转人工。
+
+
+Lease 已过期时立即禁止领取新步骤和新的有副作用调用，保留当前状态并尝试由授权网关续租；续租成功后用新 fencing token 恢复。续租失败则标记任务暂停，查询在途调用结果，确认未产生副作用后再重试或转人工，避免旧租约继续执行。
+
+**差距在哪**：新手只处理 HTTP 401，高手把授权生命周期放进任务规划和恢复协议。
+
+---
+
+## Q：MCP 工具治理为什么需要审计？应该审计哪些证据？
+
+> 来源：拓竹 AI Agent 算法一面（2026-08-18）；本轮追问：你的治理SOP是什么形式的？里面有哪些内容？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；本轮追问：这类 Skill 和 MCP 有哪些安全规范？如何保证安全并避免漏洞？（[快手AI全栈三面](https://www.nowcoder.com/discuss/929747739645136896)）
+
+**新手答**：“记录谁调用了哪个 MCP 工具和参数。”
+
+**高手答**：审计链应关联真实用户、Agent/run、Server 身份与版本、工具 schema、授权 scope、规范化参数、策略判定、结果摘要、外部副作用和审批证据。敏感内容脱敏但保留哈希与可验证引用；读写、高风险和跨租户调用使用不同保留期与告警。审计日志写入不可由模型修改的存储，并支持从业务对象反查调用链。
+
+
+Skill 和 MCP 应遵循最小权限、服务端白名单、版本或签名校验及密钥隔离；对参数做 schema 校验和资源范围限制，防 SSRF、路径穿越与注入，工具运行置于沙箱，高风险写操作需人工审批，并支持审计、撤权和快速回滚。
+
+**差距在哪**：新手做访问日志，高手建立责任归属、供应链版本和副作用证据链。
+
+---
+
 ## Q：Agent 中 Skill 与 Tool 的职责边界和选型标准是什么？
 
 > 来源：[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)
@@ -1656,6 +1668,21 @@ Skill 是可组合、可复用的行为规范或流程，通常包含目标、�
 **差距在哪**：浅层回答只给出“流程对 Skill、动作对 Tool”的定义，面试官还会考察接口边界、权限与副作用、失败重试、幂等性及如何通过调用评测验证选型。
 
 ---
+
+## Q：MCP 有哪些接入方式？分别适用于什么场景？
+
+> 来源：[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+
+**新手答**：“MCP 常见接入方式有本地 stdio 和远程 HTTP，前者适合本机工具，后者适合跨网络服务。”
+
+**高手答**：
+
+主要可按传输边界分为本地 stdio 与远程 Streamable HTTP。stdio 由客户端启动本地 MCP Server，通过标准输入输出传递协议消息，适合桌面应用、开发工具和需要本机文件或命令访问的场景；HTTP 适合集中部署、跨进程或跨网络调用，但必须额外处理认证、授权、超时、取消、并发、限流和网络失败。传输层负责消息分帧与请求关联，不能把它误当成业务安全边界；具体绑定、元数据和取消语义应以[Model Context Protocol 2026-07-28 Transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports)为准。接入验收要覆盖能力发现、参数校验、超时取消、重试幂等、断线恢复和恶意工具输入；stdio 隔离简单但扩展性有限，HTTP 更易共享运维，却扩大了暴露面。
+
+**追问补充**：MCP 适合以标准协议暴露可发现、可调用的外部工具；CLI 适合开发机或受控环境中的一次性命令、脚本和流水线操作；Skill 更适合封装稳定的领域流程、提示词、工具编排与验收规则。可按复用性、权限边界、交互复杂度和运维成本选择，三者也可组合。
+
+**差距在哪**：浅层回答只罗列 stdio 和 HTTP；深入回答还应比较进程与网络边界、消息生命周期、安全运维、失败恢复、幂等性及适用场景。
+
 
 ## Q：如何不用多智能体方案让 1000 个 Tools 正常工作？
 
@@ -1733,19 +1760,6 @@ flowchart TB
 **差距在哪**：浅层只把 LLM 当作工具链中转，深入回答会区分确定性数据流与语义决策，进一步覆盖 schema、权限、幂等、失败恢复、可审计性和成本延迟权衡。
 
 ---
-
-## Q：MCP 有哪些接入方式？分别适用于什么场景？
-
-> 来源：[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)
-
-**新手答**：“MCP 常见接入方式有本地 stdio 和远程 HTTP，前者适合本机工具，后者适合跨网络服务。”
-
-**高手答**：
-
-主要可按传输边界分为本地 stdio 与远程 Streamable HTTP。stdio 由客户端启动本地 MCP Server，通过标准输入输出传递协议消息，适合桌面应用、开发工具和需要本机文件或命令访问的场景；HTTP 适合集中部署、跨进程或跨网络调用，但必须额外处理认证、授权、超时、取消、并发、限流和网络失败。传输层负责消息分帧与请求关联，不能把它误当成业务安全边界；具体绑定、元数据和取消语义应以[Model Context Protocol 2026-07-28 Transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports)为准。接入验收要覆盖能力发现、参数校验、超时取消、重试幂等、断线恢复和恶意工具输入；stdio 隔离简单但扩展性有限，HTTP 更易共享运维，却扩大了暴露面。
-
-**差距在哪**：浅层回答只罗列 stdio 和 HTTP；深入回答还应比较进程与网络边界、消息生命周期、安全运维、失败恢复、幂等性及适用场景。
-
 
 ## 这类题的答题模式
 

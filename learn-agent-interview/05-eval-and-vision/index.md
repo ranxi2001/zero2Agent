@@ -16,7 +16,7 @@ eyebrow: Agent 面试通关 / 05
 
 ### Q：如何量化评估一个上线的 Agent 好坏？除了准确率。
 
-> 来源：腾讯 Agent 岗终面【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何量化 Agent 的“智能程度”（除准确率外）？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：任务完成率统计及避免主观评估？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：最终的效果怎么样？准确率达到了多少？怎么测评？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：你们怎么评估这个 Agent 的效果，以及后续怎么优化？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们用的 Agent 在实际过程中有没有评价指标？比如准确率、误报率，处理现网配置时有没有这类指标？】【[PDD Agent三面](https://www.nowcoder.com/feed/main/detail/9908477cdd4041fabacbfbf02febb13c)追问：Agent输出效果如何量化评估？】；本轮追问：你如何定义一个好的 Coding Agent？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：你怎么评估生成内容的质量？除了人工评估还有哪些方法？ / 你怎么评估生成内容的“创意”程度？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：你怎么评估座舱Agent的用户体验？有哪些指标？ / 你怎么评估车辆Agent的准确性？ / 你怎么评估Agent的“拟人化”程度？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）；本轮追问：你们的任务质量、效率、交互成本和效用函数如何定义？ / 你的方法相对于 baseline 的效果和 Token 节省是多少？（[字节算法（Agent）凉经](https://www.nowcoder.com/feed/main/detail/6d80836574e647d39eb9842dc4131ace)）；[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)；本轮追问：如何保证你的任务完成准确率数字是可信有意义的？（[华为AI开发二面](https://www.nowcoder.com/feed/main/detail/3b0187e22236408f90cc63dd6f9fad06)）；[深至科技一面丨全栈开发实习（医疗AI）](https://www.nowcoder.com/feed/main/detail/4dc705fe3d284276a68a86a59b1acb4f)；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)
+> 来源：腾讯 Agent 岗终面【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何量化 Agent 的“智能程度”（除准确率外）？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：任务完成率统计及避免主观评估？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：最终的效果怎么样？准确率达到了多少？怎么测评？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：你们怎么评估这个 Agent 的效果，以及后续怎么优化？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们用的 Agent 在实际过程中有没有评价指标？比如准确率、误报率，处理现网配置时有没有这类指标？】【[PDD Agent三面](https://www.nowcoder.com/feed/main/detail/9908477cdd4041fabacbfbf02febb13c)追问：Agent输出效果如何量化评估？】；本轮追问：你如何定义一个好的 Coding Agent？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：你怎么评估生成内容的质量？除了人工评估还有哪些方法？ / 你怎么评估生成内容的“创意”程度？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：你怎么评估座舱Agent的用户体验？有哪些指标？ / 你怎么评估车辆Agent的准确性？ / 你怎么评估Agent的“拟人化”程度？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）；本轮追问：你们的任务质量、效率、交互成本和效用函数如何定义？ / 你的方法相对于 baseline 的效果和 Token 节省是多少？（[字节算法（Agent）凉经](https://www.nowcoder.com/feed/main/detail/6d80836574e647d39eb9842dc4131ace)）；[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)；本轮追问：如何保证你的任务完成准确率数字是可信有意义的？（[华为AI开发二面](https://www.nowcoder.com/feed/main/detail/3b0187e22236408f90cc63dd6f9fad06)）；[深至科技一面丨全栈开发实习（医疗AI）](https://www.nowcoder.com/feed/main/detail/4dc705fe3d284276a68a86a59b1acb4f)；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[海底捞AI工程师实习生一面](https://www.nowcoder.com/feed/main/detail/17ac832a4f644705a52b007f351bd485)；[联宝科技秋招AI应用开发AI面面经](https://www.nowcoder.com/feed/main/detail/15a413ed04ef43e0a3061a82bd5ff6bb)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[小鹏AI安全一面（10.8）](https://www.nowcoder.com/feed/main/detail/b370dc556c924fa6a2dedc5e1128085d)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
 
 **新手答**：“看任务成功率和用户满意度。”
 
@@ -37,6 +37,8 @@ eyebrow: Agent 面试通关 / 05
 任务完成准确率不能只报单次均值：先固定版本、任务集和成功判定规则，按场景、难度、风险分层抽样，并与人工标注或可执行结果交叉验证；隔离评测集防止数据泄漏，同时报告样本量、置信区间及失败类型，定期复测漂移。
 
 **追问补充**：先约定指标口径：例如闭环成功率以验收通过任务数为分子，根因正确率以人工复核一致的归因数为分子，并写清分母和不可判定样本规则。“5% 噪声”必须说明来自抽样复核估计还是人为注入，二者不能混报。用脱敏的任务 ID 串起意图、检索、工具、生成和反馈；结合分层评测与事件漏斗定位损失环节。
+
+**追问补充**：杂乱数据评估时先按事件时间线、异常聚类和影响范围定位关键问题，再让Agent拆解假设、证据和行动，并用可执行结果回测。业务错误通常集中在边界样本、工具参数、过期知识和多轮状态丢失。LLM评估器只作辅助，采用固定标准、参考答案和人工盲抽复核，并用多个评估器或规则交叉校验，不能自证正确。
 
 **差距在哪**：新手的答案只有两个指标，且都是结果指标——只知道“好不好”，不知道“哪里不好”。高手的三维看板覆盖效能、质量、鲁棒性三个维度，更关键的是有**失败归因**机制——这才是驱动系统持续改进的关键。面试官考的是“你有没有运营线上系统的经验”。
 
@@ -62,7 +64,7 @@ eyebrow: Agent 面试通关 / 05
 
 ### Q：如何对 Agent 记忆系统的效果进行量化评估？
 
-> 来源：后端 AI 八股 / Memory 系统；本轮追问：粗排和精排之间的一致性具体指什么？如何进行评估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：所以是理论分析，还是有实验评估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）
+> 来源：后端 AI 八股 / Memory 系统；本轮追问：粗排和精排之间的一致性具体指什么？如何进行评估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；本轮追问：所以是理论分析，还是有实验评估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)
 
 **新手答**：“看记忆召回率。”
 
@@ -100,7 +102,7 @@ eyebrow: Agent 面试通关 / 05
 
 ### Q：你觉得 Agent 在线上最难监控的指标是什么？
 
-> 来源：腾讯大模型应用开发二面；本轮追问：除成功率和耗时外，还应关注哪些指标？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）
+> 来源：腾讯大模型应用开发二面；本轮追问：除成功率和耗时外，还应关注哪些指标？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)
 
 **新手答**：“延迟和成功率。”
 
@@ -117,6 +119,8 @@ eyebrow: Agent 面试通关 / 05
 ```
 
 这些指标更难建，但如果没有，线上看起来一切正常，用户体验却会持续变差。
+
+**追问补充**：还应设置体验与稳定性护栏：P95/P99 延迟、超时和错误率、会话中断率、重复或无效动作率、追问与人工兜底率、答案采纳或负反馈率、拒答与安全违规率，以及 token 成本和限流情况；按实验组与基线分层观察，异常时自动降级或止损。
 
 **差距在哪**：新手只关注系统指标——延迟和成功率容易打点但不够。高手指出了真正的难点是“决策质量指标”——表面成功但实际决策错误的情况在传统监控里看不到。面试官考的是你有没有 Agent 系统运营的实战经验，以及对“决策质量 vs 系统质量”的区分能力。
 
@@ -217,7 +221,7 @@ AI Coding 的常见问题是上下文理解偏差、依赖和接口假设错误�
 
 ### Q：你会怎么给 Agent 建立评测体系？只看最终成功率为什么不够？
 
-> 来源：Agent 开发面试 30 题 / [阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1) / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01) / [字节 AI Agent 研发一面](https://www.nowcoder.com/feed/main/detail/2ba7e96d48634777990b28c2cb322f40) / [中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba) / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：如何评测 Agent 的工具调用能力并构建评测集？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：有没有做过 Agent 评测相关工作？】【[pdd agent二面](https://www.nowcoder.com/feed/main/detail/f5e7351df8364147ac8da085b99d9d18)追问：Agent评测体系，测试用例覆盖范围？】；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；本轮追问：你项目中提到测试用例90%的成功率，该数据如何统计？剩余失败的原因是什么？（[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)）；本轮追问：如何衡量不同 Coding Agent 或不同 Agent 调度方案的好坏？ / 你对 Sub-agent 做了哪些评测？优化的指标是什么？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)；本轮追问：单 Agent 和多 Agent 做过对照评测吗？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）；[【社招】腾讯二面面经](https://www.nowcoder.com/feed/main/detail/12b18eae310d4b7eadd896aef7f4a712)；本轮追问：迭代后怎么验证效果？（回归评测、能力评测、灰度、影子 case） / 评测中如果出现“小层面提优、大方向负优化”怎么办？（[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)）；本轮追问：你写了测试集，怎么来的？有什么效果？后续测试集有没有回归调优？（[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)）；本轮追问：评测过程中会记录哪些 Trace 数据？使用了哪些确定性指标？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)
+> 来源：Agent 开发面试 30 题 / [阿里淘天一面](https://www.nowcoder.com/feed/main/detail/a32b3c75644e4994933a38e1dfb16bc1) / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01) / [字节 AI Agent 研发一面](https://www.nowcoder.com/feed/main/detail/2ba7e96d48634777990b28c2cb322f40) / [中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba) / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：如何评测 Agent 的工具调用能力并构建评测集？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：有没有做过 Agent 评测相关工作？】【[pdd agent二面](https://www.nowcoder.com/feed/main/detail/f5e7351df8364147ac8da085b99d9d18)追问：Agent评测体系，测试用例覆盖范围？】；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；本轮追问：你项目中提到测试用例90%的成功率，该数据如何统计？剩余失败的原因是什么？（[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)）；本轮追问：如何衡量不同 Coding Agent 或不同 Agent 调度方案的好坏？ / 你对 Sub-agent 做了哪些评测？优化的指标是什么？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)；本轮追问：单 Agent 和多 Agent 做过对照评测吗？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）；[【社招】腾讯二面面经](https://www.nowcoder.com/feed/main/detail/12b18eae310d4b7eadd896aef7f4a712)；本轮追问：迭代后怎么验证效果？（回归评测、能力评测、灰度、影子 case） / 评测中如果出现“小层面提优、大方向负优化”怎么办？（[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)）；本轮追问：你写了测试集，怎么来的？有什么效果？后续测试集有没有回归调优？（[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)）；本轮追问：评测过程中会记录哪些 Trace 数据？使用了哪些确定性指标？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[小鹏AI安全一面（10.8）](https://www.nowcoder.com/feed/main/detail/b370dc556c924fa6a2dedc5e1128085d)
 
 **新手答**：“设计一批测试用例，看通过率。”
 
@@ -274,13 +278,15 @@ Trace 至少记录请求、状态转移、模型与工具版本、工具参数�
 
 **追问补充**：评测集应按任务类型分层：文本回答看事实准确性、相关性、完整性和拒答边界；工具调用看工具选择、参数填充、调用顺序、结果解析及失败恢复；端到端任务再看最终目标是否完成。各层分别统计指标，并保留混合任务验证跨能力协同，避免工具成功掩盖回答质量问题。
 
+**追问补充**：Rubric先拆成正确性、证据、完整性、安全性、效率和过程约束，定义分级锚点与硬性扣分；两条均成功的轨迹用盲评、成对比较和工具事实校验，重复评审校准一致性。困难集来自线上Badcase及缺参、冲突、注入、越权、工具故障，反馈结合评分、重试、追问、转人工和完成率，用留出流量验证相关性。
+
 **差距在哪**：新手只看成功率。高手建立了四维评测体系（效果/效率/鲁棒性/过程质量），且指出过程质量是最容易被忽视的维度。面试官考的是你有没有“评测驱动优化”的工程方法论。
 
 ---
 
 ### Q：RAG 系统（如 oncall 机器人）的回答准确率怎么计算？用知识问答对比还是文档相似度？
 
-> 来源：蚂蚁集团智能体与大模型应用二面【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：准确率怎么计算？】；本轮追问：有没有验证过检索准确率？（[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)）；本轮追问：最初只有50条产品提供的黄金数据来构建知识库时，你们是怎么测量并确认这个知识库支撑下的回答准确性不达标的？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）
+> 来源：蚂蚁集团智能体与大模型应用二面【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：准确率怎么计算？】；本轮追问：有没有验证过检索准确率？（[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)）；本轮追问：最初只有50条产品提供的黄金数据来构建知识库时，你们是怎么测量并确认这个知识库支撑下的回答准确性不达标的？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[智加 自动驾驶软件工程师](https://www.nowcoder.com/feed/main/detail/26812880d26248e5a34b4358902509e8)；[10.8号顺丰AI全栈一面](https://www.nowcoder.com/discuss/937690332462927872)
 
 **新手答**：“人工看看对不对，算个比例。”
 
@@ -320,6 +326,8 @@ oncall 机器人或 RAG 问答系统的准确率评估比“人工看”复杂�
 
 
 只有50条黄金数据时，可先人工确认每条的标准答案与相关文档，按查询类型留出小规模验证集，统计Recall@K、MRR及端到端回答正确率，并逐条分析失败原因。若结果低于预设门槛或某类查询持续漏召回，就能确认知识库覆盖或检索效果不达标；同时记录样本量有限，后续用线上抽样和新增标注复核。
+
+**追问补充**：检索指标需明确分母：Recall@K = 命中的相关文档数 ÷ 标注相关文档总数；Precision@K = top-K 中相关文档数 ÷ K；MRR 取首个相关结果排名的倒数。知识库有效性还应检查覆盖率、内容时效性和冲突文档，并按查询类型分桶复测。
 
 **差距在哪**：新手用“人工看”一刀切。高手把评估拆成检索层和回答层两个维度，且说清了不同评估目标对应不同方法，最后给出了离线 + 在线 + 归因的组合策略。面试官考的是你有没有系统性评估 RAG 系统的方法论——“对不对”是表象，“哪里不对、为什么不对”才是核心。
 
@@ -514,7 +522,7 @@ Agent 的正确运行依赖一条长长的隐式链路：模型 API 稳定 → E
 
 ### Q：通过什么方式去验证 Skill 的提升效果，指标是什么？
 
-> 来源：美团/食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)追问：降低离线评测成本并预估转人工率变化】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：Skill 的质量评估指标有哪些？】【[作业帮一面 9.5](https://www.nowcoder.com/feed/main/detail/21ca46108ebf479fb8056c6e9f61d42f)追问：怎么验证 skill 的效果？怎么判断 skill 行不行、要不要改？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：任务执行完成率从不足 50% 提升到 100%，这个指标是怎么评测出来的？】；本轮追问：你是否了解主流 Agent 架构、工具调用链路和 Skill 评测等概念？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：输入 Token 降低、写入率提升等相对指标的对比 baseline 是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）；[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)；本轮追问：医疗项目中写的 Recall@5 从多少提升到多少，这个是准确数据还是预估值？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；本轮追问：投放后多久生效，怎么验证效果？ / 有哪些量化指标，做到多少算好？（[快手电商大模型应用开发一面（已offer）](https://www.nowcoder.com/feed/main/detail/acc9c99b46e7489386bab12b47b56c11)）；[阿里虎鲸文娱 - AI 基础设施 - 一面](https://www.nowcoder.com/feed/main/detail/9c2e1794ccc14448a6fc43d596f60f00)；[淘天供应链ai应用研发一面](https://www.nowcoder.com/feed/main/detail/8656f1483ebd441bac7c17c313e5394a)；本轮追问：评测面向内置 Skill 还是业务方 Skill？怎样反馈业务方优化？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：有没有做过实验，衡量过移除 skill 正文和不移除 skill 正文的 token 成本消耗？（[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)）；本轮追问：修改 Skill 或 CLI 后，如何验证它能达到线上运行的预期？ / 详细介绍一下你设计的 Skill 评测系统及其执行流程。（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）
+> 来源：美团/食杂后端一面 【电商库存一面追问：Skill 变更影响面回归】【字节火山引擎 Managed Agent 一面追问：脚本与模型评审对比两个 Skill】【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)追问：降低离线评测成本并预估转人工率变化】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：Skill 的质量评估指标有哪些？】【[作业帮一面 9.5](https://www.nowcoder.com/feed/main/detail/21ca46108ebf479fb8056c6e9f61d42f)追问：怎么验证 skill 的效果？怎么判断 skill 行不行、要不要改？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：任务执行完成率从不足 50% 提升到 100%，这个指标是怎么评测出来的？】；本轮追问：你是否了解主流 Agent 架构、工具调用链路和 Skill 评测等概念？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：输入 Token 降低、写入率提升等相对指标的对比 baseline 是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）；[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)；本轮追问：医疗项目中写的 Recall@5 从多少提升到多少，这个是准确数据还是预估值？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；本轮追问：投放后多久生效，怎么验证效果？ / 有哪些量化指标，做到多少算好？（[快手电商大模型应用开发一面（已offer）](https://www.nowcoder.com/feed/main/detail/acc9c99b46e7489386bab12b47b56c11)）；[阿里虎鲸文娱 - AI 基础设施 - 一面](https://www.nowcoder.com/feed/main/detail/9c2e1794ccc14448a6fc43d596f60f00)；[淘天供应链ai应用研发一面](https://www.nowcoder.com/feed/main/detail/8656f1483ebd441bac7c17c313e5394a)；本轮追问：评测面向内置 Skill 还是业务方 Skill？怎样反馈业务方优化？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：有没有做过实验，衡量过移除 skill 正文和不移除 skill 正文的 token 成本消耗？（[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)）；本轮追问：修改 Skill 或 CLI 后，如何验证它能达到线上运行的预期？ / 详细介绍一下你设计的 Skill 评测系统及其执行流程。（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)
 
 **新手答**：“看用户反馈好不好，或者看任务成功率有没有提升。”
 
@@ -553,13 +561,15 @@ Recall@5 必须标明数据来源：在固定版本、固定测试集和统一�
 
 投放时应确认 Skill 的版本已在目标环境生效，可用版本标记、灰度流量和线上日志验证；CLI 修改还需做接口契约、回归、异常和真实工具链测试。对业务方 Skill，应提供分层报告和失败样例，指导其优化触发条件、工具参数与输出格式；移除正文的收益则需在固定样本上单独做 A/B，比较 Token、成功率和延迟。
 
+**追问补充**：量化时固定同一任务集、模型、工具和预算，按任务级配对比较：通过率提升为（新方案通过率−基线通过率）/基线通过率，成本按每个成功任务的 Token 或实际费用计算，再报告样本量、置信区间和各难度层结果，避免把绝对百分点与相对提升混淆。
+
 **差距在哪**：新手只看一个结果指标。高手分了触发/执行/效率/质量四层，且有对照实验设计和回归检测意识。面试官考的是你对“如何科学度量一个能力模块效果”的工程化思维。
 
 ---
 
 ### Q：RAG 系统如何评测？有哪些评测维度和指标？评测数据集怎么构建？
 
-> 来源：快手 AI Agent 开发一面 / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：评测机制怎么做？】【[腾讯/csig/元宝/内容安全/日常实习/三轮技术面试](https://www.nowcoder.com/feed/main/detail/60f381f558a848ceac18c666268dc7da)追问：对于什么场景进行评测？评测目标是什么？评测集怎么构建的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：评测集是怎么做的？】；[9.15 小红书 AI应用研发 一面](https://www.nowcoder.com/discuss/929475914579136512)；本轮追问：你怎么评估多模态模型的内容理解效果？评测集怎么构建？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：其中的 300 条评测集是如何构建和测试的，最终结果是怎么得到的？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；本轮追问：评测集大概多大？评测样本是怎么来的？新增场景如何更新评测集？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；本轮追问：对于线上的元宝内容安全，你打算怎么设计检测指标？评测集打算怎么做？（[腾讯元宝 风控实习一面](https://www.nowcoder.com/feed/main/detail/12909ba0b0cf46e4b64b37c5f51228fb)）；本轮追问：向量召回容易召回语义相似但业务口径不匹配的片段，如何量化验证原有召回方案的缺陷？用到哪些评测指标和测试样本？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；本轮追问：综合准确率从20%+提升到80%+，该指标是如何定义的？评测集（Benchmark）包含哪些维度，又是如何打分的？ / 评测维度中的“归因深度”较为抽象，具体是如何划分和打分的？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)
+> 来源：快手 AI Agent 开发一面 / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：评测机制怎么做？】【[腾讯/csig/元宝/内容安全/日常实习/三轮技术面试](https://www.nowcoder.com/feed/main/detail/60f381f558a848ceac18c666268dc7da)追问：对于什么场景进行评测？评测目标是什么？评测集怎么构建的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：评测集是怎么做的？】；[9.15 小红书 AI应用研发 一面](https://www.nowcoder.com/discuss/929475914579136512)；本轮追问：你怎么评估多模态模型的内容理解效果？评测集怎么构建？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：其中的 300 条评测集是如何构建和测试的，最终结果是怎么得到的？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；本轮追问：评测集大概多大？评测样本是怎么来的？新增场景如何更新评测集？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；本轮追问：对于线上的元宝内容安全，你打算怎么设计检测指标？评测集打算怎么做？（[腾讯元宝 风控实习一面](https://www.nowcoder.com/feed/main/detail/12909ba0b0cf46e4b64b37c5f51228fb)）；本轮追问：向量召回容易召回语义相似但业务口径不匹配的片段，如何量化验证原有召回方案的缺陷？用到哪些评测指标和测试样本？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；本轮追问：综合准确率从20%+提升到80%+，该指标是如何定义的？评测集（Benchmark）包含哪些维度，又是如何打分的？ / 评测维度中的“归因深度”较为抽象，具体是如何划分和打分的？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
 
 **新手答**：“看回答准不准。”
 
@@ -622,6 +632,8 @@ flowchart TB
 
 
 对“语义相似但口径不匹配”，可在标注集中加入同主题错口径、时效冲突和权限不符样本，分别统计 Precision@K、业务口径命中率、错误召回率和 NDCG。端到端“准确率”应定义为满足事实、口径、完整性且无关键错误的样本占比，并报告各类分项。归因深度可按无依据、引用文档但未定位、定位到段落、定位到关键证据并完成推理逐级打分。
+
+**追问补充**：可将 RAG 拆为数据与切分、召回、重排、生成、拒答和评测回归任务；分别设验收条件：数据可追溯，Recall@K 达标，答案满足正确性与忠实度，超范围能拒答，并在固定测试集上与 baseline 对比通过。
 
 **差距在哪**：新手只看“准不准”一个维度。高手把评测拆成检索和生成两个阶段，每个阶段有独立的指标体系，且说清了评测数据集的构建方法和质量要求。面试官考的是你有没有完整的 RAG 质量保障体系——不是“上线看看效果”，而是有离线评测、有基准数据、有分阶段归因。
 
@@ -771,7 +783,7 @@ Context Precision 衡量的是**检索结果中相关文档的排位**——即�
 
 ## Q：如何为 Word、PDF、Markdown 等文档生成与编辑能力设计通用自动评测框架？
 
-> 来源：[百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)；本轮追问：如果面对的是没有标准答案的开放式场景（例如长文档或规划书生成），你认为应该如何去进行质量评测？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)）；本轮追问：如何自动评估生成文章的质量？ / 文章质量改进能否自动化评估？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）
+> 来源：[百度 AI 测开一面](https://www.nowcoder.com/feed/main/detail/cd8e446a6ec14edfa53cf4c7b6864c4d)；本轮追问：如果面对的是没有标准答案的开放式场景（例如长文档或规划书生成），你认为应该如何去进行质量评测？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)）；本轮追问：如何自动评估生成文章的质量？ / 文章质量改进能否自动化评估？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
 
 **新手答**：“准备一些标准文档，用 LLM-as-Judge 比较生成内容是否相似。”
 
@@ -1064,7 +1076,7 @@ CREATE TABLE llm_ab_eval (
 
 ## Q：AI 写代码越来越强，算法工程师的角色会怎么变？
 
-> 来源：字节TikTok AI应用开发一面 / [虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)；本轮追问：Auto Research 是什么？算法工程师是否会被取代？（[本轮追问](https://www.nowcoder.com/discuss/927984221740630016)）；本轮追问：你在规范治理项目中承担的角色是啥？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；[科大讯飞面试挺有意思，不考八股不问项目](https://www.nowcoder.com/feed/main/detail/773d1337e7314a7d90985fd81510974d)
+> 来源：字节TikTok AI应用开发一面 / [虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641)；本轮追问：Auto Research 是什么？算法工程师是否会被取代？（[本轮追问](https://www.nowcoder.com/discuss/927984221740630016)）；本轮追问：你在规范治理项目中承担的角色是啥？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；[科大讯飞面试挺有意思，不考八股不问项目](https://www.nowcoder.com/feed/main/detail/773d1337e7314a7d90985fd81510974d)；[科大讯飞——飞凡计划面经](https://www.nowcoder.com/feed/main/detail/23401c14bf8f4fc2b4818f6cb8586049)
 
 **新手答**：“AI 会替代一部分简单工作，工程师要学更多东西。”
 
@@ -1086,6 +1098,8 @@ CREATE TABLE llm_ab_eval (
 底层能力没有因为 AI 生成代码而失去价值：性能回归需要理解运行时和数据结构，线上故障要判断线程、内存、网络和存储，安全审查要识别权限与供应链边界。AI 可以生成候选实现，但验证不变量、解释资源代价和处理跨层故障仍依赖工程师理解底层机制。
 
 **个人判断**：未来 3-5 年，算法工程师的数量不会大幅减少，但人均产出会大幅提升——团队会变小，对单人能力的要求会更高，尤其是系统化思维和跨层能力。
+
+**追问补充**：数据治理Agent现阶段适合在规则明确、影响可回滚的子流程中自动执行，例如字段检查、脱敏和质量报告；难以独立承担全链路闭环。护栏只能约束已知风险，仍需权限隔离、数据血缘、结果抽检、异常升级和人工审批，尤其是删除、修复及高影响决策，必须保留人类对目标、例外和最终结果的判断。
 
 **差距在哪**：面试官考的是你有没有独立思考这个问题，而不是说正确答案。避免“AI 不会替代工程师”的防御性回答，也避免“AI 会替代一切”的焦虑式回答。展示结构化分析 + 具体场景举例 + 自己的定位思考，才是高手答法。
 
@@ -1416,7 +1430,7 @@ flowchart LR
 
 ## Q：Agent 自进化闭环如何设计？怎样判断沉淀出的经验值得进入系统？
 
-> 来源：字节/Agent 开发实习生一面 【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后如何验证提升】【[阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a)项目深挖】；本轮追问：你怎么评估 LLM 沉淀的结果？如果出现冲突、重合怎么处理？（[9.21 货拉拉二面](https://www.nowcoder.com/feed/main/detail/ec5dba791f4f457490c373194d2f20c2)）；本轮追问：Agent的记忆与自我改进如何实现？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）；本轮追问：评测结果是否已经与 Agent 自动修改 Skill 的能力打通，形成自动优化闭环？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[阿里云 Agent开发 一二面](https://www.nowcoder.com/feed/main/detail/fee780e1140147fbbad0f23a74e265c6)
+> 来源：字节/Agent 开发实习生一面 【电商库存一面追问：人工审批、C 端灰度与回滚】【字节火山引擎 Managed Agent 一面追问：自动更新 AGENTS.md / Skills 后如何验证提升】【[阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a)项目深挖】；本轮追问：你怎么评估 LLM 沉淀的结果？如果出现冲突、重合怎么处理？（[9.21 货拉拉二面](https://www.nowcoder.com/feed/main/detail/ec5dba791f4f457490c373194d2f20c2)）；本轮追问：Agent的记忆与自我改进如何实现？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）；本轮追问：评测结果是否已经与 Agent 自动修改 Skill 的能力打通，形成自动优化闭环？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[阿里云 Agent开发 一二面](https://www.nowcoder.com/feed/main/detail/fee780e1140147fbbad0f23a74e265c6)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
 
 **新手答**：“收集成功案例，让模型总结成 Skill，再自动更新。”
 
@@ -1445,7 +1459,38 @@ C 端发布的门槛要更严：先用影子流量验证，再按用户或会话
 
 记忆可分为短期上下文、情节记忆和经验证的语义/程序记忆；写入前做脱敏、去重、冲突检测并保留来源、时间、置信度和适用范围。冲突时按新鲜度、证据强度和权限裁决，无法裁决则并存并在检索时提示；自我改进只生成候选，经回放评测和灰度后更新，失败可回滚。
 
+**追问补充**：触发可来自同类失败或用户负反馈达到阈值、评测回归、人工标注以及定期复盘。轨迹层保存脱敏 Trace、工具调用、结果、错误和反馈；知识层只沉淀经验证的规则、Skill、样本及适用边界。产出包括候选 Skill、路由规则、评测用例和记忆条目。
+
 **差距在哪**：新手把自进化理解成“模型自改 Prompt”，高手设计了数据过滤、候选生成、离线评测、灰度和回滚的闭环。面试官考的是如何让学习发生，同时不失去系统控制权。
+
+---
+
+## Q：如何通过两套 Harness 的同任务对照与组件消融定位效果差异？
+
+> 来源：[Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)【[深信服 ai agent 一面](https://www.nowcoder.com/feed/main/detail/83326f3bcc5546b2b556373ad29a6d71)追问：如何评估 Harness 效果？】；本轮追问：如何验证小模型效果好？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；本轮追问：如何评估 ASR 清洗对下游 AC 自动机和推荐链路的收益？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；[0915 百度二面](https://www.nowcoder.com/feed/main/detail/d4397071257a4ea69735f7f0a8f7dc1e)；本轮追问：如何通过 Benchmark 评估 Memory、RAG 和 Context 等模块？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)
+
+**新手答**：“让两个 Harness 各跑一遍，哪个成功率高就用哪个。”
+
+**高手答**：
+
+直接比较两个端到端分数只能说明“整体不同”，不能说明差异来自哪里。先冻结模型及采样参数、任务集、工具和数据版本、权限、预算、并发和运行环境；两套 Harness 使用同一成功条件和统一 trace schema，否则模型更强、工具更快或评测口径不同都会被误算成 Harness 收益。
+
+诊断分三步：
+
+1. **端到端基线**：比较任务成功率、步骤数、Token、延迟、工具错误、恢复率和安全违规，并按任务类型切片。
+2. **首错点对齐**：把 Context Builder、Planner/Router、Tool layer、Memory、Retry、Verifier 的输入输出映射到同一逻辑阶段，找到第一处行为分叉。
+3. **组件互换/消融**：在 A 中替换 B 的单个组件，或关闭某项能力；每次只改变一个变量。若单组件无收益但组合有收益，再做二阶交互实验。
+
+每次运行保存任务、组件/Prompt/模型版本、随机种子、候选工具、状态迁移、Observation 和验收证据。统一 trace 可以参考 OpenTelemetry 对 [Trace 与 Span 语义](https://opentelemetry.io/docs/specs/semconv/general/trace/)的约定，但 Agent 阶段字段仍需项目自己定义。随机任务应重复运行并报告置信区间，不能凭一两个 case 下结论。
+
+如果两套结果都差，先看共同失败：任务定义或 Oracle 错、模型能力不足、工具/数据有缺陷，还是两套都缺少同一种恢复机制。修复后同时跑局部组件集和端到端回归，避免“Router 指标变好但最终成功率下降”。
+
+
+具体可按模块建立成对 Benchmark：关闭或替换 Memory，评估记忆召回准确性、过期记忆干扰和跨轮任务成功率；替换 RAG，评估检索命中、答案依据与幻觉率；消融 Context，评估关键信息保留、上下文长度和截断后的成功率。所有模块使用同一任务集、数据版本和验收标准，并与端到端结果联合分析。
+
+**追问补充**：验证受控编辑时固定任务、初始数据和模型参数，随机分流比较“受控补丁”和“直接生成完整修改”。除任务成功率外，统计字段约束通过率、非法写入率、越权修改率、业务不变量破坏率、人工拒绝率和回滚率，并按编辑类型分层；用配对检验或置信区间判断收益，不能只看成功率。
+
+**差距在哪**：新手做产品赛马。高手通过控制变量、首错点对齐和组件交换建立因果证据，既能识别单组件收益，也能发现组件之间的交互效应。
 
 ---
 
@@ -1501,33 +1546,6 @@ Skill 路由是带拒识能力的多标签分类问题。测试集至少包含�
 
 ---
 
-## Q：如何通过两套 Harness 的同任务对照与组件消融定位效果差异？
-
-> 来源：[Teamily AI QA/测开面经](https://www.nowcoder.com/feed/main/detail/6a01e27dc1b142d29921eb3cc7bcd20f)【[深信服 ai agent 一面](https://www.nowcoder.com/feed/main/detail/83326f3bcc5546b2b556373ad29a6d71)追问：如何评估 Harness 效果？】；本轮追问：如何验证小模型效果好？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；本轮追问：如何评估 ASR 清洗对下游 AC 自动机和推荐链路的收益？（[本轮追问](https://www.nowcoder.com/feed/main/detail/19d5ea0eda0e40de8a060ac516703c58)）；[0915 百度二面](https://www.nowcoder.com/feed/main/detail/d4397071257a4ea69735f7f0a8f7dc1e)；本轮追问：如何通过 Benchmark 评估 Memory、RAG 和 Context 等模块？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）
-
-**新手答**：“让两个 Harness 各跑一遍，哪个成功率高就用哪个。”
-
-**高手答**：
-
-直接比较两个端到端分数只能说明“整体不同”，不能说明差异来自哪里。先冻结模型及采样参数、任务集、工具和数据版本、权限、预算、并发和运行环境；两套 Harness 使用同一成功条件和统一 trace schema，否则模型更强、工具更快或评测口径不同都会被误算成 Harness 收益。
-
-诊断分三步：
-
-1. **端到端基线**：比较任务成功率、步骤数、Token、延迟、工具错误、恢复率和安全违规，并按任务类型切片。
-2. **首错点对齐**：把 Context Builder、Planner/Router、Tool layer、Memory、Retry、Verifier 的输入输出映射到同一逻辑阶段，找到第一处行为分叉。
-3. **组件互换/消融**：在 A 中替换 B 的单个组件，或关闭某项能力；每次只改变一个变量。若单组件无收益但组合有收益，再做二阶交互实验。
-
-每次运行保存任务、组件/Prompt/模型版本、随机种子、候选工具、状态迁移、Observation 和验收证据。统一 trace 可以参考 OpenTelemetry 对 [Trace 与 Span 语义](https://opentelemetry.io/docs/specs/semconv/general/trace/)的约定，但 Agent 阶段字段仍需项目自己定义。随机任务应重复运行并报告置信区间，不能凭一两个 case 下结论。
-
-如果两套结果都差，先看共同失败：任务定义或 Oracle 错、模型能力不足、工具/数据有缺陷，还是两套都缺少同一种恢复机制。修复后同时跑局部组件集和端到端回归，避免“Router 指标变好但最终成功率下降”。
-
-
-具体可按模块建立成对 Benchmark：关闭或替换 Memory，评估记忆召回准确性、过期记忆干扰和跨轮任务成功率；替换 RAG，评估检索命中、答案依据与幻觉率；消融 Context，评估关键信息保留、上下文长度和截断后的成功率。所有模块使用同一任务集、数据版本和验收标准，并与端到端结果联合分析。
-
-**差距在哪**：新手做产品赛马。高手通过控制变量、首错点对齐和组件交换建立因果证据，既能识别单组件收益，也能发现组件之间的交互效应。
-
----
-
 ## Q：树形意图识别和逐层路由应该如何设计，并构造评测集避免误差级联？
 
 > 来源：快手 AI 应用开发一面（2026-08-24）【[大方云图研发实习一面](https://www.nowcoder.com/feed/main/detail/a9a40feb4e1e4d0ca7c3f8c3ba67d487)追问：双阶段路由的专精与错误阻断】；本轮追问：路由有没有判断错误过？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[智谱ai native builder实习一面](https://www.nowcoder.com/discuss/929419257438302208)；[美团ai全栈一面](https://www.nowcoder.com/feed/main/detail/a5b8c6571f94441a8af10cd6af07ac3a)；本轮追问：你们怎么知道意图识别分得就是对的？指标如何量化？（[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)）
@@ -1548,7 +1566,7 @@ Skill 路由是带拒识能力的多标签分类问题。测试集至少包含�
 
 ## Q：Multi-Agent 出现 Badcase 时，如何定位责任 Agent，并判断是否需要 SFT？
 
-> 来源：字节/Agent 开发二面；本轮追问：你们有哪些 Case 用来统一判断输入和输出是否正确？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)
+> 来源：字节/Agent 开发二面；本轮追问：你们有哪些 Case 用来统一判断输入和输出是否正确？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
 
 **新手答**：“查看日志找到出错的 Agent，收集数据做微调。”
 
@@ -1564,6 +1582,8 @@ Skill 路由是带拒识能力的多标签分类问题。测试集至少包含�
 - 同类决策错误高频、边界稳定、已有足够高质量轨迹：才考虑 SFT。
 
 SFT 后必须在责任 Agent 的局部集和端到端回归集同时验证，防止局部指标提升却破坏协作协议。
+
+**追问补充**：对最终报告做关系级验收：先统一实体与关系类型，再将报告中的三元组与证据片段对齐，检查关系方向、属性、时间和来源是否被证据支持；用规则校验互斥与必备约束，并在分层回归集上统计关系准确率、漏报率和幻觉率，疑难样本人工复核。
 
 **差距在哪**：新手看到 badcase 就微调，高手先做首错点归因，再区分 Prompt、RAG、工具和模型能力问题。面试官考的是评测驱动的优化决策，而不是训练冲动。
 

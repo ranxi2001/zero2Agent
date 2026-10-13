@@ -17,7 +17,7 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 
 ## Q：一次 Agent 请求的完整执行链路是什么？
 
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：处理流程可以讲一下吗？整体链路是怎样的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：如果问某上市公司去年毛利率下降，Agent 收到 Prompt 后的完整流程是什么？】；本轮追问：一个用户请求进入系统后，Skill 的完整诊断流程是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：介绍一下 AI 问数平台的整体架构和链路。（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；本轮追问：工具执行器这块能不能再展开讲一下？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；本轮追问：从用户上传视频到最终拿到分析结果，完整链路是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：DeepAgents 的结构是怎么样的？它的主流程和核心部分是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：处理流程可以讲一下吗？整体链路是怎样的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：如果问某上市公司去年毛利率下降，Agent 收到 Prompt 后的完整流程是什么？】；本轮追问：一个用户请求进入系统后，Skill 的完整诊断流程是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：介绍一下 AI 问数平台的整体架构和链路。（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；本轮追问：工具执行器这块能不能再展开讲一下？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；本轮追问：从用户上传视频到最终拿到分析结果，完整链路是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：DeepAgents 的结构是怎么样的？它的主流程和核心部分是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)
 
 **新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
 
@@ -37,7 +37,40 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 
 这里记录的是模型响应和结构化决策，不依赖保存模型私有推理过程。Run 还要有最大步骤、总 Deadline、Token/Cost Budget 和取消传播，防止模型循环无限消耗资源。
 
+**追问补充**：路由先做意图识别、会话状态和权限校验，再从 Skill 注册表按能力、参数 schema、版本和租户策略选择 Skill；执行前校验参数并记录 trace。技术问题进入 RAG 时，先改写 query，做权限过滤和向量、关键词等召回，合并去重后重排，取带来源的片段拼入上下文，模型生成答案并校验引用，最后返回结果和审计信息。
+
 **差距在哪**：新手只描述模型循环，高手能指出接入幂等、租约、策略门禁、状态提交和退出条件。
+
+---
+
+## Q：为什么需要 Checkpoint，恢复时从哪里继续？
+
+> 来源：长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：断点恢复（服务重启后加载未完成状态）？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：这时候你是怎样恢复图的运行状态的？】；本轮追问：视频级 Checkpoint 和目标级 Checkpoint 为什么要分开？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)；[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)；本轮追问：为什么需要用户授权？中断以后怎样继续任务，保存了哪些状态？Agent 自己有没有记录执行状态？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；本轮追问：编码项目的正式文件如何保存？实例销毁后怎样继续使用？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)
+
+**新手答**：“每一步保存消息，Pod 挂了以后读取最后一条继续执行。”
+
+**高手答**：
+
+我会区分三类持久化数据：
+
+| 数据 | 作用 | 典型内容 |
+|------|------|---------|
+| 事件日志 | 记录已经发生的事实 | 状态转换、模型响应、Tool 执行状态 |
+| Checkpoint | 加速恢复 | 当前 Step、Context 引用、Budget、版本 |
+| 副作用记录 | 去重和对账 | `execution_id`、下游请求 ID、结果摘要 |
+
+Checkpoint 应围绕一致性边界保存，而不是机械地“每轮保存一次”。模型已经产生 Tool Call、工具即将分发、工具结果提交、进入人工等待，都是重要边界。
+
+恢复时先取得 Run 的新 lease，加载最近 Checkpoint，再重放后续事件，最后检查未决 Tool Call。只有状态明确为未执行且重试安全时才继续；如果外部操作可能成功但结果未落库，应进入 `UNKNOWN`，通过下游幂等查询或对账确认，不能直接重放。
+
+Worker 中断时还要验证 Checkpoint 之后的事件是否完整、Artifact 是否已原子提交、原 Worker 的 lease 是否失效。失败点重试不是从某个函数行号继续，而是从最近的**可验证业务边界**重建输入；过期 Worker 晚到的结果必须被 fencing token 或状态版本拒绝。
+
+
+恢复前还要校验用户授权、租约和权限是否仍有效，不能仅凭 Checkpoint 自动继续。正式代码、配置和产物应提交到 Git、对象存储或持久化工作区，Checkpoint 只保存版本、路径和校验信息；实例销毁后按这些引用重新挂载或拉取。
+
+**追问补充**：Checkpoint 不应覆盖业务系统的最新事实，而应保存图执行上下文和业务状态版本。恢复时比较版本：若业务状态已被人工或其他流程更新，应以业务源数据为准，重新计算待执行节点；若只是字段兼容问题，则通过迁移或补偿事件恢复，并记录冲突结果，避免旧快照覆盖新状态。
+
+**差距在哪**：新手把 Checkpoint 当消息快照，高手能处理快照之后的事件、并发恢复和不确定副作用。
 
 ---
 
@@ -76,35 +109,6 @@ LangChain、LangGraph 等 Framework 主要提供 Agent/Graph 的开发抽象；R
 实习中的 Harness 可理解为包住一次模型或工具调用的执行适配层，统一注入上下文、重试、超时、鉴权和追踪。Runtime 管生命周期与恢复，Workflow 表达业务编排和依赖，Node 是可重试的原子步骤。事件适配器把厂商回调映射为统一事件，保留 run/step 标识、顺序、错误和幂等键；还需适配模型协议、工具接口、状态存储、权限、沙箱及观测数据。
 
 **差距在哪**：新手罗列组件，高手先定义执行语义，再说明状态所有权、并发控制和版本边界。
-
----
-
-## Q：为什么需要 Checkpoint，恢复时从哪里继续？
-
-> 来源：长任务恢复与状态管理高频题 / [字节数据平台 Agent 一面](https://www.nowcoder.com/feed/main/detail/f5f840632a19417b91b8987762427a6a) / [MINISO Agent 开发实习一面](https://www.nowcoder.com/feed/main/detail/f844a4ac20be44bc9b3f756bd0ebb84c) / [哔哩哔哩秋招一面](https://www.nowcoder.com/feed/main/detail/87eadf9db3b14bb6912064ee79267c30)【阿里 Agent Infra 一面题库同题：状态管理、Checkpoint 与保存时机】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：断点恢复（服务重启后加载未完成状态）？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：这时候你是怎样恢复图的运行状态的？】；本轮追问：视频级 Checkpoint 和目标级 Checkpoint 为什么要分开？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)；[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)；本轮追问：为什么需要用户授权？中断以后怎样继续任务，保存了哪些状态？Agent 自己有没有记录执行状态？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；本轮追问：编码项目的正式文件如何保存？实例销毁后怎样继续使用？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）
-
-**新手答**：“每一步保存消息，Pod 挂了以后读取最后一条继续执行。”
-
-**高手答**：
-
-我会区分三类持久化数据：
-
-| 数据 | 作用 | 典型内容 |
-|------|------|---------|
-| 事件日志 | 记录已经发生的事实 | 状态转换、模型响应、Tool 执行状态 |
-| Checkpoint | 加速恢复 | 当前 Step、Context 引用、Budget、版本 |
-| 副作用记录 | 去重和对账 | `execution_id`、下游请求 ID、结果摘要 |
-
-Checkpoint 应围绕一致性边界保存，而不是机械地“每轮保存一次”。模型已经产生 Tool Call、工具即将分发、工具结果提交、进入人工等待，都是重要边界。
-
-恢复时先取得 Run 的新 lease，加载最近 Checkpoint，再重放后续事件，最后检查未决 Tool Call。只有状态明确为未执行且重试安全时才继续；如果外部操作可能成功但结果未落库，应进入 `UNKNOWN`，通过下游幂等查询或对账确认，不能直接重放。
-
-Worker 中断时还要验证 Checkpoint 之后的事件是否完整、Artifact 是否已原子提交、原 Worker 的 lease 是否失效。失败点重试不是从某个函数行号继续，而是从最近的**可验证业务边界**重建输入；过期 Worker 晚到的结果必须被 fencing token 或状态版本拒绝。
-
-
-恢复前还要校验用户授权、租约和权限是否仍有效，不能仅凭 Checkpoint 自动继续。正式代码、配置和产物应提交到 Git、对象存储或持久化工作区，Checkpoint 只保存版本、路径和校验信息；实例销毁后按这些引用重新挂载或拉取。
-
-**差距在哪**：新手把 Checkpoint 当消息快照，高手能处理快照之后的事件、并发恢复和不确定副作用。
 
 ---
 
@@ -155,6 +159,27 @@ Sandbox 容量要单独建模：区分冷启动、预热池、活跃执行和回
 一个 Run 是根 Trace，模型、检索、工具、Sandbox 和状态提交是 Span。核心指标包括任务语义成功率、基础设施失败率、队列等待、端到端延迟、步骤数、Token/Cost 和 `UNKNOWN` 副作用数。Prompt、Tool 参数和结果可能包含隐私，必须脱敏、采样、分级存储和审计，不能直接放进高基数 Metrics Label。
 
 **差距在哪**：新手会画 Queue + Worker，高手先定义负载模型，并同时处理公平性、下游瓶颈和可观测数据治理。
+
+---
+
+## Q：如何让 Agent 执行过程可观测、可调试？
+
+> 来源：[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；本轮追问：如何利用可观测链路定位首 Token 延迟、工具调用错误等问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+
+**新手答**：展示当前步骤、工具调用、状态和进度，而不是只返回最终答案。
+
+**高手答**：
+
+Runtime 为每次 run 生成 trace/span，记录计划版本、状态迁移、模型请求摘要、工具入参脱敏结果和耗时；通过 SSE/WebSocket 推送进度，前端区分 RUNNING、WAITING、BLOCKED 和 UNKNOWN。支持按 run 回放、日志检索和成本统计，敏感内容做 ACL 与脱敏，避免把内部提示词无条件暴露。
+
+
+排查时沿 trace 的时间线拆分排队、首字节/首 Token、生成和工具等待等 span，比较模型端与网关时间；工具 span 记录请求/响应摘要、状态码、超时、重试和 trace_id，按错误类型回放入参，区分工具失败、解析失败与模型误用。
+
+**追问补充**：除记录事件外，还要定义进度与错误收敛信号：每次工具调用都更新待办、已验证假设和剩余搜索空间；若候选方案或错误位置持续减少，才算有效推进。任务、调用、输入输出摘要和状态变更需持久化，便于故障恢复、重放审计、跨请求关联及比较不同策略。
+
+**差距在哪**：考察运行时事件模型、可观测性和信息安全。
+
+---
 
 ---
 
@@ -323,25 +348,6 @@ Router 可以是进程内库、Workflow 节点或独立服务。低延迟、策�
 
 ---
 
-## Q：如何让 Agent 执行过程可观测、可调试？
-
-> 来源：[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；本轮追问：如何利用可观测链路定位首 Token 延迟、工具调用错误等问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)
-
-**新手答**：展示当前步骤、工具调用、状态和进度，而不是只返回最终答案。
-
-**高手答**：
-
-Runtime 为每次 run 生成 trace/span，记录计划版本、状态迁移、模型请求摘要、工具入参脱敏结果和耗时；通过 SSE/WebSocket 推送进度，前端区分 RUNNING、WAITING、BLOCKED 和 UNKNOWN。支持按 run 回放、日志检索和成本统计，敏感内容做 ACL 与脱敏，避免把内部提示词无条件暴露。
-
-
-排查时沿 trace 的时间线拆分排队、首字节/首 Token、生成和工具等待等 span，比较模型端与网关时间；工具 span 记录请求/响应摘要、状态码、超时、重试和 trace_id，按错误类型回放入参，区分工具失败、解析失败与模型误用。
-
-**差距在哪**：考察运行时事件模型、可观测性和信息安全。
-
----
-
----
-
 ## Q：Agent 如何实现主动向用户推送消息？
 
 > 来源：[9.8 小厂 agent开发实习 面经](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：医院里大家排队买药取药，屏幕上轮播患者名字；现在要设计一个 PC 页面实现类似的轮播通知，每个用户看到自己的轮播信息，用户之间的信息相互隔离。后端通过实时数仓的 MQ 接收每秒推送的消息，后端消费后发送给前端，前端轮播展示最近 20 条。这个功能你会如何设计和实现？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）
@@ -438,6 +444,25 @@ Infra 不会直接提高基础模型智力，但会扩大模型可可靠利用�
 **差距在哪**：新手把能力等同于可用性，高手能建立基础设施机制、效果指标与反馈闭环之间的因果关系。
 
 ---
+
+## Q：周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？
+
+> 来源：[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)；[百度agent harness一面](https://www.nowcoder.com/discuss/937747584578310144)
+
+**新手答**：“用定时器每隔一段时间触发 Agent，失败就重试和发告警。”
+
+**高手答**：
+
+`Schedule` 是可变更的触发契约，保存调度表达式、时区、有效期、漏跑策略、并发策略、任务模板和通知规则；每个 `Run` 是某个逻辑触发时刻生成的不可变执行实例，固定 `schedule_id + logical_fire_time`、输入、配置版本和执行状态。这样修改 Schedule 不会偷偷改写已经创建的 Run，历史也可以按逻辑触发时刻对账。
+
+时区必须显式存 IANA 标识并定义 DST 重复或跳过时的行为，不依赖服务器本地时区。Scheduler 扫描逻辑时间窗口：对短时漏跑可限定 catch-up 窗口补跑，超窗口则记录 `MISSED` 并通知，避免恢复后瞬间补齐大量过期任务。并发策略至少区分 `ALLOW`、`FORBID` 和 `REPLACE`；`REPLACE` 仍要遵守取消语义，不能假定旧 Run 的外部副作用已撤销。
+
+创建 Run 时以 `schedule_id + logical_fire_time` 建唯一约束，调度器用 lease/fencing 避免多实例重复创建；工具副作用再使用稳定 `execution_id` 做下游幂等。不宣称 exactly-once：失败按错误类型做有界重试，最终进入失败终态或人工队列。通知事件本身也带幂等键，包含最后成功时间、本次失败阶段、重试次数和下次触发时间。
+
+这套语义可参考 Kubernetes [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) 对时区、错过调度和并发策略的处理，但 Agent Runtime 仍需自己定义 Run 状态、Tool 幂等和通知收敛，不把设计绑定到某个调度框架。
+
+**差距在哪**：新手只有“定时器 + 重试”，高手把配置和执行实例分开，并为时间语义、重复触发、重叠执行、副作用幂等和可操作告警定义了可恢复契约。
+
 
 ## Q：如何根据安全性、性能、故障影响范围和成本选择服务隔离层级？
 
@@ -549,25 +574,6 @@ Kubernetes [Local Ephemeral Storage](https://kubernetes.io/docs/concepts/storage
 **差距在哪**：新手按保存时长分层，高手按事实所有权、恢复语义和信任边界决定状态位置。
 
 ---
-
-## Q：周期性 Agent 任务如何把 Schedule 与每次 Run 分离，并处理时区、漏跑、并发、幂等和失败通知？
-
-> 来源：[淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)
-
-**新手答**：“用定时器每隔一段时间触发 Agent，失败就重试和发告警。”
-
-**高手答**：
-
-`Schedule` 是可变更的触发契约，保存调度表达式、时区、有效期、漏跑策略、并发策略、任务模板和通知规则；每个 `Run` 是某个逻辑触发时刻生成的不可变执行实例，固定 `schedule_id + logical_fire_time`、输入、配置版本和执行状态。这样修改 Schedule 不会偷偷改写已经创建的 Run，历史也可以按逻辑触发时刻对账。
-
-时区必须显式存 IANA 标识并定义 DST 重复或跳过时的行为，不依赖服务器本地时区。Scheduler 扫描逻辑时间窗口：对短时漏跑可限定 catch-up 窗口补跑，超窗口则记录 `MISSED` 并通知，避免恢复后瞬间补齐大量过期任务。并发策略至少区分 `ALLOW`、`FORBID` 和 `REPLACE`；`REPLACE` 仍要遵守取消语义，不能假定旧 Run 的外部副作用已撤销。
-
-创建 Run 时以 `schedule_id + logical_fire_time` 建唯一约束，调度器用 lease/fencing 避免多实例重复创建；工具副作用再使用稳定 `execution_id` 做下游幂等。不宣称 exactly-once：失败按错误类型做有界重试，最终进入失败终态或人工队列。通知事件本身也带幂等键，包含最后成功时间、本次失败阶段、重试次数和下次触发时间。
-
-这套语义可参考 Kubernetes [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/) 对时区、错过调度和并发策略的处理，但 Agent Runtime 仍需自己定义 Run 状态、Tool 幂等和通知收敛，不把设计绑定到某个调度框架。
-
-**差距在哪**：新手只有“定时器 + 重试”，高手把配置和执行实例分开，并为时间语义、重复触发、重叠执行、副作用幂等和可操作告警定义了可恢复契约。
-
 
 ## Q：Agent 执行过程中如何提供安全停止功能？
 

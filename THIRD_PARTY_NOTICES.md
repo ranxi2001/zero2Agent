@@ -141,3 +141,22 @@ The incremental answers from the September 23 through October 7 interview review
 
 
 No upstream prose, code, figures, or datasets are reproduced. Protocol and implementation facts are attributed at the relevant answer; architecture, evaluation, and operational recommendations are independent engineering analysis. Public interview links document question provenance only.
+
+
+## Weekly Interview Answer References (2026-10-13)
+
+The answers updated from the October 7–13 interview review were independently written and checked against these primary references:
+
+- [DAgger 论文](https://arxiv.org/abs/1011.0686)
+- [BERT 论文](https://arxiv.org/abs/1810.04805)
+- [Self-Consistency 论文](https://arxiv.org/abs/2203.11171)
+- [Diffusion Policy 项目页](https://diffusion-policy.cs.columbia.edu/)
+- [Megatron 并行策略文档](https://docs.nvidia.com/megatron-core/developer-guide/latest/user-guide/parallelism-guide.html)
+- [SciPy softmax 文档](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.softmax.html)
+- [OpenVLA 官方实现](https://github.com/openvla/openvla)
+- [RISC-V Vector 规范](https://github.com/riscvarchive/riscv-v-spec/blob/master/v-spec.adoc)
+- [ACT 项目页](https://tonyzhaozh.github.io/aloha/)
+- [JSON-RPC 2.0 规范](https://www.jsonrpc.org/specification)
+- [XGBoost 模型文档](https://xgboost.readthedocs.io/en/latest/tutorials/model.html)
+
+No upstream prose, code, diagrams, or datasets are reproduced. Interview links establish question provenance; the linked specifications, papers, and official implementations establish answer facts. Architecture, testing, deployment, and evaluation recommendations are independent engineering analysis.

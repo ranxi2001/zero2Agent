@@ -286,7 +286,7 @@ flowchart LR
 
 ### Q：知识库是怎么构建的？
 
-> 来源：淘宝闪购 AI应用研发 一面【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：IM 项目中的 AI 助手和知识检索是怎么做的？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们现在知识库具体是怎么做的？】；本轮追问：项目中各模块的具体实现方式是什么？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；[本轮来源](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；本轮追问：项目中的 RAG 是怎么做的？存多大的文档？（[9.18 虾皮shopee chatbot研发实习一面凉经](https://www.nowcoder.com/feed/main/detail/9f02a7f8009d4aca9fc730a18b9f96cc)）；本轮追问：知识库如何构建？Markdown、TXT、PDF 分别怎么切块？（[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)
+> 来源：淘宝闪购 AI应用研发 一面【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：IM 项目中的 AI 助手和知识检索是怎么做的？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：你们现在知识库具体是怎么做的？】；本轮追问：项目中各模块的具体实现方式是什么？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；[本轮来源](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；本轮追问：项目中的 RAG 是怎么做的？存多大的文档？（[9.18 虾皮shopee chatbot研发实习一面凉经](https://www.nowcoder.com/feed/main/detail/9f02a7f8009d4aca9fc730a18b9f96cc)）；本轮追问：知识库如何构建？Markdown、TXT、PDF 分别怎么切块？（[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[10.8号顺丰AI全栈一面](https://www.nowcoder.com/discuss/937690332462927872)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)
 
 **新手答**：“把文档切块，用 Embedding 模型转成向量，存进向量数据库，检索的时候做相似度匹配。”
 
@@ -336,13 +336,15 @@ RAG 运行时先做向量与关键词混合召回，再按元数据过滤、重�
 
 TXT通常按段落或固定长度切分，并保留重叠；Markdown优先按标题层级拆分，过大的章节再按段落递归切分；PDF先识别页眉页脚、标题、段落和表格，按版面顺序重建文本后再分块，避免跨页或跨表格语义断裂。
 
+**追问补充**：LM Wiki可按原始文档、概念、实体、关系/规则和证据层组织：解析后先抽取概念与实体，做实体消歧和标准化，再依据共现、引用或规则生成带来源的边，并保留版本。新增规则先进入增量索引与灰度评测，验证召回、冲突和引用后再发布；旧规则通过版本、时效和优先级处理。
+
 **差距在哪**：新手描述的是最简流程——切块→向量化→存储。高手展示了完整的数据工程管线——数据源管理、格式解析、清洗、分块、元数据、质量验证，每个环节都影响最终检索效果。面试官考的是你有没有**端到端的数据工程思维**。
 
 ---
 
 ### Q：分块策略是怎么设计的？
 
-> 来源：淘宝闪购 AI应用研发 一面 【腾讯AI应用开发一面追问：分块方案选型理由与指标量化】；[本轮来源](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)；[本轮来源](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)；本轮追问：截取策略是什么？如果重要信息在后面怎么办？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[金蝶 Agent开发 一面](https://www.nowcoder.com/feed/main/detail/0cfe501739834deb90c2a1f741b7b7fe)
+> 来源：淘宝闪购 AI应用研发 一面 【腾讯AI应用开发一面追问：分块方案选型理由与指标量化】；[本轮来源](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)；[本轮来源](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)；本轮追问：截取策略是什么？如果重要信息在后面怎么办？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[金蝶 Agent开发 一面](https://www.nowcoder.com/feed/main/detail/0cfe501739834deb90c2a1f741b7b7fe)；[shopee ai基础设施一面](https://www.nowcoder.com/discuss/939225085016031232)
 
 **新手答**：“按 512 个 token 固定切分，块之间有 50 token 的重叠。”
 
@@ -497,7 +499,7 @@ flowchart LR
 
 ### Q：你的 Agent 系统还有哪些未充分优化的地方？你的改进路线图是什么？
 
-> 来源：淘宝闪购 Agent 一面【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：AI Agent系统的优化过程如何？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[本轮来源](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)；本轮追问：距离真正上线还有哪些工作要做？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：描述一下你的项目中，算子部分你整体做了什么优化工作，实现的原理（[0915 百度二面](https://www.nowcoder.com/feed/main/detail/d4397071257a4ea69735f7f0a8f7dc1e)）；本轮追问：从单体 Agent 升级为职责分离多 Agent 加黑板调度方案，需要放弃哪些优化路线？最终选型的核心原因是什么？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；本轮追问：如果项目预算被严格卡死，只允许使用单Agent且不能调用两个模型，如何避免准确率大幅下滑？有哪些优化手段？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）
+> 来源：淘宝闪购 Agent 一面【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：AI Agent系统的优化过程如何？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[本轮来源](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)；本轮追问：距离真正上线还有哪些工作要做？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：描述一下你的项目中，算子部分你整体做了什么优化工作，实现的原理（[0915 百度二面](https://www.nowcoder.com/feed/main/detail/d4397071257a4ea69735f7f0a8f7dc1e)）；本轮追问：从单体 Agent 升级为职责分离多 Agent 加黑板调度方案，需要放弃哪些优化路线？最终选型的核心原因是什么？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；本轮追问：如果项目预算被严格卡死，只允许使用单Agent且不能调用两个模型，如何避免准确率大幅下滑？有哪些优化手段？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[记录最爽，不折腰的一次面试：小红书秋招一面](https://www.nowcoder.com/feed/main/detail/bebc8a5d22d141d09efc4e0a74031365)；[同花顺一面 10.9](https://www.nowcoder.com/feed/main/detail/9bcb709926ff4fbdb522179049d5b6da)
 
 **新手答**：“目前已经比较完善了，主要是一些小bug需要修。”
 
@@ -533,13 +535,15 @@ Agent 不知道自己“不知道”——对低置信度任务没有主动上�
 
 若升级为职责分离的多 Agent 加黑板调度，将放弃部分单体链路的低延迟、简单编排和统一上下文优化，换取隔离性与可扩展性；核心依据是任务复杂度、故障边界和并行收益，而非盲目堆组件。预算只允许单 Agent、单模型时，可用任务分类、结构化提示词、少样本示例、工具白名单、检索增强、结果校验与失败重试降低准确率损失，并用离线回测验证。
 
+**追问补充**：观测查询应按时间、run_id、任务和失败类型建立索引，采用列式或预聚合存储，避免默认扫描原始事件，并对高频看板做缓存。优化按影响面分级：先处理安全、数据正确性和高频阻断缺陷，再处理稳定性、延迟和体验问题；每项改动用离线集、线上灰度和回归指标验证，结果沉淀到 Runtime、CLI 与 Skill 的版本迭代。
+
 **差距在哪**：新手要么说“没什么问题”（缺乏自我认知），要么列一堆问题但没有优先级（缺乏判断力）。高手能准确识别核心短板，按影响优先级排序，并给出可落地的改进路线图。面试官考的不是你的系统有多完美，而是你对系统的**反思深度**和**改进能力**。
 
 ---
 
 ### Q：LangGraph 中的 State 怎么定义和流转？节点多了怎么防止状态膨胀？
 
-> 来源：蚂蚁 AI应用开发 二面 【钉学科技 FDE 实习一面追问：State、Node、Edge 的设计优先级】；[本轮来源](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)；[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)；本轮追问：如果做电商客服类 Agent，用 LangGraph 怎么设计工作流和节点？状态会怎么设计？（[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)）；本轮追问：讲一下LangGraph原理是什么？（[科大讯飞 Agent开发 一面](https://www.nowcoder.com/feed/main/detail/ec89f399f5e24573a019238282a9b912)）；本轮追问：所有节点都围绕共享state做读写，这种全局共享状态的设计，相比每个节点独立传参的朴素实现，实际带来了哪些额外的代价？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；本轮追问：为什么选用 LangGraph？里面的主要状态节点是怎么样的？有没有设置过 checkpoint？有什么作用？（[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)）
+> 来源：蚂蚁 AI应用开发 二面 【钉学科技 FDE 实习一面追问：State、Node、Edge 的设计优先级】；[本轮来源](https://www.nowcoder.com/feed/main/detail/51ff89e97d4949bd9db8e12a605b7aa9)；[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)；本轮追问：如果做电商客服类 Agent，用 LangGraph 怎么设计工作流和节点？状态会怎么设计？（[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)）；本轮追问：讲一下LangGraph原理是什么？（[科大讯飞 Agent开发 一面](https://www.nowcoder.com/feed/main/detail/ec89f399f5e24573a019238282a9b912)）；本轮追问：所有节点都围绕共享state做读写，这种全局共享状态的设计，相比每个节点独立传参的朴素实现，实际带来了哪些额外的代价？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；本轮追问：为什么选用 LangGraph？里面的主要状态节点是怎么样的？有没有设置过 checkpoint？有什么作用？（[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)
 
 **新手答**：“State 就是一个字典，每个节点往里面加数据。”
 
@@ -586,7 +590,7 @@ Node_A(state) → {"current_step": "search", "tool_results": {"query": "..."}}
 
 ### Q：项目为什么选择 E2B 沙箱？选型理由和优势是什么？
 
-> 来源：CVTE/AI应用工程师一面；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：这个沙箱是数据上的沙箱，还是执行上的沙箱？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)；本轮追问：Codex/Claude Code 等工具的本地沙箱如何做？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）
+> 来源：CVTE/AI应用工程师一面；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：这个沙箱是数据上的沙箱，还是执行上的沙箱？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)；本轮追问：Codex/Claude Code 等工具的本地沙箱如何做？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)
 
 **新手答**：“E2B 比较方便，可以直接在云端跑代码。”
 
@@ -655,6 +659,98 @@ Agent 执行代码有两个硬需求：① 不能让 Agent 的代码破坏宿主
 
 ---
 
+### Q：开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？
+
+> 来源：CVTE/AI应用工程师一面；[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)；本轮追问：在PPT管线生成中遇到了哪些难题？你是如何克服的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；本轮追问：如何理解 Agent，开发中会遇到哪些问题？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[原力灵机具身智能算法工程师面经](https://www.nowcoder.com/discuss/939528346956726272)
+
+**新手答**：“遇到过模型输出不稳定的问题，后来调了 Prompt 就好了。”
+
+**高手答**：
+
+最大的问题是**状态管理的复杂度指数增长**。
+
+初期设计时，我把所有中间状态都放在 LangGraph 的 State 里——用户偏好、工具返回值、历史摘要、待办队列全堆在一起。随着功能迭代，State 字段从 5 个膨胀到 30+，每次加新功能都要改 State schema，节点之间的依赖关系变成蜘蛛网。
+
+**如果重新设计**，我会做三件事：
+
+1. **分层存储**：热状态（当前对话）留 State，温状态（会话级偏好）写 Redis，冷状态（长期记忆）落数据库。State 只保留当前节点执行必需的最小集
+
+2. **事件驱动替代轮询**：原来每个节点都要检查“上一步有没有失败”“用户有没有新输入”，改成事件总线——状态变更发事件，订阅者各取所需
+
+3. **Schema 版本化**：State 加 version 字段，新老节点共存时做兼容迁移，避免一改全改
+
+
+Agent 是以大模型为决策核心、能根据目标自主规划并调用工具完成任务的系统。开发中还要重点处理规划偏差、工具调用失败、上下文过长、权限与安全、结果不可控及成本延迟等问题，并通过日志、超时重试、降级和人工兜底排查。
+
+**差距在哪**：新手的回答太轻描淡写——“调了 Prompt 就好了”说明没做过复杂系统。高手描述了一个真实的架构演进痛点（状态膨胀），且给出了具体的重构方案。面试官考的是你对系统复杂度的认知和工程反思能力。
+
+---
+
+### Q：你做过的不同 AI 项目之间，核心技术差异是什么？
+
+> 来源：数据智能查询平台面试（通用化：订单售后问答 vs 数据智能查询）；本轮追问：你在电信实习项目中使用了哪些技术栈（如Dify、LangChain）？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；本轮追问：研究生阶段几个强化学习项目的整体研究思路是什么？项目之间有关联吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）；本轮追问：Agent 的项目你做了什么？你觉得其中的难点在哪里？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5b7e7cb510914d3baa40af22ce602b4c)）；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)
+
+**新手答**：“一个用了 RAG，一个用了 Agent。”
+
+**高手答**：
+
+面试官问这个问题，是想看你能不能**抽象出不同 AI 系统的本质差异**，而不只是功能罗列。以“数据查询 Agent”和“知识问答 Agent”为例：
+
+| 维度 | 数据查询（Text2SQL） | 知识问答（RAG） |
+|------|---------------------|----------------|
+| 输出形式 | 结构化（SQL + 表格结果） | 非结构化（自然语言段落） |
+| 正确性验证 | 可自动验证（SQL 能执行 + 结果集对比） | 难自动验证（需人工判断答案质量） |
+| 知识来源 | 数据库 Schema + 业务规则 | 文档/FAQ/历史对话 |
+| 核心难点 | 业务语义对齐（相同词在不同场景含义不同） | 检索相关性 + 生成忠实度 |
+| 架构选型 | 偏 Workflow（DDL→规则→生成→校验，流程确定） | 偏 Agent（需要多轮检索、追问、工具调用） |
+| 评测方式 | 精确匹配 + 执行准确率（客观） | RAGAS + 人工评分（主观+客观） |
+
+**高手的表达框架**：
+1. 先一句话概括差异本质：数据查询 Agent 是“确定性高但业务规则复杂”，知识问答 Agent 是“灵活性高但质量难保证”
+2. 再从 3 个维度展开：输出形式、验证方式、核心瓶颈
+3. 最后说迁移经验：“我从 Text2SQL 项目中学到的规则层沉淀方法，后来迁移到知识问答项目的 Prompt 约束设计中”
+
+**差距在哪**：新手按功能罗列（这个用了A技术，那个用了B技术），没有深层对比。高手能抽象出“确定性 vs 灵活性”的本质差异，并从验证方式、评测方式等维度做结构化对比。面试官考的是你的技术视野——同一个人做过多个项目后，有没有形成方法论。
+
+---
+
+### Q：你的系统有没有用到 ReAct 模式？怎么用的？
+
+> 来源：淘宝闪购 AI应用研发 一面 【美团食杂后端一面同题：如何基于 ReAct 架构开发的】；[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)
+
+**新手答**：“用了 ReAct，就是让模型先 Thought 再 Action 再 Observation，循环执行。”
+
+**高手答**：
+
+用了，但不是所有模块都用 ReAct，哪里用、哪里不用是有考量的。
+
+**用了 ReAct 的地方——开放性任务处理**：
+
+用户提的需求不确定需要几步、调用哪些工具时，用 ReAct 模式让 Agent 自主决策。具体实现：
+
+```text
+循环（最多 N 轮）：
+  1. 模型输出 Thought（分析当前状态、决定下一步）
+  2. 模型输出 Action（选择工具 + 参数）
+  3. 系统执行工具，返回 Observation
+  4. 将 Observation 追加到上下文，回到 1
+  5. 模型判断任务完成 → 输出最终回答
+```
+
+**没用 ReAct 的地方——确定性流程**：
+
+比如“查询订单状态”这种流程固定的任务，直接用硬编码的流程：解析订单号→调数据库→格式化返回。用 ReAct 反而引入不确定性——模型可能先搜索、再查数据库、再搜索一次，白白消耗 token。
+
+**做了哪些改造**：
+
+1. **最大轮次限制**：防止 Agent 陷入循环。超过 N 轮（我设的 5 轮）强制退出，给用户返回“任务太复杂，请拆分”的提示
+2. **Thought 压缩**：每轮的 Thought 会累积在上下文里，轮次多了 token 消耗大。我在第 3 轮后对之前的 Thought 做摘要压缩
+3. **Observation 截断**：工具返回结果太长时（比如搜索返回 10 条结果），只保留前 3 条最相关的摘要，避免上下文爆炸
+
+**差距在哪**：新手能复述 ReAct 的定义——Thought-Action-Observation。高手能说清楚在系统的哪些模块用了 ReAct、哪些没用、为什么这样分、做了哪些工程化改造。面试官考的是你对 ReAct 的理解是**停留在论文层面还是有落地经验**。
+
+---
+
 ### Q：怎么提升模型回答的性能？
 
 > 来源：淘宝闪购 AI应用研发 一面；本轮追问：如果现在用当下性能比较强的模型，你会从哪些角度去优化这个项目？（[苏州科达AI业务开 - 9月15日 - 一面 - 秋招](https://www.nowcoder.com/discuss/929790487429382144)）；[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)；本轮追问：针对图像依赖比较严重的题目，怎么提高模型表现？（[阿里千问C端一面凉经-7.2](https://www.nowcoder.com/discuss/932006434923958272)）
@@ -689,98 +785,6 @@ Agent 执行代码有两个硬需求：① 不能让 Agent 的代码破坏宿主
 图像依赖强时，应优先优化视觉链路：统一分辨率和裁剪策略，必要时先做 OCR、检测或表格解析，再把结构化结果与原图按需交给多模态模型；同时评估图像压缩、视觉 token 数、检索到的相关区域，并用图像题专项集分别验证识别、定位和最终回答质量。
 
 **差距在哪**：新手只想到一两个点（换模型、加缓存）。高手从响应速度和回答质量两个维度展开，列出了流式输出、语义缓存、模型路由、并行调用、Prompt 精简等具体策略，且能说清楚每个策略的效果和适用场景。面试官考的是你有没有**系统性的性能优化思维**。
-
----
-
-### Q：开发 Agent 过程中遇到的最大问题是什么？如果重新设计某一模块会怎么做？
-
-> 来源：CVTE/AI应用工程师一面；[阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)；本轮追问：在PPT管线生成中遇到了哪些难题？你是如何克服的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；本轮追问：如何理解 Agent，开发中会遇到哪些问题？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）
-
-**新手答**：“遇到过模型输出不稳定的问题，后来调了 Prompt 就好了。”
-
-**高手答**：
-
-最大的问题是**状态管理的复杂度指数增长**。
-
-初期设计时，我把所有中间状态都放在 LangGraph 的 State 里——用户偏好、工具返回值、历史摘要、待办队列全堆在一起。随着功能迭代，State 字段从 5 个膨胀到 30+，每次加新功能都要改 State schema，节点之间的依赖关系变成蜘蛛网。
-
-**如果重新设计**，我会做三件事：
-
-1. **分层存储**：热状态（当前对话）留 State，温状态（会话级偏好）写 Redis，冷状态（长期记忆）落数据库。State 只保留当前节点执行必需的最小集
-
-2. **事件驱动替代轮询**：原来每个节点都要检查“上一步有没有失败”“用户有没有新输入”，改成事件总线——状态变更发事件，订阅者各取所需
-
-3. **Schema 版本化**：State 加 version 字段，新老节点共存时做兼容迁移，避免一改全改
-
-
-Agent 是以大模型为决策核心、能根据目标自主规划并调用工具完成任务的系统。开发中还要重点处理规划偏差、工具调用失败、上下文过长、权限与安全、结果不可控及成本延迟等问题，并通过日志、超时重试、降级和人工兜底排查。
-
-**差距在哪**：新手的回答太轻描淡写——“调了 Prompt 就好了”说明没做过复杂系统。高手描述了一个真实的架构演进痛点（状态膨胀），且给出了具体的重构方案。面试官考的是你对系统复杂度的认知和工程反思能力。
-
----
-
-### Q：你做过的不同 AI 项目之间，核心技术差异是什么？
-
-> 来源：数据智能查询平台面试（通用化：订单售后问答 vs 数据智能查询）；本轮追问：你在电信实习项目中使用了哪些技术栈（如Dify、LangChain）？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；本轮追问：研究生阶段几个强化学习项目的整体研究思路是什么？项目之间有关联吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/46556042061840eca6af69727e72909c)）；本轮追问：Agent 的项目你做了什么？你觉得其中的难点在哪里？（[本轮追问](https://www.nowcoder.com/feed/main/detail/5b7e7cb510914d3baa40af22ce602b4c)）；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)
-
-**新手答**：“一个用了 RAG，一个用了 Agent。”
-
-**高手答**：
-
-面试官问这个问题，是想看你能不能**抽象出不同 AI 系统的本质差异**，而不只是功能罗列。以“数据查询 Agent”和“知识问答 Agent”为例：
-
-| 维度 | 数据查询（Text2SQL） | 知识问答（RAG） |
-|------|---------------------|----------------|
-| 输出形式 | 结构化（SQL + 表格结果） | 非结构化（自然语言段落） |
-| 正确性验证 | 可自动验证（SQL 能执行 + 结果集对比） | 难自动验证（需人工判断答案质量） |
-| 知识来源 | 数据库 Schema + 业务规则 | 文档/FAQ/历史对话 |
-| 核心难点 | 业务语义对齐（相同词在不同场景含义不同） | 检索相关性 + 生成忠实度 |
-| 架构选型 | 偏 Workflow（DDL→规则→生成→校验，流程确定） | 偏 Agent（需要多轮检索、追问、工具调用） |
-| 评测方式 | 精确匹配 + 执行准确率（客观） | RAGAS + 人工评分（主观+客观） |
-
-**高手的表达框架**：
-1. 先一句话概括差异本质：数据查询 Agent 是“确定性高但业务规则复杂”，知识问答 Agent 是“灵活性高但质量难保证”
-2. 再从 3 个维度展开：输出形式、验证方式、核心瓶颈
-3. 最后说迁移经验：“我从 Text2SQL 项目中学到的规则层沉淀方法，后来迁移到知识问答项目的 Prompt 约束设计中”
-
-**差距在哪**：新手按功能罗列（这个用了A技术，那个用了B技术），没有深层对比。高手能抽象出“确定性 vs 灵活性”的本质差异，并从验证方式、评测方式等维度做结构化对比。面试官考的是你的技术视野——同一个人做过多个项目后，有没有形成方法论。
-
----
-
-### Q：你的系统有没有用到 ReAct 模式？怎么用的？
-
-> 来源：淘宝闪购 AI应用研发 一面 【美团食杂后端一面同题：如何基于 ReAct 架构开发的】；[互联网金融 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/88c55ee65af04ac98c218b9d17c47a71)
-
-**新手答**：“用了 ReAct，就是让模型先 Thought 再 Action 再 Observation，循环执行。”
-
-**高手答**：
-
-用了，但不是所有模块都用 ReAct，哪里用、哪里不用是有考量的。
-
-**用了 ReAct 的地方——开放性任务处理**：
-
-用户提的需求不确定需要几步、调用哪些工具时，用 ReAct 模式让 Agent 自主决策。具体实现：
-
-```text
-循环（最多 N 轮）：
-  1. 模型输出 Thought（分析当前状态、决定下一步）
-  2. 模型输出 Action（选择工具 + 参数）
-  3. 系统执行工具，返回 Observation
-  4. 将 Observation 追加到上下文，回到 1
-  5. 模型判断任务完成 → 输出最终回答
-```
-
-**没用 ReAct 的地方——确定性流程**：
-
-比如“查询订单状态”这种流程固定的任务，直接用硬编码的流程：解析订单号→调数据库→格式化返回。用 ReAct 反而引入不确定性——模型可能先搜索、再查数据库、再搜索一次，白白消耗 token。
-
-**做了哪些改造**：
-
-1. **最大轮次限制**：防止 Agent 陷入循环。超过 N 轮（我设的 5 轮）强制退出，给用户返回“任务太复杂，请拆分”的提示
-2. **Thought 压缩**：每轮的 Thought 会累积在上下文里，轮次多了 token 消耗大。我在第 3 轮后对之前的 Thought 做摘要压缩
-3. **Observation 截断**：工具返回结果太长时（比如搜索返回 10 条结果），只保留前 3 条最相关的摘要，避免上下文爆炸
-
-**差距在哪**：新手能复述 ReAct 的定义——Thought-Action-Observation。高手能说清楚在系统的哪些模块用了 ReAct、哪些没用、为什么这样分、做了哪些工程化改造。面试官考的是你对 ReAct 的理解是**停留在论文层面还是有落地经验**。
 
 ---
 
@@ -880,7 +884,7 @@ flowchart TB
 
 ## Q：视频 AI Agent 项目主要解决什么业务问题？
 
-> 来源：[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)；[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；本轮追问：请分享一个你做过的最具技术挑战、最值得深入探讨的大模型应用项目，它要解决什么问题，核心难点在哪？你又是如何攻克的？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）
+> 来源：[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)；[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；本轮追问：请分享一个你做过的最具技术挑战、最值得深入探讨的大模型应用项目，它要解决什么问题，核心难点在哪？你又是如何攻克的？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)
 > 来源：[阿里 Token Foundry AI应用研发二面面经](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)；[阿里 Token Foundry AI应用研发三面面经（三面挂）](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)
 
 **新手答**：让用户用自然语言检索、理解和总结长视频，减少人工浏览成本。
