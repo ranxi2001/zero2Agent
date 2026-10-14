@@ -70,6 +70,9 @@ content = re.sub(r'\`\`\`mermaid\n.*?\`\`\`', '', content, flags=re.DOTALL)
 
 # XeLaTeX 模板中的正文/等宽字体不覆盖这些符号，转成稳定文本，避免 PDF 缺字方框。
 symbol_replacements = {
+    '😂': '[笑]',
+    '−': '-',
+    'ᵀ': '^T',
     '🔴': '[Critical]',
     '⚠️': '[警告]',
     '⚠': '[警告]',

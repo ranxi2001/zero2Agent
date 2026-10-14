@@ -5,7 +5,7 @@ set -euo pipefail
 # zero2Agent 绿皮书 PDF 编译脚本
 # 依赖：pandoc >= 3.0, xelatex (texlive-xetex), Python 3
 # 用法：./build.sh [模块路径] [输出文件名]
-# 示例：./build.sh ../learn-agent-interview zero2Agent-绿皮书-Agent面试500问
+# 示例：./build.sh ../learn-agent-interview zero2Agent-绿皮书-Agent面试800问
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -20,7 +20,7 @@ case "$(uname -s)" in
 esac
 
 MODULE_PATH="${1:-../learn-agent-interview}"
-OUTPUT_NAME="${2:-zero2Agent-绿皮书-Agent面试500问}"
+OUTPUT_NAME="${2:-zero2Agent-绿皮书-Agent面试800问}"
 
 # 解析为绝对路径
 if [[ "$MODULE_PATH" != /* ]]; then
