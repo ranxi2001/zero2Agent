@@ -160,3 +160,14 @@ The answers updated from the October 7–13 interview review were independently 
 - [XGBoost 模型文档](https://xgboost.readthedocs.io/en/latest/tutorials/model.html)
 
 No upstream prose, code, diagrams, or datasets are reproduced. Interview links establish question provenance; the linked specifications, papers, and official implementations establish answer facts. Architecture, testing, deployment, and evaluation recommendations are independent engineering analysis.
+
+## RSI and Cloud Bot Practice References (2026-10-18)
+
+The two application-practice articles use the following primary sources:
+
+- [LLM4MIP](https://github.com/LLM4MIP/llm4mip.github.io) (MIT): project scope, primal/dual Skills, historical case records, and comparison limitations. Selected objective values and mechanism facts are attributed in the article; no solver runs or independent result reproduction are claimed.
+- [Recursive self-improvement of AI research agents](https://arxiv.org/abs/2609.26457): the distinction between optimizing a task artifact and iteratively modifying the research agent itself.
+- [Grok Bot documentation](https://docs.x.ai/grok-bot/overview), [Meta Muse announcement](https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/), and [ChatGPT dot help](https://help.openai.com/en/articles/20001530-getting-started-with-your-dot): documented execution environments, continuity, controls, and product-specific boundaries.
+- [Doubao Work introduction](https://www.feishu.cn/content/article/7677519271848610746), [Doubao work-partner help](https://aily.feishu.cn/hc/1u7kleqg_3d5z9ttt?_lang=zh), [Coze cloud-computer documentation](https://docs.coze.cn/cozespace_device), and [Manus Cloud Computer](https://www.manus.im/features/cloud-computer): documented task execution, collaboration, and environment lifecycle.
+
+Explanations, diagrams, task templates, and proposed evaluation procedures are independently written. They are not upstream implementations or reports of product testing. Product availability remains tied to current official documentation and account configuration.

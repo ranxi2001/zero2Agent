@@ -1,7 +1,7 @@
 ---
 layout: default
 title: learn-agent-practice
-description: 用 AI Coding Agent 完成第一个作品上线，到面试交付，再到稳定的工程工作流
+description: 从首个作品交付到评估、RSI 与云端 Bot 的工程实践
 eyebrow: Module 09
 ---
 
@@ -11,7 +11,7 @@ eyebrow: Module 09
 
 Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法，而是理解项目文件夹、终端、运行环境和版本控制之间的关系。你需要知道 Agent 在哪个目录工作、修改了哪些文件，以及怎样把成果发布出去。
 
-这个模块从零基础起步：先用 AI Coding Agent（Codex、Claude Code、Cursor 均可）完成一个 GitHub Pages 个人主页；再进入面试交付、日常开发中的 Context、Harness、Loop Engineering，以及 Harness 自适应演进。
+这个模块从零基础起步：先用 AI Coding Agent（Codex、Claude Code、Cursor 均可）完成一个 GitHub Pages 个人主页；再进入面试交付、日常开发中的 Context、Harness、Loop Engineering 与评估，最后通过运筹优化案例理解 RSI，并练习云端 Bot 的持续任务交付。
 
 主线不是“记住更多提示词”，而是逐步建立完整闭环：**打开正确的项目 → 在正确目录启动 Agent → 验证修改 → 用 Git 记录 → 发布和交付。**
 
@@ -24,6 +24,8 @@ Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法�
 - 想建立一套可复用的 Agent 使用方法论，而不是每次碰运气 → 重点看 03
 - 想让 Prompt、工具与工作流从失败轨迹中持续改进，同时守住评估和安全边界 → 重点看 04
 - 想用可测量的评估信号驱动 Agent 工作流改进，而不是凭感觉调 Prompt → 重点看 05
+- 想借助 LLM4MIP 理解求解反馈、策略改进与 RSI 的关系 → 重点看 06
+- 想用 Grok Bot、Muse、dot、豆包工作等产品承接持续任务 → 重点看 07
 
 ## 这部分的主线
 
@@ -53,10 +55,22 @@ Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法�
 
 **05 — Eval 驱动迭代：**
 
-- 用可测量的评估信号替代"感觉更好了"
+- 用可测量的评估信号替代“感觉更好了”
 - Promptfoo / Braintrust / LangSmith 各自解决什么问题和代价
 - Prompt 回归测试接入 CI/CD 的最小路径
 - 何时不该依赖 Eval 自动化
+
+**06 — RSI 与运筹优化：**
+
+- 通过 LLM4MIP 区分解改进、策略改进与 Agent 自我改进
+- 用结构分析、有限预算实验与原模型验证推进求解
+- 把经验变成可版本化的规则，并在独立实例上检查泛化
+
+**07 — 云端 Bot 持续交付：**
+
+- 理解 Grok Bot、Muse、dot、豆包工作、扣子与 Manus 的运行条件
+- 区分云端任务、持久电脑和本地电脑
+- 跑通周期简报，验证接续、去重、异常恢复和停止行为
 
 ## 建议阅读顺序
 
@@ -65,3 +79,5 @@ Vibe Coding 降低了写代码的门槛，但真正的第一步不是背语法�
 3. [日常开发中的 Agent 工作流：从 Context 到 Loop 的实战方法论](./03-daily-dev-workflow/index.html)
 4. [Auto Harness 实战：从失败轨迹迭代 Agent 运行骨架](./04-auto-harness/index.html)
 5. [Eval-Driven Agent Practice：用评估驱动 Agent 工作流迭代](./05-eval-driven-practice/index.html)
+6. [RSI 实战：从 LLM4MIP 看求解策略如何逐步改进](./06-rsi-optimization/index.html)
+7. [Bot 类 Agent 实战：从 Grok Bot、Muse、Dot 到豆包工作](./07-cloud-bot-agents/index.html)

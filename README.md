@@ -54,13 +54,13 @@
 | [Claude Code](https://onefly.top/zero2Agent/learn-claude-code/) | 12 篇 | ✅ 完成 | 12 节课手写 Coding Agent：Loop → Tools → Subagent → Teams → Worktree 隔离 |
 | [DeepSeek Harness](https://onefly.top/zero2Agent/learn-deepseek-harness/) | 13 篇 | ✅ 完成 | 从设计理念拆解可拼装的 Agent Runtime：插件、接缝、事实源、控制平面、安全与自进化边界 |
 | [Agent 训练实战](https://onefly.top/zero2Agent/learn-agent-training/) | 7 篇 | ✅ 完成 | SFT、RL、GRPO/PPO、数据配比、仿真沙箱、评估回流与部署 |
-| [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 5 篇 | 🚧 进行中 | Vibe Coding、AI Coding 面试、日常开发工作流、Auto Harness 工程与 Eval-Driven 实践 |
+| [Agent 应用实战](https://onefly.top/zero2Agent/learn-agent-practice/) | 7 篇 | 🚧 进行中 | Vibe Coding、面试与开发工作流、Auto Harness、Eval、LLM4MIP RSI 与云端 Bot（含豆包工作） |
 | [Pi Coding Agent](https://onefly.top/zero2Agent/learn-pi/) | 8 篇 | ✅ 完成 | 可验证 Agent Loop、Provider、Skill/Extension/Package、MCP、安全与树形 Session Runtime |
 | [Codex CLI](https://onefly.top/zero2Agent/learn-codex/) | 7 篇 | ✅ 完成 | OpenAI 终端 Agent：Rust 双层架构、TOML 配置、平台原生沙箱、MCP 集成、SDK 与横向对比 |
 | [面试通关](https://onefly.top/zero2Agent/learn-agent-interview/) | 17 篇 | ✅ 完成 | 大厂 AI Agent 岗位高频面试题拆解，17 大考察维度，新手答 vs 高手答对比 |
 | [Final Project](https://onefly.top/zero2Agent/final-project/) | 12 篇 | ✅ 完成 | OfferPilot 面试诊断 Agent 实战：手写 Harness 10 层架构，从 PRD 到部署 |
 
-> **当前进度：131 篇文章，12 个完整模块，1 个模块持续更新**
+> **当前进度：133 篇文章，12 个完整模块，1 个模块持续更新**
 
 ---
 
@@ -238,7 +238,7 @@ zero2Agent/
 ├── learn-claude-code/      # Claude Code 课程（12 篇）
 ├── learn-deepseek-harness/ # DeepSeek Harness 运行时拆解（13 篇）
 ├── learn-agent-training/   # Agent 训练实战（7 篇）
-├── learn-agent-practice/   # Agent 应用实战（5 篇，持续更新）
+├── learn-agent-practice/   # Agent 应用实战（7 篇，持续更新）
 ├── learn-pi/               # Pi Coding Agent（8 篇）
 ├── learn-codex/            # OpenAI Codex CLI（7 篇）
 ├── learn-agent-interview/  # 大厂面试题拆解（17 篇）
