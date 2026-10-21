@@ -15,7 +15,7 @@ eyebrow: Agent 面试通关 / 07
 
 ## Q：如何评审 AI 生成的技术方案并进行重点提炼与技术取舍？
 
-> 来源：[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)
 
 **新手答**：“先确认需求，再检查 AI 方案的可行性、风险和成本，最后用小实验验证关键结论。”
 
@@ -29,7 +29,7 @@ eyebrow: Agent 面试通关 / 07
 
 ### Q：Agent 的成本怎么控制？线上烧钱太快怎么办？
 
-> 来源：Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)追问：具体 Token 成本控制】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：大规模部署下如何控制 Token 成本（缓存、模型选型、结果复用）？】；本轮追问：大规模部署时Token成本怎么控制？（[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)）；本轮追问：模型推理成本怎样判断是否合理，还有哪些优化空间？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；本轮追问：介绍一下 token 消耗优化的一些手段。（[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)
+> 来源：Agent 岗面试高频题【字节实习二面追问：LobeChat 为什么烧 token】【[顺极 Agent 开发二面](https://www.nowcoder.com/feed/main/detail/93a26b84a6634558b7228bf350c709b5)追问：Agent 全量开放后的成本与容量治理】【[字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)追问：具体 Token 成本控制】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：大规模部署下如何控制 Token 成本（缓存、模型选型、结果复用）？】；本轮追问：大规模部署时Token成本怎么控制？（[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)）；本轮追问：模型推理成本怎样判断是否合理，还有哪些优化空间？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；本轮追问：介绍一下 token 消耗优化的一些手段。（[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)
 
 **新手答**：“用更便宜的模型。”
 
@@ -45,6 +45,8 @@ eyebrow: Agent 面试通关 / 07
 **追问补充**：成本按实际计费单位逐次累加：各请求的计费输入、输出及缓存 Token 分别乘对应单价，再计工具、重试等费用，不能在累计 Token 费用上重复乘调用次数。自部署按资源占用、利用率和运维投入摊销；用每个成功任务的成本，在同一质量与延迟目标下比较方案。
 
 **追问补充**：量化时先固定同一批流量、任务成功率和延迟目标，建立优化前基线，再做灰度对照；分别统计输入、输出、缓存 Token、模型调用次数和工具重试，计算单次成功任务成本及降幅。还要按任务类型、缓存命中率和长尾请求分层，避免平均值掩盖退化。
+
+**追问补充**：Tool Call 变少但 Token 变多，常见原因是每次工具返回了更大的结果，或编排器把多步结果、历史和总结重新塞回上下文；调用次数下降不等于输入输出量下降。KV Cache 会复用相同前缀的中间状态，减少重复计算，但通常不等同于减少计费 Token；只要前缀变化，命中就会受影响。
 
 **差距在哪**：新手的“换模型”是一维思考——只在模型选择上做文章。高手的方案是四维的：调度策略（谁用什么模型）、预算控制（花多少停）、缓存复用（重复的不花）、熔断保护（异常的不让花）。面试官考的是“你有没有成本意识和系统设计能力”——这和后端系统的限流、降级、熔断是同一套思路。
 
@@ -110,7 +112,7 @@ LobeChat 等开源 Agent 框架烧 token 的原因不是框架本身“浪费”
 
 ### Q：为什么很多 Agent Demo 很惊艳，但一上线就不稳定？
 
-> 来源：腾讯大模型应用开发二面
+> 来源：腾讯大模型应用开发二面；[ai面试](https://www.nowcoder.com/feed/main/detail/9042487b33c54921982d86614598d7ae)
 
 **新手答**：“因为线上环境比 Demo 复杂。”
 
@@ -127,12 +129,44 @@ Demo 能跑通，只能说明“这个方向可能”。线上稳定，说明的
 
 真正难的是做治理，不是做演示。很多团队一开始觉得问题在模型不够强，后来才发现大量问题其实来自**状态管理、工具设计、上下文污染和缺少容错机制**。
 
+**追问补充**：生产内容要把生成与发布解耦：用结构化输出和 schema 校验约束格式，做事实、安全、权限检查；对失败设置重试、超时、降级和人工审核，并通过离线评测、线上采样和告警持续回归，拒绝不合格结果而不是直接落库。
+
 **差距在哪**：新手只说了“环境复杂”——这是现象不是分析。高手指出了 Demo 和生产环境的具体差异（输入质量、任务长度、状态管理、异常处理），且点出了核心观点：“稳定不靠模型强，靠工程治理”。面试官考的是你有没有把 Agent 从 Demo 推到生产的实战经验。
 
 ---
 
 
 ## AI 工具与框架
+
+### Q：你熟悉的 Agent 框架，在架构设计上有什么优势？
+
+> 来源：腾讯 Agent 应用开发一面；本轮追问：如果不使用框架，原生实现Agent你写过吗？使用框架的优劣势？（[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)）；本轮追问：聊一个你熟悉的 AI 应用框架：解决什么问题、设计巧思、落地使用场景。（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；本轮追问：请聊一个你熟悉或自研的AI应用框架。它的核心是为了解决什么问题，在实现上有哪些技术设计上的巧思，你又在什么场景里真正用它落地过？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；本轮追问：Agent 框架有哪些？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[传化智联一面](https://www.nowcoder.com/feed/main/detail/52fbdc53e752443e8d261246c7bcc491)；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)
+
+**新手答**：“它用了 LLM，很智能。”
+
+**高手答**：
+
+以 OpenClaw 为例，它的架构优势体现在三个层面：
+
+1. **编排层和能力层分离**：编排层（状态机/DAG）负责“做什么、按什么顺序做”，能力层（LLM 调用、工具执行）负责“具体怎么做”。分离后编排逻辑可以独立测试和复用，不和模型调用耦合
+2. **工具即插件**：工具通过标准化接口（类似 MCP 的 tool schema）注册，新增工具不需要改编排代码。这让工具生态可以独立演化
+3. **上下文管理可配置**：不是硬编码“保留最近 N 轮”，而是提供多种上下文策略（滚动窗口、摘要压缩、按需召回），开发者根据场景组合
+
+这三个优势的共性是**关注点分离**——编排、能力、工具、上下文各自独立演化，互不干扰。这和微服务架构的设计哲学是一致的。
+
+
+原生实现通常是状态机或循环：维护对话状态，调用模型决定下一步，按 schema 分发工具，并补上超时、重试、权限、上下文裁剪和 Trace。优点是链路透明、可控、依赖少；缺点是要自行维护编排、异常恢复和工具协议。框架能提效和标准化，但也可能带来抽象泄漏、调试困难与版本耦合。
+
+
+常见框架可按定位区分：LangChain/LangGraph偏组件与流程编排，AutoGen偏多智能体协作，LlamaIndex偏数据与检索接入。实际选型要结合场景，例如客服知识库用检索加工具编排，复杂任务用状态图控制分支、重试和人工介入。
+
+**追问补充**：建议把框架层限定为可替换的编排与运行时，通过模型、工具、存储和回调接口扩展；业务记忆策略、评测集、质量门禁由应用实现。用相同任务和故障注入对比状态恢复、工具失败、流式中断和迁移成本，再判断框架带来多少实际收益。
+
+**追问补充**：性能设计需同时看端到端延迟、并发吞吐、模型与工具调用耗时、Token 和上下文长度、内存占用及失败重试放大效应。应采用异步并发、超时取消、缓存和限流，并通过压测、链路 Trace 与故障注入验证瓶颈。
+
+**差距在哪**：新手用“智能”概括一切。高手从编排/能力分离、工具插件化、上下文可配置三个架构决策分析优势。面试官考的是你对框架的理解是“会用”还是“理解设计”。
+
+---
 
 ### Q：平时用过哪些 AI Agent 工具？
 
@@ -158,37 +192,9 @@ AI Agent 工具按用途分三类：
 
 ---
 
-### Q：你熟悉的 Agent 框架，在架构设计上有什么优势？
-
-> 来源：腾讯 Agent 应用开发一面；本轮追问：如果不使用框架，原生实现Agent你写过吗？使用框架的优劣势？（[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)）；本轮追问：聊一个你熟悉的 AI 应用框架：解决什么问题、设计巧思、落地使用场景。（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；本轮追问：请聊一个你熟悉或自研的AI应用框架。它的核心是为了解决什么问题，在实现上有哪些技术设计上的巧思，你又在什么场景里真正用它落地过？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；本轮追问：Agent 框架有哪些？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[传化智联一面](https://www.nowcoder.com/feed/main/detail/52fbdc53e752443e8d261246c7bcc491)；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)
-
-**新手答**：“它用了 LLM，很智能。”
-
-**高手答**：
-
-以 OpenClaw 为例，它的架构优势体现在三个层面：
-
-1. **编排层和能力层分离**：编排层（状态机/DAG）负责“做什么、按什么顺序做”，能力层（LLM 调用、工具执行）负责“具体怎么做”。分离后编排逻辑可以独立测试和复用，不和模型调用耦合
-2. **工具即插件**：工具通过标准化接口（类似 MCP 的 tool schema）注册，新增工具不需要改编排代码。这让工具生态可以独立演化
-3. **上下文管理可配置**：不是硬编码“保留最近 N 轮”，而是提供多种上下文策略（滚动窗口、摘要压缩、按需召回），开发者根据场景组合
-
-这三个优势的共性是**关注点分离**——编排、能力、工具、上下文各自独立演化，互不干扰。这和微服务架构的设计哲学是一致的。
-
-
-原生实现通常是状态机或循环：维护对话状态，调用模型决定下一步，按 schema 分发工具，并补上超时、重试、权限、上下文裁剪和 Trace。优点是链路透明、可控、依赖少；缺点是要自行维护编排、异常恢复和工具协议。框架能提效和标准化，但也可能带来抽象泄漏、调试困难与版本耦合。
-
-
-常见框架可按定位区分：LangChain/LangGraph偏组件与流程编排，AutoGen偏多智能体协作，LlamaIndex偏数据与检索接入。实际选型要结合场景，例如客服知识库用检索加工具编排，复杂任务用状态图控制分支、重试和人工介入。
-
-**追问补充**：建议把框架层限定为可替换的编排与运行时，通过模型、工具、存储和回调接口扩展；业务记忆策略、评测集、质量门禁由应用实现。用相同任务和故障注入对比状态恢复、工具失败、流式中断和迁移成本，再判断框架带来多少实际收益。
-
-**差距在哪**：新手用“智能”概括一切。高手从编排/能力分离、工具插件化、上下文可配置三个架构决策分析优势。面试官考的是你对框架的理解是“会用”还是“理解设计”。
-
----
-
 ### Q：平时写的代码有多少是 AI 生成的？怎么保证质量？
 
-> 来源：腾讯 Agent 应用开发一面 / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：AI Coding 的占比大概是多少？】【[9.2百度AI测开2面](https://www.nowcoder.com/feed/main/detail/a4c9480945fa481c98949ffb66cd2e3a)追问：在你们日常的 Coding 工作中，大约有多少比例的代码是通过 AI Coding 或 Vibe Coding 生成的？】；本轮追问：你在 Skill 或项目中提交的代码大概是什么量级？都是 AI 写的吗？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）
+> 来源：腾讯 Agent 应用开发一面 / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632)【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：AI Coding 的占比大概是多少？】【[9.2百度AI测开2面](https://www.nowcoder.com/feed/main/detail/a4c9480945fa481c98949ffb66cd2e3a)追问：在你们日常的 Coding 工作中，大约有多少比例的代码是通过 AI Coding 或 Vibe Coding 生成的？】；本轮追问：你在 Skill 或项目中提交的代码大概是什么量级？都是 AI 写的吗？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[小米预测算法一面](https://www.nowcoder.com/feed/main/detail/f4e8f2bb1f254bc29b2e22d2b9dfadaa)
 
 **新手答**：“大概 50%，然后自己改改。”
 
@@ -221,7 +227,7 @@ AI Agent 工具按用途分三类：
 
 ### Q：用过哪些 Code Agent？优缺点？
 
-> 来源：腾讯 AI 应用开发 【淘天Agent开发追问：AI辅助编程工作流拆解 + 提示词策略与人工审核介入点】【字节火山引擎 Managed Agent 一面追问：如何用 Coding Agent 完成项目开发】 / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632) / [OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)
+> 来源：腾讯 AI 应用开发 【淘天Agent开发追问：AI辅助编程工作流拆解 + 提示词策略与人工审核介入点】【字节火山引擎 Managed Agent 一面追问：如何用 Coding Agent 完成项目开发】 / [杭州和为机电 AI 应用工程师面试](https://www.nowcoder.com/discuss/923620045412933632) / [OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)
 
 **新手答**：“用过 Copilot，挺好用的。”
 
@@ -295,7 +301,7 @@ AI Agent 工具按用途分三类：
 
 ### Q：自己做 Agent 时，踩过最大的坑是什么？
 
-> 来源：腾讯 Agent 应用开发一面；[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)
+> 来源：腾讯 Agent 应用开发一面；[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)；[小红书产品工程师agent开发一面](https://www.nowcoder.com/feed/main/detail/f0950469136e47b0828373cfeefd82ce)
 
 **新手答**：“模型输出不稳定。”
 
@@ -312,6 +318,8 @@ AI Agent 工具按用途分三类：
 
 这个坑的本质是：**Agent 的上下文窗口是“工作台”，不是“仓库”**。工作台上只放当前步骤需要的东西，其他全放仓库里按需取。
 
+**追问补充**：复盘案例时应如实说明自己负责的状态提取、持久化、回注或摘要环节，并提供对应改动和验证证据。若问题是长对话后丢约束，可用固定任务、冲突信息和恢复场景回放，检查关键事实保留率与任务完成情况；这是一种答题框架，不预设每个人都遇到过同一个坑。
+
 **差距在哪**：新手说“不稳定”是表象。高手指出了根因（过度依赖上下文承载状态）和系统性解法（状态外置 + 强制注入 + 落库）。面试官考的是你踩坑后有没有做过根因分析和系统性修复。
 
 ---
@@ -320,7 +328,7 @@ AI Agent 工具按用途分三类：
 
 ### Q：如何保证 AI 代码生成的质量与掌控性？
 
-> 来源：蚂蚁集团 Agent 开发一面 / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95) / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：AI Coding 习惯及代码质量保证？】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：如何确保 AI 生成代码逻辑可靠？；AI 编码工具（Cursor/Codex）如何协作及保证代码质量？】【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：如何让AI写业务代码？】【[作业帮一面 9.5](https://www.nowcoder.com/feed/main/detail/21ca46108ebf479fb8056c6e9f61d42f)追问：之后怎么保证代码质量？怎么验证？还有别的机制吗？】；本轮追问：如何与AI协作的（[本轮追问](https://www.nowcoder.com/feed/main/detail/022ab580ee68432daf536a939e86aefa)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f38a9773d134e6fa18e00870dd42c59)；本轮追问：从 0 设计一个通用的、规范驱动的 CLI/SDK 代码生成平台（支持 OpenAI、Arazzo 等多样输入规范，支持 Java、Python 多语言，保证用户手写代码不被覆盖，支持团队多人协作），讲讲你的系统分层设计。（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）；本轮追问：这里面有好几个环节，产物的生成怎么保证？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）；本轮追问：对于编程任务，如何评估 Agent 生成代码的质量？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[科大讯飞 Agent开发 一面](https://www.nowcoder.com/feed/main/detail/ec89f399f5e24573a019238282a9b912)；[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)；[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)；本轮追问：模型生成的代码会全部人工 Review 吗，如何控制改动范围？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；[【社招】腾讯三面面经](https://www.nowcoder.com/feed/main/detail/431b4ca35c7f43909219d31aebba5b56)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[美团ai全栈二面](https://www.nowcoder.com/feed/main/detail/064725eb6da14cda9efabb2a51a68681)；[恒生一面](https://www.nowcoder.com/feed/main/detail/25b6d9879377450988fe3589b8cfdd6f)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)
+> 来源：蚂蚁集团 Agent 开发一面 / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95) / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)【[阶跃星辰（Stepfun）- 大模型算法岗（Post-train）](https://www.nowcoder.com/discuss/926273007276814336)追问：AI Coding 习惯及代码质量保证？】【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：如何确保 AI 生成代码逻辑可靠？；AI 编码工具（Cursor/Codex）如何协作及保证代码质量？】【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：如何让AI写业务代码？】【[作业帮一面 9.5](https://www.nowcoder.com/feed/main/detail/21ca46108ebf479fb8056c6e9f61d42f)追问：之后怎么保证代码质量？怎么验证？还有别的机制吗？】；本轮追问：如何与AI协作的（[本轮追问](https://www.nowcoder.com/feed/main/detail/022ab580ee68432daf536a939e86aefa)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f38a9773d134e6fa18e00870dd42c59)；本轮追问：从 0 设计一个通用的、规范驱动的 CLI/SDK 代码生成平台（支持 OpenAI、Arazzo 等多样输入规范，支持 Java、Python 多语言，保证用户手写代码不被覆盖，支持团队多人协作），讲讲你的系统分层设计。（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）；本轮追问：这里面有好几个环节，产物的生成怎么保证？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ca3fd84341004d72a1dc2c9b853fe25a)）；本轮追问：对于编程任务，如何评估 Agent 生成代码的质量？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[科大讯飞 Agent开发 一面](https://www.nowcoder.com/feed/main/detail/ec89f399f5e24573a019238282a9b912)；[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)；[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)；本轮追问：模型生成的代码会全部人工 Review 吗，如何控制改动范围？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；[【社招】腾讯三面面经](https://www.nowcoder.com/feed/main/detail/431b4ca35c7f43909219d31aebba5b56)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[美团ai全栈二面](https://www.nowcoder.com/feed/main/detail/064725eb6da14cda9efabb2a51a68681)；[恒生一面](https://www.nowcoder.com/feed/main/detail/25b6d9879377450988fe3589b8cfdd6f)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[网易互娱 AI应用开发 日常实习](https://www.nowcoder.com/feed/main/detail/683ffea1ead24f8d8539f6bab3b7b361)；[字节跳动ai-agent一面-10.9](https://www.nowcoder.com/feed/main/detail/508d61746d7542de84312ca845a1f087)
 
 **新手答**：“生成后人工 review 一下。”
 
@@ -378,6 +386,8 @@ flowchart LR
 **追问补充**：前端和客户端应先让 AI 遵循组件库、交互规范和接口契约，按页面或组件小步生成；除类型、单测和 lint 外，还要做视觉回归、不同屏幕与系统版本测试，并在真机验证权限、网络异常、性能和无障碍，避免只在模拟器或单一路径可用。
 
 **追问补充**：对比 AI Coding 不能凭主观观感，应固定同一需求、上下文和提示，比较编译通过率、测试覆盖与通过率、缺陷率、改动范围、可维护性和安全问题。解释生成代码时逐段核对数据流、异常分支、并发与权限边界，指出违反规范或业务不变量的具体位置，并用测试或反例验证判断。
+
+**追问补充**：持续修改还要维护模块边界和依赖基线：每次任务限定目录与接口，合入前检查测试、复杂度和安全扫描结果。发现重复逻辑、依赖蔓延或回归增多时，先设计重构并补回归测试，再分小步合并；保留版本、diff 和回滚路径，避免生成速度掩盖维护成本。
 
 **差距在哪**：新手只有事后 review 一道防线。高手在生成前（约束输入）、生成中（约束输出）、生成后（自动验证）三个阶段构建了九道防线。面试官考的是你对 AI 代码生成的质量体系有没有工程化的设计。
 
@@ -483,7 +493,7 @@ AI Coding 产品的测试和传统软件测试有本质区别——输出是**�
 
 ### Q：什么是 SDD（Spec-Driven Development）？它和 Skills 有什么区别？
 
-> 来源：蚂蚁集团智能体与大模型应用二面
+> 来源：蚂蚁集团智能体与大模型应用二面；[(秋招) 10.15 - 银泰百货 - 银泰星AI工程师 - 一面](https://www.nowcoder.com/discuss/942055584050733056)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[理想智能应用研发一面](https://www.nowcoder.com/discuss/941713098040221696)
 
 **新手答**：“SDD 就是先写规格再写代码，Skills 是预定义能力。”
 
@@ -532,7 +542,7 @@ Coding Agent 执行时，每个任务和代码变更都应引用 `spec_id / requ
 
 ### Q：数据库索引失效的常见场景？LIKE 查询会不会导致索引失效？
 
-> 来源：快手 AI Agent 开发一面；[度小满AI全栈一面](https://www.nowcoder.com/discuss/931241025345978368)；[美团ai全栈一面](https://www.nowcoder.com/feed/main/detail/a5b8c6571f94441a8af10cd6af07ac3a)；[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；本轮追问：你了解 MySQL 常见的索引优化吗？慢查询如何处理，索引有哪些注意点？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[记录最爽，不折腰的一次面试：小红书秋招一面](https://www.nowcoder.com/feed/main/detail/bebc8a5d22d141d09efc4e0a74031365)；[百度agent harness一面](https://www.nowcoder.com/discuss/937747584578310144)
+> 来源：快手 AI Agent 开发一面；[度小满AI全栈一面](https://www.nowcoder.com/discuss/931241025345978368)；[美团ai全栈一面](https://www.nowcoder.com/feed/main/detail/a5b8c6571f94441a8af10cd6af07ac3a)；[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；本轮追问：你了解 MySQL 常见的索引优化吗？慢查询如何处理，索引有哪些注意点？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[记录最爽，不折腰的一次面试：小红书秋招一面](https://www.nowcoder.com/feed/main/detail/bebc8a5d22d141d09efc4e0a74031365)；[百度agent harness一面](https://www.nowcoder.com/discuss/937747584578310144)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)
 
 **新手答**：“LIKE 查询会导致索引失效。”
 
@@ -667,7 +677,7 @@ key 很多时可用 TTL、分层存储和近似计数结构只保留活跃状态
 
 ### Q：大规模数据处理场景设计——从千条到百万级如何扩展？
 
-> 来源：快手 AI Agent 开发一面；本轮追问：你之前那一段实习的这样一个大数据导出是如何优化的？（[美团ai全栈一面](https://www.nowcoder.com/feed/main/detail/a5b8c6571f94441a8af10cd6af07ac3a)）；本轮追问：除了 SQL 手段以外，有没有考虑过通过其他技术手段解决出数任务的效率问题，让出数任务跑得更快？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：快手 AI Agent 开发一面；本轮追问：你之前那一段实习的这样一个大数据导出是如何优化的？（[美团ai全栈一面](https://www.nowcoder.com/feed/main/detail/a5b8c6571f94441a8af10cd6af07ac3a)）；本轮追问：除了 SQL 手段以外，有没有考虑过通过其他技术手段解决出数任务的效率问题，让出数任务跑得更快？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)
 
 **新手答**：“用循环累加就行。”
 
@@ -803,7 +813,7 @@ class State(TypedDict):
 
 ### Q：PostgreSQL 的索引结构是什么？索引如何优化查询速度？在 Checkpoint 场景下如何用索引加速？
 
-> 来源：AI 工程师面试
+> 来源：AI 工程师面试；[淘天 AI应用研发 一面](https://www.nowcoder.com/discuss/942091198347345920)
 
 **新手答**：“就是 B+ 树，查询快。”
 
@@ -1076,7 +1086,7 @@ AI 应用中，模型输出是单向流，SSE 足够且更简单。只有需要�
 
 ### Q：开发 Agent 的时候，你用的是什么开发流程？为什么选这个流程？
 
-> 来源：字节 Agent 开发实习一面 / [阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)
+> 来源：字节 Agent 开发实习一面 / [阿里云 SOC Agent Infra 一面](https://www.nowcoder.com/feed/main/detail/1bde9ba913d74ca6847962f679865f7e)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[字节跳动 - Agent 研发 - 一面](https://www.nowcoder.com/feed/main/detail/0b91e9f5fbba4af4865c6fadc9a790e8)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)
 
 **新手答**：“想到什么做什么，边做边调。”
 
@@ -1159,7 +1169,7 @@ Skill 应贯穿这条流程，而不是上线前临时写一份说明：开发�
 
 ### Q：针对包含 3 个以上工具调用且高频请求的任务，通过什么方式可以压低系统整体的端到端延迟？
 
-> 来源：淘天 AI Agent 一面【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：如何解决上述长程任务运行延迟问题？】
+> 来源：淘天 AI Agent 一面【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：如何解决上述长程任务运行延迟问题？】；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)
 
 **新手答**：“用更快的模型。”
 
@@ -1423,7 +1433,7 @@ Checkpoint 数据结构：
 
 ### Q：用 AI Coding 工具写代码达不到预期怎么办？
 
-> 来源：CVTE/AI应用工程师一面；本轮追问：如何让AI写业务代码？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)；本轮追问：AI Coding 有哪些局限性？（[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)）
+> 来源：CVTE/AI应用工程师一面；本轮追问：如何让AI写业务代码？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)；本轮追问：AI Coding 有哪些局限性？（[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)）；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)
 
 **新手答**：“多试几次，换个写法描述需求，或者自己手写。”
 
@@ -1454,6 +1464,8 @@ AI 生成的代码能跑但不符合项目风格/架构。表现为：命名混�
 任务太复杂，超出单次生成能力。表现为：前半段对后半段错。
 
 解法：**拆任务**。把一个大需求拆成 3-5 个小步骤，每步验证后再进行下一步。用 Plan 模式先对齐方案，再逐步实现。
+
+**追问补充**：输出不达预期时先找最小失败输入，区分需求遗漏、仓库上下文不足、接口误用与验证缺失。补充具体约束和反例、缩小修改范围，再以测试与差异审查验证修复；说明真实的前后结果，避免只反复要求模型再试一次。
 
 **差距在哪**：新手的“多试几次”是盲目重试。高手先分类问题（意图/知识/架构/复杂度），每类有不同的解法策略。面试官考的是你对 AI 辅助开发的方法论——不是“用不用 AI”，而是“AI 不好使时怎么系统性解决”。
 
@@ -1762,7 +1774,7 @@ Agent 和普通 LLM 推理不同——单次请求可能触发 5-15 次模型调
 
 ### Q：LangGraph 的 State Snapshot（状态快照）机制是怎么实现的？解决什么问题？
 
-> 来源：字节后端开发 Agent 一面；本轮追问：LangGraph里用到断点跑、快照存储，怎么实现快照持久化、HITL人工介入，中断之后如何恢复？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）
+> 来源：字节后端开发 Agent 一面；本轮追问：LangGraph里用到断点跑、快照存储，怎么实现快照持久化、HITL人工介入，中断之后如何恢复？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)
 
 **新手答**：“就是保存一下当前状态，方便恢复。”
 
@@ -2318,7 +2330,7 @@ AgentState 解决的核心问题是**状态的可追踪、可回溯、可序列�
 
 ## Q：多模型如何动态路由？根据视频特征、任务特征、成本、延迟和效果选模型？
 
-> 来源：商汤/大模型算法应用实习二面【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：模型路由的依据是什么？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：从大模型切到小模型主要是为了响应时长吗，实际效果对比大模型怎么样？】；本轮追问：小模型如何选择？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；本轮追问：后面是否会训练专门的路由模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；本轮追问：国内和海外内容是否使用同一个模型？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；本轮追问：生成内容不符合领域常识、成本、延迟之间如何取舍？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；本轮追问：结合LangGraph这套体系，从成本、准确率综合性价比看，中文场景下哪个模型效果比较好？是千问3.8-7B吗？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)
+> 来源：商汤/大模型算法应用实习二面【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：模型路由的依据是什么？】【[作业帮秋招一面](https://www.nowcoder.com/feed/main/detail/c86c7591ba9d47b696774ddb48cdc9cb)追问：从大模型切到小模型主要是为了响应时长吗，实际效果对比大模型怎么样？】；本轮追问：小模型如何选择？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；本轮追问：后面是否会训练专门的路由模型？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；本轮追问：国内和海外内容是否使用同一个模型？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；本轮追问：生成内容不符合领域常识、成本、延迟之间如何取舍？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；本轮追问：结合LangGraph这套体系，从成本、准确率综合性价比看，中文场景下哪个模型效果比较好？是千问3.8-7B吗？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)；[字节tiktok ad infra 业务四面](https://www.nowcoder.com/feed/main/detail/e67a7683c6584c4e95e93cfa71957380)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)
 
 **新手答**：“根据任务类型写 if-else 选模型。”
 
@@ -2386,13 +2398,15 @@ score = α × quality + β × (1/latency) + γ × (1/cost)
 
 **追问补充**：默认由系统按风险、预算和历史效果自动路由；可在不暴露复杂模型细节的前提下提供用户偏好或“重答/更高质量”入口。用户选择应受权限、成本和延迟约束，自动重答需限制次数并记录原因，避免无限切换。
 
+**追问补充**：工具调用可按阶段编排模型：意图识别、参数抽取和简单工具选择用小模型，复杂规划、跨工具推理和结果复核再升级强模型；通过级联、缓存、早停和超时回退控制延迟，并用任务成功率、P95延迟和单位成本联合验证，而非全流程固定一个模型。
+
 **差距在哪**：新手的 if-else 只能处理静态规则，无法适应模型表现的动态变化。高手设计了规则层（快速排除）+ 打分层（精确选型）+ 反馈层（持续学习）的三层架构，且强调路由决策本身的延迟约束。面试官考的是对“模型即资源”的调度思维——像调度微服务一样调度模型，需要考虑成本、延迟、质量的多目标优化。
 
 ---
 
 ## Q：系统里多租户隔离是怎么实现的？
 
-> 来源：视频面经汇总【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计多租户隔离，包括状态和知识库隔离？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何实现多租户状态与知识库隔离？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：不同用户之间是怎么隔离的？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)；本轮追问：存储中的 Key 怎样区分场景，不同用户是否读取不同数据？（[9.14字节推荐架构一面](https://www.nowcoder.com/feed/main/detail/467d01beed8a40b89ac414b90fc7fb85)）；本轮追问：Agent 是如何部署的？不同用户的会话和工作区如何隔离？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）
+> 来源：视频面经汇总【阿里 Agent Infra 一面题库同题：数据、资源与权限隔离】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计多租户隔离，包括状态和知识库隔离？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：如何实现多租户状态与知识库隔离？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：不同用户之间是怎么隔离的？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)；本轮追问：存储中的 Key 怎样区分场景，不同用户是否读取不同数据？（[9.14字节推荐架构一面](https://www.nowcoder.com/feed/main/detail/467d01beed8a40b89ac414b90fc7fb85)）；本轮追问：Agent 是如何部署的？不同用户的会话和工作区如何隔离？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[顺丰科技27届AI开发工程师 一面面经](https://www.nowcoder.com/feed/main/detail/463a64c7df7e4efaac8c6ad32648b454)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)
 
 **新手答**：“每个租户一个数据库。”
 
@@ -2427,7 +2441,7 @@ score = α × quality + β × (1/latency) + γ × (1/cost)
 
 ## Q：Redis 在 Agent 系统中适合承担哪些职责，哪些数据不应只放 Redis？
 
-> 来源：点点互动/Agent开发秋招一面；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)；本轮追问：把数据放到 Redis 里，再用 MySQL 做持久化，为什么要持久化？直接使用 Redis 不行吗？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[字节跳动火山引擎agent开发秋招一面](https://www.nowcoder.com/feed/main/detail/3ae147c4caaf40b580071ef9da71da2e)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：点点互动/Agent开发秋招一面；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)；本轮追问：把数据放到 Redis 里，再用 MySQL 做持久化，为什么要持久化？直接使用 Redis 不行吗？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[字节跳动火山引擎agent开发秋招一面](https://www.nowcoder.com/feed/main/detail/3ae147c4caaf40b580071ef9da71da2e)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[字节 AI Agent全栈开发 面经](https://www.nowcoder.com/feed/main/detail/88e22e99028942bcbac1ed57395f2e60)
 
 **新手答**：“Redis 可以缓存对话和工具结果，提高速度。”
 
@@ -2447,7 +2461,7 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ## Q：在浏览器输入一个 URL 到页面显示，完整经历了哪些过程？
 
-> 来源：小红书 Agent 岗一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[度小满AI全栈一面](https://www.nowcoder.com/discuss/931241025345978368)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[字节跳动火山引擎agent开发秋招二面](https://www.nowcoder.com/feed/main/detail/329a57a7469045058209b214e387e32c)
+> 来源：小红书 Agent 岗一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[度小满AI全栈一面](https://www.nowcoder.com/discuss/931241025345978368)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[字节跳动火山引擎agent开发秋招二面](https://www.nowcoder.com/feed/main/detail/329a57a7469045058209b214e387e32c)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)
 
 **新手答**：“DNS 找到服务器，HTTP 请求页面，然后浏览器渲染。”
 
@@ -2467,6 +2481,23 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ---
 
+## Q：如何统计 Agent 各模块耗时并定位瓶颈？
+
+> 来源：[寒武纪AI应用开发一面&二面](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[智加 自动驾驶软件工程师](https://www.nowcoder.com/feed/main/detail/26812880d26248e5a34b4358902509e8)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)
+
+**新手答**：在每个模块前后打点，统计平均、P95/P99 和调用次数。
+
+**高手答**：
+
+采用统一 trace_id 和 span，覆盖排队、网络、模型首 token、生成、工具执行及序列化；用单调时钟记录耗时，异步链路传播上下文。按请求类型拆分分位数，结合 token、并发和错误率分析；采样保留原始 trace，聚合指标进监控，避免日志泄露提示词和隐私。
+
+**追问补充**：对渲染流程先梳理任务依赖，形成 DAG：无数据依赖的取数、预处理或资源加载可并行，有依赖的保留串行，并设置并发上限避免争抢资源。通过 trace 的 span 时间线确认真实重叠，再观察关键路径、CPU/IO 利用率和结果顺序，验证并行化没有引入竞态。
+
+**追问补充**：Agent通常缩短的是等待链路：通过并行独立工具调用、减少无效思考和重复工具调用、缓存稳定结果或压缩上下文来降低总时延；模型首 token和单次生成耗时未必下降。应以相同任务分桶对比优化前后的关键路径、调用次数、P95和成功率。
+
+**差距在哪**：考察端到端可观测性、分位数分析和隐私成本控制。
+
+
 ## Q：如何记录 Agent 的非确定性边界，实现可重复的故障回放？
 
 > 来源：腾讯互娱全栈开发（AI）二面（2026-08-13）【字节火山引擎 Managed Agent 一面追问：记录耗时、Token、结果和失败路线】；本轮追问：如何确认离线构造的故障、标准答案和线上真实排障流程一致？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[记录最爽，不折腰的一次面试：小红书秋招一面](https://www.nowcoder.com/feed/main/detail/bebc8a5d22d141d09efc4e0a74031365)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)
@@ -2481,67 +2512,9 @@ Redis 适合高频、短生命周期、允许重建的数据：会话热状态�
 
 ---
 
-## Q：多模型供应商如何抽象统一 Provider，而不丢失差异能力？
-
-> 来源：成都晓多科技 Agent 开发岗二面（2026-08-12）；本轮追问：讲一下为什么DeepAgents要做模型无关性，而Claude和GPT他们为什么不做？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)
-
-**新手答**：“定义统一的 chat 和 stream 接口，再写适配器。”
-
-**高手答**：先定义最小公共协议：消息、工具调用、流式事件、usage、错误分类和取消；供应商特性通过 capability negotiation 和显式扩展字段暴露，不能硬塞进最低公分母。适配器负责角色、schema、finish reason、错误码和流事件转换；网关再做路由、限流、重试、观测与版本兼容。契约测试同时验证普通文本、并行工具、截断、流式中断和安全拒绝。
-
-
-DeepAgents这类框架面向多供应商和可替换后端，需要模型无关层来降低迁移、测试和运维成本，同时通过能力发现保留差异。Claude或GPT厂商主要优化自家模型、API和产品闭环，直接暴露原生能力更能形成差异化，因此没有动力承担跨厂商中立抽象。
-
-**追问补充**：通常会带，但不是把上一个模型的原始请求全部透传。应保存规范化的会话消息、任务状态、必要的工具调用与结果，并按新模型能力重新序列化；隐藏推理、无关历史和过期结果应裁剪或脱敏。若只是独立重试，则可不带历史，需由路由策略明确。
-
-**追问补充**：多 scaffold 的差异通常在配置入口、消息与工具 schema、流式事件、上下文拼装、鉴权和错误语义；适配层逐项映射并保留 capability，公共层处理规范化结果。通过文本、工具调用、流中断和错误注入的契约测试验证兼容性，不能把一种供应商的 system 语义强套给其他接口。
-
-**差距在哪**：新手统一函数签名，高手统一语义并保留能力发现与兼容测试。
-
----
-
-## Q：进程、线程、协程有什么区别？什么场景下协程更有优势？
-
-> 来源：视频面经汇总；本轮追问：Python 的 asyncio 有了解吗？什么场景下适合用这个？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：进程和线程有什么区别？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)
-
-**新手答**：“进程是资源分配单位，线程是执行单位，协程更轻量。”
-
-**高手答**：
-
-```mermaid
-graph LR
-    A[进程] -->|"包含多个"| B[线程]
-    B -->|"包含多个"| C[协程]
-
-    A ---|"独立地址空间<br/>切换成本最高<br/>OS 调度"| A
-    B ---|"共享地址空间<br/>切换成本中等<br/>OS 调度"| B
-    C ---|"共享线程栈<br/>切换成本极低<br/>用户态调度"| C
-```
-
-| 维度 | 进程 | 线程 | 协程 |
-|------|------|------|------|
-| 调度者 | OS 内核 | OS 内核 | 用户态（runtime） |
-| 切换成本 | ~ms 级（TLB 刷新） | ~μs 级（寄存器保存） | ~ns 级（仅保存少量寄存器） |
-| 内存开销 | MB 级（独立地址空间） | ~1MB（默认栈大小） | ~KB（可按需增长） |
-| 并行能力 | 真并行（多核） | 真并行（多核） | 并发但不并行（单线程内） |
-| 通信方式 | IPC（管道/共享内存/Socket） | 共享内存+锁 | 直接 yield/resume |
-
-**协程的优势场景——Agent 系统中的 IO 密集任务**：
-
-Agent 系统的典型操作都是 IO 密集型：调大模型 API（网络 IO）、查向量数据库（网络 IO）、读文件（磁盘 IO）。这些操作等待时间远大于计算时间，用线程会导致大量线程阻塞在 IO 上白白占内存。
-
-协程的解法：`asyncio.gather` 同时发起 10 个 Embedding 请求，底层只用 1 个线程，IO 等待时自动切换到其他协程执行——**并发量上去了，内存开销几乎不变**。
-
-**协程不适合的场景**：CPU 密集计算（如大规模矩阵运算）——协程无法利用多核，此时需要多进程。
-
-**差距在哪**：新手背定义但不理解本质区别。高手从调度者、切换成本、并行能力三个维度做结构化对比，并能绑定到 Agent 系统中“调 API 是 IO 密集型”这个具体场景，解释为什么 Python asyncio 是 Agent 开发的主流并发模型。
-
----
-
-
 ## Q：LangGraph 图状态机里，怎么捕获每个节点的执行结果并实时推前端？
 
-> 来源：淘天/AI Agent一面【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：能否完整描述这个图、图上的状态，以及每个节点的执行过程？】；本轮追问：单据的状态机怎么设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）
+> 来源：淘天/AI Agent一面【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：能否完整描述这个图、图上的状态，以及每个节点的执行过程？】；本轮追问：单据的状态机怎么设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）；[顺丰科技27届AI开发工程师 一面面经](https://www.nowcoder.com/feed/main/detail/463a64c7df7e4efaac8c6ad32648b454)
 
 **新手答**：“用回调函数。”
 
@@ -2604,24 +2577,161 @@ flowchart LR
 
 **对比 LangChain 的 callback 方案**：callback 是同步拦截机制，不适合异步图执行；LangGraph 的 stream 是原生支持的一等公民，直接 yield 节点级别的状态变更，更适合图状态机的执行模型。
 
+**追问补充**：除实时推送外，应为每次运行生成 run_id，持久化节点的 pending、running、success、failed 状态、输入摘要、输出结果、错误和时间戳；节点开始、完成、重试和异常都写入事件日志。前端断线后可按 run_id 查询或续传，重试需保证幂等，避免重复执行或重复记账。
+
 **差距在哪**：新手只知道 callback 这一种方式。高手给出了 LangGraph 层（stream_mode）+ 后端层（SSE）+ 前端层（事件驱动 UI）的三层方案，且区分了五种事件类型的不同处理方式。面试官考的是对 LangGraph streaming API 和前后端实时通信的实战经验——不是理论概念，而是你真的用 LangGraph 做过面向用户的产品。
 
 ---
 
-## Q：如何统计 Agent 各模块耗时并定位瓶颈？
+## Q：多模型供应商如何抽象统一 Provider，而不丢失差异能力？
 
-> 来源：[寒武纪AI应用开发一面&二面](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[智加 自动驾驶软件工程师](https://www.nowcoder.com/feed/main/detail/26812880d26248e5a34b4358902509e8)
+> 来源：成都晓多科技 Agent 开发岗二面（2026-08-12）；本轮追问：讲一下为什么DeepAgents要做模型无关性，而Claude和GPT他们为什么不做？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)
 
-**新手答**：在每个模块前后打点，统计平均、P95/P99 和调用次数。
+**新手答**：“定义统一的 chat 和 stream 接口，再写适配器。”
+
+**高手答**：先定义最小公共协议：消息、工具调用、流式事件、usage、错误分类和取消；供应商特性通过 capability negotiation 和显式扩展字段暴露，不能硬塞进最低公分母。适配器负责角色、schema、finish reason、错误码和流事件转换；网关再做路由、限流、重试、观测与版本兼容。契约测试同时验证普通文本、并行工具、截断、流式中断和安全拒绝。
+
+
+DeepAgents这类框架面向多供应商和可替换后端，需要模型无关层来降低迁移、测试和运维成本，同时通过能力发现保留差异。Claude或GPT厂商主要优化自家模型、API和产品闭环，直接暴露原生能力更能形成差异化，因此没有动力承担跨厂商中立抽象。
+
+**追问补充**：通常会带，但不是把上一个模型的原始请求全部透传。应保存规范化的会话消息、任务状态、必要的工具调用与结果，并按新模型能力重新序列化；隐藏推理、无关历史和过期结果应裁剪或脱敏。若只是独立重试，则可不带历史，需由路由策略明确。
+
+**追问补充**：多 scaffold 的差异通常在配置入口、消息与工具 schema、流式事件、上下文拼装、鉴权和错误语义；适配层逐项映射并保留 capability，公共层处理规范化结果。通过文本、工具调用、流中断和错误注入的契约测试验证兼容性，不能把一种供应商的 system 语义强套给其他接口。
+
+**差距在哪**：新手统一函数签名，高手统一语义并保留能力发现与兼容测试。
+
+---
+
+## Q：进程、线程、协程有什么区别？什么场景下协程更有优势？
+
+> 来源：视频面经汇总；本轮追问：Python 的 asyncio 有了解吗？什么场景下适合用这个？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：进程和线程有什么区别？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)
+
+**新手答**：“进程是资源分配单位，线程是执行单位，协程更轻量。”
 
 **高手答**：
 
-采用统一 trace_id 和 span，覆盖排队、网络、模型首 token、生成、工具执行及序列化；用单调时钟记录耗时，异步链路传播上下文。按请求类型拆分分位数，结合 token、并发和错误率分析；采样保留原始 trace，聚合指标进监控，避免日志泄露提示词和隐私。
+```mermaid
+graph LR
+    A[进程] -->|"包含多个"| B[线程]
+    B -->|"包含多个"| C[协程]
 
-**追问补充**：对渲染流程先梳理任务依赖，形成 DAG：无数据依赖的取数、预处理或资源加载可并行，有依赖的保留串行，并设置并发上限避免争抢资源。通过 trace 的 span 时间线确认真实重叠，再观察关键路径、CPU/IO 利用率和结果顺序，验证并行化没有引入竞态。
+    A ---|"独立地址空间<br/>切换成本最高<br/>OS 调度"| A
+    B ---|"共享地址空间<br/>切换成本中等<br/>OS 调度"| B
+    C ---|"共享线程栈<br/>切换成本极低<br/>用户态调度"| C
+```
 
-**差距在哪**：考察端到端可观测性、分位数分析和隐私成本控制。
+| 维度 | 进程 | 线程 | 协程 |
+|------|------|------|------|
+| 调度者 | OS 内核 | OS 内核 | 用户态（runtime） |
+| 切换成本 | ~ms 级（TLB 刷新） | ~μs 级（寄存器保存） | ~ns 级（仅保存少量寄存器） |
+| 内存开销 | MB 级（独立地址空间） | ~1MB（默认栈大小） | ~KB（可按需增长） |
+| 并行能力 | 真并行（多核） | 真并行（多核） | 并发但不并行（单线程内） |
+| 通信方式 | IPC（管道/共享内存/Socket） | 共享内存+锁 | 直接 yield/resume |
 
+**协程的优势场景——Agent 系统中的 IO 密集任务**：
+
+Agent 系统的典型操作都是 IO 密集型：调大模型 API（网络 IO）、查向量数据库（网络 IO）、读文件（磁盘 IO）。这些操作等待时间远大于计算时间，用线程会导致大量线程阻塞在 IO 上白白占内存。
+
+协程的解法：`asyncio.gather` 同时发起 10 个 Embedding 请求，底层只用 1 个线程，IO 等待时自动切换到其他协程执行——**并发量上去了，内存开销几乎不变**。
+
+**协程不适合的场景**：CPU 密集计算（如大规模矩阵运算）——协程无法利用多核，此时需要多进程。
+
+**差距在哪**：新手背定义但不理解本质区别。高手从调度者、切换成本、并行能力三个维度做结构化对比，并能绑定到 Agent 系统中“调 API 是 IO 密集型”这个具体场景，解释为什么 Python asyncio 是 Agent 开发的主流并发模型。
+
+---
+
+
+## Q：多个子 Agent 延迟退出，同时更新同一对话的 Token 统计数据，线程竞争怎么解决？
+
+> 来源：深信服 AI 全栈开发二面；本轮追问：同一个 JVM 中，Agent 类的两个实例同时对共享计数器执行加一操作，并更新同一个共享集合，最终出现计数丢失，可能是什么原因？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)
+
+**新手答**：“加个锁就行了。”
+
+**高手答**：
+
+“加锁”方向对，但具体怎么加、在哪个层面加、锁的粒度是什么——这些细节决定了方案是否适用于生产环境。
+
+**问题本质**：
+
+多个子 Agent 并行执行，各自消耗 token，最终需要汇总到同一个 session 的 token 统计字段。如果多个子 Agent 同时完成并尝试更新同一条记录：
+
+```text
+子 Agent A 读取当前 total_tokens = 1000
+子 Agent B 读取当前 total_tokens = 1000
+子 Agent A 写入 total_tokens = 1000 + 500 = 1500
+子 Agent B 写入 total_tokens = 1000 + 300 = 1300  ← 覆盖了 A 的更新！
+```
+
+经典的“读-改-写”竞态条件（Lost Update）。
+
+**四种解决方案对比**：
+
+| 方案 | 实现 | 优点 | 缺点 | 适用场景 |
+|------|------|------|------|---------|
+| **原子增量操作** | `INCR` / `UPDATE SET x = x + delta` | 最简单、性能最好 | 只适合简单累加 | token 计数（首选） |
+| **分布式锁** | Redis `SETNX` + 过期时间 | 强一致 | 锁等待增加延迟 | 需要读-改-写的复杂更新 |
+| **乐观锁（CAS）** | 带版本号更新，失败重试 | 无锁等待 | 高并发时重试多 | 中等竞争场景 |
+| **归并队列** | 各子 Agent 写消息队列，单消费者汇总 | 完全无竞争 | 延迟略高 | 高并发 + 复杂统计 |
+
+**最佳方案：原子增量操作**
+
+对于 token 统计这种“只需要累加”的场景，根本不需要锁——用数据库的原子自增操作：
+
+```text
+Redis 方案：
+  HINCRBY session:{id}:tokens input_tokens 500
+  HINCRBY session:{id}:tokens output_tokens 300
+  → 原子操作，无竞态，O(1)
+
+SQL 方案：
+  UPDATE session_stats
+  SET total_tokens = total_tokens + 500,
+      updated_at = NOW()
+  WHERE session_id = 'xxx';
+  → 数据库内部保证原子性
+```
+
+**为什么不用分布式锁**：
+
+分布式锁（如 Redis SETNX）虽然能解决问题，但引入了不必要的复杂度——锁超时设多少？获取锁失败怎么重试？死锁怎么处理？对于简单的计数累加，原子操作是最优解。
+
+**需要锁的场景——复杂统计**：
+
+如果统计逻辑不只是累加（比如“如果总 token 超过预算则拒绝，否则累加”），就需要原子的读-判断-写操作：
+
+```text
+Redis Lua 脚本（原子执行）：
+  local current = tonumber(redis.call('HGET', key, 'total'))
+  if current + delta > budget then
+    return -1  -- 超预算，拒绝
+  end
+  redis.call('HINCRBY', key, 'total', delta)
+  return current + delta
+```
+
+Lua 脚本在 Redis 中原子执行，不需要外部锁。
+
+**归并队列方案——高并发场景**：
+
+当并发子 Agent 数量极大（如 50+ 并发），且统计逻辑复杂时，用消息队列解耦：
+
+```mermaid
+flowchart LR
+    A1["子 Agent 1"] -->|"token_delta"| Q["消息队列"]
+    A2["子 Agent 2"] -->|"token_delta"| Q
+    A3["子 Agent N"] -->|"token_delta"| Q
+    Q --> C["单线程消费者\n顺序处理，无竞争"]
+    C --> DB["更新统计数据"]
+```
+
+各子 Agent 只负责发消息（无阻塞），单消费者串行处理所有更新——彻底消除竞争，代价是统计延迟增加几十毫秒。
+
+
+若两个实例实际引用同一个共享对象，计数器的“读取再加一”不是原子操作，会发生丢失更新；ArrayList、HashMap等非线程安全集合并发写入还可能导致数据覆盖、结构损坏或可见性问题。应改用并发集合，或用同一把锁保护完整复合操作，并验证共享引用、线程转储和并发测试结果。
+
+**差距在哪**：新手只说“加锁”——这是最暴力且通常不是最优的方案。高手根据业务特征（简单累加 vs 复杂判断）选择不同方案：简单累加用原子操作（零锁开销），复杂逻辑用 Lua 脚本或归并队列。面试官考的是你对并发控制的方案选型能力——不是“会不会用锁”，而是“什么时候不需要锁”。
+
+---
 
 ## Q：如何设计同时兼顾吞吐、首 Token 延迟和租户公平性的推理调度器？
 
@@ -2783,98 +2893,6 @@ K8s 在 Agent 项目中主要解决三个问题：
 - 向量数据库（Milvus）的 StatefulSet 扩容后需要 rebalance segment → 用 CronJob 定期触发
 
 **差距在哪**：面试官不是要考你 K8s 八股，而是看你有没有在 AI 应用场景下用过。能说出 Agent 长任务的优雅终止、SSE 超时配置、GPU 调度，说明你真正在生产环境部署过 Agent 系统。
-
----
-
-## Q：多个子 Agent 延迟退出，同时更新同一对话的 Token 统计数据，线程竞争怎么解决？
-
-> 来源：深信服 AI 全栈开发二面；本轮追问：同一个 JVM 中，Agent 类的两个实例同时对共享计数器执行加一操作，并更新同一个共享集合，最终出现计数丢失，可能是什么原因？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）
-
-**新手答**：“加个锁就行了。”
-
-**高手答**：
-
-“加锁”方向对，但具体怎么加、在哪个层面加、锁的粒度是什么——这些细节决定了方案是否适用于生产环境。
-
-**问题本质**：
-
-多个子 Agent 并行执行，各自消耗 token，最终需要汇总到同一个 session 的 token 统计字段。如果多个子 Agent 同时完成并尝试更新同一条记录：
-
-```text
-子 Agent A 读取当前 total_tokens = 1000
-子 Agent B 读取当前 total_tokens = 1000
-子 Agent A 写入 total_tokens = 1000 + 500 = 1500
-子 Agent B 写入 total_tokens = 1000 + 300 = 1300  ← 覆盖了 A 的更新！
-```
-
-经典的“读-改-写”竞态条件（Lost Update）。
-
-**四种解决方案对比**：
-
-| 方案 | 实现 | 优点 | 缺点 | 适用场景 |
-|------|------|------|------|---------|
-| **原子增量操作** | `INCR` / `UPDATE SET x = x + delta` | 最简单、性能最好 | 只适合简单累加 | token 计数（首选） |
-| **分布式锁** | Redis `SETNX` + 过期时间 | 强一致 | 锁等待增加延迟 | 需要读-改-写的复杂更新 |
-| **乐观锁（CAS）** | 带版本号更新，失败重试 | 无锁等待 | 高并发时重试多 | 中等竞争场景 |
-| **归并队列** | 各子 Agent 写消息队列，单消费者汇总 | 完全无竞争 | 延迟略高 | 高并发 + 复杂统计 |
-
-**最佳方案：原子增量操作**
-
-对于 token 统计这种“只需要累加”的场景，根本不需要锁——用数据库的原子自增操作：
-
-```text
-Redis 方案：
-  HINCRBY session:{id}:tokens input_tokens 500
-  HINCRBY session:{id}:tokens output_tokens 300
-  → 原子操作，无竞态，O(1)
-
-SQL 方案：
-  UPDATE session_stats
-  SET total_tokens = total_tokens + 500,
-      updated_at = NOW()
-  WHERE session_id = 'xxx';
-  → 数据库内部保证原子性
-```
-
-**为什么不用分布式锁**：
-
-分布式锁（如 Redis SETNX）虽然能解决问题，但引入了不必要的复杂度——锁超时设多少？获取锁失败怎么重试？死锁怎么处理？对于简单的计数累加，原子操作是最优解。
-
-**需要锁的场景——复杂统计**：
-
-如果统计逻辑不只是累加（比如“如果总 token 超过预算则拒绝，否则累加”），就需要原子的读-判断-写操作：
-
-```text
-Redis Lua 脚本（原子执行）：
-  local current = tonumber(redis.call('HGET', key, 'total'))
-  if current + delta > budget then
-    return -1  -- 超预算，拒绝
-  end
-  redis.call('HINCRBY', key, 'total', delta)
-  return current + delta
-```
-
-Lua 脚本在 Redis 中原子执行，不需要外部锁。
-
-**归并队列方案——高并发场景**：
-
-当并发子 Agent 数量极大（如 50+ 并发），且统计逻辑复杂时，用消息队列解耦：
-
-```mermaid
-flowchart LR
-    A1["子 Agent 1"] -->|"token_delta"| Q["消息队列"]
-    A2["子 Agent 2"] -->|"token_delta"| Q
-    A3["子 Agent N"] -->|"token_delta"| Q
-    Q --> C["单线程消费者\n顺序处理，无竞争"]
-    C --> DB["更新统计数据"]
-```
-
-各子 Agent 只负责发消息（无阻塞），单消费者串行处理所有更新——彻底消除竞争，代价是统计延迟增加几十毫秒。
-
-
-若两个实例实际引用同一个共享对象，计数器的“读取再加一”不是原子操作，会发生丢失更新；ArrayList、HashMap等非线程安全集合并发写入还可能导致数据覆盖、结构损坏或可见性问题。应改用并发集合，或用同一把锁保护完整复合操作，并验证共享引用、线程转储和并发测试结果。
-
-**差距在哪**：新手只说“加锁”——这是最暴力且通常不是最优的方案。高手根据业务特征（简单累加 vs 复杂判断）选择不同方案：简单累加用原子操作（零锁开销），复杂逻辑用 Lua 脚本或归并队列。面试官考的是你对并发控制的方案选型能力——不是“会不会用锁”，而是“什么时候不需要锁”。
 
 ---
 

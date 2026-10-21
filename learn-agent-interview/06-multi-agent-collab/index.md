@@ -16,7 +16,7 @@ eyebrow: Agent 面试通关 / 06
 
 ### Q：多智能体怎么协作？比如一个写代码一个审查
 
-> 来源：Agent 岗面试高频题【[百度正式批：一面结束第二天就约二面了](https://www.nowcoder.com/discuss/925108144831725568)追问：你项目做多智能体协同和xx，这有什么优点和难点吗？】；本轮追问：多智能体协作场景中，如何设计通信机制和任务分配策略？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：单体 Agent 存在能力瓶颈、无法处理复杂任务时，如何设计多智能体解决方案？多 Agent 的通信、协作、调度机制怎么设计？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)；[记录最爽，不折腰的一次面试：小红书秋招一面](https://www.nowcoder.com/feed/main/detail/bebc8a5d22d141d09efc4e0a74031365)
+> 来源：Agent 岗面试高频题【[百度正式批：一面结束第二天就约二面了](https://www.nowcoder.com/discuss/925108144831725568)追问：你项目做多智能体协同和xx，这有什么优点和难点吗？】；本轮追问：多智能体协作场景中，如何设计通信机制和任务分配策略？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：单体 Agent 存在能力瓶颈、无法处理复杂任务时，如何设计多智能体解决方案？多 Agent 的通信、协作、调度机制怎么设计？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)；[记录最爽，不折腰的一次面试：小红书秋招一面](https://www.nowcoder.com/feed/main/detail/bebc8a5d22d141d09efc4e0a74031365)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)
 
 **新手答**：“一个写完发给另一个看就行。”
 
@@ -153,6 +153,36 @@ Select prompt 应提供候选 Agent 的能力标签、输入输出契约、当�
 
 ---
 
+### Q：单 Agent 还是多 Agent 的？子 Agent 的任务是什么？
+
+> 来源：抖音基础架构 Agent 一面；[字节跳动 - Agent 研发 - 一面](https://www.nowcoder.com/feed/main/detail/0b91e9f5fbba4af4865c6fadc9a790e8)
+
+**新手答**：“用一个 Agent 就行。”
+
+**高手答**：
+
+以 AI 代码测试系统为例，用多 Agent 架构，分四个角色：
+
+```text
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  代码分析器   │ ──→ │  测试生成器   │ ──→ │  测试验证器   │ ──→ │  覆盖率检查器 │
+│  Analyzer    │     │  Generator   │     │  Validator   │     │  Coverage    │
+└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
+```
+
+1. **代码分析器**：解析待测代码的 AST，提取函数签名、依赖关系、分支结构、复杂度指标，输出结构化的分析报告
+2. **测试生成器**：基于分析报告和提示词模板，生成测试代码。它只负责“写”，不负责“验”
+3. **测试验证器**：执行生成的测试，检查语法是否正确、能否通过编译、断言是否合理。失败的用例连同错误信息反馈给生成器重试
+4. **覆盖率检查器**：跑覆盖率工具，分析哪些分支没覆盖到，把未覆盖的分支信息反馈给生成器做补充生成
+
+拆成多 Agent 的原因：**每个环节的失败模式不同，分开才能精准重试**。生成失败和验证失败的处理逻辑完全不一样，混在一起会导致无效重试。
+
+**追问补充**：Multi-Agent 描述多个 Agent 协作的系统，Sub-Agent 描述主 Agent 委派子任务的关系，二者并不互斥。子任务的生命周期、上下文和权限如何隔离取决于运行时设计；只有存在并行收益、能力边界或独立失败恢复需求时再拆分，并比较通信与上下文成本。
+
+**差距在哪**：新手默认用单 Agent 解决所有问题。高手的多 Agent 架构有明确的拆分理由——不同环节的失败模式不同，分开才能精准处理。面试官考的是你为什么拆、怎么拆、拆完各个子 Agent 之间怎么协调。
+
+---
+
 ### Q：多 Agent 设计里，按“职能拆分”和按“阶段拆分”各有什么优缺点？
 
 > 来源：Agent 开发面试 30 题；本轮追问：为什么要把分析拆分为4个角色（双分析Agent、裁决Agent、Reviewer Agent）？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
@@ -204,34 +234,6 @@ Select prompt 应提供候选 Agent 的能力标签、输入输出契约、当�
 
 ---
 
-
-### Q：单 Agent 还是多 Agent 的？子 Agent 的任务是什么？
-
-> 来源：抖音基础架构 Agent 一面
-
-**新手答**：“用一个 Agent 就行。”
-
-**高手答**：
-
-以 AI 代码测试系统为例，用多 Agent 架构，分四个角色：
-
-```text
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│  代码分析器   │ ──→ │  测试生成器   │ ──→ │  测试验证器   │ ──→ │  覆盖率检查器 │
-│  Analyzer    │     │  Generator   │     │  Validator   │     │  Coverage    │
-└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
-```
-
-1. **代码分析器**：解析待测代码的 AST，提取函数签名、依赖关系、分支结构、复杂度指标，输出结构化的分析报告
-2. **测试生成器**：基于分析报告和提示词模板，生成测试代码。它只负责“写”，不负责“验”
-3. **测试验证器**：执行生成的测试，检查语法是否正确、能否通过编译、断言是否合理。失败的用例连同错误信息反馈给生成器重试
-4. **覆盖率检查器**：跑覆盖率工具，分析哪些分支没覆盖到，把未覆盖的分支信息反馈给生成器做补充生成
-
-拆成多 Agent 的原因：**每个环节的失败模式不同，分开才能精准重试**。生成失败和验证失败的处理逻辑完全不一样，混在一起会导致无效重试。
-
-**差距在哪**：新手默认用单 Agent 解决所有问题。高手的多 Agent 架构有明确的拆分理由——不同环节的失败模式不同，分开才能精准处理。面试官考的是你为什么拆、怎么拆、拆完各个子 Agent 之间怎么协调。
-
----
 
 ## 通信协议与 Handoff
 
@@ -406,7 +408,7 @@ flowchart TB
 
 ### Q：任务简单但工具调用多，用 subagent 是否浪费 token？怎么解决？
 
-> 来源：蚂蚁集团一面；[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)
+> 来源：蚂蚁集团一面；[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)
 
 **新手答**：“简单任务就不用 subagent 了，直接调工具。”
 
@@ -429,6 +431,8 @@ flowchart TB
 3. **简单 + 工具多但需要判断**（如“搜索某个函数定义，可能在多个文件里”）→ 用 subagent，但**精简 system prompt**，只给必要的任务描述，不加载完整的能力描述
 
 关键洞察：**“浪费 token”的根源不是 subagent 本身，而是没有根据任务复杂度调整 subagent 的“规格”**。就像不需要为查一个文件启动一台虚拟机——轻量容器就够了。
+
+**追问补充**：Agent 本身也需要 Harness，二者不是互斥选项。可把确定的批量调用、状态推进和结果裁剪放进宿主代码，让模型只处理需要判断的节点，以减少反复规划和读取历史的开销。是否拆 Sub-Agent 应用相同任务集比较成功率、Token、关键路径延迟与恢复成本。
 
 **差距在哪**：新手把 subagent 当成全有或全无的选择。高手给出了三级分层方案——直接调用、轻量工具链、精简 subagent，根据任务特征选最经济的方案。面试官考的是你对 Agent 系统成本控制的精细化思维。
 
@@ -489,7 +493,7 @@ subagent B 接收引用 → 需要时才通过 image_ref 加载原图
 
 ### Q：多 Agent 怎么编排的？用的什么编排模式？
 
-> 来源：百度实习 AI 应用开发一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)；[本轮来源](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)；[本轮来源](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)
+> 来源：百度实习 AI 应用开发一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)；[本轮来源](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)；[本轮来源](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[滴滴企业级算法实习生 一面](https://www.nowcoder.com/feed/main/detail/ea411234bf9f4e129eb5b8711861d6a3)；[10.14 字节跳动 AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/27b05099955e43d5a6a66013a2dea2c6)
 
 **新手答**：“一个调一个，串行执行。”
 
@@ -550,7 +554,7 @@ flowchart TB
 
 ### Q：Multi Agent 系统中 Router 节点依据什么规则把任务分给子 Agent？
 
-> 来源：淘天 AI Agent 二面【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：复杂任务场景下，中心调度 Agent 如何路由调用不同的 subAgent？】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[搜狐畅游 Agent 开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/f0648c2e373f4f03a10dd0fffbd235cd)
+> 来源：淘天 AI Agent 二面【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：复杂任务场景下，中心调度 Agent 如何路由调用不同的 subAgent？】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[搜狐畅游 Agent 开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/f0648c2e373f4f03a10dd0fffbd235cd)；[10.12字节推荐算法实习](https://www.nowcoder.com/feed/main/detail/b1c21204dc174dab82206bb3a2f94902)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)
 
 **新手答**：“根据关键词匹配分发。”
 
@@ -600,6 +604,8 @@ flowchart TB
 | 意图漂移 | 对话中途用户换了话题，但 Router 没重新判断 | 每轮都重新路由，不只在首轮 |
 | 置信度盲区 | 分类器给了 0.5 的置信度，不知道分给谁 | 设阈值兜底到 LLM 路由或人工 |
 | 路由死循环 | A 转给 B，B 转给 A | 加路由计数器，超过 N 次强制升级 |
+
+**追问补充**：常见做法是维护Agent能力注册表，先由规则、意图分类器或LLM选择Agent，再由Planner拆解任务并串并行调度；Agent间通过结构化任务消息、共享黑板或状态存储传递结果，限定可见上下文和权限。可优化为能力检索加置信度门控、动态重规划和失败重试，但应以路由准确率、端到端成功率、延迟和成本对比验证，不能只宣称创新。
 
 **差距在哪**：新手只想到关键词匹配——这在复杂场景下很快失效。高手有三层级联路由（规则 → 分类器 → LLM）的架构设计，且考虑了分发信息完整性、降级路径和常见失败模式。面试官考的是你对多 Agent 编排中“调度”这个关键环节的工程化认知。
 
@@ -688,7 +694,7 @@ Root → Sub-Agent 直调时的上下文包：
 
 ### Q：Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？
 
-> 来源：蚂蚁 AI应用开发 二面；[本轮来源](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)；本轮追问：为什么非得采用三级架构，单层架构不行吗？编排层单独拆成 Agent 是图什么？（[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)）；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)
+> 来源：蚂蚁 AI应用开发 二面；[本轮来源](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)；本轮追问：为什么非得采用三级架构，单层架构不行吗？编排层单独拆成 Agent 是图什么？（[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)）；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)
 
 **新手答**：「中心化就是有一个主 Agent 指挥别人，点对点是大家直接通信。」
 
@@ -728,7 +734,7 @@ Root → Sub-Agent 直调时的上下文包：
 
 ### Q：Multi-Agent 如何通信？不同项目分别用了哪些通信方法？
 
-> 来源：币安 AI大模型实习一面 / [中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：币安 AI大模型实习一面 / [中兴软开一面](https://www.nowcoder.com/feed/main/detail/0b39815babfb47108464ffabdf929eba)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)
 
 **新手答**：“Agent 之间通过消息传递通信。”
 
@@ -879,6 +885,77 @@ Agent 间可信通信不只是传输层加密，还涉及身份认证和内容�
 
 ---
 
+### Q：主 Agent 与子 Agent 的通信和进度同步怎么做？是推还是拉？
+
+> 来源：广州某小厂 Agent 后端开发二面【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：主 Agent 与二级 Agent、子 Agent 之间如何通信？】；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；本轮追问：项目中各模块之间如何配合？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/39ba19b7cc204f339ce07a6aced7565b)；本轮追问：主 Agent 与 Sub-agent 的通信、上下文管理和任务拆分方式，会对最终结果产生什么影响？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；本轮追问：子 Agent 在实现层面怎么做？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；[佰聆数据 助理AI应用开发工程师](https://www.nowcoder.com/feed/main/detail/3e95d47e9d4d40e09b1e5f2e8daf06c9)
+
+**新手答**：“子 Agent 做完了就告诉主 Agent。”
+
+**高手答**：
+
+“做完了通知”只是最简单的情况。实际系统中主 Agent 需要在子 Agent 执行过程中**持续感知进度**——否则无法做超时干预、动态调整、或向用户反馈进展。
+
+**推 vs 拉的对比**：
+
+| 维度 | 推模式（子 Agent 主动上报） | 拉模式（主 Agent 主动查询） |
+|------|-------------------------|--------------------------|
+| 实时性 | 高——状态变化即时通知 | 依赖轮询频率，有延迟 |
+| 资源消耗 | 低——只在状态变化时通信 | 高——空轮询浪费资源 |
+| 实现复杂度 | 需要事件机制/回调 | 简单轮询即可 |
+| 适合场景 | 子任务执行时间长、进度有多阶段 | 子任务短平快、不关心中间状态 |
+
+**生产环境的最佳实践：推为主、拉为辅**
+
+```mermaid
+flowchart TB
+    M["主 Agent"] -->|"① 分发任务"| S["子 Agent"]
+    S -->|"② 推：状态变更事件\n（开始/进行中/完成/失败）"| M
+    M -->|"③ 拉：超时未收到推送时\n主动查询状态"| S
+    S -->|"④ 推：最终结果"| M
+```
+
+**具体设计**：
+
+**1. 子 Agent 主动推送的时机**：
+
+| 事件 | 推送内容 | 主 Agent 的处理 |
+|------|---------|---------------|
+| 任务开始 | `{status: "started", estimated_time: 5s}` | 记录开始时间，启动超时计时器 |
+| 阶段完成 | `{status: "progress", step: "2/5", intermediate_result: "..."}` | 更新进度，按需向用户反馈 |
+| 需要输入 | `{status: "blocked", reason: "缺少参数 X"}` | 决定是追问用户还是从其他来源获取 |
+| 任务完成 | `{status: "completed", result: {...}}` | 取消超时计时器，整合结果 |
+| 任务失败 | `{status: "failed", error: "...", retry_suggestion: "..."}` | 决定重试/降级/上报 |
+
+**2. 主 Agent 主动拉取的场景**：
+
+```text
+- 超时兜底：分发任务后启动计时器，超过预期时间未收到推送 → 主动查询
+- 用户催促：用户问"到哪了" → 主 Agent 主动向子 Agent 拉取当前进度
+- 动态调整：外部条件变化（如用户修改了需求） → 主 Agent 拉取当前状态后决定是否中断
+```
+
+**3. 通信实现方式**：
+
+| 实现方式 | 适用场景 | 技术栈 |
+|---------|---------|--------|
+| 回调函数 | 同进程内的子 Agent | 直接函数调用，零网络开销 |
+| 事件总线 | 同服务内多 Agent | Redis Pub/Sub、内存事件队列 |
+| Webhook/SSE | 跨服务的异步 Agent | HTTP 回调或 Server-Sent Events |
+| 共享状态轮询 | 最简单的实现 | 子 Agent 写状态到 DB，主 Agent 定期读 |
+
+**4. 进度同步的工程细节**：
+
+- **幂等性**：网络抖动可能导致推送重复，主 Agent 需要按 `task_id + event_id` 去重
+- **顺序保证**：推送可能乱序到达，每条消息带递增序号，主 Agent 按序处理
+- **断线重连**：子 Agent 挂了重启后，主动向主 Agent 重新汇报当前状态
+
+
+通信、上下文边界和拆分策略会直接影响结果：任务拆得过粗难以并行和定位失败，过细则增加通信与上下文噪声；主 Agent 应为子任务明确输入、约束、依赖和验收标准，汇总时校验结果、处理冲突，避免子 Agent 的错误或重复信息污染最终答案。
+
+**差距在哪**：新手只想到“做完通知”——这是最终态，不是过程态。高手设计了“推为主、拉为辅”的混合方案，覆盖了任务全生命周期的状态同步，且考虑了超时兜底、用户催促、动态调整等实际场景。面试官考的是你对异步系统中“状态可见性”的工程化理解——主 Agent 不能是盲人，必须随时知道子 Agent 在干什么。
+
+---
+
 ### Q：子 Agent 之间的上下文怎么传递？传什么、不传什么？
 
 > 来源：阿里 Agent 面经【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：各层 Agent 之间的上下文如何传递？；如何保证传给子 Agent 的上下文足够完整，不会遗漏关键信息？】；本轮追问：第一次 Agent 调用和第二次 Agent 调用分别需要什么上下文？（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)）；[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)；本轮追问：主 Agent 跟子 Agent 之间怎么传递上下文，怎么保证不漏掉关键信息？（[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)）；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
@@ -949,77 +1026,6 @@ flowchart LR
 要保证不漏关键信息，不能只依赖摘要：为每类任务定义必填字段和约束清单，由编排层校验 schema、任务状态与未决事项；缺字段时拒绝下发或回溯加载原始结果，并保留 task_id、step_id 便于审计和重试。
 
 **差距在哪**：新手把“输出传给下一个”当成全部——这在两个 Agent 的简单链路下没问题，但在多 Agent 系统中会导致信息膨胀或缺失。高手用明确的传/不传分类、标准化消息格式和特殊场景策略，把上下文传递变成了一个可控的工程方案。面试官考的是你对多 Agent 系统中“信息流动”的精细化设计能力。
-
----
-
-### Q：主 Agent 与子 Agent 的通信和进度同步怎么做？是推还是拉？
-
-> 来源：广州某小厂 Agent 后端开发二面【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：主 Agent 与二级 Agent、子 Agent 之间如何通信？】；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；本轮追问：项目中各模块之间如何配合？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/39ba19b7cc204f339ce07a6aced7565b)；本轮追问：主 Agent 与 Sub-agent 的通信、上下文管理和任务拆分方式，会对最终结果产生什么影响？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；本轮追问：子 Agent 在实现层面怎么做？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）
-
-**新手答**：“子 Agent 做完了就告诉主 Agent。”
-
-**高手答**：
-
-“做完了通知”只是最简单的情况。实际系统中主 Agent 需要在子 Agent 执行过程中**持续感知进度**——否则无法做超时干预、动态调整、或向用户反馈进展。
-
-**推 vs 拉的对比**：
-
-| 维度 | 推模式（子 Agent 主动上报） | 拉模式（主 Agent 主动查询） |
-|------|-------------------------|--------------------------|
-| 实时性 | 高——状态变化即时通知 | 依赖轮询频率，有延迟 |
-| 资源消耗 | 低——只在状态变化时通信 | 高——空轮询浪费资源 |
-| 实现复杂度 | 需要事件机制/回调 | 简单轮询即可 |
-| 适合场景 | 子任务执行时间长、进度有多阶段 | 子任务短平快、不关心中间状态 |
-
-**生产环境的最佳实践：推为主、拉为辅**
-
-```mermaid
-flowchart TB
-    M["主 Agent"] -->|"① 分发任务"| S["子 Agent"]
-    S -->|"② 推：状态变更事件\n（开始/进行中/完成/失败）"| M
-    M -->|"③ 拉：超时未收到推送时\n主动查询状态"| S
-    S -->|"④ 推：最终结果"| M
-```
-
-**具体设计**：
-
-**1. 子 Agent 主动推送的时机**：
-
-| 事件 | 推送内容 | 主 Agent 的处理 |
-|------|---------|---------------|
-| 任务开始 | `{status: "started", estimated_time: 5s}` | 记录开始时间，启动超时计时器 |
-| 阶段完成 | `{status: "progress", step: "2/5", intermediate_result: "..."}` | 更新进度，按需向用户反馈 |
-| 需要输入 | `{status: "blocked", reason: "缺少参数 X"}` | 决定是追问用户还是从其他来源获取 |
-| 任务完成 | `{status: "completed", result: {...}}` | 取消超时计时器，整合结果 |
-| 任务失败 | `{status: "failed", error: "...", retry_suggestion: "..."}` | 决定重试/降级/上报 |
-
-**2. 主 Agent 主动拉取的场景**：
-
-```text
-- 超时兜底：分发任务后启动计时器，超过预期时间未收到推送 → 主动查询
-- 用户催促：用户问"到哪了" → 主 Agent 主动向子 Agent 拉取当前进度
-- 动态调整：外部条件变化（如用户修改了需求） → 主 Agent 拉取当前状态后决定是否中断
-```
-
-**3. 通信实现方式**：
-
-| 实现方式 | 适用场景 | 技术栈 |
-|---------|---------|--------|
-| 回调函数 | 同进程内的子 Agent | 直接函数调用，零网络开销 |
-| 事件总线 | 同服务内多 Agent | Redis Pub/Sub、内存事件队列 |
-| Webhook/SSE | 跨服务的异步 Agent | HTTP 回调或 Server-Sent Events |
-| 共享状态轮询 | 最简单的实现 | 子 Agent 写状态到 DB，主 Agent 定期读 |
-
-**4. 进度同步的工程细节**：
-
-- **幂等性**：网络抖动可能导致推送重复，主 Agent 需要按 `task_id + event_id` 去重
-- **顺序保证**：推送可能乱序到达，每条消息带递增序号，主 Agent 按序处理
-- **断线重连**：子 Agent 挂了重启后，主动向主 Agent 重新汇报当前状态
-
-
-通信、上下文边界和拆分策略会直接影响结果：任务拆得过粗难以并行和定位失败，过细则增加通信与上下文噪声；主 Agent 应为子任务明确输入、约束、依赖和验收标准，汇总时校验结果、处理冲突，避免子 Agent 的错误或重复信息污染最终答案。
-
-**差距在哪**：新手只想到“做完通知”——这是最终态，不是过程态。高手设计了“推为主、拉为辅”的混合方案，覆盖了任务全生命周期的状态同步，且考虑了超时兜底、用户催促、动态调整等实际场景。面试官考的是你对异步系统中“状态可见性”的工程化理解——主 Agent 不能是盲人，必须随时知道子 Agent 在干什么。
 
 ---
 
@@ -1164,62 +1170,9 @@ Leader 派活前从能力注册表筛选满足输入 schema、工具权限、健
 
 ---
 
-## Q：校验 Agent 和推理 Agent 结论冲突时怎么处理？
-
-> 来源：商汤/大模型算法应用实习二面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：语音转录复核 Agent 场景中，规则与模型冲突时如何处理？】；[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)；[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)
-
-**新手答**：“以校验 Agent 的结论为准。”
-
-**高手答**：
-
-不能简单“以谁为准”——需要根据**冲突类型**选择不同的仲裁策略。
-
-**冲突分类与处理**：
-
-| 冲突类型 | 特征 | 处理策略 | 示例 |
-|---------|------|---------|------|
-| 事实性冲突 | 校验 Agent 有外部证据 | 校验 Agent 赢，推理 Agent 重来 | 推理说“2024年GDP是X”，校验查到实际是Y |
-| 逻辑性冲突 | 推理链有漏洞 | 让推理 Agent 补充推理步骤，校验再验证 | 推理跳过了某个前置条件的检查 |
-| 不确定性冲突 | 双方都有道理 | 上升到仲裁层 | 对同一数据的不同合理解读 |
-
-**工程实现——争议仲裁流程**：
-
-```mermaid
-flowchart TD
-    C["检测到冲突"] --> R["生成争议报告\n（双方证据 + 推理链）"]
-    R --> J{"冲突类型判断"}
-    J -->|"事实性"| F["校验 Agent 赢\n推理 Agent 重做"]
-    J -->|"逻辑性"| L["推理 Agent 补充论证\n校验 Agent 再验证"]
-    J -->|"不确定性"| A["仲裁 Agent 裁决"]
-    A --> C2{"仲裁置信度\n> 0.6？"}
-    C2 -->|"是"| D["输出仲裁结论\n+ 裁决理由写入 trace"]
-    C2 -->|"否"| H["触发 Human-in-the-Loop"]
-    L --> V{"通过？"}
-    V -->|"是"| OK["输出结果"]
-    V -->|"否（第2次）"| A
-```
-
-**争议报告结构**：
-
-```text
-{
-  "conflict_type": "factual | logical | uncertain",
-  "reasoning_agent_claim": "推理Agent的结论 + 推理链",
-  "verification_agent_claim": "校验Agent的结论 + 证据来源",
-  "overlap": "双方同意的部分",
-  "disagreement": "具体分歧点"
-}
-```
-
-**防止震荡**：推理 Agent 和校验 Agent 互相否定进入死循环时，设置**最大争议轮次**（通常 2-3 轮）后强制走仲裁。每一轮争议都必须产生新的证据或论点，如果第二轮的论点和第一轮相同，直接判定为“不确定性冲突”走仲裁。
-
-**差距在哪**：面试官考的是多 Agent 系统中“冲突解决”机制的设计——这是分布式系统中的经典共识问题在 AI 领域的映射。简单“以谁为准”无法处理灰区情况，分类仲裁 + 争议报告 + 震荡防护才是完整方案。
-
----
-
 ## Q：如果拆成感知/推理/校验 Agent，哪些能并行哪些要顺序，什么时候需要反向通信？
 
-> 来源：商汤/大模型算法应用实习二面；本轮追问：并行后某个数据源仍然很慢，是否需要一直等到两路都返回？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）
+> 来源：商汤/大模型算法应用实习二面；本轮追问：并行后某个数据源仍然很慢，是否需要一直等到两路都返回？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；[(秋招) 10.15 - 银泰百货 - 银泰星AI工程师 - 一面](https://www.nowcoder.com/discuss/942055584050733056)
 
 **新手答**：“顺序执行就好了，感知→推理→校验。”
 
@@ -1280,6 +1233,59 @@ flowchart LR
 并行分支不必无限等待。应设置截止时间和最小可用结果门槛：快分支先返回，慢分支超时则取消或降级，用默认值、历史结果或置信度标记补齐；若慢分支是关键依赖才阻塞，并记录超时、迟到结果和最终决策依据。
 
 **差距在哪**：面试官考的是对 DAG vs 循环图的理解，以及何时引入反馈环路的判断力。纯顺序暴露的是“没考虑过并行优化”，而盲目并行暴露的是“不理解数据依赖”。正确答案是精确分析依赖、最大化并行、有限反馈循环。
+
+---
+
+## Q：校验 Agent 和推理 Agent 结论冲突时怎么处理？
+
+> 来源：商汤/大模型算法应用实习二面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：语音转录复核 Agent 场景中，规则与模型冲突时如何处理？】；[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)；[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)
+
+**新手答**：“以校验 Agent 的结论为准。”
+
+**高手答**：
+
+不能简单“以谁为准”——需要根据**冲突类型**选择不同的仲裁策略。
+
+**冲突分类与处理**：
+
+| 冲突类型 | 特征 | 处理策略 | 示例 |
+|---------|------|---------|------|
+| 事实性冲突 | 校验 Agent 有外部证据 | 校验 Agent 赢，推理 Agent 重来 | 推理说“2024年GDP是X”，校验查到实际是Y |
+| 逻辑性冲突 | 推理链有漏洞 | 让推理 Agent 补充推理步骤，校验再验证 | 推理跳过了某个前置条件的检查 |
+| 不确定性冲突 | 双方都有道理 | 上升到仲裁层 | 对同一数据的不同合理解读 |
+
+**工程实现——争议仲裁流程**：
+
+```mermaid
+flowchart TD
+    C["检测到冲突"] --> R["生成争议报告\n（双方证据 + 推理链）"]
+    R --> J{"冲突类型判断"}
+    J -->|"事实性"| F["校验 Agent 赢\n推理 Agent 重做"]
+    J -->|"逻辑性"| L["推理 Agent 补充论证\n校验 Agent 再验证"]
+    J -->|"不确定性"| A["仲裁 Agent 裁决"]
+    A --> C2{"仲裁置信度\n> 0.6？"}
+    C2 -->|"是"| D["输出仲裁结论\n+ 裁决理由写入 trace"]
+    C2 -->|"否"| H["触发 Human-in-the-Loop"]
+    L --> V{"通过？"}
+    V -->|"是"| OK["输出结果"]
+    V -->|"否（第2次）"| A
+```
+
+**争议报告结构**：
+
+```text
+{
+  "conflict_type": "factual | logical | uncertain",
+  "reasoning_agent_claim": "推理Agent的结论 + 推理链",
+  "verification_agent_claim": "校验Agent的结论 + 证据来源",
+  "overlap": "双方同意的部分",
+  "disagreement": "具体分歧点"
+}
+```
+
+**防止震荡**：推理 Agent 和校验 Agent 互相否定进入死循环时，设置**最大争议轮次**（通常 2-3 轮）后强制走仲裁。每一轮争议都必须产生新的证据或论点，如果第二轮的论点和第一轮相同，直接判定为“不确定性冲突”走仲裁。
+
+**差距在哪**：面试官考的是多 Agent 系统中“冲突解决”机制的设计——这是分布式系统中的经典共识问题在 AI 领域的映射。简单“以谁为准”无法处理灰区情况，分类仲裁 + 争议报告 + 震荡防护才是完整方案。
 
 ---
 

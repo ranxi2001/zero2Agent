@@ -171,3 +171,27 @@ The two application-practice articles use the following primary sources:
 - [Doubao Work introduction](https://www.feishu.cn/content/article/7677519271848610746), [Doubao work-partner help](https://aily.feishu.cn/hc/1u7kleqg_3d5z9ttt?_lang=zh), [Coze cloud-computer documentation](https://docs.coze.cn/cozespace_device), and [Manus Cloud Computer](https://www.manus.im/features/cloud-computer): documented task execution, collaboration, and environment lifecycle.
 
 Explanations, diagrams, task templates, and proposed evaluation procedures are independently written. They are not upstream implementations or reports of product testing. Product availability remains tied to current official documentation and account configuration.
+
+## Interview Answer References (2026-10-22)
+
+The October 13–22 question-bank update independently explains mechanisms and engineering tradeoffs using these primary references:
+
+- [Scaling Laws 原论文](https://arxiv.org/abs/2001.08361)
+- [GECToR 论文](https://arxiv.org/abs/2005.12592)
+- [Chinchilla 论文](https://arxiv.org/abs/2203.15556)
+- [DPO 论文](https://arxiv.org/abs/2305.18290)
+- [LangChain 概览](https://docs.langchain.com/oss/python/langchain/overview)
+- [PyTorch Conv2d 文档](https://docs.pytorch.org/docs/2.14/generated/torch.nn.Conv2d.html)
+- [PyTorch 梯度累积示例](https://docs.pytorch.org/docs/2.14/notes/amp_examples.html#gradient-accumulation)
+- [Ragas API](https://docs.ragas.io/en/stable/references/evaluate/)
+- [Faiss 索引说明](https://github.com/facebookresearch/faiss/wiki/Faiss-indexes)
+- [Transformers 文本生成文档](https://huggingface.co/docs/transformers/llm_tutorial)
+- [LLVM 向量化指南](https://llvm.org/docs/Vectorizers.html)
+- [2026-07-28 规范](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports)
+- [Redis 向量检索文档](https://redis.io/docs/latest/develop/ai/search-and-query/query/vector-search/)
+- [Spinning Up 强化学习基础](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html)
+- [Thinking Machines 的实现](https://thinkingmachines.ai/blog/on-policy-distillation/)
+- [Elastic 文档](https://www.elastic.co/docs/solutions/search/hybrid-search)
+- [TensorFlow 多任务推荐示例](https://www.tensorflow.org/recommenders/examples/multitask)
+
+Interview links in the articles establish question provenance. These references establish specific answer facts; deployment, evaluation, and testing recommendations are independent engineering analysis. No upstream article, source code, figure, or dataset is reproduced.

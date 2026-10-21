@@ -22,6 +22,8 @@
 - 蚂蚁、阿里、字节、腾讯、携程、百度等大厂真题
 - 同一主题内按真实面经出现频次排序，适合面试当天翻阅
 
+在线题库已更新至 **2026-10-22**，共 **844 道 Agent / AI 题**；上方 PDF 为对应版本的题库快照。
+
 **下载**：[`publish-pdf/output/zero2Agent-绿皮书-Agent面试800问.pdf`](publish-pdf/output/zero2Agent-绿皮书-Agent面试800问.pdf)
 
 > 授权协议：CC BY-NC-SA 4.0 · 转载请注明出处

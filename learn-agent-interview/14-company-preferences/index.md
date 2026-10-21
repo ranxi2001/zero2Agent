@@ -8,266 +8,201 @@ eyebrow: Agent 面试通关 / 14
 
 # 各公司面试偏好：按公司备战的高频题速查
 
-每家公司的 Agent 面试都有自己的“性格”——腾讯喜欢从 RAG 系统设计往下挖，蚂蚁全栈考察从 Prompt 到 AI Coding 测试，字节侧重记忆与上下文工程，淘宝闪购则专注 Human-in-the-Loop 和异常管控。
+准备目标公司面试时，可以先看该公司在当前题库里覆盖了哪些维度，再回到具体题目练习机制、失败模式和方案取舍。以下统计更新于 **2026-10-22**，从当前 **844 道题**的来源标注派生。
 
-本文基于 245+ 道真实面试题的来源统计，帮你识别目标公司的考察重心，精准备战。
+## 统计口径
 
----
+每家公司对同一道核心题最多计一次；同一题被多家公司问到时，可以分别出现在各公司的覆盖数中，因此各行不能相加当作题库总数。统计只识别来源标签中的公司名称或下述别名，不根据答案内容、URL 或相似岗位推断公司；没有明确公司标签的来源不归类。
 
-## 总览：各公司考察维度热力图
+字节口径包含抖音、TikTok；蚂蚁包含 CodeFuse；腾讯包含明确的 WXG、TEG、CSIG 标签。阿里与淘天、阿里国际、淘宝闪购分别统计；来源过于笼统时保留其原标注，不强行分配业务线。
 
-| 公司 | 题量 | 最高频维度 | 考察风格 |
-|------|------|-----------|---------|
-| **腾讯** | 51 | RAG(16) > 评估(8) > 工程(6) | 系统设计能力，从架构到细节逐层追问 |
-| **蚂蚁集团** | 48 | 工具(7) > 容错(6) > RAG(6) | 全栈工程考察，AI Coding 实操 |
-| **字节跳动** | 31 | 记忆(7) > 架构/Prompt/RAG(各4) | 项目深挖 + 工程踩坑经验 |
-| **阿里-淘天** | 26 | 记忆(6) > RAG(4) > 架构(3) | 系统设计 + 理论深度，追问细节 |
-| **快手** | 18 | 训练(6) > RAG(5) | 算法基础扎实，工程+模型并重 |
-| **淘宝闪购** | 17 | 项目拷打(12) > 架构(2) | 几乎全程项目深挖，无八股 |
-| **阿里国际** | 14+ | 训练(10+) > 工具(2) > RAG(2) | RL/微调深度 + GRPO 必考，近期也考 Agent 工程 |
-| **高德** | 12 | RAG(4) > 记忆(3) | 实习题为主，MCP 协议+会话记忆 |
-| **携程** | 5 | RAG(5) | RAG 基础，适合入门准备 |
-| **bilibili** | 4 | 分散 | Agent 框架实战，项目驱动 |
-| **百度** | 4 | 工程(3) | 前后端全栈，SSE/缓存等工程题 |
+这些数字表示**当前题库的样本覆盖**，不代表某公司的全部题目、招聘偏好或实际出题概率。岗位、团队和轮次不同，考察重点也会变化；优先结合自己投递岗位的要求使用。
 
----
+## 公司与维度覆盖
 
-## 腾讯（51 题）
+| 公司 | 覆盖题数 | 来源标注最多的三个维度 |
+|------|---------|--------------------------|
+| 字节跳动 | 333 | 训练、数据与模型优化（47）、RAG 与检索系统（44）、工程化踩坑（33） |
+| 阿里与淘天（不含国际、闪购） | 186 | 训练、数据与模型优化（31）、RAG 与检索系统（28）、记忆与上下文（21） |
+| 腾讯 | 120 | 训练、数据与模型优化（20）、RAG 与检索系统（18）、评估与全局观（14） |
+| 小红书 | 116 | 训练、数据与模型优化（18）、工程化踩坑（16）、记忆与上下文（12） |
+| 美团 | 103 | RAG 与检索系统（12）、架构选型（9）、记忆与上下文（9） |
+| 百度 | 99 | 工程化踩坑（11）、训练、数据与模型优化（11）、工具管理（9） |
+| 快手 | 95 | 工程化踩坑（13）、架构选型（8）、RAG 与检索系统（8） |
+| 蚂蚁集团 | 63 | 架构选型（9）、评估与全局观（7）、概念考察（7） |
+| 拼多多 | 56 | AI Infra（9）、记忆与上下文（7）、训练、数据与模型优化（7） |
+| 携程 | 47 | 记忆与上下文（9）、RAG 与检索系统（9）、评估与全局观（6） |
+| 淘宝闪购 | 26 | 简历项目拷打（14）、容错与鲁棒性（3）、架构选型（2） |
+| 阿里国际 | 22 | 训练、数据与模型优化（5）、架构选型（3）、AI Infra（3） |
+| 网易 | 19 | 业务 AI 工程分析（5）、AI 代码分析与测试（3）、记忆与上下文（2） |
+| 高德 | 9 | 记忆与上下文（3）、RAG 与检索系统（3）、工具管理（2） |
+| 京东 | 7 | RAG 与检索系统（2）、容错与鲁棒性（1）、记忆与上下文（1） |
+| bilibili | 4 | 架构选型（1）、工程化踩坑（1）、RAG 与检索系统（1） |
 
-**面试风格**：腾讯 Agent 面试覆盖面最广，从终面到一面、从 AI 应用开发到通用 Agent 岗，都有大量真题。特点是**系统设计能力**考察突出——不只问“是什么”，更问“怎么设计”“为什么这么选”。RAG 方向出题量远超其他公司。
+## 按公司选择练习入口
 
-**高频考察维度**：
+### 字节跳动（333 题）
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [RAG 与检索](../09-rag-retrieval/index.html) | 16 | Embedding/ReRank 微调、双路召回 TopK 确定、GraphRAG 三元组抽取、PDF Layout 解析 |
-| [评估与全局观](../05-eval-and-vision/index.html) | 8 | 量化评估除准确率外还看什么、线上最难监控的指标、Agent 端到端成功率量化 |
-| [工程化踩坑](../07-engineering-pitfalls/index.html) | 6 | Demo 惊艳上线不稳定的原因、AI Coding 实践、Code Agent 优缺点 |
-| [记忆与上下文](../04-memory-context/index.html) | 5 | 长上下文不丢信息、模糊需求处理、三类上下文优先级 |
-| [架构选型](../01-architecture-design/index.html) | 4 | ReAct vs Plan-Execute（终面）、ToT 线上化成本、路径震荡防范 |
-| [工具管理](../02-tool-management/index.html) | 4 | 参数校验、百级工具路由、多工具调度 |
+可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[工程化踩坑](../07-engineering-pitfalls/index.html)。
 
-**备考重点**：
-- RAG 全链路是必考——从 chunk 设计到 Embedding 选型到 ReRank 微调，准备要深
-- 评估体系设计是高频追问——不只说“准确率”，要能设计完整评测方案
-- 终面偏架构选型，一二面偏工程实践
+代表性问题：
 
----
+- [预训练数据清洗方法？](../10-training-and-data/index.html)
+- [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
+- [如何评审 AI 生成的技术方案并进行重点提炼与技术取舍？](../07-engineering-pitfalls/index.html)
 
-## 蚂蚁集团（48 题）
+### 阿里与淘天（不含国际、闪购）（186 题）
 
-**面试风格**：蚂蚁的 Agent 面试**覆盖维度最全面**（横跨 11 个维度），且是唯一大量考察 AI Coding 测试（代码插桩、覆盖率）的公司。Prompt 工程和 Skills 机制也是蚂蚁特色题。面试分多个团队（智能体平台、AI Coding、AI 应用开发），侧重点略有不同。
+可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
-**高频考察维度**：
+代表性问题：
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [工具管理](../02-tool-management/index.html) | 7 | MCP Server 构建、Skill vs MCP 区别、参数幻觉修正、工具 token 优化 |
-| [容错与鲁棒性](../03-fault-tolerance/index.html) | 6 | 幻觉治理手段、安全权限管理、Human-in-the-Loop、Self-Reflection |
-| [RAG 与检索](../09-rag-retrieval/index.html) | 6 | 文档召回率提升、向量 vs 关键词检索、GraphRAG 应用 |
-| [架构选型](../01-architecture-design/index.html) | 5 | Skill/MCP/Rule 区别、微服务接入 Agent、ReAct 原理 |
-| [Prompt 工程](../08-prompt-engineering/index.html) | 4 | Skills 原理、Claude Code 创新设计、好/差 Prompt 区别 |
-| [AI 代码测试](../11-ai-code-testing/index.html) | 4 | 分支覆盖率插桩、前置分析、代码过滤策略 |
-| [记忆与上下文](../04-memory-context/index.html) | 4 | 上下文工程、Prompt Caching、长期记忆设计 |
+- [预训练数据清洗方法？](../10-training-and-data/index.html)
+- [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
+- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
 
-**备考重点**：
-- **蚂蚁特色题**：Skills 机制、SDD（Skill Driven Development）、AI Coding 测试——其他公司几乎不考
-- 工具管理和容错是蚂蚁高频区，准备 MCP 协议细节和安全权限设计
-- 如果面的是 AI Coding 方向，11-ai-code-testing 维度必看
+### 腾讯（120 题）
 
----
+可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[评估与全局观](../05-eval-and-vision/index.html)。
 
-## 字节跳动（31 题）
+代表性问题：
 
-**面试风格**：字节（含抖音基础架构）的 Agent 面试**最重视记忆与上下文工程**，出题量是所有公司中最高的。同时 Prompt 工程方向出题多——Skills 系统设计、MCP vs Skills 区别是字节高频题。面试风格偏向项目深挖+工程踩坑。
+- [构造数据集遇到过什么难点，怎么解决？](../10-training-and-data/index.html)
+- [如果 RAG 召回了很多相互矛盾的文档，Agent 应该怎么处理，而不是直接让模型自己总结？](../09-rag-retrieval/index.html)
+- [如何量化评估一个上线的 Agent 好坏？除了准确率。](../05-eval-and-vision/index.html)
 
-**高频考察维度**：
+### 小红书（116 题）
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [记忆与上下文](../04-memory-context/index.html) | 7 | 对话太长怎么办、上下文污染防治、长短期记忆、Claude Code 记忆架构 |
-| [架构选型](../01-architecture-design/index.html) | 4 | Agent 学术组成、设计范式、模型 vs Agent 区别 |
-| [Prompt 工程](../08-prompt-engineering/index.html) | 4 | 提示词模板构建、Skill 系统设计、LobeChat 插件 vs Skills |
-| [RAG 与检索](../09-rag-retrieval/index.html) | 4 | 查询改写、并行意图识别、Claude Code 为什么不用 RAG |
-| [工程化踩坑](../07-engineering-pitfalls/index.html) | 4 | 成本控制、API 延迟、开发流程、AI Coding 检查效率 |
+可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[工程化踩坑](../07-engineering-pitfalls/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
-**备考重点**：
-- 上下文工程是字节核心考点——准备好滑动窗口、摘要压缩、上下文污染防治的完整方案
-- Prompt 工程和 Skills 机制是字节特色——需要理解 Skills 的三层本质（模板→知识封装→能力树）
-- 字节喜欢问“为什么”和“踩过什么坑”，准备具体案例比背八股更有效
-- **业务认知是隐藏考点**：字节面试官会问“扣子是 Agent 平台还是工作流平台？”“字节做 AI 最大的瓶颈？”——面前准备好豆包、扣子（Coze）、即梦等核心 AI 产品的定位和差异
+代表性问题：
 
----
+- [自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？](../10-training-and-data/index.html)
+- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
+- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
 
-## 阿里-淘天（26 题）
+### 美团（103 题）
 
-**面试风格**：淘天的 Agent 面试**理论深度要求高**，喜欢追问底层原理（Attention 稀释、平方复杂度工程影响），同时系统设计题偏大——“设计一个智能导购助手”这类综合题是淘天特色。追问细节很深。
+可先练：[RAG 与检索系统](../09-rag-retrieval/index.html)、[架构选型](../01-architecture-design/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
-**高频考察维度**：
+代表性问题：
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [记忆与上下文](../04-memory-context/index.html) | 6 | 极度模糊表达处理、主动澄清 vs 历史推断、摘要丢细节怎么办 |
-| [RAG 与检索](../09-rag-retrieval/index.html) | 4 | 查询改写提升精准度原理、BM25+RRF 调优、召回不准排查 |
-| [架构选型](../01-architecture-design/index.html) | 3 | 逻辑塌缩纠正、分布式智能导购架构、CoT vs ReAct |
-| [工具管理](../02-tool-management/index.html) | 3 | 100+工具召回偏差、外部数据格式自动映射、跨协议工具注册 |
-| [容错与鲁棒性](../03-fault-tolerance/index.html) | 3 | 思维死循环检测、RAG 不能彻底解决幻觉、全链路降幻觉 |
+- [多维度的查询改写是什么？改写遇到需要用户补充信息时怎么设计？](../09-rag-retrieval/index.html)
+- [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
+- [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
 
-**备考重点**：
-- 准备好“设计一个XX Agent”的系统设计题——淘天喜欢出综合架构题
-- 理论深度要求高——Attention 机制、Token 稀释等底层原理要能讲清楚
-- 记忆与上下文是淘天高频——模糊需求处理、摘要压缩是必考点
+### 百度（99 题）
 
----
+可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[训练、数据与模型优化](../10-training-and-data/index.html)、[工具管理](../02-tool-management/index.html)。
 
-## 快手（18 题）
+代表性问题：
 
-**面试风格**：快手面试**模型层和工程基础并重**。训练与模型方向出题量高（RLHF、GRPO、SFT 选型），同时 RAG 全链路也是重点。工程基础题（布隆过滤器、索引失效、分布式限流）比其他公司多。
+- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
+- [自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？](../10-training-and-data/index.html)
+- [你们工具库有上百个工具，怎么让模型快速选对？](../02-tool-management/index.html)
 
-**高频考察维度**：
+### 快手（95 题）
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [训练与模型](../10-training-and-data/index.html) | 6 | RLHF 奖励模型训练、SFT vs 蒸馏 vs GRPO 选型、GRPO Loss 函数 |
-| [RAG 与检索](../09-rag-retrieval/index.html) | 5 | 父子索引、BM25+向量组合、Rerank TopK 截断、端到端性能优化 |
-| [容错与鲁棒性](../03-fault-tolerance/index.html) | 2 | Prompt 注入防御、工具调用安全控制 |
-| [工程化踩坑](../07-engineering-pitfalls/index.html) | 2 | 布隆过滤器、数据库索引失效 |
+可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[架构选型](../01-architecture-design/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)。
 
-**备考重点**：
-- **快手特色**：RLHF/GRPO 训练细节是必考——奖励函数设计、全0/全1 reward 处理、SFT 不够时什么时候上 RL
-- RAG 全链路要熟——从父子索引到 BM25 到 Rerank 截断，每一步都可能追问
-- 准备传统工程基础题——布隆过滤器、分布式限流、数据库索引，快手比其他公司更重视这些
+代表性问题：
 
----
+- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
+- [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
+- [为什么在检索阶段引入BM25？它和向量检索怎样组合？](../09-rag-retrieval/index.html)
 
-## 淘宝闪购（17 题）
+### 蚂蚁集团（63 题）
 
-**面试风格**：淘宝闪购是**项目拷打最极致**的公司——全程围绕 Agent 工程经验展开，几乎无纯八股。面试官拿着简历从框架选型到线上效果一层一层挖。特别关注**安全管控**（Human-in-the-Loop、权限控制、异常管控）。
+可先练：[架构选型](../01-architecture-design/index.html)、[评估与全局观](../05-eval-and-vision/index.html)、[概念考察](../15-agent-concepts/index.html)。
 
-**高频考察维度**：
+代表性问题：
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [简历项目拷打](../13-project-deep-dive/index.html) | 12 | 框架选型 trade-off、意图识别实现、知识库构建、分块策略、工具调用正确率 |
-| [架构选型](../01-architecture-design/index.html) | 2 | Agent 设计范式、LangChain vs LangGraph |
-| [容错与鲁棒性](../03-fault-tolerance/index.html) | 2 | Human-in-the-Loop 流程、高风险异常管控 |
+- [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
+- [你会怎么给 Agent 建立评测体系？只看最终成功率为什么不够？](../05-eval-and-vision/index.html)
+- [讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering](../15-agent-concepts/index.html)
 
-**备考重点**：
-- **核心策略**：准备好你的 Agent 项目，能从头讲到尾，每个技术选型说得出 trade-off
-- Human-in-the-Loop 和异常管控是淘宝闪购必考——操作分级、熔断机制、审计日志都要准备
-- 面试官会追问“为什么这么做”——每个决策准备好 trade-off 表述比准备“最优答案”更重要
-- 坦诚讲系统不足比吹牛更加分——“你的 Agent 还有哪些没优化的”几乎必问
+### 拼多多（56 题）
 
----
+可先练：[AI Infra](../17-ai-infra/index.html)、[记忆与上下文](../04-memory-context/index.html)、[训练、数据与模型优化](../10-training-and-data/index.html)。
 
-## 阿里国际（14+ 考点）
+代表性问题：
 
-**面试风格**：阿里国际面试**最侧重模型训练与优化**——微调方法、RL 训练（GRPO 深度追问）、推理加速是核心。但近期面试也开始考察 Agent 工程能力（多轮工具调用、多智能体、上下文管理）。整体偏算法研发，对模型层理解要求高，追问极深。
+- [如何用 Roofline 和算术强度指导 CUDA 算子优化？从 GEMM 分块到寄存器压力如何逐层定位？](../17-ai-infra/index.html)
+- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
+- [位置编码的作用是什么？](../10-training-and-data/index.html)
 
-**高频考察维度**：
+### 携程（47 题）
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [训练与模型](../10-training-and-data/index.html) | 10+ | LoRA vs 全参微调、PPO vs GRPO 深度对比、GRPO Loss/Advantages/信用分配、重要性采样失效场景、KL散度区别、SFT+蒸馏+GRPO 选型、推理加速部署、GRPO训练监控指标 |
-| [RAG 与检索](../09-rag-retrieval/index.html) | 2 | 向量数据库选型（不同规模方案）、Embedding 升级后索引一致性 |
-| [工具管理](../02-tool-management/index.html) | 2 | Agent 多轮工具调用挑战、Skill 描述过长导致上下文爆炸 |
-| [评估与全局观](../05-eval-and-vision/index.html) | 1 | 调优 case + 评测集构建（规模/分布/baseline 三件套） |
-| [多智能体协作](../06-multi-agent-collab/index.html) | 1 | Claude Code 是 multi 还是 single agent |
-| [工程化踩坑](../07-engineering-pitfalls/index.html) | 1 | 数据量/QPS 增大后架构改进、硬件选型 |
+可先练：[记忆与上下文](../04-memory-context/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[评估与全局观](../05-eval-and-vision/index.html)。
 
-**GRPO 是阿里国际的必考核心**（多次出现、追问极深）：
+代表性问题：
 
-```text
-必须准备的 GRPO 知识点：
-├── Loss 函数：clipped surrogate objective + KL penalty
-├── Advantages 计算：组内归一化（无 Critic），为什么不直接用 reward
-├── 信用分配：序列级奖励如何分配到 token 级
-├── 重要性采样：为什么需要、策略差异大时 IS 失效怎么办
-├── KL 散度：GRPO vs PPO 的 KL 计算有什么区别（per-token vs 序列级）
-├── 训练监控：reward mean/std、KL divergence、policy entropy、gradient norm
-└── 技术选型：什么时候用 SFT、什么时候蒸馏、什么时候上 GRPO
-```
+- [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
+- [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
+- [你会怎么给 Agent 建立评测体系？只看最终成功率为什么不够？](../05-eval-and-vision/index.html)
 
-**备考重点**：
-- **GRPO 深度是第一优先级**——不是“知道 GRPO 是什么”就够，要能讲清 Loss 推导、Advantages 归一化原理、信用分配机制、重要性采样局限性
-- 训练三件套必背：LoRA 原理与适用场景（A/B 矩阵初始化+秩选择）、PPO vs DPO vs GRPO 对比、SFT 什么时候不够
-- 推理加速技术要熟——算子融合、KV Cache、量化部署、IO 优化
-- **Agent 工程也开始考了**：多轮工具调用挑战（状态管理、错误传播、上下文膨胀）、Claude Code 架构理解
-- 如果面的是应用开发方向，RAG（向量数据库选型）和评估（评测集构建）也要准备
+### 淘宝闪购（26 题）
 
----
+可先练：[简历项目拷打](../13-project-deep-dive/index.html)、[容错与鲁棒性](../03-fault-tolerance/index.html)、[架构选型](../01-architecture-design/index.html)。
 
-## 高德（12 题）
+代表性问题：
 
-**面试风格**：高德面试以**实习岗**为主，题目侧重工程实现细节——MCP 协议完整调用过程、会话记忆具体实现、滑动窗口设几轮。适合实习生备战。
+- [你的 Agent 项目用了什么框架？为什么选它？](../13-project-deep-dive/index.html)
+- [Agent 如何减少幻觉？在工业场景下怎么做？](../03-fault-tolerance/index.html)
+- [了解过 Agent 的设计范式吗？](../01-architecture-design/index.html)
 
-**高频考察维度**：
+### 阿里国际（22 题）
 
-| 维度 | 题量 | 代表性问题 |
-|------|------|-----------|
-| [RAG 与检索](../09-rag-retrieval/index.html) | 4 | BM25+向量多路检索、Embedding 模型选型、知识库整体设计、分块策略 |
-| [记忆与上下文](../04-memory-context/index.html) | 3 | 会话记忆实现（滑动窗口+摘要压缩）、话题切换记忆设计 |
-| [工具管理](../02-tool-management/index.html) | 2 | MCP 协议完整调用过程、意图到工具参数的映射 |
-| [Prompt 工程](../08-prompt-engineering/index.html) | 2 | Skills 本质理解、Claude Code 源码设计哲学 |
+可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[架构选型](../01-architecture-design/index.html)、[AI Infra](../17-ai-infra/index.html)。
 
-**备考重点**：
-- MCP 协议从 Host→Client→Server 的完整链路是高德特色题
-- 会话记忆的**具体实现**要准备——不只说“用滑动窗口”，要说清楚窗口设几轮、摘要怎么触发
-- Prompt 工程追问较深——Skills 的三层理解（模板→知识封装→能力树）要能讲清
+代表性问题：
 
----
+- [DPO、PPO、GRPO 的区别和优缺点？](../10-training-and-data/index.html)
+- [如果模型特别擅长生成，但不擅长严格遵守流程，你会怎么把它放进一个强约束工作流里？](../01-architecture-design/index.html)
+- [FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？](../17-ai-infra/index.html)
 
-## 携程（5 题）
+### 网易（19 题）
 
-**面试风格**：携程实习面试**聚焦 RAG 基础**，题目相对入门。适合刚开始准备 Agent 面试的同学练手。
+可先练：[业务 AI 工程分析](../12-business-ai-engineering/index.html)、[AI 代码分析与测试](../11-ai-code-testing/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
-**代表性问题**：
-- 如何向非技术人员解释 RAG？
-- RAG 检索到文档很多但回答质量差，怎么排查？
-- 什么是余弦相似度？在 RAG 中做什么？
-- 什么是嵌入（Embedding）？为什么需要向量化？
+代表性问题：
 
-**备考重点**：RAG 基础概念要能“用人话讲清楚”——面试官可能考察你解释技术概念的能力。
+- [时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？](../12-business-ai-engineering/index.html)
+- [AI 生成的代码线下测试没问题，上线后出了问题怎么办？](../11-ai-code-testing/index.html)
+- [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
 
----
+### 高德（9 题）
 
-## bilibili（4 题）
+可先练：[记忆与上下文](../04-memory-context/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[工具管理](../02-tool-management/index.html)。
 
-**面试风格**：B 站 AI 研发实习面试**项目驱动**，围绕科研辅助 Agent 设计展开，也会考 subagent 拆分和 LangGraph 实战。
+代表性问题：
 
-**代表性问题**：
-- 如果设计一个科研辅助 Agent，整体流程怎么设计？
-- 什么时候该用 subagent？主 Agent 和子 Agent 共用上下文吗？
-- LangGraph 开发中遇到最大的困难？
-- Deep Research 和普通 RAG 的区别？
+- [会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？](../04-memory-context/index.html)
+- [分块策略怎么设计？不同策略的优缺点？](../09-rag-retrieval/index.html)
+- [MCP 协议的完整调用过程是怎样的？](../02-tool-management/index.html)
 
-**备考重点**：准备一个“设计XX Agent”的完整方案——感知、规划、记忆、执行四模块。
+### 京东（7 题）
 
----
+可先练：[RAG 与检索系统](../09-rag-retrieval/index.html)、[容错与鲁棒性](../03-fault-tolerance/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
-## 百度（4 题）
+代表性问题：
 
-**面试风格**：百度实习面试偏**工程化**——多 Agent 编排、前端 SSE 处理、资源缓存等实际开发问题。
+- [讲一下项目里召回的流程](../09-rag-retrieval/index.html)
+- [金融系统不能让 Agent 真实操作（钱放出去就是大问题），怎么设计？](../03-fault-tolerance/index.html)
+- [你的向量记忆库是如何更新用户画像的？](../04-memory-context/index.html)
 
-**代表性问题**：
-- 多 Agent 怎么编排？用的什么编排模式？
-- AI 应用的前端资源缓存怎么配的？
-- AI 应用中 SSE 流式数据怎么处理？数据格式是什么？
+### bilibili（4 题）
 
-**备考重点**：前后端全栈能力，SSE 流式处理和缓存策略要能讲实现细节。
+可先练：[架构选型](../01-architecture-design/index.html)、[工程化踩坑](../07-engineering-pitfalls/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)。
 
----
+代表性问题：
 
-## 备战策略总结
+- [如果设计一个科研辅助 Agent，整体流程应该怎么设计？](../01-architecture-design/index.html)
+- [使用 LangGraph 开发 Agent，遇到最大的困难是什么？](../07-engineering-pitfalls/index.html)
+- [Deep Research 在代码层面是怎么实现的？和普通 RAG 有什么区别？](../09-rag-retrieval/index.html)
 
-**通用高频维度**（所有公司都考）：
-1. **RAG 与检索**——几乎每家都问，从 chunk 到 Embedding 到 Rerank
-2. **架构选型**——ReAct vs Plan-Execute、Agent 设计范式
-3. **记忆与上下文**——长对话、摘要压缩、模糊需求
+## 怎么用这张表
 
-**公司特色维度**（针对性准备）：
-- 面蚂蚁 → 额外准备 [Prompt 工程](../08-prompt-engineering/index.html) + [AI 代码测试](../11-ai-code-testing/index.html)
-- 面快手/阿里国际 → 额外准备 [训练与模型](../10-training-and-data/index.html)（RLHF/GRPO）
-- 面淘宝闪购 → 额外准备 [项目拷打](../13-project-deep-dive/index.html) + [容错](../03-fault-tolerance/index.html)（HiL、异常管控）
-- 面腾讯 → 额外准备 [RAG 与检索](../09-rag-retrieval/index.html)（深度，不止基础）
-- 面字节 → 额外准备 [Prompt 工程](../08-prompt-engineering/index.html)（Skills 系统设计）
+先用岗位要求确定能力范围，再选择上表中对应公司的练习入口。对每道代表题，依次练习技术机制、业务约束、失败恢复、验证方法和成本权衡；遇到简历项目追问时，用真实经历解释自己的选择。
+
+表中的前三维只是样本量较多的入口，不能据此跳过其他基础能力。题目的具体来源和追问请查看对应维度正文；同一主题组的阅读顺序按可归因面经频次维护。

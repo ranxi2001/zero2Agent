@@ -15,13 +15,17 @@ AI Infra 不是“给 Kubernetes 加几台 GPU”。模型训练关心吞吐、C
 
 ## Q：如何用 Roofline 和算术强度指导 CUDA 算子优化？从 GEMM 分块到寄存器压力如何逐层定位？
 
-> 来源：[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[拼多多 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/9e1f4f4b8642496e85cf7802d03112df)、[小鹏 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/a79383aa92f64e8eb4e85959bf2660a0)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/c582fdfbc29d4c93ac9044005ad0a311)、[飞腾 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/90c405df0a0f4dd99298768496b0c942)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)、[太初 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/45c0b82115024f16a88ad9a37f2ab398)、[壁仞 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/5baf1aaa7ff646a8a38d9c7ece43a808)、[寒武纪 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7dfe46da13ad4ae8a3dd94c3ca7f5d05)【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：如何用 Roofline 模型判断带宽瓶颈 vs 计算瓶颈？】【[昆仑芯 0903 一面（ai 高性能开发）](https://www.nowcoder.com/feed/main/detail/65b9990e774a4331bb603f0cf1ca4a88)追问：介绍一下 Roofline 模型和算术强度。】【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：大矩阵 GEMM 在 DCU 上如何切分和实现？】；[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)；[1009 苏州睿芯一面（算子开发）](https://www.nowcoder.com/feed/main/detail/e364b45f08e24699865b8f19a56f49c4)
+> 来源：[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[拼多多 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/9e1f4f4b8642496e85cf7802d03112df)、[小鹏 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/a79383aa92f64e8eb4e85959bf2660a0)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/c582fdfbc29d4c93ac9044005ad0a311)、[飞腾 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/90c405df0a0f4dd99298768496b0c942)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)、[太初 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/45c0b82115024f16a88ad9a37f2ab398)、[壁仞 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/5baf1aaa7ff646a8a38d9c7ece43a808)、[寒武纪 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7dfe46da13ad4ae8a3dd94c3ca7f5d05)【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：如何用 Roofline 模型判断带宽瓶颈 vs 计算瓶颈？】【[昆仑芯 0903 一面（ai 高性能开发）](https://www.nowcoder.com/feed/main/detail/65b9990e774a4331bb603f0cf1ca4a88)追问：介绍一下 Roofline 模型和算术强度。】【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：大矩阵 GEMM 在 DCU 上如何切分和实现？】；[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)；[1009 苏州睿芯一面（算子开发）](https://www.nowcoder.com/feed/main/detail/e364b45f08e24699865b8f19a56f49c4)；[1015 摩尔线程一面（AI 算子库及高性能计算工程师）](https://www.nowcoder.com/feed/main/detail/8f03623a522e4c75a6391f9d3f721c7f)
 
 **新手答**：“多用 Shared Memory、增加线程数，再做算子融合。”
 
 **高手答**：
 
 先以 `算术强度 = FLOPs / 搬运字节数` 判断 Kernel 更可能受计算峰值还是内存带宽约束，再用 Profiler 验证。Memory-bound 时优先检查合并访问、分块复用、向量化、减少中间写回和 Fusion；Compute-bound 时再看 Tensor Core 路径、数据布局和指令流水。GEMM 的 Tile 不能越大越好：更大的复用也会增加寄存器和 Shared Memory，占用过高可能降低驻留 Block，甚至发生 Register Spill。可靠流程是先建立正确 Baseline，再测不同 Shape，定位瓶颈、提出单一假设、微基准验证，并检查数值误差。前缀和、Reduce、Softmax、转置等手撕题都应沿这条方法回答。
+
+**追问补充**：数据类型改变后，每元素字节数、向量指令或矩阵指令支持、累加精度与对齐要求都可能改变，同一 tile 对寄存器、共享存储和带宽的占用也会变化。应重新估算算术强度与资源上限，测不同 tile、并行度和流水配置；不能机械认为位宽减半就应把分块大小翻倍。
+
+C 放寄存器是为了在 K 循环中就地累加，避免反复读写 Shared Memory 或全局内存，但并非强制；也可用共享内存或分块暂存。若各核负责不重叠的 C tile，直接写回即可；只有沿 K 维拆分、多个核更新同一 C tile 时，才需要归约、原子加或二次合并。
 
 **差距在哪**：新手堆优化技巧，高手先建立性能模型，再用证据决定优化顺序并守住正确性。
 
@@ -386,6 +390,28 @@ PD 分离的目标是减少长 Prefill 对 Decode TPOT 的干扰，并让两类�
 
 ---
 
+## Q：AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？
+
+> 来源：阿里 Agent Infra 一面题库；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[网易互娱 AI应用开发 日常实习](https://www.nowcoder.com/feed/main/detail/683ffea1ead24f8d8539f6bab3b7b361)
+
+**新手答**：“把日志和监控交给大模型，让它分析根因；确定故障后自动重启服务。”
+
+**高手答**：
+
+AIOps 不是给告警接一个聊天模型，而是把检测、诊断、处置和验证做成受约束闭环。先用用户侧 SLO、错误率和延迟确认影响，再按租户、地域、版本、模型、Tool 和资源池切分 Scope；随后关联发布变更、配置、依赖拓扑和同一时间窗内的 Logs、Metrics、Trace。OpenTelemetry 的[上下文传播](https://opentelemetry.io/docs/concepts/context-propagation/)能用 Trace/Span 上下文关联跨服务信号，但“同时发生”仍只是候选证据，不自动等于因果关系。
+
+RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪个节点最先异常、上游是否正常、哪个变更与异常重合、相似历史事件是否具有相同错误签名，以及还缺什么验证。LLM/Agent 适合查询多数据源、归纳时间线和生成验证计划；拓扑约束、错误分类、变更记录和探针结果才是事实基础。可以通过回滚配置、切换小流量或执行只读探针验证候选原因，不能让模型根据相关性直接宣布 Root Cause。
+
+自动处置按风险分级：只读诊断和证据收集可自动执行；限流、摘除单实例、扩容等可逆动作先做小范围 Canary；删除数据、全局回滚、权限变更等高风险动作必须审批。每个动作绑定目标范围、幂等键、Deadline、冷却时间、最大影响面和回滚条件，执行后重新检查 SLO；指标未恢复就停止扩大，而不是连续重试。Google SRE 的[事件管理指南](https://sre.google/resources/practices-and-processes/incident-management-guide/)也强调告警应面向用户症状、保持可操作，并让自动化辅助分析和缓解而不是替代事件控制。
+
+最后把确认根因、有效处置、失败尝试和新检测规则回写事件库与 Runbook。衡量 AIOps 不能只看“自动化次数”，还要看告警压缩率、候选根因 Top-K 命中率、MTTD/MTTR、误处置率、回滚率和实际减少的用户影响。
+
+**追问补充**：系统可拆为监控接入适配、事件标准化、证据采集、RCA 编排、策略审批、代码修复、CI 验证和 MR 审计模块；用户通过告警或工单查看证据、确认方案并审批。编排宜采用可持久化工作流，关系库存元数据与审计，时序、日志和链路系统保留原始证据，队列负责解耦。
+
+**差距在哪**：新手让模型从相关性直接跳到重启，高手把影响确认、证据关联、因果验证、分级处置和 SLO 回验串成可审计闭环。
+
+---
+
 ## Q：CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？算子编译链和选型依据是什么？
 
 > 来源：[拼多多 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/9e1f4f4b8642496e85cf7802d03112df)、[小马智行 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/0e543b8a02b84b05950e55851687450f)、[飞腾 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/90c405df0a0f4dd99298768496b0c942)
@@ -416,26 +442,6 @@ KV Cache 的“命中率”需先定义口径：前缀缓存通常按可复用 t
 
 ---
 
-## Q：AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？
-
-> 来源：阿里 Agent Infra 一面题库；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)
-
-**新手答**：“把日志和监控交给大模型，让它分析根因；确定故障后自动重启服务。”
-
-**高手答**：
-
-AIOps 不是给告警接一个聊天模型，而是把检测、诊断、处置和验证做成受约束闭环。先用用户侧 SLO、错误率和延迟确认影响，再按租户、地域、版本、模型、Tool 和资源池切分 Scope；随后关联发布变更、配置、依赖拓扑和同一时间窗内的 Logs、Metrics、Trace。OpenTelemetry 的[上下文传播](https://opentelemetry.io/docs/concepts/context-propagation/)能用 Trace/Span 上下文关联跨服务信号，但“同时发生”仍只是候选证据，不自动等于因果关系。
-
-RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪个节点最先异常、上游是否正常、哪个变更与异常重合、相似历史事件是否具有相同错误签名，以及还缺什么验证。LLM/Agent 适合查询多数据源、归纳时间线和生成验证计划；拓扑约束、错误分类、变更记录和探针结果才是事实基础。可以通过回滚配置、切换小流量或执行只读探针验证候选原因，不能让模型根据相关性直接宣布 Root Cause。
-
-自动处置按风险分级：只读诊断和证据收集可自动执行；限流、摘除单实例、扩容等可逆动作先做小范围 Canary；删除数据、全局回滚、权限变更等高风险动作必须审批。每个动作绑定目标范围、幂等键、Deadline、冷却时间、最大影响面和回滚条件，执行后重新检查 SLO；指标未恢复就停止扩大，而不是连续重试。Google SRE 的[事件管理指南](https://sre.google/resources/practices-and-processes/incident-management-guide/)也强调告警应面向用户症状、保持可操作，并让自动化辅助分析和缓解而不是替代事件控制。
-
-最后把确认根因、有效处置、失败尝试和新检测规则回写事件库与 Runbook。衡量 AIOps 不能只看“自动化次数”，还要看告警压缩率、候选根因 Top-K 命中率、MTTD/MTTR、误处置率、回滚率和实际减少的用户影响。
-
-**差距在哪**：新手让模型从相关性直接跳到重启，高手把影响确认、证据关联、因果验证、分级处置和 SLO 回验串成可审计闭环。
-
----
-
 ## Q：DeepSpeed ZeRO 的三个阶段分别做什么？
 
 > 来源：[本轮面经（文章 185）](https://www.nowcoder.com/discuss/926467109717118976)；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)
@@ -448,6 +454,22 @@ RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪�
 
 ---
 
+
+## Q：GPU 峰值性能、计算单元与寄存器等硬件参数如何影响算子性能？
+
+> 来源：[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)；[1015 摩尔线程一面（AI 算子库及高性能计算工程师）](https://www.nowcoder.com/feed/main/detail/8f03623a522e4c75a6391f9d3f721c7f)
+
+**新手答**：“峰值算力、计算单元数量和寄存器容量会影响并行度、吞吐量及算子能否高效运行。”
+
+**高手答**：
+
+峰值性能是理论上限，通常由计算单元数量、时钟频率和每周期指令能力决定，但算子实际性能还受访存带宽、缓存命中率、数据类型、并行度和控制流影响。计算单元越多不等于一定越快：小规模或低算术强度算子可能受内存限制，无法填满硬件。寄存器决定线程可保存的局部状态；单线程寄存器使用过多会降低 occupancy，甚至触发溢出到 local memory，使用过少又可能增加重复计算或访存。工程上应结合算子形状、线程块配置、共享内存和融合策略分析。验证时用 profiler 查看计算吞吐、带宽、occupancy、寄存器使用和 stall 原因，并与理论 roofline 或基准结果对照。主要权衡是寄存器、共享内存占用与并发度之间的平衡，不能只看厂商标称峰值。
+
+**追问补充**：CUDA 可结合编译器的寄存器使用报告、Nsight Compute 的 Kernel Launch Statistics 和反汇编核对；HIP 则检查 hipcc 编译输出、目标代码反汇编及 profiler 资源指标。学习 CUTLASS、Triton 等开源实现时，应对照其分块、流水和访存策略，用同一 Shape 做带宽、计算吞吐和 occupancy 对比验证。
+
+**差距在哪**：浅层回答只会罗列硬件参数，深入回答还应说明计算瓶颈、资源竞争、性能上限与 profiler 验证方法。
+
+---
 
 ## Q：大模型训练出现 OOM 时，如何定位原因并进行显存优化？
 
@@ -475,6 +497,20 @@ RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪�
 
 **差距在哪**：浅层回答只停留在“训练和推理更快”，深层回答应能拆出编译、运行时、硬件、并行与服务调度，并说明指标验证和优化权衡。
 
+
+## Q：SIMD 与 RVV 向量化计算如何处理尾部元素？
+
+> 来源：[1009 苏州睿芯一面（算子开发）](https://www.nowcoder.com/feed/main/detail/e364b45f08e24699865b8f19a56f49c4)；[1015 摩尔线程一面（AI 算子库及高性能计算工程师）](https://www.nowcoder.com/feed/main/detail/8f03623a522e4c75a6391f9d3f721c7f)
+
+**新手答**：“尾部元素通常用掩码计算，或改用标量循环处理，避免访问越界和无效结果。”
+
+**高手答**：
+
+固定宽度SIMD一次处理32个数时，100个元素可先处理96个，剩余4个用尾部掩码或标量循环完成；掩码必须同时约束加载、计算和存储，避免越界访问及把无效 lane 写回。工程上优先选择库或指令集支持的 masked load/store，并验证长度为0、1、恰好整块和非整块时的结果与边界安全；若掩码开销较高，可采用主循环加标量尾循环。RVV不是简单套用固定32的逻辑，而是根据剩余长度设置 vl，并结合掩码处理尾部。[RISC-V Vector 规范](https://github.com/riscvarchive/riscv-v-spec/blob/master/v-spec.adoc)所覆盖的边界是RVV的vl与掩码语义；对求和、最大值等操作，不能随意用0填充，必须使用正确的中性元素或屏蔽无效lane。
+
+**追问补充**：应检查编译器优化报告与反汇编，确认实际生成目标平台的向量访存及算术指令，并排查别名、边界、对齐和编译选项限制；再用相同工作负载验证吞吐。向量化收益不是仅凭源码判断，相关诊断方法见 [LLVM 向量化指南](https://llvm.org/docs/Vectorizers.html)。
+
+**差距在哪**：浅层回答只会说“补零或忽略”，面试官更关注掩码对内存安全和结果语义的影响，以及固定宽SIMD与RVV尾处理机制的区别。
 
 ## Q：AI Infra 和 Agent Infra 有什么区别？
 
@@ -581,20 +617,6 @@ Checkpoint 不只是模型权重，还可能包含 Optimizer、Scheduler、随�
 
 ---
 
-## Q：GPU 峰值性能、计算单元与寄存器等硬件参数如何影响算子性能？
-
-> 来源：[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)
-
-**新手答**：“峰值算力、计算单元数量和寄存器容量会影响并行度、吞吐量及算子能否高效运行。”
-
-**高手答**：
-
-峰值性能是理论上限，通常由计算单元数量、时钟频率和每周期指令能力决定，但算子实际性能还受访存带宽、缓存命中率、数据类型、并行度和控制流影响。计算单元越多不等于一定越快：小规模或低算术强度算子可能受内存限制，无法填满硬件。寄存器决定线程可保存的局部状态；单线程寄存器使用过多会降低 occupancy，甚至触发溢出到 local memory，使用过少又可能增加重复计算或访存。工程上应结合算子形状、线程块配置、共享内存和融合策略分析。验证时用 profiler 查看计算吞吐、带宽、occupancy、寄存器使用和 stall 原因，并与理论 roofline 或基准结果对照。主要权衡是寄存器、共享内存占用与并发度之间的平衡，不能只看厂商标称峰值。
-
-**差距在哪**：浅层回答只会罗列硬件参数，深入回答还应说明计算瓶颈、资源竞争、性能上限与 profiler 验证方法。
-
----
-
 ## Q：Nsight Compute（ncu）和 Nsight Systems（nsys）有什么区别？分别适合分析什么问题？
 
 > 来源：[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)
@@ -621,18 +643,6 @@ nsys 是系统级时间线工具，适合观察 CPU 线程、进程、CUDA API�
 
 **差距在哪**：浅层回答只描述“多分支后验证”，深层回答还应说明树的展开与 KV 复用、验收回退、资源边界、动态参数及用接受率和端到端延迟验证的权衡。
 
-
-## Q：SIMD 与 RVV 向量化计算如何处理尾部元素？
-
-> 来源：[1009 苏州睿芯一面（算子开发）](https://www.nowcoder.com/feed/main/detail/e364b45f08e24699865b8f19a56f49c4)
-
-**新手答**：“尾部元素通常用掩码计算，或改用标量循环处理，避免访问越界和无效结果。”
-
-**高手答**：
-
-固定宽度SIMD一次处理32个数时，100个元素可先处理96个，剩余4个用尾部掩码或标量循环完成；掩码必须同时约束加载、计算和存储，避免越界访问及把无效 lane 写回。工程上优先选择库或指令集支持的 masked load/store，并验证长度为0、1、恰好整块和非整块时的结果与边界安全；若掩码开销较高，可采用主循环加标量尾循环。RVV不是简单套用固定32的逻辑，而是根据剩余长度设置 vl，并结合掩码处理尾部。[RISC-V Vector 规范](https://github.com/riscvarchive/riscv-v-spec/blob/master/v-spec.adoc)所覆盖的边界是RVV的vl与掩码语义；对求和、最大值等操作，不能随意用0填充，必须使用正确的中性元素或屏蔽无效lane。
-
-**差距在哪**：浅层回答只会说“补零或忽略”，面试官更关注掩码对内存安全和结果语义的影响，以及固定宽SIMD与RVV尾处理机制的区别。
 
 ## Q：GPU 调度和普通 CPU 调度有什么不同？
 
