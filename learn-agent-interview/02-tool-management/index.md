@@ -48,7 +48,7 @@ eyebrow: Agent 面试通关 / 02
 
 ### Q：你们工具库有上百个工具，怎么让模型快速选对？
 
-> 来源：腾讯 Agent 岗终面【百度大模型研发二面追问：Agent 如何选择合适工具】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：现在有100多个工具，AI想调用的时候能找到自己想要的接口吗？怎么保障？；工具检索是如何做的？】；本轮追问：当前约十个工具时如何识别正确的 Tool？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)
+> 来源：腾讯 Agent 岗终面【百度大模型研发二面追问：Agent 如何选择合适工具】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：现在有100多个工具，AI想调用的时候能找到自己想要的接口吗？怎么保障？；工具检索是如何做的？】；本轮追问：当前约十个工具时如何识别正确的 Tool？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)
 
 **新手答**：“把所有工具描述发给模型让它选。”
 
@@ -90,7 +90,7 @@ eyebrow: Agent 面试通关 / 02
 
 ### Q：多工具场景下的调度策略？
 
-> 来源：阿里 AI Agent 开发一面；本轮追问：Agent 调用某工具为什么选择串行而不是并行？并行会带来什么问题？（[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)）；本轮追问：模型调用工具时怎么保证不发生冲突？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）
+> 来源：阿里 AI Agent 开发一面；本轮追问：Agent 调用某工具为什么选择串行而不是并行？并行会带来什么问题？（[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)）；本轮追问：模型调用工具时怎么保证不发生冲突？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
 
 **新手答**：“模型自己选。”
 
@@ -108,6 +108,8 @@ eyebrow: Agent 面试通关 / 02
 
 串行通常用于存在读写依赖、共享状态或非幂等写操作的工具调用；并行可能造成竞态、重复扣款、覆盖更新和下游限流。执行层应按租户或资源加锁、使用幂等键和事务边界，必要时以版本号校验，冲突则拒绝或重试，并通过并发压测验证。
 
+**追问补充**：“最大 10 并发”应落在编排层的有界 worker pool 或 semaphore 上，按单轮任务设置上限，并结合工具限流、超时、取消和结果收集。若结果需有序，给每个调用分配序号，异步执行后按序号归并；缺失、超时或失败项要显式保留状态，不能用返回先后代替业务顺序。
+
 **差距在哪**：新手把调度交给模型“自己想办法”。高手的回答把多工具调度拆成四个环节：路由、编排、降级、合并——每个环节都有明确策略。面试官考的是你能不能把多工具协作从“模型自己选”变成一个可控的工程流程。
 
 ---
@@ -117,7 +119,7 @@ eyebrow: Agent 面试通关 / 02
 
 ### Q：工具多导致 token 数过多，怎么解决？
 
-> 来源：字节 Agent 实习二面 【阿里国际一面追问：Skill描述过长导致上下文爆炸】【小红书 Agent 岗一面追问：工具延迟加载的触发时机与具体实现】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具数量很多时，如何避免 Prompt 过长？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：Agent工具过多时你是怎么处理的？比如接口数量太多怎么解决？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)
+> 来源：字节 Agent 实习二面 【阿里国际一面追问：Skill描述过长导致上下文爆炸】【小红书 Agent 岗一面追问：工具延迟加载的触发时机与具体实现】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具数量很多时，如何避免 Prompt 过长？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：Agent工具过多时你是怎么处理的？比如接口数量太多怎么解决？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)
 
 **新手答**：“减少工具数量。”
 
@@ -287,7 +289,7 @@ def test_get_user(mock_query):
 
 ### Q：MCP 和 Skills 的本质区别是什么？都是工具调用，为什么需要两套机制？
 
-> 来源：蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：MCP 跟 Skill 有什么区别？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：MCP 与 Skill 的核心区别是什么？迁移的原因是什么？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：MCP vs Skill 选型场景？】【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：MCP是什么，为什么项目没有选用MCP而选择自己封装？Skill与MCP的核心区别是什么？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：Agent、MCP 和 Skill 的区别是什么？（[绿盟科技一晚速通三面已offer](https://www.nowcoder.com/feed/main/detail/39776141d05c462aa212a9adc229052d)）；本轮追问：为什么 Agent 生态开始广泛使用 MCP？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)
+> 来源：蚂蚁集团智能体与大模型应用二面 【蚂蚁AI应用开发二面同题：Skill 与 MCP 核心差异】【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：MCP 跟 Skill 有什么区别？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：MCP 与 Skill 的核心区别是什么？迁移的原因是什么？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：MCP vs Skill 选型场景？】【[pdd agent 一面](https://www.nowcoder.com/feed/main/detail/ee971b755cbd475a91ef62cee38cdac8)追问：MCP是什么，为什么项目没有选用MCP而选择自己封装？Skill与MCP的核心区别是什么？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：Agent、MCP 和 Skill 的区别是什么？（[绿盟科技一晚速通三面已offer](https://www.nowcoder.com/feed/main/detail/39776141d05c462aa212a9adc229052d)）；本轮追问：为什么 Agent 生态开始广泛使用 MCP？（[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)）；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[快手 一面](https://www.nowcoder.com/feed/main/detail/ae703fcc0bd34d2797702681ada7f2b0)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)；[快手 AI 全栈开发一面](https://www.nowcoder.com/discuss/942822898094428160)
 
 **新手答**：“MCP 是协议，Skills 是能力，不太一样。”
 
@@ -350,13 +352,15 @@ Agent 是运行时的智能体或编排层，负责理解目标、维护上下�
 
 **追问补充**：CLI 适合已有命令行程序、脚本化运维和本地自动化，直接封装即可；plugin 适合宿主平台内的扩展点，需要遵循宿主生命周期、权限和界面约束。通常由 Skill 编排任务，按部署边界选择 MCP、CLI 或 plugin，并统一做参数校验与权限治理。
 
+**追问补充**：Skill 通常按触发条件按需加载任务提示、流程和约束，调用工具时仍可能走 CLI、插件或 MCP；MCP 则需发现工具 Schema，并在每次调用中传入参数、接收结果。配置文本等长不代表消耗相同，还取决于加载频率、工具数量、Schema 与结果大小、历史上下文、重试次数及序列化开销。判断 Skill 是否有效，应看触发准确率、任务完成率、工具成功率、Token/延迟成本和回归结果。
+
 **差距在哪**：新手把 MCP 和 Skills 当成两个并列的概念。高手看到的是**分层架构**——MCP 在协议层解决“怎么调”，Skills 在业务层解决“怎么用”，两者是上下层关系而非替代关系。面试官考的是你能不能把 Agent 架构按层次拆清楚。
 
 ---
 
 ### Q：大模型的 Function Call 是什么？Tool Use 一般怎么用？
 
-> 来源：蚂蚁集团智能体与大模型应用一面 【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：`tool_use` 捕获、执行与非标准命令请求】；[BIGO 音频算法工程师一面](https://www.nowcoder.com/discuss/924359576990781440)；[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)【[启云方AI Agent一面凉经](https://www.nowcoder.com/feed/main/detail/fea2d18bd59a421da7d16fe16223d38c)追问：“语言调用工具”中的“语言”和真正的 tool call / function call 到底是什么关系？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：模型这种结构化输出、工具调用的能力叫什么？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；本轮追问：完整的工具调用链路是怎样的？模型生成工具调用 JSON 之后代码层做什么？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；本轮追问：Skill 怎么让大模型知道什么时候用、怎么用？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)；[宏图智能一面](https://www.nowcoder.com/discuss/934206754898866176)
+> 来源：蚂蚁集团智能体与大模型应用一面 【字节实习Agent开发一面追问：工具注册/解析/调用/回传全链路】【小红书 Agent 岗一面追问：`tool_use` 捕获、执行与非标准命令请求】；[BIGO 音频算法工程师一面](https://www.nowcoder.com/discuss/924359576990781440)；[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)【[启云方AI Agent一面凉经](https://www.nowcoder.com/feed/main/detail/fea2d18bd59a421da7d16fe16223d38c)追问：“语言调用工具”中的“语言”和真正的 tool call / function call 到底是什么关系？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：模型这种结构化输出、工具调用的能力叫什么？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；本轮追问：完整的工具调用链路是怎样的？模型生成工具调用 JSON 之后代码层做什么？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；本轮追问：Skill 怎么让大模型知道什么时候用、怎么用？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)；[宏图智能一面](https://www.nowcoder.com/discuss/934206754898866176)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)；[超聚变 AI 软件工程师（AI 大模型）一面](https://www.nowcoder.com/discuss/948249299312242688)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)
 
 **新手答**：“就是让模型调用函数。”
 
@@ -402,6 +406,8 @@ sequenceDiagram
 - **错误处理要前置**：工具调用可能失败，返回值里必须带状态码和错误信息，让模型能根据错误类型决定下一步
 
 当 Tool Use 由 Skill 驱动时，完整链路是：先按任务发现并加载 Skill，Skill 提供流程、约束和可用工具说明；模型据此生成工具调用意图；宿主按 Tool Schema、权限和业务不变量校验参数，执行真实工具，再把带 `tool_call_id` 的 Observation 回写给模型继续推理。Skill 只是指导模型“应该怎样做”，实际执行、授权和校验仍由确定性宿主负责，不能把 Skill 文本当成安全边界。
+
+**追问补充**：工具名、参数与调用 ID 的位置由具体 API 契约规定，不能把 `choices[].message.tool_calls` 套到所有接口。宿主负责校验、授权、执行和回传结果；ReAct 描述推理、行动与观察的组织方式，结构化 Tool Calling 是调用接口，两者可组合。并发、重试和审批能力也须逐项核对框架配置，不能因接入框架就默认具备。
 
 **差距在哪**：新手把 Function Call 等同于“调函数”。高手理解它是模型从“文本生成器”升级为“行动执行器”的关键机制，且清楚 Schema 设计、返回值规范和错误处理这些工程细节决定了 Tool Use 的稳定性。面试官考的是你对 Agent 核心能力的理解深度。
 
@@ -472,7 +478,7 @@ System Prompt:
 
 ### Q：MCP Server 是怎么构建的？
 
-> 来源：字节 Agent 实习二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：自己有去搭建过 MCP Server 吗？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)；[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)
+> 来源：字节 Agent 实习二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[钉钉二面](https://www.nowcoder.com/discuss/925181638412091392)追问：自己有去搭建过 MCP Server 吗？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)；[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)；[华宇信息 Agent 开发社招面试](https://www.nowcoder.com/feed/main/detail/cdf15b93310e40f6936168a93db504c7)
 
 **新手答**：“就是写个 API 接口。”
 
@@ -516,7 +522,7 @@ MCP（Model Context Protocol）是 Anthropic 提出的**模型与外部工具/�
 
 ### Q：大厂开源的 CLI 工具（如 lark-cli）和 MCP 有什么区别？它们跟直接调 API 又有什么不同？
 
-> 来源：大厂 Agent 面试高频题；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[宏图智能一面](https://www.nowcoder.com/discuss/934206754898866176)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：大厂 Agent 面试高频题；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[宏图智能一面](https://www.nowcoder.com/discuss/934206754898866176)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
 
 **新手答**：“CLI 就是命令行工具，MCP 就是协议，API 就是接口，三个不同的东西。”
 
@@ -575,13 +581,15 @@ MCP 的价值在于：Agent 不需要知道底层是 REST、gRPC 还是 CLI—�
 
 **它们的关系是递进的**：API 是原始能力 → CLI 是大厂面向 Agent 生态的快速封装 → MCP 是最终的协议层标准。一个 MCP Server 内部可以调 API，也可以调 CLI，它们不互斥。
 
+**追问补充**：MCP 不是把结果简单落进 SQL，而是把查询能力封装成受控工具，统一处理参数校验、权限、审计、超时和错误语义，避免 Agent 直接拼接 SQL。业务 API 适合稳定的在线契约，固定脚本适合遗留流程或运维批处理，两条链路可由 MCP 适配层统一暴露并分别治理。
+
 **差距在哪**：新手把三者当成并列的“不同的东西”。高手看到的是 Agent 工具生态的演进脉络——API 一直在，CLI 是大厂看到 MCP/Agent 趋势后的抢位动作，MCP 是最终统一标准。面试官考的是你能不能看到这波 CLI 扎堆出现背后的产业逻辑，以及理解为什么 Agent 时代的终局是协议层标准化而不是各家出各家的 CLI。
 
 ---
 
 ### Q：Function Calling 的本质价值是什么？它解决的是“模型能力问题”还是“系统约束问题”？
 
-> 来源：Agent 开发面试 30 题
+> 来源：Agent 开发面试 30 题；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)
 
 **新手答**：“让模型能调工具，解决的是能力问题。”
 
@@ -604,6 +612,8 @@ Function Calling 的本质价值是**把“模型想调工具”这件事从自�
 
 这不是让模型“更聪明”了，而是**给模型和系统之间建立了一个明确的通信协议**——模型的意图（调什么工具、传什么参数）不再是需要“猜”的自由文本，而是有格式保证的结构化消息。
 
+**追问补充**：终止不能只交给模型判断，应由编排器控制：根据是否仍有待执行工具、工具结果是否满足任务、最大轮数与预算决定继续或收敛；对重复调用、非法参数和异常结果设置校验、重试上限与强制转人工或返回错误，最终再允许生成自然语言答案。
+
 **差距在哪**：新手觉得 FC 是一种“新能力”。高手理解 FC 本质是模型和系统之间的**接口协议**——解决的是“怎么可靠地把模型意图传递给系统”这个工程问题。面试官考的是你对 FC 的理解停留在“会用”还是“理解设计动机”。
 
 **追问：有了 Function Calling，是不是可以没有 MCP？**
@@ -625,7 +635,7 @@ Function Calling 的本质价值是**把“模型想调工具”这件事从自�
 
 ### Q：手撕一个 ReAct 架构的 Agent，实现文件操作（找文件、删除文件）
 
-> 来源：AI 工程师面试（手撕代码，可借助 AI）；[小厂Agent开发一面](https://www.nowcoder.com/feed/main/detail/51a65e9e02e949dbb52e90b5691a20f4)
+> 来源：AI 工程师面试（手撕代码，可借助 AI）；[小厂Agent开发一面](https://www.nowcoder.com/feed/main/detail/51a65e9e02e949dbb52e90b5691a20f4)；[小红书 增长方向一、二面](https://www.nowcoder.com/feed/main/detail/b9761e83c4c142c2a3bba57b545df113)
 
 **新手答**：写了个 while 循环拼 Prompt，没有工具抽象，逻辑和 I/O 混在一起。
 
@@ -731,44 +741,9 @@ result = agent.invoke({
 ---
 
 
-### Q：同一个能力是做成“一个大而全工具”还是“多个小工具”，怎么权衡？
-
-> 来源：Agent 开发面试 30 题；[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)；本轮追问：模型调用工具是单个还是多个？多个工具调用时是并行还是串行？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）
-
-**新手答**：“拆小一点好，职责单一。”
-
-**高手答**：
-
-不能一刀切。**拆不拆、怎么拆，取决于模型的工具选择负担和参数填充难度**：
-
-| 维度 | 大而全工具 | 多个小工具 |
-|------|----------|----------|
-| 模型选择负担 | 低（只需选一个工具） | 高（需从多个里选对的） |
-| 参数复杂度 | 高（参数多、组合多） | 低（每个工具参数少） |
-| 错误定位 | 难（哪步出错不好查） | 易（哪个工具失败一目了然） |
-| 编排灵活性 | 低（绑定了固定流程） | 高（可以自由组合） |
-
-**什么时候用大工具**：
-- 操作有强事务性——查库存 + 锁库存 + 扣款必须原子执行，拆开会有一致性风险
-- 用户感知是一个动作——“帮我订机票”不应该让用户看到拆成了五步
-
-**什么时候拆小工具**：
-- 子步骤可以独立使用——搜索酒店和预订酒店是两个独立需求
-- 需要灵活编排——“先搜再比再订”的顺序可能因用户需求变化
-- 参数空间差异大——搜索只需要城市和日期，预订还需要用户信息和支付方式
-
-**实际工程中的折中方案**：对外给模型暴露小工具（降低选择和参数负担），对内用**编排层把小工具组合成事务**（保证一致性）。模型只需要说“我要订这个酒店”，编排层自动执行“校验 → 锁房 → 扣款 → 确认”的事务流程。
-
-
-工具调用应按依赖关系编排：彼此独立且无副作用的查询可并行，以降低总延迟；存在数据依赖、事务顺序或资源竞争时应串行。实际可用 DAG 编排，设置超时、失败重试和部分结果策略，并结合限流与一致性要求决定并发度。
-
-**差距在哪**：新手只记住了“职责单一”的教条。高手从模型负担、参数复杂度、事务性、编排灵活性四个维度做权衡，且给出了“对外小工具 + 对内事务编排”的折中方案。面试官考的是你在工具设计时有没有系统性的权衡框架。
-
----
-
 ### Q：你会如何设计工具 schema，才能降低模型传错参数、漏参数、乱调用的问题？
 
-> 来源：Agent 开发面试 30 题；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
+> 来源：Agent 开发面试 30 题；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)
 
 **新手答**：“写清楚参数说明就行。”
 
@@ -811,7 +786,44 @@ result = agent.invoke({
 
 **追问补充**：权限不能只写在提示词或 Schema 中：工具注册时绑定允许的主体、资源范围和操作级权限，服务端执行鉴权与参数校验；写操作、敏感数据访问需二次确认或审批，并记录调用者、参数摘要、结果和审计日志。
 
+**追问补充**：执行前应将 JSON 解析后按 schema 校验必填项、类型、枚举、格式、范围及额外字段，失败时返回结构化错误并禁止调用。封装外部 API 还需处理鉴权、超时、重试、幂等、限流、字段映射和错误归一化，避免把供应商细节直接暴露给模型。
+
 **差距在哪**：新手觉得“描述写清楚”就够了。高手从参数设计、描述技巧、命名规范、工具粒度四个角度系统性地降低出错率。面试官考的是你有没有做过“把模型对接到真实工具”的工程经验——只有踩过坑的人才知道 schema 设计有这么多讲究。
+
+---
+
+### Q：同一个能力是做成“一个大而全工具”还是“多个小工具”，怎么权衡？
+
+> 来源：Agent 开发面试 30 题；[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)；本轮追问：模型调用工具是单个还是多个？多个工具调用时是并行还是串行？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）
+
+**新手答**：“拆小一点好，职责单一。”
+
+**高手答**：
+
+不能一刀切。**拆不拆、怎么拆，取决于模型的工具选择负担和参数填充难度**：
+
+| 维度 | 大而全工具 | 多个小工具 |
+|------|----------|----------|
+| 模型选择负担 | 低（只需选一个工具） | 高（需从多个里选对的） |
+| 参数复杂度 | 高（参数多、组合多） | 低（每个工具参数少） |
+| 错误定位 | 难（哪步出错不好查） | 易（哪个工具失败一目了然） |
+| 编排灵活性 | 低（绑定了固定流程） | 高（可以自由组合） |
+
+**什么时候用大工具**：
+- 操作有强事务性——查库存 + 锁库存 + 扣款必须原子执行，拆开会有一致性风险
+- 用户感知是一个动作——“帮我订机票”不应该让用户看到拆成了五步
+
+**什么时候拆小工具**：
+- 子步骤可以独立使用——搜索酒店和预订酒店是两个独立需求
+- 需要灵活编排——“先搜再比再订”的顺序可能因用户需求变化
+- 参数空间差异大——搜索只需要城市和日期，预订还需要用户信息和支付方式
+
+**实际工程中的折中方案**：对外给模型暴露小工具（降低选择和参数负担），对内用**编排层把小工具组合成事务**（保证一致性）。模型只需要说“我要订这个酒店”，编排层自动执行“校验 → 锁房 → 扣款 → 确认”的事务流程。
+
+
+工具调用应按依赖关系编排：彼此独立且无副作用的查询可并行，以降低总延迟；存在数据依赖、事务顺序或资源竞争时应串行。实际可用 DAG 编排，设置超时、失败重试和部分结果策略，并结合限流与一致性要求决定并发度。
+
+**差距在哪**：新手只记住了“职责单一”的教条。高手从模型负担、参数复杂度、事务性、编排灵活性四个维度做权衡，且给出了“对外小工具 + 对内事务编排”的折中方案。面试官考的是你在工具设计时有没有系统性的权衡框架。
 
 ---
 
@@ -819,7 +831,7 @@ result = agent.invoke({
 
 ### Q：MCP 协议的完整调用过程是怎样的？
 
-> 来源：高德 AI 应用开发实习一面 【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后，Host、Client 与 Server 背后发生了什么】；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：一次 MCP 调用到底是谁发起、谁执行？；详细讲解一次 MCP 调用背后有哪些步骤。】【[去哪儿AI面试](https://www.nowcoder.com/discuss/924765100441903104)追问：MCP 的客户端和服务端交互的完整流程是怎么样的？中间的具体内容是什么？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：MCP 用过吗？Agent 和 MCP 的交互方式是怎样的？】；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；本轮追问：框架如何接入 MCP？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)
+> 来源：高德 AI 应用开发实习一面 【腾讯AI应用开发一面追问：领域MCP工具（慢SQL诊断）与Agent系统串联】【唯品会大模型算法实习追问：Tool Schema 以 MCP JSON 注册后，Host、Client 与 Server 背后发生了什么】；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：一次 MCP 调用到底是谁发起、谁执行？；详细讲解一次 MCP 调用背后有哪些步骤。】【[去哪儿AI面试](https://www.nowcoder.com/discuss/924765100441903104)追问：MCP 的客户端和服务端交互的完整流程是怎么样的？中间的具体内容是什么？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：MCP 用过吗？Agent 和 MCP 的交互方式是怎样的？】；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；本轮追问：框架如何接入 MCP？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[阳光保险 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/600fa3f292654e02ab227d923206a158)
 
 **新手答**：“就是调 API。”
 
@@ -895,6 +907,8 @@ sequenceDiagram
 框架接入时由 MCP Client 负责初始化、能力协商和工具发现，再将工具 Schema 适配为框架的统一 Tool 注册表；执行时按工具标识路由回 Client 调用，并统一处理超时、取消、错误和结果格式。运行中的编排应使用已缓存的能力快照，工具变更在下一轮生效。
 
 **追问补充**：同时请求 tools、resources、prompts 等能力时，协议本身不规定响应顺序；Client 用 JSON-RPC 请求 ID 匹配响应，Host 根据依赖关系决定并行或串行。Server 可按资源锁、优先级和并发额度调度，独立请求可并行，依赖请求需等待前置结果，并分别处理超时、取消和错误。 JSON-RPC 请求 ID 的对应规则见 [JSON-RPC 2.0 规范](https://www.jsonrpc.org/specification)。
+
+**追问补充**：query 中的 MCP name 只是路由线索，Host 仍须完成服务选择、连接与能力发现，再把受控工具定义提供给模型。协议区分 `tools/list` 与 `tools/call`，工具列表可分页；不能把某个 MCP Center 的缓存或二次请求路径当成协议保证，见 [MCP 工具规范](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)。后续是否访问 Server 取决于实际调用、缓存失效与宿主编排。
 
 **差距在哪**：新手把 MCP 等同于调 API——完全忽略了三角色架构、初始化握手、能力协商这些协议层设计。高手能完整描述从初始化到工具发现到调用到结果回传的全链路，且清楚 stdio 和 Streamable HTTP（可选 SSE）两种标准传输的适用场景。面试官考的是你对 MCP 协议的理解是停留在“听说过”还是“真的看过协议规范”。
 
@@ -1031,6 +1045,47 @@ flowchart LR
 
 ---
 
+### Q：为什么将 Agent 工具注册到微服务注册中心（如 Nacos）而不是用 MCP？工具的自动注入怎么实现？
+
+> 来源：遥望科技 Agent开发一面【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：动态工具注册中心是怎么做的？动态注入是怎么去注入的？；工具注册中心的构建过程中有什么难点吗？】；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)
+
+**新手答**：“MCP 是标准协议，应该统一用 MCP 就好了。”
+
+**高手答**：
+
+这两种方案解决的是不同层面的问题，选型取决于你的系统架构和工具的生命周期管理需求。
+
+**MCP 的定位**：标准化的模型-工具通信协议。它定义了 Host/Client/Server 三层架构，解决的是“模型如何发现和调用一个工具”的接口标准化问题。适合：工具相对固定、单机或小规模部署、对接多个不同的 LLM。
+
+**注册中心（Nacos/Consul）的定位**：分布式服务治理。它解决的是“工具作为微服务如何动态上下线、负载均衡、灰度发布”的运维问题。适合：工具本身是后端微服务、需要弹性伸缩、多实例负载均衡、灰度切流。
+
+**选 Nacos 不选 MCP 的典型场景**：
+
+1. **工具就是已有的后端接口** — 团队已经有成熟的微服务体系（Spring Cloud + Nacos），工具只是在已有接口上包一层 Tool Description，没必要再引入一套 MCP Server
+2. **动态上下线** — 工具服务需要根据负载弹性扩缩容，Nacos 天然支持健康检查和实例摘除，MCP 没有这个能力
+3. **灰度和版本管理** — 同一个工具的 v1 和 v2 可以通过 Nacos 的 metadata 做流量切分，无需改 Agent 代码
+
+**工具自动注入的实现**：
+
+```text
+1. 每个工具服务启动时向 Nacos 注册，metadata 中携带 Tool Schema（名称、描述、参数 JSON Schema）
+2. Agent Gateway 订阅 Nacos 的服务变更事件
+3. 有新工具上线 → Gateway 自动拉取其 Schema → 注入到 Agent 的可用工具列表
+4. 工具下线 → Gateway 自动移除，Agent 不再调用
+```
+
+这样实现了**零代码热插拔**：新工具上线不需要重启 Agent，不需要改 Prompt，不需要重新部署。
+
+**两者不矛盾**：在更大规模的系统里，MCP 管协议标准（模型怎么调工具），Nacos 管服务治理（工具实例怎么管理）。可以在 MCP Server 内部用 Nacos 做服务发现。
+
+**追问补充**：外部接口可由适配器封装成受控工具，明确工具输入输出契约、鉴权、超时与错误语义；数据库或搜索数据源则通过查询工具暴露必要能力。注册时校验工具 Schema、权限和健康状态，调用时按租户隔离凭证，不能把数据源结构直接等同于工具参数 Schema。
+
+**追问补充**：通过 MCP 获取信息的价值在于把 Agent 与具体数据源解耦：统一工具发现、参数/结果契约和调用边界，避免每个 Agent 维护一套适配代码。MCP Center 可作为控制面，负责 Server 注册、能力目录、权限筛选、健康状态与审计；调用面仍直连具体服务，并按租户返回可用工具，避免把全量数据源暴露给模型。
+
+**差距在哪**：新手把工具管理等同于“协议选型”。高手区分了协议层（MCP）和治理层（注册中心）的职责差异，且能根据团队已有基础设施做务实选型。面试官考的是你有没有在真实微服务环境中做过工具集成——纯 Demo 项目不会遇到动态上下线和灰度切流的问题。
+
+---
+
 ### Q：如何在多智能体环境中实现动态发现并注册跨协议工具？
 
 > 来源：淘天 AI Agent 一面；本轮追问：MCP 工具具有动态发现能力，如何保证编排执行时能力稳定？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）
@@ -1111,45 +1166,6 @@ flowchart LR
 编排启动时应获取并固定工具能力快照，记录工具版本、Schema 和权限，执行期间不因动态刷新改变参数契约；注册中心需做健康检查和兼容校验。调用失败时按超时、重试、熔断及候选工具降级处理，变更只影响后续编排并保留审计记录。
 
 **差距在哪**：新手用静态配置列出所有工具——工具少时能用，工具多了或跨团队协作时根本管不过来。高手设计了一套完整的动态发现机制：注册中心提供工具目录、能力描述实现语义发现、运行时注册支持热扩展、协议适配层屏蔽底层差异。面试官考的是你对多智能体工具生态的架构设计能力。
-
----
-
-### Q：为什么将 Agent 工具注册到微服务注册中心（如 Nacos）而不是用 MCP？工具的自动注入怎么实现？
-
-> 来源：遥望科技 Agent开发一面【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：动态工具注册中心是怎么做的？动态注入是怎么去注入的？；工具注册中心的构建过程中有什么难点吗？】；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)
-
-**新手答**：“MCP 是标准协议，应该统一用 MCP 就好了。”
-
-**高手答**：
-
-这两种方案解决的是不同层面的问题，选型取决于你的系统架构和工具的生命周期管理需求。
-
-**MCP 的定位**：标准化的模型-工具通信协议。它定义了 Host/Client/Server 三层架构，解决的是“模型如何发现和调用一个工具”的接口标准化问题。适合：工具相对固定、单机或小规模部署、对接多个不同的 LLM。
-
-**注册中心（Nacos/Consul）的定位**：分布式服务治理。它解决的是“工具作为微服务如何动态上下线、负载均衡、灰度发布”的运维问题。适合：工具本身是后端微服务、需要弹性伸缩、多实例负载均衡、灰度切流。
-
-**选 Nacos 不选 MCP 的典型场景**：
-
-1. **工具就是已有的后端接口** — 团队已经有成熟的微服务体系（Spring Cloud + Nacos），工具只是在已有接口上包一层 Tool Description，没必要再引入一套 MCP Server
-2. **动态上下线** — 工具服务需要根据负载弹性扩缩容，Nacos 天然支持健康检查和实例摘除，MCP 没有这个能力
-3. **灰度和版本管理** — 同一个工具的 v1 和 v2 可以通过 Nacos 的 metadata 做流量切分，无需改 Agent 代码
-
-**工具自动注入的实现**：
-
-```text
-1. 每个工具服务启动时向 Nacos 注册，metadata 中携带 Tool Schema（名称、描述、参数 JSON Schema）
-2. Agent Gateway 订阅 Nacos 的服务变更事件
-3. 有新工具上线 → Gateway 自动拉取其 Schema → 注入到 Agent 的可用工具列表
-4. 工具下线 → Gateway 自动移除，Agent 不再调用
-```
-
-这样实现了**零代码热插拔**：新工具上线不需要重启 Agent，不需要改 Prompt，不需要重新部署。
-
-**两者不矛盾**：在更大规模的系统里，MCP 管协议标准（模型怎么调工具），Nacos 管服务治理（工具实例怎么管理）。可以在 MCP Server 内部用 Nacos 做服务发现。
-
-**追问补充**：外部接口可由适配器封装成受控工具，明确工具输入输出契约、鉴权、超时与错误语义；数据库或搜索数据源则通过查询工具暴露必要能力。注册时校验工具 Schema、权限和健康状态，调用时按租户隔离凭证，不能把数据源结构直接等同于工具参数 Schema。
-
-**差距在哪**：新手把工具管理等同于“协议选型”。高手区分了协议层（MCP）和治理层（注册中心）的职责差异，且能根据团队已有基础设施做务实选型。面试官考的是你有没有在真实微服务环境中做过工具集成——纯 Demo 项目不会遇到动态上下线和灰度切流的问题。
 
 ---
 
@@ -1243,7 +1259,7 @@ LoRA 微调 → 解决模型“理解不了复杂意图”的根本能力问题
 
 ### Q：对于边界不好定义的场景，Skill 形式不能很好区分场景披露工具，怎么办？
 
-> 来源：阿里暑期Agent算法二面
+> 来源：阿里暑期Agent算法二面；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
 
 **新手答**：“那就把所有工具都给模型看呗。”
 
@@ -1276,7 +1292,7 @@ LoRA 微调 → 解决模型“理解不了复杂意图”的根本能力问题
 
 ### Q：工具返回了非常大的数据超出了大模型的上下文窗口，怎么办？
 
-> 来源：唯品会一面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：工具返回数据量过大时，如何进行分块或流式处理？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具返回数据量过大时，如何处理？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：查询日志接口是现有的，怎么保证不会一次拉取过多日志导致上下文爆掉？】；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：上一轮 Tool 返回特别长怎么办？原始结果会保留吗？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：金融场景工具返回五六千只 A 股，用户要求全量输出，压缩的信息损失怎么办？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：以读文件工具为例，文件不存在或文件非常大时，分别返回什么结果？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：日志文件规模通常达到数百万行，模型上下文装不下时，工程上如何做高效检索过滤？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)
+> 来源：唯品会一面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：工具返回数据量过大时，如何进行分块或流式处理？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具返回数据量过大时，如何处理？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：查询日志接口是现有的，怎么保证不会一次拉取过多日志导致上下文爆掉？】；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：上一轮 Tool 返回特别长怎么办？原始结果会保留吗？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：金融场景工具返回五六千只 A 股，用户要求全量输出，压缩的信息损失怎么办？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：以读文件工具为例，文件不存在或文件非常大时，分别返回什么结果？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：日志文件规模通常达到数百万行，模型上下文装不下时，工程上如何做高效检索过滤？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)
 
 **新手答**：“截断数据，只取前面一部分给模型。”
 
@@ -1604,6 +1620,22 @@ Web 层可由认证中间件解析用户身份，将请求路由到对应的 ses
 
 ---
 
+## Q：Agent 中 Skill 与 Tool 的职责边界和选型标准是什么？
+
+> 来源：[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)
+
+**新手答**：“Skill 更适合描述可复用的流程和知识，Tool 更适合执行具体动作或调用外部系统。”
+
+**高手答**：
+
+Skill 是可组合、可复用的行为规范或流程，通常包含目标、步骤、提示模板、领域知识和判断规则，本身不一定直接产生外部副作用；Tool 是模型可调用的明确接口，负责查询数据、写文件、发请求或执行计算，并应定义参数、返回值、权限和错误。选型时看能力是否需要实时数据、确定性执行和外部副作用：偏知识与流程编排用 Skill，必须访问系统或完成动作则用 Tool。工程上要限制权限、校验参数、设置超时，处理重试、幂等和部分失败；用离线用例、工具调用日志、成功率与人工抽检验证效果。Skill 过大难维护，Tool 过多会增加选择歧义和攻击面。
+
+**追问补充**：业务 Harness 可理解为包裹 Agent 运行的工程化外壳，统一提供上下文注入、流程编排、权限隔离、观测、评测、重试和人工接管；Skill 是其中可复用的行为能力，Tool 是被调用的执行接口。判断是否使用过时，应说明接入了哪些治理能力，并用调用日志、失败回放和权限测试验证。
+
+**差距在哪**：浅层回答只给出“流程对 Skill、动作对 Tool”的定义，面试官还会考察接口边界、权限与副作用、失败重试、幂等性及如何通过调用评测验证选型。
+
+---
+
 ## Q：MCP 返回结果支不支持流式？
 
 > 来源：淘天/AI Agent一面
@@ -1662,22 +1694,6 @@ Lease 已过期时立即禁止领取新步骤和新的有副作用调用，保�
 Skill 和 MCP 应遵循最小权限、服务端白名单、版本或签名校验及密钥隔离；对参数做 schema 校验和资源范围限制，防 SSRF、路径穿越与注入，工具运行置于沙箱，高风险写操作需人工审批，并支持审计、撤权和快速回滚。
 
 **差距在哪**：新手做访问日志，高手建立责任归属、供应链版本和副作用证据链。
-
----
-
-## Q：Agent 中 Skill 与 Tool 的职责边界和选型标准是什么？
-
-> 来源：[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)
-
-**新手答**：“Skill 更适合描述可复用的流程和知识，Tool 更适合执行具体动作或调用外部系统。”
-
-**高手答**：
-
-Skill 是可组合、可复用的行为规范或流程，通常包含目标、步骤、提示模板、领域知识和判断规则，本身不一定直接产生外部副作用；Tool 是模型可调用的明确接口，负责查询数据、写文件、发请求或执行计算，并应定义参数、返回值、权限和错误。选型时看能力是否需要实时数据、确定性执行和外部副作用：偏知识与流程编排用 Skill，必须访问系统或完成动作则用 Tool。工程上要限制权限、校验参数、设置超时，处理重试、幂等和部分失败；用离线用例、工具调用日志、成功率与人工抽检验证效果。Skill 过大难维护，Tool 过多会增加选择歧义和攻击面。
-
-**追问补充**：业务 Harness 可理解为包裹 Agent 运行的工程化外壳，统一提供上下文注入、流程编排、权限隔离、观测、评测、重试和人工接管；Skill 是其中可复用的行为能力，Tool 是被调用的执行接口。判断是否使用过时，应说明接入了哪些治理能力，并用调用日志、失败回放和权限测试验证。
-
-**差距在哪**：浅层回答只给出“流程对 Skill、动作对 Tool”的定义，面试官还会考察接口边界、权限与副作用、失败重试、幂等性及如何通过调用评测验证选型。
 
 ---
 
@@ -1759,7 +1775,6 @@ flowchart TB
 
 ---
 
----
 
 ## Q：工具调用结果如何在 Agent 工作流中直接传递？什么情况下需要 LLM 参与中转？
 
@@ -1774,6 +1789,57 @@ flowchart TB
 **差距在哪**：浅层只把 LLM 当作工具链中转，深入回答会区分确定性数据流与语义决策，进一步覆盖 schema、权限、幂等、失败恢复、可审计性和成本延迟权衡。
 
 ---
+
+
+## Q：Agent 的云端工具和本地工具有什么区别？分别适用于什么场景？
+
+> 来源：[深度赋智 Agent 算法 / 开发二面](https://www.nowcoder.com/discuss/948319558106968064)
+
+**新手答**：“本地工具直接访问当前设备，云端工具通过服务提供能力，选择时要看数据、权限和运行成本。”
+
+**高手答**：
+
+先区分部署位置、调用协议和信任边界，三者不能混为一谈。本地工具通常运行在用户机器或工作区附近，适合编辑仓库、访问设备及离线任务，但也更靠近本地凭证和文件；云端工具便于集中部署、弹性资源和协作，却增加网络、租户隔离及数据出域要求。[MCP传输规范](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports)同时定义子进程stdio与Streamable HTTP，但协议形态本身不自动证明工具安全或部署位置。
+
+我的工程选择是先列工具所需数据、网络、算力、身份和副作用，再决定在哪里执行。可采用本地薄代理访问受限文件，云端承担长任务，但每次传输都要裁剪数据、限定授权，并处理断网、取消和结果回写。统一接口保留实际执行后端、超时、错误和幂等信息，不抹平能力差异。验收应测试凭证过期、网络中断、跨租户与本地路径越界；本地不天然私密，云端也不必然不安全，关键是实际权限与证据。
+
+**差距在哪**：不能仅比较“速度和成本”，还要区分位置、协议与信任域，并说明访问控制、断网和副作用恢复。
+
+---
+
+## Q：如何为 macOS、Windows 和 Linux 设计显式选择执行环境的 Shell 工具？
+
+> 来源：[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)
+
+**新手答**：“按操作系统改命令和路径，Windows 上换成 PowerShell。”
+
+**高手答**：
+
+先探测 OS、原生或 WSL 环境、可用 Shell 和可执行文件，再显式绑定后端、cwd 与编码。Windows 可能用 PowerShell、Git Bash 或 WSL，不能假设都有 Bash；这些环境也不能混用路径和权限语义（[官方 Windows 环境说明](https://code.claude.com/docs/en/setup#set-up-on-windows)）。
+
+普通命令优先用 program 与 argv 列表直接启动，避免拼接 Shell 字符串；需要管道、重定向或变量展开时，才显式选择 Shell 并按其规则转义。这与官方区分的 [exec form / shell form](https://code.claude.com/docs/en/hooks#exec-form-and-shell-form) 一致，但该文档的具体字段只属于 Hook 契约。PowerShell 管道可传对象，不能当作 Bash 文本管道直接移植（[管道说明](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines)）。
+
+适配层统一返回退出码、stdout、stderr，并区分启动失败、超时和取消；管道各段失败也要可见。回归覆盖中文与空格路径、参数特殊字符、编码换行、失败退出和取消；同时校验路径作用域、权限与副作用，不能把退出码为零当作任务验收。
+
+**差距在哪**：新手只替换命令语法，高手把执行环境、输入输出契约和验证矩阵说清，并保留各后端的权限与安全边界。
+
+---
+
+## Q：Codex 的 apply_patch 与字符串编辑工具在输入契约、上下文匹配和失败处理上有什么区别？
+
+> 来源：[深度赋智 Agent 算法 / 开发二面](https://www.nowcoder.com/discuss/948319558106968064)
+
+**新手答**：“apply_patch 按补丁修改文件，edit 替换字符串；修改多时用补丁。”
+
+**高手答**：
+
+先明确 edit 的具体接口。字符串编辑通常接收 old_text/new_text，是否要求唯一、只换首处或允许全量替换，必须查工具契约。Codex CLI 的 apply_patch 接收带文件操作、上下文和增删行的补丁文本，可描述多文件修改，属于文本编辑机制（[官方工具定义](https://github.com/openai/codex/blob/0768988e5563dd78a6802be5bdffc9cc3eceee09/codex-rs/core/src/tools/handlers/apply_patch_spec.rs#L9)）。
+
+补丁也有匹配歧义：所核验 CLI 实现从精确到宽松分层匹配，每层可取搜索起点后的首处命中，没有全文件唯一性检查（[匹配实现](https://github.com/openai/codex/blob/0768988e5563dd78a6802be5bdffc9cc3eceee09/codex-rs/apply-patch/src/seek_sequence.rs#L35)）。这一行为不能推广到所有客户端。
+
+定位明确的小替换可用字符串编辑；多处修改可用补丁。执行前重读文件，把上下文扩到函数名和相邻代码，区分重复块；自建工具可校验预期匹配数。不匹配就重新读取并生成，不能盲目全量替换。执行后检查位置、diff 和相关回归，工具成功不等于改对了。
+
+**差距在哪**：新手只区分输入形式，高手会说明匹配歧义、实现边界，以及如何验证文件改到了预期位置。
 
 ## 这类题的答题模式
 

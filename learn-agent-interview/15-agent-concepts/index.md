@@ -18,7 +18,7 @@ eyebrow: Agent 面试通关 / 15
 
 ### Q：Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？
 
-> 来源：快手 AI业务应用设计开发 / [阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【字节后端开发日常实习二面同题：“harness有了解吗”】【腾讯AI后端开发一面同题：“了解harness嘛，具体是做什么的”】【美团Agent方向面经同题：“harness工程了解吗？主要内容？项目里怎么用？还能补什么？”】【社招五年Go面经同题：“了解harness engineer吗”】【腾讯音乐暑期+日常同题：“有了解过Harness么？有用过Harness么？”】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[(秋招) vivo线下面面经 - Agent开发](https://www.nowcoder.com/discuss/932016298563809280)；本轮追问：在让 AI 开始工作前，你通常会做什么来提高输出正确性和可控性？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[小鹏二面](https://www.nowcoder.com/feed/main/detail/7c2fa3dd92014d038603ba388fb078f4)；[快手 AI 全栈开发 面经](https://www.nowcoder.com/feed/main/detail/b65f5ee779b34f1399be9d97bbae3937)；[HW技术一面（10.13）](https://www.nowcoder.com/feed/main/detail/978bed84f8f74b31b7f3798a71f67f5a)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)
+> 来源：快手 AI业务应用设计开发 / [阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【字节后端开发日常实习二面同题：“harness有了解吗”】【腾讯AI后端开发一面同题：“了解harness嘛，具体是做什么的”】【美团Agent方向面经同题：“harness工程了解吗？主要内容？项目里怎么用？还能补什么？”】【社招五年Go面经同题：“了解harness engineer吗”】【腾讯音乐暑期+日常同题：“有了解过Harness么？有用过Harness么？”】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[(秋招) vivo线下面面经 - Agent开发](https://www.nowcoder.com/discuss/932016298563809280)；本轮追问：在让 AI 开始工作前，你通常会做什么来提高输出正确性和可控性？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[小鹏二面](https://www.nowcoder.com/feed/main/detail/7c2fa3dd92014d038603ba388fb078f4)；[快手 AI 全栈开发 面经](https://www.nowcoder.com/feed/main/detail/b65f5ee779b34f1399be9d97bbae3937)；[HW技术一面（10.13）](https://www.nowcoder.com/feed/main/detail/978bed84f8f74b31b7f3798a71f67f5a)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[未注明公司 Agent 面试问题整理](https://www.nowcoder.com/feed/main/detail/feeede5d38f341f791c665bb7585adf7)；[小红书 增长方向一、二面](https://www.nowcoder.com/feed/main/detail/b9761e83c4c142c2a3bba57b545df113)；[长鑫存储 AI 全栈开发一面](https://www.nowcoder.com/feed/main/detail/712626e9f6114e6ebdffe11d83d19ff7)；[超聚变 AI 软件工程师（AI 大模型）一面](https://www.nowcoder.com/discuss/948249299312242688)
 
 **新手答**：“好像是跟测试框架有关的东西？不太了解。”
 
@@ -64,13 +64,15 @@ flowchart TB
 
 **可以补充的方向**：更接近真实业务的“半合成”评测环境（不是纯 mock，而是真实 API + 可控输入）、对抗性用例（测试安全边界）、成本与性能的持续监控。
 
+**追问补充**：模型变强会让规则、提示和工具编排可以更薄，但不会消除确定性边界：权限隔离、审批、输出校验、审计和回归评测仍应由 Harness 承担。应按风险分层，让模型负责开放式决策，Harness 负责不可逾越的约束与可验证反馈，并用失败率、越权样例和回归集验证是否真的能变薄。
+
 **差距在哪**：新手不了解这个概念，或只知道“跟测试有关”。高手能讲清 Harness 的三层结构（约束/增强/验证）和核心价值（不是规定 Agent 怎么做，而是确保它在安全范围内自主做事），且能给出具体的构建方案。面试官考的是你对“Agent 工程化”这件事有多深的理解——是只会调 Prompt，还是能搭建完整的工程保障体系。
 
 ---
 
 ### Q：Prompt Engineering、Context Engineering、Harness Engineering 三者有什么区别？
 
-> 来源：阿里淘天 Agent开发 日常实习一面【字节火山引擎 Managed Agent 一面追问：为开发、测试、运维任务组织 Skills】；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)
+> 来源：阿里淘天 Agent开发 日常实习一面【字节火山引擎 Managed Agent 一面追问：为开发、测试、运维任务组织 Skills】；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)；[水滴 AI 全栈一面](https://www.nowcoder.com/discuss/948270457868804096)
 
 **新手答**：“Prompt Engineering 是写提示词，其他两个不太清楚。”
 
@@ -95,6 +97,8 @@ flowchart TB
 **Harness Engineering 的价值**：把保障能力从模型内部（靠 Prompt 约束）转移到模型外部（靠工程体系保障）。模型负责“思考和执行”，Harness 负责“约束、增强和验证”。
 
 **一句话总结**：Prompt Engineering 解决“说什么”，Context Engineering 解决“给什么”，Harness Engineering 解决“怎么保障”。
+
+**追问补充**：比较Harness应按具体产品版本及执行边界，而不是按国内/国外推断：检查工具接入、状态持久化、隔离与授权、评测、部署及可观测能力，并在同一任务集验证。地域不是架构分类标准，也不能据此断言某类产品一定更适合企业或开发者。
 
 **差距在哪**：新手只知道 Prompt Engineering，对后两者模糊。高手能清晰区分三者的操作对象和责任边界，也知道它们在同一个系统中互相配合。面试官考的是你对 Agent 工程方法论的全景认知。
 
@@ -140,7 +144,7 @@ System Prompt 约束只是 Harness 最原始的形态。真正的 Harness Engine
 
 ### Q：讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering
 
-> 来源：阿里淘天 AI应用开发 暑期二面 【[淘天 AI 应用开发秋招二面](https://www.nowcoder.com/feed/main/detail/1b201d12219c45818b447bc7633fd62c)追问：模型升级与 Harness 的边界】；本轮追问：如何看待工具、记忆、权限管理和 Agent Loop 全面插件化的发展趋势？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）
+> 来源：阿里淘天 AI应用开发 暑期二面 【[淘天 AI 应用开发秋招二面](https://www.nowcoder.com/feed/main/detail/1b201d12219c45818b447bc7633fd62c)追问：模型升级与 Harness 的边界】；本轮追问：如何看待工具、记忆、权限管理和 Agent Loop 全面插件化的发展趋势？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）；[小红书 增长方向一、二面](https://www.nowcoder.com/feed/main/detail/b9761e83c4c142c2a3bba57b545df113)
 
 **新手答**：“以前是 ReAct，现在有了 MCP 和多 Agent。”
 
@@ -192,6 +196,8 @@ flowchart LR
 
 插件化能降低耦合并支持按场景替换，但不等于把控制权外包：工具、记忆、权限和 Loop 应通过稳定接口接入，明确状态、超时、版本兼容、错误恢复与审计；权限插件必须在工具调用前独立校验，记忆插件区分读写范围，Loop 仍由 Harness 设预算、终止条件和人工接管，并用回归评测验证替换后的行为。
 
+**追问补充**：先纠正时间前提：[ReAct论文](https://arxiv.org/abs/2210.03629)在2022年已公开。论文出现与某团队采用之间没有固定时差；“到2025年才流行”需要明确样本和指标，不能当成已证实事实。工程上可分析模型遵循、工具接口、成本、评测与执行治理如何影响采用，但这些是需要验证的解释。
+
 **差距在哪**：新手只能说出技术名词（ReAct、MCP），但说不清“为什么从 A 演进到 B”。高手能讲清每个阶段解决的问题和暴露的新瓶颈，形成“问题→解法→新问题→新解法”的递进逻辑。面试官考的是你对 Agent 技术演进有没有结构化的认知——不是背时间线，而是理解每一步“为什么”。
 
 ---
@@ -238,35 +244,9 @@ flowchart LR
 
 ## 前沿概念辨析
 
-### Q：你会关注 Harness、Context Engineering 这类行业热点吗？你觉得它们有什么优势劣势？
-
-> 来源：腾讯 CDG 产品经理（技术背景）一面 【腾讯音乐追问：“为什么没用过这些来辅助提升效率？”】【[DeepSeek（深度求索）- Agent 开发 / Harness 方向（独角兽）](https://www.nowcoder.com/discuss/925527442863714304)追问：你最近在关注 Agent 领域的什么新技术？】；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)
-
-**新手答**：“关注，我看到过这些词。”
-
-**高手答**：
-
-会关注，而且我认为需要**区分“概念创新”和“营销术语”**——Agent 领域概念更迭很快，但真正改变工程实践的不多。我的判断标准是：**这个概念有没有解决一个以前解决不了的问题？**
-
-| 概念 | 解决的真实问题 | 优势 | 劣势/局限 |
-|------|-------------|------|----------|
-| **Harness Engineering** | Agent 行为不可控、改动无法验证 | 把保障从模型内部迁到外部，工程师可控 | 前期搭建成本高，简单项目是过度工程化 |
-| **Context Engineering** | 模型有能力但缺信息 | 精准投喂比精细 Prompt 更高效 | 对上下文窗口大小有硬依赖，窗口不够仍是瓶颈 |
-| **MCP/A2A** | 工具和 Agent 之间的连接缺乏标准 | 协议标准化后组件可复用 | 生态还在早期，协议本身在快速迭代中 |
-
-**这些概念的共同趋势**：从“让模型更强”转向“让模型周围的工程更强”。这说明行业进入了工程化阶段——模型能力已经足够，瓶颈在于怎么可靠地把能力落地。
-
-**我没有盲目追每个热词**，而是看它是否能解决我当前项目的具体痛点。比如 Harness 中的评测管线思想，我已经在项目里落地了（每次改 Prompt 跑回归评测集）；但 A2A 协议我还没有使用场景，所以只保持关注不深入投入。
-
-**追问补充**：需求文档和技术方案应作为高价值上下文源纳入，但不宜默认全文塞入。先按任务检索相关章节，结合版本、权限和生效状态过滤，并保留文档来源；实现方案需与代码、配置等运行时事实交叉验证，避免文档过期导致错误决策。
-
-**差距在哪**：新手只能说“看到过这些词”。高手对每个概念有独立判断（解决什么问题、有什么局限），且能说清自己的取舍逻辑。面试官考的是你对行业动态的**批判性思考能力**——不是追热点，而是能辨别哪些值得投入。
-
----
-
 ### Q：Harness、Hermes 这种比较新的 Agent 设计了解吗？
 
-> 来源：字节 大模型算法 暑期实习 二面；本轮追问：你了解的 DeepSeek Harness 和 Pi Agent 分别是什么？（[字节 Agent 秋招一面](https://www.nowcoder.com/discuss/929731481189044224)）
+> 来源：字节 大模型算法 暑期实习 二面；本轮追问：你了解的 DeepSeek Harness 和 Pi Agent 分别是什么？（[字节 Agent 秋招一面](https://www.nowcoder.com/discuss/929731481189044224)）；[深度赋智 Agent 算法 / 开发一面](https://www.nowcoder.com/discuss/947993571775242240)；[长鑫存储 AI 全栈开发一面](https://www.nowcoder.com/feed/main/detail/712626e9f6114e6ebdffe11d83d19ff7)；[深度赋智 Agent 算法 / 开发二面](https://www.nowcoder.com/discuss/948319558106968064)
 
 **新手答**：“Harness 听说过，Hermes 不了解。”
 
@@ -299,11 +279,37 @@ DeepSeek Harness 可理解为围绕模型组织提示、上下文、工具调用
 ---
 
 
+### Q：你会关注 Harness、Context Engineering 这类行业热点吗？你觉得它们有什么优势劣势？
+
+> 来源：腾讯 CDG 产品经理（技术背景）一面 【腾讯音乐追问：“为什么没用过这些来辅助提升效率？”】【[DeepSeek（深度求索）- Agent 开发 / Harness 方向（独角兽）](https://www.nowcoder.com/discuss/925527442863714304)追问：你最近在关注 Agent 领域的什么新技术？】；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)
+
+**新手答**：“关注，我看到过这些词。”
+
+**高手答**：
+
+会关注，而且我认为需要**区分“概念创新”和“营销术语”**——Agent 领域概念更迭很快，但真正改变工程实践的不多。我的判断标准是：**这个概念有没有解决一个以前解决不了的问题？**
+
+| 概念 | 解决的真实问题 | 优势 | 劣势/局限 |
+|------|-------------|------|----------|
+| **Harness Engineering** | Agent 行为不可控、改动无法验证 | 把保障从模型内部迁到外部，工程师可控 | 前期搭建成本高，简单项目是过度工程化 |
+| **Context Engineering** | 模型有能力但缺信息 | 精准投喂比精细 Prompt 更高效 | 对上下文窗口大小有硬依赖，窗口不够仍是瓶颈 |
+| **MCP/A2A** | 工具和 Agent 之间的连接缺乏标准 | 协议标准化后组件可复用 | 生态还在早期，协议本身在快速迭代中 |
+
+**这些概念的共同趋势**：从“让模型更强”转向“让模型周围的工程更强”。这说明行业进入了工程化阶段——模型能力已经足够，瓶颈在于怎么可靠地把能力落地。
+
+**我没有盲目追每个热词**，而是看它是否能解决我当前项目的具体痛点。比如 Harness 中的评测管线思想，我已经在项目里落地了（每次改 Prompt 跑回归评测集）；但 A2A 协议我还没有使用场景，所以只保持关注不深入投入。
+
+**追问补充**：需求文档和技术方案应作为高价值上下文源纳入，但不宜默认全文塞入。先按任务检索相关章节，结合版本、权限和生效状态过滤，并保留文档来源；实现方案需与代码、配置等运行时事实交叉验证，避免文档过期导致错误决策。
+
+**差距在哪**：新手只能说“看到过这些词”。高手对每个概念有独立判断（解决什么问题、有什么局限），且能说清自己的取舍逻辑。面试官考的是你对行业动态的**批判性思考能力**——不是追热点，而是能辨别哪些值得投入。
+
+---
+
 ## 协议标准化：MCP
 
 ### Q：MCP 是什么？它解决了 Function Calling 的什么根本问题？
 
-> 来源：蚂蚁集团智能体与大模型应用二面 / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880) 【蚂蚁Agent开发一面追问：“有了FC是否可以没有MCP”】【高德实习一面同题：“MCP协议的完整调用过程”】【字节实习Agent开发一面追问：“MCP和Function Calling的关系”】【阿里 Agent Infra 一面题库同题】；[阳光电源  AI应用开发工程师 一面](https://www.nowcoder.com/feed/main/detail/122fd928ee824ed99c8f834233d1ac23)；本轮追问：MCP和普通本地Tools很像，MCP解决了Tools的什么问题？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[阿里云 ai应用开发 一面](https://www.nowcoder.com/feed/main/detail/7e27cf4dedb142d9b643471ba31276ed)；本轮追问：你说到 function call、tool 和 MCP，讲讲这几个概念。（[9.18 虾皮shopee chatbot研发实习一面凉经](https://www.nowcoder.com/feed/main/detail/9f02a7f8009d4aca9fc730a18b9f96cc)）；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[移动卓望AI面10.17](https://www.nowcoder.com/feed/main/detail/2dcc16b1678d42beac2c7f5270f6ff0c)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)
+> 来源：蚂蚁集团智能体与大模型应用二面 / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880) 【蚂蚁Agent开发一面追问：“有了FC是否可以没有MCP”】【高德实习一面同题：“MCP协议的完整调用过程”】【字节实习Agent开发一面追问：“MCP和Function Calling的关系”】【阿里 Agent Infra 一面题库同题】；[阳光电源  AI应用开发工程师 一面](https://www.nowcoder.com/feed/main/detail/122fd928ee824ed99c8f834233d1ac23)；本轮追问：MCP和普通本地Tools很像，MCP解决了Tools的什么问题？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[阿里云 ai应用开发 一面](https://www.nowcoder.com/feed/main/detail/7e27cf4dedb142d9b643471ba31276ed)；本轮追问：你说到 function call、tool 和 MCP，讲讲这几个概念。（[9.18 虾皮shopee chatbot研发实习一面凉经](https://www.nowcoder.com/feed/main/detail/9f02a7f8009d4aca9fc730a18b9f96cc)）；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[移动卓望AI面10.17](https://www.nowcoder.com/feed/main/detail/2dcc16b1678d42beac2c7f5270f6ff0c)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[华宇信息 Agent 开发社招面试](https://www.nowcoder.com/feed/main/detail/cdf15b93310e40f6936168a93db504c7)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)
 
 **新手答**：“MCP 就是 Anthropic 出的一个调用工具的协议，跟 Function Calling 差不多。”
 
@@ -364,6 +370,8 @@ MCP Server 通过 `tools/list` 声明能力，Client 通过 `tools/call` 调用�
 **追问补充**：MCP 不是唯一方案。单一应用、少量稳定工具可直接用本地函数、SDK、内部 API 或插件，由宿主自行完成注册和鉴权；只有在需要跨宿主复用、远程隔离、动态发现或统一治理时，MCP 的标准化收益才更明显，不能为使用协议而引入额外复杂度。
 
 **追问补充**：REST API 是业务接口的常见形式；MCP 标准化宿主与 Server 间的能力发现和调用交互，可以封装 REST API，但不必构建在业务 REST 接口之上。Function Calling 是模型提出结构化调用的能力，真正执行与鉴权仍由宿主及工具实现。参见 [MCP 架构文档](https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture)。
+
+**追问补充**：Agent负责目标与执行编排，Tool是具体能力，MCP规范Host/Client与Server之间的消息及能力接入，并不替应用保证业务正确性。工具发现和调用分别有明确协议，见 [MCP工具规范](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)。失败时由宿主按副作用、错误类型和预算决定重试、降级或终止，保留结构化错误而非盲目循环。
 
 **差距在哪**：新手把 MCP 等同于 FC 的升级版。高手理解两者是不同层面的东西——FC 是模型能力，MCP 是连接协议。面试官考的是你对 Agent 工具链架构的分层理解，以及对“标准化为什么重要”的工程认知。
 
@@ -555,6 +563,38 @@ Claude 与 Codex 的差别不能只看模型名称：还要比较运行环境、
 
 ---
 
+## Q：使用 LangChain 构建 Agent 时有哪些核心模块？各模块如何协作？
+
+> 来源：[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[字节AI全栈二面](https://www.nowcoder.com/discuss/938145178114592768)；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[快手 一面](https://www.nowcoder.com/feed/main/detail/ae703fcc0bd34d2797702681ada7f2b0)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
+
+**新手答**：“LangChain Agent通常由模型、工具、提示词和执行循环组成，模型决定下一步是否调用工具，工具返回结果后继续推理或输出答案。”
+
+**高手答**：
+
+用 LangChain 构建 Agent，核心包括模型、工具、Agent 执行循环、消息与状态，以及可选的中间件和结构化输出；这些能力在 [LangChain Agents Documentation](https://docs.langchain.com/oss/python/langchain/agents) 中有对应说明。模型根据提示和当前状态选择工具或结束，工具执行外部检索、数据库或业务操作，结果再回到循环，直到满足停止条件。工程上应限制最大步数、超时和预算，校验工具参数并隔离权限；对写操作设置人工确认或幂等键，记录轨迹以便排查。不要把模型输出当作可信指令，应通过 schema、沙箱和拒绝策略验证；评估需覆盖任务成功率、工具调用准确性、延迟、成本及异常恢复，而非只看 Demo 对话效果。
+
+**追问补充**：[LangChain](https://docs.langchain.com/oss/python/langchain/overview)提供模型、工具与 Agent 构建抽象。工程上可据此组织模型调用、检索与工具执行，再按需要接入状态管理、中间件和观测。面试回答应说明实际选用了哪些模块，以及异常恢复、权限和成本如何验证，不能把框架提供抽象等同于业务已经可靠。
+
+**追问补充**：可将模型适配、工具注册、提示模板、执行循环、状态存储、观测审计、权限与评测抽象为平台层；不同场景主要替换领域工具、数据源、状态 schema、业务提示和验收指标。客服、问答与工作流共用安全、超时、重试、预算和人工门禁，但流程编排与领域 Oracle 需按场景调整。
+
+**差距在哪**：浅层回答能列出模型、工具和循环，深入考点在状态管理、中间件、结构化输出、权限与失败控制，以及如何用轨迹和任务指标验证 Agent。
+
+---
+
+## Q：Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？
+
+> 来源：B站 Agent 二面（2026-08-19）；本轮追问：使用主 Agent 做输出约束，与另设一个 Agent 执行或评审任务有什么区别？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：你重写的 Agent 层到底对需求做了什么约束？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)；[阳光保险 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/600fa3f292654e02ab227d923206a158)
+
+**新手答**：“在工具调用前后运行 Hook，做日志和安全检查。”
+
+**高手答**：Hooks 可位于请求进入、上下文组装、模型调用、工具前后、状态提交和最终输出，但每个 Hook 必须有明确输入、超时、失败策略和副作用。权限、路径、参数和发布门禁由确定性 Hook 强制执行；Prompt 只提供行为指导。Hook 版本进入 trace，禁止任意插件获取全量秘密；高风险阻断需可解释、可审批和可回滚。
+
+**追问补充**：在 Claude Code 中，CLAUDE.md 是加载进模型上下文的项目指令，官方明确它属于上下文指导，不是强制配置（[记忆与项目指令](https://code.claude.com/docs/en/memory#claude-md-files)）。Hook 则由客户端按生命周期事件和匹配条件触发；同步 PreToolUse 可通过规定的输出协议阻止工具执行（[决策协议](https://code.claude.com/docs/en/hooks#pretooluse-decision-control)）。但不能把所有 Hook 都当成确定性 Shell 脚本：处理器可以调用模型，失败处理也依事件与配置而定，后台异步 Hook 不能追溯阻止已经发生的动作（[限制](https://code.claude.com/docs/en/hooks#limitations)）。因此项目约定放入 CLAUDE.md，可执行检查放入合适的 Hook，权限和路径限制仍需在执行层落实，并回归检查失败、超时和绕过路径。
+
+**差距在哪**：新手把 Hook 当回调，高手把它当模型之外的策略执行点。
+
+---
+
 ## Q：知识库与 Skills 如何分工承载业务知识？
 
 > 来源：[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)；本轮追问：AI pipeline 对业务知识的理解如何保证准确？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)
@@ -571,7 +611,6 @@ Claude 与 Codex 的差别不能只看模型名称：还要比较运行环境、
 
 ---
 
----
 
 ## Q：如何比较 Coding Agent、通用助手与办公 Agent？
 
@@ -617,35 +656,21 @@ Claude Code、Codex、Trae 等更接近开发环境中的 Coding Agent；豆包�
 
 ---
 
----
 
-## Q：使用 LangChain 构建 Agent 时有哪些核心模块？各模块如何协作？
+## Q：Function Calling 和 RAG 分别解决什么问题？如何配合使用？
 
-> 来源：[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[字节AI全栈二面](https://www.nowcoder.com/discuss/938145178114592768)；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)
+> 来源：[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)；[顺丰科技27届AI开发工程师 一面面经](https://www.nowcoder.com/feed/main/detail/463a64c7df7e4efaac8c6ad32648b454)；[华鲲振宇 AI 开发一面](https://www.nowcoder.com/feed/main/detail/65a687060578410699b9c7bcd109a2e6)
 
-**新手答**：“LangChain Agent通常由模型、工具、提示词和执行循环组成，模型决定下一步是否调用工具，工具返回结果后继续推理或输出答案。”
+**新手答**：“Function Calling 让模型调用外部工具，RAG 让模型检索外部知识；实际系统可以先用 RAG 找资料，再通过 Function Calling 执行业务操作。”
 
 **高手答**：
 
-用 LangChain 构建 Agent，核心包括模型、工具、Agent 执行循环、消息与状态，以及可选的中间件和结构化输出；这些能力在 [LangChain Agents Documentation](https://docs.langchain.com/oss/python/langchain/agents) 中有对应说明。模型根据提示和当前状态选择工具或结束，工具执行外部检索、数据库或业务操作，结果再回到循环，直到满足停止条件。工程上应限制最大步数、超时和预算，校验工具参数并隔离权限；对写操作设置人工确认或幂等键，记录轨迹以便排查。不要把模型输出当作可信指令，应通过 schema、沙箱和拒绝策略验证；评估需覆盖任务成功率、工具调用准确性、延迟、成本及异常恢复，而非只看 Demo 对话效果。
+Function Calling 解决“让模型按结构化参数请求外部能力”的问题，例如查订单、调用计算服务或提交变更；真正执行仍由应用控制，必须做参数校验、权限检查、超时、重试和幂等。RAG 解决“让模型基于外部或私有资料回答”的问题，通常包括切分、索引、召回、重排和把证据放入上下文，可降低仅依赖模型参数记忆的风险，但会受检索质量、时效性、权限隔离和上下文长度影响。两者可以串联：先检索授权资料，再让模型决定是否调用工具，或工具返回结果后再次生成答案。验证应分别评估召回率、引用与答案正确性、工具参数准确率、拒答率及端到端失败恢复；不能把检索结果或模型输出直接当作可信指令。
 
-**追问补充**：[LangChain](https://docs.langchain.com/oss/python/langchain/overview)提供模型、工具与 Agent 构建抽象。工程上可据此组织模型调用、检索与工具执行，再按需要接入状态管理、中间件和观测。面试回答应说明实际选用了哪些模块，以及异常恢复、权限和成本如何验证，不能把框架提供抽象等同于业务已经可靠。
+**追问补充**：直接传原文需要评估上下文预算、相关性、权限及引用定位；RAG 则先选取证据，便于控制输入和更新范围。全文输入与检索并非固定二选一，可按文档体量和任务组合使用，不能把只有短且单一文档才能传全文当作硬规则。
 
-**差距在哪**：浅层回答能列出模型、工具和循环，深入考点在状态管理、中间件、结构化输出、权限与失败控制，以及如何用轨迹和任务指标验证 Agent。
+**差距在哪**：浅层只会区分“调用工具”和“检索知识”，深入回答还应说明编排顺序、权限与幂等边界，以及如何评估检索和工具执行的可靠性。
 
----
-
-## Q：Hooks 在 Agent 系统中应该拦截哪些阶段，和 Prompt 约束有什么区别？
-
-> 来源：B站 Agent 二面（2026-08-19）；本轮追问：使用主 Agent 做输出约束，与另设一个 Agent 执行或评审任务有什么区别？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：你重写的 Agent 层到底对需求做了什么约束？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）
-
-**新手答**：“在工具调用前后运行 Hook，做日志和安全检查。”
-
-**高手答**：Hooks 可位于请求进入、上下文组装、模型调用、工具前后、状态提交和最终输出，但每个 Hook 必须有明确输入、超时、失败策略和副作用。权限、路径、参数和发布门禁由确定性 Hook 强制执行；Prompt 只提供行为指导。Hook 版本进入 trace，禁止任意插件获取全量秘密；高风险阻断需可解释、可审批和可回滚。
-
-**差距在哪**：新手把 Hook 当回调，高手把它当模型之外的策略执行点。
-
----
 
 ## Q：Computer Use Agent 如何感知并操作本地电脑？
 
@@ -662,21 +687,6 @@ Computer Use Agent 通常运行在隔离的桌面或浏览器环境中：先获�
 **差距在哪**：浅层回答只描述“截图加点击”，深层回答还应说明执行闭环、隔离权限、提示注入与高风险确认，以及如何通过轨迹和失败率验证可靠性。
 
 ---
-
-## Q：Function Calling 和 RAG 分别解决什么问题？如何配合使用？
-
-> 来源：[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)；[顺丰科技27届AI开发工程师 一面面经](https://www.nowcoder.com/feed/main/detail/463a64c7df7e4efaac8c6ad32648b454)
-
-**新手答**：“Function Calling 让模型调用外部工具，RAG 让模型检索外部知识；实际系统可以先用 RAG 找资料，再通过 Function Calling 执行业务操作。”
-
-**高手答**：
-
-Function Calling 解决“让模型按结构化参数请求外部能力”的问题，例如查订单、调用计算服务或提交变更；真正执行仍由应用控制，必须做参数校验、权限检查、超时、重试和幂等。RAG 解决“让模型基于外部或私有资料回答”的问题，通常包括切分、索引、召回、重排和把证据放入上下文，可降低仅依赖模型参数记忆的风险，但会受检索质量、时效性、权限隔离和上下文长度影响。两者可以串联：先检索授权资料，再让模型决定是否调用工具，或工具返回结果后再次生成答案。验证应分别评估召回率、引用与答案正确性、工具参数准确率、拒答率及端到端失败恢复；不能把检索结果或模型输出直接当作可信指令。
-
-**追问补充**：直接传原文需要评估上下文预算、相关性、权限及引用定位；RAG 则先选取证据，便于控制输入和更新范围。全文输入与检索并非固定二选一，可按文档体量和任务组合使用，不能把只有短且单一文档才能传全文当作硬规则。
-
-**差距在哪**：浅层只会区分“调用工具”和“检索知识”，深入回答还应说明编排顺序、权限与幂等边界，以及如何评估检索和工具执行的可靠性。
-
 
 ## Q：Agent 和 Siri 这种传统助手的核心差别在哪？
 
@@ -763,25 +773,9 @@ Coding Agent 的天花板是**底层模型的能力**——理论上只要模型
 
 ---
 
-## Q：LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？
-
-> 来源：哔哩哔哩 AI 应用岗 Agent 开发一面（2026-08-18）
-
-**新手答**：“LCEL 用管道符连接组件，写起来更简洁。”
-
-**高手答**：
-
-传统 Chain 往往由具体类封装固定调用流程，扩展、并行和流式行为取决于各类实现。LCEL 把 Prompt、模型、解析器、Retriever 和自定义函数统一抽象为 Runnable，通过 `|`、并行映射和分支组合声明数据流，并统一提供 `invoke/batch/stream/async`、配置传递、重试与 tracing 接口。
-
-它的价值不只是语法短，而是让组合后的链仍保留批处理、流式、异步和观测能力，便于局部替换和测试。LCEL 适合无复杂持久状态的可组合数据流；需要循环、长期状态、人工中断和 checkpoint 时，应使用 LangGraph 等状态图，不要把 LCEL 管道硬拗成工作流引擎。
-
-**差距在哪**：新手只看到运算符，高手说清统一 Runnable 协议、组合能力和与状态图的边界。
-
----
-
 ## Q：DeepAgents 的核心难点、设计亮点及其解决的 Agent 工程痛点是什么？
 
-> 来源：[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)
+> 来源：[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)
 
 **新手答**：“DeepAgents 是一种带有规划、工具调用、子 Agent 委派和上下文管理能力的 Agent 框架，用来处理复杂的长流程任务。”
 
@@ -794,7 +788,7 @@ DeepAgents 的核心不是再写一个简单的“思考—调用工具”循环
 
 ## Q：Self-Consistency 是什么？如何通过多次采样提升大模型输出的可靠性？
 
-> 来源：[南方基金 AI应用大模型方向 笔面试梳理](https://www.nowcoder.com/feed/main/detail/0d707380326e4d8cbd3fa310c3f6f441)
+> 来源：[南方基金 AI应用大模型方向 笔面试梳理](https://www.nowcoder.com/feed/main/detail/0d707380326e4d8cbd3fa310c3f6f441)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
 
 **新手答**：“Self-Consistency 就是让模型对同一问题多次生成不同推理过程，再通过多数投票选择最常见的最终答案。”
 
@@ -808,7 +802,7 @@ Self-Consistency 的角色是把一次推理的单点结果，变成多条候选
 
 ## Q：Agent 开发与传统前后端开发有哪些核心区别？
 
-> 来源：[字节跳动火山引擎agent开发秋招一面](https://www.nowcoder.com/feed/main/detail/3ae147c4caaf40b580071ef9da71da2e)
+> 来源：[字节跳动火山引擎agent开发秋招一面](https://www.nowcoder.com/feed/main/detail/3ae147c4caaf40b580071ef9da71da2e)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)
 
 **新手答**：“传统前后端主要围绕确定的请求、数据和页面流程开发，而 Agent 还要处理模型推理、工具调用、上下文记忆和不确定结果。”
 
@@ -836,6 +830,22 @@ Self-Consistency 的角色是把一次推理的单点结果，变成多条候选
 - [Agent Infra：Runtime、Sandbox 与可靠执行](../16-agent-infra/index.html)
 - [架构选型：ReAct、Plan-and-Execute 与 ToT 怎么选](../01-architecture-design/index.html)
 - [Prompt 工程与框架原理](../08-prompt-engineering/index.html)
+
+## Q：LangChain 的传统 Chain 和 LCEL 有什么区别？LCEL 解决了哪些工程问题？
+
+> 来源：哔哩哔哩 AI 应用岗 Agent 开发一面（2026-08-18）
+
+**新手答**：“LCEL 用管道符连接组件，写起来更简洁。”
+
+**高手答**：
+
+传统 Chain 往往由具体类封装固定调用流程，扩展、并行和流式行为取决于各类实现。LCEL 把 Prompt、模型、解析器、Retriever 和自定义函数统一抽象为 Runnable，通过 `|`、并行映射和分支组合声明数据流，并统一提供 `invoke/batch/stream/async`、配置传递、重试与 tracing 接口。
+
+它的价值不只是语法短，而是让组合后的链仍保留批处理、流式、异步和观测能力，便于局部替换和测试。LCEL 适合无复杂持久状态的可组合数据流；需要循环、长期状态、人工中断和 checkpoint 时，应使用 LangGraph 等状态图，不要把 LCEL 管道硬拗成工作流引擎。
+
+**差距在哪**：新手只看到运算符，高手说清统一 Runnable 协议、组合能力和与状态图的边界。
+
+---
 
 ## 这类题的答题模式
 

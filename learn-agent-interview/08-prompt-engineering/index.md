@@ -16,7 +16,7 @@ Prompt 工程不是“写提示词”，是一个**分层组装系统**。面试
 
 ### Q：提示词模板是怎么构建的？
 
-> 来源：抖音基础架构 Agent 一面；本轮追问：用户消息、系统提示词、Memory 等信息如何组装并发送给模型？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)
+> 来源：抖音基础架构 Agent 一面；本轮追问：用户消息、系统提示词、Memory 等信息如何组装并发送给模型？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)；[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/3903a12df0d342619ce1a550b7b65e1c)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)
 
 **新手答**：“把任务描述和代码拼成一个 Prompt 发给模型。”
 
@@ -125,7 +125,7 @@ Skill 的创建方式不止一种，按自动化程度从低到高：
 
 ### Q：Claude Code 的架构有什么比较创新的设计？
 
-> 来源：腾讯 Agent 应用开发一面；本轮追问：Claude Code 的原理、组成和工作流是什么？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)
+> 来源：腾讯 Agent 应用开发一面；本轮追问：Claude Code 的原理、组成和工作流是什么？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)；[都学网 技术面试](https://www.nowcoder.com/feed/main/detail/6365999695014b7988cb34426691da68)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)
 
 **新手答**：“它很强，能直接改代码。”
 
@@ -177,6 +177,8 @@ Claude Code 通过工具定义（Read、Edit、Bash、Agent 等）严格限定�
 典型工作流是：主 Agent 接收需求并读取项目上下文，拆解任务后选择工具或子 Agent 执行；每轮根据工具结果更新状态，必要时继续调用、修改代码并运行测试，最后汇总变更与验证结果。组件可抽象为模型、上下文管理器、工具执行器、权限层和持久化状态。
 
 **追问补充**：若按三层落地，可拆为交互层、编排层和执行层：交互层维护会话与确认，编排层管理上下文、状态机、预算及工具选择，执行层做参数校验、权限审批、沙箱执行和结果回传；每次工具返回都写入状态后再进入下一轮，避免模型直接绕过控制层操作环境。
+
+**追问补充**：若采用Coordinator模式，可让它管理任务依赖、子任务上下文与结果汇总，执行者处理受限工作单元；仍需验证协调成本、共享状态和失败恢复。这是可选的工程组织方式，不能仅凭“多Agent”推断某个Claude Code版本内部必然有固定协调器。
 
 **差距在哪**：新手只感受到了“强”。高手从 System Prompt 规则引擎、权限分级、上下文压缩、Hooks 四个具体设计点分析了创新。面试官考的是你对 Agent 框架的拆解和分析能力。
 
@@ -379,7 +381,7 @@ Skill 中的脚本通常是被 Skill 指令编排的辅助程序，不会因写�
 
 ### Q：一个好的 Prompt 和一个差的 Prompt 的区别？
 
-> 来源：腾讯 Agent 应用开发一面；本轮追问：请写一个 prompt。（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）；本轮追问：从文档中“提取什么内容”，也是由 Prompt 决定吗？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；[字节多模态大模型面经一面](https://www.nowcoder.com/discuss/932594519835443200)
+> 来源：腾讯 Agent 应用开发一面；本轮追问：请写一个 prompt。（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）；本轮追问：从文档中“提取什么内容”，也是由 Prompt 决定吗？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；[字节多模态大模型面经一面](https://www.nowcoder.com/discuss/932594519835443200)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
 
 **新手答**：“好的 Prompt 描述清楚，差的 Prompt 太模糊。”
 
@@ -456,7 +458,7 @@ Skill 是**模型的知识**——不执行代码，而是告诉模型“遇到�
 
 ### Q：Harness Engineering 是什么？它如何演进的？
 
-> 来源：CVTE/AI应用工程师一面 | 更完整的 Harness 专题见 → [概念考察：Harness Engineering](../15-agent-concepts/index.html)【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：你怎么看 Harness 工程？】【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：你如何理解Agent中Harness的概念？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：为什么会从早期方案演变到 Harness、上下文工程和 Graph Engineer？它们有什么区别？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；本轮追问：了解什么是Harness吗？（[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)）；本轮追问：Agent Harness 最重要需要解决的问题是什么？（[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)）；本轮追问：模型外面的 Harness 工程包含哪些模块？还有哪些模块需要考虑？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：讲一个 Agent 工程中由于 Harness 环节做得不好而导致的问题，以及如何排查和解决。（[(秋招) vivo线下面面经 - Agent开发](https://www.nowcoder.com/discuss/932016298563809280)）；[阳光保险AI应用开发一面](https://www.nowcoder.com/feed/main/detail/20a1e12257c441d4804216625f11f8f4)；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)
+> 来源：CVTE/AI应用工程师一面 | 更完整的 Harness 专题见 → [概念考察：Harness Engineering](../15-agent-concepts/index.html)【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：你怎么看 Harness 工程？】【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：你如何理解Agent中Harness的概念？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；本轮追问：为什么会从早期方案演变到 Harness、上下文工程和 Graph Engineer？它们有什么区别？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；本轮追问：了解什么是Harness吗？（[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)）；本轮追问：Agent Harness 最重要需要解决的问题是什么？（[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)）；本轮追问：模型外面的 Harness 工程包含哪些模块？还有哪些模块需要考虑？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：讲一个 Agent 工程中由于 Harness 环节做得不好而导致的问题，以及如何排查和解决。（[(秋招) vivo线下面面经 - Agent开发](https://www.nowcoder.com/discuss/932016298563809280)）；[阳光保险AI应用开发一面](https://www.nowcoder.com/feed/main/detail/20a1e12257c441d4804216625f11f8f4)；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)；[阿里健康 Agent 算法工程师实习一面](https://www.nowcoder.com/feed/main/detail/4543b76d09404ce7aa4530f448fb7715)；[小红书 PE 一面](https://www.nowcoder.com/feed/main/detail/37ca05e39cc14069bfd2dfc5365d6187)；[网易云音乐 全栈开发一面](https://www.nowcoder.com/discuss/944165886930309120)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
 
 **新手答**：“不太了解这个概念，是不是跟测试框架有关？”
 
@@ -491,13 +493,15 @@ graph LR
 
 Harness 还应包含上下文构建与记忆、权限和沙箱、任务状态与重试、观测日志与评估、成本及超时控制、人工审批和回滚。比如 Agent 误调用高风险工具时，先查工具选择日志、上下文和权限策略，再用沙箱复现；修正规则或工具契约后，以回归任务验证误调用率和成功率。
 
+**追问补充**：底层通常是 Agent Loop：Harness 组装上下文、工具和权限，模型产出动作后由执行器调用 MCP Client 或其他工具，再把结果写回并继续循环。Hook 挂在模型请求、工具执行、结果回写和任务结束等边界，负责校验、审计、拦截或触发检查；记忆模块区分会话状态与长期知识，按相关性检索并控制写入。自建 Harness 可细粒度控制安全、状态和观测，托管服务接入更快但扩展、数据边界和调试控制较受限。
+
 **差距在哪**：新手不了解这个概念。高手能讲清演进逻辑（为什么从 Prompt 演进到 Harness）和核心区别（约束 vs 规定路径），展示对 Agent 框架设计哲学的深度理解。面试官考的是你对前沿 Agent 工程架构的认知。
 
 ---
 
 ### Q：Skill 的渐进式披露（Progressive Disclosure）怎么实现？Skill 之间的沙箱隔离和通信机制是什么？
 
-> 来源：蚂蚁AI应用开发二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：Skill的渐进式披露概念了解吗？】【[pdd agent二面](https://www.nowcoder.com/feed/main/detail/f5e7351df8364147ac8da085b99d9d18)追问：Agent怎么实现不同任务的隔离？】；[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：蚂蚁AI应用开发二面；[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)【[要务科技-面筋](https://www.nowcoder.com/discuss/926539013991796736)追问：Skill的渐进式披露概念了解吗？】【[pdd agent二面](https://www.nowcoder.com/feed/main/detail/f5e7351df8364147ac8da085b99d9d18)追问：Agent怎么实现不同任务的隔离？】；[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)
 
 **新手答**：“Skill 加载进去就行了，不需要什么披露策略。”
 
@@ -537,6 +541,69 @@ Skill A 执行完 → 将结果写入 shared_context（结构化 JSON）
 **追问补充**：在合同场景中，L0 只暴露合同审查、条款抽取等能力索引；识别合同类型后加载 L1 的章节定位和任务流程；确定审查范围后再加载 L2 的对应条款规则、字段 Schema 与示例。每个章节独立执行并输出证据位置，汇总阶段只读取结构化结果和引用，避免把整份合同或全部 Skill 注入上下文。
 
 **差距在哪**：新手认为 Skill 是“全量加载、互不相关”的。高手理解生产级 Skill 系统需要渐进披露（控制 token 成本）、沙箱隔离（防止冲突）、间接通信（支持组合）三重机制。面试官考的是你能不能把 Skill 从“单个文件”的认知提升到“多 Skill 协作系统”的架构层面。
+
+---
+
+### Q：通常 Prompt 包含哪些结构？
+
+> 来源：淘宝闪购 AI应用研发 一面；[Agent 开发面经](https://www.nowcoder.com/discuss/930572525178748928)；[字节跳动 AI 应用开发一、二面](https://www.nowcoder.com/feed/main/detail/c1fbd2d203714b129e4e09736be5006a)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)
+
+**新手答**：“角色、指令、示例，三个部分。”
+
+**高手答**：
+
+生产级 Prompt 远不止三要素。一个完整的 Agent 系统 Prompt 通常包含六层结构，每层有不同的职责和优先级：
+
+**1. 身份与角色层（Identity）**
+
+定义模型是谁、基本行为准则。放在最开头，优先级最高。
+
+```text
+你是一个电商客服助手，服务于XX平台的用户。
+你的回答必须准确、礼貌、简洁。
+```
+
+**2. 规则约束层（Rules）**
+
+硬性限制——模型绝对不能违反的规则。通常用否定句式强调。
+
+```text
+- 绝不编造商品信息，不确定时说"我帮您查询"
+- 不讨论政治、宗教等敏感话题
+- 涉及退款操作必须确认订单号
+```
+
+**3. 上下文注入层（Context）**
+
+动态注入的背景信息——当前用户画像、历史对话摘要、检索到的知识片段。这一层每次请求都不同。
+
+**4. 工具描述层（Tools）**
+
+可用工具的定义和使用说明。通过 function calling 接口或 Prompt 内嵌的方式提供。
+
+**5. 示例层（Examples）**
+
+Few-shot 示例——展示期望的输入输出格式和推理方式。2-3 个示例通常足够，太多会挤占上下文空间。
+
+**6. 输出格式层（Output Format）**
+
+约束输出的结构——JSON、Markdown、特定模板。放在 Prompt 末尾，离模型输出最近，遵循度最高。
+
+**层级之间的优先级**：
+
+```text
+规则约束 > 身份角色 > 上下文 > 示例 > 输出格式 > 工具描述
+```
+
+当不同层的指令冲突时（比如示例中的行为违反了规则），规则约束应该胜出。在 Prompt 中可以显式声明优先级：“如果以下示例与上述规则冲突，以规则为准。”
+
+**工程实践**：
+
+生产系统中，这六层通常不是写在一个字符串里，而是用**模板引擎**动态拼装——身份层和规则层固定，上下文层和工具层按需注入，示例层按任务类型切换。Prompt 版本管理和 A/B 测试也是必要的工程实践。
+
+**追问补充**：一次请求通常由编排层组装：先放固定的 System Prompt，再按任务选择 Skill 指令和安全规则，随后注入经筛选的上下文；MCP 提供的工具目录转换为工具定义随请求传入，最后附上本轮 User Prompt。Skill 是可复用任务指令，MCP 主要提供工具能力，二者都应做权限过滤和长度控制。
+
+**差距在哪**：新手只知道“角色+指令+示例”三件套。高手展示了六层架构——身份、规则、上下文、工具、示例、输出格式——且理解层级间的优先级关系和动态拼装机制。面试官考的是你对 Prompt 的理解是“写一段话”还是“设计一个分层系统”。
 
 ---
 
@@ -630,67 +697,6 @@ Prompt 调优不是「碰运气」，是一个有方法论的工程流程。分�
 
 ---
 
-### Q：通常 Prompt 包含哪些结构？
-
-> 来源：淘宝闪购 AI应用研发 一面；[Agent 开发面经](https://www.nowcoder.com/discuss/930572525178748928)
-
-**新手答**：“角色、指令、示例，三个部分。”
-
-**高手答**：
-
-生产级 Prompt 远不止三要素。一个完整的 Agent 系统 Prompt 通常包含六层结构，每层有不同的职责和优先级：
-
-**1. 身份与角色层（Identity）**
-
-定义模型是谁、基本行为准则。放在最开头，优先级最高。
-
-```text
-你是一个电商客服助手，服务于XX平台的用户。
-你的回答必须准确、礼貌、简洁。
-```
-
-**2. 规则约束层（Rules）**
-
-硬性限制——模型绝对不能违反的规则。通常用否定句式强调。
-
-```text
-- 绝不编造商品信息，不确定时说"我帮您查询"
-- 不讨论政治、宗教等敏感话题
-- 涉及退款操作必须确认订单号
-```
-
-**3. 上下文注入层（Context）**
-
-动态注入的背景信息——当前用户画像、历史对话摘要、检索到的知识片段。这一层每次请求都不同。
-
-**4. 工具描述层（Tools）**
-
-可用工具的定义和使用说明。通过 function calling 接口或 Prompt 内嵌的方式提供。
-
-**5. 示例层（Examples）**
-
-Few-shot 示例——展示期望的输入输出格式和推理方式。2-3 个示例通常足够，太多会挤占上下文空间。
-
-**6. 输出格式层（Output Format）**
-
-约束输出的结构——JSON、Markdown、特定模板。放在 Prompt 末尾，离模型输出最近，遵循度最高。
-
-**层级之间的优先级**：
-
-```text
-规则约束 > 身份角色 > 上下文 > 示例 > 输出格式 > 工具描述
-```
-
-当不同层的指令冲突时（比如示例中的行为违反了规则），规则约束应该胜出。在 Prompt 中可以显式声明优先级：“如果以下示例与上述规则冲突，以规则为准。”
-
-**工程实践**：
-
-生产系统中，这六层通常不是写在一个字符串里，而是用**模板引擎**动态拼装——身份层和规则层固定，上下文层和工具层按需注入，示例层按任务类型切换。Prompt 版本管理和 A/B 测试也是必要的工程实践。
-
-**差距在哪**：新手只知道“角色+指令+示例”三件套。高手展示了六层架构——身份、规则、上下文、工具、示例、输出格式——且理解层级间的优先级关系和动态拼装机制。面试官考的是你对 Prompt 的理解是“写一段话”还是“设计一个分层系统”。
-
----
-
 ## Q：用户的某个需求，你会沉淀为 Skill 还是长期记忆？判断标准是什么？
 
 > 来源：字节TikTok AI应用开发一面；[移动卓望AI面10.17](https://www.nowcoder.com/feed/main/detail/2dcc16b1678d42beac2c7f5270f6ff0c)
@@ -771,7 +777,7 @@ DSPy 是斯坦福 NLP 实验室推出的框架，核心理念是**把 Prompt Eng
 
 ### Q：你觉得一个 Skill 写得好不好，应该看哪些标准？
 
-> 来源：视频面经汇总；[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)；本轮追问：文章质量检测 Skill 包含哪些检查项？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）
+> 来源：视频面经汇总；[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)；本轮追问：文章质量检测 Skill 包含哪些检查项？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；[快手 AI 全栈开发一面](https://www.nowcoder.com/discuss/942822898094428160)；[快手 AI 应用二面](https://www.nowcoder.com/discuss/944286343738257408)
 
 **新手答**：“看模型能不能正确触发它。”
 
@@ -827,6 +833,27 @@ DSPy 是斯坦福 NLP 实验室推出的框架，核心理念是**把 Prompt Eng
 
 ---
 
+## Q：如何让大模型从混乱的非结构化文档中稳定提取结构化 JSON？
+
+> 来源：[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)；本轮追问：让大模型稳定输出结构化数据，如JSON是AI应用开发常见需求，但模型有时会输出多余的解释文字或格式不合法，你会用哪些手段提升结构化输出的稳定性和可解析性？ / 如果在提示词里已经明确要求只输出JSON不要额外解释，但模型依然在JSON前后附带自然语言说明，你会用什么方式处理这类输出？ / 模型输出的JSON本身存在转义错误、括号不匹配，这类语法问题导致正则也无法准确截取合法片段，你会怎么处理？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；本轮追问：大模型稳定输出结构化 JSON，经常出现多余文字、格式非法，你会用哪些手段提升结构化输出稳定性与可解析性？ / 输出 JSON 缺失必填字段你会怎么处理？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；[字节 260907 一面面经](https://www.nowcoder.com/discuss/935858952644939776)；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)；[国药控股广东生物科技AI agent](https://www.nowcoder.com/feed/main/detail/18d271f86bda4d81afb30f02164352f1)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[未注明公司 技术面试（实习转正）](https://www.nowcoder.com/discuss/946807142583930880)；[得物 MLOps 和 Agent 实习面试](https://www.nowcoder.com/feed/main/detail/9b098d808abd4bd3921a6c189b0daaf3)；[广东亿迅科技 日常实习面试](https://www.nowcoder.com/feed/main/detail/7cfb34fbb0c14b39b92874e84cc4344e)
+
+**新手答**：“可以通过清晰的提示词、固定 JSON 格式和示例，让模型从文档中提取字段。”
+
+**高手答**：
+
+先定义字段契约：字段名、类型、是否必填、枚举范围、缺失值和歧义处理规则，并要求模型只输出符合 Schema 的 JSON。对混乱文档可先做分段、版面恢复、表格解析和字段候选定位，再让模型抽取；长文档采用分块抽取与汇总，避免上下文污染。生产链路应使用结构化输出或 JSON Schema 校验，解析失败自动重试或转人工，不能只依赖提示词。对金额、日期、编号等关键字段进行正则、字典和业务规则复核，保留原文证据与置信度。用标注样本评估字段级准确率、召回率、格式通过率及拒答率，并覆盖缺失、冲突和恶意指令。强约束更稳定但可能增加拒答和成本，宽松抽取则需要更强的后处理。
+
+
+先优先使用模型或接口的结构化输出约束；仍有前后说明时，按协议边界提取并交给 JSON 解析器校验，不要依赖正则。括号、转义损坏时可有限修复后重试，无法可靠修复则拒答或转人工；缺失必填字段应校验失败、重试或补采，不能静默填值。
+
+**追问补充**：多模态场景先按文件类型处理：图片直接做版面分析，PDF区分文本层与扫描页，扫描页逐页渲染后OCR，再结合表格和坐标信息抽取。OCR优先评估外部服务的准确率、成本、延迟与隐私合规；敏感、离线或定制字段场景可自研或私有化部署，并保留原图、OCR结果和置信度，低置信度转人工复核。
+
+**追问补充**：对于“按指定格式成文”，先把文档解析为带证据位置的结构化要点，再按输出契约生成文章；契约应明确章节顺序、字数、语气、必含条件和禁止内容。生成后用结构化校验检查缺段、条件遗漏、格式和事实依据，失败则重试或转人工，不能只靠提示词约束。
+
+**差距在哪**：浅层只会写提示词和 JSON 示例，深入回答应覆盖文档预处理、Schema 校验、失败重试、证据留存、业务复核与可量化评估。
+
+---
+
 ## Q：团队里的 Skill 数量持续膨胀，如何治理重复能力、路由冲突和上下文占用？
 
 > 来源：[电商 Agent 三面](https://www.nowcoder.com/feed/main/detail/b6b453976c2d4e43a872054d695c2fe2)【电商库存二面（2026-08-17）】；[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)；[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)；本轮追问：除描述外误路由还有什么原因，Skill 数量影响吗，做过大规模优化吗？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：不同的 skill 之间，大模型是怎么决定选择哪个 skill 的？提示词应该怎么写？（[淘天供应链ai应用研发一面](https://www.nowcoder.com/feed/main/detail/8656f1483ebd441bac7c17c313e5394a)）；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)
@@ -845,25 +872,6 @@ DSPy 是斯坦福 NLP 实验室推出的框架，核心理念是**把 Prompt Eng
 **追问补充**：发现路由错误后先暂停副作用，校验 Skill 前置条件和输出；可回退并重新召回候选，信息不足时向用户澄清，连续失败则转人工并记录样本。Skill 构建应先定义职责边界、输入输出 schema、权限和失败语义，再封装工具调用、幂等与超时处理，配套单测、混淆集和版本化发布。
 
 **差距在哪**：新手只优化一段描述，高手把 Skill 当作需要准入、发现、评测、发布和退役的能力资产。面试官考的是团队规模扩大后能否避免能力目录失控。
-
----
-
-## Q：如何让大模型从混乱的非结构化文档中稳定提取结构化 JSON？
-
-> 来源：[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)；本轮追问：让大模型稳定输出结构化数据，如JSON是AI应用开发常见需求，但模型有时会输出多余的解释文字或格式不合法，你会用哪些手段提升结构化输出的稳定性和可解析性？ / 如果在提示词里已经明确要求只输出JSON不要额外解释，但模型依然在JSON前后附带自然语言说明，你会用什么方式处理这类输出？ / 模型输出的JSON本身存在转义错误、括号不匹配，这类语法问题导致正则也无法准确截取合法片段，你会怎么处理？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；本轮追问：大模型稳定输出结构化 JSON，经常出现多余文字、格式非法，你会用哪些手段提升结构化输出稳定性与可解析性？ / 输出 JSON 缺失必填字段你会怎么处理？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；[字节 260907 一面面经](https://www.nowcoder.com/discuss/935858952644939776)；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)；[国药控股广东生物科技AI agent](https://www.nowcoder.com/feed/main/detail/18d271f86bda4d81afb30f02164352f1)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)
-
-**新手答**：“可以通过清晰的提示词、固定 JSON 格式和示例，让模型从文档中提取字段。”
-
-**高手答**：
-
-先定义字段契约：字段名、类型、是否必填、枚举范围、缺失值和歧义处理规则，并要求模型只输出符合 Schema 的 JSON。对混乱文档可先做分段、版面恢复、表格解析和字段候选定位，再让模型抽取；长文档采用分块抽取与汇总，避免上下文污染。生产链路应使用结构化输出或 JSON Schema 校验，解析失败自动重试或转人工，不能只依赖提示词。对金额、日期、编号等关键字段进行正则、字典和业务规则复核，保留原文证据与置信度。用标注样本评估字段级准确率、召回率、格式通过率及拒答率，并覆盖缺失、冲突和恶意指令。强约束更稳定但可能增加拒答和成本，宽松抽取则需要更强的后处理。
-
-
-先优先使用模型或接口的结构化输出约束；仍有前后说明时，按协议边界提取并交给 JSON 解析器校验，不要依赖正则。括号、转义损坏时可有限修复后重试，无法可靠修复则拒答或转人工；缺失必填字段应校验失败、重试或补采，不能静默填值。
-
-**追问补充**：多模态场景先按文件类型处理：图片直接做版面分析，PDF区分文本层与扫描页，扫描页逐页渲染后OCR，再结合表格和坐标信息抽取。OCR优先评估外部服务的准确率、成本、延迟与隐私合规；敏感、离线或定制字段场景可自研或私有化部署，并保留原图、OCR结果和置信度，低置信度转人工复核。
-
-**差距在哪**：浅层只会写提示词和 JSON 示例，深入回答应覆盖文档预处理、Schema 校验、失败重试、证据留存、业务复核与可量化评估。
 
 ---
 
@@ -1012,9 +1020,29 @@ flowchart LR
 
 ---
 
+## Q：Skill 的多后端可插拔加载应该如何设计？
+
+> 来源：[阿里边缘 BU 一面](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)；本轮追问：这个 AI 伴看 Agent 是怎样进行首轮加载的？是用户开始提问时才加载，还是以其他方式加载？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[宇视科技 一面](https://www.nowcoder.com/feed/main/detail/e3b9dfc725a949a9bb19e8d45af586c7)
+
+**新手答**：“定义统一接口，用工厂模式按配置加载本地、数据库或远程 Skill。”
+
+**高手答**：先定义稳定的逻辑契约，而不是只统一 `load()`：后端返回 `skill_id、version、manifest、content_hash、dependencies、permissions、provenance`，并区分 `list metadata`、`resolve version`、`fetch content` 和 `watch changes`。文件系统、Git、对象存储和注册中心分别实现 Adapter；路由器只依赖契约，不能把某个后端的路径或一致性语义泄漏到 Agent Loop。
+
+加载采用“两阶段”：先拉取小体积索引做候选路由，命中后再按不可变版本读取正文和依赖。缓存键包含 backend、skill、version 与内容哈希；发布者先写不可变对象，再原子更新可见指针。远程超时可回退到已经校验的旧版本，但必须标记 stale；哈希、签名、Schema、依赖和权限校验失败时拒绝加载，不能静默换后端取一份同名内容。
+
+多后端还要定义优先级和冲突规则：项目级覆盖全局时必须显式可见，同名不同 owner 不自动合并。契约测试对所有 Adapter 跑同一套发现、版本、缓存、失效、权限和故障注入用例；线上记录本次 Run 实际使用的 backend、版本和哈希，保证问题可回放。
+
+
+首轮不应等用户提问才加载：会话或作品打开时先异步拉取 Skill 索引、版本和权限信息，并预加载高概率使用的摘要或路由配置；真正执行某类任务时再按需获取正文和依赖。首轮加载失败可使用已校验缓存，但要标记版本和过期状态。
+
+**差距在哪**：新手只有接口和工厂，高手补齐不可变版本、渐进披露、缓存一致性、供应链校验与跨后端冲突规则。
+
+---
+
+
 ## Q：Skill 分层体系怎么设计？为什么这么分层？
 
-> 来源：字节跳动 Agent 二面（Coding Agent）；本轮追问：你们的 Agent 是怎么分层的？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；本轮追问：Skill是怎么在项目中使用的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；本轮追问：什么是 Skill？Skill 怎么划分粒度？怎么评价一个 Skill 写得好坏？怎么评测 Skill 的效果？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）
+> 来源：字节跳动 Agent 二面（Coding Agent）；本轮追问：你们的 Agent 是怎么分层的？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；本轮追问：Skill是怎么在项目中使用的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；本轮追问：什么是 Skill？Skill 怎么划分粒度？怎么评价一个 Skill 写得好坏？怎么评测 Skill 的效果？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)
 
 **新手答**：“按功能分类，比如代码生成一类、文档处理一类。”
 
@@ -1125,7 +1153,7 @@ Skill 是可复用的任务说明、步骤、约束与校验规则集合。粒�
 
 ## Q：如果让你设计一个代码审查的 Skill，你会如何设计？
 
-> 来源：最有料 AI 实习生面经；本轮追问：给你一个 PRD，你会怎么和 AI 进行协同开发？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）；本轮追问：如何设计一个“天气与穿搭”的 Skill/工具？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；本轮追问：对修改后的代码，你会从哪些方面进行 Review？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）
+> 来源：最有料 AI 实习生面经；本轮追问：给你一个 PRD，你会怎么和 AI 进行协同开发？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）；本轮追问：如何设计一个“天气与穿搭”的 Skill/工具？（[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)）；本轮追问：对修改后的代码，你会从哪些方面进行 Review？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；[得物 MLOps 和 Agent 实习面试](https://www.nowcoder.com/feed/main/detail/9b098d808abd4bd3921a6c189b0daaf3)
 
 **新手答**：“写一个 Prompt 让模型去审查代码，列出问题就行。”
 
@@ -1232,6 +1260,8 @@ Skill 式的代码审查不是替代 ESLint/Pylint，而是补充它们无法覆
 
 天气与穿搭 Skill 可拆为天气查询工具和穿搭决策逻辑：先确认城市、时间、单位及用户偏好，调用天气 API 获取温度、体感温度、降水、风力和预警；工具失败时明确提示并避免臆测。再依据温度、降水、场景生成分层建议，并标注数据时间与不确定性。
 
+**追问补充**：生产中直接调用大模型API还要防止密钥泄露、敏感代码外发、提示注入和不可信输出；需配置超时、限流、重试退避与预算控制，校验结构化结果并隔离自动修复权限。记录请求版本、耗时、token、错误和审查结论，结合脱敏、采样回放及回归集验证效果。
+
 **差距在哪**：新手只想到“让模型看代码找问题”——这是最粗暴的方式，没有结构、没有分级、没有上下文。高手设计了完整的四阶段流程（收集→审查→输出→修复），按五个维度分级审查，并考虑了质量保障和反馈闭环。面试官考的是你能不能把一个“让 AI 做 X”的模糊需求转化为一个可工程化、可评测、可迭代的 Skill 设计。
 
 ---
@@ -1306,61 +1336,9 @@ skill_name/
 
 ---
 
-## Q：Skill 的多后端可插拔加载应该如何设计？
-
-> 来源：[阿里边缘 BU 一面](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)；本轮追问：这个 AI 伴看 Agent 是怎样进行首轮加载的？是用户开始提问时才加载，还是以其他方式加载？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)
-
-**新手答**：“定义统一接口，用工厂模式按配置加载本地、数据库或远程 Skill。”
-
-**高手答**：先定义稳定的逻辑契约，而不是只统一 `load()`：后端返回 `skill_id、version、manifest、content_hash、dependencies、permissions、provenance`，并区分 `list metadata`、`resolve version`、`fetch content` 和 `watch changes`。文件系统、Git、对象存储和注册中心分别实现 Adapter；路由器只依赖契约，不能把某个后端的路径或一致性语义泄漏到 Agent Loop。
-
-加载采用“两阶段”：先拉取小体积索引做候选路由，命中后再按不可变版本读取正文和依赖。缓存键包含 backend、skill、version 与内容哈希；发布者先写不可变对象，再原子更新可见指针。远程超时可回退到已经校验的旧版本，但必须标记 stale；哈希、签名、Schema、依赖和权限校验失败时拒绝加载，不能静默换后端取一份同名内容。
-
-多后端还要定义优先级和冲突规则：项目级覆盖全局时必须显式可见，同名不同 owner 不自动合并。契约测试对所有 Adapter 跑同一套发现、版本、缓存、失效、权限和故障注入用例；线上记录本次 Run 实际使用的 backend、版本和哈希，保证问题可回放。
-
-
-首轮不应等用户提问才加载：会话或作品打开时先异步拉取 Skill 索引、版本和权限信息，并预加载高概率使用的摘要或路由配置；真正执行某类任务时再按需获取正文和依赖。首轮加载失败可使用已校验缓存，但要标记版本和过期状态。
-
-**差距在哪**：新手只有接口和工厂，高手补齐不可变版本、渐进披露、缓存一致性、供应链校验与跨后端冲突规则。
-
----
-
----
-
-## Q：为什么 Coding Agent 的 Skills 通常放在 System 上下文，而不是用户 Query 中？
-
-> 来源：文心一言/实习一面
-
-**新手答**：“System Prompt 优先级更高，所以模型更听话。”
-
-**高手答**：
-
-Skill 是宿主提供的能力说明和执行约束，不属于用户临时意图。放在 System 层有四个原因：权限边界更清晰，用户不能伪造或覆盖；跨轮次稳定，不必每轮重复拼接；可由 Host 按需披露并统一版本化；更容易与工具 schema、Hooks 和安全规则组合。
-
-但不应把所有 Skill 全量塞进 System。正确做法是 System 只保留 Skill 索引和不可变规则，路由命中后再加载具体 Skill 内容；动态任务参数仍放用户或运行时上下文。这样既保持指令层级，也控制 token 和注意力污染。
-
-**差距在哪**：新手只会说“优先级高”，高手能区分平台能力、用户意图和运行时数据，并解释渐进式披露与版本治理。面试官考的是上下文分层设计。
-
----
-
-## Q：异构 Coding Agent 如何共享和兼容项目级指令配置？
-
-> 来源：[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)；[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)；[科大讯飞——飞凡计划面经](https://www.nowcoder.com/feed/main/detail/23401c14bf8f4fc2b4818f6cb8586049)
-
-**新手答**：“不要只依赖 CLAUDE.md，应把通用规则放进项目级规范，并为不同 Coding Agent 提供对应的配置适配文件。”
-
-**高手答**：
-
-核心做法是把项目规则维护为一份与工具无关的规范源，例如编码约束、测试命令、目录边界和提交要求，再通过 CLAUDE.md、AGENTS.md 或其他 Agent 配置文件做薄适配，而不是手工维护多套内容。需要明确加载范围、继承关系、冲突时的优先级，并避免把密钥、个人偏好和不可验证的承诺写入仓库。可在 CI 中检查必需文件、规则同步、格式及示例命令，使用不同 Agent 做最小任务验证。还应防止指令注入和恶意修改，保留评审记录；兼容性越强，配置抽象和维护成本越高。
-
-**追问补充**：频繁更换模型不必每次全量重评 Skill，可按模型版本、指令跟随能力和 Skill 风险分层：先用冒烟集验证匹配、参数填充、工具调用和拒答边界；高风险或失败样本触发相关 Skill 回归，重大模型变更再执行全量评测，并保留版本化结果。
-
-**差距在哪**：浅层只会建议同时放置两个文件，深入回答还应说明规范单一来源、加载优先级、冲突处理、CI 验证与安全边界，这是面试官考察的工程化能力。
-
-
 ## Q：Skill 的 Prompt 配置上线后出错，如何快速止损和修复？
 
-> 来源：百度秋招后端一面 【[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度】
+> 来源：百度秋招后端一面 【[拼多多 AI 全栈两轮技术面](https://www.nowcoder.com/discuss/921104232256675840)追问：Prompt 模板的版本、测试和灰度】；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
 
 **新手答**：“马上修改 Prompt，再重新发布。”
 
@@ -1382,9 +1360,25 @@ Skill Prompt 必须像代码一样发布，而不是直接覆盖数据库文本�
 
 ---
 
+## Q：为什么 Coding Agent 的 Skills 通常放在 System 上下文，而不是用户 Query 中？
+
+> 来源：文心一言/实习一面
+
+**新手答**：“System Prompt 优先级更高，所以模型更听话。”
+
+**高手答**：
+
+Skill 是宿主提供的能力说明和执行约束，不属于用户临时意图。放在 System 层有四个原因：权限边界更清晰，用户不能伪造或覆盖；跨轮次稳定，不必每轮重复拼接；可由 Host 按需披露并统一版本化；更容易与工具 schema、Hooks 和安全规则组合。
+
+但不应把所有 Skill 全量塞进 System。正确做法是 System 只保留 Skill 索引和不可变规则，路由命中后再加载具体 Skill 内容；动态任务参数仍放用户或运行时上下文。这样既保持指令层级，也控制 token 和注意力污染。
+
+**差距在哪**：新手只会说“优先级高”，高手能区分平台能力、用户意图和运行时数据，并解释渐进式披露与版本治理。面试官考的是上下文分层设计。
+
+---
+
 ## Q：如何让 Agent 自动沉淀 Skill，同时保证生成的 Skill 准确、无害且不会无限膨胀？
 
-> 来源：电商库存二面（2026-08-17）；本轮追问：Skill 怎么呈现？非预设 Skill 怎么从对话沉淀？小模型怎么判“走弯路”、打分维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）
+> 来源：电商库存二面（2026-08-17）；本轮追问：Skill 怎么呈现？非预设 Skill 怎么从对话沉淀？小模型怎么判“走弯路”、打分维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
 
 **新手答**：“任务成功后让模型总结成 Skill，人工审核后保存。”
 
@@ -1394,9 +1388,26 @@ Skill Prompt 必须像代码一样发布，而不是直接覆盖数据库文本�
 
 发布时绑定版本、owner、评测报告和回滚目标，小流量观察路由准确率、任务成功率、误触发和副作用。后续按使用率、失败率和能力重叠度合并或退役。模型可以提出和改写候选，但不能自行扩大工具权限、覆盖稳定版本或删除审计来源。
 
+**追问补充**：沉淀保险配置Skill可先固定输入字段、规则来源和输出契约，把业务约束交给确定性校验，再做版本管理、样例回放和发布审核。是否需要DSL或双人复核取决于系统与风险，不应当作所有Skill的固定实现；面试应提供自己实际的前后验证证据。
+
 **差距在哪**：新手只有“总结 + 审核”，高手补齐候选准入、去重、安全测试、灰度和退役闭环。面试官考的是自进化能否被证据和权限约束。
 
 ---
+
+## Q：异构 Coding Agent 如何共享和兼容项目级指令配置？
+
+> 来源：[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)；[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)；[科大讯飞——飞凡计划面经](https://www.nowcoder.com/feed/main/detail/23401c14bf8f4fc2b4818f6cb8586049)
+
+**新手答**：“不要只依赖 CLAUDE.md，应把通用规则放进项目级规范，并为不同 Coding Agent 提供对应的配置适配文件。”
+
+**高手答**：
+
+核心做法是把项目规则维护为一份与工具无关的规范源，例如编码约束、测试命令、目录边界和提交要求，再通过 CLAUDE.md、AGENTS.md 或其他 Agent 配置文件做薄适配，而不是手工维护多套内容。需要明确加载范围、继承关系、冲突时的优先级，并避免把密钥、个人偏好和不可验证的承诺写入仓库。可在 CI 中检查必需文件、规则同步、格式及示例命令，使用不同 Agent 做最小任务验证。还应防止指令注入和恶意修改，保留评审记录；兼容性越强，配置抽象和维护成本越高。
+
+**追问补充**：频繁更换模型不必每次全量重评 Skill，可按模型版本、指令跟随能力和 Skill 风险分层：先用冒烟集验证匹配、参数填充、工具调用和拒答边界；高风险或失败样本触发相关 Skill 回归，重大模型变更再执行全量评测，并保留版本化结果。
+
+**差距在哪**：浅层只会建议同时放置两个文件，深入回答还应说明规范单一来源、加载优先级、冲突处理、CI 验证与安全边界，这是面试官考察的工程化能力。
+
 
 ## Q：可演进能力为什么应封装为 Skill，而不是不断塞进 Prompt？Skill 的知识进化流水线如何治理？
 
@@ -1416,7 +1427,6 @@ Skill Prompt 必须像代码一样发布，而不是直接覆盖数据库文本�
 
 ---
 
----
 
 ## Q：动态 Prompt 和静态 Prompt 有什么区别？各自在什么场景下用？
 

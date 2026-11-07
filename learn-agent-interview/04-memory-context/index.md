@@ -92,7 +92,7 @@ eyebrow: Agent 面试通关 / 04
 
 ### Q：长上下文里，怎么让 Agent 不忘记关键信息？
 
-> 来源：腾讯 Agent 岗终面；本轮追问：怎么定义什么是关键信息？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；本轮追问：上下文用错历史结果、漏掉关键结果，具体有哪些典型 Case？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；本轮追问：分层上下文 Roadmap 怎样解决长任务历史堆积与关键证据丢失？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）
+> 来源：腾讯 Agent 岗终面；本轮追问：怎么定义什么是关键信息？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；本轮追问：上下文用错历史结果、漏掉关键结果，具体有哪些典型 Case？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；本轮追问：分层上下文 Roadmap 怎样解决长任务历史堆积与关键证据丢失？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)；[都学网 技术面试](https://www.nowcoder.com/feed/main/detail/6365999695014b7988cb34426691da68)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)
 
 **新手答**：“用向量数据库存起来。”
 
@@ -122,6 +122,8 @@ eyebrow: Agent 面试通关 / 04
 
 
 典型错误包括：把旧任务的用户偏好误套到新任务、用过期订单状态作决策、摘要覆盖了原始约束，或检索只命中相似闲聊而漏掉否定条件。Roadmap 可从原始历史逐步演进为最近窗口、结构化状态、带来源和时间的事件证据，再配合摘要与按需检索；通过历史回放校验关键事实召回、冲突检测和状态更新结果。
+
+**追问补充**：Code Agent 应把复杂任务拆成可验证的迭代闭环：先建立仓库索引和任务清单，按依赖逐步修改；每步保存补丁、状态和决策，运行格式检查、单测或构建，失败时根据日志定向修复，定期压缩上下文但保留验收标准与未完成项，最终回放变更并做回归验证。
 
 **差距在哪**：新手的“向量数据库”是一个工具，不是方案。它解决了存储问题，但没解决“存什么、怎么查、怎么融合”的问题。高手的三段式记忆在不同时间粒度上各有分工——短期精确、中期结构化、长期摘要——这是 Memory 系统设计的核心思路。面试官考的是“你理不理解 Agent Memory 的多层次需求”。
 
@@ -185,7 +187,7 @@ eyebrow: Agent 面试通关 / 04
 
 ### Q：讲一下 Agent 中的“长短期记忆”
 
-> 来源：字节后端开发 Agent 一面 / [字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba) / [百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35) 【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：记忆模块如何实现，长期存储和短期存储分别采用什么方案？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何进行记忆分层（工作记忆/长期记忆），存储方案如何设计？】【[万仞二面CEO](https://www.nowcoder.com/feed/main/detail/641608e014b147c7b8aaa3c2e4387f2c)追问：短期记忆和长期记忆怎么做的？】；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；本轮追问：为什么要这样设计 Memory？不同类型的记忆分别解决什么问题？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；本轮追问：请介绍短期记忆机制如何实现，以及简历中各项指标的具体含义。（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)；[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)；本轮追问：Agent Memory 通常如何分类？（[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)）；本轮追问：Agent 第二大脑与长期记忆方案 / Agent 记忆的读写与存储内容（[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)）；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[美团agent一面](https://www.nowcoder.com/feed/main/detail/554bdcc695ae42f8b0d78e3c44dd17d5)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[度小满 - AI 全栈研发 - 三面](https://www.nowcoder.com/feed/main/detail/e98c29d76e854e2bbd1b40731d6ce715)；[南方基金 AI应用大模型方向 笔面试梳理](https://www.nowcoder.com/feed/main/detail/0d707380326e4d8cbd3fa310c3f6f441)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[微店ai全栈一面](https://www.nowcoder.com/discuss/940646573107650560)；[HW技术一面（10.13）](https://www.nowcoder.com/feed/main/detail/978bed84f8f74b31b7f3798a71f67f5a)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[网易互娱｜AI应用开发实习一面](https://www.nowcoder.com/feed/main/detail/2d982457b8b94da09fab383e275de93d)
+> 来源：字节后端开发 Agent 一面 / [字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba) / [百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35) 【蚂蚁AI应用开发二面同题：Agent 长期记忆设计思路】【淘天Agent开发同题：短期对话记忆和长期记忆分别怎么提取和存储】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：记忆模块如何实现，长期存储和短期存储分别采用什么方案？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何进行记忆分层（工作记忆/长期记忆），存储方案如何设计？】【[万仞二面CEO](https://www.nowcoder.com/feed/main/detail/641608e014b147c7b8aaa3c2e4387f2c)追问：短期记忆和长期记忆怎么做的？】；[本轮来源](https://www.nowcoder.com/discuss/927594784770764800)；本轮追问：为什么要这样设计 Memory？不同类型的记忆分别解决什么问题？（[本轮追问](https://www.nowcoder.com/discuss/927597050630270976)）；本轮追问：请介绍短期记忆机制如何实现，以及简历中各项指标的具体含义。（[本轮追问](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)；[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)；本轮追问：Agent Memory 通常如何分类？（[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)）；本轮追问：Agent 第二大脑与长期记忆方案 / Agent 记忆的读写与存储内容（[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)）；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[美团agent一面](https://www.nowcoder.com/feed/main/detail/554bdcc695ae42f8b0d78e3c44dd17d5)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[度小满 - AI 全栈研发 - 三面](https://www.nowcoder.com/feed/main/detail/e98c29d76e854e2bbd1b40731d6ce715)；[南方基金 AI应用大模型方向 笔面试梳理](https://www.nowcoder.com/feed/main/detail/0d707380326e4d8cbd3fa310c3f6f441)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[微店ai全栈一面](https://www.nowcoder.com/discuss/940646573107650560)；[HW技术一面（10.13）](https://www.nowcoder.com/feed/main/detail/978bed84f8f74b31b7f3798a71f67f5a)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[网易互娱｜AI应用开发实习一面](https://www.nowcoder.com/feed/main/detail/2d982457b8b94da09fab383e275de93d)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/34dd692b16c84c059daeb00866533d96)；[海尔 Agent 系统工程师一面](https://www.nowcoder.com/feed/main/detail/f05864ee1b43409297abd2610078c790)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[快手 一面](https://www.nowcoder.com/feed/main/detail/ae703fcc0bd34d2797702681ada7f2b0)；[阳光保险 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/600fa3f292654e02ab227d923206a158)
 
 **新手答**：“短期记忆是当前对话，长期记忆存数据库。”
 
@@ -232,7 +234,7 @@ Agent 的记忆系统可以类比人类认知模型，分三层：
 
 ### Q：一个 Agent 系统里，什么时候应该追问用户，什么时候应该自己继续推理？
 
-> 来源：腾讯大模型应用开发二面【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：模糊需求（如“找个好吃的”）的多轮澄清机制？】；本轮追问：用户语义不明确，Agent 使用默认参数填写，但与事实不符合，如何解决？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；本轮追问：置信度通过什么规则、约束来判断，什么情况需要二次确认用户？（[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)）；本轮追问：用户问题比较口语化、有错别字或意图不明确时，如何处理？（[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[字节内部跨转-飞书基建二面](https://www.nowcoder.com/feed/main/detail/7e53073808f94e8790ab0d1dfd1a7841)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[阳光保险AI应用开发一面](https://www.nowcoder.com/feed/main/detail/20a1e12257c441d4804216625f11f8f4)
+> 来源：腾讯大模型应用开发二面【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：模糊需求（如“找个好吃的”）的多轮澄清机制？】；本轮追问：用户语义不明确，Agent 使用默认参数填写，但与事实不符合，如何解决？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；本轮追问：置信度通过什么规则、约束来判断，什么情况需要二次确认用户？（[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)）；本轮追问：用户问题比较口语化、有错别字或意图不明确时，如何处理？（[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[字节内部跨转-飞书基建二面](https://www.nowcoder.com/feed/main/detail/7e53073808f94e8790ab0d1dfd1a7841)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[阳光保险AI应用开发一面](https://www.nowcoder.com/feed/main/detail/20a1e12257c441d4804216625f11f8f4)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/34dd692b16c84c059daeb00866533d96)
 
 **新手答**：“不确定就问用户。”
 
@@ -271,6 +273,8 @@ Agent 的记忆系统可以类比人类认知模型，分三层：
 
 **追问补充**：可以由 Agent 负责意图识别与澄清编排，并支持多轮：会话状态保存当前意图、已确认槽位、待确认候选和工具证据；每轮只补一个关键槽位，更新置信度，达到阈值后复述参数并执行，超过轮数或仍有冲突则给出选项或转人工，避免无限追问。
 
+**追问补充**：对模糊 UI 不应一次性生成并自证：先用少量风格、布局和交互选项澄清，生成可预览原型；再依据用户选择和截图反馈逐轮修改。每轮保留已确认约束，并用浏览器测试、响应式检查、可访问性和关键流程验收，记录偏好以避免反复偏离。
+
 **差距在哪**：新手的“不确定就问”看起来安全，但会导致过度追问、体验打折。高手用两个判断标准（是否影响执行 + 能否自动补齐）加一个风险维度（猜错代价）构建了完整的决策框架。面试官考的是你能不能在“用户体验”和“执行安全”之间做工程化的平衡。
 
 **追问：用户表达极度模糊（如“帮我看看”“随便推荐”），Agent 在工程上怎么处理？**
@@ -304,7 +308,7 @@ Agent 的记忆系统可以类比人类认知模型，分三层：
 
 ### Q：你怎么理解 Agent 里的“状态”而不是“上下文”？
 
-> 来源：腾讯大模型应用开发二面 / [百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35) 【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)
+> 来源：腾讯大模型应用开发二面 / [百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35) 【阿里 Agent Infra 一面题库追问：State、Context、Memory 的区别】；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[华宇信息 Agent 开发社招面试](https://www.nowcoder.com/feed/main/detail/cdf15b93310e40f6936168a93db504c7)
 
 **新手答**：“状态就是上下文的一部分。”
 
@@ -327,6 +331,8 @@ Memory 是之后可能被检索和重用的跨 Step/Session 信息，不等于�
 **追问补充**：持久化本身不会减少模型计算；只有有效复用已验证的状态或工具结果、跳过重复步骤时才可能省算力，还需计入重建上下文的开销。Redis 会话可按租户与 session/task 隔离，记录阶段、版本和结果，以条件写或 Lua 保证状态迁移原子性。TTL 不能替代耐久性设计；恢复时先校验版本、权限和结果有效期。
 
 **追问补充**：MCP 是 Agent 与外部工具、资源和提示模板交互的协议层，解决能力发现、调用参数和结果返回的标准化；它不是状态或记忆存储。Runtime 可通过 MCP 调用服务，但仍需自行控制权限、超时、幂等、审计，并把经过校验的结果写入 State 或 Memory。
+
+**追问补充**：实现上可自建一个 Runtime：用结构化 State Schema 描述阶段、输入、结果和错误，通过状态机或受限迁移更新；持久层保存版本并用条件写保证并发一致。框架只负责编排或存储适配，不替代状态模型，是否采用应以恢复、重试和审计需求验证。
 
 **差距在哪**：新手把状态和上下文混为一谈。高手区分了两者——上下文是“模型看到的输入”，状态是“系统对任务进度的结构化刻画”。面试官考的是你理不理解 Agent 的核心工程挑战：把隐式的执行进度变成显式的结构化状态。
 
@@ -399,7 +405,7 @@ Memory 是之后可能被检索和重用的跨 Step/Session 信息，不等于�
 
 ### Q：设计一个能支持亿级用户、千亿级记忆条目的 Agent 记忆系统，你会如何做技术选型和架构设计？
 
-> 来源：后端 AI 八股 / Memory 系统；[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)
+> 来源：后端 AI 八股 / Memory 系统；[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)；[卓望 人工智能工程师 AI 面试](https://www.nowcoder.com/discuss/948185029677477888)；[阿里 AI 应用开发实习一面](https://www.nowcoder.com/discuss/945984162802995200)
 
 **新手答**：“用向量数据库存记忆，加个缓存层。”
 
@@ -420,6 +426,8 @@ Memory 是之后可能被检索和重用的跨 Step/Session 信息，不等于�
 - **两阶段检索**：第一阶段用 ANN（近似最近邻）从百万级候选中快速召回 top-100，第二阶段用 Re-ranking 模型（Cross-Encoder）对候选集做精排，兼顾速度和精度
 
 千亿级的核心不是“用什么数据库”，而是**分层存储 + 冷热分离 + 异步写入**的架构设计。
+
+**追问补充**：应分别说明向量索引层与记忆生命周期层解决什么问题，再核对所用Milvus、Mem0版本支持的抽取、更新和检索能力。用同一任务集对照其它数据库、检索及自研方案，比较权限隔离、更新一致性、召回、延迟、运维与成本；组件名或规模宣传不能替代选型证据。
 
 **差距在哪**：新手只想到了一个组件。高手按访问频率做了三层分离，每层有不同的存储引擎和访问模式，且点出了分片、冷热迁移、异步写入三个关键工程决策。面试官考的是你能不能把“用什么数据库”的问题升级成一个完整的系统架构设计。
 
@@ -455,6 +463,34 @@ Dreaming 机制的核心工作：
 
 ---
 
+### Q：Agent 的记忆可能存在偏见（Bias）或事实性错误，如何发现并纠正？
+
+> 来源：后端 AI 八股 / Memory 系统；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)
+
+**新手答**：“定期清理过期记忆。”
+
+**高手答**：
+
+记忆偏见主要有三种来源：
+1. **采样偏差**：如果用户只在不满时反馈，Agent 记住的全是负面信息，导致后续交互过度谨慎
+2. **确认偏差**：Agent 用已有记忆过滤新信息，只保留和已有记忆一致的内容，形成“信息茧房”
+3. **事实过期**：用户之前说“在北京工作”，后来搬去了上海，旧记忆变成了错误记忆
+
+**发现机制**：
+- **矛盾检测**：新记忆写入时，和已有记忆做冲突检查。如果新信息和旧记忆矛盾（“我现在在上海” vs 记忆中的“用户在北京”），触发更新流程
+- **置信度衰减**：事实性记忆带置信度分数，长时间未被验证的逐步降低置信度
+- **周期性审计**：定期用模型对关键记忆做事实性检查——“这条记忆是否仍然有效？”
+
+**纠正机制**：
+- 用户主动纠正时，不只更新当前记忆，还要**级联更新**所有基于错误记忆推导出的下游记忆
+- 高置信度新信息覆盖低置信度旧信息，但旧信息不删除，做版本化存储，方便溯源
+
+**追问补充**：可把纠正做成受控闭环：先记录模型依据、用户反馈和原记忆版本，要求模型指出冲突与错误，再生成候选修正；通过规则、来源或人工确认后写入，并重新执行矛盾检测和下游记忆重算。若反馈不足或多次修正不一致，应降低置信度并向用户澄清，不能让模型自证正确。
+
+**差距在哪**：新手只想到了“清理过期”——这是最粗暴的方式。高手从偏见来源、发现机制、纠正策略三个层面构建了完整方案，且提到了级联更新和版本化存储。面试官考的是你有没有意识到记忆系统的“数据质量”问题。
+
+---
+
 ### Q：如何处理记忆的“新鲜度”与“重要性”之间的冲突？
 
 > 来源：后端 AI 八股 / Memory 系统
@@ -483,32 +519,6 @@ FinalScore = w1 × Relevance + w2 × Importance + w3 × Recency
 核心是**不同类型的记忆用不同的衰减策略**，而不是一刀切。
 
 **差距在哪**：新手用单一维度做排序。高手引入了三因子加权模型（相关性 + 重要性 + 新鲜度），按记忆类型定义不同的衰减策略，且用 A/B 测试调优权重。面试官考的是你有没有把“排序”问题建模成一个可量化、可调优的工程方案。
-
----
-
-### Q：Agent 的记忆可能存在偏见（Bias）或事实性错误，如何发现并纠正？
-
-> 来源：后端 AI 八股 / Memory 系统
-
-**新手答**：“定期清理过期记忆。”
-
-**高手答**：
-
-记忆偏见主要有三种来源：
-1. **采样偏差**：如果用户只在不满时反馈，Agent 记住的全是负面信息，导致后续交互过度谨慎
-2. **确认偏差**：Agent 用已有记忆过滤新信息，只保留和已有记忆一致的内容，形成“信息茧房”
-3. **事实过期**：用户之前说“在北京工作”，后来搬去了上海，旧记忆变成了错误记忆
-
-**发现机制**：
-- **矛盾检测**：新记忆写入时，和已有记忆做冲突检查。如果新信息和旧记忆矛盾（“我现在在上海” vs 记忆中的“用户在北京”），触发更新流程
-- **置信度衰减**：事实性记忆带置信度分数，长时间未被验证的逐步降低置信度
-- **周期性审计**：定期用模型对关键记忆做事实性检查——“这条记忆是否仍然有效？”
-
-**纠正机制**：
-- 用户主动纠正时，不只更新当前记忆，还要**级联更新**所有基于错误记忆推导出的下游记忆
-- 高置信度新信息覆盖低置信度旧信息，但旧信息不删除，做版本化存储，方便溯源
-
-**差距在哪**：新手只想到了“清理过期”——这是最粗暴的方式。高手从偏见来源、发现机制、纠正策略三个层面构建了完整方案，且提到了级联更新和版本化存储。面试官考的是你有没有意识到记忆系统的“数据质量”问题。
 
 ---
 
@@ -543,7 +553,7 @@ FinalScore = w1 × Relevance + w2 × Importance + w3 × Recency
 
 ### Q：在实现长期记忆时，什么情况选向量数据库，什么情况选传统的 KV 或关系数据库？
 
-> 来源：后端 AI 八股 / Memory 系统；[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[字节跳动 - Agent 研发 - 一面](https://www.nowcoder.com/feed/main/detail/0b91e9f5fbba4af4865c6fadc9a790e8)
+> 来源：后端 AI 八股 / Memory 系统；[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[字节跳动 - Agent 研发 - 一面](https://www.nowcoder.com/feed/main/detail/0b91e9f5fbba4af4865c6fadc9a790e8)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)
 
 **新手答**：“记忆都用向量数据库。”
 
@@ -565,6 +575,8 @@ FinalScore = w1 × Relevance + w2 × Importance + w3 × Recency
 - 实体关系 → 图数据库（Neo4j），支持多跳关联查询
 
 向量数据库的局限：不擅长精确匹配、不支持事务、更新成本高。如果你的查询是“查用户的手机号”，向量数据库反而不如 KV 直查。
+
+**追问补充**：结构化工作流定义及权限、发布版本应存入适合事务或版本管理的权威存储，向量库可作语义发现索引。Markdown可以是可审查的记忆源，检索它也能组成RAG；二者不是互斥架构。更新时同步来源版本、索引与缓存，分别测新鲜度、权限过滤和召回效果，不以文件格式推断规模或成本。
 
 **差距在哪**：新手“全用向量数据库”是一刀切。高手按查询模式选存储，区分了情景记忆（KV）、语义记忆（向量库）、结构化记忆（关系库）、关联记忆（图库），且指出实际系统是混合架构。面试官考的是你有没有数据存储选型的工程经验——不同查询模式对应不同的最优存储引擎。
 
@@ -708,6 +720,42 @@ Embedding 计算：按 5000 万条/天 × $0.0001/条 ≈ $5,000/月
 
 ## 记忆检索与维护
 
+### Q：你会如何判断一条历史信息该进入长期记忆，还是只留在当前会话里？
+
+> 来源：Agent 开发面试 30 题 / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[华鲲振宇 AI 开发一面](https://www.nowcoder.com/feed/main/detail/65a687060578410699b9c7bcd109a2e6)
+
+**新手答**：“重要的存长期，不重要的只留会话。”
+
+**高手答**：
+
+“重要不重要”太主观了。需要一套**可程序化的判断标准**：
+
+**进入长期记忆的条件（满足任一）**：
+
+| 条件 | 示例 | 原因 |
+|------|------|------|
+| 用户显式声明的偏好 | “我不吃辣”“预算一般在 5000 以内” | 跨会话复用价值高 |
+| 反复出现的模式 | 连续三次对话都查某只股票 | 隐式偏好，值得记住 |
+| 身份性信息 | 姓名、角色、所在城市、公司 | 个性化服务的基础 |
+| 已确认的事实性结论 | “上次排查发现是 Redis 配置问题” | 避免重复排查 |
+
+**只留在当前会话的条件**：
+
+| 条件 | 示例 | 原因 |
+|------|------|------|
+| 一次性的任务上下文 | “帮我写封邮件”的具体内容 | 任务完成后无复用价值 |
+| 中间推理过程 | 模型的 chain-of-thought | 占空间大、复用价值低 |
+| 临时性的环境信息 | “现在网络不好” | 下次对话时已过期 |
+| 未经确认的猜测 | Agent 推测用户可能想要 X | 未验证的信息不应持久化 |
+
+**工程实现**：每轮对话结束后，用一个轻量模型做“记忆准入判断”——从当前对话中提取候选记忆条目，按上述条件过滤，通过的写入长期存储。关键是**去重**——新记忆和已有记忆做语义相似度检查，重复的合并而非追加。
+
+**追问补充**：压缩前为信息打标签：与当前目标无关、重复、已被更新事实替代、来源不可靠或无法验证的内容可丢弃；身份偏好、关键约束和未完成事项应保留。压缩后用原文回放或问答一致性抽检，确认不改变决策所需事实，并支持恢复原始记录。
+
+**差距在哪**：新手用“重要性”做主观判断。高手给出了可程序化的准入条件表——显式偏好、反复模式、身份信息、确认事实四类进长期，一次性上下文、中间过程、临时信息、未确认猜测只留会话。面试官考的是你能不能把模糊的“重要性”转化成可执行的工程规则。
+
+---
+
 ### Q：记忆摘要、压缩、去重、合并这几件事，你会怎么设计触发时机？
 
 > 来源：Agent 开发面试 30 题；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；本轮追问：除了工具压缩还有哪些压缩机制？（[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)）；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[小厂Agent开发一面](https://www.nowcoder.com/feed/main/detail/51a65e9e02e949dbb52e90b5691a20f4)
@@ -761,45 +809,9 @@ Embedding 计算：按 5000 万条/天 × $0.0001/条 ≈ $5,000/月
 
 ---
 
-### Q：你会如何判断一条历史信息该进入长期记忆，还是只留在当前会话里？
-
-> 来源：Agent 开发面试 30 题 / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
-
-**新手答**：“重要的存长期，不重要的只留会话。”
-
-**高手答**：
-
-“重要不重要”太主观了。需要一套**可程序化的判断标准**：
-
-**进入长期记忆的条件（满足任一）**：
-
-| 条件 | 示例 | 原因 |
-|------|------|------|
-| 用户显式声明的偏好 | “我不吃辣”“预算一般在 5000 以内” | 跨会话复用价值高 |
-| 反复出现的模式 | 连续三次对话都查某只股票 | 隐式偏好，值得记住 |
-| 身份性信息 | 姓名、角色、所在城市、公司 | 个性化服务的基础 |
-| 已确认的事实性结论 | “上次排查发现是 Redis 配置问题” | 避免重复排查 |
-
-**只留在当前会话的条件**：
-
-| 条件 | 示例 | 原因 |
-|------|------|------|
-| 一次性的任务上下文 | “帮我写封邮件”的具体内容 | 任务完成后无复用价值 |
-| 中间推理过程 | 模型的 chain-of-thought | 占空间大、复用价值低 |
-| 临时性的环境信息 | “现在网络不好” | 下次对话时已过期 |
-| 未经确认的猜测 | Agent 推测用户可能想要 X | 未验证的信息不应持久化 |
-
-**工程实现**：每轮对话结束后，用一个轻量模型做“记忆准入判断”——从当前对话中提取候选记忆条目，按上述条件过滤，通过的写入长期存储。关键是**去重**——新记忆和已有记忆做语义相似度检查，重复的合并而非追加。
-
-**追问补充**：压缩前为信息打标签：与当前目标无关、重复、已被更新事实替代、来源不可靠或无法验证的内容可丢弃；身份偏好、关键约束和未完成事项应保留。压缩后用原文回放或问答一致性抽检，确认不改变决策所需事实，并支持恢复原始记录。
-
-**差距在哪**：新手用“重要性”做主观判断。高手给出了可程序化的准入条件表——显式偏好、反复模式、身份信息、确认事实四类进长期，一次性上下文、中间过程、临时信息、未确认猜测只留会话。面试官考的是你能不能把模糊的“重要性”转化成可执行的工程规则。
-
----
-
 ### Q：如何判断当前对话与历史对话是否相关？
 
-> 来源：字节 Agent 实习二面
+> 来源：字节 Agent 实习二面；[美团 一面](https://www.nowcoder.com/feed/main/detail/6c551a197dcc4a6e95f5f01c62680744)
 
 **新手答**：“看关键词有没有重叠。”
 
@@ -842,6 +854,8 @@ Embedding 计算：按 5000 万条/天 × $0.0001/条 ≈ $5,000/月
 - **时间衰减**：越近的历史对话越可能相关，给相似度分数加时间衰减权重
 - **主题切换检测**：如果用户明确说“换个话题”或提了一个完全无关的新需求，直接判定与历史无关
 - **会话级 vs 跨会话级**：同一会话内的历史默认相关，跨会话的才需要判断
+
+**追问补充**：应先用 `conversation_id`、用户身份、创建时间和显式结束标记划分会话，不能仅按相似度合并记录。同一会话内仍需保留消息顺序与记录来源；召回时按会话隔离并附带来源标识，发现多个候选主题或事实冲突时先向用户确认，避免把第二段记录当成第一段上下文。
 
 **差距在哪**：新手只想到关键词匹配，这在语义相近但用词不同时会失效。高手用三层递进的判断方法（实体匹配 → 语义相似 → 模型精判），且考虑了时间衰减和主题切换等实际场景。面试官考的是你能不能把“相关性判断”设计成一个可工程化的方案，而不是拍脑袋设阈值。
 
@@ -928,7 +942,7 @@ flowchart LR
 
 ### Q：如何减少无关上下文对模型的干扰？当前上下文有哪些优化思路？
 
-> 来源：快手 AI Agent 开发一面【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：处理上下文过长有哪些常见策略？】【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：随着提问轮次增加，上下文窗口会越来越大，该如何解决？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何进行上下文管理，避免上下文过长导致效果下降？】【[第三次去哪儿旅行一面，AI面试问的是前端吗？](https://www.nowcoder.com/feed/main/detail/2ed12b3fa1d4491f8bb029f99cf9de73)追问：Agent记忆模块如何设计？上下文无限膨胀有哪些处理方案？】；[本轮来源](https://www.nowcoder.com/discuss/926539013991796736)；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；本轮追问：导致模型上下文膨胀的原因有哪些？（[本轮追问](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；本轮追问：上下文、prompt 方面你做了哪些设计，你的贡献是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)；[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)；本轮追问：多Agent交互、推理多导致上下文膨胀，上下文处理相关机制你了解吗？（[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)）；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)；[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)；本轮追问：你的上下文方案是针对某个 Case 的修补，还是能在不同场景复用？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；[传化智联一面](https://www.nowcoder.com/feed/main/detail/52fbdc53e752443e8d261246c7bcc491)；[联宝科技秋招AI应用开发AI面面经](https://www.nowcoder.com/feed/main/detail/15a413ed04ef43e0a3061a82bd5ff6bb)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[安恒信息一面｜Python Agent开发实习生](https://www.nowcoder.com/feed/main/detail/42ad85eefd20401a8a076203ec850175)
+> 来源：快手 AI Agent 开发一面【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：处理上下文过长有哪些常见策略？】【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：随着提问轮次增加，上下文窗口会越来越大，该如何解决？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何进行上下文管理，避免上下文过长导致效果下降？】【[第三次去哪儿旅行一面，AI面试问的是前端吗？](https://www.nowcoder.com/feed/main/detail/2ed12b3fa1d4491f8bb029f99cf9de73)追问：Agent记忆模块如何设计？上下文无限膨胀有哪些处理方案？】；[本轮来源](https://www.nowcoder.com/discuss/926539013991796736)；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；本轮追问：导致模型上下文膨胀的原因有哪些？（[本轮追问](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；本轮追问：上下文、prompt 方面你做了哪些设计，你的贡献是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)；[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)；本轮追问：多Agent交互、推理多导致上下文膨胀，上下文处理相关机制你了解吗？（[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)）；[百度 AIGC 多模态智能体算法工程师二面](https://www.nowcoder.com/feed/main/detail/2d033fd6daa04e2aaad2282b75531bbc)；[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)；[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)；本轮追问：你的上下文方案是针对某个 Case 的修补，还是能在不同场景复用？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；[传化智联一面](https://www.nowcoder.com/feed/main/detail/52fbdc53e752443e8d261246c7bcc491)；[联宝科技秋招AI应用开发AI面面经](https://www.nowcoder.com/feed/main/detail/15a413ed04ef43e0a3061a82bd5ff6bb)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[安恒信息一面｜Python Agent开发实习生](https://www.nowcoder.com/feed/main/detail/42ad85eefd20401a8a076203ec850175)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[快手 二面](https://www.nowcoder.com/feed/main/detail/44030be23c2e436bbdb5c21ae3eba037)；[广东亿迅科技 日常实习面试](https://www.nowcoder.com/feed/main/detail/7cfb34fbb0c14b39b92874e84cc4344e)；[未注明公司 Agent 面试问题整理](https://www.nowcoder.com/feed/main/detail/feeede5d38f341f791c665bb7585adf7)；[数盾股份 AI 应用开发实习面试](https://www.nowcoder.com/feed/main/detail/98d81ac1218340f39763399f11fca557)
 
 **新手答**：“把不相关的信息删掉。”
 
@@ -999,73 +1013,15 @@ System Prompt 区（最稳定）：系统规则、安全约束、输出格式
 
 **追问补充**：实际效果应按优化前后对比回答，至少说明相关性、遗漏率、Token 成本和任务成功率的变化，避免只说“效果更好”。RAG 接入时需明确目标，提供检索、切片、重排和注入代码，以及用户问题、约束、召回文档和来源等最小上下文，并验证引用准确性与失败兜底。
 
+**追问补充**：上下文窗口管理通常有三类：直接截断按优先级保留系统规则、当前任务和最新消息，超限时丢弃低价值旧消息；将稳定偏好、决策和约束写入 memory.md 等外置记忆，按需检索并校验版本，不能每轮全文注入；对较早对话做摘要，保留目标、结论、未决事项和证据指针。三者可按预算组合，并用遗漏率和任务成功率验证。
+
 **差距在哪**：新手只想到“删掉不相关的”——但怎么判断“不相关”？高手从四个维度给出了完整方案：准入控制（入口减噪）、位置优化（利用注意力分布）、动态压缩（释放 token）、结构化分隔（防止混淆）。面试官考的是你对“上下文质量”这个 Agent 核心问题的系统性思考。
 
 ---
 
-### Q：摘要总结往往会丢失关键细节，在长文本 Agent 中一般怎么来处理这一块？
-
-> 来源：淘天 AI Agent 一面【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：压缩或者摘要肯定会丢失信息，如何使信息丢失最小化？】；本轮追问：怎么防范关键信息提错或者提漏？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；本轮追问：AI 伴看 Agent 中的“动态加载”和“剧情摘要预加载 + 当前集按需检索”是什么意思？你是如何处理以实现这一机制的？为什么能够节省 Token，大概节省了多少？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)
-
-**新手答**：“用模型做摘要就行。”
-
-**高手答**：
-
-一次性摘要是最常见的做法，也是最容易丢信息的做法。问题在于：模型做摘要时会倾向保留“大意”而丢弃“细节”——但在 Agent 场景中，往往**细节才是关键**：一个具体的数字、一条用户约束、一个边界条件，丢了就会导致后续执行出错。
-
-解决思路是**不要让摘要承担所有压缩任务**，而是把关键细节和叙事流分开处理：
-
-**策略一：分层摘要**
-
-不要一次性把长文本压成一段摘要，而是分层递进：
-
-```text
-第一层：段落级摘要 —— 每段保留核心论点和关键数据
-第二层：章节级摘要 —— 合并同主题段落，保留结论和依据
-第三层：全文级摘要 —— 提炼整体结论和核心约束
-```
-
-每一层保留不同粒度的信息。需要概览时用第三层，需要细节时回溯到第一层。比单次压缩损失少得多。
-
-**策略二：先提取后摘要**
-
-在做摘要之前，先用 NER + 规则提取把**结构化关键事实**抽出来存到独立的 key-value 存储中：
-
-| 提取类型 | 示例 | 存储位置 |
-|---------|------|---------|
-| 日期时间 | “截止日期是 4 月 30 日” | 结构化事实库 |
-| 数字约束 | “预算不超过 5000 元” | 结构化事实库 |
-| 人名/实体 | “负责人是张三” | 结构化事实库 |
-| 明确约束 | “必须支持 iOS 和 Android” | 结构化事实库 |
-| 叙事内容 | 讨论过程、背景说明 | 交给摘要处理 |
-
-摘要只负责压缩叙事流（讨论了什么、结论是什么），不承担保留具体数字和约束的责任。最终上下文 = 结构化事实 + 叙事摘要，两者合并注入。
-
-**策略三：选择性压缩**
-
-不是所有内容都需要同等程度的压缩：
-
-| 内容类型 | 压缩策略 | 保留程度 |
-|---------|---------|---------|
-| 用户约束和决策 | 保留原文 | 100% |
-| 错误详情和边界条件 | 保留原文 | 100% |
-| 工具返回的关键结果 | 提取关键字段 | 50% |
-| 讨论过程和背景 | 摘要压缩 | 20% |
-| 寒暄和确认性回复 | 直接丢弃 | 0% |
-
-关键部分不压缩，常规部分重度压缩，无价值内容直接丢弃——这比均匀压缩的信息保真度高得多。
-
-
-动态加载是按会话和当前剧情进度分层取数：进入作品时预加载全局剧情摘要、人物关系和章节索引，用户切到某集后仅检索该集及相关片段，命中后再按需补充原文，并缓存已加载结果。这样避免每轮携带全量剧本；节省比例应通过埋点对比压缩前后输入 Token，按未加载的历史文本占比估算。
-
-**差距在哪**：新手用一次性摘要解决所有问题——模型会自动丢弃它认为“不重要”的细节，但在 Agent 场景中这些细节往往是执行的关键。高手把压缩任务拆成结构化提取 + 分层摘要 + 选择性压缩三个策略，确保关键细节不被摘要过程吞掉。面试官考的是你对长文本信息压缩的精细化设计能力——摘要不是“一键总结”，是一个有策略的信息管理流程。
-
----
-
-
 ### Q：做上下文工程最关键的工作是什么？
 
-> 来源：蚂蚁集团 Agent 开发二面；本轮追问：上下文工程和Memory模块怎么做的？（[【社招】腾讯二面面经](https://www.nowcoder.com/feed/main/detail/12b18eae310d4b7eadd896aef7f4a712)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
+> 来源：蚂蚁集团 Agent 开发二面；本轮追问：上下文工程和Memory模块怎么做的？（[【社招】腾讯二面面经](https://www.nowcoder.com/feed/main/detail/12b18eae310d4b7eadd896aef7f4a712)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[Awaken AI Agent 一面](https://www.nowcoder.com/discuss/943194203725570048)；[网易云音乐 全栈开发一面](https://www.nowcoder.com/discuss/944165886930309120)
 
 **新手答**：“把相关信息尽量多地塞进上下文。”
 
@@ -1118,6 +1074,68 @@ Memory 模块应把短期记忆与长期记忆分层：短期记忆随会话维�
 **差距在哪**：新手以为上下文工程就是“塞信息”。高手把它拆成信息分级、注入位置、生命周期管理三个关键环节——重点不是“放什么进去”，而是“什么时候让什么退出”。面试官考的是你对上下文工程的系统性认知，而不只是“会用 RAG 注入知识”。
 
 ---
+
+### Q：摘要总结往往会丢失关键细节，在长文本 Agent 中一般怎么来处理这一块？
+
+> 来源：淘天 AI Agent 一面【[字节跳动9.3 Agent开发一面面经](https://www.nowcoder.com/discuss/925342611194286080)追问：压缩或者摘要肯定会丢失信息，如何使信息丢失最小化？】；本轮追问：怎么防范关键信息提错或者提漏？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；本轮追问：AI 伴看 Agent 中的“动态加载”和“剧情摘要预加载 + 当前集按需检索”是什么意思？你是如何处理以实现这一机制的？为什么能够节省 Token，大概节省了多少？（[飞书深诺（全栈AI应用开发方向）](https://www.nowcoder.com/feed/main/detail/46a9336c7ead4586bae34e521d4f61d0)）；[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)
+
+**新手答**：“用模型做摘要就行。”
+
+**高手答**：
+
+一次性摘要是最常见的做法，也是最容易丢信息的做法。问题在于：模型做摘要时会倾向保留“大意”而丢弃“细节”——但在 Agent 场景中，往往**细节才是关键**：一个具体的数字、一条用户约束、一个边界条件，丢了就会导致后续执行出错。
+
+解决思路是**不要让摘要承担所有压缩任务**，而是把关键细节和叙事流分开处理：
+
+**策略一：分层摘要**
+
+不要一次性把长文本压成一段摘要，而是分层递进：
+
+```text
+第一层：段落级摘要 —— 每段保留核心论点和关键数据
+第二层：章节级摘要 —— 合并同主题段落，保留结论和依据
+第三层：全文级摘要 —— 提炼整体结论和核心约束
+```
+
+每一层保留不同粒度的信息。需要概览时用第三层，需要细节时回溯到第一层。比单次压缩损失少得多。
+
+**策略二：先提取后摘要**
+
+在做摘要之前，先用 NER + 规则提取把**结构化关键事实**抽出来存到独立的 key-value 存储中：
+
+| 提取类型 | 示例 | 存储位置 |
+|---------|------|---------|
+| 日期时间 | “截止日期是 4 月 30 日” | 结构化事实库 |
+| 数字约束 | “预算不超过 5000 元” | 结构化事实库 |
+| 人名/实体 | “负责人是张三” | 结构化事实库 |
+| 明确约束 | “必须支持 iOS 和 Android” | 结构化事实库 |
+| 叙事内容 | 讨论过程、背景说明 | 交给摘要处理 |
+
+摘要只负责压缩叙事流（讨论了什么、结论是什么），不承担保留具体数字和约束的责任。最终上下文 = 结构化事实 + 叙事摘要，两者合并注入。
+
+**策略三：选择性压缩**
+
+不是所有内容都需要同等程度的压缩：
+
+| 内容类型 | 压缩策略 | 保留程度 |
+|---------|---------|---------|
+| 用户约束和决策 | 保留原文 | 100% |
+| 错误详情和边界条件 | 保留原文 | 100% |
+| 工具返回的关键结果 | 提取关键字段 | 50% |
+| 讨论过程和背景 | 摘要压缩 | 20% |
+| 寒暄和确认性回复 | 直接丢弃 | 0% |
+
+关键部分不压缩，常规部分重度压缩，无价值内容直接丢弃——这比均匀压缩的信息保真度高得多。
+
+
+动态加载是按会话和当前剧情进度分层取数：进入作品时预加载全局剧情摘要、人物关系和章节索引，用户切到某集后仅检索该集及相关片段，命中后再按需补充原文，并缓存已加载结果。这样避免每轮携带全量剧本；节省比例应通过埋点对比压缩前后输入 Token，按未加载的历史文本占比估算。
+
+**追问补充**：多Agent场景要有协调器和共享记忆边界：各Agent输出带来源、版本和置信度，关键事实采用追加写入并保留原文快照，冲突时回查来源而不是静默覆盖。单个Agent超时、异常或结果不可验证时，按幂等重试、切换备用Agent或降级人工确认，并记录检查点以便恢复。
+
+**差距在哪**：新手用一次性摘要解决所有问题——模型会自动丢弃它认为“不重要”的细节，但在 Agent 场景中这些细节往往是执行的关键。高手把压缩任务拆成结构化提取 + 分层摘要 + 选择性压缩三个策略，确保关键细节不被摘要过程吞掉。面试官考的是你对长文本信息压缩的精细化设计能力——摘要不是“一键总结”，是一个有策略的信息管理流程。
+
+---
+
 
 ### Q：Code Agent 的上下文工程，和普通对话 Agent 相比有哪些独特挑战？
 
@@ -1298,7 +1316,7 @@ flowchart LR
 
 ### Q：会话记忆具体是怎么实现的？滑动窗口设几轮？摘要压缩怎么触发？
 
-> 来源：高德 AI 应用开发实习一面【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：上下文压缩怎么做？】【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：记忆压缩怎么做？进行到第十一轮时，应该给模型哪些信息？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：记忆压缩（减少上下文同时保留关键信息）的实现？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：这个摘要是怎样使用的？】；本轮追问：对日志的预处理、减少 Token 是怎么预处理的？会不会有关键的信息缺失？这是怎么解决的？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；[本轮来源](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：你的 Coding Agent 没有用框架，那你是怎么实现上下文压缩、记忆处理的？（[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)）；本轮追问：压缩窗口使用什么指标和阈值？（[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)）；[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)；[字节 Agent 秋招一面](https://www.nowcoder.com/discuss/929731481189044224)；本轮追问：上下文压缩是同步做的还是异步做的？（[【社招】腾讯二面面经](https://www.nowcoder.com/feed/main/detail/12b18eae310d4b7eadd896aef7f4a712)）；本轮追问：群聊和私聊会话的上下文有什么区别？长期记忆是如何处理的？上下文压缩策略是什么？（[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)）；本轮追问：你的 agent 基座在 memory 压缩、同步/异步、session 总结上是怎么做定制的？（[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)）；本轮追问：问题定位是单次执行，还是支持多轮对话？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[零一万物 知识图谱算法实习生一面](https://www.nowcoder.com/feed/main/detail/de81855bb25447bda52e11fe4d6af61d)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)；[10.15 金蝶软件 软开（Ai）一面](https://www.nowcoder.com/discuss/939924708173037568)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[小红书日常一面](https://www.nowcoder.com/feed/main/detail/4ab62221668140c8bad86f75a4fb02d2)
+> 来源：高德 AI 应用开发实习一面【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：上下文压缩怎么做？】【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：记忆压缩怎么做？进行到第十一轮时，应该给模型哪些信息？】【[美团 - Agent 开发岗（场景设计方向）](https://www.nowcoder.com/discuss/926273749555376128)追问：记忆压缩（减少上下文同时保留关键信息）的实现？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：这个摘要是怎样使用的？】；本轮追问：对日志的预处理、减少 Token 是怎么预处理的？会不会有关键的信息缺失？这是怎么解决的？（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；[本轮来源](https://www.nowcoder.com/feed/main/detail/26eac83de56c4e6daf6fa79a5addb01a)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：你的 Coding Agent 没有用框架，那你是怎么实现上下文压缩、记忆处理的？（[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)）；本轮追问：压缩窗口使用什么指标和阈值？（[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)）；[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)；[字节 Agent 秋招一面](https://www.nowcoder.com/discuss/929731481189044224)；本轮追问：上下文压缩是同步做的还是异步做的？（[【社招】腾讯二面面经](https://www.nowcoder.com/feed/main/detail/12b18eae310d4b7eadd896aef7f4a712)）；本轮追问：群聊和私聊会话的上下文有什么区别？长期记忆是如何处理的？上下文压缩策略是什么？（[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)）；本轮追问：你的 agent 基座在 memory 压缩、同步/异步、session 总结上是怎么做定制的？（[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)）；本轮追问：问题定位是单次执行，还是支持多轮对话？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[零一万物 知识图谱算法实习生一面](https://www.nowcoder.com/feed/main/detail/de81855bb25447bda52e11fe4d6af61d)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)；[10.15 金蝶软件 软开（Ai）一面](https://www.nowcoder.com/discuss/939924708173037568)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[小红书日常一面](https://www.nowcoder.com/feed/main/detail/4ab62221668140c8bad86f75a4fb02d2)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)；[华宇信息 Agent 开发社招面试](https://www.nowcoder.com/feed/main/detail/cdf15b93310e40f6936168a93db504c7)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)
 
 **新手答**：“存最近几轮对话就行。”
 
@@ -1361,52 +1379,9 @@ flowchart LR
 
 ---
 
-### Q：设计会话记忆系统时需要考虑哪些维度？
-
-> 来源：高德 AI 应用开发实习一面；本轮追问：对于像 ChatGPT 这种对话 Agent，如何设计会话表和消息表的字段？（[本轮追问](https://www.nowcoder.com/discuss/926917172448759808)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：Agent 记忆在什么情况下增删改查（[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)）；本轮追问：如果新开一个会话，直接复用旧会话恢复，会有什么问题？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）；[小红书ai agent一面](https://www.nowcoder.com/discuss/940294942633504768)
-
-**新手答**：“考虑存多少轮。”
-
-**高手答**：
-
-只考虑容量是远远不够的。设计会话记忆系统需要从**五个核心维度**出发：
-
-| 维度 | 实现策略 | 常见陷阱 |
-|------|---------|---------|
-| **时效性** | 衰减函数：recency-weighted scoring，越近的记忆权重越高 | 有些信息永远不该衰减（用户名、过敏信息），需要设置“不衰减白名单” |
-| **相关性** | 注入上下文前做语义相似度过滤，只取和当前查询相关的记忆 | 不过滤就全塞进去，导致无关记忆干扰模型推理 |
-| **重要性** | 重要性评分器（规则 or LLM）：用户承诺（“我要退货”）、关键决策、纠错信息为高重要性；闲聊为低重要性 | 把所有记忆一视同仁，闲聊占满了上下文空间 |
-| **容量** | 固定 token 预算分配：系统指令 > 当前查询上下文 > 相关记忆 > 工具结果 | 记忆占了太多 token，挤压了当前任务的空间 |
-| **一致性** | 用户更新偏好时（“其实我想要红色的，不是蓝色的”），旧记忆必须被更新而非追加 | 只做追加不做更新，导致记忆自相矛盾，模型不知道该信哪条 |
-
-**五个维度之间的关系**：
-
-```mermaid
-flowchart TB
-    A["新记忆写入"] --> B["一致性检查\n是否和已有记忆矛盾？"]
-    B -->|"矛盾"| C["更新旧记忆"]
-    B -->|"不矛盾"| D["重要性评分"]
-    C --> D
-    D --> E["存储（容量管理）"]
-    E --> F["检索时：\n时效性加权 +\n相关性过滤"]
-    F --> G["注入上下文"]
-```
-
-**元原则**：记忆不是一份日志（log），而是一个**精心维护的知识库**。日志只管追加，知识库要管理增删改查和数据质量。很多系统把记忆当日志来做——只管往里写、不管清理和更新——最终记忆越来越多，质量越来越差，模型被噪声淹没。
-
-
-记忆的增加应限于经确认的偏好、承诺和长期事实；查询发生在生成前，按当前任务相关性检索；用户明确纠正或事实更新时修改并保留版本；用户要求删除、信息过期失效或触及隐私边界时删除，并通过审计记录验证结果。
-
-
-新会话不应直接复用旧会话的执行状态：会混入旧指令、工具结果和未完成任务，造成上下文污染、权限越界、状态过期及重复副作用。应新建 thread/session，仅按用户授权和相关性读取长期记忆；若确需续接，校验身份、版本和幂等点，并从明确 checkpoint 恢复，验证消息顺序与工具调用结果。
-
-**差距在哪**：新手只想到了容量这一个维度。高手从时效性、相关性、重要性、容量、一致性五个维度系统分析，每个维度都有具体的实现策略和常见陷阱。面试官考的是你对记忆系统的认知深度——它不是一个“存东西的地方”，而是一个需要多维度设计的知识管理系统。
-
----
-
 ### Q：Claude Code 的记忆架构是什么？上下文真的等于记忆吗？
 
-> 来源：字节 Agent 开发实习一面 【小红书数据库智能化一面追问：主流 Agent 与 Claude Code 的上下文管理策略】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：你读过哪些 Claude Code 源码，了解它的上下文管理机制吗？】；[9.21 货拉拉二面](https://www.nowcoder.com/feed/main/detail/ec5dba791f4f457490c373194d2f20c2)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)
+> 来源：字节 Agent 开发实习一面 【小红书数据库智能化一面追问：主流 Agent 与 Claude Code 的上下文管理策略】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：你读过哪些 Claude Code 源码，了解它的上下文管理机制吗？】；[9.21 货拉拉二面](https://www.nowcoder.com/feed/main/detail/ec5dba791f4f457490c373194d2f20c2)；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[快手 一面](https://www.nowcoder.com/feed/main/detail/ae703fcc0bd34d2797702681ada7f2b0)
 
 **新手答**：“上下文就是记忆，对话历史就是全部。”
 
@@ -1464,7 +1439,86 @@ flowchart TB
 
 **追问补充**：如果要支持用户偏好跨会话延续，应将经确认的偏好写入独立持久记忆，保存来源、时间和适用范围；当前上下文删除后仍可按权限重新检索。没有持久化的信息不会自动恢复，还需支持修改、遗忘和冲突处理。这里描述的是记忆系统设计建议，不能仅凭对话表现推断具体工具的存储实现。
 
+**追问补充**：跨 Session 不应重复注入完整历史，而应把稳定事实、决策和偏好抽取为带来源、时间、范围及版本的记忆，去重后按当前任务检索并截断。上下文管理是运行时的组装、压缩和淘汰；工程持久化负责可靠存储、权限、更新、冲突处理与恢复，二者不能互相替代。
+
 **差距在哪**：新手把上下文等同于记忆，认为对话历史就是 Agent 知道的一切。高手能画出五层记忆架构，清楚地区分临时上下文与持久记忆的关系——上下文只是记忆加载到当前会话的子集，Compaction 会销毁上下文但不影响持久记忆文件。面试官考的是你对 Agent 记忆系统的结构性认知，而不只是“对话历史”三个字。
+
+---
+
+### Q：设计会话记忆系统时需要考虑哪些维度？
+
+> 来源：高德 AI 应用开发实习一面；本轮追问：对于像 ChatGPT 这种对话 Agent，如何设计会话表和消息表的字段？（[本轮追问](https://www.nowcoder.com/discuss/926917172448759808)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：Agent 记忆在什么情况下增删改查（[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)）；本轮追问：如果新开一个会话，直接复用旧会话恢复，会有什么问题？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）；[小红书ai agent一面](https://www.nowcoder.com/discuss/940294942633504768)
+
+**新手答**：“考虑存多少轮。”
+
+**高手答**：
+
+只考虑容量是远远不够的。设计会话记忆系统需要从**五个核心维度**出发：
+
+| 维度 | 实现策略 | 常见陷阱 |
+|------|---------|---------|
+| **时效性** | 衰减函数：recency-weighted scoring，越近的记忆权重越高 | 有些信息永远不该衰减（用户名、过敏信息），需要设置“不衰减白名单” |
+| **相关性** | 注入上下文前做语义相似度过滤，只取和当前查询相关的记忆 | 不过滤就全塞进去，导致无关记忆干扰模型推理 |
+| **重要性** | 重要性评分器（规则 or LLM）：用户承诺（“我要退货”）、关键决策、纠错信息为高重要性；闲聊为低重要性 | 把所有记忆一视同仁，闲聊占满了上下文空间 |
+| **容量** | 固定 token 预算分配：系统指令 > 当前查询上下文 > 相关记忆 > 工具结果 | 记忆占了太多 token，挤压了当前任务的空间 |
+| **一致性** | 用户更新偏好时（“其实我想要红色的，不是蓝色的”），旧记忆必须被更新而非追加 | 只做追加不做更新，导致记忆自相矛盾，模型不知道该信哪条 |
+
+**五个维度之间的关系**：
+
+```mermaid
+flowchart TB
+    A["新记忆写入"] --> B["一致性检查\n是否和已有记忆矛盾？"]
+    B -->|"矛盾"| C["更新旧记忆"]
+    B -->|"不矛盾"| D["重要性评分"]
+    C --> D
+    D --> E["存储（容量管理）"]
+    E --> F["检索时：\n时效性加权 +\n相关性过滤"]
+    F --> G["注入上下文"]
+```
+
+**元原则**：记忆不是一份日志（log），而是一个**精心维护的知识库**。日志只管追加，知识库要管理增删改查和数据质量。很多系统把记忆当日志来做——只管往里写、不管清理和更新——最终记忆越来越多，质量越来越差，模型被噪声淹没。
+
+
+记忆的增加应限于经确认的偏好、承诺和长期事实；查询发生在生成前，按当前任务相关性检索；用户明确纠正或事实更新时修改并保留版本；用户要求删除、信息过期失效或触及隐私边界时删除，并通过审计记录验证结果。
+
+
+新会话不应直接复用旧会话的执行状态：会混入旧指令、工具结果和未完成任务，造成上下文污染、权限越界、状态过期及重复副作用。应新建 thread/session，仅按用户授权和相关性读取长期记忆；若确需续接，校验身份、版本和幂等点，并从明确 checkpoint 恢复，验证消息顺序与工具调用结果。
+
+**差距在哪**：新手只想到了容量这一个维度。高手从时效性、相关性、重要性、容量、一致性五个维度系统分析，每个维度都有具体的实现策略和常见陷阱。面试官考的是你对记忆系统的认知深度——它不是一个“存东西的地方”，而是一个需要多维度设计的知识管理系统。
+
+---
+
+### Q：什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？
+
+> 来源：蚂蚁 AI应用开发 二面【阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache】【[全栈实习一面，20分钟居然问这么细😂](https://www.nowcoder.com/feed/main/detail/4af1e257116e4e36970c6e0d8bf2f70e)追问：你的项目有没有做前上下文缓存、前缀缓存？】；本轮追问：稳定前缀冻结命中 cache 与按问题装配工具子集会不会打架？（[本轮追问](https://www.nowcoder.com/discuss/928253581973553152)）；本轮追问：摘要会影响 KV/Prefix Cache 命中吗？怎样降低影响？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：上下文压缩后怎么保证缓存命中？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/34dd692b16c84c059daeb00866533d96)
+
+**新手答**：“就是把常用的 Prompt 缓存起来，下次直接用。”
+
+**高手答**：
+
+上下文缓存（Prompt Caching）是模型服务层面的优化技术。核心原理：当多次 API 调用共享相同的 Prompt 前缀时，模型服务端可以**缓存前缀部分的 KV Cache**，后续请求只需要计算新增的部分，大幅降低延迟和成本。
+
+**在 Agent 系统中的价值**：
+
+Agent 的典型调用模式是：每轮对话都带上完整的 System Prompt + 工具定义 + 历史对话。其中 System Prompt 和工具定义在整个会话中不变，可能占 2000-5000 token——每次都重新计算这部分是巨大的浪费。
+
+| 场景 | 不用缓存 | 用缓存 | 节省 |
+|------|---------|-------|------|
+| 10 轮对话 | 每轮处理完整 System Prompt | 第 2-10 轮跳过前缀计算 | ~40% token 成本 |
+| 多用户相同 Agent | 每用户独立处理 | 跨用户共享前缀缓存 | 延迟降低 50%+ |
+
+**工程实践**：
+
+1. **前缀稳定性**：缓存命中要求前缀**逐字节一致**。动态注入的内容（如用户画像、时间戳）不能放在 System Prompt 开头，否则前缀不匹配导致缓存失效。正确做法：静态内容（身份、规则、工具定义）放前面，动态内容放后面
+
+2. **缓存粒度**：Anthropic 的 Prompt Caching 以 block 为单位缓存，支持在请求中用 `cache_control` 标记缓存断点。OpenAI 的自动前缀匹配则不需要显式标记
+
+3. **在 Agent 循环中的应用**：Agent 的 ReAct 循环每轮都在上下文末尾追加新的 Thought-Action-Observation，前缀部分（System Prompt + 历史轮次）保持不变——天然适合前缀缓存
+
+
+摘要会改变后续输入的 token 序列，若替换了缓存前缀或其边界，原有 KV/Prefix Cache 通常无法命中。可冻结稳定系统提示和工具前缀，把摘要放在固定边界之后；摘要采用确定性模板并带版本，优先压缩会话尾部，分段缓存并监控命中率。
+
+**差距在哪**：新手把上下文缓存等同于“存 Prompt 字符串”。高手理解的是模型服务层面的 KV Cache 复用机制，且能说清楚在 Agent 系统中的适用场景（System Prompt 不变、工具定义不变）和工程约束（前缀必须一致）。面试官考的是你对模型调用成本优化的工程理解。
 
 ---
 
@@ -1570,40 +1624,6 @@ flowchart LR
 **和自己实现记忆的区别**：
 
 自己实现通常是**粗粒度的全量存储**——把对话历史全部存进向量库，检索时按相似度召回。Mem0 多了两个关键步骤：**选择性抽取**（不是所有信息都值得记）和**冲突消解**（用户改了偏好要更新旧记忆）。代价是每轮多一次 LLM 调用做抽取判断，但记忆质量显著提升。
-
----
-
-### Q：什么是上下文缓存（Prompt Caching）？它在 Agent 系统中有什么价值？
-
-> 来源：蚂蚁 AI应用开发 二面【阿里 Agent Infra 一面题库同题：上下文预计算与 Prefix Cache】【[全栈实习一面，20分钟居然问这么细😂](https://www.nowcoder.com/feed/main/detail/4af1e257116e4e36970c6e0d8bf2f70e)追问：你的项目有没有做前上下文缓存、前缀缓存？】；本轮追问：稳定前缀冻结命中 cache 与按问题装配工具子集会不会打架？（[本轮追问](https://www.nowcoder.com/discuss/928253581973553152)）；本轮追问：摘要会影响 KV/Prefix Cache 命中吗？怎样降低影响？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：上下文压缩后怎么保证缓存命中？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）
-
-**新手答**：“就是把常用的 Prompt 缓存起来，下次直接用。”
-
-**高手答**：
-
-上下文缓存（Prompt Caching）是模型服务层面的优化技术。核心原理：当多次 API 调用共享相同的 Prompt 前缀时，模型服务端可以**缓存前缀部分的 KV Cache**，后续请求只需要计算新增的部分，大幅降低延迟和成本。
-
-**在 Agent 系统中的价值**：
-
-Agent 的典型调用模式是：每轮对话都带上完整的 System Prompt + 工具定义 + 历史对话。其中 System Prompt 和工具定义在整个会话中不变，可能占 2000-5000 token——每次都重新计算这部分是巨大的浪费。
-
-| 场景 | 不用缓存 | 用缓存 | 节省 |
-|------|---------|-------|------|
-| 10 轮对话 | 每轮处理完整 System Prompt | 第 2-10 轮跳过前缀计算 | ~40% token 成本 |
-| 多用户相同 Agent | 每用户独立处理 | 跨用户共享前缀缓存 | 延迟降低 50%+ |
-
-**工程实践**：
-
-1. **前缀稳定性**：缓存命中要求前缀**逐字节一致**。动态注入的内容（如用户画像、时间戳）不能放在 System Prompt 开头，否则前缀不匹配导致缓存失效。正确做法：静态内容（身份、规则、工具定义）放前面，动态内容放后面
-
-2. **缓存粒度**：Anthropic 的 Prompt Caching 以 block 为单位缓存，支持在请求中用 `cache_control` 标记缓存断点。OpenAI 的自动前缀匹配则不需要显式标记
-
-3. **在 Agent 循环中的应用**：Agent 的 ReAct 循环每轮都在上下文末尾追加新的 Thought-Action-Observation，前缀部分（System Prompt + 历史轮次）保持不变——天然适合前缀缓存
-
-
-摘要会改变后续输入的 token 序列，若替换了缓存前缀或其边界，原有 KV/Prefix Cache 通常无法命中。可冻结稳定系统提示和工具前缀，把摘要放在固定边界之后；摘要采用确定性模板并带版本，优先压缩会话尾部，分段缓存并监控命中率。
-
-**差距在哪**：新手把上下文缓存等同于“存 Prompt 字符串”。高手理解的是模型服务层面的 KV Cache 复用机制，且能说清楚在 Agent 系统中的适用场景（System Prompt 不变、工具定义不变）和工程约束（前缀必须一致）。面试官考的是你对模型调用成本优化的工程理解。
 
 ---
 
@@ -1954,7 +1974,7 @@ Lost in the Middle 是指模型处理长上下文时，**对中间位置信息�
 
 ### Q：如果让你设计一个三层记忆机制，你会如何设计？从整体架构和具体压缩方法进行描述。
 
-> 来源：快手 AI应用开发 一面
+> 来源：快手 AI应用开发 一面；[华鲲振宇 AI 开发一面](https://www.nowcoder.com/feed/main/detail/65a687060578410699b9c7bcd109a2e6)
 
 **新手答**：“短期记忆、长期记忆、向量数据库，三层。”
 
@@ -2175,7 +2195,7 @@ Reflection 产出（1 条）：
 
 ### Q：为什么要区分静态长期记忆和动态长期记忆？各自存什么？
 
-> 来源：字节跳动 Agent 二面（Coding Agent）；[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)
+> 来源：字节跳动 Agent 二面（Coding Agent）；[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)
 
 **新手答**：“长期记忆就是把重要信息存起来，不用分那么细。”
 
@@ -2262,7 +2282,7 @@ flowchart TB
 
 ## Q：上下文预算不足时，如何按任务依赖压缩，而不是按时间删除旧消息？
 
-> 来源：腾讯互娱全栈开发（AI）二面（2026-08-13） / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：上下文压缩时会对所有内容一视同仁，还是会侧重不同内容？；具体应该如何压缩上下文？】；[本轮来源](https://www.nowcoder.com/discuss/927381090602348544)；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：你了解的 Claude Code 上下文压缩机制是什么？（[字节 Agent 秋招一面](https://www.nowcoder.com/discuss/929731481189044224)）；[9.21 货拉拉二面](https://www.nowcoder.com/feed/main/detail/ec5dba791f4f457490c373194d2f20c2)；本轮追问：Tool Result 如何淘汰或压缩？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)；[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)；本轮追问：压缩后，上下文里面主要包含些什么？按照什么顺序排序？（[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)）；本轮追问：什么时候检测并触发压缩，大 Tool Result 的阈值是什么？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：压缩机制是自己设计的，还是用 LangGraph 自带的？（[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[字节Agent全三轮面经](https://www.nowcoder.com/feed/main/detail/b4fb3bee56134c3d9bcde6a3166a1711)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)
+> 来源：腾讯互娱全栈开发（AI）二面（2026-08-13） / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)【[百度后端一面](https://www.nowcoder.com/discuss/924730985210458112)追问：上下文压缩时会对所有内容一视同仁，还是会侧重不同内容？；具体应该如何压缩上下文？】；[本轮来源](https://www.nowcoder.com/discuss/927381090602348544)；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：你了解的 Claude Code 上下文压缩机制是什么？（[字节 Agent 秋招一面](https://www.nowcoder.com/discuss/929731481189044224)）；[9.21 货拉拉二面](https://www.nowcoder.com/feed/main/detail/ec5dba791f4f457490c373194d2f20c2)；本轮追问：Tool Result 如何淘汰或压缩？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)；[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)；本轮追问：压缩后，上下文里面主要包含些什么？按照什么顺序排序？（[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)）；本轮追问：什么时候检测并触发压缩，大 Tool Result 的阈值是什么？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：压缩机制是自己设计的，还是用 LangGraph 自带的？（[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[字节Agent全三轮面经](https://www.nowcoder.com/feed/main/detail/b4fb3bee56134c3d9bcde6a3166a1711)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[深度赋智 Agent 算法 / 开发一面](https://www.nowcoder.com/discuss/947993571775242240)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)；[都学网 技术面试](https://www.nowcoder.com/feed/main/detail/6365999695014b7988cb34426691da68)
 
 **新手答**：“保留最近几轮，把更早内容做摘要。”
 
@@ -2278,13 +2298,15 @@ flowchart TB
 
 **追问补充**：评价压缩策略应检查是否保留当前目标、关键约束、待办、代码改动与验证结果，并用原文指针保存可恢复证据。比较压缩前后的任务成功率、关键事实遗漏率、Token 成本和恢复开销；仅凭摘要更短，不能推断某个产品的内部策略更好。
 
+**追问补充**：L0~L3应先定义为可验证的压缩层级，例如L0保留规则与权限，L1保留目标、约束和待办，L2保留决策及证据指针，L3仅保留可恢复摘要；不要据此断言产品内部实现。任务边界切换时冻结旧任务状态，保留共享约束和来源，再重建新任务依赖与工作集。
+
 **差距在哪**：新手按消息年龄压缩，高手按任务因果关系管理工作集。
 
 ---
 
 ## Q：云端 Coding Agent 的容器迁移或重启时，如何恢复会话上下文、工作区和进行中的任务？
 
-> 来源：[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）【[小米 - AI Agent 开发（三面综合）](https://www.nowcoder.com/discuss/925163737139429376)追问：如何设计 Agent 的状态持久化？容器重启后如何恢复会话？】【[拼多多 - AI Agent 开发（工程化 + 数据库方向）](https://www.nowcoder.com/discuss/925527160763187200)追问：长流程任务的“断点恢复”能力你是怎么做的？服务重启后如何加载未完成状态？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计断点续传，使服务重启后能够恢复任务？】【[阿里巴巴（阿里云）- Agent Infra](https://www.nowcoder.com/discuss/926273487512113152)追问：如何实现状态持久化，使容器重启后会话恢复？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：断点恢复怎么做的？服务重启后状态怎么加载？状态不一致怎么办？（[拼多多AI Agent一面，双机位，全程严肃](https://www.nowcoder.com/feed/main/detail/3cb8b70b192f4051b3c19ace4dda1beb)）；[面完字节Agent，我人都傻了](https://www.nowcoder.com/discuss/929492609167290368)；本轮追问：Reconcile 的恢复是怎么做的？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）
+> 来源：[腾讯 WXG 微信读书一面](https://www.nowcoder.com/feed/main/detail/3ffc762437274543b6a8f5e2ea6fb535)（2026-08-24）【[小米 - AI Agent 开发（三面综合）](https://www.nowcoder.com/discuss/925163737139429376)追问：如何设计 Agent 的状态持久化？容器重启后如何恢复会话？】【[拼多多 - AI Agent 开发（工程化 + 数据库方向）](https://www.nowcoder.com/discuss/925527160763187200)追问：长流程任务的“断点恢复”能力你是怎么做的？服务重启后如何加载未完成状态？】【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计断点续传，使服务重启后能够恢复任务？】【[阿里巴巴（阿里云）- Agent Infra](https://www.nowcoder.com/discuss/926273487512113152)追问：如何实现状态持久化，使容器重启后会话恢复？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：断点恢复怎么做的？服务重启后状态怎么加载？状态不一致怎么办？（[拼多多AI Agent一面，双机位，全程严肃](https://www.nowcoder.com/feed/main/detail/3cb8b70b192f4051b3c19ace4dda1beb)）；[面完字节Agent，我人都傻了](https://www.nowcoder.com/discuss/929492609167290368)；本轮追问：Reconcile 的恢复是怎么做的？（[快手大模型agent研发一面](https://www.nowcoder.com/discuss/932315325276618752)）；[深度赋智 Agent 算法 / 开发二面](https://www.nowcoder.com/discuss/948319558106968064)；[美团 一面](https://www.nowcoder.com/feed/main/detail/6c551a197dcc4a6e95f5f01c62680744)；[科大讯飞 Harness 一面](https://www.nowcoder.com/feed/main/detail/b60a64c3934545c8aa7b7033ea9372a6)
 
 **新手答**：“把聊天记录和代码目录挂载到持久卷，容器启动后继续运行。”
 
@@ -2297,7 +2319,70 @@ flowchart TB
 
 Reconcile 应由控制面周期性或事件触发执行：对比 checkpoint、事件日志、工作区版本与外部副作用记录，逐项判断已完成、未执行或状态未知；通过幂等键查询未知操作终态，补写一致事件，必要时回滚或人工接管，完成后再推进任务状态。
 
+**追问补充**：在隔离工作区或专用虚机中执行脚本，按任务限制挂载、网络出口、设备、凭证及资源配额；不能把普通虚拟环境当成操作系统安全边界。执行前记录可恢复快照或版本，之后比较状态差异；快照只恢复其覆盖的资源，外部写入和宿主副作用仍需授权、幂等或补偿，不能假定一键撤销。
+
 **差距在哪**：新手只有“持久卷 + 聊天记录”。高手区分会话、工作区和执行状态，用 checkpoint、租约、fencing、幂等和恢复校验保证一致性。面试官考的是有状态 Agent 在无状态容器基础设施上如何做到可恢复且不重复产生副作用。
+
+---
+
+## Q：当用户对话零碎、跨轮次且意图发生跳跃时，如何结合上下文准确判断当前意图？
+
+> 来源：某小厂FOSHO/AI应用开发二面；本轮追问：如果 Agent 理解错了用户意图，系统有什么处理手段？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；本轮追问：如果用户两次提问的表达相似，但实际意图不一样，你们怎么判断出来？（[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)）；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)；[水滴 AI 全栈一面](https://www.nowcoder.com/discuss/948270457868804096)；[阳光保险 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/600fa3f292654e02ab227d923206a158)；[宇视科技 一面](https://www.nowcoder.com/feed/main/detail/e3b9dfc725a949a9bb19e8d45af586c7)
+
+**新手答**：“用最近几轮对话判断意图。”
+
+**高手答**：
+
+意图跳跃的本质是：**用户心智模型是连续的，但表达是碎片化的**。用户脑中有一条清晰的思路，但说出来的话是断断续续、前后跳转的。只看最近几轮会误判——因为最新一轮可能是对三轮前某个话题的回溯。
+
+**三层意图识别策略**：
+
+```mermaid
+flowchart TB
+    A["用户最新消息"] --> L1["第一层：即时意图\n直接从当前轮提取关键词+语义"]
+    A --> L2["第二层：会话意图\n滑动窗口内的对话主题聚类\n判断是延续还是跳转"]
+    A --> L3["第三层：长期意图\n从历史行为中提取稳定偏好\n辅助消歧"]
+    L1 --> M["意图融合决策"]
+    L2 --> M
+    L3 --> M
+    M --> R["最终意图判断"]
+```
+
+| 层级 | 输入 | 输出 | 作用 |
+|------|------|------|------|
+| 即时意图 | 当前轮用户消息 | 关键词 + 初步意图分类 | 捕捉最新表达 |
+| 会话意图 | 最近 3-5 轮对话 | 主题聚类 + 是否跳跃判断 | 判断延续 vs 跳转 |
+| 长期意图 | 用户历史画像 | 稳定偏好 + 高频需求 | 消歧和补全 |
+
+**跳跃检测机制**：
+
+计算当前 query 与上一轮 query 的语义相似度：
+- 相似度 > 0.7 → 延续当前话题，正常处理
+- 相似度 0.3~0.7 → 灰区，结合历史判断是否是对更早话题的回溯
+- 相似度 < 0.3 → 判定为跳跃，触发“话题重置”
+
+**跳跃后的处理**：
+- 清空工作记忆（当前话题的中间状态）
+- 保留用户画像（长期偏好不受话题切换影响）
+- 检查是否是对历史话题的回溯——如果是，从话题记忆中恢复该话题的上下文
+
+**编程/Agent 场景的特殊处理**：
+
+用户可能在多个文件间跳转，但底层任务是同一个（比如“修复一个跨模块的 bug”）。这时候需要维护的是**任务栈**而非话题栈——文件切换不是意图跳跃，而是同一任务的不同步骤。
+
+```text
+话题栈（对话场景）：聊天气 → 聊餐厅 → 回到天气 → 各话题独立
+任务栈（Agent 场景）：改文件A → 改文件B → 跑测试 → 同一任务的不同步骤
+```
+
+
+对表达相似的提问，不能只看相似度，还要抽取当前目标、约束、实体和期望输出，并与历史任务状态对齐；若目标或约束冲突，则视为新意图。置信度不足或两种解释都可行时，应向用户确认，而不是直接沿用旧上下文。
+
+**追问补充**：多意图请求应先做意图拆分，分别抽取目标、实体、约束和输出格式，再按依赖关系决定串行或并行执行；各子任务独立维护上下文，最后汇总结果。若意图冲突、优先级不明或涉及不可逆操作，应先向用户确认。
+
+**追问补充**：长对话不能无限拼接历史，应按任务或话题维护状态，压缩已确认事实、未决问题和约束，并按当前意图检索相关片段；对冲突或过期信息标注来源和时间。分类不确定时给出候选意图与简短澄清，用户确认后更新状态；用长上下文回放、跳转和冲突样本评测准确率与遗忘率。
+
+**差距在哪**：面试官考的是对“意图不连续”这个真实工程难题的解题思路，不是教科书式的意图分类。只看最近几轮会在跳跃时误判，只靠语义相似度会在“同一任务不同步骤”时误触跳跃检测。三层融合 + 场景化判断才是完整方案。
 
 ---
 
@@ -2380,65 +2465,6 @@ LLM 负责从自然语言中提取候选和证据片段，输出受 JSON Schema 
 
 ---
 
-## Q：当用户对话零碎、跨轮次且意图发生跳跃时，如何结合上下文准确判断当前意图？
-
-> 来源：某小厂FOSHO/AI应用开发二面；本轮追问：如果 Agent 理解错了用户意图，系统有什么处理手段？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8aa09d879bfc408fae7442565fd25fbe)；本轮追问：如果用户两次提问的表达相似，但实际意图不一样，你们怎么判断出来？（[迅雷 Agent一面](https://www.nowcoder.com/discuss/932392798559432704)）；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)
-
-**新手答**：“用最近几轮对话判断意图。”
-
-**高手答**：
-
-意图跳跃的本质是：**用户心智模型是连续的，但表达是碎片化的**。用户脑中有一条清晰的思路，但说出来的话是断断续续、前后跳转的。只看最近几轮会误判——因为最新一轮可能是对三轮前某个话题的回溯。
-
-**三层意图识别策略**：
-
-```mermaid
-flowchart TB
-    A["用户最新消息"] --> L1["第一层：即时意图\n直接从当前轮提取关键词+语义"]
-    A --> L2["第二层：会话意图\n滑动窗口内的对话主题聚类\n判断是延续还是跳转"]
-    A --> L3["第三层：长期意图\n从历史行为中提取稳定偏好\n辅助消歧"]
-    L1 --> M["意图融合决策"]
-    L2 --> M
-    L3 --> M
-    M --> R["最终意图判断"]
-```
-
-| 层级 | 输入 | 输出 | 作用 |
-|------|------|------|------|
-| 即时意图 | 当前轮用户消息 | 关键词 + 初步意图分类 | 捕捉最新表达 |
-| 会话意图 | 最近 3-5 轮对话 | 主题聚类 + 是否跳跃判断 | 判断延续 vs 跳转 |
-| 长期意图 | 用户历史画像 | 稳定偏好 + 高频需求 | 消歧和补全 |
-
-**跳跃检测机制**：
-
-计算当前 query 与上一轮 query 的语义相似度：
-- 相似度 > 0.7 → 延续当前话题，正常处理
-- 相似度 0.3~0.7 → 灰区，结合历史判断是否是对更早话题的回溯
-- 相似度 < 0.3 → 判定为跳跃，触发“话题重置”
-
-**跳跃后的处理**：
-- 清空工作记忆（当前话题的中间状态）
-- 保留用户画像（长期偏好不受话题切换影响）
-- 检查是否是对历史话题的回溯——如果是，从话题记忆中恢复该话题的上下文
-
-**编程/Agent 场景的特殊处理**：
-
-用户可能在多个文件间跳转，但底层任务是同一个（比如“修复一个跨模块的 bug”）。这时候需要维护的是**任务栈**而非话题栈——文件切换不是意图跳跃，而是同一任务的不同步骤。
-
-```text
-话题栈（对话场景）：聊天气 → 聊餐厅 → 回到天气 → 各话题独立
-任务栈（Agent 场景）：改文件A → 改文件B → 跑测试 → 同一任务的不同步骤
-```
-
-
-对表达相似的提问，不能只看相似度，还要抽取当前目标、约束、实体和期望输出，并与历史任务状态对齐；若目标或约束冲突，则视为新意图。置信度不足或两种解释都可行时，应向用户确认，而不是直接沿用旧上下文。
-
-**追问补充**：多意图请求应先做意图拆分，分别抽取目标、实体、约束和输出格式，再按依赖关系决定串行或并行执行；各子任务独立维护上下文，最后汇总结果。若意图冲突、优先级不明或涉及不可逆操作，应先向用户确认。
-
-**差距在哪**：面试官考的是对“意图不连续”这个真实工程难题的解题思路，不是教科书式的意图分类。只看最近几轮会在跳跃时误判，只靠语义相似度会在“同一任务不同步骤”时误触跳跃检测。三层融合 + 场景化判断才是完整方案。
-
----
-
 ## Q：Agent 做上下文压缩后，如何验证没有破坏当前任务？
 
 > 来源：Coding Agent 面经/本地 Coding Agent【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：如何设计上下文压缩策略，以及如何评估信息丢失？】【[拼多多 复活赛 一面](https://www.nowcoder.com/feed/main/detail/2109cf8eb0254507911fbf86bcbf51e4)追问：上下文压缩时怎么降低信息丢失的概率？】；本轮追问：Agent 上下文溢出怎么处理？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)
@@ -2501,7 +2527,6 @@ flowchart TB
 
 ---
 
----
 
 ## Q：已进行 10 轮并做了总结，第 11 轮开始时，总结怎么处理？是重算前 11 轮还是叠加？
 
@@ -2637,25 +2662,9 @@ flowchart LR
 
 ---
 
-## Q：大模型输出过长时如何进行长度控制与内容压缩？
-
-> 来源：[9.14日美团多模态生成大模型二面](https://www.nowcoder.com/discuss/930520072370606080)；本轮追问：消息是一条一条推送的，如何进行截断？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）
-
-**新手答**：“通常会限制最大输出长度，要求模型先给结论、再压缩重复内容，必要时分段输出或让模型继续生成。”
-
-**高手答**：
-
-长度控制的目标不是简单截断，而是在预算内保留任务所需信息。可在请求层设置输出 token 上限、超时和停止词，并用结构化模板约束字段；生成后按优先级压缩，去掉重复背景，保留结论、证据、风险和待办。长文可采用“先摘要、按需展开”或分页续写，但续写必须携带稳定的摘要、已输出范围和幂等标识，避免重复或遗漏。应通过事实覆盖率、关键字段完整率、截断率、用户满意度和成本延迟评估策略；对代码、数字、引用等内容要使用专门校验，不能只依赖字数统计。主要权衡是压缩越强成本越低，但细节和可验证性可能下降。
-
-
-流式消息不要按任意字节硬切：服务端维护累计缓冲和预算，达到上限后在句子或结构化字段边界停止后续生成，并发送截断标记；JSON、代码等需保证可解析，前端按 sequence 拼接、去重，断线可按游标续传。
-
-**差距在哪**：浅层回答只会设置长度上限，深入回答还要设计分层压缩、续写状态、质量指标与失败边界，考查的是可控生成和评估能力。
-
-
 ## Q：大模型生成会话摘要时，如何避免摘要内容污染用户偏好？新结论推翻旧结论时怎么保留？
 
-> 来源：百度内容营销与广告日常实习一面（2026-08-12）；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)
+> 来源：百度内容营销与广告日常实习一面（2026-08-12）；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[水滴 AI 全栈一面](https://www.nowcoder.com/discuss/948270457868804096)
 
 **新手答**：“把历史对话交给模型总结，用户说了新偏好就覆盖旧偏好。”
 
@@ -2680,6 +2689,36 @@ conflicts：新旧结论、作用域、裁决状态
 **追问补充**：切换模型本身不是用户偏好变化的证据：给每条摘要或候选偏好记录生成模型、提示版本和来源标记。模型生成的临时归纳在切换后只作低可信参考，必要时重算或忽略；仅保留能回溯到用户原话的确认偏好，并按作用域重新校验，避免把 A 的推断带入 B 的长期上下文。
 
 **差距在哪**：新手把摘要当成一段可反复覆盖的文本。高手将摘要、偏好、临时约束和事实分离，用证据、作用域和版本链解决污染与冲突。面试官考的是记忆系统能否审计、纠错和回滚。
+
+---
+
+## Q：大模型输出过长时如何进行长度控制与内容压缩？
+
+> 来源：[9.14日美团多模态生成大模型二面](https://www.nowcoder.com/discuss/930520072370606080)；本轮追问：消息是一条一条推送的，如何进行截断？（[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)）
+
+**新手答**：“通常会限制最大输出长度，要求模型先给结论、再压缩重复内容，必要时分段输出或让模型继续生成。”
+
+**高手答**：
+
+长度控制的目标不是简单截断，而是在预算内保留任务所需信息。可在请求层设置输出 token 上限、超时和停止词，并用结构化模板约束字段；生成后按优先级压缩，去掉重复背景，保留结论、证据、风险和待办。长文可采用“先摘要、按需展开”或分页续写，但续写必须携带稳定的摘要、已输出范围和幂等标识，避免重复或遗漏。应通过事实覆盖率、关键字段完整率、截断率、用户满意度和成本延迟评估策略；对代码、数字、引用等内容要使用专门校验，不能只依赖字数统计。主要权衡是压缩越强成本越低，但细节和可验证性可能下降。
+
+
+流式消息不要按任意字节硬切：服务端维护累计缓冲和预算，达到上限后在句子或结构化字段边界停止后续生成，并发送截断标记；JSON、代码等需保证可解析，前端按 sequence 拼接、去重，断线可按游标续传。
+
+**差距在哪**：浅层回答只会设置长度上限，深入回答还要设计分层压缩、续写状态、质量指标与失败边界，考查的是可控生成和评估能力。
+
+
+## Q：Work Memory 如何设计与更新？为什么能提升 Agent 的任务执行效果？
+
+> 来源：[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[商汤 AI 开发一面](https://www.nowcoder.com/feed/main/detail/c93f091675f84c4a96d519dbe933cb0d)
+
+**新手答**：“Work Memory 通常把当前任务的重要状态、计划、发现和失败经验结构化保存，并在后续步骤中按需检索，从而减少重复推理和上下文丢失。”
+
+**高手答**：
+
+Work Memory 是面向当前任务的短期、可更新状态层，不等同于把全部对话堆进上下文。可将目标、约束、已验证事实、待办、工具结果、失败原因和决策依据结构化存储，并为条目记录来源、时间、置信度和适用范围。Agent 在阶段切换或获得新证据时按策略写入、合并、修正或淘汰，再依据当前子任务检索相关内容；冲突信息应保留版本或回到来源核验。它有效的原因是减少重复观察和规划，降低长上下文噪声，并让执行状态跨步骤持续。工程上要限制写入膨胀、错误记忆、提示注入和敏感信息扩散，必要时支持人工覆盖。应通过有无 Memory 的消融实验，比较任务成功率、工具调用次数、延迟、成本和错误恢复率，而不是只看主观体验。
+
+**差距在哪**：浅层回答只是保存历史摘要，深入回答要定义记忆结构、写入与冲突策略、检索边界，并用消融和成本指标验证是否真正提升执行效果。
 
 ---
 
@@ -2753,20 +2792,6 @@ chapter_summaries：每章已覆盖内容与状态增量
 
 **差距在哪**：新手靠扩大上下文和最终润色。高手把大纲、事实、论点和待办外置为版本化状态，用按需检索、状态增量和分层校验维持跨章节一致性，同时保留证据和可回滚能力。
 
-
-## Q：Work Memory 如何设计与更新？为什么能提升 Agent 的任务执行效果？
-
-> 来源：[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)
-
-**新手答**：“Work Memory 通常把当前任务的重要状态、计划、发现和失败经验结构化保存，并在后续步骤中按需检索，从而减少重复推理和上下文丢失。”
-
-**高手答**：
-
-Work Memory 是面向当前任务的短期、可更新状态层，不等同于把全部对话堆进上下文。可将目标、约束、已验证事实、待办、工具结果、失败原因和决策依据结构化存储，并为条目记录来源、时间、置信度和适用范围。Agent 在阶段切换或获得新证据时按策略写入、合并、修正或淘汰，再依据当前子任务检索相关内容；冲突信息应保留版本或回到来源核验。它有效的原因是减少重复观察和规划，降低长上下文噪声，并让执行状态跨步骤持续。工程上要限制写入膨胀、错误记忆、提示注入和敏感信息扩散，必要时支持人工覆盖。应通过有无 Memory 的消融实验，比较任务成功率、工具调用次数、延迟、成本和错误恢复率，而不是只看主观体验。
-
-**差距在哪**：浅层回答只是保存历史摘要，深入回答要定义记忆结构、写入与冲突策略、检索边界，并用消融和成本指标验证是否真正提升执行效果。
-
----
 
 ## 这类题的答题模式
 

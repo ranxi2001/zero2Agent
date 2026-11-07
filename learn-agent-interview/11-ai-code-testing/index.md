@@ -120,7 +120,7 @@ else:
 
 ### Q：如何测试 AI 生成代码的正确性？
 
-> 来源：蚂蚁集团 Agent 开发一面 【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序的实现】 / [字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07) / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)；本轮追问：看程序找出当前程序中存在的问题，然后进行修改（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：站在测试开发角度，怎么验证功能是否符合预期？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；本轮追问：AI 生成代码后，怎么做测试校验和部署测试？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）；本轮追问：这个项目中哪些代码和设计是你亲自完成的，哪些是 AI Coding 辅助完成的？你如何验收 AI 生成的代码？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：AI智能体编写的SQL出现错误，如何发现并处理？（[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)）；本轮追问：除了编译成功和测试通过，还应该使用哪些标准评价代码结果？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)；本轮追问：会让 AI 提前生成测试吗？只做函数单测，还是也做整体测试？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[美团ai全栈二面](https://www.nowcoder.com/feed/main/detail/064725eb6da14cda9efabb2a51a68681)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)
+> 来源：蚂蚁集团 Agent 开发一面 【字节实习Agent开发一面追问：代码Agent生成结果有效性/准确率量化】【小红书 Agent 岗一面追问：Agent 自主生成测试程序的实现】 / [字节中国交易与广告 AI 全栈二面](https://www.nowcoder.com/feed/main/detail/0f77410f8b1b4daca879d5ff99c7ae07) / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)；本轮追问：看程序找出当前程序中存在的问题，然后进行修改（[本轮追问](https://www.nowcoder.com/discuss/926928449204129792)）；本轮追问：站在测试开发角度，怎么验证功能是否符合预期？（[本轮追问](https://www.nowcoder.com/discuss/927594784770764800)）；本轮追问：AI 生成代码后，怎么做测试校验和部署测试？（[本轮追问](https://www.nowcoder.com/feed/main/detail/d0be5ebcc6a0480d8975498fba408250)）；本轮追问：这个项目中哪些代码和设计是你亲自完成的，哪些是 AI Coding 辅助完成的？你如何验收 AI 生成的代码？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：AI智能体编写的SQL出现错误，如何发现并处理？（[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)）；本轮追问：除了编译成功和测试通过，还应该使用哪些标准评价代码结果？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)；本轮追问：会让 AI 提前生成测试吗？只做函数单测，还是也做整体测试？（[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)）；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[美团ai全栈二面](https://www.nowcoder.com/feed/main/detail/064725eb6da14cda9efabb2a51a68681)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[微店 AI 全栈二面](https://www.nowcoder.com/discuss/942826597550247936)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)；[快手 AI 全栈开发一面](https://www.nowcoder.com/discuss/942822898094428160)
 
 **新手答**：“跑一下看能不能通过。”
 
@@ -175,6 +175,8 @@ flowchart TB
 **追问补充**：还要针对实现特性做专项验收：固定随机种子并替换时间、网络等外部依赖，检查确定性；用基准和压力测试观察耗时、吞吐及资源占用；为调用链传递截止时间并验证取消是否生效；核对数据结构、Schema、空值和兼容性。发现问题后保留最小复现样例，定位、修正并回归验证。
 
 **追问补充**：隐藏测试可能是固定样例，也可能由参数生成器、未公开边界数据或不同随机种子产生，取决于评测协议。应验证输入约束、不变量和异常路径，使用留出案例与重复运行检查泛化；通过可见样例不能证明隐藏测试一定通过。
+
+**追问补充**：先把需求拆成接口、边界和不变量，再由独立检查步骤对照实现，验证遗漏、越权、性能和资源风险。另开窗口不自动保证上下文或判断独立；应控制评审输入并结合测试Oracle、静态分析和必要人工复核。每次缺陷保留最小复现，修复后重跑专项及回归检查。
 
 **差距在哪**：新手的“跑一下”只覆盖了“能不能运行”。高手从静态（类型/lint/安全）、动态（回归/自生成/属性测试）、语义（Spec 对比/变异测试/人工）三层构建了完整的正确性验证体系。面试官考的是你对 AI 生成代码测试有没有系统性的方法论——不是“测了没有”，而是“怎么测才可靠”。
 
@@ -243,7 +245,7 @@ flowchart TB
 
 ## Q：如何用 Agent 自动化测试一个现有软件项目，并划分规划、执行、Oracle 与人工门禁？
 
-> 来源：蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果完全自动化地交给Agent不太放心，如何解决？】；本轮追问：AI 平台与真正执行测试的软件之间如何进行数据交互？（[本轮追问](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)）；本轮追问：自动化用力叠加你设计的边角场景测试策略，整体功能场景覆盖度如何预估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)
+> 来源：蚂蚁集团效能研发面经【[0824 百度二面](https://www.nowcoder.com/feed/main/detail/2c301fd7793e43d18b8f8481d25a72e8)追问：长期演进框架的上下文与产物治理】【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果完全自动化地交给Agent不太放心，如何解决？】；本轮追问：AI 平台与真正执行测试的软件之间如何进行数据交互？（[本轮追问](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)）；本轮追问：自动化用力叠加你设计的边角场景测试策略，整体功能场景覆盖度如何预估？（[本轮追问](https://www.nowcoder.com/feed/main/detail/64868531af8d424b8aa55f46e313b478)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/c478feeef29340caac7b8c44d5a6c5e4)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[昆仑万维 多模态算法面试](https://www.nowcoder.com/feed/main/detail/2b41f626926d4284bf98a5973eabc1ca)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)
 
 **新手答**：“让 Agent 阅读需求和代码，生成测试用例，运行失败后自动修复，最后把报告交给人看。”
 
@@ -274,13 +276,15 @@ Oracle 是最容易被忽略的部分。HTTP 200、页面出现文字或“模�
 
 **追问补充**：覆盖度不能只看行覆盖率，应按需求验收项、风险类别、接口状态、边界数据和故障路径建立矩阵，并将每个 Case 绑定需求与断言；测试框架可依据变更范围动态生成并由固定 Oracle 校验。验证 Agent 只能辅助解释，关键结果仍由确定性断言或人工确认。失败可回传修复，但每轮必须保留原证据、限制重试，禁止改弱断言，连续失败进入人工门禁。
 
+**追问补充**：badcase可自动做失败聚类去重、输入最小化、环境与证据固化、可复现重放，并将确认缺陷沉淀为回归用例和固定Oracle。脚本下发按风险分级：隔离环境中的只读、幂等低风险任务可自动执行；写入、破坏性操作、权限变化或基线修改须人工确认，并保留审批与执行证据。
+
 **差距在哪**：新手把 Agent 当“会写测试的脚本”。高手把规划、受控执行、可信 Oracle 和人工责任拆开，解决了测试环境、判定独立性、副作用、失败分类和发布门禁，才能让自动化结果进入真实研发流程。
 
 ---
 
 ## Q：AI 生成代码在哪些场景更具落地价值？应用边界在哪？
 
-> 来源：蚂蚁Agent一二面（Code Agent方向）；本轮追问：AST 存在哪些局限性？可以用什么技术弥补？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）；[9.14字节推荐架构一面](https://www.nowcoder.com/feed/main/detail/467d01beed8a40b89ac414b90fc7fb85)；[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)；本轮追问：AI Coding对你来说带来了哪些提效？你认为它有什么局限？（[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)）；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)
+> 来源：蚂蚁Agent一二面（Code Agent方向）；本轮追问：AST 存在哪些局限性？可以用什么技术弥补？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）；[9.14字节推荐架构一面](https://www.nowcoder.com/feed/main/detail/467d01beed8a40b89ac414b90fc7fb85)；[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)；本轮追问：AI Coding对你来说带来了哪些提效？你认为它有什么局限？（[携程AI应用开发实习一面（OC）](https://www.nowcoder.com/discuss/933058120102739968)）；[美团 正式批 一面 自动驾驶算法工程师](https://www.nowcoder.com/feed/main/detail/4065102c270e40758437b32297f58836)；[科大讯飞 推理工程部 AI Infra 一面](https://www.nowcoder.com/discuss/944283905056665600)
 
 **新手答**：“写 CRUD 和简单逻辑的时候好用，复杂的不行。”
 
@@ -299,13 +303,15 @@ Oracle 是最容易被忽略的部分。HTTP 200、页面出现文字或“模�
 3. **安全敏感代码**：加密、认证、权限控制——AI 可能引入微妙漏洞
 4. **创新型架构设计**：没有先例可参考的全新设计，需要人的判断
 
+**追问补充**：Infra可选择从配置草稿、监控规则、脚本或排障证据整理等可验证任务试点，以相同工作量比较交付周期、返工、变更失败与人工复核成本。涉及权限、网络、发布或数据写入时，使用静态与策略检查、隔离验证和既定审批；是否提效应由观测结果证明，不能因生成更快就认定运维风险更低。
+
 **差距在哪**：面试官要看你有没有“工具理性”——知道什么时候用、什么时候不用，而不是全盘接受或全盘否定。
 
 ---
 
 ## Q：工程级 Code Agent 处理项目上下文、生成代码时有哪些核心挑战？
 
-> 来源：蚂蚁Agent一二面（Code Agent方向） / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：代码生成全链路及超长上下文处理？】；[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)
+> 来源：蚂蚁Agent一二面（Code Agent方向） / [字节 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/7e8a821479a649fd914e449d312eeb95)【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：代码生成全链路及超长上下文处理？】；[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)；[度小满 - AI 全栈研发 - 二面](https://www.nowcoder.com/feed/main/detail/0bed1f22b62145f480d2c10c5ffd7951)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/34dd692b16c84c059daeb00866533d96)
 
 **新手答**：“就是上下文太长放不下的问题。”
 
@@ -322,6 +328,8 @@ Oracle 是最容易被忽略的部分。HTTP 200、页面出现文字或“模�
 这些瓶颈应分层定位：检索层看是否拿到正确代码和规范，规划层看改动范围与依赖是否完整，执行层看工具权限、环境和失败恢复，验证层看是否有独立 Oracle。工程交付不能用“生成了代码”或“命令执行成功”收口，而要留下最小 diff、依赖影响、可复现验证命令、测试与安全门禁结果，以及仍未覆盖的风险；无法验证的部分应明确交给人，而不是让同一个生成模型自证正确。
 
 **追问补充**：生成代码前应提供结构化任务说明、相关文件片段与依赖关系、接口和数据模型、项目编码规范、可参考的相似实现，以及验收标准和测试用例；生成中再通过编译器、lint 和测试反馈迭代，避免只依赖自然语言描述。
+
+**追问补充**：只生成前端可以是一种产品范围选择：预览有助于收集布局和交互反馈，但页面看起来正确仍不证明逻辑、安全或可访问性通过。扩展后端前应另行明确数据模型、鉴权、事务、副作用、部署与密钥边界，再配置契约、集成和故障测试；不必为追求“全栈”直接开放生产写入。
 
 **差距在哪**：面试官要看你是否有“从 Demo 到工程”的认知跨越——玩具级 Code Agent 只管生成，工程级还要管选择、验证、安全。
 
@@ -521,7 +529,6 @@ AI 适合处理开放且高成本的“候选生成和证据解释”，代码�
 
 ---
 
----
 
 ## Q：HumanEval、MBPP、APPS 的数据集结构与评估方式是什么？
 
@@ -535,6 +542,37 @@ AI 适合处理开放且高成本的“候选生成和证据解释”，代码�
 
 **差距在哪**：浅层只知道“生成代码后跑测试”，深入回答要区分三套数据结构、执行指标、采样口径、沙箱安全，以及测试覆盖不足和数据泄漏带来的评测偏差。
 
+---
+
+## Q：AI 生成的 Vue 等前端代码如何构建、启动并提供受限预览？
+
+> 来源：[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/3903a12df0d342619ce1a550b7b65e1c)
+
+**新手答**：“先安装依赖并构建，再启动预览服务，最后在浏览器检查页面。”
+
+**高手答**：
+
+先把生成物放入独立工作区，检查package.json、锁文件、依赖来源和脚本，避免直接以宿主高权限安装并执行任意生成命令。对已有Vue工程保持版本与构建配置一致，按项目脚本安装依赖、做类型检查与测试，再执行生产构建；[Vue快速开始](https://vuejs.org/guide/quick-start.html)说明构建产物默认在dist。构建失败应保留脱敏日志，让Agent修复后重跑，不能忽略退出码就返回预览链接。
+
+预览应绑定受限端口，经鉴权入口暴露给对应用户，设置生命周期和资源上限，并按需要隔离网络、文件系统与敏感环境变量。这是工程隔离建议，Vite本身不是安全沙箱。[Vite文档](https://vite.dev/guide/static-deploy)明确preview仅用于本地检查构建，不是生产服务器。最后用真实浏览器验证路由、交互、网络请求、桌面与移动布局；构建成功只证明静态产物可生成，不证明功能正确，更不证明可直接公开上线。
+
+**差距在哪**：完整答案需要构建、受限执行、访问控制和浏览器验收，不能将dev server可打开等同于安全交付。
+
+---
+
+## Q：AI Coding Agent 如何检测并保留用户手动修改，避免后续增量生成覆盖代码？
+
+> 来源：[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
+
+**新手答**：“每轮编辑前读取最新代码，比对基线与用户改动，出现冲突时合并或让用户确认。”
+
+**高手答**：
+
+不要把上轮生成文件当作当前事实。每轮先记录文件版本或内容哈希，读取最新工作区，再比较“上次共同基线、用户当前文件、Agent拟修改结果”。修改范围不重叠时可自动合并；同一区域冲突则保留双方差异，按明确策略解决或请用户判断，不能用整文件覆盖代替增量编辑。这里的三方比较是工程设计；[Git apply文档](https://git-scm.com/docs/git-apply.html)中的--3way也有前提，必须能识别并取得补丁基线，且可能留下冲突。
+
+提交时应结合锁、版本条件写或编辑器协作接口校验版本，避免检查后又被修改的竞态；失败就重新读取并生成补丁。应用后检查精确diff，确认没有删除无关用户修改，再运行受影响测试。应保存可回滚的修改记录，但不要把用户未授权内容上传外部。验收至少覆盖用户新增函数、修改同一行、重命名文件及并行编辑；静默采用Agent版本不是解决冲突，工具返回成功也不能证明用户改动被保留。
+
+**差距在哪**：核心是共同基线、并发版本检查和冲突边界；“改前读文件”还不足以防止整文件覆盖和读写竞争。
 
 ## 这类题的答题模式
 

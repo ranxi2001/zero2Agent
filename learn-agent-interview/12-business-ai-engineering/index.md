@@ -160,7 +160,7 @@ AI 方案的目标不是“模型更准”，是“业务更好”。两者经�
 
 ### Q：业务方反馈“AI 效果差”，你怎么系统性定位问题？
 
-> 来源：网易 AI Agent 开发实习（原题：玩家反馈 AI 很蠢如何定位）【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果AI Agent效果没有达到预期、在某些指标上落后，你们怎么优化？】；本轮追问：能否详细讲讲在小米项目中，你观察到的一个 Agent 效果上的具体问题，以及你们最终是怎么迭代和改进的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：如果有人质疑你的 Skill 结论失真，你怎么排查和解决？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)；[度小满 - AI 全栈研发 - 三面](https://www.nowcoder.com/feed/main/detail/e98c29d76e854e2bbd1b40731d6ce715)；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)
+> 来源：网易 AI Agent 开发实习（原题：玩家反馈 AI 很蠢如何定位）【[viture agent平台开发 一面](https://www.nowcoder.com/feed/main/detail/c4c614b12d564af3b37c30c241072973)追问：如果AI Agent效果没有达到预期、在某些指标上落后，你们怎么优化？】；本轮追问：能否详细讲讲在小米项目中，你观察到的一个 Agent 效果上的具体问题，以及你们最终是怎么迭代和改进的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；本轮追问：如果有人质疑你的 Skill 结论失真，你怎么排查和解决？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)）；[9.24 普通の快手一面（发券）](https://www.nowcoder.com/feed/main/detail/02dac811205448be9c3b0f146dd68f8b)；[度小满 - AI 全栈研发 - 三面](https://www.nowcoder.com/feed/main/detail/e98c29d76e854e2bbd1b40731d6ce715)；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)
 
 **新手答**：“看看 bad case，调调 Prompt。”
 
@@ -317,7 +317,7 @@ flowchart TB
 
 ## Q：Agent 项目如何从 Demo 进行企业级落地？从原型到生产需要补全哪些工程能力？
 
-> 来源：哆咔互娱 Agent开发实习一面 【[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界】；本轮追问：你的经历主要集中在 Skill 开发，是否具备 Agent 工程落地经验？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)；本轮追问：介绍 Codex Pi 的实现，以及 Agent 如何与业务结合并提效？（[本轮追问](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)）；本轮追问：Agent项目是用于业务提效的，还是可以复制到全公司维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/beae35cec366487a918abee5421216f2)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；本轮追问：视频生产是直接调用模型，还是组合素材和工程能力？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；本轮追问：简历中的“企业级 RAG”应该如何理解？企业级 RAG 与学习型 Demo 有哪些不同？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[字节Agent全三轮面经](https://www.nowcoder.com/feed/main/detail/b4fb3bee56134c3d9bcde6a3166a1711)
+> 来源：哆咔互娱 Agent开发实习一面 【[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界】；本轮追问：你的经历主要集中在 Skill 开发，是否具备 Agent 工程落地经验？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)；本轮追问：介绍 Codex Pi 的实现，以及 Agent 如何与业务结合并提效？（[本轮追问](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)）；本轮追问：Agent项目是用于业务提效的，还是可以复制到全公司维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/beae35cec366487a918abee5421216f2)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；本轮追问：视频生产是直接调用模型，还是组合素材和工程能力？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；本轮追问：简历中的“企业级 RAG”应该如何理解？企业级 RAG 与学习型 Demo 有哪些不同？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[字节Agent全三轮面经](https://www.nowcoder.com/feed/main/detail/b4fb3bee56134c3d9bcde6a3166a1711)；[未注明公司 Agent 开发实习转正面试](https://www.nowcoder.com/feed/main/detail/7a9f8b8beafd490190cef40fe0af6afc)
 
 **新手答**：“把 Demo 代码优化一下，加个前端界面，部署到服务器上就行了。”
 
@@ -391,7 +391,32 @@ graph LR
 
 企业级 RAG 不只是接入向量库，而是围绕数据治理和可验证性建设：按租户、角色和数据密级做采集与检索权限隔离，保留来源、版本和更新时间；通过混合检索、重排、引用约束降低召回偏差，并用离线评测、线上反馈和 Bad Case 回流持续验证效果。
 
+**追问补充**：拿到高保真 HTML 后，先按页面、组件和交互状态拆解：区分静态展示、表单校验、跳转、弹窗、权限和异常态，再结合老师的使用流程整理功能清单。随后为每项标注输入输出、数据来源、状态流转、接口需求和验收条件，识别哪些是演示假数据，最后与产品确认边界并拆成前端、后端、Agent 流程和测试任务。
+
 **差距在哪**：面试官考的是你对“工程成熟度”的认知。Demo 证明“能做”，生产证明“做得稳”。能列出从可靠性、可观测性到安全合规的系统清单，说明你有真实的落地思维而不只是跑通 Happy Path。
+
+---
+
+## Q：面向 C 端的 Agent 应用应该包含哪些架构和模块？
+
+> 来源：百度大模型研发工程师二面（2026-08-21）【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：何为 Agent 应用？C 端 Agent 的架构模块？】；[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)；本轮追问：如果把这个 Agent 做到网页端使用，你觉得应该如何设计？（[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)）；本轮追问：把本地 Coding Agent 做成多人使用的 SaaS，架构、创建、复用与销毁如何设计？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：讲一下这个视觉的人工智能客服的全流程你觉得应该是怎么样的？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[快手可灵 Agent Harness 一面](https://www.nowcoder.com/discuss/946891033357381632)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
+
+**新手答**：“前端接一个大模型，后端提供 RAG、Memory 和 Tools。”
+
+**高手答**：
+
+C 端 Agent 要同时回答“用户如何持续使用”和“任务如何可靠完成”。产品接入层包含账号、会话、流式交互、多模态输入、历史记录和反馈；Agent Runtime 负责 Context 装配、规划、工具循环、暂停恢复和预算；能力层提供搜索、RAG、Memory、业务 API 与 Sandbox；治理层负责权限、内容安全、隐私、审计、Eval、成本和灰度。
+
+与内部 Agent 相比，C 端还要处理弱网重连、跨设备会话、首屏/首 Token 延迟、用户插话和取消、工具操作确认、未成年人或敏感数据保护。高风险动作必须展示将执行什么、影响什么，并让用户确认；模型生成文本成功不等于业务任务成功，最终状态要以权威业务系统为准。
+
+指标也要分层：产品层看留存、任务完成率和投诉；Agent 层看步骤数、澄清率、工具正确率；系统层看 TTFT、P99、失败恢复和单任务成本。架构选择由目标任务决定，通用助手、办公 Agent 和 Coding Agent 不应复用同一套默认工具与权限。
+
+
+多人 SaaS 应按租户隔离账号、会话、权限、密钥和数据，为每次 Coding 任务创建带配额的临时 Sandbox，支持模板或快照复用，完成、超时或取消后回收并保留审计产物。视觉客服流程可为图片接入、预处理与 OCR/视觉识别、意图判断、知识库检索、工具执行、回复或转人工，并记录全链路结果供质检。
+
+**追问补充**：回答项目分工时，应明确负责的边界，例如 Runtime 编排、上下文与工具接入、Sandbox、会话状态或评测治理，并说明接口、权限和失败恢复的设计取舍。网页生成 Agent 可复用其任务拆解、代码生成、预览调试、版本化和 Sandbox 能力，再接入穿戴设备规格、传感器数据、固件/API、仿真测试及研发权限等领域工具。
+
+**差距在哪**：新手只列模型组件，高手把产品交互、Runtime、业务能力和治理连成完整闭环，并能指出 C 端特有的体验与安全约束。
 
 ---
 
@@ -412,27 +437,6 @@ graph LR
 
 **差距在哪**：浅层回答只会说“敏感内容人工审核”，面试官考察的是风险分层、审核路由、可追溯反馈和人力成本之间的工程闭环。
 
-
-## Q：面向 C 端的 Agent 应用应该包含哪些架构和模块？
-
-> 来源：百度大模型研发工程师二面（2026-08-21）【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：何为 Agent 应用？C 端 Agent 的架构模块？】；[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)；本轮追问：如果把这个 Agent 做到网页端使用，你觉得应该如何设计？（[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)）；本轮追问：把本地 Coding Agent 做成多人使用的 SaaS，架构、创建、复用与销毁如何设计？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：讲一下这个视觉的人工智能客服的全流程你觉得应该是怎么样的？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）
-
-**新手答**：“前端接一个大模型，后端提供 RAG、Memory 和 Tools。”
-
-**高手答**：
-
-C 端 Agent 要同时回答“用户如何持续使用”和“任务如何可靠完成”。产品接入层包含账号、会话、流式交互、多模态输入、历史记录和反馈；Agent Runtime 负责 Context 装配、规划、工具循环、暂停恢复和预算；能力层提供搜索、RAG、Memory、业务 API 与 Sandbox；治理层负责权限、内容安全、隐私、审计、Eval、成本和灰度。
-
-与内部 Agent 相比，C 端还要处理弱网重连、跨设备会话、首屏/首 Token 延迟、用户插话和取消、工具操作确认、未成年人或敏感数据保护。高风险动作必须展示将执行什么、影响什么，并让用户确认；模型生成文本成功不等于业务任务成功，最终状态要以权威业务系统为准。
-
-指标也要分层：产品层看留存、任务完成率和投诉；Agent 层看步骤数、澄清率、工具正确率；系统层看 TTFT、P99、失败恢复和单任务成本。架构选择由目标任务决定，通用助手、办公 Agent 和 Coding Agent 不应复用同一套默认工具与权限。
-
-
-多人 SaaS 应按租户隔离账号、会话、权限、密钥和数据，为每次 Coding 任务创建带配额的临时 Sandbox，支持模板或快照复用，完成、超时或取消后回收并保留审计产物。视觉客服流程可为图片接入、预处理与 OCR/视觉识别、意图判断、知识库检索、工具执行、回复或转人工，并记录全链路结果供质检。
-
-**差距在哪**：新手只列模型组件，高手把产品交互、Runtime、业务能力和治理连成完整闭环，并能指出 C 端特有的体验与安全约束。
-
----
 
 ## Q：设计订单客服 Agent 时，如何处理转人工和意图识别调优？
 
@@ -794,7 +798,6 @@ MCP 的价值是**跨 Host 复用、动态发现和协议标准化**，不是让
 
 ---
 
----
 
 ## Q：如何生成既有吸引力又不重复的推荐理由？
 
@@ -838,7 +841,6 @@ MCP 的价值是**跨 Host 复用、动态发现和协议标准化**，不是让
 
 ---
 
----
 
 ## Q：前端手动入口与 Agent Chat 入口如何划分职责和交互边界？
 

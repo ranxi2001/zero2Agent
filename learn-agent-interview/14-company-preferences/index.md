@@ -8,7 +8,7 @@ eyebrow: Agent 面试通关 / 14
 
 # 各公司面试偏好：按公司备战的高频题速查
 
-准备目标公司面试时，可以先看该公司在当前题库里覆盖了哪些维度，再回到具体题目练习机制、失败模式和方案取舍。以下统计更新于 **2026-10-22**，从当前 **844 道题**的来源标注派生。
+准备目标公司面试时，可以先看该公司在当前题库里覆盖了哪些维度，再回到具体题目练习机制、失败模式和方案取舍。以下统计更新于 **2026-11-07**，从当前 **861 道题**的来源标注派生。
 
 ## 统计口径
 
@@ -22,26 +22,26 @@ eyebrow: Agent 面试通关 / 14
 
 | 公司 | 覆盖题数 | 来源标注最多的三个维度 |
 |------|---------|--------------------------|
-| 字节跳动 | 333 | 训练、数据与模型优化（47）、RAG 与检索系统（44）、工程化踩坑（33） |
-| 阿里与淘天（不含国际、闪购） | 186 | 训练、数据与模型优化（31）、RAG 与检索系统（28）、记忆与上下文（21） |
-| 腾讯 | 120 | 训练、数据与模型优化（20）、RAG 与检索系统（18）、评估与全局观（14） |
-| 小红书 | 116 | 训练、数据与模型优化（18）、工程化踩坑（16）、记忆与上下文（12） |
-| 美团 | 103 | RAG 与检索系统（12）、架构选型（9）、记忆与上下文（9） |
-| 百度 | 99 | 工程化踩坑（11）、训练、数据与模型优化（11）、工具管理（9） |
-| 快手 | 95 | 工程化踩坑（13）、架构选型（8）、RAG 与检索系统（8） |
-| 蚂蚁集团 | 63 | 架构选型（9）、评估与全局观（7）、概念考察（7） |
-| 拼多多 | 56 | AI Infra（9）、记忆与上下文（7）、训练、数据与模型优化（7） |
-| 携程 | 47 | 记忆与上下文（9）、RAG 与检索系统（9）、评估与全局观（6） |
+| 字节跳动 | 341 | 训练、数据与模型优化（48）、RAG 与检索系统（44）、工程化踩坑（33） |
+| 阿里与淘天（不含国际、闪购） | 207 | 训练、数据与模型优化（38）、RAG 与检索系统（30）、记忆与上下文（24） |
+| 小红书 | 133 | 工程化踩坑（19）、训练、数据与模型优化（18）、记忆与上下文（13） |
+| 快手 | 125 | 工程化踩坑（16）、RAG 与检索系统（14）、架构选型（10） |
+| 腾讯 | 122 | 训练、数据与模型优化（20）、RAG 与检索系统（18）、评估与全局观（14） |
+| 美团 | 110 | 工程化踩坑（13）、RAG 与检索系统（12）、记忆与上下文（11） |
+| 百度 | 108 | 工程化踩坑（13）、训练、数据与模型优化（11）、工具管理（9） |
+| 蚂蚁集团 | 86 | RAG 与检索系统（11）、架构选型（9）、评估与全局观（8） |
+| 携程 | 60 | 记忆与上下文（9）、RAG 与检索系统（9）、评估与全局观（6） |
+| 拼多多 | 57 | AI Infra（10）、记忆与上下文（7）、训练、数据与模型优化（7） |
 | 淘宝闪购 | 26 | 简历项目拷打（14）、容错与鲁棒性（3）、架构选型（2） |
+| 网易 | 23 | 业务 AI 工程分析（5）、记忆与上下文（3）、AI 代码分析与测试（3） |
 | 阿里国际 | 22 | 训练、数据与模型优化（5）、架构选型（3）、AI Infra（3） |
-| 网易 | 19 | 业务 AI 工程分析（5）、AI 代码分析与测试（3）、记忆与上下文（2） |
 | 高德 | 9 | 记忆与上下文（3）、RAG 与检索系统（3）、工具管理（2） |
 | 京东 | 7 | RAG 与检索系统（2）、容错与鲁棒性（1）、记忆与上下文（1） |
 | bilibili | 4 | 架构选型（1）、工程化踩坑（1）、RAG 与检索系统（1） |
 
 ## 按公司选择练习入口
 
-### 字节跳动（333 题）
+### 字节跳动（341 题）
 
 可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[工程化踩坑](../07-engineering-pitfalls/index.html)。
 
@@ -51,7 +51,7 @@ eyebrow: Agent 面试通关 / 14
 - [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
 - [如何评审 AI 生成的技术方案并进行重点提炼与技术取舍？](../07-engineering-pitfalls/index.html)
 
-### 阿里与淘天（不含国际、闪购）（186 题）
+### 阿里与淘天（不含国际、闪购）（207 题）
 
 可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
@@ -61,7 +61,27 @@ eyebrow: Agent 面试通关 / 14
 - [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
 - [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
 
-### 腾讯（120 题）
+### 小红书（133 题）
+
+可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[训练、数据与模型优化](../10-training-and-data/index.html)、[记忆与上下文](../04-memory-context/index.html)。
+
+代表性问题：
+
+- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
+- [自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？](../10-training-and-data/index.html)
+- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
+
+### 快手（125 题）
+
+可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[架构选型](../01-architecture-design/index.html)。
+
+代表性问题：
+
+- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
+- [讲一下项目里召回的流程](../09-rag-retrieval/index.html)
+- [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
+
+### 腾讯（122 题）
 
 可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[评估与全局观](../05-eval-and-vision/index.html)。
 
@@ -71,27 +91,17 @@ eyebrow: Agent 面试通关 / 14
 - [如果 RAG 召回了很多相互矛盾的文档，Agent 应该怎么处理，而不是直接让模型自己总结？](../09-rag-retrieval/index.html)
 - [如何量化评估一个上线的 Agent 好坏？除了准确率。](../05-eval-and-vision/index.html)
 
-### 小红书（116 题）
+### 美团（110 题）
 
-可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[工程化踩坑](../07-engineering-pitfalls/index.html)、[记忆与上下文](../04-memory-context/index.html)。
-
-代表性问题：
-
-- [自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？](../10-training-and-data/index.html)
-- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
-- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
-
-### 美团（103 题）
-
-可先练：[RAG 与检索系统](../09-rag-retrieval/index.html)、[架构选型](../01-architecture-design/index.html)、[记忆与上下文](../04-memory-context/index.html)。
+可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[记忆与上下文](../04-memory-context/index.html)。
 
 代表性问题：
 
+- [你熟悉的 Agent 框架，在架构设计上有什么优势？](../07-engineering-pitfalls/index.html)
 - [多维度的查询改写是什么？改写遇到需要用户补充信息时怎么设计？](../09-rag-retrieval/index.html)
-- [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
 - [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
 
-### 百度（99 题）
+### 百度（108 题）
 
 可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[训练、数据与模型优化](../10-training-and-data/index.html)、[工具管理](../02-tool-management/index.html)。
 
@@ -101,37 +111,17 @@ eyebrow: Agent 面试通关 / 14
 - [自动标注系统的主要难点是什么？如何设计模型预标注、置信度分流和人工复核闭环？](../10-training-and-data/index.html)
 - [你们工具库有上百个工具，怎么让模型快速选对？](../02-tool-management/index.html)
 
-### 快手（95 题）
+### 蚂蚁集团（86 题）
 
-可先练：[工程化踩坑](../07-engineering-pitfalls/index.html)、[架构选型](../01-architecture-design/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)。
+可先练：[RAG 与检索系统](../09-rag-retrieval/index.html)、[架构选型](../01-architecture-design/index.html)、[评估与全局观](../05-eval-and-vision/index.html)。
 
 代表性问题：
 
-- [Agent 的成本怎么控制？线上烧钱太快怎么办？](../07-engineering-pitfalls/index.html)
+- [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
 - [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
-- [为什么在检索阶段引入BM25？它和向量检索怎样组合？](../09-rag-retrieval/index.html)
+- [如何量化评估一个上线的 Agent 好坏？除了准确率。](../05-eval-and-vision/index.html)
 
-### 蚂蚁集团（63 题）
-
-可先练：[架构选型](../01-architecture-design/index.html)、[评估与全局观](../05-eval-and-vision/index.html)、[概念考察](../15-agent-concepts/index.html)。
-
-代表性问题：
-
-- [你用 ReAct 还是 Plan-and-Execute？为什么？](../01-architecture-design/index.html)
-- [你会怎么给 Agent 建立评测体系？只看最终成功率为什么不够？](../05-eval-and-vision/index.html)
-- [讲一讲 Agent 的发展路线——从以前的架构到现在的 Harness Engineering](../15-agent-concepts/index.html)
-
-### 拼多多（56 题）
-
-可先练：[AI Infra](../17-ai-infra/index.html)、[记忆与上下文](../04-memory-context/index.html)、[训练、数据与模型优化](../10-training-and-data/index.html)。
-
-代表性问题：
-
-- [如何用 Roofline 和算术强度指导 CUDA 算子优化？从 GEMM 分块到寄存器压力如何逐层定位？](../17-ai-infra/index.html)
-- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
-- [位置编码的作用是什么？](../10-training-and-data/index.html)
-
-### 携程（47 题）
+### 携程（60 题）
 
 可先练：[记忆与上下文](../04-memory-context/index.html)、[RAG 与检索系统](../09-rag-retrieval/index.html)、[评估与全局观](../05-eval-and-vision/index.html)。
 
@@ -140,6 +130,16 @@ eyebrow: Agent 面试通关 / 14
 - [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
 - [RAG 的检索如何实现？](../09-rag-retrieval/index.html)
 - [你会怎么给 Agent 建立评测体系？只看最终成功率为什么不够？](../05-eval-and-vision/index.html)
+
+### 拼多多（57 题）
+
+可先练：[AI Infra](../17-ai-infra/index.html)、[记忆与上下文](../04-memory-context/index.html)、[训练、数据与模型优化](../10-training-and-data/index.html)。
+
+代表性问题：
+
+- [如何用 Roofline 和算术强度指导 CUDA 算子优化？从 GEMM 分块到寄存器压力如何逐层定位？](../17-ai-infra/index.html)
+- [上下文窗口不够用，对话太长了怎么办？](../04-memory-context/index.html)
+- [位置编码的作用是什么？](../10-training-and-data/index.html)
 
 ### 淘宝闪购（26 题）
 
@@ -151,6 +151,16 @@ eyebrow: Agent 面试通关 / 14
 - [Agent 如何减少幻觉？在工业场景下怎么做？](../03-fault-tolerance/index.html)
 - [了解过 Agent 的设计范式吗？](../01-architecture-design/index.html)
 
+### 网易（23 题）
+
+可先练：[业务 AI 工程分析](../12-business-ai-engineering/index.html)、[记忆与上下文](../04-memory-context/index.html)、[AI 代码分析与测试](../11-ai-code-testing/index.html)。
+
+代表性问题：
+
+- [时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？](../12-business-ai-engineering/index.html)
+- [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
+- [AI 生成的代码线下测试没问题，上线后出了问题怎么办？](../11-ai-code-testing/index.html)
+
 ### 阿里国际（22 题）
 
 可先练：[训练、数据与模型优化](../10-training-and-data/index.html)、[架构选型](../01-architecture-design/index.html)、[AI Infra](../17-ai-infra/index.html)。
@@ -160,16 +170,6 @@ eyebrow: Agent 面试通关 / 14
 - [DPO、PPO、GRPO 的区别和优缺点？](../10-training-and-data/index.html)
 - [如果模型特别擅长生成，但不擅长严格遵守流程，你会怎么把它放进一个强约束工作流里？](../01-architecture-design/index.html)
 - [FlashAttention 为什么更快？Online Softmax、Tiling、重计算和不同版本分别解决什么瓶颈？](../17-ai-infra/index.html)
-
-### 网易（19 题）
-
-可先练：[业务 AI 工程分析](../12-business-ai-engineering/index.html)、[AI 代码分析与测试](../11-ai-code-testing/index.html)、[记忆与上下文](../04-memory-context/index.html)。
-
-代表性问题：
-
-- [时间紧张，“快速上线规则方案”和“训练一个更智能的 AI 方案”之间怎么选？](../12-business-ai-engineering/index.html)
-- [AI 生成的代码线下测试没问题，上线后出了问题怎么办？](../11-ai-code-testing/index.html)
-- [讲一下 Agent 中的“长短期记忆”](../04-memory-context/index.html)
 
 ### 高德（9 题）
 
