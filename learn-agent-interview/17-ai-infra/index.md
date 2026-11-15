@@ -15,7 +15,7 @@ AI Infra 不是“给 Kubernetes 加几台 GPU”。模型训练关心吞吐、C
 
 ## Q：如何用 Roofline 和算术强度指导 CUDA 算子优化？从 GEMM 分块到寄存器压力如何逐层定位？
 
-> 来源：[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[拼多多 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/9e1f4f4b8642496e85cf7802d03112df)、[小鹏 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/a79383aa92f64e8eb4e85959bf2660a0)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/c582fdfbc29d4c93ac9044005ad0a311)、[飞腾 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/90c405df0a0f4dd99298768496b0c942)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)、[太初 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/45c0b82115024f16a88ad9a37f2ab398)、[壁仞 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/5baf1aaa7ff646a8a38d9c7ece43a808)、[寒武纪 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7dfe46da13ad4ae8a3dd94c3ca7f5d05)【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：如何用 Roofline 模型判断带宽瓶颈 vs 计算瓶颈？】【[昆仑芯 0903 一面（ai 高性能开发）](https://www.nowcoder.com/feed/main/detail/65b9990e774a4331bb603f0cf1ca4a88)追问：介绍一下 Roofline 模型和算术强度。】【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：大矩阵 GEMM 在 DCU 上如何切分和实现？】；[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)；[1009 苏州睿芯一面（算子开发）](https://www.nowcoder.com/feed/main/detail/e364b45f08e24699865b8f19a56f49c4)；[1015 摩尔线程一面（AI 算子库及高性能计算工程师）](https://www.nowcoder.com/feed/main/detail/8f03623a522e4c75a6391f9d3f721c7f)；[清微智能 AI 应用软件开发一面（偏编译器）](https://www.nowcoder.com/discuss/944964515630768128)；[曦望 高性能异构计算研究员一面](https://www.nowcoder.com/feed/main/detail/caed883d565f427ba54e2fb5ffafe50f)
+> 来源：[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[拼多多 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/9e1f4f4b8642496e85cf7802d03112df)、[小鹏 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/a79383aa92f64e8eb4e85959bf2660a0)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/c582fdfbc29d4c93ac9044005ad0a311)、[飞腾 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/90c405df0a0f4dd99298768496b0c942)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)、[太初 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/45c0b82115024f16a88ad9a37f2ab398)、[壁仞 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/5baf1aaa7ff646a8a38d9c7ece43a808)、[寒武纪 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7dfe46da13ad4ae8a3dd94c3ca7f5d05)【[华为 - 大模型算法岗（AI Infra / 训练优化）](https://www.nowcoder.com/discuss/926272625410674688)追问：如何用 Roofline 模型判断带宽瓶颈 vs 计算瓶颈？】【[昆仑芯 0903 一面（ai 高性能开发）](https://www.nowcoder.com/feed/main/detail/65b9990e774a4331bb603f0cf1ca4a88)追问：介绍一下 Roofline 模型和算术强度。】【[0907 百度一面 （AI Infra）](https://www.nowcoder.com/feed/main/detail/91f5187146864de5878349a2ecf497ce)追问：大矩阵 GEMM 在 DCU 上如何切分和实现？】；[0921 新紫光一面（算子工程师）](https://www.nowcoder.com/feed/main/detail/3c301f1ae6594998aedb25dcd98b7a1b)；[1009 苏州睿芯一面（算子开发）](https://www.nowcoder.com/feed/main/detail/e364b45f08e24699865b8f19a56f49c4)；[1015 摩尔线程一面（AI 算子库及高性能计算工程师）](https://www.nowcoder.com/feed/main/detail/8f03623a522e4c75a6391f9d3f721c7f)；[清微智能 AI 应用软件开发一面（偏编译器）](https://www.nowcoder.com/discuss/944964515630768128)；[曦望 高性能异构计算研究员一面](https://www.nowcoder.com/feed/main/detail/caed883d565f427ba54e2fb5ffafe50f)；[1114 中信银行一面（金融科技岗-人工智能）](https://www.nowcoder.com/feed/main/detail/a14fc690213b4628b05d054765d032f3)
 
 **新手答**：“多用 Shared Memory、增加线程数，再做算子融合。”
 
@@ -227,7 +227,7 @@ RAG通常是在线链路：请求到达后检索最新知识，再调用在线�
 
 ## Q：CPU、GPU 与 NPU 的体系结构和优化目标有什么差异？如何为训练/推理工作负载选硬件？
 
-> 来源：[蔚来 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7cb7ccbb4a3145cf99dbb05aff767299)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/eccb5cafdfce452c8d56374ef070685d)、[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[讯飞飞星 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/aed72ed951f54745b240e723df9a9f96)、[小鹏 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/953ea04c2c5d420fa1e04db93bb2a5a4)、[荣耀 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/59dece94af144cba94157481f2e2b5ce)、[太初 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/45c0b82115024f16a88ad9a37f2ab398)；[中兴 GPU 算子开发技术面试](https://www.nowcoder.com/feed/main/detail/634456784b3347c395dfac00bc24c0a5)；[字节跳动 Data 搜广推 Infra 一面](https://www.nowcoder.com/feed/main/detail/f80f421b5bcf4dc08cc51e99f129c3ce)
+> 来源：[蔚来 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7cb7ccbb4a3145cf99dbb05aff767299)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/eccb5cafdfce452c8d56374ef070685d)、[美团北斗 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/841452f926a140babb84585de97c04aa)、[讯飞飞星 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/aed72ed951f54745b240e723df9a9f96)、[小鹏 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/953ea04c2c5d420fa1e04db93bb2a5a4)、[荣耀 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/59dece94af144cba94157481f2e2b5ce)、[太初 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/45c0b82115024f16a88ad9a37f2ab398)；[中兴 GPU 算子开发技术面试](https://www.nowcoder.com/feed/main/detail/634456784b3347c395dfac00bc24c0a5)；[字节跳动 Data 搜广推 Infra 一面](https://www.nowcoder.com/feed/main/detail/f80f421b5bcf4dc08cc51e99f129c3ce)；[1114 中信银行一面（金融科技岗-人工智能）](https://www.nowcoder.com/feed/main/detail/a14fc690213b4628b05d054765d032f3)
 
 **新手答**：“CPU 擅长串行，GPU 擅长并行，NPU 专门跑 AI，所以 NPU 效率最高。”
 
@@ -250,6 +250,20 @@ CPU 用较少但复杂的核心、较强缓存和分支预测换低延迟与通�
 流水线并行把层分到不同 Stage，Micro-batch 在 Stage 间传递；启动时下游无输入、排空时上游无工作，再加前后向依赖和 Stage 不均衡，就形成 Bubble。1F1B 在预热后交替执行一次前向和一次反向，通常比先做完全部前向再反向更早释放部分激活，但仍有填充/排空成本。Zero-Bubble 会进一步拆分并重排反向阶段，DualPipe 则利用双向流水提高重叠；两者的精确定义和可行依赖应以对应论文/实现为准。选型时同时核算 Stage 平衡、Micro-batch 数、激活峰值、跨 Stage 通信和调度复杂度，不能只比较理论 Bubble 比例。
 
 **差距在哪**：新手只会画流水线，高手能解释空泡来源、依赖约束和显存/通信取舍。
+
+---
+
+## Q：MoE 的 Expert Parallel 如何做 Dispatch/Combine、负载均衡和通信优化？DeepEP/EPLB 分别解决什么问题？
+
+> 来源：[阿里 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/31edaaa47197404a8647601612312786)、[美团 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/c94734d67c9f461ab950bf1d800c5643)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/12a74831ffa543cb9117c646faf214fd)、[vLLM/SGLang 小厂面经](https://www.nowcoder.com/feed/main/detail/c7eee5b04fb8424aa4847f0e21fab875)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)、[阿里控股 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7d75c82afe80416ea8a489a18b79b144)、[爱奇艺 AI 平台研发面经](https://www.nowcoder.com/discuss/918635351327924224)；[快手 AI Platform 技术面试](https://www.nowcoder.com/feed/main/detail/762f8d3c098c472cb0d4255d00bccdde)
+
+**新手答**：“Router 把 Token 发给不同 Expert，用 All-to-All 通信，再把结果合回来。”
+
+**高手答**：
+
+Router 产生 Top-K Expert 选择后，Runtime 先按目标 Rank 对 Token 打包并 Dispatch，经 Expert GEMM 计算，再按原 Token 顺序 Combine。真正瓶颈常是路由倾斜：热点 Expert 让部分 Rank 过载，其他 Rank 等待，All-to-All 还会放大跨节点流量。治理要同时考虑训练侧的负载均衡目标、容量与丢弃策略，以及推理侧的 Expert 放置、复制、动态迁移和拓扑感知。DeepEP 侧重为 MoE Dispatch/Combine 提供高效通信能力，EPLB 侧重依据负载调整 Expert 布局；具体接口和算法随版本变化，应查官方实现。评测必须同时看吞吐、尾延迟、丢弃率、负载偏斜和通信占比。
+
+**差距在哪**：新手只知道 EP 等于 All-to-All，高手能把路由、布局、通信与 Straggler 串成闭环。
 
 ---
 
@@ -302,20 +316,6 @@ Prefill 一次处理多个输入 Token，矩阵通常更大、并行度更高，
 
 ---
 
-## Q：MoE 的 Expert Parallel 如何做 Dispatch/Combine、负载均衡和通信优化？DeepEP/EPLB 分别解决什么问题？
-
-> 来源：[阿里 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/31edaaa47197404a8647601612312786)、[美团 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/c94734d67c9f461ab950bf1d800c5643)、[快手 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/12a74831ffa543cb9117c646faf214fd)、[vLLM/SGLang 小厂面经](https://www.nowcoder.com/feed/main/detail/c7eee5b04fb8424aa4847f0e21fab875)、[字节 AI Infra 二面](https://www.nowcoder.com/feed/main/detail/eaea5cf9e9e44c5bb5fecf3f1d8243ce)、[阿里控股 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/7d75c82afe80416ea8a489a18b79b144)、[爱奇艺 AI 平台研发面经](https://www.nowcoder.com/discuss/918635351327924224)
-
-**新手答**：“Router 把 Token 发给不同 Expert，用 All-to-All 通信，再把结果合回来。”
-
-**高手答**：
-
-Router 产生 Top-K Expert 选择后，Runtime 先按目标 Rank 对 Token 打包并 Dispatch，经 Expert GEMM 计算，再按原 Token 顺序 Combine。真正瓶颈常是路由倾斜：热点 Expert 让部分 Rank 过载，其他 Rank 等待，All-to-All 还会放大跨节点流量。治理要同时考虑训练侧的负载均衡目标、容量与丢弃策略，以及推理侧的 Expert 放置、复制、动态迁移和拓扑感知。DeepEP 侧重为 MoE Dispatch/Combine 提供高效通信能力，EPLB 侧重依据负载调整 Expert 布局；具体接口和算法随版本变化，应查官方实现。评测必须同时看吞吐、尾延迟、丢弃率、负载偏斜和通信占比。
-
-**差距在哪**：新手只知道 EP 等于 All-to-All，高手能把路由、布局、通信与 Straggler 串成闭环。
-
----
-
 ## Q：Stride、View/Contiguous 与 NHWC/NCHW 如何影响张量算子的正确性和性能？
 
 > 来源：[字节 AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/b99b6a7c7ff54453a2451d43488ade5a)、[荣耀 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/59dece94af144cba94157481f2e2b5ce)、[OPPO AI Infra 二面低置信截断稿](https://www.nowcoder.com/feed/main/detail/101e205200ab480db5677ee2852e7d91)
@@ -330,6 +330,39 @@ Router 产生 Top-K Expert 选择后，Runtime 先按目标 Rank 对 Token 打�
 
 ---
 
+## Q：大模型训练出现 OOM 时，如何定位原因并进行显存优化？
+
+> 来源：[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)；[腾讯混元 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/848f8b4430be4385ba403732f3a64cd0)；[华为 线下技术面试](https://www.nowcoder.com/feed/main/detail/db120ae0156249078ffd635bd66f3772)；[10.28字节搜索大模型一面凉经](https://www.nowcoder.com/feed/main/detail/f3991feac126477cb244984b8ea09d94)；[快手 AI Platform 技术面试](https://www.nowcoder.com/feed/main/detail/762f8d3c098c472cb0d4255d00bccdde)
+
+**新手答**：“可以通过混合精度、减小 batch size、梯度累积和梯度检查点等方式降低训练显存占用。”
+
+**高手答**：
+
+先区分 OOM 类型：记录峰值显存、已分配与已保留显存、失败算子、序列长度和并行配置，判断是模型参数、梯度、优化器状态、激活值，还是碎片与临时张量导致。优化可依次采用混合精度、减小 micro-batch 配合梯度累积、梯度检查点、缩短或分桶序列、参数/梯度/优化器分片（如 ZeRO 或 FSDP），必要时卸载到 CPU。还要检查异常长样本、未释放计算图、验证阶段缓存和数据并行复制。每次只改一个变量，用固定小数据验证 loss、梯度、收敛和吞吐，并通过峰值显存与长序列压力测试确认；分片和卸载能省显存，但会增加通信、带宽、实现复杂度及故障恢复成本。
+
+**追问补充**：排查时同时看设备进程占用和框架的 allocated、reserved 与峰值统计：进程占用可能包含通信库和非框架分配，reserved 也不等于活跃张量。将统计与具体迭代、批次和并发对齐，再定位泄漏、峰值或碎片。[PyTorch 显存管理说明](https://docs.pytorch.org/docs/stable/notes/cuda.html#memory-management)
+
+**差距在哪**：浅层回答只会罗列省显存技巧，深入回答还要按显存构成定位根因，结合分布式通信、异常样本、正确性验证和性能权衡。
+
+---
+
+## Q：训练与推理引擎的核心模块、底层工作与优化方向是什么？
+
+> 来源：[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)；[原力灵机具身智能算法工程师面经](https://www.nowcoder.com/discuss/939528346956726272)；[科大讯飞 推理工程部 AI Infra 一面](https://www.nowcoder.com/discuss/944283905056665600)；[数盾股份 AI 应用开发实习面试](https://www.nowcoder.com/feed/main/detail/98d81ac1218340f39763399f11fca557)；[10.28字节搜索大模型一面凉经](https://www.nowcoder.com/feed/main/detail/f3991feac126477cb244984b8ea09d94)
+
+**新手答**：“训练引擎负责模型训练，推理引擎负责高效执行模型，底层通常涉及算子、显存、并行和调度优化。”
+
+**高手答**：
+
+训练与推理引擎是连接模型计算图和硬件资源的运行时系统。训练侧通常包括自动微分、算子实现、计算图编译、混合精度、显存管理、通信与数据并行；推理侧还要处理图优化、权重加载、批处理、KV Cache、请求调度和服务接口。底层优化围绕算子融合、内存复用、内核选择、流水线并行和通信计算重叠展开，但吞吐、时延、显存占用和数值精度往往互相制约。工程上应先用正确性测试、精度对比、端到端延迟与吞吐压测、显存和通信 profiling 定位瓶颈，再决定优化，避免只优化单个算子却恶化整体服务。
+
+**追问补充**：以当前 vLLM V1 文档为例，API server 处理接入和输入，engine core 管调度与KV缓存，GPU worker执行模型；这些是该实现的模块边界，不是所有引擎的固定进程结构。（[架构说明](https://docs.vllm.ai/en/latest/design/arch_overview/)）GPU部署下，主存可承载分词、请求数据及权重加载/卸载，显存承载驻留权重、激活和KV；CPU不是另一种“运行内存”。应分别记录主存、显存的峰值和搬运量，再定位瓶颈。
+
+**追问补充**：词表裁剪不能随意删除高频或特殊 token，应依据目标领域语料覆盖、token 频率和分词退化评估候选集合，并保留特殊符号及必要回退路径；裁剪后需比较分词长度、困惑度、任务精度、吞吐和兼容性。常见推理框架可选 vLLM、TensorRT-LLM 或 Hugging Face Transformers，按模型支持、延迟、吞吐和部署复杂度选择。
+
+**差距在哪**：浅层回答只停留在“训练和推理更快”，深层回答应能拆出编译、运行时、硬件、并行与服务调度，并说明指标验证和优化权衡。
+
+
 ## Q：Attention 与 FFN 的计算量和参数量谁更大？
 
 > 来源：[阿里云 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/a2ba1ef152ea4328a9f2d30baadd78f8)、[百度 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/09c161adbf1f459f8e2799d908321420)
@@ -343,6 +376,26 @@ Router 产生 Top-K Expert 选择后，Runtime 先按目标 Rank 对 Token 打�
 参数量同样主要取决于投影矩阵：标准 Attention 约为 `4H²`，FFN 约为 `2HI`，若 `I≈4H`，FFN 参数通常更多。GQA、MLA、MoE、门控 FFN 和稀疏激活都会改变公式。单请求 Decode 的矩阵形状还可能更接近 GEMV，而训练、Prefill 或批量 Decode 通常仍可组织成 GEMM；最终要以真实 batch、序列长度和 Profiler 为准。
 
 **差距在哪**：新手只背复杂度标签，高手先写出维度和工作负载，再判断参数、算力与访存瓶颈。
+
+---
+
+## Q：PD 分离解决什么问题，Prefill 与 Decode 资源比例怎么定？
+
+> 来源：[百度 AI Infra 提前批一面](https://www.nowcoder.com/feed/main/detail/09c161adbf1f459f8e2799d908321420)、[百度 AI Infra 暑期一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)；[曦望 AI Platform 二面](https://www.nowcoder.com/feed/main/detail/b46f3f7761a04a3ea9070c60116f75db)
+
+**新手答**：“Prefill 计算密集、Decode 访存密集，所以把它们部署到不同 GPU。”
+
+**高手答**：
+
+PD 分离的目标是减少长 Prefill 对 Decode TPOT 的干扰，并让两类阶段独立批处理、扩容和选硬件。但拆分后必须传输或共享 KV Cache，引入网络带宽、序列化、调度、故障恢复和额外排队；小模型、短 Prompt 或低负载时，分离成本可能高于收益。
+
+资源比例不能背固定数字，应由流量画像推导：Prompt/Output Token 分布、到达率、Prefill Token/s、Decode Token/s、TTFT/TPOT SLO、KV 传输成本和峰值余量。可以分别建立两个队列，用在线水位和 Deadline 调整路由；`chunked prefill` 也能在单集群内把长 Prefill 切块，与 Decode 迭代交错，是独立部署之外的另一种取舍。
+
+压测必须覆盖长短请求混合、突发流量、跨节点 KV 传输和某一侧容量不足。只报告平均吞吐无法证明分离有效，还要比较 TTFT、TPOT、P99、GPU 利用率和每 Token 成本。
+
+**追问补充**：可按请求阶段拆成 Prefill 与 Decode worker 池，由路由和 KV 传输连接。分别测排队、处理速率、传输成本与 SLO，再决定扩缩容；缩容前排空在途请求。具体 Dynamo 版本的 Planner 规则需另查实现，不能把通用队列扩容建议当成其固定算法。
+
+**差距在哪**：新手只说异构部署，高手会量化流量、传输代价、排队和 SLO，再决定是否分离及如何配比。
 
 ---
 
@@ -384,6 +437,30 @@ CUDA Graph 不是算子融合，而是先捕获一段 Kernel、Memcpy 和依赖�
 
 ---
 
+## Q：AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？
+
+> 来源：阿里 Agent Infra 一面题库；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[网易互娱 AI应用开发 日常实习](https://www.nowcoder.com/feed/main/detail/683ffea1ead24f8d8539f6bab3b7b361)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
+
+**新手答**：“把日志和监控交给大模型，让它分析根因；确定故障后自动重启服务。”
+
+**高手答**：
+
+AIOps 不是给告警接一个聊天模型，而是把检测、诊断、处置和验证做成受约束闭环。先用用户侧 SLO、错误率和延迟确认影响，再按租户、地域、版本、模型、Tool 和资源池切分 Scope；随后关联发布变更、配置、依赖拓扑和同一时间窗内的 Logs、Metrics、Trace。OpenTelemetry 的[上下文传播](https://opentelemetry.io/docs/concepts/context-propagation/)能用 Trace/Span 上下文关联跨服务信号，但“同时发生”仍只是候选证据，不自动等于因果关系。
+
+RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪个节点最先异常、上游是否正常、哪个变更与异常重合、相似历史事件是否具有相同错误签名，以及还缺什么验证。LLM/Agent 适合查询多数据源、归纳时间线和生成验证计划；拓扑约束、错误分类、变更记录和探针结果才是事实基础。可以通过回滚配置、切换小流量或执行只读探针验证候选原因，不能让模型根据相关性直接宣布 Root Cause。
+
+自动处置按风险分级：只读诊断和证据收集可自动执行；限流、摘除单实例、扩容等可逆动作先做小范围 Canary；删除数据、全局回滚、权限变更等高风险动作必须审批。每个动作绑定目标范围、幂等键、Deadline、冷却时间、最大影响面和回滚条件，执行后重新检查 SLO；指标未恢复就停止扩大，而不是连续重试。Google SRE 的[事件管理指南](https://sre.google/resources/practices-and-processes/incident-management-guide/)也强调告警应面向用户症状、保持可操作，并让自动化辅助分析和缓解而不是替代事件控制。
+
+最后把确认根因、有效处置、失败尝试和新检测规则回写事件库与 Runbook。衡量 AIOps 不能只看“自动化次数”，还要看告警压缩率、候选根因 Top-K 命中率、MTTD/MTTR、误处置率、回滚率和实际减少的用户影响。
+
+**追问补充**：系统可拆为监控接入适配、事件标准化、证据采集、RCA 编排、策略审批、代码修复、CI 验证和 MR 审计模块；用户通过告警或工单查看证据、确认方案并审批。编排宜采用可持久化工作流，关系库存元数据与审计，时序、日志和链路系统保留原始证据，队列负责解耦。
+
+**追问补充**：各业务系统的排查能力应下沉到对应领域适配器或诊断子 Agent：收银台负责支付请求与页面状态，交易负责订单状态机，收单/银行负责渠道响应，余额和花呗负责账户及授信校验。上层 RCA 只编排统一接口、关联 trace 和汇总证据；领域组件维护错误码映射、Runbook、查询权限与可验证探针，避免把业务规则全塞进提示词。
+
+**差距在哪**：新手让模型从相关性直接跳到重启，高手把影响确认、证据关联、因果验证、分级处置和 SLO 回验串成可审计闭环。
+
+---
+
 ## Q：CUDA、Triton、CUTE 与 MLIR 分别位于什么抽象层？算子编译链和选型依据是什么？
 
 > 来源：[拼多多 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/9e1f4f4b8642496e85cf7802d03112df)、[小马智行 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/0e543b8a02b84b05950e55851687450f)、[飞腾 AI Infra 面经](https://www.nowcoder.com/feed/main/detail/90c405df0a0f4dd99298768496b0c942)；[清微智能 AI 应用软件开发一面（偏编译器）](https://www.nowcoder.com/discuss/944964515630768128)
@@ -415,75 +492,6 @@ KV Cache 的“命中率”需先定义口径：前缀缓存通常按可复用 t
 **追问补充**：两者都旨在复用相同token前缀的KV，但组织方式不同：SGLang原论文用radix tree管理前缀匹配、引用与淘汰；vLLM官方实现按token块及父前缀哈希标识可复用块，只缓存完整块。（[RadixAttention论文](https://arxiv.org/html/2312.07104v2)、[vLLM前缀缓存](https://docs.vllm.ai/en/latest/design/prefix_caching/)）这些描述有实现与版本边界，不构成通用速度排名；应在同一流量下比较命中token、TTFT、显存和调度代价。
 
 **差距在哪**：浅层只会说复用历史 KV 和优化提示词，深层要先界定命中口径，再覆盖缓存键、淘汰隔离、指标验证与安全边界。
-
----
-
-## Q：训练与推理引擎的核心模块、底层工作与优化方向是什么？
-
-> 来源：[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)；[原力灵机具身智能算法工程师面经](https://www.nowcoder.com/discuss/939528346956726272)；[科大讯飞 推理工程部 AI Infra 一面](https://www.nowcoder.com/discuss/944283905056665600)；[数盾股份 AI 应用开发实习面试](https://www.nowcoder.com/feed/main/detail/98d81ac1218340f39763399f11fca557)
-
-**新手答**：“训练引擎负责模型训练，推理引擎负责高效执行模型，底层通常涉及算子、显存、并行和调度优化。”
-
-**高手答**：
-
-训练与推理引擎是连接模型计算图和硬件资源的运行时系统。训练侧通常包括自动微分、算子实现、计算图编译、混合精度、显存管理、通信与数据并行；推理侧还要处理图优化、权重加载、批处理、KV Cache、请求调度和服务接口。底层优化围绕算子融合、内存复用、内核选择、流水线并行和通信计算重叠展开，但吞吐、时延、显存占用和数值精度往往互相制约。工程上应先用正确性测试、精度对比、端到端延迟与吞吐压测、显存和通信 profiling 定位瓶颈，再决定优化，避免只优化单个算子却恶化整体服务。
-
-**追问补充**：以当前 vLLM V1 文档为例，API server 处理接入和输入，engine core 管调度与KV缓存，GPU worker执行模型；这些是该实现的模块边界，不是所有引擎的固定进程结构。（[架构说明](https://docs.vllm.ai/en/latest/design/arch_overview/)）GPU部署下，主存可承载分词、请求数据及权重加载/卸载，显存承载驻留权重、激活和KV；CPU不是另一种“运行内存”。应分别记录主存、显存的峰值和搬运量，再定位瓶颈。
-
-**差距在哪**：浅层回答只停留在“训练和推理更快”，深层回答应能拆出编译、运行时、硬件、并行与服务调度，并说明指标验证和优化权衡。
-
-
-## Q：PD 分离解决什么问题，Prefill 与 Decode 资源比例怎么定？
-
-> 来源：[百度 AI Infra 提前批一面](https://www.nowcoder.com/feed/main/detail/09c161adbf1f459f8e2799d908321420)、[百度 AI Infra 暑期一面](https://www.nowcoder.com/feed/main/detail/05c5fe23173245a4ab39b3dddf2b95bb)
-
-**新手答**：“Prefill 计算密集、Decode 访存密集，所以把它们部署到不同 GPU。”
-
-**高手答**：
-
-PD 分离的目标是减少长 Prefill 对 Decode TPOT 的干扰，并让两类阶段独立批处理、扩容和选硬件。但拆分后必须传输或共享 KV Cache，引入网络带宽、序列化、调度、故障恢复和额外排队；小模型、短 Prompt 或低负载时，分离成本可能高于收益。
-
-资源比例不能背固定数字，应由流量画像推导：Prompt/Output Token 分布、到达率、Prefill Token/s、Decode Token/s、TTFT/TPOT SLO、KV 传输成本和峰值余量。可以分别建立两个队列，用在线水位和 Deadline 调整路由；`chunked prefill` 也能在单集群内把长 Prefill 切块，与 Decode 迭代交错，是独立部署之外的另一种取舍。
-
-压测必须覆盖长短请求混合、突发流量、跨节点 KV 传输和某一侧容量不足。只报告平均吞吐无法证明分离有效，还要比较 TTFT、TPOT、P99、GPU 利用率和每 Token 成本。
-
-**差距在哪**：新手只说异构部署，高手会量化流量、传输代价、排队和 SLO，再决定是否分离及如何配比。
-
----
-
-## Q：AIOps 如何结合告警、Metrics、Logs、Trace 和服务拓扑完成证据驱动的 RCA，并安全执行自动处置？
-
-> 来源：阿里 Agent Infra 一面题库；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[网易互娱 AI应用开发 日常实习](https://www.nowcoder.com/feed/main/detail/683ffea1ead24f8d8539f6bab3b7b361)
-
-**新手答**：“把日志和监控交给大模型，让它分析根因；确定故障后自动重启服务。”
-
-**高手答**：
-
-AIOps 不是给告警接一个聊天模型，而是把检测、诊断、处置和验证做成受约束闭环。先用用户侧 SLO、错误率和延迟确认影响，再按租户、地域、版本、模型、Tool 和资源池切分 Scope；随后关联发布变更、配置、依赖拓扑和同一时间窗内的 Logs、Metrics、Trace。OpenTelemetry 的[上下文传播](https://opentelemetry.io/docs/concepts/context-propagation/)能用 Trace/Span 上下文关联跨服务信号，但“同时发生”仍只是候选证据，不自动等于因果关系。
-
-RCA 层应输出带证据的候选列表，而不是一句确定性结论：哪个节点最先异常、上游是否正常、哪个变更与异常重合、相似历史事件是否具有相同错误签名，以及还缺什么验证。LLM/Agent 适合查询多数据源、归纳时间线和生成验证计划；拓扑约束、错误分类、变更记录和探针结果才是事实基础。可以通过回滚配置、切换小流量或执行只读探针验证候选原因，不能让模型根据相关性直接宣布 Root Cause。
-
-自动处置按风险分级：只读诊断和证据收集可自动执行；限流、摘除单实例、扩容等可逆动作先做小范围 Canary；删除数据、全局回滚、权限变更等高风险动作必须审批。每个动作绑定目标范围、幂等键、Deadline、冷却时间、最大影响面和回滚条件，执行后重新检查 SLO；指标未恢复就停止扩大，而不是连续重试。Google SRE 的[事件管理指南](https://sre.google/resources/practices-and-processes/incident-management-guide/)也强调告警应面向用户症状、保持可操作，并让自动化辅助分析和缓解而不是替代事件控制。
-
-最后把确认根因、有效处置、失败尝试和新检测规则回写事件库与 Runbook。衡量 AIOps 不能只看“自动化次数”，还要看告警压缩率、候选根因 Top-K 命中率、MTTD/MTTR、误处置率、回滚率和实际减少的用户影响。
-
-**追问补充**：系统可拆为监控接入适配、事件标准化、证据采集、RCA 编排、策略审批、代码修复、CI 验证和 MR 审计模块；用户通过告警或工单查看证据、确认方案并审批。编排宜采用可持久化工作流，关系库存元数据与审计，时序、日志和链路系统保留原始证据，队列负责解耦。
-
-**差距在哪**：新手让模型从相关性直接跳到重启，高手把影响确认、证据关联、因果验证、分级处置和 SLO 回验串成可审计闭环。
-
----
-
-## Q：大模型训练出现 OOM 时，如何定位原因并进行显存优化？
-
-> 来源：[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)；[腾讯混元 AI Infra 一面](https://www.nowcoder.com/feed/main/detail/848f8b4430be4385ba403732f3a64cd0)；[华为 线下技术面试](https://www.nowcoder.com/feed/main/detail/db120ae0156249078ffd635bd66f3772)
-
-**新手答**：“可以通过混合精度、减小 batch size、梯度累积和梯度检查点等方式降低训练显存占用。”
-
-**高手答**：
-
-先区分 OOM 类型：记录峰值显存、已分配与已保留显存、失败算子、序列长度和并行配置，判断是模型参数、梯度、优化器状态、激活值，还是碎片与临时张量导致。优化可依次采用混合精度、减小 micro-batch 配合梯度累积、梯度检查点、缩短或分桶序列、参数/梯度/优化器分片（如 ZeRO 或 FSDP），必要时卸载到 CPU。还要检查异常长样本、未释放计算图、验证阶段缓存和数据并行复制。每次只改一个变量，用固定小数据验证 loss、梯度、收敛和吞吐，并通过峰值显存与长序列压力测试确认；分片和卸载能省显存，但会增加通信、带宽、实现复杂度及故障恢复成本。
-
-**差距在哪**：浅层回答只会罗列省显存技巧，深入回答还要按显存构成定位根因，结合分布式通信、异常样本、正确性验证和性能权衡。
 
 ---
 
@@ -692,6 +700,20 @@ CUDA Stream把Kernel、拷贝等操作组织成有序队列：同一Stream内按
 
 **差距在哪**：应解释队列顺序、跨流依赖和实际并发条件；API异步、优先级和正确性保证是不同概念。
 
+## Q：模型预加载如何实现？如何减少模型加载时间和显存抖动？
+
+> 来源：[曦望 AI Platform 二面](https://www.nowcoder.com/feed/main/detail/b46f3f7761a04a3ea9070c60116f75db)
+
+**新手答**：“将权重提前准备并加载到目标设备，完成代表性请求预热后再接收流量。”
+
+**高手答**：
+
+模型预加载的核心是把“下载检查点、构造模块、权重映射、迁移到目标设备、执行 warmup、通过 readiness”拆开管理，而不是简单在进程启动时调用一次 load。可在镜像或共享缓存中预置文件，启动时用内存映射、meta device 和 assign 等方式减少重复分配，再按设备容量加载并校验权重；这些方法可降低加载阶段的冗余内存占用，但具体收益仍需测量。[PyTorch 模型检查点加载指南](https://docs.pytorch.org/tutorials/recipes/recipes/module_load_state_dict_tips.html)
+
+为减少显存抖动，应限制并发加载数，避免多个副本同时执行 CPU 到 GPU 的迁移，必要时采用分片、分阶段迁移和固定的显存预算；warmup 应覆盖代表性输入、编译或 kernel 缓存路径，readiness 只有在权重、设备、依赖和探活请求均可用后才放量。要分别记录下载、解析、权重映射、迁移、warmup、首次请求延迟、峰值 CPU/显存和并发启动行为。滚动发布时可先启动预加载副本，再切流并保留回滚；若共享缓存失效或设备不足，应限流、重试并避免无限等待。
+
+**差距在哪**：需要区分下载、权重加载、设备迁移、预热和就绪门禁，并检查并发启动时的峰值资源。
+
 ## Q：GPU 调度和普通 CPU 调度有什么不同？
 
 > 来源：Kubernetes GPU Scheduler 高频题
@@ -710,9 +732,7 @@ GPU 通常是稀缺、异构且拓扑敏感的资源。除了型号和显存，�
 
 ---
 
-
-
-
+---
 
 ## AI Infra 系统设计答题主线
 

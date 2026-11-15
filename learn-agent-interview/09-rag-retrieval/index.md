@@ -16,7 +16,7 @@ RAG 是 Agent 系统的“外部知识接口”。面试官考 RAG 时不想听�
 
 ### Q：RAG 的检索如何实现？
 
-> 来源：阿里 AI Agent 开发一面；[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)；本轮追问：你的父子切割具体是如何实现的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)）；本轮追问：保留了向量检索或混合检索接口，具体怎么实现？（[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)）；[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)；[多益网络面试](https://www.nowcoder.com/discuss/935573069089820672)；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[顺丰科技27届AI开发工程师 一面面经](https://www.nowcoder.com/feed/main/detail/463a64c7df7e4efaac8c6ad32648b454)；[小厂Agent开发一面](https://www.nowcoder.com/feed/main/detail/51a65e9e02e949dbb52e90b5691a20f4)；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[网易云音乐 全栈开发一面](https://www.nowcoder.com/discuss/944165886930309120)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)
+> 来源：阿里 AI Agent 开发一面；[钉钉一面](https://www.nowcoder.com/discuss/923765750446202880)；本轮追问：你的父子切割具体是如何实现的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)）；本轮追问：保留了向量检索或混合检索接口，具体怎么实现？（[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)）；[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)；[多益网络面试](https://www.nowcoder.com/discuss/935573069089820672)；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[顺丰科技27届AI开发工程师 一面面经](https://www.nowcoder.com/feed/main/detail/463a64c7df7e4efaac8c6ad32648b454)；[小厂Agent开发一面](https://www.nowcoder.com/feed/main/detail/51a65e9e02e949dbb52e90b5691a20f4)；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[网易云音乐 全栈开发一面](https://www.nowcoder.com/discuss/944165886930309120)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)；[小厂AI应用开发面试](https://www.nowcoder.com/feed/main/detail/c9dd06bab88247348a5c42fd89646f3b)
 
 **新手答**：“用向量数据库做相似度搜索。”
 
@@ -48,6 +48,8 @@ answer = llm.generate(query, context)
 工程上可抽象统一检索接口，输入 query、过滤条件和 top_k，输出带分数及来源的文档；向量库与 BM25 分别实现适配器。混合召回可用加权归一化或 RRF 融合，随后去重、按权限和元数据过滤，并对任一检索源超时设置降级与日志，验证各路召回量、融合结果和延迟。
 
 **追问补充**：双层检索可将文档父节点与子 chunk 分开：子 chunk 负责向量或关键词召回，命中后回溯所属父节点，补充完整章节或上下文再重排。召回的不是单一向量，而是文本片段及标题、来源、权限等元数据；最终把筛选后的证据片段交给模型。
+
+**追问补充**：Rerank 通常只对初召回的候选集做精排：将 query 与候选文本组成成对输入交给 Cross-Encoder，按相关性分数排序；也可融合关键词命中、时效、权限等特征。需控制候选规模和超时，离线用标注相关性集评估 Recall、NDCG，线上观察点击、答案采纳率与延迟。
 
 **差距在哪**：新手只说了“向量数据库”——这是一个组件，不是方案。高手的回答覆盖了离线和在线两条链路，且点出了 chunk 设计这个影响效果的关键因素。面试官考的是你对 RAG 工程的完整认知。
 
@@ -907,7 +909,7 @@ RAG 不是可选步骤，而是必经环节——先检索证据，再基于证�
 
 ### Q：为什么在检索阶段引入BM25？它和向量检索怎样组合？
 
-> 来源：快手 AI Agent 开发一面 【字节二面同题：多路检索 + 向量/关键词各解决什么】【淘天Agent开发同题：为什么加 BM25 + 具体解决了什么 bad case】【钉学科技 FDE 实习一面追问：双路短板、融合与分类 bad case 验证】【[9.4 某小厂 AI Agent hr+技术面](https://www.nowcoder.com/feed/main/detail/10b2fcaf73d2401f8636bd0459e1cd08)追问：在混合检索中，除了向量语义检索，常结合的基于关键词词频与文档相关性的检索算法是什么？】【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：BM25 检索结果和向量检索结果，两套数据如何做结果融合？】；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；本轮追问：为什么这个场景更适合关键词检索？（[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)）；本轮追问：用户提供了一个非常明确的错误，用向量检索反而可能查不到，你觉得是为什么？然后怎么改进？（[淘天供应链ai应用研发一面](https://www.nowcoder.com/feed/main/detail/8656f1483ebd441bac7c17c313e5394a)）；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[多益网络面试](https://www.nowcoder.com/discuss/935573069089820672)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[shopee ai基础设施一面](https://www.nowcoder.com/discuss/939225085016031232)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[佰聆数据 助理AI应用开发工程师](https://www.nowcoder.com/feed/main/detail/3e95d47e9d4d40e09b1e5f2e8daf06c9)；[10.15 金蝶软件 软开（Ai）一面](https://www.nowcoder.com/discuss/939924708173037568)；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[长鑫存储agent开发实习一面](https://www.nowcoder.com/feed/main/detail/6b5af9c0f2cd4cd68709a0932656afd4)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[字节跳动 前端三面](https://www.nowcoder.com/feed/main/detail/77f67869d54e4487af5b4b40ae26435f)；[商汤 AI 开发一面](https://www.nowcoder.com/feed/main/detail/c93f091675f84c4a96d519dbe933cb0d)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)
+> 来源：快手 AI Agent 开发一面 【字节二面同题：多路检索 + 向量/关键词各解决什么】【淘天Agent开发同题：为什么加 BM25 + 具体解决了什么 bad case】【钉学科技 FDE 实习一面追问：双路短板、融合与分类 bad case 验证】【[9.4 某小厂 AI Agent hr+技术面](https://www.nowcoder.com/feed/main/detail/10b2fcaf73d2401f8636bd0459e1cd08)追问：在混合检索中，除了向量语义检索，常结合的基于关键词词频与文档相关性的检索算法是什么？】【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：BM25 检索结果和向量检索结果，两套数据如何做结果融合？】；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；本轮追问：为什么这个场景更适合关键词检索？（[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)）；本轮追问：用户提供了一个非常明确的错误，用向量检索反而可能查不到，你觉得是为什么？然后怎么改进？（[淘天供应链ai应用研发一面](https://www.nowcoder.com/feed/main/detail/8656f1483ebd441bac7c17c313e5394a)）；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[多益网络面试](https://www.nowcoder.com/discuss/935573069089820672)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[shopee ai基础设施一面](https://www.nowcoder.com/discuss/939225085016031232)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[佰聆数据 助理AI应用开发工程师](https://www.nowcoder.com/feed/main/detail/3e95d47e9d4d40e09b1e5f2e8daf06c9)；[10.15 金蝶软件 软开（Ai）一面](https://www.nowcoder.com/discuss/939924708173037568)；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[长鑫存储agent开发实习一面](https://www.nowcoder.com/feed/main/detail/6b5af9c0f2cd4cd68709a0932656afd4)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[字节跳动 前端三面](https://www.nowcoder.com/feed/main/detail/77f67869d54e4487af5b4b40ae26435f)；[商汤 AI 开发一面](https://www.nowcoder.com/feed/main/detail/c93f091675f84c4a96d519dbe933cb0d)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)；[记忆张量-大模型全栈实习一面](https://www.nowcoder.com/feed/main/detail/2359e337039240e39a7f4acd6c00c29f)
 
 **新手答**：“BM25 是传统检索方法，加上它可以互补。”
 
@@ -1065,7 +1067,7 @@ flowchart TB
 
 ### Q：如何系统性提升 RAG 的检索相关度与生成效果？
 
-> 来源：快手 AI Agent 开发一面【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：底层检索做了哪些提升？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；本轮追问：RAG 怎么做的？针对 RAG 做了哪些优化？如果继续改进还有哪些措施？（[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)）；本轮追问：检索后的重排是怎么做的？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；本轮追问：如果最初的检索方向走偏了，系统有哪些机制能把它拉回来？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)
+> 来源：快手 AI Agent 开发一面【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：底层检索做了哪些提升？】；[本轮来源](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；本轮追问：RAG 怎么做的？针对 RAG 做了哪些优化？如果继续改进还有哪些措施？（[cvte应用软件开发一面](https://www.nowcoder.com/feed/main/detail/c2155d2308de452c8a6e3cf2bbb482f3)）；本轮追问：检索后的重排是怎么做的？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；本轮追问：如果最初的检索方向走偏了，系统有哪些机制能把它拉回来？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)；[10.28字节搜索大模型一面凉经](https://www.nowcoder.com/feed/main/detail/f3991feac126477cb244984b8ea09d94)；[记忆张量-大模型全栈实习一面](https://www.nowcoder.com/feed/main/detail/2359e337039240e39a7f4acd6c00c29f)
 
 **新手答**：“换更好的 Embedding 模型。”
 
@@ -1119,6 +1121,8 @@ flowchart TB
 
 
 重排通常将 Query 与每个候选 Chunk 成对输入 Cross-Encoder 或重排模型，输出相关性分数后排序，并结合阈值、去重和多样性截断上下文。若初始方向偏了，可并行保留 BM25、向量、原始 Query 和改写 Query 多路候选，用关键词或元数据过滤兜底；若候选仍为空，触发澄清、放宽过滤或降级到关键词检索，并记录 bad case 验证恢复效果。
+
+**追问补充**：“章节关联”是把命中 chunk 与其文档、章节路径及相邻内容关联起来，而不只看孤立片段。召回后可沿 parent_id、章节树补齐父标题和必要的前后文，再按 token 预算截断；用包含章节信息的评测集验证补全是否提升答案完整性且未引入噪声。
 
 **差距在哪**：新手只想到换模型——这是最贵且不一定有效的做法。高手把优化拆成检索和生成两阶段，每个阶段有明确的手段和优先级排序，且有离线+在线的验证体系。面试官考的是你优化 RAG 系统时有没有系统性的方法论和效果验证闭环。
 
@@ -1797,7 +1801,7 @@ acl_binding    resource_id、subject/role/tenant、policy_version、有效期
 
 ### Q：Embedding 模型怎么选？选型时考虑哪些因素？
 
-> 来源：高德 AI 应用开发实习一面；本轮追问：Chunksize怎么选，Embedding模型怎么选？（[本轮追问](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)；[本轮来源](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[科大讯飞羚羊 一面](https://www.nowcoder.com/feed/main/detail/e5141a1836ff4e8889edf42dcc85e86a)
+> 来源：高德 AI 应用开发实习一面；本轮追问：Chunksize怎么选，Embedding模型怎么选？（[本轮追问](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)；[本轮来源](https://www.nowcoder.com/feed/main/detail/767320afaa484643842873c525a2b477)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[科大讯飞羚羊 一面](https://www.nowcoder.com/feed/main/detail/e5141a1836ff4e8889edf42dcc85e86a)；[10.28字节搜索大模型一面凉经](https://www.nowcoder.com/feed/main/detail/f3991feac126477cb244984b8ea09d94)
 
 **新手答**：“用 OpenAI 的就行。”
 
@@ -1849,6 +1853,8 @@ flowchart TB
 **关键认知**：公开 benchmark 排名不等于你的场景效果。必须在自己的数据上做 A/B 评测——构建几百条 `(query, relevant_doc)` 的评估集，跑 Recall@K 和 MRR，用数据说话。
 
 **追问补充**：先说明实际模型与索引：稠密表示通常使用固定维度连续向量；词项稀疏表示既可由BM25构造，也可由学习模型产生，例如 [SPLADE论文](https://arxiv.org/abs/2107.05720)。术语匹配或语义泛化孰优取决于语料与任务，应在同一评测集比较召回、延迟、成本，再决定是否混合，而非只看模型名。
+
+**追问补充**：先澄清 SID 指语义物品 ID、内部模型还是系统名称，不能从缩写猜实际 Embedding。核对训练目标、输入格式、模型版本、向量维度和索引配置，再在目标查询—文档或用户—物品数据上比较召回、排序、延迟与成本；更换编码器后旧索引通常需要重新验证或构建。
 
 **差距在哪**：新手直接选最有名的模型。高手从六个维度系统评估，坚持在业务数据上做 domain-specific evaluation，而不是盲目跟 benchmark 排名。面试官考的是你选型时有没有工程化的方法论，以及对“通用模型 vs 领域适配”这个 tradeoff 的理解。
 
@@ -2057,7 +2063,7 @@ flowchart TB
 
 ### Q：RAG 架构与模型微调（Fine-tuning）相比，各自的适用场景和优缺点是什么？
 
-> 来源：字节后端 Agent 开发二面 【淘天转正实习一面追问：预训练语料已包含相关知识为什么还要RAG】【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：RAG 主要用来做什么？】；本轮追问：你做过多模态大模型微调，什么场景下需要做模型微调？微调可以解决什么问题？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[帆软终面-人生最烂的面试体验](https://www.nowcoder.com/feed/main/detail/d9692bcb798a4574a3d9abd2b82caff2)；本轮追问：rag是什么，具体场景有哪些，如何分片（[赛诺贝斯 面经 一面过 笔试过 hc无](https://www.nowcoder.com/discuss/930126120177926144)）；[美团agent一面](https://www.nowcoder.com/feed/main/detail/554bdcc695ae42f8b0d78e3c44dd17d5)；本轮追问：RAG、传统检索+生成、微调三种方案的本质区别是什么？分别在什么场景下选用？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)
+> 来源：字节后端 Agent 开发二面 【淘天转正实习一面追问：预训练语料已包含相关知识为什么还要RAG】【[字节二面（Trae）](https://www.nowcoder.com/discuss/924821959647440896)追问：RAG 主要用来做什么？】；本轮追问：你做过多模态大模型微调，什么场景下需要做模型微调？微调可以解决什么问题？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[帆软终面-人生最烂的面试体验](https://www.nowcoder.com/feed/main/detail/d9692bcb798a4574a3d9abd2b82caff2)；本轮追问：rag是什么，具体场景有哪些，如何分片（[赛诺贝斯 面经 一面过 笔试过 hc无](https://www.nowcoder.com/discuss/930126120177926144)）；[美团agent一面](https://www.nowcoder.com/feed/main/detail/554bdcc695ae42f8b0d78e3c44dd17d5)；本轮追问：RAG、传统检索+生成、微调三种方案的本质区别是什么？分别在什么场景下选用？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/724b6bc0f02b42e58ff7397be51df3b5)）；[0924恒生电子｜AI 应用开发工程师 ｜AI面](https://www.nowcoder.com/feed/main/detail/5e0a75e9cf4941a9861b1948fb7f4e60)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“RAG 不需要训练，Fine-tuning 效果更好。”
 
@@ -2111,55 +2117,9 @@ flowchart TD
 
 ---
 
-### Q：PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？
-
-> 来源：腾讯 AI 应用开发二面；本轮追问：PDF转写从31分钟优化到2.5分钟，怎么做的？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；本轮追问：你的 Agent 在实现文件解析方面做了哪些优化，图表解析有什么优化思路？（[本轮追问](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)）；本轮追问：目前你的 RAG 项目可以读取哪些文件？可以读取 PDF 和 PPT 吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)）；[阳光电源  AI应用开发工程师 一面](https://www.nowcoder.com/feed/main/detail/122fd928ee824ed99c8f834233d1ac23)；本轮追问：RAG中PDF从上传到最终召回经历哪些阶段？（[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)）；本轮追问：怎么解决文档解析出错的问题？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[科大讯飞羚羊 一面](https://www.nowcoder.com/feed/main/detail/e5141a1836ff4e8889edf42dcc85e86a)
-
-**新手答**：“用 PyPDF 读文本就行。”
-
-**高手答**：
-
-PyPDF 只能提取纯文本流，**完全丢失版面布局信息**——表格变成散乱的文字、双栏论文的左右栏被混在一起、图片标注和正文混淆。RAG 的质量上限取决于解析质量，解析错了后面全链路都救不回来。
-
-**主流 PDF 解析工具对比**：
-
-| 工具 | 原理 | 优势 | 劣势 | 适合场景 |
-|------|------|------|------|---------|
-| PyPDF / pdfplumber | 文本流提取 | 快、零依赖 | 丢失布局，表格乱 | 纯文本 PDF |
-| Unstructured | 规则 + ML 混合 | 支持多格式，社区活跃 | 表格准确率一般 | 通用文档 |
-| Marker | 视觉模型 | 版面还原度高 | 速度慢 | 学术论文 |
-| MinerU (PDF-Extract-Kit) | 版面检测 + OCR | 表格还原强，开源 | 资源消耗大 | 复杂排版 PDF |
-| 商业方案（Azure Document Intelligence） | 云端 ML | 准确率最高 | 收费、数据出境 | 企业级生产 |
-
-**Layout-aware Parsing 的核心思路**：
-
-```mermaid
-flowchart LR
-    A[“PDF 页面图像”] --> B[“版面检测\n（识别文本/表格/图片区域）”]
-    B --> C[“区域分类\n（标题/正文/表格/脚注）”]
-    C --> D[“分区提取\n（文本用OCR，表格用专门解析器）”]
-    D --> E[“阅读顺序重建\n（双栏→单栏序列）”]
-    E --> F[“结构化输出\n（带标签的文本块）”]
-```
-
-关键是**先“看”再“读”**——不是直接提取文本流，而是先用视觉模型识别页面上每个区域的类型和位置，然后按阅读顺序依次提取。
-
-**选型建议**：学术论文用 Marker 或 MinerU（版面复杂但格式相对规范），企业文档用 Unstructured + 自定义后处理，对准确率要求极高的场景用商业方案。**没有万能工具，必须横向对比**——用同一批标注好的文档测试不同工具的准确率，选最适合自己文档类型的。
-
-
-完整链路通常是上传校验与存储、解析/OCR、版面重建、清洗切块、写入元数据、向量化建索引，查询时再召回、重排并组装上下文。解析出错应保留页码和坐标，结合置信度、规则校验和人工抽检定位问题；对扫描件或低置信区域切换 OCR/备用解析器，并用样本文档回归测试。
-
-**追问补充**：可接收 PDF、Word、PPT、Excel、HTML、TXT 和图片等格式，先按 MIME 与文件特征校验，再走对应解析器并统一成带页码、坐标、表格结构的中间格式。原生 PDF 通常直接读取文本层并校验阅读顺序；缺少可靠文本层的扫描 PDF 需逐页 OCR，并依据置信度触发重试或人工抽检。
-
-**追问补充**：复杂文档可重点检查双栏、跨页表格、扫描件、图文混排及页眉页脚，先保留页码、坐标和置信度，再用标注样本做阅读顺序、表格结构和召回效果回归；“最终效果”应填真实项目结果，不能凭空补指标。MinerU的部署形态需以实际采购或部署记录为准，不能仅凭工具名判断是私有化还是付费；面试时应明确实际部署方式、数据边界与成本依据。
-
-**差距在哪**：新手用 PyPDF 读文本，遇到表格和复杂排版就束手无策。高手理解 Layout-aware Parsing 的核心是“先视觉理解版面结构，再分区提取内容”，并能对比不同工具的适用场景做选型。面试官考的是你对 RAG 管线最上游（文档解析）的工程理解——这一步的质量决定了后续所有环节的上限。
-
----
-
 ### Q：向量数据库中 IVF_FLAT 和 HNSW 索引的区别是什么？各自适合什么场景？
 
-> 来源：快手AI应用开发一面【[阿里巴巴（淘天）- 大模型算法岗（搜推方向）](https://www.nowcoder.com/discuss/926272464059891712)追问：向量检索中 IVF 与 HNSW 的选型依据是什么？】【[全栈实习一面，20分钟居然问这么细😂](https://www.nowcoder.com/feed/main/detail/4af1e257116e4e36970c6e0d8bf2f70e)追问：你的 RAG 向量数据库用的索引是什么？】；本轮追问：如果分完桶之后，有一个桶里面只有 10000 个向量，为什么会出现这样只有 10000 个向量的桶？这些向量是怎么组织的，怎么分层的？（[奇怪の字节二面面经（大概率凉经）](https://www.nowcoder.com/feed/main/detail/bcf0b8497fcb4982b2292cafbcb08d69)）；[华为AI开发一面](https://www.nowcoder.com/feed/main/detail/bb07b66e5c434b08992bf8747dd7bd3e)；[字节 260907 一面面经](https://www.nowcoder.com/discuss/935858952644939776)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[阿里 AI 应用开发实习一面](https://www.nowcoder.com/discuss/945984162802995200)
+> 来源：快手AI应用开发一面【[阿里巴巴（淘天）- 大模型算法岗（搜推方向）](https://www.nowcoder.com/discuss/926272464059891712)追问：向量检索中 IVF 与 HNSW 的选型依据是什么？】【[全栈实习一面，20分钟居然问这么细😂](https://www.nowcoder.com/feed/main/detail/4af1e257116e4e36970c6e0d8bf2f70e)追问：你的 RAG 向量数据库用的索引是什么？】；本轮追问：如果分完桶之后，有一个桶里面只有 10000 个向量，为什么会出现这样只有 10000 个向量的桶？这些向量是怎么组织的，怎么分层的？（[奇怪の字节二面面经（大概率凉经）](https://www.nowcoder.com/feed/main/detail/bcf0b8497fcb4982b2292cafbcb08d69)）；[华为AI开发一面](https://www.nowcoder.com/feed/main/detail/bb07b66e5c434b08992bf8747dd7bd3e)；[字节 260907 一面面经](https://www.nowcoder.com/discuss/935858952644939776)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[阿里 AI 应用开发实习一面](https://www.nowcoder.com/discuss/945984162802995200)；[科大讯飞Agent一面](https://www.nowcoder.com/feed/main/detail/c325a58591c44b42919f2a4984ed12b8)
 
 **新手答**：“都是加速向量搜索的索引，HNSW 更快。”
 
@@ -2212,9 +2172,55 @@ IVF_FLAT 和 HNSW 是两种完全不同的索引范式——一个基于分区�
 
 ---
 
+### Q：PDF 解析用什么工具？Layout-aware Parsing 是怎么做的？
+
+> 来源：腾讯 AI 应用开发二面；本轮追问：PDF转写从31分钟优化到2.5分钟，怎么做的？（[本轮追问](https://www.nowcoder.com/discuss/926539013991796736)）；本轮追问：你的 Agent 在实现文件解析方面做了哪些优化，图表解析有什么优化思路？（[本轮追问](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)）；本轮追问：目前你的 RAG 项目可以读取哪些文件？可以读取 PDF 和 PPT 吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a8854ce3fa4b45cb8d73ec92c798a63b)）；[阳光电源  AI应用开发工程师 一面](https://www.nowcoder.com/feed/main/detail/122fd928ee824ed99c8f834233d1ac23)；本轮追问：RAG中PDF从上传到最终召回经历哪些阶段？（[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)）；本轮追问：怎么解决文档解析出错的问题？（[拼多多 agent 一面凉经](https://www.nowcoder.com/feed/main/detail/4dd4b979b1f74625aaef3e7b975142ba)）；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[科大讯飞羚羊 一面](https://www.nowcoder.com/feed/main/detail/e5141a1836ff4e8889edf42dcc85e86a)
+
+**新手答**：“用 PyPDF 读文本就行。”
+
+**高手答**：
+
+PyPDF 只能提取纯文本流，**完全丢失版面布局信息**——表格变成散乱的文字、双栏论文的左右栏被混在一起、图片标注和正文混淆。RAG 的质量上限取决于解析质量，解析错了后面全链路都救不回来。
+
+**主流 PDF 解析工具对比**：
+
+| 工具 | 原理 | 优势 | 劣势 | 适合场景 |
+|------|------|------|------|---------|
+| PyPDF / pdfplumber | 文本流提取 | 快、零依赖 | 丢失布局，表格乱 | 纯文本 PDF |
+| Unstructured | 规则 + ML 混合 | 支持多格式，社区活跃 | 表格准确率一般 | 通用文档 |
+| Marker | 视觉模型 | 版面还原度高 | 速度慢 | 学术论文 |
+| MinerU (PDF-Extract-Kit) | 版面检测 + OCR | 表格还原强，开源 | 资源消耗大 | 复杂排版 PDF |
+| 商业方案（Azure Document Intelligence） | 云端 ML | 准确率最高 | 收费、数据出境 | 企业级生产 |
+
+**Layout-aware Parsing 的核心思路**：
+
+```mermaid
+flowchart LR
+    A[“PDF 页面图像”] --> B[“版面检测\n（识别文本/表格/图片区域）”]
+    B --> C[“区域分类\n（标题/正文/表格/脚注）”]
+    C --> D[“分区提取\n（文本用OCR，表格用专门解析器）”]
+    D --> E[“阅读顺序重建\n（双栏→单栏序列）”]
+    E --> F[“结构化输出\n（带标签的文本块）”]
+```
+
+关键是**先“看”再“读”**——不是直接提取文本流，而是先用视觉模型识别页面上每个区域的类型和位置，然后按阅读顺序依次提取。
+
+**选型建议**：学术论文用 Marker 或 MinerU（版面复杂但格式相对规范），企业文档用 Unstructured + 自定义后处理，对准确率要求极高的场景用商业方案。**没有万能工具，必须横向对比**——用同一批标注好的文档测试不同工具的准确率，选最适合自己文档类型的。
+
+
+完整链路通常是上传校验与存储、解析/OCR、版面重建、清洗切块、写入元数据、向量化建索引，查询时再召回、重排并组装上下文。解析出错应保留页码和坐标，结合置信度、规则校验和人工抽检定位问题；对扫描件或低置信区域切换 OCR/备用解析器，并用样本文档回归测试。
+
+**追问补充**：可接收 PDF、Word、PPT、Excel、HTML、TXT 和图片等格式，先按 MIME 与文件特征校验，再走对应解析器并统一成带页码、坐标、表格结构的中间格式。原生 PDF 通常直接读取文本层并校验阅读顺序；缺少可靠文本层的扫描 PDF 需逐页 OCR，并依据置信度触发重试或人工抽检。
+
+**追问补充**：复杂文档可重点检查双栏、跨页表格、扫描件、图文混排及页眉页脚，先保留页码、坐标和置信度，再用标注样本做阅读顺序、表格结构和召回效果回归；“最终效果”应填真实项目结果，不能凭空补指标。MinerU的部署形态需以实际采购或部署记录为准，不能仅凭工具名判断是私有化还是付费；面试时应明确实际部署方式、数据边界与成本依据。
+
+**差距在哪**：新手用 PyPDF 读文本，遇到表格和复杂排版就束手无策。高手理解 Layout-aware Parsing 的核心是“先视觉理解版面结构，再分区提取内容”，并能对比不同工具的适用场景做选型。面试官考的是你对 RAG 管线最上游（文档解析）的工程理解——这一步的质量决定了后续所有环节的上限。
+
+---
+
 ### Q：Agentic RAG 是什么？和传统 RAG 的核心区别？
 
-> 来源：美团Keeta Agent开发一面；本轮追问：RAG 项目使用的基座模型是什么？（[本轮追问](https://www.nowcoder.com/discuss/926677767104532480)）；[10.15 金蝶软件 软开（Ai）一面](https://www.nowcoder.com/discuss/939924708173037568)；[未注明公司 Agent 面试问题整理](https://www.nowcoder.com/feed/main/detail/feeede5d38f341f791c665bb7585adf7)；[华为 线下技术面试](https://www.nowcoder.com/feed/main/detail/db120ae0156249078ffd635bd66f3772)
+> 来源：美团Keeta Agent开发一面；本轮追问：RAG 项目使用的基座模型是什么？（[本轮追问](https://www.nowcoder.com/discuss/926677767104532480)）；[10.15 金蝶软件 软开（Ai）一面](https://www.nowcoder.com/discuss/939924708173037568)；[未注明公司 Agent 面试问题整理](https://www.nowcoder.com/feed/main/detail/feeede5d38f341f791c665bb7585adf7)；[华为 线下技术面试](https://www.nowcoder.com/feed/main/detail/db120ae0156249078ffd635bd66f3772)；[转转-实习-一面](https://www.nowcoder.com/feed/main/detail/5ae1949864db494c806fba155139232f)
 
 **新手答**：「就是把 RAG 和 Agent 结合起来吧。」
 
@@ -2430,6 +2436,64 @@ def should_continue(state):
 
 ---
 
+### Q：RAG 检索到的 Chunk 不足以回答问题，后续怎么处理？
+
+> 来源：字节春招大模型测开一面；本轮追问：使用全文索引检索，如果遇到召回不到的问题怎么处理？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；本轮追问：是否先按照标题结构划分模块，再将模块拆成小 chunk？检索时召回小 chunk，再补充对应的父模块吗？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
+
+**新手答**：“让模型直接用自己的知识回答，或者告诉用户找不到。”
+
+**高手答**：
+
+这是 RAG 系统最常见的退化场景之一。“Chunk 不足”有两种含义——检索到了但信息不够完整，或者根本没检索到相关内容。处理策略完全不同：
+
+**第一层：判断“不足”的程度**
+
+在生成前先做一步**充分性评估**（Sufficiency Check）：用 LLM 判断当前检索结果能否支撑回答。评估维度：
+
+- 关键实体是否存在（问“A 和 B 的区别”，至少要有 A 和 B 的描述）
+- 时间/数值是否覆盖（问“2024年营收”，2023年的数据不算充分）
+- 逻辑链是否完整（问“为什么 X 导致 Y”，需要因果链条，不能只有结论）
+
+**第二层：补充检索策略**
+
+如果判定不足，触发 Agentic RAG 的补充检索：
+
+```mermaid
+flowchart TD
+    A[“初次检索结果”] --> B{“充分性评估”}
+    B -->|”充分”| C[“直接生成回答”]
+    B -->|”不充分”| D[“策略切换”]
+    D --> E[“查询改写\n换角度/拆子问题”]
+    D --> F[“扩大召回\n放宽阈值/切换索引”]
+    D --> G[“跨库检索\n换知识源/调外部API”]
+    E & F & G --> H{“二次充分性评估”}
+    H -->|”充分”| C
+    H -->|”仍不足”| I[“诚实告知+给出部分答案+标注不确定性”]
+```
+
+关键策略：
+
+1. **查询改写** — 原始 query 可能太笼统或措辞偏离文档表达。拆成子问题、换同义词、补充上下文后重新检索
+2. **扩大召回范围** — 降低相似度阈值、增加 Top-K、切换到 BM25 关键词匹配（语义检索漏掉的关键词匹配可能命中）
+3. **跨库检索** — 如果本地知识库确实没有，可以调用外部搜索引擎、数据库查询、或调用其他系统的 API
+
+**第三层：生成策略**
+
+如果补充检索后仍不足：
+
+- **部分回答 + 标注** — “根据现有信息，X 部分的答案是...，但关于 Y 的具体数据暂未找到”
+- **不编造** — 绝对不能让模型用自身参数知识补充事实性信息（这是幻觉的主要来源）
+- **引导用户** — “您可以提供更具体的文档/关键词吗？”或“建议查阅 XX 系统获取最新数据”
+
+
+全文索引召回不到时先用已知文档做可检索性验证，检查分词器、同义词、字段权重、大小写及停用词配置，并确认文档已入索引且过滤条件未排除。再用关键词拆分、同义词扩展、拼写纠错或放宽过滤重试，结合 explain 和命中样本定位是索引还是查询问题。
+
+**追问补充**：多跳检索先将问题拆成有依赖关系的子问题，按“检索—抽取中间实体或结论—生成下一跳查询”逐步执行；每跳校验证据是否支持下一步并记录来源，直到得到最终答案或达到步数上限，避免错误中间结果持续扩散。
+
+**差距在哪**：新手的处理是二元的——“有就答，没有就说不知道”。高手有一套分级应对策略：先评估不足程度，再用查询改写/扩大召回/跨库检索做补充，最后仍不足时给出部分答案并标注不确定性。面试官考的是你对 RAG 系统边界情况的处理能力——生产环境中“检索不足”比“检索精准”出现得更频繁。
+
+---
+
 ### Q：RAG 知识库的噪声剔除和文档去重怎么做？
 
 > 来源：腾讯 AI 应用开发二面 【淘天Agent开发追问：防止 AI 批量生成虚假数据投毒】；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
@@ -2527,62 +2591,6 @@ flowchart LR
 **追问补充**：用户未搜到预期结果时，先记录原始问题、改写结果、过滤条件、召回与重排日志，区分“数据源不存在”“解析或切分丢失”“索引未更新”“查询表达或检索策略不匹配”。再用人工标注查询检查文档覆盖、关键词命中和向量召回，定位后分别补数据、修解析索引或调整检索策略。
 
 **差距在哪**：新手的「再搜一次」没有质量评估也没有策略切换——大概率搜出同样的结果。高手先用质量门控判断是否需要补充检索，再用策略切换保证二次检索有实质性差异。面试官考的是你对 RAG 检索链路的精细化控制能力。
-
----
-
-### Q：RAG 检索到的 Chunk 不足以回答问题，后续怎么处理？
-
-> 来源：字节春招大模型测开一面；本轮追问：使用全文索引检索，如果遇到召回不到的问题怎么处理？（[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)）；本轮追问：是否先按照标题结构划分模块，再将模块拆成小 chunk？检索时召回小 chunk，再补充对应的父模块吗？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）
-
-**新手答**：“让模型直接用自己的知识回答，或者告诉用户找不到。”
-
-**高手答**：
-
-这是 RAG 系统最常见的退化场景之一。“Chunk 不足”有两种含义——检索到了但信息不够完整，或者根本没检索到相关内容。处理策略完全不同：
-
-**第一层：判断“不足”的程度**
-
-在生成前先做一步**充分性评估**（Sufficiency Check）：用 LLM 判断当前检索结果能否支撑回答。评估维度：
-
-- 关键实体是否存在（问“A 和 B 的区别”，至少要有 A 和 B 的描述）
-- 时间/数值是否覆盖（问“2024年营收”，2023年的数据不算充分）
-- 逻辑链是否完整（问“为什么 X 导致 Y”，需要因果链条，不能只有结论）
-
-**第二层：补充检索策略**
-
-如果判定不足，触发 Agentic RAG 的补充检索：
-
-```mermaid
-flowchart TD
-    A[“初次检索结果”] --> B{“充分性评估”}
-    B -->|”充分”| C[“直接生成回答”]
-    B -->|”不充分”| D[“策略切换”]
-    D --> E[“查询改写\n换角度/拆子问题”]
-    D --> F[“扩大召回\n放宽阈值/切换索引”]
-    D --> G[“跨库检索\n换知识源/调外部API”]
-    E & F & G --> H{“二次充分性评估”}
-    H -->|”充分”| C
-    H -->|”仍不足”| I[“诚实告知+给出部分答案+标注不确定性”]
-```
-
-关键策略：
-
-1. **查询改写** — 原始 query 可能太笼统或措辞偏离文档表达。拆成子问题、换同义词、补充上下文后重新检索
-2. **扩大召回范围** — 降低相似度阈值、增加 Top-K、切换到 BM25 关键词匹配（语义检索漏掉的关键词匹配可能命中）
-3. **跨库检索** — 如果本地知识库确实没有，可以调用外部搜索引擎、数据库查询、或调用其他系统的 API
-
-**第三层：生成策略**
-
-如果补充检索后仍不足：
-
-- **部分回答 + 标注** — “根据现有信息，X 部分的答案是...，但关于 Y 的具体数据暂未找到”
-- **不编造** — 绝对不能让模型用自身参数知识补充事实性信息（这是幻觉的主要来源）
-- **引导用户** — “您可以提供更具体的文档/关键词吗？”或“建议查阅 XX 系统获取最新数据”
-
-
-全文索引召回不到时先用已知文档做可检索性验证，检查分词器、同义词、字段权重、大小写及停用词配置，并确认文档已入索引且过滤条件未排除。再用关键词拆分、同义词扩展、拼写纠错或放宽过滤重试，结合 explain 和命中样本定位是索引还是查询问题。
-
-**差距在哪**：新手的处理是二元的——“有就答，没有就说不知道”。高手有一套分级应对策略：先评估不足程度，再用查询改写/扩大召回/跨库检索做补充，最后仍不足时给出部分答案并标注不确定性。面试官考的是你对 RAG 系统边界情况的处理能力——生产环境中“检索不足”比“检索精准”出现得更频繁。
 
 ---
 
@@ -3017,7 +3025,7 @@ flowchart TD
 
 ### Q：手动干预切片是怎么做的？为什么需要这一步？
 
-> 来源：视频面经汇总；本轮追问：动态重叠窗口切片相比固定长度切片解决了什么问题？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)
+> 来源：视频面经汇总；本轮追问：动态重叠窗口切片相比固定长度切片解决了什么问题？（[本轮追问](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)）；[字节跳动Agent开发1面凉经](https://www.nowcoder.com/discuss/929406267141914624)；[记忆张量-大模型全栈实习一面](https://www.nowcoder.com/feed/main/detail/2359e337039240e39a7f4acd6c00c29f)
 
 **新手答**：“人工检查切片结果，把切错的手动改一下。”
 
@@ -3042,6 +3050,8 @@ flowchart TD
 - 切片结果存数据库时保留 `source_type` 字段标记（auto / manual_split / manual_merge）
 - 人工修正后重新生成 embedding 并更新向量索引（增量更新，不重建全量）
 - 建立“bad case → chunk 溯源 → 修正 → 效果验证”的闭环流程
+
+**追问补充**：召回阶段会设置窗口：按模型上下文和业务延迟预留预算，限制候选 chunk 数及总 token；超长时先按相关性重排并截断，优先保留命中句、父标题和相邻窗口，必要时分批检索或摘要压缩，避免直接把完整文档塞入上下文。
 
 **差距在哪**：面试官深挖切分细节是为了验证“你的 RAG 到底做了多深”。新手觉得切片是一次性的预处理工作。高手知道切片质量直接决定检索效果——自动切片解决大部分情况，但 bad case 驱动的人工干预是持续优化的关键环节。这体现了 RAG 系统的运营思维，而不是纯开发思维。
 
@@ -3425,6 +3435,44 @@ flowchart LR
 
 ---
 
+## Q：知识图谱如何从文档构建、增量维护，并处理实体与关系冲突？
+
+> 来源：阿里云暑期 Agent 面经（2026-05-03）【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：知识构建与图谱抽取怎么做？；更新时实体抽取和关系关联怎么处理？】；本轮追问：知识图谱主要是干什么的？怎么来的？和单纯 RAG 比较有什么效果？（[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[10.8号顺丰AI全栈一面](https://www.nowcoder.com/discuss/937690332462927872)；[零一万物 知识图谱算法实习生一面](https://www.nowcoder.com/feed/main/detail/de81855bb25447bda52e11fe4d6af61d)；[10.12京东金融推荐算法实习一面](https://www.nowcoder.com/feed/main/detail/ecc02b93de0643c797cbc516e736fea7)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
+
+**新手答**：“用大模型从文档抽取实体和三元组，去重后写入 Neo4j；有新文档就继续追加。”
+
+**高手答**：
+
+文档知识图谱不是一次三元组抽取，而是一条**带 Schema、溯源和变更语义的数据管线**：文档解析与分块 → 实体/关系候选抽取 → 类型与关系 Schema 校验 → 实体规范化与消歧 → 证据绑定和置信度计算 → 合并入图 → 质量评测。每个实体、关系或属性都要保留来源文档、版本、原文区间、抽取器版本和时间，不能只留下一个失去证据的 `(subject, predicate, object)`。
+
+实体合并至少结合规范化名称、别名词典、唯一业务标识、上下文和邻居结构。例如两个“苹果”不能因字符串相同直接合并；同一家公司的中英文名也不能因字符串不同就创建两个节点。低置信候选先进入待确认区，高价值实体可用人工标注集持续评估 precision、recall 和错误合并率。
+
+增量维护应以文档版本差异驱动，而不是只追加：
+
+1. 新增文档只抽取受影响分块，并与现有实体做链接。
+2. 修改文档先撤销旧版本贡献的证据，再重算变更分块及其邻域。
+3. 删除文档删除的是证据边；只有当实体或关系不再有任何有效证据时才 tombstone，不能误删其他文档共同支持的知识。
+4. Schema、消歧模型或抽取 Prompt 变更要记录版本，并支持按受影响类型回放，而不是全图无条件重建。
+
+冲突也不能简单“新值覆盖旧值”。先区分实体重复、抽取错误和来源观点冲突：实体重复进入 merge/split 流程；违反 Schema 或原文不支持的关系拒绝入图；两个可信来源给出不同结论时，把“声明”建模为带来源、有效时间、适用范围和置信度的独立记录并保留并存。查询时再按时间、权威度、业务域和用户意图选择或同时展示，关键冲突升级人工裁决，裁决过程可回滚。
+
+
+知识图谱把分散文本中的实体、关系和属性组织成可追溯网络，适合多跳关系查询、实体消歧和关系推理。通常由文档解析、实体关系抽取、规范化消歧、合并及证据挂接得到。相比只检索文本片段的 RAG，图谱更擅长结构化、多跳和全局关联，但构建维护成本高、抽取错误会传播；RAG 更灵活且保留原文，二者可混合检索并回溯证据。
+
+**追问补充**：查询时先用实体规范名、别名和业务标识做精确或倒排匹配，再以模糊、向量检索补充候选；结合实体类型、上下文、领域和时间消歧，确定实体 ID 后进行邻接或多跳查询，并返回对应证据与置信度。
+
+**追问补充**：节点变更后先依据证据反向索引找出受影响的关系、属性和文档，再沿业务定义的依赖边做有界传播；对每个邻居比较旧新实体、关系、时间范围和置信度，只有影响其可查询结论或约束时入重算队列。记录影响路径，抽样回放并校验未受影响节点，避免全图重建。
+
+**追问补充**：图谱与动态画像可作为共享实体底座上的两条并行链路：图谱沉淀相对稳定的事实和关系，画像记录用户行为、偏好及时间变化。两者分别维护证据与时效性，查询时按意图路由，再融合排序并返回来源；身份映射和更新事件需保持一致，避免画像覆盖事实。
+
+**追问补充**：抽取宜采用“模型候选、规则或 Schema 校验、领域专家抽样及高风险复核”的混合流程，人工不必逐条录入。优先为稳定实体、明确关系、跨文档多跳、约束校验和需溯源的知识建图；临时或一次性信息可留在原文或 RAG。数据准备需去重、清除模板噪声、保留版本权限并做字段校验；本体由领域专家结合 competency questions、概念层级和关系约束迭代评审。
+
+**追问补充**：维护上采用分层治理：领域专家只负责本体、关键约束和高风险裁决，通用实体与关系由模型、规则和抽样审核自动处理；按业务域设责任人和变更审批，统计人工复核量、错误合并率与收益，低价值或低频知识不建图，以控制维护门槛和人力成本。
+
+**差距在哪**：新手停在“LLM 抽三元组 + 图数据库”。高手覆盖了 Schema、实体消歧、证据溯源、按文档版本撤销贡献和多来源冲突建模，回答的是知识图谱如何长期可信地演化。
+
+---
+
 ## Q：基于关键词的命令行代码搜索与基于 Embedding/RAG 的代码搜索，各有什么优缺点？
 
 > 来源：某小厂FOSHO/AI应用开发二面；本轮追问：你的搜索引擎和直接使用云博客搜索有什么区别？（[本轮追问](https://www.nowcoder.com/discuss/927223254320676864)）；本轮追问：code agent 怎么根据 PRD 的描述定位到要修改的代码？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；本轮追问：如何基于 AST 识别代码中的硬编码路径？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）；本轮追问：有什么办法能让 AI 看代码时看得更准？代码库规模较大时，怎么确认 AI 为什么找不准？（[淘天供应链ai应用研发一面](https://www.nowcoder.com/feed/main/detail/8656f1483ebd441bac7c17c313e5394a)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/34dd692b16c84c059daeb00866533d96)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)
@@ -3472,45 +3520,9 @@ flowchart TB
 
 ---
 
-## Q：知识图谱如何从文档构建、增量维护，并处理实体与关系冲突？
-
-> 来源：阿里云暑期 Agent 面经（2026-05-03）【[抖音电商Agent全栈开发工程师一面](https://www.nowcoder.com/discuss/925066865183858688)追问：知识构建与图谱抽取怎么做？；更新时实体抽取和关系关联怎么处理？】；本轮追问：知识图谱主要是干什么的？怎么来的？和单纯 RAG 比较有什么效果？（[携程agent开发一面](https://www.nowcoder.com/feed/main/detail/0d590f82f4f243b180ee923860010b94)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[10.8号顺丰AI全栈一面](https://www.nowcoder.com/discuss/937690332462927872)；[零一万物 知识图谱算法实习生一面](https://www.nowcoder.com/feed/main/detail/de81855bb25447bda52e11fe4d6af61d)；[10.12京东金融推荐算法实习一面](https://www.nowcoder.com/feed/main/detail/ecc02b93de0643c797cbc516e736fea7)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)
-
-**新手答**：“用大模型从文档抽取实体和三元组，去重后写入 Neo4j；有新文档就继续追加。”
-
-**高手答**：
-
-文档知识图谱不是一次三元组抽取，而是一条**带 Schema、溯源和变更语义的数据管线**：文档解析与分块 → 实体/关系候选抽取 → 类型与关系 Schema 校验 → 实体规范化与消歧 → 证据绑定和置信度计算 → 合并入图 → 质量评测。每个实体、关系或属性都要保留来源文档、版本、原文区间、抽取器版本和时间，不能只留下一个失去证据的 `(subject, predicate, object)`。
-
-实体合并至少结合规范化名称、别名词典、唯一业务标识、上下文和邻居结构。例如两个“苹果”不能因字符串相同直接合并；同一家公司的中英文名也不能因字符串不同就创建两个节点。低置信候选先进入待确认区，高价值实体可用人工标注集持续评估 precision、recall 和错误合并率。
-
-增量维护应以文档版本差异驱动，而不是只追加：
-
-1. 新增文档只抽取受影响分块，并与现有实体做链接。
-2. 修改文档先撤销旧版本贡献的证据，再重算变更分块及其邻域。
-3. 删除文档删除的是证据边；只有当实体或关系不再有任何有效证据时才 tombstone，不能误删其他文档共同支持的知识。
-4. Schema、消歧模型或抽取 Prompt 变更要记录版本，并支持按受影响类型回放，而不是全图无条件重建。
-
-冲突也不能简单“新值覆盖旧值”。先区分实体重复、抽取错误和来源观点冲突：实体重复进入 merge/split 流程；违反 Schema 或原文不支持的关系拒绝入图；两个可信来源给出不同结论时，把“声明”建模为带来源、有效时间、适用范围和置信度的独立记录并保留并存。查询时再按时间、权威度、业务域和用户意图选择或同时展示，关键冲突升级人工裁决，裁决过程可回滚。
-
-
-知识图谱把分散文本中的实体、关系和属性组织成可追溯网络，适合多跳关系查询、实体消歧和关系推理。通常由文档解析、实体关系抽取、规范化消歧、合并及证据挂接得到。相比只检索文本片段的 RAG，图谱更擅长结构化、多跳和全局关联，但构建维护成本高、抽取错误会传播；RAG 更灵活且保留原文，二者可混合检索并回溯证据。
-
-**追问补充**：查询时先用实体规范名、别名和业务标识做精确或倒排匹配，再以模糊、向量检索补充候选；结合实体类型、上下文、领域和时间消歧，确定实体 ID 后进行邻接或多跳查询，并返回对应证据与置信度。
-
-**追问补充**：节点变更后先依据证据反向索引找出受影响的关系、属性和文档，再沿业务定义的依赖边做有界传播；对每个邻居比较旧新实体、关系、时间范围和置信度，只有影响其可查询结论或约束时入重算队列。记录影响路径，抽样回放并校验未受影响节点，避免全图重建。
-
-**追问补充**：图谱与动态画像可作为共享实体底座上的两条并行链路：图谱沉淀相对稳定的事实和关系，画像记录用户行为、偏好及时间变化。两者分别维护证据与时效性，查询时按意图路由，再融合排序并返回来源；身份映射和更新事件需保持一致，避免画像覆盖事实。
-
-**追问补充**：抽取宜采用“模型候选、规则或 Schema 校验、领域专家抽样及高风险复核”的混合流程，人工不必逐条录入。优先为稳定实体、明确关系、跨文档多跳、约束校验和需溯源的知识建图；临时或一次性信息可留在原文或 RAG。数据准备需去重、清除模板噪声、保留版本权限并做字段校验；本体由领域专家结合 competency questions、概念层级和关系约束迭代评审。
-
-**差距在哪**：新手停在“LLM 抽三元组 + 图数据库”。高手覆盖了 Schema、实体消歧、证据溯源、按文档版本撤销贡献和多来源冲突建模，回答的是知识图谱如何长期可信地演化。
-
----
-
 ## Q：RRF（Reciprocal Rank Fusion）是什么？如何融合多路检索结果？
 
-> 来源：[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；本轮追问：RAG中向量、BM25、图谱多跳做IF融合，IF怎么计算？为什么不用分数直接加和做融合？79%-95%的评测指标是如何构建的？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；本轮追问：你们使用到的RRF融合，这个里面的k是你参与自己测试调试出来的吗，还是已经有的？你自己有尝试去调一下吗？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[百度agent harness一面](https://www.nowcoder.com/discuss/937747584578310144)
+> 来源：[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[字节Agent开发后端 日常实习一面凉面](https://www.nowcoder.com/discuss/932295617999622144)；本轮追问：RAG中向量、BM25、图谱多跳做IF融合，IF怎么计算？为什么不用分数直接加和做融合？79%-95%的评测指标是如何构建的？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；本轮追问：你们使用到的RRF融合，这个里面的k是你参与自己测试调试出来的吗，还是已经有的？你自己有尝试去调一下吗？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[百度agent harness一面](https://www.nowcoder.com/discuss/937747584578310144)；[记忆张量-大模型全栈实习一面](https://www.nowcoder.com/feed/main/detail/2359e337039240e39a7f4acd6c00c29f)
 
 **新手答**：“RRF 会根据各路检索结果的排名计算倒数得分，再把同一文档在多路结果中的分数相加并重新排序。”
 
@@ -3529,7 +3541,7 @@ RRF（Reciprocal Rank Fusion）只依赖排名，不要求不同检索器的分�
 
 ## Q：混合检索到底在哪个环节比单独用效果好？
 
-> 来源：淘天/AI Agent一面【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：有没有通过实验分析向量检索及混合检索带来的提升？】；本轮追问：混合检索是怎么实现的？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)
+> 来源：淘天/AI Agent一面【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：有没有通过实验分析向量检索及混合检索带来的提升？】；本轮追问：混合检索是怎么实现的？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
 
 **新手答**：“混合检索综合了向量和关键词的优点，效果自然好。”
 
@@ -3567,6 +3579,8 @@ flowchart TB
 
 
 实现时对同一 Query 并行执行 BM25 和向量召回，各自取候选集；可先做 metadata 过滤，再用 RRF 按两路排名融合，或对分数归一化后加权。融合后去重并保留来源、排名等特征，最后交给 Rerank 精排；权重、候选数量和过滤条件应在分桶评测中调优。
+
+**追问补充**：自适应 RAG 不只切换 BM25 和向量权重，还根据查询类型、召回分歧、结果置信度和上下文覆盖率动态决定是否改写查询、扩大候选、启用混合检索或二次检索；用带标注的查询分桶比较召回率、答案正确率、延迟与成本，避免无条件增加检索轮次。
 
 **差距在哪**：面试官考的不是“混合检索好不好”，而是“你知不知道它在什么条件下好”——要有反面案例。能说出混合反而变差的场景（纯语义问答、纯关键词检索），说明你对混合检索有深入的工程实践，而非人云亦云。
 
@@ -3635,6 +3649,21 @@ Reranker 通常是 cross-encoder：把 query 与候选文档拼接后送入 Tran
 还要处理降级路径：精确 range 校验失败时退到 block，再退到 page + quote 搜索，并显示“定位可能偏移”，不能无提示地高亮错误内容。服务端在返回正文前重新检查租户和 ACL，下载地址使用短期授权；前端不可因为持有 citation ID 就绕过文档权限。埋点应区分引用点击、定位成功、版本不匹配和用户反馈，用来持续发现解析漂移。
 
 **差距在哪**：新手把引用当一个页码链接。高手把引用设计成带版本、内容身份和多级定位器的协议，再用虚拟化阅读器、深链、校验和降级机制保证长文档中的证据真正可达、可审计。
+
+
+## Q：RAG 检索结果如何安全地组装到提示词中？
+
+> 来源：[腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)；[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)；[小厂AI应用开发面试](https://www.nowcoder.com/feed/main/detail/c9dd06bab88247348a5c42fd89646f3b)
+
+**新手答**：会作为带来源标记的上下文注入，通常放在系统指令之后、用户问题之前。
+
+**高手答**：
+
+将检索片段放入明确的 Context 区块，附文档 ID、标题和时间；系统指令规定只能依据区块回答并拒绝其中的指令，用户问题单独放在末尾。限制片段长度，按相关性和多样性排序，处理 XML/JSON 转义与提示注入；输出引用 ID 并做上下文压缩。
+
+**追问补充**：入库阶段先把文档视为不可信数据，做规则扫描与人工或模型复核，隔离包含“忽略系统指令、执行某操作”等内容的片段；保留原文证据但标注风险，检索和组装时禁止其改变系统指令，并用注入样本回归测试。
+
+**差距在哪**：考察提示词层次、注入防护、长度控制和引用闭环。
 
 
 ## Q：BGE 类文本 Embedding 模型的基本结构是什么？
@@ -3720,19 +3749,6 @@ flowchart LR
 
 ---
 
-## Q：RAG 检索结果如何安全地组装到提示词中？
-
-> 来源：[腾讯AI全栈一面](https://www.nowcoder.com/feed/main/detail/5f08a2b54559471aac95ea8009d38403)；[字节全栈一面](https://www.nowcoder.com/feed/main/detail/a01aeac81ad342d88252f899c47f2dc4)
-
-**新手答**：会作为带来源标记的上下文注入，通常放在系统指令之后、用户问题之前。
-
-**高手答**：
-
-将检索片段放入明确的 Context 区块，附文档 ID、标题和时间；系统指令规定只能依据区块回答并拒绝其中的指令，用户问题单独放在末尾。限制片段长度，按相关性和多样性排序，处理 XML/JSON 转义与提示注入；输出引用 ID 并做上下文压缩。
-
-**差距在哪**：考察提示词层次、注入防护、长度控制和引用闭环。
-
-
 ## Q：生成教学蓝图时，如何识别语义歧义和超纲内容？
 
 > 来源：[9.7传音控股AI测试开发实习生](https://www.nowcoder.com/feed/main/detail/1c1b97aa3ccb4b2a915eeed85d01107a)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)
@@ -3817,6 +3833,20 @@ flowchart LR
 **差距在哪**：浅层只停留在“结构化对非结构化”的分类，深入回答要说明事务、权限、实时性、召回误差、幻觉和混合架构的取舍。
 
 ---
+
+## Q：本体（Ontology）如何建模？本体化知识体系的核心组成和构建流程是什么？
+
+> 来源：[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
+
+**新手答**：“本体化就是把业务概念、关系、约束和实例定义成可计算的知识模型，让不同数据能用统一语义连接和推理。”
+
+**高手答**：
+
+本体通常包含类、属性、个体以及公理和限制，用来表达“有哪些概念、概念如何关联、哪些组合被允许”，并支持一定的语义推理；OWL 2 Primer 对这些组成和推理机制有说明，但本体推理不等同于数据库 Schema 的闭世界校验，也不自动产生运行时权限结论。[W3C OWL 2 Primer](https://www.w3.org/TR/owl2-primer/) 可作为形式化参考。
+
+落地时可先明确业务范围和 competency questions，再盘点术语、建立概念层级与关系约束，映射实体和数据源，设计实体对齐、版本治理、质量校验及检索接口，最后用真实问题验证覆盖率和误推理。企业内部实现需有公开证据；在通用方案中，建议把知识抽取、图存储、向量检索或 GraphRAG 与正式本体分开验证，并做等数据、等模型和等预算消融，因为 GraphRAG 的实体关系抽取与社区摘要并不等价于正式本体，也不应预设一定优于向量检索。[Microsoft GraphRAG](https://microsoft.github.io/graphrag/)
+
+**差距在哪**：深入回答应区分概念模型、实例数据与运行时校验，说明建模范围、变更治理和验证方法。
 
 ## Q：如何设计支持版本过滤和时间旅行查询的向量索引？
 
@@ -3950,6 +3980,24 @@ ES 语义召回的角色不是替代大模型，而是提供可复用、可追�
 关键词提取不是固定由某一种技术完成。规则适合格式稳定、词表明确、低延迟且可解释的场景，例如编号、产品名和领域术语；模型适合表达灵活、需要理解上下文或发现同义概念的文本，但会带来成本、延迟、幻觉和输出不稳定。常见做法是先做文本规范化、词典匹配和正则召回，再由模型补充、归一化和排序，并限制输出数量与格式。选型应以标注集评估精确率、召回率、覆盖面、延迟和成本，同时测试错别字、歧义词、长文本及提示注入。若用于检索，还应在线观察召回结果和最终回答质量；规则更可控，模型更灵活，混合方案维护复杂度也更高。
 
 **差距在哪**：浅层回答停留在“规则或模型二选一”，深层回答要说明场景边界、混合流程、输出约束、离线与在线评估及维护成本。
+
+---
+
+## Q：本体化知识增强与普通 RAG 有什么区别？如何评估文档本体化带来的收益？
+
+> 来源：[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
+
+**新手答**：“本体化是在文档之外补充实体、关系和约束，让检索能按结构找信息；普通 RAG 主要按文本相似度召回。评估时要做等数据、等模型、等检索预算的对照实验。”
+
+**高手答**：
+
+普通 RAG 通常把完整文档切块后建立关键词、向量或混合索引，优势是接入快、保留原文语境；但跨段关系、同义实体、层级约束和多跳问题可能依赖切块与召回运气。本体化则显式定义类、属性、个体和公理，可把“谁属于什么、有哪些关系、哪些约束”作为检索或重排条件；OWL 的语义推理能力并不等同于数据库 Schema 的闭世界校验，也不能自动保证事实正确。[W3C OWL 2 Primer](https://www.w3.org/TR/owl2-primer/)
+
+评估应固定语料、切块、模型、top-k、上下文预算和问答提示，只改变是否加入实体关系、类型过滤、图扩展或推理结果，并设置普通向量、BM25/混合检索等基线。分别测召回率、MRR/nDCG、实体与关系抽取准确率、答案正确性、引用覆盖、延迟、索引成本和人工维护成本；按单跳、多跳、歧义实体、长文档和时效变化分层。还要做等数据等预算消融：只加实体、只加关系、只加推理、加入原文回链，避免把额外信息量误判成本体收益。GraphRAG 的实体、关系、社区和摘要流程也不等于正式本体，不能据此预设一定优于向量检索。[Microsoft GraphRAG](https://microsoft.github.io/graphrag/)
+
+**差距在哪**：浅答覆盖了结构化检索和对照评估，但没有展开本体语义边界、分层指标、成本与消融设计。
+
+---
 
 ## 这类题的答题模式
 

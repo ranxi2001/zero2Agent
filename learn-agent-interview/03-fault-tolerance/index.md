@@ -16,7 +16,7 @@ Agent 的容错设计是面试中最容易暴露“做没做过真实系统”�
 
 ### Q：Agent 如何减少幻觉？在工业场景下怎么做？
 
-> 来源：字节后端开发 Agent 一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】 / [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)；本轮追问：涉及财务数据时怎么降低大模型幻觉？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；本轮追问：有没有遇到一些幻觉严重、指令跟预期不达标的场景？（[本轮追问](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)；本轮追问：Agent 动态调用工具，如何解决模型幻觉问题？哪些部分做固定流程，哪些交给模型决策？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[阿里云 ai应用开发 一面](https://www.nowcoder.com/feed/main/detail/7e27cf4dedb142d9b643471ba31276ed)；[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[淘天 Agent算法 一面](https://www.nowcoder.com/discuss/941801876566167552)；[未注明公司 技术面试（实习转正）](https://www.nowcoder.com/discuss/946807142583930880)；[美团 一面](https://www.nowcoder.com/feed/main/detail/6c551a197dcc4a6e95f5f01c62680744)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
+> 来源：字节后端开发 Agent 一面 【字节实习Agent开发一面追问：任务幻觉（Agent编造未请求的执行步骤）】 / [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0)；本轮追问：涉及财务数据时怎么降低大模型幻觉？（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；本轮追问：有没有遇到一些幻觉严重、指令跟预期不达标的场景？（[本轮追问](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)；本轮追问：Agent 动态调用工具，如何解决模型幻觉问题？哪些部分做固定流程，哪些交给模型决策？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[阿里云 ai应用开发 一面](https://www.nowcoder.com/feed/main/detail/7e27cf4dedb142d9b643471ba31276ed)；[美团AI Agent一面](https://www.nowcoder.com/feed/main/detail/50bcdc47e7754aa7be59b6318fea514b)；[经纬恒润ai应用开发一面面经](https://www.nowcoder.com/feed/main/detail/32d60ac358504e86aab2d634a15b996b)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[淘天 Agent算法 一面](https://www.nowcoder.com/discuss/941801876566167552)；[未注明公司 技术面试（实习转正）](https://www.nowcoder.com/discuss/946807142583930880)；[美团 一面](https://www.nowcoder.com/feed/main/detail/6c551a197dcc4a6e95f5f01c62680744)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：“用 RAG 给模型提供事实依据。”
 
@@ -157,7 +157,7 @@ System Prompt 中的重试引导：
 
 ### Q：你会如何限制 Agent 的思考深度、工具调用次数和递归层级，避免无限循环？
 
-> 来源：Agent 开发面试 30 题【百度大模型研发二面追问：工具失败后如何避免无限重复调用】【阿里 Agent Infra 一面题库同题：重复 Tool Call 与停止条件】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何设计任务完成的停止条件？】；本轮追问：Agent 循环怎么控制？有哪些终止条件？最大循环次数、目标完成校验、重复调用检测、人工介入怎么做？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；本轮追问：Agent 如何处理工具调用、插件钩子、重试和最大循环次数？ / 如何识别并处理模型重复调用同一个工具的问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；本轮追问：这个 Agent 工具调用大概多少次、循环多少轮，为什么是这个量级？（[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)）；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[10.8号顺丰AI全栈一面](https://www.nowcoder.com/discuss/937690332462927872)；[小天才ai应用开发一面10.21](https://www.nowcoder.com/discuss/942444785531473920)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)；[阿里 AI 应用开发实习一面](https://www.nowcoder.com/discuss/945984162802995200)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)
+> 来源：Agent 开发面试 30 题【百度大模型研发二面追问：工具失败后如何避免无限重复调用】【阿里 Agent Infra 一面题库同题：重复 Tool Call 与停止条件】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：如何设计任务完成的停止条件？】；本轮追问：Agent 循环怎么控制？有哪些终止条件？最大循环次数、目标完成校验、重复调用检测、人工介入怎么做？（[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)）；本轮追问：Agent 如何处理工具调用、插件钩子、重试和最大循环次数？ / 如何识别并处理模型重复调用同一个工具的问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；本轮追问：这个 Agent 工具调用大概多少次、循环多少轮，为什么是这个量级？（[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)）；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[10.8号顺丰AI全栈一面](https://www.nowcoder.com/discuss/937690332462927872)；[小天才ai应用开发一面10.21](https://www.nowcoder.com/discuss/942444785531473920)；[小红书 PE AI 与全栈一面](https://www.nowcoder.com/feed/main/detail/eb319df6903245df94f787a97205c73c)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)；[阿里 AI 应用开发实习一面](https://www.nowcoder.com/discuss/945984162802995200)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)；[科大讯飞Agent一面](https://www.nowcoder.com/feed/main/detail/c325a58591c44b42919f2a4984ed12b8)
 
 **新手答**：“设一个最大步数上限就行。”
 
@@ -232,7 +232,7 @@ System Prompt 中的重试引导：
 
 ### Q：幻觉的各种治理手段，优缺点分别是什么？行为限制在什么阶段做？
 
-> 来源：蚂蚁集团智能体与大模型应用一面 / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)；[接受加班吗....](https://www.nowcoder.com/discuss/930502345694203904)；本轮追问：大模型幻觉的原因是什么？如何解决？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）；本轮追问：多模态模型产生幻觉的主要原因是什么？怎么通过后训练、RAG、规则缓解？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)；本轮追问：如何解决幻觉、复读机问题（[字节多模态大模型面经一面](https://www.nowcoder.com/discuss/932594519835443200)）；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[Awaken AI Agent 一面](https://www.nowcoder.com/discuss/943194203725570048)
+> 来源：蚂蚁集团智能体与大模型应用一面 / [去哪儿 AI 全栈 AI 面](https://www.nowcoder.com/feed/main/detail/9cf516b3c2404100baeac52564e40709)；[接受加班吗....](https://www.nowcoder.com/discuss/930502345694203904)；本轮追问：大模型幻觉的原因是什么？如何解决？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）；本轮追问：多模态模型产生幻觉的主要原因是什么？怎么通过后训练、RAG、规则缓解？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；[(秋招) 9.16 字节中交广 - 交易与广告业务 - AI全栈开发工程师](https://www.nowcoder.com/discuss/932587389027962880)；本轮追问：如何解决幻觉、复读机问题（[字节多模态大模型面经一面](https://www.nowcoder.com/discuss/932594519835443200)）；[度小满 - AI 全栈研发 - 一面](https://www.nowcoder.com/feed/main/detail/f9c29fa841664294b8ab7e9921072afd)；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[Awaken AI Agent 一面](https://www.nowcoder.com/discuss/943194203725570048)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)；[小厂AI应用开发面试](https://www.nowcoder.com/feed/main/detail/c9dd06bab88247348a5c42fd89646f3b)
 
 **新手答**：“RAG 最好用，其他的都是辅助。”
 
@@ -286,6 +286,8 @@ flowchart LR
 
 
 复读机问题还需单独治理：训练侧清理重复样本并加入多样性偏好数据；解码侧调节温度、top-p、重复惩罚或设置 no-repeat 约束；运行时检测连续 n-gram、句间相似度和异常长度，触发截断、重采样或换模型。
+
+**追问补充**：Ontology/Action 建模可把实体、关系、状态和允许动作显式化，作为检索过滤、参数校验与权限边界，减少模型把不存在的实体或动作当成事实。排查 RAG 幻觉时按检索、拼接、生成、校验分段打 trace：检查召回率、相关性、文档时效与冲突，确认答案是否有证据支持；再用引用校验、拒答阈值和人工抽检定位并缓解。
 
 **差距在哪**：新手觉得 RAG 就够了。高手逐一分析了七种治理手段的优缺点和适用场景，且把行为限制按训练/部署/运行时三个阶段展开，说明了为什么必须叠加使用。面试官考的是你对幻觉治理的全面认知——不是背手段清单，而是理解每种手段的边界和组合策略。
 
@@ -416,7 +418,7 @@ Agent 执行 shell 命令的安全问题本质上和**代码注入**一样——
 
 ### Q：工具调用的安全控制是怎么实现的？如何限制模型调用敏感接口？
 
-> 来源：快手 AI Agent 开发一面；本轮追问：如果涉及车窗、车门等安全操作，怎么增加二次确认？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）；本轮追问：Agent 的写操作权限通常如何控制？ / 非代码类的项目修改如何获得用户授权？（[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)）；本轮追问：Agent 权限管理怎么做的？（[拼多多 复活赛 agent 二面](https://www.nowcoder.com/feed/main/detail/db1ac008584f43dd9bfab65b35ff695c)）；[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)；本轮追问：工具副作用分级授权模型，两阶段提交+执行期0信任二次校验，具体指什么，如何落地？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；本轮追问：Agent 能否直接执行查询和写操作？涉及线上变更时如何控制风险？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[水滴 AI 全栈一面](https://www.nowcoder.com/discuss/948270457868804096)；[金蝶 软件开发 AI 岗一面](https://www.nowcoder.com/feed/main/detail/96615cf2fa874246b43c68bbc12dcc05)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
+> 来源：快手 AI Agent 开发一面；本轮追问：如果涉及车窗、车门等安全操作，怎么增加二次确认？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）；本轮追问：Agent 的写操作权限通常如何控制？ / 非代码类的项目修改如何获得用户授权？（[携程 AI 应用开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/2b1c35eace4a4bb3bd88ee669f163793)）；本轮追问：Agent 权限管理怎么做的？（[拼多多 复活赛 agent 二面](https://www.nowcoder.com/feed/main/detail/db1ac008584f43dd9bfab65b35ff695c)）；[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)；本轮追问：工具副作用分级授权模型，两阶段提交+执行期0信任二次校验，具体指什么，如何落地？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；本轮追问：Agent 能否直接执行查询和写操作？涉及线上变更时如何控制风险？（[9.22 阿里千问二面](https://www.nowcoder.com/feed/main/detail/5ff7b7fde8bc49eb960d5badde3ac623)）；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[水滴 AI 全栈一面](https://www.nowcoder.com/discuss/948270457868804096)；[金蝶 软件开发 AI 岗一面](https://www.nowcoder.com/feed/main/detail/96615cf2fa874246b43c68bbc12dcc05)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
 
 **新手答**：“加个白名单。”
 
@@ -483,6 +485,8 @@ Agent 执行 shell 命令的安全问题本质上和**代码注入**一样——
 **追问补充**：子 Agent 应使用独立身份和能力令牌，分别配置可调用工具、可访问资源及可通信的 Agent 白名单；消息经编排器转发并校验发送方、接收方、消息类型和敏感字段，禁止直接传递未授权上下文。所有跨 Agent 调用记录审计，令牌按任务限时、限范围。
 
 **追问补充**：用户输入和只读工具返回都应视为不可信数据，按数据字段传递而非当作指令；模型只能提出计划，策略引擎在模型外校验工具、资源、参数及用户授权。涉及写入或越权请求时拒绝或重新确认，不能因文本声称“忽略规则”而改变权限。
+
+**追问补充**：编排器可按身份、租户和任务裁剪可见工具与上下文，短时令牌应在可信执行层保存，不把秘密写入提示词。每次调用由策略与工具服务核验授权、资源范围和有效期，撤权后阻止后续副作用；审计保留决策标识与必要摘要，避免记录凭证。
 
 **差距在哪**：新手只有白名单一招。高手从权限分级、参数校验、频率限制、敏感接口隔离、审计日志五个层面构建了完整的工具安全控制体系。面试官考的是你有没有意识到 Agent 工具调用是一个需要系统性安全设计的问题，而不是“加个过滤”就能解决的。
 
@@ -662,7 +666,7 @@ Prompt 不是机密性边界。真正的设计目标是：**让下游 Skill 获�
 
 ### Q：Agent 系统的安全护栏怎么设计？敏感词拦截的工程方案有哪些？
 
-> 来源：小红书AI应用开发一面【[腾讯/csig/元宝/内容安全/日常实习/三轮技术面试](https://www.nowcoder.com/feed/main/detail/60f381f558a848ceac18c666268dc7da)追问：我现在需要对云端 Agent 的输出做安全校验，你会怎么设计校验方案？】；本轮追问：如果从架构层面改造，你会怎样设计敏感内容的读取和输出流程？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：一个长视频，怎么做安全审查？（[Agent 开发面经](https://www.nowcoder.com/discuss/930572525178748928)）；[绿盟科技一晚速通三面已offer](https://www.nowcoder.com/feed/main/detail/39776141d05c462aa212a9adc229052d)；本轮追问：系统既要灵活处理，又要求所有动作符合合规、不能越权，你会怎么选择技术方案？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；[小鹏AI安全一面（10.8）](https://www.nowcoder.com/feed/main/detail/b370dc556c924fa6a2dedc5e1128085d)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)；[华为 后训练与强化学习实习一面](https://www.nowcoder.com/feed/main/detail/bd8dc3f838c541bfbf8c5689f2fc2bac)
+> 来源：小红书AI应用开发一面【[腾讯/csig/元宝/内容安全/日常实习/三轮技术面试](https://www.nowcoder.com/feed/main/detail/60f381f558a848ceac18c666268dc7da)追问：我现在需要对云端 Agent 的输出做安全校验，你会怎么设计校验方案？】；本轮追问：如果从架构层面改造，你会怎样设计敏感内容的读取和输出流程？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；本轮追问：一个长视频，怎么做安全审查？（[Agent 开发面经](https://www.nowcoder.com/discuss/930572525178748928)）；[绿盟科技一晚速通三面已offer](https://www.nowcoder.com/feed/main/detail/39776141d05c462aa212a9adc229052d)；本轮追问：系统既要灵活处理，又要求所有动作符合合规、不能越权，你会怎么选择技术方案？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；[小鹏AI安全一面（10.8）](https://www.nowcoder.com/feed/main/detail/b370dc556c924fa6a2dedc5e1128085d)；[10.13 上海初创小厂面经](https://www.nowcoder.com/discuss/939554787337441280)；[华为 后训练与强化学习实习一面](https://www.nowcoder.com/feed/main/detail/bd8dc3f838c541bfbf8c5689f2fc2bac)；[科大讯飞Agent一面](https://www.nowcoder.com/feed/main/detail/c325a58591c44b42919f2a4984ed12b8)
 
 **新手答**：“用正则表达式匹配敏感词，匹配到就拒绝回答。”
 
@@ -710,6 +714,8 @@ flowchart LR
 采用“策略决策、权限执行”分离：模型只能提出结构化意图，由策略引擎按用户身份、资源范围、风险等级和当前状态做白名单授权；高风险或不可逆动作强制确认，工具侧再次校验参数并记录审计，越权即拒绝而非依赖提示词。
 
 **追问补充**：AC 自动机先把词表建成 Trie；节点保存失败指针，表示当前前缀失配时可跳转到最长可复用后缀，并通过输出链报告该节点及其后缀节点的词命中。扫描文本时逐字符转移，失配沿失败指针回退而不回退文本位置，因此可一次扫描找出多模式匹配；需注意 Unicode 归一化、大小写及词边界规则，否则匹配结果会偏差。
+
+**追问补充**：建议把外部文档视为不可信数据，隔离解析并保留来源，避免其中的指令改变任务授权。文件读取限制目录和凭证访问；外发动作在工具层核验接收方、数据范围与授权，高风险操作再请求确认。提示词、检测器和沙箱各有盲区，需用注入与越权样例联合验证。
 
 **差距在哪**：新手只想到正则匹配——这是最弱的方案，绕过成本极低。高手展示了三层纵深防御（输入/推理/输出）+ 两种互补的检测技术（规则快筛 + 语义深筛）。面试官考的是你对安全系统“纵深防御”理念的理解——单点防线一定会被突破，只有多层才能可靠。
 
@@ -782,7 +788,7 @@ flowchart TD
 
 ### Q：支付等高敏感操作场景下，Human-in-the-Loop 流程怎么设计？
 
-> 来源：蚂蚁 AI应用开发 二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】；本轮追问：Agent 的读操作和写操作分别如何鉴权与控制风险？为什么写操作最终仍要跳转工单由用户确认？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）；[字节AI全栈二面](https://www.nowcoder.com/discuss/938145178114592768)；[微店ai全栈一面](https://www.nowcoder.com/discuss/940646573107650560)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)
+> 来源：蚂蚁 AI应用开发 二面 【淘宝闪购一面同题：人工强制中断 Agent 执行与 HiL 处理】；本轮追问：Agent 的读操作和写操作分别如何鉴权与控制风险？为什么写操作最终仍要跳转工单由用户确认？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）；[字节AI全栈二面](https://www.nowcoder.com/discuss/938145178114592768)；[微店ai全栈一面](https://www.nowcoder.com/discuss/940646573107650560)；[10.21小红书一面面经](https://www.nowcoder.com/feed/main/detail/bab2ccabb366403492901c712278329e)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
 
 **新手答**：“敏感操作前弹个确认框让用户点确认。”
 
@@ -814,6 +820,8 @@ flowchart TD
 
 
 读操作也要按用户身份、资源归属和最小权限鉴权，并限制查询范围、频率及敏感字段；写操作除鉴权外还需校验参数、幂等性和风控策略。最终跳转工单并由用户确认，是为了让执行主体、目标和不可逆影响形成可审计的明确授权，避免模型误解、越权或被篡改参数后直接落地。
+
+**追问补充**：需要把执行流建模为可持久化的暂停状态：生成授权或追问请求后保存 checkpoint、待确认动作、参数摘要、会话及过期时间，释放执行线程并返回等待状态。用户回复后校验身份、请求版本和授权范围，恢复 checkpoint，重新校验参数与幂等键；拒绝、超时或状态失效则安全终止，不能依赖进程内上下文续跑。
 
 **差距在哪**：新手把 HITL 简化为“弹确认框”。高手设计了操作分级、信息展示规范、超时兜底、审计日志四层机制——这不是 UX 问题，是**安全工程问题**。面试官考的是你对 Agent 安全性的理解深度——高敏感场景下，默认行为必须是“不执行”。
 
@@ -908,7 +916,7 @@ RAG 是防幻觉的一层防线，但只是一层。完整的防幻觉体系需�
 
 ### Q：Agent 的 Self-Reflection 机制怎么识别输出中的逻辑错误？
 
-> 来源：蚂蚁 AI应用开发 二面
+> 来源：蚂蚁 AI应用开发 二面；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：“让模型自己重新检查一遍输出。”
 
@@ -930,6 +938,8 @@ Self-Reflection 识别逻辑错误的核心是**把开放的生成任务转化�
    - Observation 是否被正确解读（模型可能误解工具返回值）
 
 3. **规则约束检查**：用硬编码规则检查输出的形式化属性——数值范围、格式合规、必要字段是否齐全。这不需要模型能力，但能捕获大量低级逻辑错误
+
+**追问补充**：Schema 只能证明字段和类型正确，不能证明语义正确。应把关键结论拆成可验证的断言，使用检索证据、工具计算、规则或独立模型逐条核验，并做反事实、边界和一致性测试；证据缺失、数值矛盾或与工具结果冲突时判为失败，拒绝输出或转人工。
 
 **差距在哪**：新手的“自检”没有方法论。高手解释了 Self-Reflection 有效的底层原理（评估空间 < 生成空间），并给出了三种具体的逻辑错误识别策略。面试官考的是你对这个机制的理解是“知道名字”还是“理解原理”。
 
@@ -1201,7 +1211,7 @@ Fallback 要分层设计——不同层级的失败对应不同的降级策略�
 
 ## Q：工具调用返回结果为空或调用失败，Agent 应该怎么处理？是直接重试还是换策略？
 
-> 来源：最有料 AI 实习生面经【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：工具调用失败率较高时，应从描述、重试、降级等哪些维度进行优化？】；本轮追问：遇到 429 和 retry-after 连续重试时，在预算 6 步、8 次调用的约束下怎么修改？停止原因是什么？给用户返回什么？（[本轮追问](https://www.nowcoder.com/discuss/928253581973553152)）；本轮追问：如果订单查询连接失败，工具也没有执行，返回了空列表，应该怎么告诉用户？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；本轮追问：工具调用超时怎么办？（[面完字节Agent，我人都傻了](https://www.nowcoder.com/discuss/929492609167290368)）；本轮追问：Agent 调用工具时做了哪些异常、超时、重试处理？模型是怎么做负载/排队调度的？（[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)）；本轮追问：大模型调用的时候出现了异常，例如超时等问题，你应该如何进行处理的？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[零一万物 知识图谱算法实习生一面](https://www.nowcoder.com/feed/main/detail/de81855bb25447bda52e11fe4d6af61d)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[阳光保险 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/600fa3f292654e02ab227d923206a158)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
+> 来源：最有料 AI 实习生面经【[快手 - Agent 开发岗（应用落地 + AI 工具）](https://www.nowcoder.com/discuss/926274020192841728)追问：工具调用失败率较高时，应从描述、重试、降级等哪些维度进行优化？】；本轮追问：遇到 429 和 retry-after 连续重试时，在预算 6 步、8 次调用的约束下怎么修改？停止原因是什么？给用户返回什么？（[本轮追问](https://www.nowcoder.com/discuss/928253581973553152)）；本轮追问：如果订单查询连接失败，工具也没有执行，返回了空列表，应该怎么告诉用户？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/8f0f005a1f7a48958ac5f07bea3c5d88)；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；本轮追问：工具调用超时怎么办？（[面完字节Agent，我人都傻了](https://www.nowcoder.com/discuss/929492609167290368)）；本轮追问：Agent 调用工具时做了哪些异常、超时、重试处理？模型是怎么做负载/排队调度的？（[阿里云二面](https://www.nowcoder.com/feed/main/detail/640ec3ff1d7d4e9c8e42f5ededb1e4a6)）；本轮追问：大模型调用的时候出现了异常，例如超时等问题，你应该如何进行处理的？（[杭州微链词元  AI应用开发](https://www.nowcoder.com/feed/main/detail/0fa200b70a5442f2aad559323802d889)）；[乐堡AI应用开发岗四面面经，面试官非常nice！](https://www.nowcoder.com/discuss/939480702876123136)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[零一万物 知识图谱算法实习生一面](https://www.nowcoder.com/feed/main/detail/de81855bb25447bda52e11fe4d6af61d)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[阳光保险 AI 应用开发二面](https://www.nowcoder.com/feed/main/detail/600fa3f292654e02ab227d923206a158)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“重试几次，还不行就报错。”
 
@@ -1339,7 +1349,7 @@ Agent 的重试预算：
 
 ## Q：Agent 失败通常有哪些原因？如何快速定位责任层？
 
-> 来源：点点互动/Agent开发秋招一面【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：根因定位的 Agent 能详细讲一下吗？】；本轮追问：模型和Agent工具调用中间的过程终止，可能会有哪些原因？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；[本轮来源](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)；本轮追问：讲一下你在这个项目里遇到最难定位的一个 Bad Case 是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：你这个系统的订单量是不是很少？并发、服务运维、任务失败归因怎么做？（[Agent 开发面经](https://www.nowcoder.com/discuss/930572525178748928)）；本轮追问：对失败的任务怎么进行分析并且反过来迭代优化？（[华为AI开发二面](https://www.nowcoder.com/feed/main/detail/3b0187e22236408f90cc63dd6f9fad06)）；本轮追问：混合云故障排查如何确保 Agent 定位正确？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；本轮追问：请介绍故障定位的整体工作链路，中间哪些部分是你具体负责、投入比较多的？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；本轮追问：如何排查锁定根因是流程设计问题，而不是 prompt 写法、模型版本等其他因素？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)；[同花顺一面 10.9](https://www.nowcoder.com/feed/main/detail/9bcb709926ff4fbdb522179049d5b6da)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)
+> 来源：点点互动/Agent开发秋招一面【阿里 Agent Infra 一面题库同题：模型与 Infra 故障归因】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：根因定位的 Agent 能详细讲一下吗？】；本轮追问：模型和Agent工具调用中间的过程终止，可能会有哪些原因？（[本轮追问](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；[本轮来源](https://www.nowcoder.com/feed/main/detail/c366afaed5b84de2b05d70bc6f2b81f2)；本轮追问：讲一下你在这个项目里遇到最难定位的一个 Bad Case 是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：你这个系统的订单量是不是很少？并发、服务运维、任务失败归因怎么做？（[Agent 开发面经](https://www.nowcoder.com/discuss/930572525178748928)）；本轮追问：对失败的任务怎么进行分析并且反过来迭代优化？（[华为AI开发二面](https://www.nowcoder.com/feed/main/detail/3b0187e22236408f90cc63dd6f9fad06)）；本轮追问：混合云故障排查如何确保 Agent 定位正确？（[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)）；本轮追问：请介绍故障定位的整体工作链路，中间哪些部分是你具体负责、投入比较多的？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；本轮追问：如何排查锁定根因是流程设计问题，而不是 prompt 写法、模型版本等其他因素？（[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)）；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)；[同花顺一面 10.9](https://www.nowcoder.com/feed/main/detail/9bcb709926ff4fbdb522179049d5b6da)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[未注明公司 AI 全栈开发实习转正面试](https://www.nowcoder.com/feed/main/detail/facaecedc70e4fffbc4e556ba7b7998d)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：“可能是模型幻觉、工具报错或者网络超时，失败了就重试。”
 
@@ -1366,13 +1376,15 @@ Agent 的重试预算：
 
 优化要形成闭环：保存失败样本、Trace 和人工或规则标签，按层归因后做最小变更，在回放集与线上灰度对比成功率、误报、延迟和成本。混合云还要核对跨云网络、鉴权、网关、配额、版本和数据一致性，并结合首个异常 Span 与变更记录判责。若固定模型、Prompt 和工具下仍按固定步骤失败，且改流程后恢复，才可锁定为流程设计问题；否则先做 Prompt、模型和依赖的隔离实验。
 
+**追问补充**：执行中为每一步设置前置条件、后置断言和超时边界；断言失败时保留检查点，按错误类型修参、重规划或回滚，连续失败则降级或转人工。子 Agent 需上报模块、输入输出、状态版本和错误码，由父 Agent 对照契约与首个异常事件定位责任模块，避免只依据最终结果归因。
+
 **差距在哪**：新手罗列故障名词并统一重试，高手按链路分层、用证据定位，并为不同故障设置不同恢复策略。面试官考的是生产级可观测性和故障归因能力。
 
 ---
 
 ## Q：所有模型超时或故障时怎么兜底？什么时候用规则引擎，什么时候转人工，服务恢复后怎么回切？
 
-> 来源：商汤/大模型算法应用实习二面；拼多多 AI Agent 提前批二面（API Provider 故障切换、自动恢复与回切）；本轮追问：你说的工具层“兜底”具体是做什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)；本轮追问：模型熔断切换怎么保证上下文一致？（[9.17 润科通用一面](https://www.nowcoder.com/feed/main/detail/f426a93495c34fd7a66a91d1e59bf2e7)）；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)
+> 来源：商汤/大模型算法应用实习二面；拼多多 AI Agent 提前批二面（API Provider 故障切换、自动恢复与回切）；本轮追问：你说的工具层“兜底”具体是做什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)；本轮追问：模型熔断切换怎么保证上下文一致？（[9.17 润科通用一面](https://www.nowcoder.com/feed/main/detail/f426a93495c34fd7a66a91d1e59bf2e7)）；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[10.28字节搜索大模型一面凉经](https://www.nowcoder.com/feed/main/detail/f3991feac126477cb244984b8ea09d94)
 
 **新手答**：“超时就重试，重试失败就报错给用户。”
 
@@ -1427,6 +1439,8 @@ flowchart LR
 
 
 熔断切换不能只复制用户文本，应让各模型共享同一份有序会话状态，以消息版本或快照传递系统提示、历史消息、记忆和工具状态；切换前固定上下文版本，工具调用用幂等键防止重试产生重复副作用，完成后再提交新消息。
+
+**追问补充**：搜索链路应拆分记录召回、重排、上下文拼接、模型生成和工具调用各阶段的耗时，并以端到端 P95/P99 设预算。超预算时可截断候选、减少检索量或并行调用；先返回缓存/规则结果，异步补全长答案，设置全链路超时并避免无界重试。
 
 **差距在哪**：新手只有“重试”和“报错”两个选项。高手设计了完整的降级链路（主模型 → 备用模型 → 规则引擎 → 人工），明确了每层的触发条件，且给出了服务恢复后的渐进回切策略。面试官考察的是生产级系统的韧性设计——不只是“重试”，而是完整的降级-兜底-恢复闭环。
 

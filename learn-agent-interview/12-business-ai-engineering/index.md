@@ -317,7 +317,7 @@ flowchart TB
 
 ## Q：Agent 项目如何从 Demo 进行企业级落地？从原型到生产需要补全哪些工程能力？
 
-> 来源：哆咔互娱 Agent开发实习一面 【[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界】；本轮追问：你的经历主要集中在 Skill 开发，是否具备 Agent 工程落地经验？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)；本轮追问：介绍 Codex Pi 的实现，以及 Agent 如何与业务结合并提效？（[本轮追问](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)）；本轮追问：Agent项目是用于业务提效的，还是可以复制到全公司维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/beae35cec366487a918abee5421216f2)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；本轮追问：视频生产是直接调用模型，还是组合素材和工程能力？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；本轮追问：简历中的“企业级 RAG”应该如何理解？企业级 RAG 与学习型 Demo 有哪些不同？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[字节Agent全三轮面经](https://www.nowcoder.com/feed/main/detail/b4fb3bee56134c3d9bcde6a3166a1711)；[未注明公司 Agent 开发实习转正面试](https://www.nowcoder.com/feed/main/detail/7a9f8b8beafd490190cef40fe0af6afc)
+> 来源：哆咔互娱 Agent开发实习一面 【[国际业务 Agent 一面](https://www.nowcoder.com/feed/main/detail/3c305b0c1565458ba05c9906322f5327)追问：无人化业务链路的自治边界】；本轮追问：你的经历主要集中在 Skill 开发，是否具备 Agent 工程落地经验？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/4dab7dac5d114250a5b8025bb05cf17f)；本轮追问：介绍 Codex Pi 的实现，以及 Agent 如何与业务结合并提效？（[本轮追问](https://www.nowcoder.com/feed/main/detail/9b4cee70522d4e7aa771e222aeb28169)）；本轮追问：Agent项目是用于业务提效的，还是可以复制到全公司维度？（[本轮追问](https://www.nowcoder.com/feed/main/detail/beae35cec366487a918abee5421216f2)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；本轮追问：视频生产是直接调用模型，还是组合素材和工程能力？（[携程 AI 应用开发二面（已oc）](https://www.nowcoder.com/feed/main/detail/781cfc04e3bc4697acf0a5c913543a28)）；本轮追问：简历中的“企业级 RAG”应该如何理解？企业级 RAG 与学习型 Demo 有哪些不同？（[字节 Agent 秋招二面](https://www.nowcoder.com/discuss/932657562825027584)）；[字节Agent全三轮面经](https://www.nowcoder.com/feed/main/detail/b4fb3bee56134c3d9bcde6a3166a1711)；[未注明公司 Agent 开发实习转正面试](https://www.nowcoder.com/feed/main/detail/7a9f8b8beafd490190cef40fe0af6afc)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“把 Demo 代码优化一下，加个前端界面，部署到服务器上就行了。”
 
@@ -392,6 +392,8 @@ graph LR
 企业级 RAG 不只是接入向量库，而是围绕数据治理和可验证性建设：按租户、角色和数据密级做采集与检索权限隔离，保留来源、版本和更新时间；通过混合检索、重排、引用约束降低召回偏差，并用离线评测、线上反馈和 Bad Case 回流持续验证效果。
 
 **追问补充**：拿到高保真 HTML 后，先按页面、组件和交互状态拆解：区分静态展示、表单校验、跳转、弹窗、权限和异常态，再结合老师的使用流程整理功能清单。随后为每项标注输入输出、数据来源、状态流转、接口需求和验收条件，识别哪些是演示假数据，最后与产品确认边界并拆成前端、后端、Agent 流程和测试任务。
+
+**追问补充**：Action 可按“梳理—复用—评审—测试—发布”闭环推进：先确认业务边界、验收指标和现有接口，再优先复用稳定 API 并补齐鉴权、幂等和错误码；评审接口契约、权限与异常流程。测试覆盖单接口、链路、Agent 评测和回归，最后通过灰度、监控和可回滚版本发布。
 
 **差距在哪**：面试官考的是你对“工程成熟度”的认知。Demo 证明“能做”，生产证明“做得稳”。能列出从可靠性、可观测性到安全合规的系统清单，说明你有真实的落地思维而不只是跑通 Happy Path。
 
@@ -894,6 +896,22 @@ MCP 的价值是**跨 Host 复用、动态发现和协议标准化**，不是让
 系统的角色不是简单排名，而是把考试、作答过程、题目知识点和学习行为转成可解释的诊断与干预依据。流程可分为数据接入与治理、题目—知识点映射、指标计算、薄弱点识别、报告生成和干预效果追踪；指标应同时关注正确率、难度校正后的表现、知识点覆盖和时间变化，避免只按分数贴标签。工程上要处理缺失、重复提交、题目标注错误、班级样本偏差及权限隔离，成绩和行为数据应最小化采集并审计访问。用历史回测、教师抽样复核、干预前后对照和分群公平性检查验证效果。数据模型可分学校、用户与角色、课程班级、题目、知识点、作答记录及报告，教师、学生、管理者按对象范围授权；原始事实与模型诊断分开保存。模型复杂度应由基线对照决定，保留证据和人工修正入口。
 
 **差距在哪**：浅层回答停留在“分析成绩并推荐”，深层回答会覆盖数据建模、诊断有效性、隐私权限、干预闭环与评估偏差。
+
+---
+
+## Q：如何设计教育辅导 Agent 的整体流程？
+
+> 来源：[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
+
+**新手答**：“根据学习目标检索教材，生成讲解和练习，再根据学生反馈调整。”
+
+**高手答**：
+
+先明确学习阶段、课程范围和教学目标，再把 Agent 划成目标澄清、课程检索、讲解练习、判分反馈与学习记录几个环节。知识内容保留教材引用，题目和答案分别校验，无法确认的知识点转交教师；不能以流畅解释代替正确性。
+
+工程上可让固定 Workflow 控制测验与评分协议，模型负责解释和提示。学生答错时先诊断概念、推理或计算错误，再给分级提示，避免直接暴露完整答案；涉及高风险建议或敏感信息时限制数据收集和输出范围。按知识点、难度和学生类型建立回归集，分别观察正确性、提示有效性、学习增益、误导率和成本，不能只用对话轮数或满意度证明教学效果。这是设计建议，实际流程需按具体课程与使用者验证。
+
+**差距在哪**：需要把讲解能力与教学目标、可验证判分、错误诊断和学生安全边界联系起来。
 
 ## 推荐阅读
 

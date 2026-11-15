@@ -18,7 +18,7 @@ eyebrow: Agent 面试通关 / 15
 
 ### Q：Harness Engineering 是什么？如果让你构建一个 Harness 体系，你会做哪些工作？
 
-> 来源：快手 AI业务应用设计开发 / [阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【字节后端开发日常实习二面同题：“harness有了解吗”】【腾讯AI后端开发一面同题：“了解harness嘛，具体是做什么的”】【美团Agent方向面经同题：“harness工程了解吗？主要内容？项目里怎么用？还能补什么？”】【社招五年Go面经同题：“了解harness engineer吗”】【腾讯音乐暑期+日常同题：“有了解过Harness么？有用过Harness么？”】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[(秋招) vivo线下面面经 - Agent开发](https://www.nowcoder.com/discuss/932016298563809280)；本轮追问：在让 AI 开始工作前，你通常会做什么来提高输出正确性和可控性？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[小鹏二面](https://www.nowcoder.com/feed/main/detail/7c2fa3dd92014d038603ba388fb078f4)；[快手 AI 全栈开发 面经](https://www.nowcoder.com/feed/main/detail/b65f5ee779b34f1399be9d97bbae3937)；[HW技术一面（10.13）](https://www.nowcoder.com/feed/main/detail/978bed84f8f74b31b7f3798a71f67f5a)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[未注明公司 Agent 面试问题整理](https://www.nowcoder.com/feed/main/detail/feeede5d38f341f791c665bb7585adf7)；[小红书 增长方向一、二面](https://www.nowcoder.com/feed/main/detail/b9761e83c4c142c2a3bba57b545df113)；[长鑫存储 AI 全栈开发一面](https://www.nowcoder.com/feed/main/detail/712626e9f6114e6ebdffe11d83d19ff7)；[超聚变 AI 软件工程师（AI 大模型）一面](https://www.nowcoder.com/discuss/948249299312242688)
+> 来源：快手 AI业务应用设计开发 / [阿里国际 Agent 开发三面](https://www.nowcoder.com/feed/main/detail/747f07e71f4448bebdce6ada5de800cd) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【字节后端开发日常实习二面同题：“harness有了解吗”】【腾讯AI后端开发一面同题：“了解harness嘛，具体是做什么的”】【美团Agent方向面经同题：“harness工程了解吗？主要内容？项目里怎么用？还能补什么？”】【社招五年Go面经同题：“了解harness engineer吗”】【腾讯音乐暑期+日常同题：“有了解过Harness么？有用过Harness么？”】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；[本轮来源](https://www.nowcoder.com/feed/main/detail/89e9597f580840f5a6e9f740cc6b0b97)；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[(秋招) vivo线下面面经 - Agent开发](https://www.nowcoder.com/discuss/932016298563809280)；本轮追问：在让 AI 开始工作前，你通常会做什么来提高输出正确性和可控性？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[小鹏二面](https://www.nowcoder.com/feed/main/detail/7c2fa3dd92014d038603ba388fb078f4)；[快手 AI 全栈开发 面经](https://www.nowcoder.com/feed/main/detail/b65f5ee779b34f1399be9d97bbae3937)；[HW技术一面（10.13）](https://www.nowcoder.com/feed/main/detail/978bed84f8f74b31b7f3798a71f67f5a)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[未注明公司 Agent 面试问题整理](https://www.nowcoder.com/feed/main/detail/feeede5d38f341f791c665bb7585adf7)；[小红书 增长方向一、二面](https://www.nowcoder.com/feed/main/detail/b9761e83c4c142c2a3bba57b545df113)；[长鑫存储 AI 全栈开发一面](https://www.nowcoder.com/feed/main/detail/712626e9f6114e6ebdffe11d83d19ff7)；[超聚变 AI 软件工程师（AI 大模型）一面](https://www.nowcoder.com/discuss/948249299312242688)；[StepFun（阶跃星辰） AI 评测算法 一面](https://www.nowcoder.com/feed/main/detail/68924c2475314c068f0bb31dc2b2a732)
 
 **新手答**：“好像是跟测试框架有关的东西？不太了解。”
 
@@ -65,6 +65,8 @@ flowchart TB
 **可以补充的方向**：更接近真实业务的“半合成”评测环境（不是纯 mock，而是真实 API + 可控输入）、对抗性用例（测试安全边界）、成本与性能的持续监控。
 
 **追问补充**：模型变强会让规则、提示和工具编排可以更薄，但不会消除确定性边界：权限隔离、审批、输出校验、审计和回归评测仍应由 Harness 承担。应按风险分层，让模型负责开放式决策，Harness 负责不可逾越的约束与可验证反馈，并用失败率、越权样例和回归集验证是否真的能变薄。
+
+**追问补充**：Rollout Harness 通常指将 Agent 放入任务环境反复执行并采集轨迹的运行设施，具体用于评测、训练数据采集还是产品实验，要看仓库定义。应追踪任务输入、工具与环境重置、终止条件、结果判定和轨迹格式；这里的 rollout 不能直接解释成生产灰度发布。
 
 **差距在哪**：新手不了解这个概念，或只知道“跟测试有关”。高手能讲清 Harness 的三层结构（约束/增强/验证）和核心价值（不是规定 Agent 怎么做，而是确保它在安全范围内自主做事），且能给出具体的构建方案。面试官考的是你对“Agent 工程化”这件事有多深的理解——是只会调 Prompt，还是能搭建完整的工程保障体系。
 
@@ -430,7 +432,7 @@ MCP 在底层（Agent 到工具），A2A 在上层（Agent 到 Agent）。两者
 
 ### Q：Skills 是什么？为什么有了 MCP 和 Function Calling，还需要 Skills？
 
-> 来源：字节实习一面 【蚂蚁一面同题：“Skills 的原理有没有了解过？”】【小红书AI应用开发同题：“Skills了解+如何管理”】【CVTE AI应用工程师一面追问：“怎么理解 Skill？能解决什么问题？”】【科大讯飞一面追问：“写Skills和写提示词的区别与共同点”】；[字节广告团队agent面经（一二面）](https://www.nowcoder.com/discuss/930870582843805696)；本轮追问：Skills的能力直接写进系统提示词也能实现，为什么要单独拆出Skills？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[苏州科达AI业务开 - 9月15日 - 一面 - 秋招](https://www.nowcoder.com/discuss/929790487429382144)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[网易互娱 AI应用开发 日常实习](https://www.nowcoder.com/feed/main/detail/683ffea1ead24f8d8539f6bab3b7b361)
+> 来源：字节实习一面 【蚂蚁一面同题：“Skills 的原理有没有了解过？”】【小红书AI应用开发同题：“Skills了解+如何管理”】【CVTE AI应用工程师一面追问：“怎么理解 Skill？能解决什么问题？”】【科大讯飞一面追问：“写Skills和写提示词的区别与共同点”】；[字节广告团队agent面经（一二面）](https://www.nowcoder.com/discuss/930870582843805696)；本轮追问：Skills的能力直接写进系统提示词也能实现，为什么要单独拆出Skills？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[苏州科达AI业务开 - 9月15日 - 一面 - 秋招](https://www.nowcoder.com/discuss/929790487429382144)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[网易互娱 AI应用开发 日常实习](https://www.nowcoder.com/feed/main/detail/683ffea1ead24f8d8539f6bab3b7b361)；[未注明公司 AI 工程技术面试](https://www.nowcoder.com/feed/main/detail/c66bd7dc631642758a84001b1343bcc0)；[字节中国交易与广告AI全栈实习 一面](https://www.nowcoder.com/feed/main/detail/c1afa60c2b9e4b25a39e27c31fed3d8c)
 
 **新手答**：“Skills 就是预写好的 Prompt 模板吧，调用时注入进去。”
 
@@ -483,7 +485,7 @@ FC 和 MCP 解决“Agent 能调用什么工具”，但不解决**“Agent 该�
 
 ### Q：Skill、MCP、Rule 三者在 Agent 系统中各自扮演什么角色？
 
-> 来源：蚂蚁一面 / [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0) / [虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641) 【快手AI应用开发一面追问：“Tool/Skill/Agent 三层抽象的本质区别”】
+> 来源：蚂蚁一面 / [淘宝闪购 AI 应用研发二面](https://www.nowcoder.com/feed/main/detail/09ec7c36a2774223a93044a02b2c3ec0) / [虾皮一面](https://www.nowcoder.com/feed/main/detail/e133c2610bde4adc812bba66c62e1641) 【快手AI应用开发一面追问：“Tool/Skill/Agent 三层抽象的本质区别”】；[科大讯飞Agent一面](https://www.nowcoder.com/feed/main/detail/c325a58591c44b42919f2a4984ed12b8)
 
 **新手答**：“都是给 Agent 加能力的，只是形式不同。”
 
@@ -521,6 +523,8 @@ flowchart TB
 
 三者组合才构成完整的 Agent 行为管控体系：Rules 画红线，Skills 铺方法，Tools 提供手段。
 
+**追问补充**：TOOLS 是运行时可执行的单个能力，负责参数校验、权限、调用和返回结果；MCP 是连接 Agent 与外部工具/资源的协议层，统一发现、描述和调用方式。层次上，MCP 解决互操作与接入，TOOLS 解决具体执行，Skill 则编排多个工具的任务方法，Rule 负责约束边界。
+
 **差距在哪**：新手觉得三者“差不多”。高手理解它们是正交的三个维度——约束、方法、能力——缺任何一个 Agent 系统都有缺陷。面试官考的是你对 Agent 系统设计的分层思维。
 
 ---
@@ -528,7 +532,7 @@ flowchart TB
 
 ## Q：Hermes、OpenCode、Claude Code、OpenClaw 等热门 Coding Agent 工具的核心差异和适用场景？
 
-> 来源：哆咔互娱 Agent开发实习一面 / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01) / [快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491) 【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：有没有看过市面上流行的开源 Agent 框架，比如 openclaw？讲讲 claw 的实现、记忆机制？（[本轮追问](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)）；本轮追问：你认为 Claude Code 哪些功能做得比较好？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；本轮追问：Claude和Codex二者有什么差别，哪个更好？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[小鹏二面](https://www.nowcoder.com/feed/main/detail/7c2fa3dd92014d038603ba388fb078f4)
+> 来源：哆咔互娱 Agent开发实习一面 / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01) / [快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491) 【唯品会大模型算法实习追问：主流 Agent 框架在 Harness 上有什么差异】；[本轮来源](https://www.nowcoder.com/feed/main/detail/2f4e4cde4e524a16aae5f55a89c49273)；本轮追问：有没有看过市面上流行的开源 Agent 框架，比如 openclaw？讲讲 claw 的实现、记忆机制？（[本轮追问](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)）；本轮追问：你认为 Claude Code 哪些功能做得比较好？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bfd43b5c66784add8fbf5893c164697a)）；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；本轮追问：Claude和Codex二者有什么差别，哪个更好？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[小鹏二面](https://www.nowcoder.com/feed/main/detail/7c2fa3dd92014d038603ba388fb078f4)；[海康总部Agent开发日常实习一面30min](https://www.nowcoder.com/feed/main/detail/b3f0a1b58fba41a9bffb5df3497da289)；[小厂AI应用开发面试](https://www.nowcoder.com/feed/main/detail/c9dd06bab88247348a5c42fd89646f3b)
 
 **新手答**：“Claude Code 最强，其他的也差不多，都是用大模型写代码的工具。”
 

@@ -260,3 +260,18 @@ The 2026-10-22 至 2026-11-07 question-bank update independently explains mechan
 - [TensorFlow Recommenders排除接口](https://www.tensorflow.org/recommenders/api_docs/python/tfrs/layers/factorized_top_k/ScaNN)
 
 Interview links in the articles establish question provenance. These references establish specific answer facts; deployment, evaluation, and testing recommendations are independent engineering analysis. No upstream article, source code, figure, or dataset is reproduced.
+
+## Interview Answer References (2026-11-15)
+
+The 2026-11-07 to 2026-11-15 interview update uses these primary references for independently written explanations:
+
+- [A Watermark for Large Language Models](https://arxiv.org/abs/2301.10226)
+- [PyTorch 显存管理说明](https://docs.pytorch.org/docs/stable/notes/cuda.html#memory-management)
+- [PyTorch 模型检查点加载指南](https://docs.pytorch.org/tutorials/recipes/recipes/module_load_state_dict_tips.html)
+- [PyTorch 性能指南](https://docs.pytorch.org/tutorials/recipes/recipes/tuning_guide.html)
+- [Faiss Additive Quantizers](https://github.com/facebookresearch/faiss/wiki/Additive-quantizers)
+- [Microsoft GraphRAG](https://microsoft.github.io/graphrag/)
+- [Eino 文档](https://www.cloudwego.io/docs/eino/)
+- [W3C OWL 2 Primer](https://www.w3.org/TR/owl2-primer/)
+
+Interview links establish question provenance. Official references support specific technical mechanisms; deployment, evaluation and failure-handling recommendations are engineering analysis. No upstream article, figure or dataset is reproduced.

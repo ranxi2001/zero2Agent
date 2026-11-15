@@ -119,7 +119,7 @@ eyebrow: Agent 面试通关 / 02
 
 ### Q：工具多导致 token 数过多，怎么解决？
 
-> 来源：字节 Agent 实习二面 【阿里国际一面追问：Skill描述过长导致上下文爆炸】【小红书 Agent 岗一面追问：工具延迟加载的触发时机与具体实现】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具数量很多时，如何避免 Prompt 过长？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：Agent工具过多时你是怎么处理的？比如接口数量太多怎么解决？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)
+> 来源：字节 Agent 实习二面 【阿里国际一面追问：Skill描述过长导致上下文爆炸】【小红书 Agent 岗一面追问：工具延迟加载的触发时机与具体实现】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具数量很多时，如何避免 Prompt 过长？】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：Agent工具过多时你是怎么处理的？比如接口数量太多怎么解决？】；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；[阿里 AI 应用开发二面](https://www.nowcoder.com/discuss/945984937780350976)；[字节中国交易与广告AI全栈实习 一面](https://www.nowcoder.com/feed/main/detail/c1afa60c2b9e4b25a39e27c31fed3d8c)
 
 **新手答**：“减少工具数量。”
 
@@ -170,7 +170,7 @@ eyebrow: Agent 面试通关 / 02
 
 ### Q：如果工具调用是成功的，但返回结果语义不完整，模型很容易误判，你怎么设计中间层？
 
-> 来源：腾讯大模型应用开发二面；本轮追问：模型如何知道文件还没有读完？如何判断是否继续读取？工具应该返回哪些额外信息辅助判断？ / 假设文件有 1 万行，工具每次最多读取 2500 行，调用后返回的具体结果是什么？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[安恒信息一面｜Python Agent开发实习生](https://www.nowcoder.com/feed/main/detail/42ad85eefd20401a8a076203ec850175)
+> 来源：腾讯大模型应用开发二面；本轮追问：模型如何知道文件还没有读完？如何判断是否继续读取？工具应该返回哪些额外信息辅助判断？ / 假设文件有 1 万行，工具每次最多读取 2500 行，调用后返回的具体结果是什么？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[安恒信息一面｜Python Agent开发实习生](https://www.nowcoder.com/feed/main/detail/42ad85eefd20401a8a076203ec850175)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“让模型自己判断返回值是否完整。”
 
@@ -633,6 +633,59 @@ Function Calling 的本质价值是**把“模型想调工具”这件事从自�
 
 ## 工具设计与实现
 
+### Q：你会如何设计工具 schema，才能降低模型传错参数、漏参数、乱调用的问题？
+
+> 来源：Agent 开发面试 30 题；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
+
+**新手答**：“写清楚参数说明就行。”
+
+**高手答**：
+
+工具 schema 设计的核心原则是**降低模型的决策负担**——参数越少、约束越紧、描述越具体，出错概率越低。
+
+**1. 参数设计——越少越好，越受限越好**：
+
+- **合并冗余参数**：不要同时暴露 `start_date` 和 `start_timestamp`，选一种格式，内部转换
+- **用枚举代替自由文本**：`sort_by` 不要让模型自由填，用 `enum: ["price_asc", "price_desc", "rating"]`
+- **必填和选填分清楚**：`required` 字段必须标明，可选参数给合理的 `default` 值，减少模型需要做的决定
+
+**2. 描述设计——说“别做什么”比“该做什么”更重要**：
+
+```json
+{
+  "name": "search_hotel",
+  "parameters": {
+    "city": {
+      "type": "string",
+      "description": "城市名，直接使用用户原文（如'北京'），不要从地址中自行提取城市"
+    },
+    "check_in": {
+      "type": "string",
+      "description": "入住日期，格式 YYYY-MM-DD。如果用户说'下周五'，请转换为具体日期"
+    }
+  }
+}
+```
+
+**3. 命名设计——名字要自解释**：
+
+- `get_weather` 比 `fetch_data` 好——名字越具体，模型越不容易误调
+- 相似工具要通过命名区分清楚：`search_hotel_by_city` vs `search_hotel_by_id`，而不是一个 `search_hotel` 靠参数区分
+
+**4. 工具粒度——一个工具做一件事**：
+
+一个“大而全”的工具（既能搜索、又能预订、还能取消）会让模型在参数选择上出错。拆成 `search_hotel`、`book_hotel`、`cancel_booking` 三个工具，每个的参数空间小而确定。
+
+**追问补充**：权限不能只写在提示词或 Schema 中：工具注册时绑定允许的主体、资源范围和操作级权限，服务端执行鉴权与参数校验；写操作、敏感数据访问需二次确认或审批，并记录调用者、参数摘要、结果和审计日志。
+
+**追问补充**：执行前应将 JSON 解析后按 schema 校验必填项、类型、枚举、格式、范围及额外字段，失败时返回结构化错误并禁止调用。封装外部 API 还需处理鉴权、超时、重试、幂等、限流、字段映射和错误归一化，避免把供应商细节直接暴露给模型。
+
+**追问补充**：JSON Schema 能约束字段类型、必填、枚举和部分组合关系；本体可补充实体类型、关系和业务术语。二者表达力和推理假设不同，都不能自动证明真实业务状态或权限合法，执行侧仍须根据权威数据与当前授权核验。
+
+**差距在哪**：新手觉得“描述写清楚”就够了。高手从参数设计、描述技巧、命名规范、工具粒度四个角度系统性地降低出错率。面试官考的是你有没有做过“把模型对接到真实工具”的工程经验——只有踩过坑的人才知道 schema 设计有这么多讲究。
+
+---
+
 ### Q：手撕一个 ReAct 架构的 Agent，实现文件操作（找文件、删除文件）
 
 > 来源：AI 工程师面试（手撕代码，可借助 AI）；[小厂Agent开发一面](https://www.nowcoder.com/feed/main/detail/51a65e9e02e949dbb52e90b5691a20f4)；[小红书 增长方向一、二面](https://www.nowcoder.com/feed/main/detail/b9761e83c4c142c2a3bba57b545df113)
@@ -740,57 +793,6 @@ result = agent.invoke({
 
 ---
 
-
-### Q：你会如何设计工具 schema，才能降低模型传错参数、漏参数、乱调用的问题？
-
-> 来源：Agent 开发面试 30 题；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)
-
-**新手答**：“写清楚参数说明就行。”
-
-**高手答**：
-
-工具 schema 设计的核心原则是**降低模型的决策负担**——参数越少、约束越紧、描述越具体，出错概率越低。
-
-**1. 参数设计——越少越好，越受限越好**：
-
-- **合并冗余参数**：不要同时暴露 `start_date` 和 `start_timestamp`，选一种格式，内部转换
-- **用枚举代替自由文本**：`sort_by` 不要让模型自由填，用 `enum: ["price_asc", "price_desc", "rating"]`
-- **必填和选填分清楚**：`required` 字段必须标明，可选参数给合理的 `default` 值，减少模型需要做的决定
-
-**2. 描述设计——说“别做什么”比“该做什么”更重要**：
-
-```json
-{
-  "name": "search_hotel",
-  "parameters": {
-    "city": {
-      "type": "string",
-      "description": "城市名，直接使用用户原文（如'北京'），不要从地址中自行提取城市"
-    },
-    "check_in": {
-      "type": "string",
-      "description": "入住日期，格式 YYYY-MM-DD。如果用户说'下周五'，请转换为具体日期"
-    }
-  }
-}
-```
-
-**3. 命名设计——名字要自解释**：
-
-- `get_weather` 比 `fetch_data` 好——名字越具体，模型越不容易误调
-- 相似工具要通过命名区分清楚：`search_hotel_by_city` vs `search_hotel_by_id`，而不是一个 `search_hotel` 靠参数区分
-
-**4. 工具粒度——一个工具做一件事**：
-
-一个“大而全”的工具（既能搜索、又能预订、还能取消）会让模型在参数选择上出错。拆成 `search_hotel`、`book_hotel`、`cancel_booking` 三个工具，每个的参数空间小而确定。
-
-**追问补充**：权限不能只写在提示词或 Schema 中：工具注册时绑定允许的主体、资源范围和操作级权限，服务端执行鉴权与参数校验；写操作、敏感数据访问需二次确认或审批，并记录调用者、参数摘要、结果和审计日志。
-
-**追问补充**：执行前应将 JSON 解析后按 schema 校验必填项、类型、枚举、格式、范围及额外字段，失败时返回结构化错误并禁止调用。封装外部 API 还需处理鉴权、超时、重试、幂等、限流、字段映射和错误归一化，避免把供应商细节直接暴露给模型。
-
-**差距在哪**：新手觉得“描述写清楚”就够了。高手从参数设计、描述技巧、命名规范、工具粒度四个角度系统性地降低出错率。面试官考的是你有没有做过“把模型对接到真实工具”的工程经验——只有踩过坑的人才知道 schema 设计有这么多讲究。
-
----
 
 ### Q：同一个能力是做成“一个大而全工具”还是“多个小工具”，怎么权衡？
 
@@ -980,6 +982,91 @@ LLM 并不是凭空猜出工具参数的。实际流程是：
 
 ---
 
+### Q：如何在多智能体环境中实现动态发现并注册跨协议工具？
+
+> 来源：淘天 AI Agent 一面；本轮追问：MCP 工具具有动态发现能力，如何保证编排执行时能力稳定？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
+
+**新手答**：“在配置文件里列出所有工具。”
+
+**高手答**：
+
+多智能体系统中，每个 Agent 可能需要来自不同来源的工具——MCP Server、REST API、甚至其他 Agent 暴露的能力。**静态配置无法扩展**：新工具上线要改配置重启，Agent 之间的能力共享需要人工同步，协议不同还要分别适配。
+
+解决方案是构建**动态工具发现与注册机制**：
+
+**1. 工具注册中心（Tool Registry Service）**
+
+所有工具向中心化的注册中心注册自己的能力描述、Schema、端点地址和鉴权要求。注册中心就像一个“工具市场”：
+
+```text
+注册信息示例：
+{
+  "tool_id": "product_search_v2",
+  "capability": "按关键词搜索商品，支持价格、品类筛选",
+  "schema": { ... },          // 输入输出的 JSON Schema
+  "endpoint": "mcp://product-server:8080",
+  "protocol": "MCP",
+  "auth": "bearer_token",
+  "owner_agent": "product-agent"
+}
+```
+
+**2. 基于能力的发现（Capability-based Discovery）**
+
+Agent 不需要知道工具名，只需描述自己需要什么能力：
+
+```text
+Agent 请求："我需要一个能搜索商品的工具"
+注册中心：语义匹配 → 返回 product_search_v2（MCP）、catalog_api（REST）两个候选
+Agent：根据协议偏好和延迟选择最优工具
+```
+
+这比按名字查找更灵活——新工具上线后，只要能力描述匹配，就能被自动发现。
+
+**3. 运行时注册（Runtime Registration）**
+
+新的 MCP Server 或 Agent 上线后，无需重启系统即可注册新工具：
+
+```text
+新 MCP Server 启动 → 向注册中心发送注册请求 → 注册中心更新索引
+→ 其他 Agent 下次查询时自动发现新工具
+```
+
+**4. 跨协议适配层（Cross-Protocol Adaptation）**
+
+不同来源的工具协议各异，但调用方 Agent 不应关心底层细节。通过**统一工具接口层 + 协议适配器**解耦：
+
+```mermaid
+flowchart LR
+    A["调用方 Agent"] -->|"统一 Tool Schema"| R["工具注册中心"]
+    R --> PA["MCP 适配器"]
+    R --> PB["REST 适配器"]
+    R --> PC["A2A 适配器"]
+    PA --> T1["MCP Server\n（商品搜索）"]
+    PB --> T2["REST API\n（支付接口）"]
+    PC --> T3["其他 Agent\n（数据分析能力）"]
+```
+
+每个适配器负责将统一的调用格式转换为目标协议的原生格式：
+- **MCP 适配器**：直接透传，协议天然兼容
+- **REST 适配器**：将 Tool Schema 参数映射为 HTTP 请求参数/body
+- **A2A 适配器**：将工具调用转化为对目标 Agent 的任务请求
+
+**5. 安全与权限控制**
+
+- 工具注册需要身份认证——防止恶意工具注入
+- Agent 只能发现自己有权限使用的工具——注册中心按角色过滤
+- 跨 Agent 能力共享需要双向授权——提供方授权暴露，使用方授权访问
+
+
+编排启动时应获取并固定工具能力快照，记录工具版本、Schema 和权限，执行期间不因动态刷新改变参数契约；注册中心需做健康检查和兼容校验。调用失败时按超时、重试、熔断及候选工具降级处理，变更只影响后续编排并保留审计记录。
+
+**追问补充**：新建 Action 可按“定义—校验—注册—发布—调用”执行：先声明名称、输入输出 Schema、协议端点、权限和版本；校验 Schema、鉴权与健康状态后写入注册中心，生成不可变版本并发布。编排时只绑定已审核版本，调用前再次校验参数和权限，记录请求、结果及版本，失败则按幂等键重试或回滚。
+
+**差距在哪**：新手用静态配置列出所有工具——工具少时能用，工具多了或跨团队协作时根本管不过来。高手设计了一套完整的动态发现机制：注册中心提供工具目录、能力描述实现语义发现、运行时注册支持热扩展、协议适配层屏蔽底层差异。面试官考的是你对多智能体工具生态的架构设计能力。
+
+---
+
 ### Q：Agent 做多轮工具调用和单轮调用相比，会面临哪些额外挑战？
 
 > 来源：阿里国际大模型算法一面；本轮追问：用户需求需要连续调用多个不同工具时，模型在多轮工具调用过程中具体承担什么核心工作？（[27秋招-恒生电子AI面试-AI应用开发岗-26.9.23](https://www.nowcoder.com/feed/main/detail/e7981675c7a44b098d97e90a854f9c3c)）；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)
@@ -1083,89 +1170,6 @@ flowchart LR
 **追问补充**：通过 MCP 获取信息的价值在于把 Agent 与具体数据源解耦：统一工具发现、参数/结果契约和调用边界，避免每个 Agent 维护一套适配代码。MCP Center 可作为控制面，负责 Server 注册、能力目录、权限筛选、健康状态与审计；调用面仍直连具体服务，并按租户返回可用工具，避免把全量数据源暴露给模型。
 
 **差距在哪**：新手把工具管理等同于“协议选型”。高手区分了协议层（MCP）和治理层（注册中心）的职责差异，且能根据团队已有基础设施做务实选型。面试官考的是你有没有在真实微服务环境中做过工具集成——纯 Demo 项目不会遇到动态上下线和灰度切流的问题。
-
----
-
-### Q：如何在多智能体环境中实现动态发现并注册跨协议工具？
-
-> 来源：淘天 AI Agent 一面；本轮追问：MCP 工具具有动态发现能力，如何保证编排执行时能力稳定？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）
-
-**新手答**：“在配置文件里列出所有工具。”
-
-**高手答**：
-
-多智能体系统中，每个 Agent 可能需要来自不同来源的工具——MCP Server、REST API、甚至其他 Agent 暴露的能力。**静态配置无法扩展**：新工具上线要改配置重启，Agent 之间的能力共享需要人工同步，协议不同还要分别适配。
-
-解决方案是构建**动态工具发现与注册机制**：
-
-**1. 工具注册中心（Tool Registry Service）**
-
-所有工具向中心化的注册中心注册自己的能力描述、Schema、端点地址和鉴权要求。注册中心就像一个“工具市场”：
-
-```text
-注册信息示例：
-{
-  "tool_id": "product_search_v2",
-  "capability": "按关键词搜索商品，支持价格、品类筛选",
-  "schema": { ... },          // 输入输出的 JSON Schema
-  "endpoint": "mcp://product-server:8080",
-  "protocol": "MCP",
-  "auth": "bearer_token",
-  "owner_agent": "product-agent"
-}
-```
-
-**2. 基于能力的发现（Capability-based Discovery）**
-
-Agent 不需要知道工具名，只需描述自己需要什么能力：
-
-```text
-Agent 请求："我需要一个能搜索商品的工具"
-注册中心：语义匹配 → 返回 product_search_v2（MCP）、catalog_api（REST）两个候选
-Agent：根据协议偏好和延迟选择最优工具
-```
-
-这比按名字查找更灵活——新工具上线后，只要能力描述匹配，就能被自动发现。
-
-**3. 运行时注册（Runtime Registration）**
-
-新的 MCP Server 或 Agent 上线后，无需重启系统即可注册新工具：
-
-```text
-新 MCP Server 启动 → 向注册中心发送注册请求 → 注册中心更新索引
-→ 其他 Agent 下次查询时自动发现新工具
-```
-
-**4. 跨协议适配层（Cross-Protocol Adaptation）**
-
-不同来源的工具协议各异，但调用方 Agent 不应关心底层细节。通过**统一工具接口层 + 协议适配器**解耦：
-
-```mermaid
-flowchart LR
-    A["调用方 Agent"] -->|"统一 Tool Schema"| R["工具注册中心"]
-    R --> PA["MCP 适配器"]
-    R --> PB["REST 适配器"]
-    R --> PC["A2A 适配器"]
-    PA --> T1["MCP Server\n（商品搜索）"]
-    PB --> T2["REST API\n（支付接口）"]
-    PC --> T3["其他 Agent\n（数据分析能力）"]
-```
-
-每个适配器负责将统一的调用格式转换为目标协议的原生格式：
-- **MCP 适配器**：直接透传，协议天然兼容
-- **REST 适配器**：将 Tool Schema 参数映射为 HTTP 请求参数/body
-- **A2A 适配器**：将工具调用转化为对目标 Agent 的任务请求
-
-**5. 安全与权限控制**
-
-- 工具注册需要身份认证——防止恶意工具注入
-- Agent 只能发现自己有权限使用的工具——注册中心按角色过滤
-- 跨 Agent 能力共享需要双向授权——提供方授权暴露，使用方授权访问
-
-
-编排启动时应获取并固定工具能力快照，记录工具版本、Schema 和权限，执行期间不因动态刷新改变参数契约；注册中心需做健康检查和兼容校验。调用失败时按超时、重试、熔断及候选工具降级处理，变更只影响后续编排并保留审计记录。
-
-**差距在哪**：新手用静态配置列出所有工具——工具少时能用，工具多了或跨团队协作时根本管不过来。高手设计了一套完整的动态发现机制：注册中心提供工具目录、能力描述实现语义发现、运行时注册支持热扩展、协议适配层屏蔽底层差异。面试官考的是你对多智能体工具生态的架构设计能力。
 
 ---
 
@@ -1292,7 +1296,7 @@ LoRA 微调 → 解决模型“理解不了复杂意图”的根本能力问题
 
 ### Q：工具返回了非常大的数据超出了大模型的上下文窗口，怎么办？
 
-> 来源：唯品会一面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：工具返回数据量过大时，如何进行分块或流式处理？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具返回数据量过大时，如何处理？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：查询日志接口是现有的，怎么保证不会一次拉取过多日志导致上下文爆掉？】；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：上一轮 Tool 返回特别长怎么办？原始结果会保留吗？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：金融场景工具返回五六千只 A 股，用户要求全量输出，压缩的信息损失怎么办？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：以读文件工具为例，文件不存在或文件非常大时，分别返回什么结果？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：日志文件规模通常达到数百万行，模型上下文装不下时，工程上如何做高效检索过滤？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)
+> 来源：唯品会一面【[字节跳动 - AI Agent 开发岗（工程方向）](https://www.nowcoder.com/discuss/926273296180547584)追问：工具返回数据量过大时，如何进行分块或流式处理？】【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：工具返回数据量过大时，如何处理？】【[8.26百度二面](https://www.nowcoder.com/feed/main/detail/190c6c68414b491d856091e42aef2386)追问：查询日志接口是现有的，怎么保证不会一次拉取过多日志导致上下文爆掉？】；[4399-agent开发面经](https://www.nowcoder.com/feed/main/detail/b040e00a505344deac8f0d2b4968b171)；[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)；本轮追问：上一轮 Tool 返回特别长怎么办？原始结果会保留吗？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；本轮追问：金融场景工具返回五六千只 A 股，用户要求全量输出，压缩的信息损失怎么办？（[9.15秋招东方财富AI应用一面](https://www.nowcoder.com/feed/main/detail/d406314e733c4fc8945637ce5d06cdcf)）；本轮追问：以读文件工具为例，文件不存在或文件非常大时，分别返回什么结果？（[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)）；本轮追问：日志文件规模通常达到数百万行，模型上下文装不下时，工程上如何做高效检索过滤？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[小厂智能体凉经](https://www.nowcoder.com/feed/main/detail/d78471d0602c46d89795594f12a8995d)；[美团二面](https://www.nowcoder.com/feed/main/detail/886316b114144a8da0ef3438ba028588)；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
 
 **新手答**：“截断数据，只取前面一部分给模型。”
 
@@ -1499,6 +1503,47 @@ CLI 直接调用 LLM 和 Skill 拉起 sub-agent 的取舍，要从五个维度�
 
 ---
 
+## Q：如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？
+
+> 来源：阿里控股 Agent Infra 暑期一面【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：如何判断 CLI/MCP 是否 AI-Friendly】；本轮追问：如何判断工具是否可信，并允许它在 Sandbox 中直接执行？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
+
+**新手答**：“用 MCP Inspector 调通工具，再统计调用成功率和延迟；失败样本拿来改 Tool Description。”
+
+**高手答**：
+
+先把“工具是否合格”和“模型是否会用工具”拆开。Server/Tool 单体评测使用固定请求或确定性调用器，避免把模型选错工具归咎于实现；端到端评测再让 Agent 参与，验证描述、选择和结果利用。两层共享同一工具版本和 trace，才能定位首个失败点。
+
+单体评测建立分层门禁：
+
+| 层级 | 测试内容 | 关键指标 |
+|------|----------|----------|
+| 协议契约 | 初始化与能力发现、`tools/list`、输入/输出 schema、错误对象、可选取消能力及竞态、版本兼容 | schema 通过率、兼容性失败数 |
+| 功能语义 | 黄金输入、边界值、非法参数、权限不足、幂等重放、部分失败和副作用对账 | 结果正确率、错误分类准确率、重复副作用数 |
+| 可用性 | 冷启动、并发、超时、断连、重连、限流、依赖故障和资源泄漏 | 成功率、P50/P95/P99、超时率、容量和恢复时间 |
+| 安全治理 | 身份与 scope、跨租户、Secret 泄漏、恶意参数、工具结果提示注入和审计完整性 | 越权率、泄漏数、审计覆盖率 |
+| Agent 效果 | 正/负/歧义请求、多工具相似候选、返回结果能否支撑最终答案 | Tool Precision/Recall、参数正确率、任务成功率和效用增量 |
+
+对 CLI 还要增加一组**机器可用性契约**：`--help` 能否稳定发现能力；是否支持非交互模式和结构化输出；stdout 是否只放结果、stderr 是否承载诊断；退出码和错误类型是否稳定；是否支持 `--dry-run`、幂等键、超时、取消和可恢复的进度。一个“人能用”的 CLI 如果只能读彩色终端文本、遇错就交互询问、成功失败都返回 0，就不是 AI-Friendly。
+
+对 MCP 则按当前官方 [Tools 规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) 验证 `tools/list`、`tools/call`、输入/输出 schema、错误对象和工具列表变更通知。协议合规只是底线；工具是否真正 AI-Friendly，仍要由困难负例、参数修复、取消恢复和端到端任务效用证明。
+
+取消不能被当成所有实现都必须完成的强保证。MCP 的 [Cancellation 规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation)将通知定义为可选能力，接收方可能忽略，且取消通知与原请求完成会发生竞态；评测应分别覆盖支持取消、不支持取消、迟到结果和重复通知。对于使用 Tasks 扩展的长任务，还要验证 `tasks/cancel` 的状态收敛，而不是只检查客户端是否发出了通知。
+
+“效果”要做对照实验：固定任务分别运行无该 Tool、旧版本和候选版本；不仅看调用率，还看它是否提升最终成功率、证据质量，并控制延迟、Token、外部费用和副作用风险。对随机或实时结果使用不变量、范围和 metamorphic test，而不是要求字面完全一致；会写数据的 Tool 在隔离环境中测试，并以业务状态对账作为 oracle。
+
+轨迹回流先做首错点归因：能力发现失败、描述误导、选错 Tool、参数构造、Server 执行、结果契约、Observation 未被模型使用，还是下游推理错误。Badcase 脱敏后保留输入、候选工具、schema/Server/模型版本、调用参数、结果摘要、时序和人工标签；聚类后转成最小可复现用例，分别进入契约集、语义回归集或 Agent 路由集。修复应对症：改 schema/实现、Tool Description、路由样本或恢复策略，而不是所有失败都靠改 Prompt。
+
+发布时对旧版和候选版跑同一不可变回归集，再做 shadow 和按租户灰度；严重越权、重复副作用和契约破坏是一票否决，质量、延迟与成本采用分层阈值。每个 Badcase 绑定修复版本与回归用例，持续监控线上分布漂移和长尾工具覆盖率，防止只把热门工具越测越好。
+
+
+可信工具应具备可追溯来源、固定版本或内容哈希、最小权限声明，并通过静态检查、隔离动态测试和恶意输入回归。允许 Sandbox 直执行前，限制文件系统、网络、凭据和资源配额，默认无副作用；高风险操作需审批，保留审计、回滚与熔断开关。
+
+**追问补充**：线上可建立自动回流闭环：按成功率、超时、重试、用户负反馈和越权风险触发采样，脱敏后由规则与模型初筛、人工抽检确认并聚类归因；自动生成最小复现用例，进入契约或端到端回归集。修复后先离线对比，再灰度验证，只有通过门禁的样本和版本才更新基准，避免错误标签自我强化。
+
+**差距在哪**：新手把“能调通”当成“工具可用”，高手分离协议、功能、SLO、安全和 Agent 效用，用首错点归因把轨迹 Badcase 变成可复现回归门禁。面试官考的是能否把 MCP 工具生态做成持续交付的基础设施。
+
+---
+
 ## Q：Tool-use SFT 的训练目标是什么？基座模型已经具备工具调用能力时，SFT 还需要学习什么？
 
 > 来源：唯品会/NLP算法实习一面；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)
@@ -1578,45 +1623,6 @@ Web 层可由认证中间件解析用户身份，将请求路由到对应的 ses
 **追问补充**：直接塞入数字会丢失单位、时间、来源、精度和业务状态，模型还可能把过期或不可信值当成事实。应保留带类型和证据的结构化结果，仅投影必要摘要；用固定任务做原始数字与结构化回写的A/B，比较事实准确率、误用率、Token和延迟。
 
 **差距在哪**：新手能串起协议，高手让结果可恢复、可审计且语义无歧义。
-
----
-
-## Q：如何评测 MCP Server / Tool 自身的契约、可用性和效果，并用轨迹 Badcase 持续迭代？
-
-> 来源：阿里控股 Agent Infra 暑期一面【[未知公司 Agent 二面](https://www.nowcoder.com/feed/main/detail/16675d793c0c42e8a6b46d42fb561561)追问：如何判断 CLI/MCP 是否 AI-Friendly】；本轮追问：如何判断工具是否可信，并允许它在 Sandbox 中直接执行？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)
-
-**新手答**：“用 MCP Inspector 调通工具，再统计调用成功率和延迟；失败样本拿来改 Tool Description。”
-
-**高手答**：
-
-先把“工具是否合格”和“模型是否会用工具”拆开。Server/Tool 单体评测使用固定请求或确定性调用器，避免把模型选错工具归咎于实现；端到端评测再让 Agent 参与，验证描述、选择和结果利用。两层共享同一工具版本和 trace，才能定位首个失败点。
-
-单体评测建立分层门禁：
-
-| 层级 | 测试内容 | 关键指标 |
-|------|----------|----------|
-| 协议契约 | 初始化与能力发现、`tools/list`、输入/输出 schema、错误对象、可选取消能力及竞态、版本兼容 | schema 通过率、兼容性失败数 |
-| 功能语义 | 黄金输入、边界值、非法参数、权限不足、幂等重放、部分失败和副作用对账 | 结果正确率、错误分类准确率、重复副作用数 |
-| 可用性 | 冷启动、并发、超时、断连、重连、限流、依赖故障和资源泄漏 | 成功率、P50/P95/P99、超时率、容量和恢复时间 |
-| 安全治理 | 身份与 scope、跨租户、Secret 泄漏、恶意参数、工具结果提示注入和审计完整性 | 越权率、泄漏数、审计覆盖率 |
-| Agent 效果 | 正/负/歧义请求、多工具相似候选、返回结果能否支撑最终答案 | Tool Precision/Recall、参数正确率、任务成功率和效用增量 |
-
-对 CLI 还要增加一组**机器可用性契约**：`--help` 能否稳定发现能力；是否支持非交互模式和结构化输出；stdout 是否只放结果、stderr 是否承载诊断；退出码和错误类型是否稳定；是否支持 `--dry-run`、幂等键、超时、取消和可恢复的进度。一个“人能用”的 CLI 如果只能读彩色终端文本、遇错就交互询问、成功失败都返回 0，就不是 AI-Friendly。
-
-对 MCP 则按当前官方 [Tools 规范](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) 验证 `tools/list`、`tools/call`、输入/输出 schema、错误对象和工具列表变更通知。协议合规只是底线；工具是否真正 AI-Friendly，仍要由困难负例、参数修复、取消恢复和端到端任务效用证明。
-
-取消不能被当成所有实现都必须完成的强保证。MCP 的 [Cancellation 规范](https://modelcontextprotocol.io/specification/2025-11-25/basic/utilities/cancellation)将通知定义为可选能力，接收方可能忽略，且取消通知与原请求完成会发生竞态；评测应分别覆盖支持取消、不支持取消、迟到结果和重复通知。对于使用 Tasks 扩展的长任务，还要验证 `tasks/cancel` 的状态收敛，而不是只检查客户端是否发出了通知。
-
-“效果”要做对照实验：固定任务分别运行无该 Tool、旧版本和候选版本；不仅看调用率，还看它是否提升最终成功率、证据质量，并控制延迟、Token、外部费用和副作用风险。对随机或实时结果使用不变量、范围和 metamorphic test，而不是要求字面完全一致；会写数据的 Tool 在隔离环境中测试，并以业务状态对账作为 oracle。
-
-轨迹回流先做首错点归因：能力发现失败、描述误导、选错 Tool、参数构造、Server 执行、结果契约、Observation 未被模型使用，还是下游推理错误。Badcase 脱敏后保留输入、候选工具、schema/Server/模型版本、调用参数、结果摘要、时序和人工标签；聚类后转成最小可复现用例，分别进入契约集、语义回归集或 Agent 路由集。修复应对症：改 schema/实现、Tool Description、路由样本或恢复策略，而不是所有失败都靠改 Prompt。
-
-发布时对旧版和候选版跑同一不可变回归集，再做 shadow 和按租户灰度；严重越权、重复副作用和契约破坏是一票否决，质量、延迟与成本采用分层阈值。每个 Badcase 绑定修复版本与回归用例，持续监控线上分布漂移和长尾工具覆盖率，防止只把热门工具越测越好。
-
-
-可信工具应具备可追溯来源、固定版本或内容哈希、最小权限声明，并通过静态检查、隔离动态测试和恶意输入回归。允许 Sandbox 直执行前，限制文件系统、网络、凭据和资源配额，默认无副作用；高风险操作需审批，保留审计、回滚与熔断开关。
-
-**差距在哪**：新手把“能调通”当成“工具可用”，高手分离协议、功能、SLO、安全和 Agent 效用，用首错点归因把轨迹 Badcase 变成可复现回归门禁。面试官考的是能否把 MCP 工具生态做成持续交付的基础设施。
 
 ---
 

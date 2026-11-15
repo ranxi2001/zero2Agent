@@ -89,7 +89,7 @@ Select prompt 应提供候选 Agent 的能力标签、输入输出契约、当�
 
 ### Q：怎么判断一个 Agent 该做成单 Agent，还是多 Agent？
 
-> 来源：腾讯大模型应用开发二面 / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】；[美团agent一面](https://www.nowcoder.com/feed/main/detail/554bdcc695ae42f8b0d78e3c44dd17d5)；本轮追问：为什么要设计双分析Agent？解决了单Agent运行时的什么痛点？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)
+> 来源：腾讯大模型应用开发二面 / [钉钉一面](https://www.nowcoder.com/discuss/923765750446202880) / [阿里千问平台开发复活赛一面](https://www.nowcoder.com/feed/main/detail/141447389dab4e8e9ca6db742a514f39) 【阿里国际一面追问：Claude Code 是 multi 还是 single agent】；[美团agent一面](https://www.nowcoder.com/feed/main/detail/554bdcc695ae42f8b0d78e3c44dd17d5)；本轮追问：为什么要设计双分析Agent？解决了单Agent运行时的什么痛点？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[快手二面](https://www.nowcoder.com/feed/main/detail/2e044b336930429a9667909a27026382)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[转转-实习-一面](https://www.nowcoder.com/feed/main/detail/5ae1949864db494c806fba155139232f)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)；[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
 
 **新手答**：“复杂任务用多 Agent，简单任务用单 Agent。”
 
@@ -114,7 +114,7 @@ Select prompt 应提供候选 Agent 的能力标签、输入输出契约、当�
 
 ### Q：在多 Agent 协作系统中，记忆应该如何共享？是全局共享还是每个 Agent 独立？
 
-> 来源：后端 AI 八股 / Memory 系统 【小红书AI应用开发同题：多Agent上下文管理与共享】；本轮追问：多智能体系统中，上下文以及memory记忆问题你们是如何解决的？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[科大讯飞——飞凡计划面经](https://www.nowcoder.com/feed/main/detail/23401c14bf8f4fc2b4818f6cb8586049)
+> 来源：后端 AI 八股 / Memory 系统 【小红书AI应用开发同题：多Agent上下文管理与共享】；本轮追问：多智能体系统中，上下文以及memory记忆问题你们是如何解决的？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[科大讯飞——飞凡计划面经](https://www.nowcoder.com/feed/main/detail/23401c14bf8f4fc2b4818f6cb8586049)；[字节中国交易与广告AI全栈实习 一面](https://www.nowcoder.com/feed/main/detail/c1afa60c2b9e4b25a39e27c31fed3d8c)
 
 **新手答**：“全部共享，大家都能看到。”
 
@@ -294,7 +294,7 @@ Agent B 需要知道什么？
 
 ### Q：MCP 和 A2A 分别解决什么层面的问题？如果系统同时用了两者，架构上怎么分工？
 
-> 来源：Agent 开发面试 30 题；[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)
+> 来源：Agent 开发面试 30 题；[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)；[字节中国交易与广告AI全栈实习 一面](https://www.nowcoder.com/feed/main/detail/c1afa60c2b9e4b25a39e27c31fed3d8c)
 
 **新手答**：“MCP 是调工具的，A2A 是 Agent 之间通信的。”
 
@@ -503,7 +503,7 @@ subagent B 接收引用 → 需要时才通过 image_ref 加载原图
 
 ### Q：多 Agent 怎么编排的？用的什么编排模式？
 
-> 来源：百度实习 AI 应用开发一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)；[本轮来源](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)；[本轮来源](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[滴滴企业级算法实习生 一面](https://www.nowcoder.com/feed/main/detail/ea411234bf9f4e129eb5b8711861d6a3)；[10.14 字节跳动 AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/27b05099955e43d5a6a66013a2dea2c6)
+> 来源：百度实习 AI 应用开发一面；[本轮来源](https://www.nowcoder.com/feed/main/detail/31bdec3009dd4557936291038fae6bc0)；[本轮来源](https://www.nowcoder.com/feed/main/detail/439125efe93b460baea2f71a5d454650)；[本轮来源](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)；[8.25 小红书实习 AI全栈开发实习一面挂凉经](https://www.nowcoder.com/feed/main/detail/c712eda7fbf44ba69835b6dd2ff7fc4c)；[高斯信息技术，ai开发工程师，一面](https://www.nowcoder.com/feed/main/detail/80a2ffb74adf42d9adec69ee3b7c73eb)；[滴滴企业级算法实习生 一面](https://www.nowcoder.com/feed/main/detail/ea411234bf9f4e129eb5b8711861d6a3)；[10.14 字节跳动 AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/27b05099955e43d5a6a66013a2dea2c6)；[海康总部Agent开发日常实习一面30min](https://www.nowcoder.com/feed/main/detail/b3f0a1b58fba41a9bffb5df3497da289)；[海尔 Agent 系统工程师 一面](https://www.nowcoder.com/discuss/949356321336205312)
 
 **新手答**：“一个调一个，串行执行。”
 
@@ -639,7 +639,7 @@ flowchart TB
 
 ### Q：Multi-Agent 中心化编排模式 vs 点对点架构，核心区别和优势是什么？
 
-> 来源：蚂蚁 AI应用开发 二面；[本轮来源](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)；本轮追问：为什么非得采用三级架构，单层架构不行吗？编排层单独拆成 Agent 是图什么？（[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)）；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)
+> 来源：蚂蚁 AI应用开发 二面；[本轮来源](https://www.nowcoder.com/feed/main/detail/11e40634018b47a7974bf5c96605024c)；本轮追问：为什么非得采用三级架构，单层架构不行吗？编排层单独拆成 Agent 是图什么？（[字节 AI Agent 开发 一面（抖音电商 · 一面掉池子里面了）](https://www.nowcoder.com/discuss/932407145864130560)）；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[字节一面](https://www.nowcoder.com/feed/main/detail/71da2b6d8a7b481bb1fa7eacd075281f)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)；[上海某中厂Agent开发一面凉经](https://www.nowcoder.com/feed/main/detail/0fabdc17ea3e43e881d516745c148327)
 
 **新手答**：「中心化就是有一个主 Agent 指挥别人，点对点是大家直接通信。」
 
@@ -681,7 +681,7 @@ flowchart TB
 
 ### Q：详细介绍多智能体协同策略——三层 Agent（Root / Main+Fallback / Sub-Agent）是怎么配合流转的？主 Agent 越过中间层直接调子 Agent 时，上下文怎么跨层传递？
 
-> 来源：淘天 Agent 开发【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：多层子 Agent 调用会不会造成中心调度 Agent 上下文爆炸？怎么解决？】；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)；本轮追问：多智能体编排，宏观调度和微观执行做了两层拆分，解释这么做的好处与代价，为什么单框架不够，必须两层架构？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）
+> 来源：淘天 Agent 开发【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：多层子 Agent 调用会不会造成中心调度 Agent 上下文爆炸？怎么解决？】；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[【社招】腾讯一面面经](https://www.nowcoder.com/feed/main/detail/668c7f4007b44fc7b878f55eb01e6e11)；本轮追问：多智能体编排，宏观调度和微观执行做了两层拆分，解释这么做的好处与代价，为什么单框架不够，必须两层架构？（[药明康德（AI数据方向-二面）](https://www.nowcoder.com/feed/main/detail/365904cd189149ffb52c36286ab23b37)）；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)；[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
 
 **新手答**：“Root 分发任务，Main 执行，Sub-Agent 做具体工具调用。上下文通过全局变量共享。”
 
@@ -848,7 +848,7 @@ Multi-Agent 的流行原因经历了**本质性转变**——从“不得不拆�
 
 ## Q：如果让两个不同的 Agent 产品进行对话（比如 Claude Code 和 Cursor），在协议层面应该怎么做？
 
-> 来源：字节TikTok AI应用开发一面
+> 来源：字节TikTok AI应用开发一面；[海康总部Agent开发日常实习一面30min](https://www.nowcoder.com/feed/main/detail/b3f0a1b58fba41a9bffb5df3497da289)
 
 **新手答**：“用 API 互相调用呗，一个 Agent 调另一个的接口。”
 
@@ -1043,7 +1043,7 @@ flowchart LR
 
 ### Q：多 Agent 协作常见模式有哪些？各自适合什么任务类型？
 
-> 来源：阿里 Agent 面经 / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)；[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)
+> 来源：阿里 Agent 面经 / [蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)；[乐言科技一面](https://www.nowcoder.com/feed/main/detail/70faa87a0e1046a68c864a2a7c4c6789)；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
 
 **新手答**：“就是一个 Agent 做完交给下一个。”
 
@@ -1121,7 +1121,7 @@ flowchart TB
 
 ### Q：多个 Agent 并发操作数据库或文件，这种并发怎么处理？
 
-> 来源：蚂蚁Agent开发一面【[拼多多 - AI Agent 开发（工程化 + 数据库方向）](https://www.nowcoder.com/discuss/925527160763187200)追问：多 Agent 运行机制是怎样的？如何防止并发修改同一文件？】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：多 Agent 并发修改同一文件的冲突防止？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)
+> 来源：蚂蚁Agent开发一面【[拼多多 - AI Agent 开发（工程化 + 数据库方向）](https://www.nowcoder.com/discuss/925527160763187200)追问：多 Agent 运行机制是怎样的？如何防止并发修改同一文件？】【[拼多多 - Agent 开发岗（工程化 + 数据库）](https://www.nowcoder.com/discuss/926273867092430848)追问：多 Agent 并发修改同一文件的冲突防止？】；[本轮来源](https://www.nowcoder.com/discuss/926928449204129792)；[蚂蚁 Agent 一面](https://www.nowcoder.com/feed/main/detail/3b05460868c7429193e93f8d09f62794)；[记忆张量-大模型全栈实习一面](https://www.nowcoder.com/feed/main/detail/2359e337039240e39a7f4acd6c00c29f)
 
 **新手答**：“加锁，谁先拿到锁谁先执行。”
 
@@ -1245,7 +1245,7 @@ Leader 派活前从能力注册表筛选满足输入 schema、工具权限、健
 
 ## Q：如果拆成感知/推理/校验 Agent，哪些能并行哪些要顺序，什么时候需要反向通信？
 
-> 来源：商汤/大模型算法应用实习二面；本轮追问：并行后某个数据源仍然很慢，是否需要一直等到两路都返回？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；[(秋招) 10.15 - 银泰百货 - 银泰星AI工程师 - 一面](https://www.nowcoder.com/discuss/942055584050733056)
+> 来源：商汤/大模型算法应用实习二面；本轮追问：并行后某个数据源仍然很慢，是否需要一直等到两路都返回？（[9.15科大讯飞AI应用一面](https://www.nowcoder.com/feed/main/detail/aece93373f9c47ea95c831aef6471886)）；[(秋招) 10.15 - 银泰百货 - 银泰星AI工程师 - 一面](https://www.nowcoder.com/discuss/942055584050733056)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“顺序执行就好了，感知→推理→校验。”
 

@@ -17,7 +17,7 @@ Agent Demo 能完成一次工具调用，不代表它能承受 Worker 重启、�
 
 ## Q：一次 Agent 请求的完整执行链路是什么？
 
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：处理流程可以讲一下吗？整体链路是怎样的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：如果问某上市公司去年毛利率下降，Agent 收到 Prompt 后的完整流程是什么？】；本轮追问：一个用户请求进入系统后，Skill 的完整诊断流程是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：介绍一下 AI 问数平台的整体架构和链路。（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；本轮追问：工具执行器这块能不能再展开讲一下？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；本轮追问：从用户上传视频到最终拿到分析结果，完整链路是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：DeepAgents 的结构是怎么样的？它的主流程和核心部分是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[字节内部跨转-飞书基建二面](https://www.nowcoder.com/feed/main/detail/7e53073808f94e8790ab0d1dfd1a7841)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)；[微店ai全栈一面](https://www.nowcoder.com/discuss/940646573107650560)；[网易互娱｜AI应用开发实习一面](https://www.nowcoder.com/feed/main/detail/2d982457b8b94da09fab383e275de93d)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[华为 后训练与强化学习实习一面](https://www.nowcoder.com/feed/main/detail/bd8dc3f838c541bfbf8c5689f2fc2bac)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[网易云音乐 全栈开发一面](https://www.nowcoder.com/discuss/944165886930309120)；[快手 AI 全栈开发一面](https://www.nowcoder.com/discuss/942822898094428160)
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff) / [阿里控股 Agent Infra 二面](https://www.nowcoder.com/feed/main/detail/627844d5923149b6ac46a631b2b41d5a) / Agent Runtime 完整管线设计高频题【字节火山引擎 Managed Agent 一面同题】【阿里 Agent Infra 一面题库同题】【[深信服Agent开发实习生一面二面，长时间被吊着，最终被横向掉了](https://www.nowcoder.com/feed/main/detail/14b2c379ae434062a009aefea9fc5df9)追问：处理流程可以讲一下吗？整体链路是怎样的？】【[百度Agent一面](https://www.nowcoder.com/feed/main/detail/72858aade19d443facc870fea8bb134f)追问：如果问某上市公司去年毛利率下降，Agent 收到 Prompt 后的完整流程是什么？】；本轮追问：一个用户请求进入系统后，Skill 的完整诊断流程是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；本轮追问：介绍一下 AI 问数平台的整体架构和链路。（[本轮追问](https://www.nowcoder.com/feed/main/detail/14fe3975c0464b02bb58b24be1b63a21)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)；本轮追问：工具执行器这块能不能再展开讲一下？（[本轮追问](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)）；本轮追问：从用户上传视频到最终拿到分析结果，完整链路是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：DeepAgents 的结构是怎么样的？它的主流程和核心部分是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[淘天AI应用开发二面](https://www.nowcoder.com/feed/main/detail/d5d1f688dae5496abbce783aa28d6731)；[阿里云一面](https://www.nowcoder.com/feed/main/detail/ceade00d742046d0bef6bee7fe7a7aad)；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[虾皮秋招 研发工程师](https://www.nowcoder.com/feed/main/detail/dcb2bf1c6b7c4b6a9f4c095ba9329bce)；[字节内部跨转-飞书基建二面](https://www.nowcoder.com/feed/main/detail/7e53073808f94e8790ab0d1dfd1a7841)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[水滴AI全栈一面](https://www.nowcoder.com/feed/main/detail/ae70e9823b9f40cead0f8016b949b7c2)；[携程agent一面](https://www.nowcoder.com/feed/main/detail/9f492f65706f42ed85ecc2d294690638)；[微店ai全栈一面](https://www.nowcoder.com/discuss/940646573107650560)；[网易互娱｜AI应用开发实习一面](https://www.nowcoder.com/feed/main/detail/2d982457b8b94da09fab383e275de93d)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[华为 后训练与强化学习实习一面](https://www.nowcoder.com/feed/main/detail/bd8dc3f838c541bfbf8c5689f2fc2bac)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[网易云音乐 全栈开发一面](https://www.nowcoder.com/discuss/944165886930309120)；[快手 AI 全栈开发一面](https://www.nowcoder.com/discuss/942822898094428160)；[新凯来面试](https://www.nowcoder.com/feed/main/detail/6d2f788fc8e04992ad371645235058fa)
 
 **新手答**：“用户请求模型，模型调用工具，拿到结果后继续推理。”
 
@@ -144,31 +144,9 @@ Sandbox 运行的是不可信代码，目标不只是限制 CPU 和内存，还�
 
 ---
 
-## Q：如何让 Agent 执行过程可观测、可调试？
-
-> 来源：[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；本轮追问：如何利用可观测链路定位首 Token 延迟、工具调用错误等问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
-
-**新手答**：展示当前步骤、工具调用、状态和进度，而不是只返回最终答案。
-
-**高手答**：
-
-Runtime 为每次 run 生成 trace/span，记录计划版本、状态迁移、模型请求摘要、工具入参脱敏结果和耗时；通过 SSE/WebSocket 推送进度，前端区分 RUNNING、WAITING、BLOCKED 和 UNKNOWN。支持按 run 回放、日志检索和成本统计，敏感内容做 ACL 与脱敏，避免把内部提示词无条件暴露。
-
-
-排查时沿 trace 的时间线拆分排队、首字节/首 Token、生成和工具等待等 span，比较模型端与网关时间；工具 span 记录请求/响应摘要、状态码、超时、重试和 trace_id，按错误类型回放入参，区分工具失败、解析失败与模型误用。
-
-**追问补充**：除记录事件外，还要定义进度与错误收敛信号：每次工具调用都更新待办、已验证假设和剩余搜索空间；若候选方案或错误位置持续减少，才算有效推进。任务、调用、输入输出摘要和状态变更需持久化，便于故障恢复、重放审计、跨请求关联及比较不同策略。
-
-**追问补充**：工具调用要设连接/读取超时与总 Deadline，并传播取消；但客户端超时不证明服务端已停止，更不证明写操作未发生。gRPC 也要求服务端自行停止已派生的工作。（[Deadline 官方说明](https://grpc.io/docs/guides/deadlines/)）有副作用的结果不确定时先标 UNKNOWN、按执行ID查状态或对账，再决定重试。并发用有界队列和背压控制，分开监控排队、执行、占用及超时；拥塞变慢不能直接诊断为死锁。
-
-**差距在哪**：考察运行时事件模型、可观测性和信息安全。
-
----
-
-
 ## Q：Tool 已成功但 Runtime 在写状态前宕机，如何避免重复副作用？
 
-> 来源：分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】【[字节agent一面](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)追问：Agent 超时重复下单是高风险问题，你们怎么实现幂等避免重复操作？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：如果工具调用成功，但 Redis Checkpoint 写入失败，系统如何恢复并避免重复执行？】；本轮追问：客户端请求创建 AI 摘要任务发生超时，但服务端实际上已经完成入库；客户端重试后，如何避免重复创建任务或重复扣费？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)
+> 来源：分布式幂等与部分失败高频题【[多益三面](https://www.nowcoder.com/discuss/922801355649974272)同题】【阿里 Agent Infra 一面题库同题：幂等、Exactly Once 与 Tool 部分成功】【[字节agent一面](https://www.nowcoder.com/feed/main/detail/612a1c20eea744a288b142f5b43f57e1)追问：Agent 超时重复下单是高风险问题，你们怎么实现幂等避免重复操作？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：如果工具调用成功，但 Redis Checkpoint 写入失败，系统如何恢复并避免重复执行？】；本轮追问：客户端请求创建 AI 摘要任务发生超时，但服务端实际上已经完成入库；客户端重试后，如何避免重复创建任务或重复扣费？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[字节跳动 AI 全栈面试](https://www.nowcoder.com/discuss/942897472391684096)；[小厂AI应用开发面试](https://www.nowcoder.com/feed/main/detail/c9dd06bab88247348a5c42fd89646f3b)
 
 **新手答**：“给 Tool Call 加一个唯一 ID，恢复时查数据库。”
 
@@ -192,6 +170,28 @@ PENDING → DISPATCHED → RUNNING → SUCCEEDED
 **差距在哪**：新手只说“去重”，高手知道最危险的是执行结果未知，并能按下游能力选择事务、对账或人工介入。
 
 ---
+
+## Q：如何让 Agent 执行过程可观测、可调试？
+
+> 来源：[9.7 百度 agent开发日常实习面经](https://www.nowcoder.com/feed/main/detail/bb8c28105f364770b57ff5eb5649cc60)；本轮追问：如何利用可观测链路定位首 Token 延迟、工具调用错误等问题？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[虾皮agent开发一面](https://www.nowcoder.com/feed/main/detail/4d4b1c6d952942cea43417678fe5ea53)；[模思智能（Moss）多模态voice相关测评](https://www.nowcoder.com/feed/main/detail/f37ffb0525d6404b986e24f97225e909)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[小米 技术一面](https://www.nowcoder.com/feed/main/detail/0ab2c08a8f934009b7ff0a958eea0954)；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
+
+**新手答**：展示当前步骤、工具调用、状态和进度，而不是只返回最终答案。
+
+**高手答**：
+
+Runtime 为每次 run 生成 trace/span，记录计划版本、状态迁移、模型请求摘要、工具入参脱敏结果和耗时；通过 SSE/WebSocket 推送进度，前端区分 RUNNING、WAITING、BLOCKED 和 UNKNOWN。支持按 run 回放、日志检索和成本统计，敏感内容做 ACL 与脱敏，避免把内部提示词无条件暴露。
+
+
+排查时沿 trace 的时间线拆分排队、首字节/首 Token、生成和工具等待等 span，比较模型端与网关时间；工具 span 记录请求/响应摘要、状态码、超时、重试和 trace_id，按错误类型回放入参，区分工具失败、解析失败与模型误用。
+
+**追问补充**：除记录事件外，还要定义进度与错误收敛信号：每次工具调用都更新待办、已验证假设和剩余搜索空间；若候选方案或错误位置持续减少，才算有效推进。任务、调用、输入输出摘要和状态变更需持久化，便于故障恢复、重放审计、跨请求关联及比较不同策略。
+
+**追问补充**：工具调用要设连接/读取超时与总 Deadline，并传播取消；但客户端超时不证明服务端已停止，更不证明写操作未发生。gRPC 也要求服务端自行停止已派生的工作。（[Deadline 官方说明](https://grpc.io/docs/guides/deadlines/)）有副作用的结果不确定时先标 UNKNOWN、按执行ID查状态或对账，再决定重试。并发用有界队列和背压控制，分开监控排队、执行、占用及超时；拥塞变慢不能直接诊断为死锁。
+
+**差距在哪**：考察运行时事件模型、可观测性和信息安全。
+
+---
+
 
 ## Q：如何支撑几十万并发 Agent Task，并把它观测清楚？
 
@@ -246,6 +246,25 @@ Driver 提交 Task/Actor，Raylet 按资源和放置约束调度 Worker，GCS �
 节点内存紧张时，Ray 的 Memory Monitor 可能终止 Worker，但选择和重试策略具有版本边界。Agent Tool 写库、发消息等副作用仍需业务幂等，不能把 Ray 重试当成 exactly-once。
 
 **差距在哪**：新手把框架重试等同于恢复，高手会逐一检查任务、对象、Actor 和外部副作用的可重建条件。
+
+---
+
+## Q：Agentic RL 的 Rollout、Training 与推理引擎如何编排？
+
+> 来源：[AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)；本轮追问：VERL基于什么框架实现？底层训练和推理引擎是什么？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）；[StepFun（阶跃星辰） AI 评测算法 一面](https://www.nowcoder.com/feed/main/detail/68924c2475314c068f0bb31dc2b2a732)
+
+**新手答**：“推理引擎生成轨迹，训练器算奖励并更新模型，然后同步权重。”
+
+**高手答**：
+
+系统通常包含 Actor/Learner、Rollout Engine、Reference Policy、Reward，以及算法需要时的 Critic。调度器把 Prompt 分发给 Rollout，轨迹连同模型版本进入奖励与训练阶段；Learner 产出新权重后，通过全量、分片或增量传输到推理侧。切换必须有 `policy_version`、完整性校验和原子激活，避免某条轨迹混用两版参数。
+
+Actor 与 Rollout 共置可降低权重传输成本，却会产生显存和计算争用；分离部署隔离更好，但增加网络和同步开销。具体角色、同步协议和一致性强度取决于框架，回答应先给不变量，再谈实现。
+
+
+以 verl 为例，其编排通常基于 Ray 的分布式执行；训练侧可对接 PyTorch FSDP 或 Megatron-LM，Rollout 侧可对接 vLLM、SGLang 等推理引擎。Ray 负责角色进程、任务和资源协同，具体后端由配置及版本决定。
+
+**差距在哪**：新手只会画训练循环，高手能说明资源编排、权重版本、轨迹可追溯性和共置取舍。
 
 ---
 
@@ -352,22 +371,19 @@ Router 可以是进程内库、Workflow 节点或独立服务。低延迟、策�
 
 ---
 
-## Q：Agentic RL 的 Rollout、Training 与推理引擎如何编排？
+## Q：Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？
 
-> 来源：[AI Infra 实习面经](https://www.nowcoder.com/feed/main/detail/166e576d5afa4a298cf9492ed51bed04)；本轮追问：VERL基于什么框架实现？底层训练和推理引擎是什么？（[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)）
+> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff)；[科大讯飞Agent一面](https://www.nowcoder.com/feed/main/detail/c325a58591c44b42919f2a4984ed12b8)
 
-**新手答**：“推理引擎生成轨迹，训练器算奖励并更新模型，然后同步权重。”
+**新手答**：“Infra 更稳定、并发更高，所以 Agent 效果会更好。”
 
 **高手答**：
 
-系统通常包含 Actor/Learner、Rollout Engine、Reference Policy、Reward，以及算法需要时的 Critic。调度器把 Prompt 分发给 Rollout，轨迹连同模型版本进入奖励与训练阶段；Learner 产出新权重后，通过全量、分片或增量传输到推理侧。切换必须有 `policy_version`、完整性校验和原子激活，避免某条轨迹混用两版参数。
+Infra 不会直接提高基础模型智力，但会扩大模型可可靠利用的能力：Context 组装提高有效信息密度，Tool/Router 把决策连接到可执行动作，Memory 支撑跨步骤延续，Checkpoint 和幂等让长任务能够恢复，Sandbox 与权限门禁允许系统安全放权，Trace/Eval 则把 Badcase 变成可迭代数据。
 
-Actor 与 Rollout 共置可降低权重传输成本，却会产生显存和计算争用；分离部署隔离更好，但增加网络和同步开销。具体角色、同步协议和一致性强度取决于框架，回答应先给不变量，再谈实现。
+最难的是模型语义不确定性与分布式部分失败叠加：一次“成功”既要判断基础设施完成，也要判断任务语义正确。证明收益应在同模型、同任务集下做消融，对比任务成功率、步骤数、工具失败率、恢复率、延迟和成本，避免把流量变化误认为能力提升。
 
-
-以 verl 为例，其编排通常基于 Ray 的分布式执行；训练侧可对接 PyTorch FSDP 或 Megatron-LM，Rollout 侧可对接 vLLM、SGLang 等推理引擎。Ray 负责角色进程、任务和资源协同，具体后端由配置及版本决定。
-
-**差距在哪**：新手只会画训练循环，高手能说明资源编排、权重版本、轨迹可追溯性和共置取舍。
+**差距在哪**：新手把能力等同于可用性，高手能建立基础设施机制、效果指标与反馈闭环之间的因果关系。
 
 ---
 
@@ -465,22 +481,6 @@ Deployment 通过新旧 ReplicaSet 和 `maxSurge`、`maxUnavailable` 控制替�
 还要验证客户端重连、重复请求和版本兼容。PDB 主要约束自愿驱逐，并不保存 Agent 业务状态；不同入口控制器和服务网格的切流细节也不能一概而论。
 
 **差距在哪**：新手只讲 Pod 数量，高手同时处理 Kubernetes 发布、任务租约、状态恢复和协议兼容。
-
----
-
-## Q：Agent Infra 为什么能提升 Agent 的能力上限和任务成功率？
-
-> 来源：[字节跳动 Agent 后端开发业务终面](https://www.nowcoder.com/feed/main/detail/1dd33c4b7bda453a82f7d645bde7f3ff)
-
-**新手答**：“Infra 更稳定、并发更高，所以 Agent 效果会更好。”
-
-**高手答**：
-
-Infra 不会直接提高基础模型智力，但会扩大模型可可靠利用的能力：Context 组装提高有效信息密度，Tool/Router 把决策连接到可执行动作，Memory 支撑跨步骤延续，Checkpoint 和幂等让长任务能够恢复，Sandbox 与权限门禁允许系统安全放权，Trace/Eval 则把 Badcase 变成可迭代数据。
-
-最难的是模型语义不确定性与分布式部分失败叠加：一次“成功”既要判断基础设施完成，也要判断任务语义正确。证明收益应在同模型、同任务集下做消融，对比任务成功率、步骤数、工具失败率、恢复率、延迟和成本，避免把流量变化误认为能力提升。
-
-**差距在哪**：新手把能力等同于可用性，高手能建立基础设施机制、效果指标与反馈闭环之间的因果关系。
 
 ---
 

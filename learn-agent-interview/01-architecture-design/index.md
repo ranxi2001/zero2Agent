@@ -16,7 +16,7 @@ eyebrow: Agent 面试通关 / 01
 
 ### Q：你用 ReAct 还是 Plan-and-Execute？为什么？
 
-> 来源：腾讯 Agent 岗终面 【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【小红书 Agent 岗一面追问：ReAct/Plan Mode 双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)同题】【[去哪儿旅行AI面试+笔试](https://www.nowcoder.com/discuss/926507047238078464)追问：ReAct和Plan-and-Execute两种AI agent运行框架的核心差异？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：你这里支持 ReAct 循环，但又由 Planner 将任务拆分成带依赖关系和验收条件的 DAG，这是不是就不是经典 ReAct 了？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：在这个场景中，直接采用 ReAct + Tool 是否也能满足需求？】；[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)；[淘天集团 Agent算法 一面](https://www.nowcoder.com/discuss/931957859154132992)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[字节 AI Agent全栈开发 面经](https://www.nowcoder.com/feed/main/detail/88e22e99028942bcbac1ed57395f2e60)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)；[字节跳动 AI 应用开发一、二面](https://www.nowcoder.com/feed/main/detail/c1fbd2d203714b129e4e09736be5006a)
+> 来源：腾讯 Agent 岗终面 【蚂蚁AI应用开发二面同题：ReAct 核心原理与复杂任务提升逻辑】【字节二面同题：ReAct vs Plan-and-Execute 理解与优劣对比】【小红书 Agent 岗一面追问：ReAct/Plan Mode 双模式与多轮状态机实现】【字节火山引擎 Managed Agent 一面追问：Reasoning + Action 循环】【[OPPO IT 开发一面](https://www.nowcoder.com/discuss/923561467092160512)同题】【[去哪儿旅行AI面试+笔试](https://www.nowcoder.com/discuss/926507047238078464)追问：ReAct和Plan-and-Execute两种AI agent运行框架的核心差异？】【[深圳tuitti视界之外实习一面](https://www.nowcoder.com/feed/main/detail/9b1329caf4b64389a0ab666585bda045)追问：你这里支持 ReAct 循环，但又由 Planner 将任务拆分成带依赖关系和验收条件的 DAG，这是不是就不是经典 ReAct 了？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：在这个场景中，直接采用 ReAct + Tool 是否也能满足需求？】；[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；[9.15快手二面AI应用](https://www.nowcoder.com/feed/main/detail/5356d768dc7a4c62a989ee425bef7b12)；[淘天集团 Agent算法 一面](https://www.nowcoder.com/discuss/931957859154132992)；[合肥某头部企业软件开发实习生面试问题汇总（时长1个小时）](https://www.nowcoder.com/feed/main/detail/d2c3a96201704d98b060db827c0ca808)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[美团一面全栈开发日常实习面经](https://www.nowcoder.com/feed/main/detail/95e9fc44397d4118ba3946ef0d33b6da)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[字节 AI Agent全栈开发 面经](https://www.nowcoder.com/feed/main/detail/88e22e99028942bcbac1ed57395f2e60)；[字节一面和二面汇总面经](https://www.nowcoder.com/discuss/941992971027636224)；[未注明公司 Agent 技术面试](https://www.nowcoder.com/feed/main/detail/0979eecf57104fd483c8ad5c58e6632c)；[字节跳动 AI 应用开发一、二面](https://www.nowcoder.com/feed/main/detail/c1fbd2d203714b129e4e09736be5006a)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
 
 **新手答**：“看情况，复杂用 ReAct，简单用 Plan。”
 
@@ -31,6 +31,8 @@ eyebrow: Agent 面试通关 / 01
 **追问补充**：ReAct 的逐步观察与再决策可能增加模型往返，Plan-and-Execute 也可能因重规划或步骤依赖而变慢。两者都能在实现允许时并行独立任务。应在同任务、同模型和同预算下拆分规划、执行、重试耗时，对比关键路径和成功率，不能仅凭范式断言延迟高低。
 
 **追问补充**：Workflow适合固定流程和强约束节点；Replan是在执行反馈导致原计划失效时局部或整体重规划。主体选ReAct是因为任务信息和工具结果持续变化。CoT只做内部推理，思维树探索多条分支，Plan-and-Execute先做全局计划再执行。
+
+**追问补充**：先判断场景是一次提交触发的固定任务，还是需要持续观察和再决策的交互任务。前者可用 Workflow 设置解析、校验和输出验收点，后者可在受限节点中用 ReAct；是否拆成多 Agent 取决于状态、权限和并行收益，不以调用轮数直接决定。
 
 **差距在哪**：新手只说了“看情况”，但没有给出判断标准。高手的回答有三个层次：① 明确的选择维度（任务不确定性）；② 具体的业务对应（内部工具 vs 用户任务）；③ 混合方案的工程技巧（检查点机制）。面试官要的不是“我知道这两个东西”，而是“我在实际系统里怎么选、怎么用”。
 
@@ -122,7 +124,7 @@ Executor 按依赖关系执行每步，返回结构化结果：
 
 ### Q：Agent 的架构设计？从系统角度来拆分
 
-> 来源：阿里 AI Agent 开发一面【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：Agent 项目的架构如何设计？解决了什么问题？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：为什么把系统设计成三级 Agent 架构？】；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[本轮来源](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)；本轮追问：Agent项目里承担什么角色，有参与架构设计吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/0a081f7c63464a39b9888c1af7b121ab)）；本轮追问：看你项目主要使用 Java 开发，视频平台项目技术栈和中间件较多，从技术架构角度介绍项目整体技术编排。（[本轮追问](https://www.nowcoder.com/feed/main/detail/4f486761a999482fa6819b3e45ae3346)）；本轮追问：画一下你自己这个项目的架构图。（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)）；本轮追问：Agent项目的多模式引擎怎么做的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)；本轮追问：这个项目为什么要设计成 Agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：你怎么会想着做这个系统？（项目背景）（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[字节 AI 全栈一面（飞书）](https://www.nowcoder.com/discuss/931555466247700480)；本轮追问：如何补齐平台能力的 CLI 与 Skills 暴露，并将前端交互改造成以 Agent 为中心的模式？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）；[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；本轮追问：如果让你从零做一个多模态内容理解Agent，技术选型是什么？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：如何完成 Coding Agent 的技术方案、架构设计以及项目开发规划？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[南方基金 AI应用大模型方向 笔面试梳理](https://www.nowcoder.com/feed/main/detail/0d707380326e4d8cbd3fa310c3f6f441)；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[金蝶 软件开发 AI 岗一面](https://www.nowcoder.com/feed/main/detail/96615cf2fa874246b43c68bbc12dcc05)
+> 来源：阿里 AI Agent 开发一面【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：Agent 项目的架构如何设计？解决了什么问题？】【[阿里边缘bu 秋招一面 （已过）](https://www.nowcoder.com/feed/main/detail/bdebbb6088b6405e9eb2bd2c345acb6e)追问：为什么把系统设计成三级 Agent 架构？】；[本轮来源](https://www.nowcoder.com/discuss/927597050630270976)；[本轮来源](https://www.nowcoder.com/feed/main/detail/08b8ba3555674c7b9d1de6c7d68c9b9d)；本轮追问：Agent项目里承担什么角色，有参与架构设计吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/0a081f7c63464a39b9888c1af7b121ab)）；本轮追问：看你项目主要使用 Java 开发，视频平台项目技术栈和中间件较多，从技术架构角度介绍项目整体技术编排。（[本轮追问](https://www.nowcoder.com/feed/main/detail/4f486761a999482fa6819b3e45ae3346)）；本轮追问：画一下你自己这个项目的架构图。（[本轮追问](https://www.nowcoder.com/feed/main/detail/6a7fbdcf484a4b2bbe4b900b2dbd5750)）；本轮追问：Agent项目的多模式引擎怎么做的？（[本轮追问](https://www.nowcoder.com/feed/main/detail/b3ca025c64914a259b878ede711b6aed)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/cd9443129c2a4b05ad4e6b630bf46ad6)；本轮追问：这个项目为什么要设计成 Agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ed25d2f60ddc4436b0139a7c52e62a61)）；本轮追问：你怎么会想着做这个系统？（项目背景）（[本轮追问](https://www.nowcoder.com/feed/main/detail/fbd28b541e1b4f498a58e84efb7314cf)）；[字节 AI 全栈一面（飞书）](https://www.nowcoder.com/discuss/931555466247700480)；本轮追问：如何补齐平台能力的 CLI 与 Skills 暴露，并将前端交互改造成以 Agent 为中心的模式？（[9.21 蚂蚁二面](https://www.nowcoder.com/feed/main/detail/52b419448b854e24bbdf41ca9e6ffe06)）；[字节数据中台Agent全栈面经](https://www.nowcoder.com/feed/main/detail/fe77496948f74b4091ab4bb6e8156c8b)；本轮追问：如果让你从零做一个多模态内容理解Agent，技术选型是什么？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：如何完成 Coding Agent 的技术方案、架构设计以及项目开发规划？（[9.14小红书 PE（产品工程师/全栈方向--实习）二面 (流程泡到9.21挂)](https://www.nowcoder.com/discuss/929891805049421824)）；[南方基金 AI应用大模型方向 笔面试梳理](https://www.nowcoder.com/feed/main/detail/0d707380326e4d8cbd3fa310c3f6f441)；[秋招第二挂 小红书](https://www.nowcoder.com/feed/main/detail/90c05c87e0414708976ab28b20a51d36)；[9.30 binance AI全栈开发实习一面](https://www.nowcoder.com/feed/main/detail/e2194645f6a44f68ab131372025297c1)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[10.8 pdd秋招 agent 一面](https://www.nowcoder.com/feed/main/detail/b7c5a262265f41e6ab95c008f7dd31de)；[10.15 阶跃星辰 开发者关系技术向实习一面](https://www.nowcoder.com/feed/main/detail/277091082aa9484a96a15d49af4b047a)；[字节 Agent 日常一面](https://www.nowcoder.com/feed/main/detail/0ee160a2d38f4b5daaf1965cf975a8f0)；[百度 一面](https://www.nowcoder.com/feed/main/detail/74481a7b176142a188400c93f598aea7)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)；[蚂蚁 智能体一面](https://www.nowcoder.com/feed/main/detail/9348f95402fc4d598b076417a994df0f)；[金蝶 软件开发 AI 岗一面](https://www.nowcoder.com/feed/main/detail/96615cf2fa874246b43c68bbc12dcc05)；[未注明公司 AI 工程技术面试](https://www.nowcoder.com/feed/main/detail/c66bd7dc631642758a84001b1343bcc0)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：“用大模型接工具就行。”
 
@@ -143,6 +145,8 @@ Agent 正确的地方不是“能不能想”，而是“想完能不能稳定�
 平台能力应统一成带 schema、权限、超时和幂等约束的 CLI/Skills，前端围绕任务、计划、审批、结果和人工接管组织，而非堆功能按钮。多模态 Agent 可按内容选视觉、语音或文本模型，配预处理、抽取、检索和校验链。Coding Agent 则拆规划、代码检索、编辑执行、测试评审与回滚，先做最小闭环，再用任务集和门禁迭代。
 
 **追问补充**：部署上可按入口服务、编排服务、工具执行器和状态存储拆分，执行器独立隔离并通过队列或 RPC 通信。V1 先用单 Agent 跑通闭环；V2 按决策、执行、记忆解耦以提升可维护性；V3 再引入多 Agent、异步调度、权限和观测，版本演进应由吞吐、稳定性与隔离需求验证。
+
+**追问补充**：Supervisor 负责识别任务、选择协作模式、分派子任务并汇总结果；Planner 将目标拆成有依赖关系且可校验的步骤，明确输入、产出和停止条件；Executor 按计划调用工具或子 Agent，处理重试、超时和结果校验，并把状态回传。Supervisor 不直接承担细节执行，Planner 也不绕过权限调用工具。
 
 **差距在哪**：新手把 Agent 等同于“大模型 + Prompt”。高手的回答展示了分层架构的思维——入口、决策、执行、记忆各司其职，还有校验层做兜底。面试官想看你脑子里有没有系统设计的概念。
 
@@ -286,7 +290,7 @@ Skill 只能告诉模型“应该怎么做”，不能证明模型一定照做�
 
 ### Q：什么时候该做 Agent？和 Workflow 的边界在哪？
 
-> 来源：Agent 开发面试 30 题 【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【阿里 Agent Infra 一面题库同题】【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：Agent 是人工触发任务吗？整体工作流程是否固定？】；本轮追问：Workflow 的优点和缺点是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；本轮追问：动态 Workflow 了解吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；[搜狐畅游 Agent 开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/f0648c2e373f4f03a10dd0fffbd235cd)；本轮追问：如何理解 Agent、工具、RAG、记忆与工作流的边界？（[脑利一面](https://www.nowcoder.com/feed/main/detail/4002450a24194b4eaa759a2450cab7f5)）；[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)；[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[长鑫存储 AI 全栈开发一面](https://www.nowcoder.com/feed/main/detail/712626e9f6114e6ebdffe11d83d19ff7)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)
+> 来源：Agent 开发面试 30 题 【小红书 Rednote AI Native 一面追问：大模型与工作流如何权衡、固定流程为何仍用 Agent】【广报 Agent 开发追问：没有长期记忆或不完全自主是否仍算 Agent】【阿里 Agent Infra 一面题库同题】【[虾皮Agent一面](https://www.nowcoder.com/feed/main/detail/409dc8793a7b450eb51ee32c2b923d49)追问：Agent 是人工触发任务吗？整体工作流程是否固定？】；本轮追问：Workflow 的优点和缺点是什么？（[本轮追问](https://www.nowcoder.com/discuss/926528416512315392)）；[本轮来源](https://www.nowcoder.com/feed/main/detail/13bdf306b95f4cc9b6fafeec2e74ad70)；本轮追问：动态 Workflow 了解吗？（[本轮追问](https://www.nowcoder.com/feed/main/detail/a11a3a9e0d824969b44db5bb2149ef9f)）；[千问AI研发一面凉经](https://www.nowcoder.com/feed/main/detail/ebf0ec03e5ee4fa8a140cc8d247b1e20)；[搜狐畅游 Agent 开发一面（已oc）](https://www.nowcoder.com/feed/main/detail/f0648c2e373f4f03a10dd0fffbd235cd)；本轮追问：如何理解 Agent、工具、RAG、记忆与工作流的边界？（[脑利一面](https://www.nowcoder.com/feed/main/detail/4002450a24194b4eaa759a2450cab7f5)）；[恒生电子技术岗ai面](https://www.nowcoder.com/feed/main/detail/49a60657cf63400897542e731c3feae4)；[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)；[腾讯 260824 一面面经](https://www.nowcoder.com/feed/main/detail/bf38563e18af48269c0e710993d3f06e)；[美团Agent一面凉经](https://www.nowcoder.com/feed/main/detail/18fa4134edb14e8c901787ee5cd33ace)；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[腾讯面经 腾讯大模型算法岗面经-04](https://www.nowcoder.com/discuss/940391665104064512)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[字节跳动 后端 Agent 一面](https://www.nowcoder.com/feed/main/detail/6f9d862d77ec4284a05d07d3ec3cc92e)；[长鑫存储 AI 全栈开发一面](https://www.nowcoder.com/feed/main/detail/712626e9f6114e6ebdffe11d83d19ff7)；[快手 Agent 开发二面](https://www.nowcoder.com/discuss/944882264687534080)；[小天才 AI 应用工程师（穿戴）一面](https://www.nowcoder.com/discuss/943115023751053312)；[网易有道agent凉经](https://www.nowcoder.com/feed/main/detail/1a1b6af64ee440ffb7919636cacd803a)
 
 **新手答**：“需求复杂就用 Agent，简单就用 Workflow。”
 
@@ -327,7 +331,7 @@ Skill 只能告诉模型“应该怎么做”，不能证明模型一定照做�
 
 ### Q：生产级 Agent 的执行循环包含哪些阶段？哪些必须显式状态化？
 
-> 来源：Agent 开发面试 30 题【阿里 Agent Infra 一面题库追问：Agent Loop】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)同题】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)同题】；[腾讯元宝 风控实习一面](https://www.nowcoder.com/feed/main/detail/12909ba0b0cf46e4b64b37c5f51228fb)；[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)；本轮追问：大模型在 Agent Loop 中可能返回哪几种 Action？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[快手 AI 全栈开发 面经](https://www.nowcoder.com/feed/main/detail/b65f5ee779b34f1399be9d97bbae3937)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)
+> 来源：Agent 开发面试 30 题【阿里 Agent Infra 一面题库追问：Agent Loop】【[字节中国交易与广告 AI 应用开发一面](https://www.nowcoder.com/feed/main/detail/b34f6902e8544fe2953696ed52e49dba)同题】【[蚂蚁 Agent 开发一面](https://www.nowcoder.com/feed/main/detail/39451cad5d2245b491d16778f2a9ca01)同题】；[腾讯元宝 风控实习一面](https://www.nowcoder.com/feed/main/detail/12909ba0b0cf46e4b64b37c5f51228fb)；[字节跳动 AI Agent研发工程师｜AI算力基础设施 27秋招面经](https://www.nowcoder.com/discuss/930155293864914944)；本轮追问：大模型在 Agent Loop 中可能返回哪几种 Action？（[字节 aime 一面 9.10](https://www.nowcoder.com/feed/main/detail/ed5e9d17f26e489da94afbf1241b885e)）；[中兴未来领军计划AI算法一面](https://www.nowcoder.com/discuss/932316204088180736)；[字节业务中台AI全栈面经——日常实习](https://www.nowcoder.com/feed/main/detail/6ac5ba31705a4b64a407b087f39d5447)；[快手 AI 全栈开发 面经](https://www.nowcoder.com/feed/main/detail/b65f5ee779b34f1399be9d97bbae3937)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[科大讯飞Agent一面](https://www.nowcoder.com/feed/main/detail/c325a58591c44b42919f2a4984ed12b8)
 
 **新手答**：“就是思考 → 行动 → 观察的循环。”
 
@@ -370,7 +374,7 @@ flowchart TB
 
 ### Q：Agent 系统里，模型和系统代码的职责边界怎么划？
 
-> 来源：Agent 开发面试 30 题；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[文远知行 算法工程二面](https://www.nowcoder.com/discuss/947525472466825216)；[未注明公司 技术面试（实习转正）](https://www.nowcoder.com/discuss/946807142583930880)
+> 来源：Agent 开发面试 30 题；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[秋招-字节跳动-抖音电商-Agent开发一/二/三面](https://www.nowcoder.com/discuss/937314680270311424)；[海康威视 9.12 Agent开发 线下一面](https://www.nowcoder.com/feed/main/detail/d9ffae547f2049eca64e49e0085701bf)；[长鑫存储 Agent 开发面试](https://www.nowcoder.com/feed/main/detail/9d70e1b461fc481dba8f7d6875577d95)；[文远知行 算法工程二面](https://www.nowcoder.com/discuss/947525472466825216)；[未注明公司 技术面试（实习转正）](https://www.nowcoder.com/discuss/946807142583930880)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“模型负责思考，代码负责执行。”
 
@@ -396,6 +400,8 @@ flowchart TB
 一个简单的验证标准：如果这个环节出错后果严重且不可接受 → 系统代码负责。如果这个环节出错可以通过重试/降级补救 → 可以交给模型。
 
 **追问补充**：规划层可由模型提出步骤与候选，宿主负责验证依赖、权限和业务不变量。停车点案例应区分需求理解、候选生成及确定性约束检查；数学判题可让SymPy处理受支持的表达式与符号变换，LLM负责理解和组织说明，但符号工具也受假设、定义域、超时与可判定性限制，结果不确定时拒绝直接判等并回查证据。
+
+**追问补充**：可先用纯 LLM 验证任务可行性，再把高频、稳定且需强约束的步骤下沉为代码工具，模型保留意图理解、规划和解释。Prompt 适合表达规则与示例，流程负责重试、分支和审批，工具负责检索、计算及副作用；用离线集和线上 trace 比较准确率、成本与失败类型。
 
 **差距在哪**：新手的“思考 vs 执行”太笼统。高手把两者的职责列表拉出来对比，且给出了一个实用的验证标准（出错后果是否可接受）。面试官考的是你能不能精确划分系统设计中的职责边界。
 
@@ -498,7 +504,7 @@ flowchart TB
 
 ### Q：什么样的任务适合先全局规划再执行，什么样的任务更适合边走边决策？
 
-> 来源：Agent 开发面试 30 题；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)
+> 来源：Agent 开发面试 30 题；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[OPPO Agent 一面](https://www.nowcoder.com/feed/main/detail/1bee89abbd3d4e3fbf0fe535f0a8ff91)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“简单任务边走边做，复杂任务先规划。”
 
@@ -528,35 +534,15 @@ flowchart TB
 
 **追问补充**：还可对比反思式（Reflection）：执行后由独立步骤检查结果、分析错误并修正，适合结果可验证但一次生成不稳定的任务；代价是增加模型调用和延迟。Plan-and-Execute重在提前拆解，ReAct重在边观察边行动，Reflection重在事后评审，可组合使用并设置最大修正轮数。
 
+**追问补充**：局部失败通常不应整条重跑：先依据检查点保留已验证结果，只对失败步骤及其受影响的后续步骤重新规划；若失败改变了关键前提、产生不可逆副作用或状态无法确认，则暂停并校验业务状态，必要时回滚、人工确认后再整体重规划。
+
 **差距在哪**：新手用“简单 vs 复杂”做判断——但“简单”的信息调研可能需要边走边做，“复杂”的 ETL 反而适合先规划。高手用“信息完备度”和“可预测性”两个维度做判断，且给出了混合策略。面试官考的是你在选执行策略时有没有清晰的判断标准。
-
----
-
-### Q：如果面试官说“Agent 本质上就是套壳调用工具”，你怎么反驳？
-
-> 来源：Agent 开发面试 30 题
-
-**新手答**：“不是套壳，Agent 更智能。”
-
-**高手答**：
-
-这句话的逻辑类似于说“操作系统就是套壳调硬件”——技术上没错，但忽略了**中间层的价值**。
-
-“套壳调工具”只描述了 Agent 的最表层行为（接收输入 → 调工具 → 返回结果），但 Agent 的核心价值在于三个“套壳”做不到的能力：
-
-1. **动态规划**：不是“收到请求 → 调固定工具 → 返回”，而是“理解意图 → 拆解任务 → 根据中间结果动态选择下一步”。一个订机票的 Agent 可能需要先查航班 → 发现满了 → 改查临近日期 → 发现价格高 → 问用户是否接受 → 最终下单。这个决策链在设计时不可穷举
-2. **自我修正**：调工具失败后不是报错，而是分析失败原因、换一个工具或调整参数重试。这种“错了知道怎么补救”的能力是纯工具链做不到的
-3. **上下文推理**：能把多轮对话、用户画像、当前任务状态综合起来做决策，而不是每次请求都是无状态的
-
-API Wrapper 是确定性的——同样输入永远同样输出。Agent 是概率性的但有推理能力——面对未见过的输入也能给出合理响应。这个区别就像“if-else 路由器”和“有经验的客服”的区别。
-
-**差距在哪**：新手的反驳苍白无力。高手从动态规划、自我修正、上下文推理三个具体能力点说明 Agent 不是“套壳”，且用“操作系统 vs 硬件”类比让论证更有力。面试官用这种挑衅式问题考的是你对 Agent 的理解有多深。
 
 ---
 
 ### Q：为什么很多团队做到最后是“Workflow + Agent 节点”的混合架构？
 
-> 来源：Agent 开发面试 30 题
+> 来源：Agent 开发面试 30 题；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：“因为纯 Agent 不够稳定。”
 
@@ -582,7 +568,31 @@ flowchart LR
 
 这也解释了为什么纯 Agent 创业项目容易死——不是技术不行，是把本该确定性处理的东西也交给了模型，导致系统整体可靠性无法保证。
 
+**追问补充**：这不是二选一：Workflow 是外层确定性的流程编排与状态控制，ReAct 是 Agent 节点内部“思考—调用工具—观察结果—再决策”的循环。可在 Workflow 中嵌入受限 ReAct，并设置工具白名单、步数、超时和失败分支。
+
 **差距在哪**：新手只说了“不稳定”。高手分析了根因——不同环节对确定性的要求不同，且给出了 80/20 的量化认知和混合架构的设计原则。面试官考的是你有没有把 Agent 从 Demo 推到生产的实战认知。
+
+---
+
+### Q：如果面试官说“Agent 本质上就是套壳调用工具”，你怎么反驳？
+
+> 来源：Agent 开发面试 30 题
+
+**新手答**：“不是套壳，Agent 更智能。”
+
+**高手答**：
+
+这句话的逻辑类似于说“操作系统就是套壳调硬件”——技术上没错，但忽略了**中间层的价值**。
+
+“套壳调工具”只描述了 Agent 的最表层行为（接收输入 → 调工具 → 返回结果），但 Agent 的核心价值在于三个“套壳”做不到的能力：
+
+1. **动态规划**：不是“收到请求 → 调固定工具 → 返回”，而是“理解意图 → 拆解任务 → 根据中间结果动态选择下一步”。一个订机票的 Agent 可能需要先查航班 → 发现满了 → 改查临近日期 → 发现价格高 → 问用户是否接受 → 最终下单。这个决策链在设计时不可穷举
+2. **自我修正**：调工具失败后不是报错，而是分析失败原因、换一个工具或调整参数重试。这种“错了知道怎么补救”的能力是纯工具链做不到的
+3. **上下文推理**：能把多轮对话、用户画像、当前任务状态综合起来做决策，而不是每次请求都是无状态的
+
+API Wrapper 是确定性的——同样输入永远同样输出。Agent 是概率性的但有推理能力——面对未见过的输入也能给出合理响应。这个区别就像“if-else 路由器”和“有经验的客服”的区别。
+
+**差距在哪**：新手的反驳苍白无力。高手从动态规划、自我修正、上下文推理三个具体能力点说明 Agent 不是“套壳”，且用“操作系统 vs 硬件”类比让论证更有力。面试官用这种挑衅式问题考的是你对 Agent 的理解有多深。
 
 ---
 
@@ -987,7 +997,7 @@ LangGraph 的核心价值是用显式状态、节点和边管理可循环、可�
 
 ### Q：模型和 Agent 的区别到底是什么？
 
-> 来源：字节 Agent 开发实习一面【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：介绍一下大模型和 Agent 的区别和关系？】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：大模型与 Agent 的区别联系？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：在“AI 原生应用”中，Agent 的角色是什么？】；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[江苏金租 一面](https://www.nowcoder.com/feed/main/detail/a3e1a89d12a547a0836a529b28546954)
+> 来源：字节 Agent 开发实习一面【[MiniMax - 大模型算法岗（后训练 / SFT / RL 方向，独角兽）](https://www.nowcoder.com/discuss/925527528259743744)追问：介绍一下大模型和 Agent 的区别和关系？】【[MiniMax - 大模型算法岗（后训练 / SFT / RL）](https://www.nowcoder.com/discuss/926272883872075776)追问：大模型与 Agent 的区别联系？】【[百度 - Agent 研发岗（架构方向）](https://www.nowcoder.com/discuss/926273622006665216)追问：在“AI 原生应用”中，Agent 的角色是什么？】；[小米--后端--二面](https://www.nowcoder.com/discuss/929769764719775744)；[上海联蔚数科agent面经](https://www.nowcoder.com/feed/main/detail/97ee6dec31b14d12a1f800b709e21a4c)；[百度Agent二面，不看简历不问八股](https://www.nowcoder.com/feed/main/detail/c7f00d0e48aa4017911b46ed928d15f3)；[字节剪映AI应用开发一面](https://www.nowcoder.com/feed/main/detail/7211e82c75284d23a89b569cd9dc289d)；[小红书 Product Engineer（AI与全栈方向）-社区工程 一面面经](https://www.nowcoder.com/feed/main/detail/70ad5ead2f784676b0b399eab877d3d4)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[江苏金租 一面](https://www.nowcoder.com/feed/main/detail/a3e1a89d12a547a0836a529b28546954)；[未注明公司 AI 工程技术面试](https://www.nowcoder.com/feed/main/detail/c66bd7dc631642758a84001b1343bcc0)
 
 **新手答**：“Agent 就是模型加了工具调用。”
 
@@ -1043,7 +1053,7 @@ flowchart LR
 
 ### Q：如果设计一个科研辅助 Agent，整体流程应该怎么设计？
 
-> 来源：bilibili AI研发实习一面；本轮追问：你们的agent是怎么设计的？你负责哪一部分？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；本轮追问：code agent 是怎么设计的，做了哪些优化？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；本轮追问：如果设计这些游戏里的 Agent，会怎么进行设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/85a64d94c3374a10afa20d7466d24d5d)）；本轮追问：如何设计一个 Agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）；本轮追问：如果让你设计一个“智能创作助手”，帮用户生成笔记文案和配图，你会怎么做？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：如果要实现一个简单个人助理Agent，可查当日当地天气、规划两地路线，说出实现框架和步骤。（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)
+> 来源：bilibili AI研发实习一面；本轮追问：你们的agent是怎么设计的？你负责哪一部分？（[本轮追问](https://www.nowcoder.com/feed/main/detail/595a0cb450cf45e9a47a0d32084b9099)）；本轮追问：code agent 是怎么设计的，做了哪些优化？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；本轮追问：如果设计这些游戏里的 Agent，会怎么进行设计？（[本轮追问](https://www.nowcoder.com/feed/main/detail/85a64d94c3374a10afa20d7466d24d5d)）；本轮追问：如何设计一个 Agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/f9e65706c3274fac86b52f27a70bf902)）；本轮追问：如果让你设计一个“智能创作助手”，帮用户生成笔记文案和配图，你会怎么做？（[小红书多模态秋招二面](https://www.nowcoder.com/discuss/930755993066041344)）；本轮追问：如果要实现一个简单个人助理Agent，可查当日当地天气、规划两地路线，说出实现框架和步骤。（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[记录小厂一面](https://www.nowcoder.com/discuss/939580601693229056)；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：“让大模型帮忙搜论文、写摘要。”
 
@@ -1126,7 +1136,7 @@ Gemini Deep Research、Perplexity 的深度研究功能，本质上就是这套�
 
 ### Q：场景题——如果有一个监控日志，给 Agent 分析，需要得到分析结果，怎么设计这个 Agent？怎么设计工具？
 
-> 来源：腾讯 AI 应用开发实习一面 【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)追问：本机异常进程排查 Agent】；本轮追问：如果让你设计一个“车辆健康监测Agent”，实时检测故障，你会怎么做？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）；本轮追问：给一个传统课程平台新增 AI 助教，你怎么设计？（[智谱ai native builder实习一面](https://www.nowcoder.com/discuss/929419257438302208)）；本轮追问：假设让你做一个数据分析的 agent，老板经常问“为什么今天这个数据异常 / 标高了”，你会怎么设计？（[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)）；本轮追问：如果一条客诉工单进来（例如“开机黑屏但有声音”），从多源输入到最终产出归因报告，中间会经历哪些步骤与节点？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）
+> 来源：腾讯 AI 应用开发实习一面 【[百度 Agent 一面](https://www.nowcoder.com/feed/main/detail/53542e2dcfd44b1d84b0ae55b4fc1b35)追问：本机异常进程排查 Agent】；本轮追问：如果让你设计一个“车辆健康监测Agent”，实时检测故障，你会怎么做？（[蔚来——大模型算法岗（智能座舱/自动驾驶）实习一面](https://www.nowcoder.com/discuss/930755708008558592)）；本轮追问：给一个传统课程平台新增 AI 助教，你怎么设计？（[智谱ai native builder实习一面](https://www.nowcoder.com/discuss/929419257438302208)）；本轮追问：假设让你做一个数据分析的 agent，老板经常问“为什么今天这个数据异常 / 标高了”，你会怎么设计？（[【面经】字节/AI 应用工程师 一面挂经……](https://www.nowcoder.com/discuss/933023499399024640)）；本轮追问：如果一条客诉工单进来（例如“开机黑屏但有声音”），从多源输入到最终产出归因报告，中间会经历哪些步骤与节点？（[9.20 汇川技术 数字化全栈工程师 一面](https://www.nowcoder.com/feed/main/detail/28032c48a90c4f69827704deb3fae34c)）；[秋招 蚂蚁 AI 应用方向技术 面经](https://www.nowcoder.com/feed/main/detail/d9d6a1ea1adc41b4a44ca47b535e9994)
 
 **新手答**：「把日志喂给大模型，让它分析。」
 
@@ -1192,6 +1202,8 @@ Agent 不是一次性读完所有日志——而是**迭代缩小范围**：先�
 
 
 客诉归因可按“接入与脱敏→语音/图片/文本转结构化症状→检索设备型号、维修记录和知识库→调用诊断规则及日志查询→交叉验证候选根因→输出证据、置信度、影响范围和处理建议→低置信度转人工”串联，并保留每一步证据与时间线，避免仅凭模型猜测。
+
+**追问补充**：支付诊断应把收银台、收单、交易、银行卡、余额等能力封装为领域工具或子 Agent，并统一返回错误码、状态流转、请求链路、账务结果和可核验时间线。通过支付知识库、故障 Runbook、规则校验和历史案例沉淀排查路径；跨系统证据冲突或置信度不足时转人工，避免只依据单条日志归因。
 
 **差距在哪**：新手把日志直接喂模型——这在数据量和噪声面前完全不可行。高手的设计有三个层次：Agent 层做三阶段推理（定位→诊断→输出），工具层做结构化查询和分析，两者通过迭代缩小范围配合工作。面试官考的是你面对大规模非结构化数据时的**系统设计能力**——不是「模型能看多少」，而是「怎么让模型只看关键信息」。
 
@@ -1500,7 +1512,7 @@ flowchart TB
 
 ## Q：Skill 和 Workflow 的区别是什么？什么场景该用 Skill 而不是 Workflow？
 
-> 来源：快手AI应用开发一面 【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)同题】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；本轮追问：为什么不用固定代码 workflow，而是用 prompt 描述流程？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；本轮追问：Loop Engineer 和 Graph Engineer 的区别是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）；本轮追问：你提到把 Workflow 转成 Skill。两种方式哪一种回答更准确？各自的优势和劣势是什么？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)
+> 来源：快手AI应用开发一面 【[快手 AI 全栈一面](https://www.nowcoder.com/feed/main/detail/a30242712e8d456c839ff4223470f491)同题】；[本轮来源](https://www.nowcoder.com/discuss/926528416512315392)；本轮追问：为什么不用固定代码 workflow，而是用 prompt 描述流程？（[本轮追问](https://www.nowcoder.com/feed/main/detail/ac25d49b0692473c8f65654adda82b9b)）；本轮追问：Loop Engineer 和 Graph Engineer 的区别是什么？（[本轮追问](https://www.nowcoder.com/feed/main/detail/c639e7ea920b49b1834839f2a090809e)）；本轮追问：你提到把 Workflow 转成 Skill。两种方式哪一种回答更准确？各自的优势和劣势是什么？（[度小满 AI 全栈二面](https://www.nowcoder.com/discuss/931952631340077056)）；[视源股份 应用开发工程师一面](https://www.nowcoder.com/feed/main/detail/f2233c6940df4b42b818db288d59c232)；[海康总部Agent开发日常实习一面30min](https://www.nowcoder.com/feed/main/detail/b3f0a1b58fba41a9bffb5df3497da289)
 
 **新手答**：“Skill 就是一个功能模块，Workflow 是流程编排，两个差不多吧。”
 
@@ -1560,13 +1572,15 @@ Skill 的定义更像一个稳定接口：
 
 **追问补充**：动态加载 Skill 的优点是按需扩展、减少固定编排和上下文占用；缺点是路由误判会降低准确率，并增加 ReAct 轮次、延迟、Token 成本和结果波动。可用意图分类、置信度阈值、Skill 白名单、缓存与并行调用控制成本；低置信度或高风险任务回退到固定 Workflow，并用离线评测和线上追踪比较准确率、耗时、成本及失败率。
 
+**追问补充**：没有适用于所有系统的固定体量阈值；当 Skill 数量增长到名称、输入输出或适用场景高度相似，且描述已超过模型可稳定区分的上下文范围时，混淆会明显增加。典型如多个查询、解析或写入类 Skill 仅参数不同。应按候选数、相似度和路由准确率做离线压测，必要时分域、分层路由或回退 Workflow。
+
 **差距在哪**：新手分不清 Skill 和 Workflow，混为一谈或者觉得 Skill 只是小功能。高手能清晰说出两者的设计目标不同——Workflow 关注流程完整性和状态流转，Skill 关注能力复用和可组合性。面试官考的是你对**系统解耦和能力沉淀**的理解：什么时候该固化流程，什么时候该抽取通用能力。
 
 ---
 
 ## Q：DAG 与含循环图在 Agent 编排中的区别和适用场景
 
-> 来源：猎豹移动Agent全栈开发；[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)
+> 来源：猎豹移动Agent全栈开发；[度小满一面](https://www.nowcoder.com/feed/main/detail/41baab8c631647568203ebfaf3898574)；[秋招 淘天 AI Agent / 大模型应用研发 二面](https://www.nowcoder.com/feed/main/detail/f2995b761244484db735fd2ccf62db50)
 
 **新手答**：“DAG 就是不能有环的图，有环就是循环图。”
 
@@ -1587,6 +1601,8 @@ Skill 的定义更像一个稳定接口：
 - 风险：死循环、成本不可控，需要 max_iterations + 循环检测
 
 **混合架构**：实际生产中常见——外层 DAG 控制大流程（如：理解→规划→执行→验证），内层节点允许循环（如执行节点内的 ReAct loop）。
+
+**追问补充**：Planner 可将任务表示为节点加依赖边，每个节点声明输入、输出和前置条件；先校验依赖图并拓扑排序，独立节点并行执行，汇聚节点等待所需输入。运行时还应记录节点状态、失败重试和条件分支，避免循环依赖。
 
 **差距在哪**：面试官要看你是否理解“确定性和灵活性的 trade-off”——DAG 省钱可控但傻，循环图聪明但贵且危险，工程上常常混合使用。
 
@@ -1774,7 +1790,7 @@ flowchart TB
 
 ## Q：只有模型 API 和 VS Code，如何从零搭建一套可用的 Agent 应用？
 
-> 来源：百度大模型研发工程师二面（2026-08-21）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：从零开始设计一个 Agent 应用时，整体规划如何制定？】；本轮追问：为什么自己去做一个 code agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[字节AI全栈二面](https://www.nowcoder.com/discuss/938145178114592768)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[佰聆数据 助理AI应用开发工程师](https://www.nowcoder.com/feed/main/detail/3e95d47e9d4d40e09b1e5f2e8daf06c9)
+> 来源：百度大模型研发工程师二面（2026-08-21）【[月之暗面（Moonshot）- Agent 应用开发岗](https://www.nowcoder.com/discuss/926274239747952640)追问：从零开始设计一个 Agent 应用时，整体规划如何制定？】；本轮追问：为什么自己去做一个 code agent？（[本轮追问](https://www.nowcoder.com/feed/main/detail/77660a0c109d42f89001980a8f94c1a6)）；[滴滴一些面经合集（算法）](https://www.nowcoder.com/feed/main/detail/37cae17c5f2a49ee81375721f53bbf9b)；[中科曙光 AI Agent 一面](https://www.nowcoder.com/feed/main/detail/9ca655a5f5a9472da0c27670c8cc9d8c)；[字节AI全栈二面](https://www.nowcoder.com/discuss/938145178114592768)；[启元机器人 机器人软件平台开发](https://www.nowcoder.com/feed/main/detail/c01e635722d14d30b075667f721e56ff)；[字节 AI Agent 开发一面](https://www.nowcoder.com/feed/main/detail/9cd459d87a754e07a490ba7f1c03b495)；[佰聆数据 助理AI应用开发工程师](https://www.nowcoder.com/feed/main/detail/3e95d47e9d4d40e09b1e5f2e8daf06c9)；[秋招 淘天 AI Agent / 大模型应用研发 一面面经](https://www.nowcoder.com/feed/main/detail/6d45897f57b0484eb9863bc991993866)
 
 **新手答**：“写一个 while 循环调用模型，再把工具函数注册进去。”
 
@@ -1900,7 +1916,7 @@ flowchart LR
 
 ### Q：Agent 的 thinking 阶段怎么决定是调用工具还是直接回复？
 
-> 来源：腾讯AI应用开发实习生一面【字节火山引擎 Managed Agent 一面同题】；本轮追问：配置完工具之后，Agent运行时怎样真正去调用工具，拿到工具结果再回复用户？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[联宝科技秋招AI应用开发AI面面经](https://www.nowcoder.com/feed/main/detail/15a413ed04ef43e0a3061a82bd5ff6bb)；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[美团 一面](https://www.nowcoder.com/feed/main/detail/6c551a197dcc4a6e95f5f01c62680744)
+> 来源：腾讯AI应用开发实习生一面【字节火山引擎 Managed Agent 一面同题】；本轮追问：配置完工具之后，Agent运行时怎样真正去调用工具，拿到工具结果再回复用户？（[斑头雁（Agent实习生面试一面）](https://www.nowcoder.com/discuss/930139676764102656)）；[联宝科技秋招AI应用开发AI面面经](https://www.nowcoder.com/feed/main/detail/15a413ed04ef43e0a3061a82bd5ff6bb)；[滴滴 java 一面 10.15](https://www.nowcoder.com/feed/main/detail/5b57de7f52e94f3f8985ee51f1f78a43)；[千问 Agent 社招一面](https://www.nowcoder.com/feed/main/detail/25f0445d66b947bf9f979c6acdbf9fef)；[携程 Agent 二面](https://www.nowcoder.com/feed/main/detail/fc1899a553c7462585f18749c4b37bbb)；[美团 一面](https://www.nowcoder.com/feed/main/detail/6c551a197dcc4a6e95f5f01c62680744)；[无量星图 AI应用工程师 一面面经](https://www.nowcoder.com/feed/main/detail/89adf7e2f94145b1ac718cb00e8e1121)
 
 **新手答**：“模型会根据 system prompt 里的指令判断需不需要调用工具。”
 
